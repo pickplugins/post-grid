@@ -1,0 +1,171 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/terms-list",
+  "title": "Terms List",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "inline-block"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "taxonomies": {
+      "type": "object",
+      "default": {
+        "options": {
+          "taxName": ""
+        }
+      }
+    },
+    "items": {
+      "type": "object",
+      "default": {
+        "options": {
+          "prefix": "",
+          "postfix": "",
+          "viewType": "list",
+          "hierarchicaly": false,
+          "queryPosts": false,
+          "accordionOpen": false,
+          "linkToTerm": false,
+          "postCountPosition": "beforeTitle",
+          "postCountText": "Total Posts %s",
+          "gridColNumber": {},
+          "gridColGap": "15px",
+          "gridRowGap": "15px",
+          "hideEmpty": false,
+          "maxCount": 99,
+          "postCount": false,
+          "class": "item inline-block",
+          "linkTarget": "",
+          "linkAttr": []
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeFronttext",
+          "class": "icon"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "separator": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "inline-block",
+          "text": ", "
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "frontText": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "Tags: ",
+          "class": "inline-block"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "keywords": [
+    "terms list",
+    "term list",
+    "taxonomy term list",
+    "category list",
+    "categories list",
+    "tag list",
+    "tags list",
+    "taxonomy list",
+    "taxonomies list",
+    "terms list block",
+    "terms list for wordpress",
+    "terms list block for wordpress"
+  ],
+  "description": "The terms list block displays a list of specific terms, providing a quick reference for readers."
+}

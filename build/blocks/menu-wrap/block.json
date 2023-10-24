@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/menu-wrap",
+  "title": "Menu Wrap",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          }
+        }
+      }
+    },
+    "menuWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "ul",
+          "class": ""
+        },
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          }
+        }
+      }
+    },
+    "subMenuWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "type": ""
+        },
+        "styles": {
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "editorStyle": "pgmenu_wrap_editor_style",
+  "keywords": [
+    "menu",
+    "menu block",
+    "navigation block",
+    "menu for wordpress",
+    "menu block for wordpress"
+  ],
+  "description": "The menu wrap block is a container for structuring and presenting navigation menus or lists of items on a webpage, enhancing user accessibility."
+}

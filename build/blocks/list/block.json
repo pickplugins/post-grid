@@ -1,0 +1,139 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/list",
+  "title": "List",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "ul",
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "display": {}
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "text": "",
+          "icon": {
+            "library": "fontAwesome",
+            "srcType": "class",
+            "iconSrc": "fas fa-chevron-right"
+          },
+          "styles": {}
+        }
+      ]
+    },
+    "itemsX": {
+      "type": "object",
+      "default": {
+        "items": []
+      }
+    },
+    "item": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "tag": "li",
+          "counter": false,
+          "reversed": false,
+          "start": 1,
+          "type": "1",
+          "class": "item"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "display": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-chevron-right",
+          "class": "icon",
+          "position": "before"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "list",
+    "list maker",
+    "list block",
+    "list for wordpress",
+    "list block for wordpress"
+  ],
+  "description": "The list block is a formatting element for creating ordered or unordered lists, making content easy to follow and categorize."
+}

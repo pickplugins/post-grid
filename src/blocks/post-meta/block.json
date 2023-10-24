@@ -1,0 +1,140 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/post-meta",
+  "title": "Post Meta",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "template": {
+      "type": "string",
+      "default": "<div>Output HTML: {metaValue}</div>"
+    },
+    "templateLoop": {
+      "type": "string",
+      "default": ""
+    },
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "tag": "div"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "display": {}
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "default": {
+        "options": {
+          "key": "",
+          "type": "string",
+          "prefix": "",
+          "postfix": ""
+        },
+        "styles": {
+          "display": {},
+          "width": {},
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          },
+          "lineHeight": {},
+          "letterSpacing": {},
+          "fontFamily": {},
+          "fontWeight": {},
+          "textDecoration": {},
+          "textTransform": {}
+        }
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "prefix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "postfix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "postfix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "post meta",
+    "custom field",
+    "custom fields",
+    "custom fields block",
+    "acf fields",
+    "acf meta fields",
+    "meta fields",
+    "custom fields block",
+    "post meta block",
+    "post meta for wordpress",
+    "post meta block for wordpress"
+  ],
+  "description": "The post meta block provides supplementary information about a blog post, including details like the author, date, and category."
+}

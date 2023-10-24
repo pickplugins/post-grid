@@ -1,0 +1,244 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/social-share",
+  "title": "Social Share",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "icon",
+          "position": "beforeLabel"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "label": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "elements": {
+      "type": "object",
+      "default": {
+        "options": {
+          "linkTarget": "_blank",
+          "showLabel": false,
+          "showCount": false,
+          "showIcon": true,
+          "iconPositon": "beforeLabel"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#18978F"
+          },
+          "backgroundColor": {},
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": "5px 5px 5px 5px"
+          },
+          "display": {},
+          "borderRadius": {},
+          "fontSize": {
+            "Desktop": "35px"
+          },
+          "lineHeight": {},
+          "letterSpacing": {},
+          "fontWeight": {},
+          "textDecoration": {},
+          "textTransform": {}
+        },
+        "items": [
+          {
+            "id": "facebook",
+            "label": "Facebook",
+            "count": 125,
+            "url": "https://www.facebook.com/sharer.php?u={URL}",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": "fab fa-facebook-square"
+            },
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {},
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              },
+              "display": {}
+            }
+          },
+          {
+            "id": "twitter",
+            "label": "Twitter",
+            "count": 125,
+            "url": "https://twitter.com/intent/tweet?url={URL}",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": "fab fa-twitter-square"
+            },
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {},
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              },
+              "display": {}
+            }
+          },
+          {
+            "id": "linkedin",
+            "label": "Linkedin",
+            "count": 125,
+            "url": "https://www.linkedin.com/shareArticle?mini=true&url={URL}&title={TITLE}",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": "fab fa-linkedin"
+            },
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {},
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              },
+              "display": {}
+            }
+          }
+        ]
+      }
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "keywords": [
+    "social share",
+    "social share button",
+    "social share link",
+    "social share count",
+    "social share block",
+    "social share for wordpress",
+    "social share block for wordpress"
+  ],
+  "description": "The social share block enables users to easily share content on various social media platforms, increasing its reach and engagement."
+}

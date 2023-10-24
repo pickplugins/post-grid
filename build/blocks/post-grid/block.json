@@ -1,0 +1,326 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/post-grid",
+  "title": "Post Grid",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "providesContext": {
+    "queryId": "queryId",
+    "loopIndex": "loopIndex",
+    "query": "query",
+    "displayLayout": "displayLayout"
+  },
+  "supports": {
+    "align": [
+      "left",
+      "right",
+      "center",
+      "wide",
+      "full"
+    ],
+    "html": false
+  },
+  "attributes": {
+    "lazyLoad": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "lazyLoad",
+          "enable": "no",
+          "srcUrl": "",
+          "srcId": "",
+          "icon": {
+            "library": "",
+            "srcType": "class",
+            "iconSrc": ""
+          }
+        },
+        "styles": {}
+      }
+    },
+    "search": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "search",
+          "enable": "no",
+          "type": "",
+          "placeholder": "",
+          "icon": "",
+          "busyIcon": ""
+        },
+        "styles": {}
+      }
+    },
+    "container": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "itemsWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "items-loop"
+        },
+        "styles": {}
+      }
+    },
+    "itemWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "item"
+        },
+        "styles": {}
+      }
+    },
+    "noPostsWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "no-posts text-center"
+        },
+        "styles": {}
+      }
+    },
+    "spinnerWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "spinner"
+        },
+        "styles": {}
+      }
+    },
+    "grid": {
+      "type": "object",
+      "default": {
+        "options": {
+          "itemCss": {}
+        },
+        "styles": {
+          "gridTemplateColumns": {},
+          "gridTemplateRows": {},
+          "colGap": {},
+          "rowGap": {},
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pagination",
+          "type": "normal",
+          "maxPageNum": "",
+          "prevText": "Previous",
+          "nextText": "Next",
+          "loadMoreText": "Load More",
+          "noMorePosts": "No More Posts",
+          "loadingText": "Loading...",
+          "loadingIcon": {
+            "library": "",
+            "srcType": "class",
+            "iconSrc": ""
+          }
+        },
+        "styles": {
+          "textAlign": {
+            "Desktop": "center"
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "paginationItem": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "page-numbers inline-block"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "inline-block"
+          },
+          "color": {
+            "Desktop": "#18978F"
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "paginationItemActive": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "page-numbers inline-block"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "default": {
+        "id": "",
+        "srcServer": "library",
+        "data": [
+          {
+            "blockName": "core/post-title",
+            "attrs": {},
+            "innerBlocks": [],
+            "innerHTML": "",
+            "innerContent": []
+          },
+          {
+            "blockName": null,
+            "attrs": {},
+            "innerBlocks": [],
+            "innerHTML": "\n\n",
+            "innerContent": [
+              "\n\n"
+            ]
+          },
+          {
+            "blockName": "core/post-date",
+            "attrs": {},
+            "innerBlocks": [],
+            "innerHTML": "",
+            "innerContent": []
+          },
+          {
+            "blockName": null,
+            "attrs": {},
+            "innerBlocks": [],
+            "innerHTML": "\n\n",
+            "innerContent": [
+              "\n\n"
+            ]
+          },
+          {
+            "blockName": "core/post-excerpt",
+            "attrs": {
+              "moreText": "",
+              "textColor": "primary"
+            },
+            "innerBlocks": [],
+            "innerHTML": "",
+            "innerContent": []
+          }
+        ],
+        "rawData": "<!-- wp:post-featured-image  /-->\n\n<!-- wp:post-title /-->\n\n<!-- wp:post-excerpt  /-->"
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "queryArgs": {
+      "type": "object",
+      "default": {
+        "items": [
+          {
+            "val": [
+              "post"
+            ],
+            "id": "postType"
+          },
+          {
+            "val": [
+              "publish"
+            ],
+            "id": "postStatus"
+          },
+          {
+            "val": "DESC",
+            "id": "order"
+          },
+          {
+            "val": [
+              "date"
+            ],
+            "id": "orderby"
+          },
+          {
+            "val": 3,
+            "id": "postsPerPage"
+          },
+          {
+            "val": 1,
+            "id": "paged"
+          }
+        ]
+      }
+    }
+  },
+  "style": "front_style",
+  "keywords": [
+    "post grid",
+    "content grid",
+    "grid archive",
+    "post query",
+    "grid layout",
+    "advanced post grid",
+    "custom post grid",
+    "custom post type grid",
+    "post grid",
+    "post grid",
+    "post grid block",
+    "post grid for wordpress",
+    "post grid block for wordpress"
+  ],
+  "description": "The post grid block arranges blog posts in a grid format, making it easy for users to browse and access content efficiently."
+}

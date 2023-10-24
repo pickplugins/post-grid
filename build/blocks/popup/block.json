@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/popup",
+  "title": "Popup",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "providesContext": {
+    "post-grid/popupId": "blockId"
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "inner": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "closeWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "span",
+          "class": "",
+          "animation": "",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-chevron-right"
+        },
+        "styles": {}
+      }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "editMode": {
+      "type": "boolean",
+      "default": true
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "editorStyle": "pgpopup-animate",
+  "keywords": [
+    "popup",
+    "popup form",
+    "Popups",
+    "Popup Builder",
+    "Popup Maker",
+    "Popup Maker",
+    "Lead Generation",
+    "Optins",
+    "Video PopUp",
+    "Popup Anything",
+    "popup block",
+    "popup for wordpress",
+    "popup block for wordpress"
+  ],
+  "description": "The popup block is a user-triggered element that displays additional content or information in an overlay, often used for alerts, messages, or interactive features on a webpage."
+}

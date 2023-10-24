@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/text",
+  "title": "Text",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "example": {},
+  "attributes": {
+    "text": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "Hello World!",
+          "tag": "div",
+          "class": "pg-text",
+          "limitBy": "",
+          "limitCount": 99
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "advanced text",
+    "rich text",
+    "text block"
+  ],
+  "description": "The text block is a basic element used for displaying and formatting text content on a webpage."
+}

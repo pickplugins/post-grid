@@ -1,0 +1,148 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/post-excerpt",
+  "title": "Post Excerpt",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "postExcerpt": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "p",
+          "text": "",
+          "limitBy": "word",
+          "limitCount": 99,
+          "excerptSource": "auto",
+          "excerptSourceMeta": "",
+          "removeBlocks": true,
+          "removeShortcodes": true,
+          "keepHtml": false,
+          "removeEmbeds": true,
+          "autoP": false,
+          "isLink": false,
+          "linkTarget": "_blank",
+          "customUrl": "",
+          "linkAttr": [],
+          "class": "excerpt-text"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "readMore": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "text": "Read More",
+          "isLink": true,
+          "linkTarget": "_blank",
+          "customUrl": "",
+          "linkAttr": [],
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "prefix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "postfix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "postfix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "linkAttr": {
+      "type": "array",
+      "default": []
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "style": "front_style",
+  "keywords": [
+    "post excerpt",
+    "post excerpt html",
+    "post excerpt count",
+    "advanced post excerpt",
+    "excerpt",
+    "excerpt read more",
+    "excerpt block",
+    "post excerpt block",
+    "post excerpt"
+  ],
+  "description": "This block displays the excerpt or summary of a blog post's content."
+}

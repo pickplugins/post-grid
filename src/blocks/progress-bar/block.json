@@ -1,0 +1,203 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/progress-bar",
+  "title": "Progress Bar",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "progressData": {
+      "type": "object",
+      "default": {
+        "type": "",
+        "animate": "",
+        "animateDuration": 1,
+        "animateIteration": 2,
+        "animateDelay": 2,
+        "fill": 45
+      }
+    },
+    "progressInfo": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "position": "beforeBar"
+        },
+        "styles": {}
+      }
+    },
+    "progressBar": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "progressFill": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "progressCount": {
+      "type": "object",
+      "default": {
+        "options": {
+          "position": "afterLabel",
+          "prefix": "",
+          "postfix": "",
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "circleOverlay": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "circleMask": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "progressLabel": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "Digital Marketing",
+          "position": "",
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "position": "beforeprogressCount",
+          "srcType": "class",
+          "iconSrc": "far fa-calendar-alt",
+          "class": "number-count-icon"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "style": "front_style",
+  "keywords": [
+    "progress bar",
+    "progress bars",
+    "progress",
+    "circular progress bar",
+    "progress bar block",
+    "progress bar for wordpress",
+    "progress bar block for wordpress"
+  ],
+  "description": "The progress bar block visually represents the completion or progress of a task, process, or goal."
+}

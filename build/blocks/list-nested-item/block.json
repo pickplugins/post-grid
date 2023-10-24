@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/list-nested-item",
+  "title": "List item",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "parent": [
+    "post-grid/list-nested"
+  ],
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "position": {},
+          "zIndex": {},
+          "top": {},
+          "right": {},
+          "bottom": {},
+          "left": {}
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "advanced nested list item",
+    "nested list item block",
+    "list",
+    "list maker",
+    "list block",
+    "list for wordpress",
+    "list block for wordpress"
+  ],
+  "description": "This block is the inner block of nested list block"
+}

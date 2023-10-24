@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/content-slider-item",
+  "title": "Content Slider Item",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "parent": [
+    "post-grid/content-slider"
+  ],
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "flex-item-wrap"
+        },
+        "styles": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "editorStyle": "pgcontent-slider-splide-core",
+  "keywords": [
+    "Content slider",
+    "Image slider",
+    "Video slider",
+    "Slider block",
+    "Carousel block",
+    "Carousel slider",
+    "Custom content slider"
+  ],
+  "description": "This block is the inner block of content slider block"
+}

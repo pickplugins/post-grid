@@ -1,0 +1,9 @@
+.pg-tabs {}
+
+.pg-tabs-panel {
+    display: none;
+}
+
+.pg-tabs-panel-active {
+    display: block;
+}

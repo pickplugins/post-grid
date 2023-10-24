@@ -1,0 +1,147 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/icon",
+  "title": "Icon/Button/Link",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "",
+          "attr": []
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "borderRadius": {}
+        }
+      }
+    },
+    "text": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "text": "Custom Text",
+          "src": "",
+          "linkTo": "",
+          "linkToAuthorMeta": "",
+          "linkToCustomMeta": "",
+          "linkTarget": "_blank",
+          "customUrl": "",
+          "linkAttr": [],
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-check-circle",
+          "position": "beforeText",
+          "class": "text-icon"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "prefix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "postfix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "postfix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "linkAttr": {
+      "type": "array",
+      "default": []
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "editorStyle": "font-awesome-5",
+  "style": "front_style",
+  "keywords": [
+    "icon",
+    "icons",
+    "button",
+    "buttons",
+    "link",
+    "icon block",
+    "button block",
+    "icon button link",
+    "link block",
+    "icon block for wordpress",
+    "button block for wordpress",
+    "icon button link block for wordpress",
+    "multi-functional button",
+    "call-to-action button",
+    "button"
+  ],
+  "description": "The icon/button/link block is a clickable element that typically contains an icon or text, serving as a visual cue for actions like navigation, downloads, or interactions on a website."
+}

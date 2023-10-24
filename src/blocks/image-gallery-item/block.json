@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/image-gallery-item",
+  "title": "Image Gallery Item",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "parent": [
+    "post-grid/image-gallery"
+  ],
+  "usesContext": [
+    "post-grid/galleryId",
+    "post-grid/lightbox"
+  ],
+  "providesContext": {
+    "post-grid/galleryId": "blockId",
+    "post-grid/lightbox": "lightbox"
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "grid-item-wrap"
+        },
+        "styles": {
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "image gallery",
+    "image gallery block",
+    "video gallery block",
+    "gallery block",
+    "image lightbox block",
+    "lightbox block",
+    "image gallery for wordpress",
+    "image gallery block for wordpress"
+  ],
+  "description": "This block is the inner block of image gallery block"
+}

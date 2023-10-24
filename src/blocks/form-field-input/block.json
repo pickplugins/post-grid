@@ -1,0 +1,155 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/form-field-input",
+  "title": "Form Field - Input",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "parent": [
+    "post-grid/form-wrap",
+		"post-grid/flex-wrap",
+		"post-grid/flex-wrap-item",
+		"post-grid/grid-wrap",
+		"post-grid/grid-wrap-item",
+		"core/columns",
+		"post-grid/tabs-nested-item",
+		"post-grid/accordion-nested-item"
+  ],
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        }
+      }
+    },
+    "labelWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "enable": true,
+          "class": ""
+        }
+      }
+    },
+    "label": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "label",
+          "for": "label",
+          "enable": true,
+          "text": "Your Name",
+          "class": "pg-form-field-label"
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "default": {
+        "options": {
+          "type": "text",
+          "placeholder": "Write your name",
+          "value": "",
+          "valueSource": "",
+          "name": "",
+          "required": false,
+          "disabled": false,
+          "size": false,
+          "minLength": null,
+          "maxLength": null,
+          "readonly": false,
+          "step": null,
+          "pattern": null,
+          "patternCustom": "",
+          "includeMailBody": true,
+          "max": null,
+          "min": null,
+          "checked": false,
+          "autocomplete": false,
+          "id": "",
+          "class": "pg-form-field-input",
+          "position": "afterLabel"
+        }
+      }
+    },
+    "inputWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "enable": true,
+          "class": ""
+        }
+      }
+    },
+    "errorWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "enable": true,
+          "text": "",
+          "position": "afterInput",
+          "class": ""
+        }
+      }
+    },
+    "requiredWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "span",
+          "enable": true,
+          "class": ""
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "form block for wordpress",
+    "form block",
+    "form builder",
+    "form maker",
+    "dynamic form",
+    "Contact Form Plugin",
+    "opt-in form",
+    "login form",
+    "register form",
+    "custom form",
+    "wordpress form",
+    "wordpress form plugin",
+    "Subscription form",
+    "contact form block"
+  ],
+  "description": "The form-input field is a blank space used in online forms for users to submit text or data, such as names and email addresses."
+}

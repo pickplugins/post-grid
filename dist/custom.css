@@ -1,0 +1,10 @@
+.block-editor-block-inspector .components-base-control {
+  margin-bottom: 0;
+}
+
+.block-editor-block-inspector .components-base-control:last-child {
+  margin-bottom: 0;
+}
+
+
+.item {}

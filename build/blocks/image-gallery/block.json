@@ -1,0 +1,69 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/image-gallery",
+  "title": "Image Gallery",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "providesContext": {
+    "post-grid/galleryId": "blockId",
+    "post-grid/lightbox": "lightbox"
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "lightbox": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "image gallery",
+    "image gallery block",
+    "video gallery block",
+    "gallery block",
+    "image lightbox block",
+    "lightbox block",
+    "image gallery for wordpress",
+    "image gallery block for wordpress"
+  ],
+  "description": "The image gallery block is a collection of images or photos displayed together, often in a grid format, for easy browsing and viewing."
+}

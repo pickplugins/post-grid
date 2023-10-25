@@ -72,6 +72,9 @@ import metadata from "./block.json";
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
+	title: "Post Title",
+	description: "The post title block showcases the main title or headline of a blog post.",
+
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -173,7 +176,7 @@ registerBlockType(metadata, {
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
-		useEffect(() => {}, [wrapper]);
+		useEffect(() => { }, [wrapper]);
 		useEffect(() => {
 			var blockCssObj = {};
 
@@ -897,7 +900,7 @@ registerBlockType(metadata, {
 
 		var postUrl =
 			postTitle.options.customUrl != undefined &&
-			postTitle.options.customUrl.length > 0
+				postTitle.options.customUrl.length > 0
 				? postTitle.options.customUrl
 				: currentPostUrl;
 
@@ -918,7 +921,7 @@ registerBlockType(metadata, {
 								activeTab="styles"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -1019,7 +1022,7 @@ registerBlockType(metadata, {
 								activeTab="styles"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -1362,23 +1365,23 @@ registerBlockType(metadata, {
 
 									{(postTitle.options.limitBy == "word" ||
 										postTitle.options.limitBy == "character") && (
-										<PanelRow>
-											<label for="">Limit Count</label>
+											<PanelRow>
+												<label for="">Limit Count</label>
 
-											<InputControl
-												value={postTitle.options.limitCount}
-												onChange={(newVal) => {
-													var options = {
-														...postTitle.options,
-														limitCount: newVal,
-													};
-													setAttributes({
-														postTitle: { ...postTitle, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-									)}
+												<InputControl
+													value={postTitle.options.limitCount}
+													onChange={(newVal) => {
+														var options = {
+															...postTitle.options,
+															limitCount: newVal,
+														};
+														setAttributes({
+															postTitle: { ...postTitle, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+										)}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1405,7 +1408,7 @@ registerBlockType(metadata, {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -1485,7 +1488,7 @@ registerBlockType(metadata, {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",

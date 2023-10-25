@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,13 +19,14 @@ class PGBlockPostTaxonomies
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-taxonomies/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/post-taxonomies/block.json', array(
-            
+        register_block_type(post_grid_plugin_dir . 'build/blocks/post-taxonomies/block.json', array(
+
             'render_callback' => array($this, 'theHTML'),
-            
 
 
-        ));
+
+        )
+        );
     }
 
     function front_script($attributes)
@@ -138,7 +140,7 @@ class PGBlockPostTaxonomies
 
         $termsCount = (is_array($terms)) ? count($terms) : 0;
 
-        $maxCount = ($termsCount >  $itemsMaxCount) ? $itemsMaxCount : $termsCount;
+        $maxCount = ($termsCount > $itemsMaxCount) ? $itemsMaxCount : $termsCount;
         $maxCount = (empty($maxCount)) ? $termsCount : $maxCount;
 
         ob_start();
@@ -152,13 +154,16 @@ class PGBlockPostTaxonomies
         }
 
 
-?>
+        ?>
 
 
 
-        <<?php echo esc_attr($wrapperTag); ?> class="<?php echo $blockId; ?>">
-            <?php if (!empty($frontTexttext)) : ?>
-                <span class='frontText '><?php echo $frontTexttext; ?></span>
+        <<?php echo esc_attr($wrapperTag); ?> class="
+            <?php echo $blockId; ?>">
+            <?php if (!empty($frontTexttext)): ?>
+                <span class='frontText '>
+                    <?php echo $frontTexttext; ?>
+                </span>
             <?php endif; ?>
             <?php
 
@@ -190,74 +195,94 @@ class PGBlockPostTaxonomies
                         $linkUrl = $itemsCustomUrl;
                     }
 
-                    if ($i > $maxCount) break;
+                    if ($i > $maxCount)
+                        break;
 
                     /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-            ?>
-                <?php if (!empty($itemsLinkTo)) : ?>
-                    <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+                    ?>
+                    <?php if (!empty($itemsLinkTo)): ?>
+                        <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?>
+                            target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
 
-                        <?php if ($iconPosition == 'beforeItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
+                            <?php if ($iconPosition == 'beforeItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-                        <?php if (!empty($itemsPrefix)) : ?>
-                            <span class='prefix'><?php echo wp_kses_post($itemsPrefix); ?></span>
+                            <?php if (!empty($itemsPrefix)): ?>
+                                <span class='prefix'>
+                                    <?php echo wp_kses_post($itemsPrefix); ?>
+                                </span>
 
-                        <?php endif; ?>
+                            <?php endif; ?>
 
-                        <span class='termTitle'><?php echo wp_kses_post($term->name); ?></span>
-                        <?php if ($itemsPostCount) : ?>
-                            <span class='postCount'>(<?php echo wp_kses_post($term_post_count); ?>)</span>
-                        <?php endif; ?>
+                            <span class='termTitle'>
+                                <?php echo wp_kses_post($term->name); ?>
+                            </span>
+                            <?php if ($itemsPostCount): ?>
+                                <span class='postCount'>(
+                                    <?php echo wp_kses_post($term_post_count); ?>)
+                                </span>
+                            <?php endif; ?>
 
-                        <?php if (!empty($itemsPostfix)) : ?>
-                            <span class='postfix'><?php echo wp_kses_post($itemsPostfix); ?></span>
+                            <?php if (!empty($itemsPostfix)): ?>
+                                <span class='postfix'>
+                                    <?php echo wp_kses_post($itemsPostfix); ?>
+                                </span>
 
-                        <?php endif; ?>
-
-
-
-                        <?php if ($iconPosition == 'afterItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                    </a>
-                <?php else : ?>
-                    <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
-
-                        <?php if ($iconPosition == 'beforeItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-
-                        <?php if (!empty($itemsPrefix)) : ?>
-                            <span class='prefix'><?php echo wp_kses_post($itemsPrefix); ?></span>
-
-                        <?php endif; ?>
-
-                        <span class='termTitle'><?php echo wp_kses_post($term->name); ?></span>
-                        <?php if ($itemsPostCount) : ?>
-                            <span class='postCount'>(<?php echo wp_kses_post($term_post_count); ?>)</span>
-                        <?php endif; ?>
-
-                        <?php if (!empty($itemsPostfix)) : ?>
-                            <span class='postfix'><?php echo wp_kses_post($itemsPostfix); ?></span>
-
-                        <?php endif; ?>
+                            <?php endif; ?>
 
 
 
-                        <?php if ($iconPosition == 'afterItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                    </span>
-                <?php endif; ?>
+                            <?php if ($iconPosition == 'afterItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+                        </a>
+                    <?php else: ?>
+                        <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
+
+                            <?php if ($iconPosition == 'beforeItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+
+                            <?php if (!empty($itemsPrefix)): ?>
+                                <span class='prefix'>
+                                    <?php echo wp_kses_post($itemsPrefix); ?>
+                                </span>
+
+                            <?php endif; ?>
+
+                            <span class='termTitle'>
+                                <?php echo wp_kses_post($term->name); ?>
+                            </span>
+                            <?php if ($itemsPostCount): ?>
+                                <span class='postCount'>(
+                                    <?php echo wp_kses_post($term_post_count); ?>)
+                                </span>
+                            <?php endif; ?>
+
+                            <?php if (!empty($itemsPostfix)): ?>
+                                <span class='postfix'>
+                                    <?php echo wp_kses_post($itemsPostfix); ?>
+                                </span>
+
+                            <?php endif; ?>
 
 
-                <?php if ($maxCount > $i) : ?>
-                    <span className='separator'><?php echo esc_html($separatorText); ?></span>
-                <?php endif; ?>
 
-            <?php
+                            <?php if ($iconPosition == 'afterItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+                        </span>
+                    <?php endif; ?>
+
+
+                    <?php if ($maxCount > $i): ?>
+                        <span className='separator'>
+                            <?php echo esc_html($separatorText); ?>
+                        </span>
+                    <?php endif; ?>
+
+                    <?php
                     $i++;
                 }
 
@@ -275,7 +300,7 @@ class PGBlockPostTaxonomies
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

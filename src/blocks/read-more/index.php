@@ -20,7 +20,7 @@ class PGBlockReadmore
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/read-more/block.json',
+            post_grid_plugin_dir . 'build/blocks/read-more/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),

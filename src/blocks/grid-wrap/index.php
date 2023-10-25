@@ -37,7 +37,7 @@ class PGBlockGridWrap
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/grid-wrap/block.json',
+            post_grid_plugin_dir . 'build/blocks/grid-wrap/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -85,12 +85,12 @@ class PGBlockGridWrap
 
 
         ?>
-        <div class="pg-grid-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <?php echo $content ?>
-        </div>
-        <?php
+                <div class="pg-grid-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    <?php echo $content ?>
+                </div>
+                <?php
 
-        return ob_get_clean();
+                return ob_get_clean();
     }
 }
 

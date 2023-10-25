@@ -38,9 +38,11 @@ class PGBlockFormWrap
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/form-wrap/block.json', array(
-            'render_callback' => array($this, 'theHTML'),
-        )
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/form-wrap/block.json',
+            array(
+                'render_callback' => array($this, 'theHTML'),
+            )
         );
     }
 
@@ -115,23 +117,23 @@ class PGBlockFormWrap
 
         ?>
 
-                <div class="pg-form-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                        <div class="pg-form-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 
-                    <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
+                            <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
 
-                    <form class=" " formId="<?php echo esc_attr($blockId); ?>" method="GET" onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)): ?> onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?>         <?php if (!empty($afterSubmit)): ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?>         <?php if (!empty($visible)): ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
-                        <?php echo $content ?>
-                        <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
-                    </form>
+                            <form class=" " formId="<?php echo esc_attr($blockId); ?>" method="GET" onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)): ?> onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?>                 <?php if (!empty($afterSubmit)): ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?>                 <?php if (!empty($visible)): ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
+                                <?php echo $content ?>
+                                <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
+                            </form>
 
-                    <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
-                </div>
+                            <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
+                        </div>
 
-        <?php
+                <?php
 
-        return ob_get_clean();
+                return ob_get_clean();
     }
 }
 

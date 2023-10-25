@@ -36,7 +36,7 @@ class PGBlockWooAddToCart
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/woo-add-to-cart/block.json',
+            post_grid_plugin_dir . 'build/blocks/woo-add-to-cart/block.json',
             array(
 
 

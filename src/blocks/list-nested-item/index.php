@@ -20,7 +20,7 @@ class PGBlockListNestedItem
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/list-nested-item/block.json',
+            post_grid_plugin_dir . 'build/blocks/list-nested-item/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -95,7 +95,7 @@ class PGBlockListNestedItem
 
 
 
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

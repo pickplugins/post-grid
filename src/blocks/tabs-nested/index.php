@@ -39,7 +39,7 @@ class PGBlockTabs
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/tabs-nested/block.json',
+            post_grid_plugin_dir . 'build/blocks/tabs-nested/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),

@@ -17,12 +17,14 @@ class PGBlockStarRate
     {
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/star-rate/block.json', array(
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/star-rate/block.json',
+            array(
 
 
-            'render_callback' => array($this, 'theHTML'),
+                'render_callback' => array($this, 'theHTML'),
 
-        )
+            )
         );
     }
 

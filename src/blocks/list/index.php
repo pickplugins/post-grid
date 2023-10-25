@@ -21,13 +21,15 @@ class PGBlockList
 
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/list/block.json', array(
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/list/block.json',
+            array(
 
-            'render_callback' => array($this, 'theHTML'),
+                'render_callback' => array($this, 'theHTML'),
 
 
 
-        )
+            )
         );
     }
 
@@ -110,56 +112,56 @@ class PGBlockList
         if (!empty($wrapperTag)):
             ?>
 
-            <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>
-                <?php echo esc_attr($blockAlign); ?>">
+                        <<?php echo esc_attr($wrapperTag); ?> class="
+                            <?php echo esc_attr($blockId); ?>
+                            <?php echo esc_attr($blockAlign); ?>">
 
 
 
-                <?php
-                if (!empty($items))
-                    foreach ($items as $index => $item) {
+                            <?php
+                            if (!empty($items))
+                                foreach ($items as $index => $item) {
 
-                        ?>
-                        <<?php echo esc_attr($itemTag); ?> class="
-                            <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
-
-
-                            <?php if ($iconPosition == 'left'): ?>
-                                <?php echo wp_kses_post($iconHtml); ?>
-                            <?php endif; ?>
-
-                            <span>
-
-                                <?php if ($iconPosition == 'before'): ?>
-                                    <?php echo wp_kses_post($iconHtml); ?>
-                                <?php endif; ?>
-                                <?php echo (isset($item['text'])) ? wp_kses_post($item['text']) : ''; ?>
-                            </span>
-                            <?php if ($iconPosition == 'after'): ?>
-                                <?php echo wp_kses_post($iconHtml); ?>
-                            <?php endif; ?>
+                                    ?>
+                                            <<?php echo esc_attr($itemTag); ?> class="
+                                                <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
 
 
-                            <?php if ($iconPosition == 'right'): ?>
-                                <span class="float-right">
-                                    <?php echo wp_kses_post($iconHtml); ?>
-                                </span>
-                            <?php endif; ?>
+                                                <?php if ($iconPosition == 'left'): ?>
+                                                        <?php echo wp_kses_post($iconHtml); ?>
+                                                <?php endif; ?>
+
+                                                <span>
+
+                                                    <?php if ($iconPosition == 'before'): ?>
+                                                            <?php echo wp_kses_post($iconHtml); ?>
+                                                    <?php endif; ?>
+                                                    <?php echo (isset($item['text'])) ? wp_kses_post($item['text']) : ''; ?>
+                                                </span>
+                                                <?php if ($iconPosition == 'after'): ?>
+                                                        <?php echo wp_kses_post($iconHtml); ?>
+                                                <?php endif; ?>
 
 
-                        </<?php echo esc_attr($itemTag); ?>>
+                                                <?php if ($iconPosition == 'right'): ?>
+                                                        <span class="float-right">
+                                                            <?php echo wp_kses_post($iconHtml); ?>
+                                                        </span>
+                                                <?php endif; ?>
 
 
+                                            </<?php echo esc_attr($itemTag); ?>>
 
 
 
+
+
+                                            <?php
+                                }
+
+                            ?>
+                        </<?php echo esc_attr($wrapperTag); ?>>
                         <?php
-                    }
-
-                ?>
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
 
         endif;
 
@@ -174,7 +176,7 @@ class PGBlockList
 
 
 
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

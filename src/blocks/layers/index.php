@@ -20,7 +20,7 @@ class PGBlockLayers
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/layers/block.json',
+            post_grid_plugin_dir . 'build/blocks/layers/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -111,20 +111,20 @@ class PGBlockLayers
 
 
         if ($wrapperTag == 'a') { ?>
-            <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-                target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>"
-                href="<?php echo esc_url_raw($linkUrl); ?>">
-                <?php echo $content ?>
-            </a>
-            <?php
+                        <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+                            target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>"
+                            href="<?php echo esc_url_raw($linkUrl); ?>">
+                            <?php echo $content ?>
+                        </a>
+                        <?php
 
         } else { ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="pg-layers
-                <?php echo esc_attr($blockId); ?>
-                <?php echo esc_attr($blockAlign); ?>">
-                <?php echo $content ?>
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+                        <<?php echo esc_attr($wrapperTag); ?> class="pg-layers
+                            <?php echo esc_attr($blockId); ?>
+                            <?php echo esc_attr($blockAlign); ?>">
+                            <?php echo $content ?>
+                        </<?php echo esc_attr($wrapperTag); ?>>
+                        <?php
         }
 
         return ob_get_clean();

@@ -20,7 +20,7 @@ class PGBlockLayer
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/layer/block.json',
+            post_grid_plugin_dir . 'build/blocks/layer/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -83,18 +83,18 @@ class PGBlockLayer
 
 
         if ($wrapperTag == 'a') { ?>
-            <a class="pg-layer <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" href="" target="">
-                <?php echo $content ?>
-            </a>
-            <?php
+                        <a class="pg-layer <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" href="" target="">
+                            <?php echo $content ?>
+                        </a>
+                        <?php
 
         } else { ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="pg-layer
-                <?php echo esc_attr($blockId); ?>
-                <?php echo esc_attr($blockAlign); ?>">
-                <?php echo $content ?>
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+                        <<?php echo esc_attr($wrapperTag); ?> class="pg-layer
+                            <?php echo esc_attr($blockId); ?>
+                            <?php echo esc_attr($blockAlign); ?>">
+                            <?php echo $content ?>
+                        </<?php echo esc_attr($wrapperTag); ?>>
+                        <?php
         }
 
         return ob_get_clean();

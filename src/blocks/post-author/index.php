@@ -20,7 +20,7 @@ class PGBlockPostAuthor
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/post-author/block.json',
+            post_grid_plugin_dir . 'build/blocks/post-author/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -129,104 +129,102 @@ class PGBlockPostAuthor
         ob_start();
         ?>
 
-        <div class="<?php echo esc_attr($nameClass); ?>">
-            <?php if (!empty($nameLink)): ?>
+                <div class="<?php echo esc_attr($nameClass); ?>">
+                    <?php if (!empty($nameLink)): ?>
 
-                <?php if ($namePrefix): ?>
-                    <span class="prefix">
-                        <?php echo wp_kses_post($namePrefix); ?>
-                    </span>
-                <?php endif; ?>
-                <a href="<?php echo esc_url_raw($nameLink); ?>">
-                    <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
-                </a>
-                <?php if ($namePostfix): ?>
-                    <span class="prefix">
-                        <?php echo wp_kses_post($namePostfix); ?>
-                    </span>
-                <?php endif; ?>
-
-
-            <?php else: ?>
+                            <?php if ($namePrefix): ?>
+                                    <span class="prefix">
+                                        <?php echo wp_kses_post($namePrefix); ?>
+                                    </span>
+                            <?php endif; ?>
+                            <a href="<?php echo esc_url_raw($nameLink); ?>">
+                                <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
+                            </a>
+                            <?php if ($namePostfix): ?>
+                                    <span class="prefix">
+                                        <?php echo wp_kses_post($namePostfix); ?>
+                                    </span>
+                            <?php endif; ?>
 
 
-                <?php if ($namePrefix): ?>
-                    <span class="prefix">
-                        <?php echo wp_kses_post($namePrefix); ?>
-                    </span>
-                <?php endif; ?>
-                <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
-                <?php if ($namePostfix): ?>
-                    <span class="prefix">
-                        <?php echo wp_kses_post($namePostfix); ?>
-                    </span>
-                <?php endif; ?>
-            <?php endif; ?>
-
-        </div>
-
-        <?php
-        $htmlGroups['name'] = ob_get_clean();
+                    <?php else: ?>
 
 
-        ob_start();
-        ?>
+                            <?php if ($namePrefix): ?>
+                                    <span class="prefix">
+                                        <?php echo wp_kses_post($namePrefix); ?>
+                                    </span>
+                            <?php endif; ?>
+                            <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
+                            <?php if ($namePostfix): ?>
+                                    <span class="prefix">
+                                        <?php echo wp_kses_post($namePostfix); ?>
+                                    </span>
+                            <?php endif; ?>
+                    <?php endif; ?>
 
-        <div class="<?php echo esc_attr($descriptionClass); ?>">
-            <?php echo wp_kses_post(get_the_author_meta('description', $post_author_id)); ?>
-        </div>
+                </div>
 
-        <?php
-        $htmlGroups['description'] = ob_get_clean();
-
-
-        ob_start();
-        ?>
-
-        <div class="<?php echo esc_attr($avatarClass); ?>">
-            <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>"
-                alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
-        </div>
-
-        <?php
-        $htmlGroups['avatar'] = ob_get_clean();
+                <?php
+                $htmlGroups['name'] = ob_get_clean();
 
 
+                ob_start();
+                ?>
+
+                <div class="<?php echo esc_attr($descriptionClass); ?>">
+                    <?php echo wp_kses_post(get_the_author_meta('description', $post_author_id)); ?>
+                </div>
+
+                <?php
+                $htmlGroups['description'] = ob_get_clean();
 
 
-        $linkAttrStr = '';
+                ob_start();
+                ?>
+
+                <div class="<?php echo esc_attr($avatarClass); ?>">
+                    <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>"
+                        alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
+                </div>
+
+                <?php
+                $htmlGroups['avatar'] = ob_get_clean();
 
 
 
-        if (!empty($itemsLinkAttr))
-            foreach ($itemsLinkAttr as $attr) {
 
-                if (!empty($attr['val']))
-                    $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
-            }
-
-
-        ob_start();
-
-
-        ?>
-
-
-        <<?php echo esc_attr($wrapperTag); ?> class="
-            <?php echo $blockId; ?>">
-            <?php
-            foreach ($elementsItems as $item) {
-
-
-                echo $htmlGroups[$item['id']];
-            }
+                $linkAttrStr = '';
 
 
 
-            ?>
-        </<?php echo esc_attr($wrapperTag); ?>>
+                if (!empty($itemsLinkAttr))
+                    foreach ($itemsLinkAttr as $attr) {
+
+                        if (!empty($attr['val']))
+                            $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
+                    }
 
 
+                ob_start();
+
+
+                ?>
+
+
+                <<?php echo esc_attr($wrapperTag); ?> class="
+                    <?php echo $blockId; ?>">
+                    <?php
+                    foreach ($elementsItems as $item) {
+
+
+                        echo $htmlGroups[$item['id']];
+                    }
+
+
+
+                    ?>
+                </<?php echo esc_attr($wrapperTag); ?>>
 
 
 
@@ -236,7 +234,9 @@ class PGBlockPostAuthor
 
 
 
-        <?php return ob_get_clean();
+
+
+                <?php return ob_get_clean();
     }
 }
 

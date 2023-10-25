@@ -33,7 +33,7 @@ class PGBlockTermsList
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/terms-list/block.json',
+            post_grid_plugin_dir . 'build/blocks/terms-list/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),

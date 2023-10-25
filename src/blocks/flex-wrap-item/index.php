@@ -20,7 +20,7 @@ class PGBlockFlexWrapItem
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/flex-wrap-item/block.json',
+            post_grid_plugin_dir . 'build/blocks/flex-wrap-item/block.json',
             array(
                 'render_callback' => array($this, 'theHTML'),
             )
@@ -61,11 +61,11 @@ class PGBlockFlexWrapItem
         ob_start();
 
         ?>
-        <div class="pg-flex-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <?php echo $content ?>
-        </div>
-        <?php
-        return ob_get_clean();
+                <div class="pg-flex-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    <?php echo $content ?>
+                </div>
+                <?php
+                return ob_get_clean();
     }
 }
 

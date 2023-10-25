@@ -33,7 +33,7 @@ class PGBlockMenuWrapItem
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/menu-wrap-item/block.json',
+            post_grid_plugin_dir . 'build/blocks/menu-wrap-item/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -91,22 +91,22 @@ class PGBlockMenuWrapItem
         ?>
 
 
-        <li class="pg-menu-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                <li class="pg-menu-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
-            <?php if (!empty($linktext)): ?>
-                <a class='menuLink' href="<?php echo esc_url_raw($linkurl); ?>">
-                    <?php echo esc_html($linktext) ?>
-                </a>
-            <?php endif; ?>
+                    <?php if (!empty($linktext)): ?>
+                            <a class='menuLink' href="<?php echo esc_url_raw($linkurl); ?>">
+                                <?php echo esc_html($linktext) ?>
+                            </a>
+                    <?php endif; ?>
 
-            <ul class='subMenu'>
-                <?php echo $content ?>
-            </ul>
-        </li>
+                    <ul class='subMenu'>
+                        <?php echo $content ?>
+                    </ul>
+                </li>
 
 
-        <?php
-        return ob_get_clean();
+                <?php
+                return ob_get_clean();
     }
 }
 

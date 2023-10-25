@@ -19,13 +19,15 @@ class PGBlockFormFieldFile
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/form-field-file/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/form-field-file/block.json', array(
-            
-            'render_callback' => array($this, 'theHTML'),
-            
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/form-field-file/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
 
 
-        )
+
+            )
         );
     }
 
@@ -102,42 +104,42 @@ class PGBlockFormFieldFile
 
         ?>
 
-                <div class="<?php echo esc_attr($blockId); ?>">
+                        <div class="<?php echo esc_attr($blockId); ?>">
 
 
-                    <div class='label-wrap'>
+                            <div class='label-wrap'>
 
-                        <?php if ($labelEnable): ?>
-                                <label for=""><?php echo wp_kses_post($labelText); ?></label>
-                        <?php endif; ?>
-
-
-                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
-                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                        <?php endif; ?>
+                                <?php if ($labelEnable): ?>
+                                            <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                                <?php endif; ?>
 
 
-                    </div>
-                    <div class='input-wrap'>
-                        <input type="file" 
-                        placeholder="<?php echo esc_attr($inputPlaceholder); ?>" 
-                        value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         
-                            <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
-                        <?php if ($errorWrapPosition == 'afterInput'): ?>
-                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-
-                        <?php endif; ?>
-                    </div>
+                                <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                                <?php endif; ?>
 
 
+                            </div>
+                            <div class='input-wrap'>
+                                <input type="file" 
+                                placeholder="<?php echo esc_attr($inputPlaceholder); ?>" 
+                                value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                 <?php if ($inputDisabled): ?> disabled <?php endif; ?>         
+                                    <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
+                                <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
 
+                                <?php endif; ?>
+                            </div>
 
 
 
-                </div>
 
-        <?php
-        return ob_get_clean();
+
+
+                        </div>
+
+                <?php
+                return ob_get_clean();
     }
 }
 

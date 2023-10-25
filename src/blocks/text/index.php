@@ -18,7 +18,7 @@ class PGBlockPostText
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/text/block.json',
+            post_grid_plugin_dir . 'build/blocks/text/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),

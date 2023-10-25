@@ -35,7 +35,7 @@ class PGBlockPopup
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/popup/block.json',
+            post_grid_plugin_dir . 'build/blocks/popup/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -128,20 +128,20 @@ class PGBlockPopup
 
 
         ?>
-        <div class="pg-popup   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-            popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>"
-            data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
-            <div class='inner'>
-                <span class='close' popup-id="<?php echo esc_attr($blockId); ?>"
-                    close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
-                    <?php echo $closeIconHtml; ?>
-                </span>
-                <?php echo $content ?>
-            </div>
-        </div>
-        <?php
+                <div class="pg-popup   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+                    popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>"
+                    data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
+                    <div class='inner'>
+                        <span class='close' popup-id="<?php echo esc_attr($blockId); ?>"
+                            close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
+                            <?php echo $closeIconHtml; ?>
+                        </span>
+                        <?php echo $content ?>
+                    </div>
+                </div>
+                <?php
 
-        return ob_get_clean();
+                return ob_get_clean();
     }
 }
 

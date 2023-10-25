@@ -29,7 +29,7 @@ class PGBlockMenuWrap
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/menu-wrap/block.json',
+            post_grid_plugin_dir . 'build/blocks/menu-wrap/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -82,14 +82,14 @@ class PGBlockMenuWrap
 
 
         ?>
-        <div class="pg-menu-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <ul class="menu">
-                <?php echo $content ?>
-            </ul>
-        </div>
-        <?php
+                <div class="pg-menu-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    <ul class="menu">
+                        <?php echo $content ?>
+                    </ul>
+                </div>
+                <?php
 
-        return ob_get_clean();
+                return ob_get_clean();
     }
 }
 

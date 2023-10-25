@@ -20,7 +20,7 @@ class PGBlockFeaturedImage
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/post-featured-image/block.json',
+            post_grid_plugin_dir . 'build/blocks/post-featured-image/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -61,7 +61,7 @@ class PGBlockFeaturedImage
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
         $useAsBackground = isset($wrapperOptions['useAsBackground']) ? $wrapperOptions['useAsBackground'] : 'no';
 
-        $wrapperTextAlign = isset($wrapperStyles['textAlign']) ? $wrapperStyles['textAlign'] : '';
+        // $wrapperTextAlign = isset($wrapperStyles['textAlign']) ? $wrapperStyles['textAlign'] : '';
 
 
         $featuredImage = isset($attributes['featuredImage']) ? $attributes['featuredImage'] : [];

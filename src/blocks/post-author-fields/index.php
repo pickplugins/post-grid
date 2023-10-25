@@ -20,7 +20,7 @@ class PGBlockPostAuthorields
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/post-author-fields/block.json',
+            post_grid_plugin_dir . 'build/blocks/post-author-fields/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -161,60 +161,58 @@ class PGBlockPostAuthorields
         ?>
 
 
-        <<?php echo esc_attr($wrapperTag); ?> class="
-            <?php echo $blockId; ?>">
+                <<?php echo esc_attr($wrapperTag); ?> class="
+                    <?php echo $blockId; ?>">
 
-            <?php if ($iconPosition == 'beforeFronttext'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-
-            <?php if (!empty($frontTextText)): ?>
-                <span class='frontText'>
-                    <?php echo wp_kses_post($frontTextText); ?>
-                </span>
-            <?php endif; ?>
-
-            <?php if ($iconPosition == 'afterFronttext'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-            <?php if ($iconPosition == 'beforeField'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-            <?php if (!empty($fieldLink)): ?>
-                <a <?php if ($fieldLinkTo == 'authorMail'): ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>" <?php else: ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?>>
-                <?php endif; ?>
-
-                <?php
-
-                if ($metaKey == 'id' || $metaKey == 'login' || $metaKey == 'nickname' || $metaKey == 'url' || $metaKey == 'registered' || $metaKey == 'display_name' || $metaKey == 'display_name' || $metaKey == 'last_name' || $metaKey == 'description' || $metaKey == 'display_name'):
-                    ?>
-                    <span class="fieldVal">
-                        <?php echo wp_kses_post(get_the_author_meta($metaKey, $post_author_id)) ?>
-                    </span>
-                    <?php
-                elseif ($metaKey == 'avatar'):
-                    ?>
-                    <img class="fieldVal"
-                        src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $fieldAvatarSize])) ?>"
-                        alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
-
-                    <?php
-                endif;
-
-                ?>
-
-                <?php if (!empty($fieldLink)): ?>
-                </a>
-            <?php endif; ?>
-            <?php if ($iconPosition == 'afterField'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-        </<?php echo esc_attr($wrapperTag); ?>>
+                    <?php if ($iconPosition == 'beforeFronttext'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
 
 
+                    <?php if (!empty($frontTextText)): ?>
+                            <span class='frontText'>
+                                <?php echo wp_kses_post($frontTextText); ?>
+                            </span>
+                    <?php endif; ?>
+
+                    <?php if ($iconPosition == 'afterFronttext'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+
+                    <?php if ($iconPosition == 'beforeField'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+
+                    <?php if (!empty($fieldLink)): ?>
+                            <a <?php if ($fieldLinkTo == 'authorMail'): ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>" <?php else: ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?>>
+                        <?php endif; ?>
+
+                        <?php
+
+                        if ($metaKey == 'id' || $metaKey == 'login' || $metaKey == 'nickname' || $metaKey == 'url' || $metaKey == 'registered' || $metaKey == 'display_name' || $metaKey == 'display_name' || $metaKey == 'last_name' || $metaKey == 'description' || $metaKey == 'display_name'):
+                            ?>
+                                <span class="fieldVal">
+                                    <?php echo wp_kses_post(get_the_author_meta($metaKey, $post_author_id)) ?>
+                                </span>
+                                <?php
+                        elseif ($metaKey == 'avatar'):
+                            ?>
+                                <img class="fieldVal"
+                                    src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $fieldAvatarSize])) ?>"
+                                    alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
+
+                                <?php
+                        endif;
+
+                        ?>
+
+                        <?php if (!empty($fieldLink)): ?>
+                            </a>
+                    <?php endif; ?>
+                    <?php if ($iconPosition == 'afterField'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+                </<?php echo esc_attr($wrapperTag); ?>>
 
 
 
@@ -224,7 +222,9 @@ class PGBlockPostAuthorields
 
 
 
-        <?php return ob_get_clean();
+
+
+                <?php return ob_get_clean();
     }
 }
 

@@ -1,92 +1,94 @@
 <?php
 if (!defined('ABSPATH'))
-    exit();
+  exit();
 
 
 
 class PGBlockImageGallery
 {
-    function __construct()
-    {
-        add_action('init', array($this, 'register_scripts'));
-        add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+  function __construct()
+  {
+    add_action('init', array($this, 'register_scripts'));
+    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+  }
+
+
+  function front_scripts($attributes)
+  {
+    wp_register_script('pgimage-gallery_front_script', post_grid_plugin_url . 'src/blocks/image-gallery/front-scripts.js', [], '', true);
+
+    if (has_block('post-grid/image-gallery')) {
+
+      wp_enqueue_style('jquery-ui');
+
+      wp_enqueue_script('jquery');
+      wp_enqueue_script('jquery-ui-core');
+      wp_enqueue_script('jquery-ui-accordion');
+      wp_enqueue_script('jquery-effects-core');
+
+      wp_enqueue_script('pgimage-gallery_front_script');
     }
+  }
+  // loading src files in the gutenberg editor screen
+  function register_scripts()
+  {
+    //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/layers/index.css');
+    //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
-    function front_scripts($attributes)
-    {
-        wp_register_script('pgimage-gallery_front_script', post_grid_plugin_url . 'src/blocks/image-gallery/front-scripts.js', [], '', true);
+    register_block_type(
+      post_grid_plugin_dir . 'build/blocks/image-gallery/block.json',
+      array(
 
-        if (has_block('post-grid/image-gallery')) {
+        'render_callback' => array($this, 'theHTML'),
+      )
+    );
+  }
 
-            wp_enqueue_style('jquery-ui');
+  function front_script($attributes)
+  {
+  }
+  function front_style($attributes)
+  {
+  }
 
-            wp_enqueue_script('jquery');
-            wp_enqueue_script('jquery-ui-core');
-            wp_enqueue_script('jquery-ui-accordion');
-            wp_enqueue_script('jquery-effects-core');
-
-            wp_enqueue_script('pgimage-gallery_front_script');
-        }
-    }
-    // loading src files in the gutenberg editor screen
-    function register_scripts()
-    {
-        //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/layers/index.css');
-        //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
+  // front-end output from the gutenberg editor 
+  function theHTML($attributes, $content, $block)
+  {
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/image-gallery/block.json', array(
+    global $postGridCustomCss;
+    global $postGridCssY;
 
-            'render_callback' => array($this, 'theHTML'),
-        )
-        );
-    }
+    $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
 
-    function front_script($attributes)
-    {
-    }
-    function front_style($attributes)
-    {
-    }
-
-    // front-end output from the gutenberg editor 
-    function theHTML($attributes, $content, $block)
-    {
+    $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+    $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
 
-        global $postGridCustomCss;
-        global $postGridCssY;
-
-        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
-
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
-        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
+    $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+    $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
+    $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
-        $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
-
-
-        $postGridCustomCss .= $customCss;
+    $postGridCustomCss .= $customCss;
 
 
 
-        ob_start();
+    ob_start();
 
 
 
-        ?>
+    ?>
         <div class="pg-image-gallery <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <?php echo $content ?>
+          <?php echo $content ?>
         </div>
         <?php
 
         return ob_get_clean();
-    }
+  }
 }
 
 $BlockPostGrid = new PGBlockImageGallery();

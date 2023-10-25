@@ -20,7 +20,7 @@ class PGBlockPostExcerpt
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/post-excerpt/block.json',
+            post_grid_plugin_dir . 'build/blocks/post-excerpt/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -247,94 +247,94 @@ class PGBlockPostExcerpt
         if (!empty($wrapperTag)):
 
             ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>">
-                <?php if ($postExcerptIsLink): ?>
-                    <a class="excerpt-text"
-                        href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) : esc_url_raw($post_url); ?>"
-                        rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php
-                              /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                              echo ($linkAttrStr); ?>>
+                        <<?php echo esc_attr($wrapperTag); ?> class="
+                            <?php echo esc_attr($blockId); ?>">
+                            <?php if ($postExcerptIsLink): ?>
+                                    <a class="excerpt-text"
+                                        href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) : esc_url_raw($post_url); ?>"
+                                        rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php
+                                              /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                              echo ($linkAttrStr); ?>>
 
 
-                        <?php if ($postfixText): ?>
-                            <span class="<?php echo esc_attr($prefixClass); ?>">
-                                <?php echo esc_attr($prefixText); ?>
-                            </span>
-                        <?php endif; ?>
+                                        <?php if ($postfixText): ?>
+                                                <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                    <?php echo esc_attr($prefixText); ?>
+                                                </span>
+                                        <?php endif; ?>
 
-                        <?php echo wp_kses_post($post_excerpt); ?>
+                                        <?php echo wp_kses_post($post_excerpt); ?>
 
-                        <?php if ($postfixText): ?>
-                            <span class="<?php echo esc_attr($postfixClass); ?>">
-                                <?php echo wp_kses_post($postfixText); ?>
-                            </span>
-                        <?php endif; ?>
+                                        <?php if ($postfixText): ?>
+                                                <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                    <?php echo wp_kses_post($postfixText); ?>
+                                                </span>
+                                        <?php endif; ?>
 
-                    </a>
-                <?php else: ?>
+                                    </a>
+                            <?php else: ?>
 
 
-                    <?php if (!empty($postExcerptTag)): ?>
-                        <<?php echo esc_attr($postExcerptTag); ?> class="excerpt-text">
-                            <?php if ($postfixText): ?>
-                                <span class="<?php echo esc_attr($prefixClass); ?>">
-                                    <?php echo wp_kses_post($prefixText); ?>
-                                </span>
+                                    <?php if (!empty($postExcerptTag)): ?>
+                                            <<?php echo esc_attr($postExcerptTag); ?> class="excerpt-text">
+                                                <?php if ($postfixText): ?>
+                                                        <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                            <?php echo wp_kses_post($prefixText); ?>
+                                                        </span>
+                                                <?php endif; ?>
+
+                                                <?php echo wp_kses_post($post_excerpt); ?>
+
+                                                <?php if ($postfixText): ?>
+                                                        <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                            <?php echo wp_kses_post($postfixText); ?>
+                                                        </span>
+                                                <?php endif; ?>
+
+                                            </<?php echo esc_attr($postExcerptTag); ?>>
+
+                                    <?php else: ?>
+                                            <?php if ($postfixText): ?>
+                                                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                        <?php echo wp_kses_post($prefixText); ?>
+                                                    </span>
+                                            <?php endif; ?>
+
+                                            <?php echo wp_kses_post($post_excerpt); ?>
+
+                                            <?php if ($postfixText): ?>
+                                                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                        <?php echo wp_kses_post($postfixText); ?>
+                                                    </span>
+                                            <?php endif; ?>
+
+
+                                    <?php endif; ?>
+
+
+
                             <?php endif; ?>
 
-                            <?php echo wp_kses_post($post_excerpt); ?>
+                            <?php if ($readMoreEnable):
+                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 
-                            <?php if ($postfixText): ?>
-                                <span class="<?php echo esc_attr($postfixClass); ?>">
-                                    <?php echo wp_kses_post($postfixText); ?>
-                                </span>
+                                ?>
+
+                                    <?php if (!empty($readMoreText)): ?>
+                                            <a class='readmore' <?php echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>"
+                                                rel="<?php echo esc_attr($readMoreRel); ?>"
+                                                href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) : esc_url_raw($post_url); ?>">
+                                                <?php echo wp_kses_post($readMoreText); ?>
+                                            </a>
+                                    <?php endif; ?>
+
+
+
                             <?php endif; ?>
 
-                        </<?php echo esc_attr($postExcerptTag); ?>>
 
-                    <?php else: ?>
-                        <?php if ($postfixText): ?>
-                            <span class="<?php echo esc_attr($prefixClass); ?>">
-                                <?php echo wp_kses_post($prefixText); ?>
-                            </span>
-                        <?php endif; ?>
-
-                        <?php echo wp_kses_post($post_excerpt); ?>
-
-                        <?php if ($postfixText): ?>
-                            <span class="<?php echo esc_attr($postfixClass); ?>">
-                                <?php echo wp_kses_post($postfixText); ?>
-                            </span>
-                        <?php endif; ?>
-
-
-                    <?php endif; ?>
-
-
-
-                <?php endif; ?>
-
-                <?php if ($readMoreEnable):
-                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-
-                    ?>
-
-                    <?php if (!empty($readMoreText)): ?>
-                        <a class='readmore' <?php echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>"
-                            rel="<?php echo esc_attr($readMoreRel); ?>"
-                            href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) : esc_url_raw($post_url); ?>">
-                            <?php echo wp_kses_post($readMoreText); ?>
-                        </a>
-                    <?php endif; ?>
-
-
-
-                <?php endif; ?>
-
-
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+                        </<?php echo esc_attr($wrapperTag); ?>>
+                        <?php
 
         endif;
 
@@ -342,85 +342,85 @@ class PGBlockPostExcerpt
 
             ?>
 
-            <?php if ($postExcerptIsLink): ?>
-                <a class="<?php echo esc_attr($blockId); ?>"
-                    href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) : esc_url_raw($post_url); ?>"
-                    rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php
-                          /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                          echo ($linkAttrStr); ?>>
+                        <?php if ($postExcerptIsLink): ?>
+                                <a class="<?php echo esc_attr($blockId); ?>"
+                                    href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) : esc_url_raw($post_url); ?>"
+                                    rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php
+                                          /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                          echo ($linkAttrStr); ?>>
 
-                    <?php if ($postfixText): ?>
-                        <span class="<?php echo esc_attr($prefixClass); ?>">
-                            <?php echo wp_kses_post($prefixText); ?>
-                        </span>
-                    <?php endif; ?>
+                                    <?php if ($postfixText): ?>
+                                            <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                <?php echo wp_kses_post($prefixText); ?>
+                                            </span>
+                                    <?php endif; ?>
 
-                    <?php echo wp_kses_post($post_excerpt); ?>
-                    <?php if ($postfixText): ?>
-                        <span class="<?php echo esc_attr($postfixClass); ?>">
-                            <?php echo wp_kses_post($postfixText); ?>
-                        </span>
-                    <?php endif; ?>
-                </a>
-            <?php else: ?>
-                <div class="<?php echo esc_attr($blockId); ?>">
+                                    <?php echo wp_kses_post($post_excerpt); ?>
+                                    <?php if ($postfixText): ?>
+                                            <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                <?php echo wp_kses_post($postfixText); ?>
+                                            </span>
+                                    <?php endif; ?>
+                                </a>
+                        <?php else: ?>
+                                <div class="<?php echo esc_attr($blockId); ?>">
 
-                    <?php if (!empty($postExcerptTag)): ?>
-                        <<?php echo esc_attr($postExcerptTag); ?> class="excerpt-text">
-                            <?php if ($postfixText): ?>
-                                <span class="<?php echo esc_attr($prefixClass); ?>">
-                                    <?php echo wp_kses_post($prefixText); ?>
-                                </span>
-                            <?php endif; ?>
+                                    <?php if (!empty($postExcerptTag)): ?>
+                                            <<?php echo esc_attr($postExcerptTag); ?> class="excerpt-text">
+                                                <?php if ($postfixText): ?>
+                                                        <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                            <?php echo wp_kses_post($prefixText); ?>
+                                                        </span>
+                                                <?php endif; ?>
 
-                            <?php echo wp_kses_post($post_excerpt); ?>
+                                                <?php echo wp_kses_post($post_excerpt); ?>
 
-                            <?php if ($postfixText): ?>
-                                <span class="<?php echo esc_attr($postfixClass); ?>">
-                                    <?php echo wp_kses_post($postfixText); ?>
-                                </span>
-                            <?php endif; ?>
+                                                <?php if ($postfixText): ?>
+                                                        <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                            <?php echo wp_kses_post($postfixText); ?>
+                                                        </span>
+                                                <?php endif; ?>
 
-                        </<?php echo esc_attr($postExcerptTag); ?>>
+                                            </<?php echo esc_attr($postExcerptTag); ?>>
 
-                    <?php else: ?>
-                        <?php if ($postfixText): ?>
-                            <span class="<?php echo esc_attr($prefixClass); ?>">
-                                <?php echo wp_kses_post($prefixText); ?>
-                            </span>
+                                    <?php else: ?>
+                                            <?php if ($postfixText): ?>
+                                                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                        <?php echo wp_kses_post($prefixText); ?>
+                                                    </span>
+                                            <?php endif; ?>
+
+                                            <?php echo wp_kses_post($post_excerpt); ?>
+
+                                            <?php if ($postfixText): ?>
+                                                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                        <?php echo wp_kses_post($postfixText); ?>
+                                                    </span>
+                                            <?php endif; ?>
+
+
+                                    <?php endif; ?>
+                                    <?php if ($readMoreEnable):
+                                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                        ?>
+                                            <?php if (!empty($readMoreText)): ?>
+                                                    <a class='readmore' <?php echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>"
+                                                        rel="<?php echo esc_attr($readMoreRel); ?>"
+                                                        href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) : esc_url_raw($post_url); ?>">
+                                                        <?php echo wp_kses_post($readMoreText); ?>
+                                                    </a>
+                                            <?php endif; ?>
+                                    <?php endif; ?>
+
+
+                                </div>
+
                         <?php endif; ?>
 
-                        <?php echo wp_kses_post($post_excerpt); ?>
-
-                        <?php if ($postfixText): ?>
-                            <span class="<?php echo esc_attr($postfixClass); ?>">
-                                <?php echo wp_kses_post($postfixText); ?>
-                            </span>
-                        <?php endif; ?>
-
-
-                    <?php endif; ?>
-                    <?php if ($readMoreEnable):
-                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                        ?>
-                        <?php if (!empty($readMoreText)): ?>
-                            <a class='readmore' <?php echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>"
-                                rel="<?php echo esc_attr($readMoreRel); ?>"
-                                href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) : esc_url_raw($post_url); ?>">
-                                <?php echo wp_kses_post($readMoreText); ?>
-                            </a>
-                        <?php endif; ?>
-                    <?php endif; ?>
-
-
-                </div>
-
-            <?php endif; ?>
 
 
 
-
-            <?php
+                        <?php
 
         endif;
 
@@ -434,7 +434,7 @@ class PGBlockPostExcerpt
 
 
 
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

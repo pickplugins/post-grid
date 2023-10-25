@@ -19,58 +19,60 @@ class PGBlockGridWrapItem
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layer/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/grid-wrap-item/block.json', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-layers"
-                        ],
-                        "styles" => [
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/grid-wrap-item/block.json',
+            array(
+                //'editor_script' => 'editor_script',
+                //'editor_style' => 'editor_style',
+                //'script' => 'front_script',
+                'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
+                //'style' => 'front_style',
+                'render_callback' => array($this, 'theHTML'),
+                'attributes' => [
+                    "wrapper" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "content" => "",
+                                "tag" => "div",
+                                "class" => "pg-layers"
+                            ],
+                            "styles" => [
 
-                            "color" => [],
+                                "color" => [],
 
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "position" => [],
-                            "zIndex" => [],
-                            "width" => [],
-                            "height" => [],
-                            "top" => [],
-                            "right" => [],
-                            "bottom" => [],
-                            "left" => []
+                                "padding" => [],
+                                "margin" => [],
+                                "display" => [],
+                                "position" => [],
+                                "zIndex" => [],
+                                "width" => [],
+                                "height" => [],
+                                "top" => [],
+                                "right" => [],
+                                "bottom" => [],
+                                "left" => []
+                            ]
+                        ]
+                    ],
+                    "blockId" => [
+                        "type" => "string",
+                        "default" => ""
+                    ],
+                    "customCss" => [
+                        "type" => "string",
+                        "default" => ""
+                    ],
+                    "blockCssY" => [
+                        "type" => "object",
+                        "default" => [
+                            "items" => []
                         ]
                     ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
                 ]
-            ]
 
 
-        )
+            )
         );
     }
 
@@ -108,11 +110,11 @@ class PGBlockGridWrapItem
         ob_start();
 
         ?>
-        <div class="pg-grid-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <?php echo $content ?>
-        </div>
-        <?php
-        return ob_get_clean();
+                <div class="pg-grid-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    <?php echo $content ?>
+                </div>
+                <?php
+                return ob_get_clean();
     }
 }
 

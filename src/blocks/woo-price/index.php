@@ -20,7 +20,7 @@ class PGBlockWooPrice
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/woo-price/block.json',
+            post_grid_plugin_dir . 'build/blocks/woo-price/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),

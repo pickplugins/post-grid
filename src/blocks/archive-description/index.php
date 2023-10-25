@@ -20,10 +20,11 @@ class PGBlocArchiveDescription
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/archive-description/block.json',
+            post_grid_plugin_dir . 'build/blocks/archive-description/block.json',
             array(
 
-
+                'title' => 'Accordion Description',
+                'render_callback' => array($this, 'theHTML'),
 
             )
         );

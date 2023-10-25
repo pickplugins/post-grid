@@ -20,7 +20,7 @@ class PGBlockWooProductInfo
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/woo-product-info/block.json',
+            post_grid_plugin_dir . 'build/blocks/woo-product-info/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -112,187 +112,187 @@ class PGBlockWooProductInfo
         if (!empty($wrapperTag)):
 
             ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>">
+                        <<?php echo esc_attr($wrapperTag); ?> class="
+                            <?php echo esc_attr($blockId); ?>">
 
-
-                <?php
-
-
-
-                $i = 0;
-
-                if (!empty($itemsElements))
-                    foreach ($itemsElements as $index => $item) {
-                        $id = isset($item['id']) ? $item['id'] : '';
-
-                        $label = isset($item['label']) ? $item['label'] : '';
-                        $value = isset($item['value']) ? $item['value'] : '';
-
-                        $prefix = isset($item['prefix']) ? $item['prefix'] : '';
-                        $postfix = isset($item['postfix']) ? $item['postfix'] : '';
-                        $type = isset($item['type']) ? $item['type'] : '';
-
-                        $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
-
-                        $iconLibrary = isset($siteIcon['library']) ? $siteIcon['library'] : '';
-                        $iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
-                        $iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
-
-
-
-                        if ($iconLibrary == 'fontAwesome') {
-                            wp_enqueue_style('fontawesome-icons');
-                        } else if ($iconLibrary == 'iconFont') {
-                            wp_enqueue_style('icofont-icons');
-                        } else if ($iconLibrary == 'bootstrap') {
-                            wp_enqueue_style('bootstrap-icons');
-                        }
-
-                        $fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
-
-                        ?>
-
-                        <li class="item item-<?php echo esc_attr($i); ?>">
-
-
-                            <?php if (!empty($prefix)): ?>
-                                <span class='prefix'>
-                                    <?php echo wp_kses_post($prefix); ?>
-                                </span>
-                            <?php endif; ?>
-
-                            <?php echo wp_kses_post($fontIconHtml); ?>
 
                             <?php
 
 
-                            if ($product != null) {
 
-                                if ($id == 'weight') {
+                            $i = 0;
 
-                                    $weight = ($product == null) ? 0 : $product->get_weight();
+                            if (!empty($itemsElements))
+                                foreach ($itemsElements as $index => $item) {
+                                    $id = isset($item['id']) ? $item['id'] : '';
 
-                                    ?>
-                                    <span class='value'>
-                                        <?php echo wp_kses_post($weight); ?>kg
-                                    </span>
-                                    <?php
-                                }
-                                if ($id == 'text') {
+                                    $label = isset($item['label']) ? $item['label'] : '';
+                                    $value = isset($item['value']) ? $item['value'] : '';
 
+                                    $prefix = isset($item['prefix']) ? $item['prefix'] : '';
+                                    $postfix = isset($item['postfix']) ? $item['postfix'] : '';
+                                    $type = isset($item['type']) ? $item['type'] : '';
 
-                                    ?>
-                                    <span class='value'>
-                                        <?php echo wp_kses_post($value); ?>
-                                    </span>
-                                    <?php
-                                }
+                                    $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
+
+                                    $iconLibrary = isset($siteIcon['library']) ? $siteIcon['library'] : '';
+                                    $iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
+                                    $iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
 
 
 
-                                if ($id == 'length') {
-                                    $length = ($product == null) ? 0 : $product->get_length();
-
-                                    ?>
-                                    <span class='value'>
-                                        <?php echo wp_kses_post($length); ?>cm
-                                    </span>
-                                    <?php
-                                }
-                                if ($id == 'width') {
-                                    $width = ($product == null) ? 0 : $product->get_width();
-
-                                    ?>
-                                    <span class='value'>
-                                        <?php echo wp_kses_post($width); ?>cm
-                                    </span>
-                                    <?php
-                                }
-                                if ($id == 'height') {
-                                    $height = ($product == null) ? 0 : $product->get_height();
-                                    ?>
-                                    <span class='value'>
-                                        <?php echo wp_kses_post($height); ?>cm
-                                    </span>
-                                    <?php
-                                }
-                                if ($id == 'dimensions') {
-                                    //$dimensions = $product->get_dimensions();
-        
-                                    ?>
-                                    <span class='value'>
-                                        <?php //echo wp_kses_post($dimensions); 
-                                                                    ?>
-                                    </span>
-                                    <?php
-                                }
-
-                                if ($type == 'taxonomy') {
-                                    if (function_exists("wc_get_product_terms")) {
-
-                                        $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
-                                    } else {
-                                        $terms = [];
+                                    if ($iconLibrary == 'fontAwesome') {
+                                        wp_enqueue_style('fontawesome-icons');
+                                    } else if ($iconLibrary == 'iconFont') {
+                                        wp_enqueue_style('icofont-icons');
+                                    } else if ($iconLibrary == 'bootstrap') {
+                                        wp_enqueue_style('bootstrap-icons');
                                     }
 
-                                    $termsCount = count($terms);
+                                    $fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
 
-                                    if (!empty($terms)) {
-                                        $j = 1;
-                                        foreach ($terms as $term) {
-                                            echo $term;
-                                            $termsCount = count($terms);
-                                            if ($termsCount > $j) {
-                                                echo ', ';
-                                            }
+                                    ?>
 
-                                            $j++;
-                                        }
-                                    }
+                                            <li class="item item-<?php echo esc_attr($i); ?>">
+
+
+                                                <?php if (!empty($prefix)): ?>
+                                                        <span class='prefix'>
+                                                            <?php echo wp_kses_post($prefix); ?>
+                                                        </span>
+                                                <?php endif; ?>
+
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
+
+                                                <?php
+
+
+                                                if ($product != null) {
+
+                                                    if ($id == 'weight') {
+
+                                                        $weight = ($product == null) ? 0 : $product->get_weight();
+
+                                                        ?>
+                                                                <span class='value'>
+                                                                    <?php echo wp_kses_post($weight); ?>kg
+                                                                </span>
+                                                                <?php
+                                                    }
+                                                    if ($id == 'text') {
+
+
+                                                        ?>
+                                                                <span class='value'>
+                                                                    <?php echo wp_kses_post($value); ?>
+                                                                </span>
+                                                                <?php
+                                                    }
+
+
+
+                                                    if ($id == 'length') {
+                                                        $length = ($product == null) ? 0 : $product->get_length();
+
+                                                        ?>
+                                                                <span class='value'>
+                                                                    <?php echo wp_kses_post($length); ?>cm
+                                                                </span>
+                                                                <?php
+                                                    }
+                                                    if ($id == 'width') {
+                                                        $width = ($product == null) ? 0 : $product->get_width();
+
+                                                        ?>
+                                                                <span class='value'>
+                                                                    <?php echo wp_kses_post($width); ?>cm
+                                                                </span>
+                                                                <?php
+                                                    }
+                                                    if ($id == 'height') {
+                                                        $height = ($product == null) ? 0 : $product->get_height();
+                                                        ?>
+                                                                <span class='value'>
+                                                                    <?php echo wp_kses_post($height); ?>cm
+                                                                </span>
+                                                                <?php
+                                                    }
+                                                    if ($id == 'dimensions') {
+                                                        //$dimensions = $product->get_dimensions();
+                            
+                                                        ?>
+                                                                <span class='value'>
+                                                                    <?php //echo wp_kses_post($dimensions); 
+                                                                                                ?>
+                                                                </span>
+                                                                <?php
+                                                    }
+
+                                                    if ($type == 'taxonomy') {
+                                                        if (function_exists("wc_get_product_terms")) {
+
+                                                            $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
+                                                        } else {
+                                                            $terms = [];
+                                                        }
+
+                                                        $termsCount = count($terms);
+
+                                                        if (!empty($terms)) {
+                                                            $j = 1;
+                                                            foreach ($terms as $term) {
+                                                                echo $term;
+                                                                $termsCount = count($terms);
+                                                                if ($termsCount > $j) {
+                                                                    echo ', ';
+                                                                }
+
+                                                                $j++;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+
+
+
+
+                                                ?>
+
+
+
+                                                <?php if (!empty($postfix)): ?>
+                                                        <span class='postfix'>
+                                                            <?php echo wp_kses_post($postfix); ?>
+                                                        </span>
+                                                <?php endif; ?>
+
+                                            </li>
+
+                                            <?php
+                                            $i++;
                                 }
-                            }
-
-
-
 
 
                             ?>
 
 
 
-                            <?php if (!empty($postfix)): ?>
-                                <span class='postfix'>
-                                    <?php echo wp_kses_post($postfix); ?>
-                                </span>
-                            <?php endif; ?>
 
-                        </li>
+
+                        </<?php echo esc_attr($wrapperTag); ?>>
+
+
+
+
 
                         <?php
-                        $i++;
-                    }
-
-
-                ?>
-
-
-
-
-
-            </<?php echo esc_attr($wrapperTag); ?>>
-
-
-
-
-
-            <?php
 
         endif;
 
         ?>
 
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

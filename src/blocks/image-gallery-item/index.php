@@ -20,7 +20,7 @@ class PGBlockImageGalleryItem
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/image-gallery-item/block.json',
+            post_grid_plugin_dir . 'build/blocks/image-gallery-item/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -70,11 +70,11 @@ class PGBlockImageGalleryItem
         ob_start();
 
         ?>
-        <div class="pg-image-gallery-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <?php echo $content ?>
-        </div>
-        <?php
-        return ob_get_clean();
+                <div class="pg-image-gallery-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    <?php echo $content ?>
+                </div>
+                <?php
+                return ob_get_clean();
     }
 }
 

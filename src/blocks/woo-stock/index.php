@@ -20,7 +20,7 @@ class PGBlockWooStock
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/woo-stock/block.json',
+            post_grid_plugin_dir . 'build/blocks/woo-stock/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -154,142 +154,142 @@ class PGBlockWooStock
         if (!empty($wrapperTag)):
 
             ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>">
+                        <<?php echo esc_attr($wrapperTag); ?> class="
+                            <?php echo esc_attr($blockId); ?>">
 
 
-                <?php if ($iconPosition == 'beforePrefix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                            <?php if ($iconPosition == 'beforePrefix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
+                            <?php if ($prefixText): ?>
+                                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                                        <?php echo wp_kses_post($prefixText); ?>
+                                    </span>
+                            <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-
-                <?php
-
-                if ($manageStock):
-                    $onStock = ($product != null) ? $product->get_stock_status() : '';
-
-                    ?>
-
-
-                    <?php if ($onStock == "instock"): ?>
-
-                        <span class='stock'>
+                            <?php if ($iconPosition == 'afterPrefix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
                             <?php
-                            echo wp_kses_post($stockInStock);
+
+                            if ($manageStock):
+                                $onStock = ($product != null) ? $product->get_stock_status() : '';
+
+                                ?>
+
+
+                                    <?php if ($onStock == "instock"): ?>
+
+                                            <span class='stock'>
+
+                                                <?php
+                                                echo wp_kses_post($stockInStock);
+                                                ?>
+
+
+                                            </span>
+
+                                    <?php endif; ?>
+                                    <?php if ($onStock == "outofstock"): ?>
+
+                                            <span class='stock'>
+
+                                                <?php
+                                                echo wp_kses_post($stockOutOfStock);
+                                                ?>
+
+
+                                            </span>
+
+                                    <?php endif; ?>
+                                    <?php if ($onStock == "onbackorder"): ?>
+
+                                            <span class='stock'>
+
+                                                <?php
+                                                echo wp_kses_post($stockBackOrder);
+                                                ?>
+
+
+                                            </span>
+
+                                    <?php endif; ?>
+
+                                    <?php
+                            endif;
+                            if (!$manageStock):
+
+                                $onStock = ($product != null) ? $product->get_stock_status() : '';
+
+                                ?>
+                                    <?php if ($onStock == "instock"): ?>
+
+                                            <span class='stock'>
+
+                                                <?php
+                                                echo wp_kses_post($stockInStock);
+                                                ?>
+
+
+                                            </span>
+
+                                    <?php endif; ?>
+                                    <?php if ($onStock == "outofstock"): ?>
+
+                                            <span class='stock'>
+
+                                                <?php
+                                                echo wp_kses_post($stockOutOfStock);
+                                                ?>
+
+
+                                            </span>
+
+                                    <?php endif; ?>
+                                    <?php if ($onStock == "onbackorder"): ?>
+
+                                            <span class='stock'>
+
+                                                <?php
+                                                echo wp_kses_post($stockBackOrder);
+                                                ?>
+
+
+                                            </span>
+
+                                    <?php endif; ?>
+
+                                    <?php
+
+                            endif;
+
+
+
+
                             ?>
 
 
-                        </span>
-
-                    <?php endif; ?>
-                    <?php if ($onStock == "outofstock"): ?>
-
-                        <span class='stock'>
-
-                            <?php
-                            echo wp_kses_post($stockOutOfStock);
-                            ?>
-
-
-                        </span>
-
-                    <?php endif; ?>
-                    <?php if ($onStock == "onbackorder"): ?>
-
-                        <span class='stock'>
-
-                            <?php
-                            echo wp_kses_post($stockBackOrder);
-                            ?>
-
-
-                        </span>
-
-                    <?php endif; ?>
-
-                    <?php
-                endif;
-                if (!$manageStock):
-
-                    $onStock = ($product != null) ? $product->get_stock_status() : '';
-
-                    ?>
-                    <?php if ($onStock == "instock"): ?>
-
-                        <span class='stock'>
-
-                            <?php
-                            echo wp_kses_post($stockInStock);
-                            ?>
-
-
-                        </span>
-
-                    <?php endif; ?>
-                    <?php if ($onStock == "outofstock"): ?>
-
-                        <span class='stock'>
-
-                            <?php
-                            echo wp_kses_post($stockOutOfStock);
-                            ?>
-
-
-                        </span>
-
-                    <?php endif; ?>
-                    <?php if ($onStock == "onbackorder"): ?>
-
-                        <span class='stock'>
-
-                            <?php
-                            echo wp_kses_post($stockBackOrder);
-                            ?>
-
-
-                        </span>
-
-                    <?php endif; ?>
-
-                    <?php
-
-                endif;
 
 
 
 
-                ?>
+                            <?php if ($iconPosition == 'beforePostfix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+                            <?php if ($postfixText): ?>
+                                    <span class="<?php echo $postfixClass; ?>">
+                                        <?php echo $postfixText; ?>
+                                    </span>
+                            <?php endif; ?>
 
+                            <?php if ($iconPosition == 'afterPostfix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-
-
-
-
-                <?php if ($iconPosition == 'beforePostfix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo $postfixClass; ?>">
-                        <?php echo $postfixText; ?>
-                    </span>
-                <?php endif; ?>
-
-                <?php if ($iconPosition == 'afterPostfix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+                        </<?php echo esc_attr($wrapperTag); ?>>
+                        <?php
 
         endif;
 
@@ -303,7 +303,7 @@ class PGBlockWooStock
 
 
 
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

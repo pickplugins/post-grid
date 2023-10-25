@@ -20,7 +20,7 @@ class PGBlockFormFieldFileMulti
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/form-field-file-multi/block.json',
+            post_grid_plugin_dir . 'build/blocks/form-field-file-multi/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -114,82 +114,82 @@ class PGBlockFormFieldFileMulti
 
         ?>
 
-        <div class="<?php echo esc_attr($blockId); ?>">
-            <div class='label-wrap'>
+                <div class="<?php echo esc_attr($blockId); ?>">
+                    <div class='label-wrap'>
 
-                <?php if ($labelEnable): ?>
-                    <label for="">
-                        <?php echo wp_kses_post($labelText); ?>
-                    </label>
-                <?php endif; ?>
+                        <?php if ($labelEnable): ?>
+                                <label for="">
+                                    <?php echo wp_kses_post($labelText); ?>
+                                </label>
+                        <?php endif; ?>
 
-                <?php if ($addItemPosition == 'afterLabel'): ?>
-                    <div class='add-item'>
-                        <?php echo wp_kses_post($addItemText); ?>
+                        <?php if ($addItemPosition == 'afterLabel'): ?>
+                                <div class='add-item'>
+                                    <?php echo wp_kses_post($addItemText); ?>
+                                </div>
+                        <?php endif; ?>
+
+                        <?php if ($errorWrapPosition == 'afterLabel'): ?>
+                                <div class='error-wrap'>
+                                    <?php echo wp_kses_post($errorWrapText); ?>
+                                </div>
+                        <?php endif; ?>
+
+
+
                     </div>
-                <?php endif; ?>
+                    <div class='input-wrap'>
 
-                <?php if ($errorWrapPosition == 'afterLabel'): ?>
-                    <div class='error-wrap'>
-                        <?php echo wp_kses_post($errorWrapText); ?>
+
+                        <?php if ($addItemPosition == 'beforeFiles'): ?>
+                                <div class='add-item'>
+                                    <?php echo wp_kses_post($addItemText); ?>
+                                </div>
+                        <?php endif; ?>
+
+
+                        <?php
+
+                        for ($i = 0; $i < $inputMaxCount; $i++) {
+
+                            ?>
+                                <div class="item">
+                                    <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
+                                        value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                         <?php if ($inputDisabled): ?> disabled <?php endif; ?>
+                                        <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
+                                </div>
+
+                                <?php
+                        }
+
+                        ?>
+
+
+
+
+
+                        <?php if ($addItemPosition == 'afterFiles'): ?>
+                                <div class='add-item'>
+                                    <?php echo wp_kses_post($addItemText); ?>
+                                </div>
+                        <?php endif; ?>
+
+                        <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                <div class='error-wrap'>
+                                    <?php echo wp_kses_post($errorWrapText); ?>
+                                </div>
+                        <?php endif; ?>
                     </div>
-                <?php endif; ?>
 
 
 
-            </div>
-            <div class='input-wrap'>
 
 
-                <?php if ($addItemPosition == 'beforeFiles'): ?>
-                    <div class='add-item'>
-                        <?php echo wp_kses_post($addItemText); ?>
-                    </div>
-                <?php endif; ?>
 
+                </div>
 
                 <?php
-
-                for ($i = 0; $i < $inputMaxCount; $i++) {
-
-                    ?>
-                    <div class="item">
-                        <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
-                            value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>             <?php if ($inputDisabled): ?> disabled <?php endif; ?>
-                            <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
-                    </div>
-
-                    <?php
-                }
-
-                ?>
-
-
-
-
-
-                <?php if ($addItemPosition == 'afterFiles'): ?>
-                    <div class='add-item'>
-                        <?php echo wp_kses_post($addItemText); ?>
-                    </div>
-                <?php endif; ?>
-
-                <?php if ($errorWrapPosition == 'afterInput'): ?>
-                    <div class='error-wrap'>
-                        <?php echo wp_kses_post($errorWrapText); ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-
-
-
-
-
-
-        </div>
-
-        <?php
-        return ob_get_clean();
+                return ob_get_clean();
     }
 }
 

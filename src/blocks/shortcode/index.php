@@ -20,7 +20,7 @@ class BlockPostShortcode
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/shortcode/block.json',
+            post_grid_plugin_dir . 'build/blocks/shortcode/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),
@@ -57,7 +57,7 @@ class BlockPostShortcode
         if (!is_admin()) {
 
 
-            //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-categories/index.js', array('wp-element'));
+            //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'build/blocks/post-categories/index.js', array('wp-element'));
 
             // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-categories/index.css');
         }

@@ -20,7 +20,7 @@ class PGBlockPostTags
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/post-tags/block.json',
+            post_grid_plugin_dir . 'build/blocks/post-tags/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),

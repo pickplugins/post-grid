@@ -20,7 +20,7 @@ class PGBlockSocialShare
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/social-share/block.json',
+            post_grid_plugin_dir . 'build/blocks/social-share/block.json',
             array(
 
                 'render_callback' => array($this, 'theHTML'),

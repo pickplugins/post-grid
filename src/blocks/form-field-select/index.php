@@ -19,13 +19,15 @@ class PGBlockFormFieldSelect
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/text/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/form-field-select/block.json', array(
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/form-field-select/block.json',
+            array(
 
-            'render_callback' => array($this, 'theHTML'),
+                'render_callback' => array($this, 'theHTML'),
 
 
 
-        )
+            )
         );
     }
 
@@ -106,101 +108,101 @@ class PGBlockFormFieldSelect
 
         ?>
 
-        <div class="<?php echo esc_attr($blockId); ?>">
+                <div class="<?php echo esc_attr($blockId); ?>">
 
 
-            <div class='label-wrap'>
+                    <div class='label-wrap'>
 
-                <?php if ($labelEnable): ?>
-                    <label for="">
-                        <?php echo wp_kses_post($labelText); ?>
-                    </label>
-                <?php endif; ?>
+                        <?php if ($labelEnable): ?>
+                                <label for="">
+                                    <?php echo wp_kses_post($labelText); ?>
+                                </label>
+                        <?php endif; ?>
 
 
-                <?php if ($errorWrapPosition == 'afterlabel'): ?>
-                    <div class='error-wrap'>
-                        <?php echo wp_kses_post($errorWrapText); ?>
+                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                <div class='error-wrap'>
+                                    <?php echo wp_kses_post($errorWrapText); ?>
+                                </div>
+                        <?php endif; ?>
                     </div>
-                <?php endif; ?>
-            </div>
-            <div class='input-wrap'>
+                    <div class='input-wrap'>
 
 
-                <select placeholder="<?php echo esc_attr($inputPlaceholder); ?>" name="<?php echo esc_attr($inputName); ?>"
-                    <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         <?php if ($inputReadonly): ?> readonly <?php endif; ?>         <?php if ($inputMultiple): ?> multiple <?php endif; ?>>
+                        <select placeholder="<?php echo esc_attr($inputPlaceholder); ?>" name="<?php echo esc_attr($inputName); ?>"
+                            <?php if ($inputRequired): ?> required <?php endif; ?>                 <?php if ($inputDisabled): ?> disabled <?php endif; ?>                 <?php if ($inputReadonly): ?> readonly <?php endif; ?>                 <?php if ($inputMultiple): ?> multiple <?php endif; ?>>
 
 
 
-                    <?php
+                            <?php
 
-                    if (!empty($inputArgs)):
-                        foreach ($inputArgs as $index => $inputArg):
+                            if (!empty($inputArgs)):
+                                foreach ($inputArgs as $index => $inputArg):
 
-                            $args = isset($inputArg['args']) ? $inputArg['args'] : [];
+                                    $args = isset($inputArg['args']) ? $inputArg['args'] : [];
 
-
-                            if (!empty($args)):
-                                $groupLabel = $inputArg['label'];
-
-                                ?>
-                                <optgroup label="<?php echo esc_attr($groupLabel); ?>">
-
-                                    <?php
 
                                     if (!empty($args)):
-                                        foreach ($args as $arg):
+                                        $groupLabel = $inputArg['label'];
 
-                                            ?>
-                                            <option value="<?php echo esc_attr($arg['value']) ?>" <?php if ($inputMultiple): ?>                                 <?php if (in_array($arg['value'], $inputValue)): ?> selected <?php endif; ?>                             <?php else: ?>                                 <?php if ($inputValue == $arg['value']): ?> selected <?php endif; ?>                             <?php endif; ?>>
-                                                <?php echo wp_kses_post($arg['label']); ?>
-                                            </option>
-                                            <?php
-                                        endforeach;
+                                        ?>
+                                                    <optgroup label="<?php echo esc_attr($groupLabel); ?>">
+
+                                                        <?php
+
+                                                        if (!empty($args)):
+                                                            foreach ($args as $arg):
+
+                                                                ?>
+                                                                        <option value="<?php echo esc_attr($arg['value']) ?>" <?php if ($inputMultiple): ?>                                                                 <?php if (in_array($arg['value'], $inputValue)): ?> selected <?php endif; ?>                                                         <?php else: ?>                                                                 <?php if ($inputValue == $arg['value']): ?> selected <?php endif; ?>                                                         <?php endif; ?>>
+                                                                            <?php echo wp_kses_post($arg['label']); ?>
+                                                                        </option>
+                                                                        <?php
+                                                            endforeach;
+                                                        endif;
+
+                                                        ?>
+
+
+                                                    </optgroup>
+                                                    <?php
                                     endif;
 
-                                    ?>
+                                    if (empty($args)):
+                                        ?>
+                                                    <option value="<?php echo esc_attr($inputArg['value']) ?>" <?php if ($inputMultiple): ?>                                                 <?php if (in_array($inputArg['value'], [$inputValue])): ?> selected <?php endif; ?>                                         <?php else: ?>                                                 <?php if ($inputValue == $inputArg['value']): ?> selected <?php endif; ?>                                         <?php endif; ?>>
+
+                                                        <?php echo wp_kses_post($inputArg['label']); ?>
+                                                    </option>
+                                                    <?php
+                                    endif;
 
 
-                                </optgroup>
-                                <?php
+
+                                endforeach;
                             endif;
 
-                            if (empty($args)):
-                                ?>
-                                <option value="<?php echo esc_attr($inputArg['value']) ?>" <?php if ($inputMultiple): ?>                         <?php if (in_array($inputArg['value'], [$inputValue])): ?> selected <?php endif; ?>                     <?php else: ?>                         <?php if ($inputValue == $inputArg['value']): ?> selected <?php endif; ?>                     <?php endif; ?>>
-
-                                    <?php echo wp_kses_post($inputArg['label']); ?>
-                                </option>
-                                <?php
-                            endif;
+                            ?>
+                        </select>
 
 
+                        <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                <div class='error-wrap'>
+                                    <?php echo wp_kses_post($errorWrapText); ?>
+                                </div>
 
-                        endforeach;
-                    endif;
-
-                    ?>
-                </select>
-
-
-                <?php if ($errorWrapPosition == 'afterInput'): ?>
-                    <div class='error-wrap'>
-                        <?php echo wp_kses_post($errorWrapText); ?>
+                        <?php endif; ?>
                     </div>
 
-                <?php endif; ?>
-            </div>
 
 
 
 
 
+                </div>
 
-        </div>
-
-        <?php
-        return ob_get_clean();
+                <?php
+                return ob_get_clean();
     }
 }
 

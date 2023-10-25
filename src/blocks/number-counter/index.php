@@ -20,14 +20,16 @@ class PGBlockNumberCounter
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/number-counter/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/number-counter/block.json', array(
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/number-counter/block.json',
+            array(
 
 
-            'render_callback' => array($this, 'theHTML'),
+                'render_callback' => array($this, 'theHTML'),
 
 
 
-        )
+            )
         );
     }
 
@@ -144,49 +146,49 @@ class PGBlockNumberCounter
         if (!empty($wrapperTag)):
 
             ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="PGBlockNumberCount
-                <?php echo esc_attr($blockId); ?>
-                <?php echo esc_attr($blockAlign); ?>" data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+                        <<?php echo esc_attr($wrapperTag); ?> class="PGBlockNumberCount
+                            <?php echo esc_attr($blockId); ?>
+                            <?php echo esc_attr($blockAlign); ?>" data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
-                <?php if ($iconPosition == 'beforePrefix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                            <?php if ($iconPosition == 'beforePrefix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
+                            <?php if ($prefixText): ?>
+                                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                                        <?php echo wp_kses_post($prefixText); ?>
+                                    </span>
+                            <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-
-
-
-                <span class='number-count'>
-
-                    <?php echo wp_kses_post($start); ?>
-
-                </span>
+                            <?php if ($iconPosition == 'afterPrefix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
 
-                <?php if ($iconPosition == 'beforePostfix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo $postfixClass; ?>">
-                        <?php echo $postfixText; ?>
-                    </span>
-                <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                            <span class='number-count'>
 
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+                                <?php echo wp_kses_post($start); ?>
+
+                            </span>
+
+
+                            <?php if ($iconPosition == 'beforePostfix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+                            <?php if ($postfixText): ?>
+                                    <span class="<?php echo $postfixClass; ?>">
+                                        <?php echo $postfixText; ?>
+                                    </span>
+                            <?php endif; ?>
+
+                            <?php if ($iconPosition == 'afterPostfix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+
+                        </<?php echo esc_attr($wrapperTag); ?>>
+                        <?php
 
         endif;
 
@@ -202,7 +204,7 @@ class PGBlockNumberCounter
 
 
 
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

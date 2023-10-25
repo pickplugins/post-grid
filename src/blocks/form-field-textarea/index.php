@@ -19,13 +19,15 @@ class PGBlockFormFieldTextarea
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/text/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/form-field-textarea/block.json', array(
-            
-            'render_callback' => array($this, 'theHTML'),
-            
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/form-field-textarea/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
 
 
-        )
+
+            )
         );
     }
 
@@ -113,40 +115,40 @@ class PGBlockFormFieldTextarea
 
         ?>
 
-                <div class="<?php echo esc_attr($blockId); ?> pg-form-field" id="<?php echo esc_attr($blockId); ?>">
+                        <div class="<?php echo esc_attr($blockId); ?> pg-form-field" id="<?php echo esc_attr($blockId); ?>">
 
 
-                    <div class='label-wrap'>
+                            <div class='label-wrap'>
 
-                        <?php if ($labelEnable): ?>
-                                <label for=""><?php echo wp_kses_post($labelText); ?></label>
-                        <?php endif; ?>
-
-
-                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
-                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                        <?php endif; ?>
+                                <?php if ($labelEnable): ?>
+                                            <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                                <?php endif; ?>
 
 
-                    </div>
-                    <div class='input-wrap'>
-                        <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         <?php if ($inputReadonly): ?> readonly <?php endif; ?>         <?php if ($inputAutocomplete): ?> autocomplete="on" <?php endif; ?>         <?php if (!$inputAutocomplete): ?> autocomplete="off" <?php endif; ?>         <?php if ($inputAutocorrect): ?> autocorrect="on" <?php endif; ?>         <?php if (!$inputAutocorrect): ?> autocorrect="off" <?php endif; ?>         <?php if ($inputCols): ?> cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?>         <?php if ($inputRows): ?> rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?>         <?php if ($inputMinLength): ?> minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?>         <?php if ($inputMaxLength): ?> maxLength="<?php echo esc_attr($inputMaxLength); ?>" <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
-                        <?php if ($errorWrapPosition == 'afterInput'): ?>
-                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-
-                        <?php endif; ?>
-                    </div>
+                                <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                                <?php endif; ?>
 
 
+                            </div>
+                            <div class='input-wrap'>
+                                <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                 <?php if ($inputDisabled): ?> disabled <?php endif; ?>                 <?php if ($inputReadonly): ?> readonly <?php endif; ?>                 <?php if ($inputAutocomplete): ?> autocomplete="on" <?php endif; ?>                 <?php if (!$inputAutocomplete): ?> autocomplete="off" <?php endif; ?>                 <?php if ($inputAutocorrect): ?> autocorrect="on" <?php endif; ?>                 <?php if (!$inputAutocorrect): ?> autocorrect="off" <?php endif; ?>                 <?php if ($inputCols): ?> cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?>                 <?php if ($inputRows): ?> rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?>                 <?php if ($inputMinLength): ?> minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?>                 <?php if ($inputMaxLength): ?> maxLength="<?php echo esc_attr($inputMaxLength); ?>" <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
+                                <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
 
+                                <?php endif; ?>
+                            </div>
 
 
 
-                </div>
 
-        <?php
 
-        return ob_get_clean();
+
+                        </div>
+
+                <?php
+
+                return ob_get_clean();
     }
 }
 

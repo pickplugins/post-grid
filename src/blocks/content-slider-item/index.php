@@ -19,13 +19,15 @@ class PGBlockContentSliderItem
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layer/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type(post_grid_plugin_dir . 'src/blocks/content-slider-item/block.json', array(
+        register_block_type(
+            post_grid_plugin_dir . 'build/blocks/content-slider-item/block.json',
+            array(
 
-            'render_callback' => array($this, 'theHTML'),
+                'render_callback' => array($this, 'theHTML'),
 
 
 
-        )
+            )
         );
     }
 
@@ -63,12 +65,12 @@ class PGBlockContentSliderItem
         ob_start();
 
         ?>
-        <div
-            class="pg-content-slider-item splide__slide <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <?php echo $content ?>
-        </div>
-        <?php
-        return ob_get_clean();
+                <div
+                    class="pg-content-slider-item splide__slide <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    <?php echo $content ?>
+                </div>
+                <?php
+                return ob_get_clean();
     }
 }
 

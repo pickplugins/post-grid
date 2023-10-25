@@ -38,7 +38,7 @@ class PGBlockIcon
 
 
         register_block_type(
-            post_grid_plugin_dir . 'src/blocks/icon/block.json',
+            post_grid_plugin_dir . 'build/blocks/icon/block.json',
             array(
 
 
@@ -182,81 +182,81 @@ class PGBlockIcon
         if (!empty($wrapperTag)):
 
             ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+                        <<?php echo esc_attr($wrapperTag); ?> class="
+                            <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
 
 
-                <?php if ($iconPosition == 'beforePrefix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                            <?php if ($iconPosition == 'beforePrefix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
+                            <?php if ($prefixText): ?>
+                                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                                        <?php echo wp_kses_post($prefixText); ?>
+                                    </span>
+                            <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <?php if (!empty($textLinkTo)):
-                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                    ?>
-                    <a class='text' <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>"
-                        rel="<?php echo esc_attr($textRel); ?>"
-                        href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
-                        <?php if ($iconPosition == 'beforeText'): ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
+                            <?php if ($iconPosition == 'afterPrefix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+                            <?php if (!empty($textLinkTo)):
+                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                ?>
+                                    <a class='text' <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>"
+                                        rel="<?php echo esc_attr($textRel); ?>"
+                                        href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+                                        <?php if ($iconPosition == 'beforeText'): ?>
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
+                                        <?php endif; ?>
 
-                        <?php if ($textEnable): ?>
-                            <span>
-                                <?php echo wp_kses_post($textText); ?>
-                            </span>
-                        <?php endif; ?>
-
-
-                        <?php if ($iconPosition == 'afterText'): ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                    </a>
-
-                <?php else: ?>
-                    <?php if ($iconPosition == 'beforeText'): ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
+                                        <?php if ($textEnable): ?>
+                                                <span>
+                                                    <?php echo wp_kses_post($textText); ?>
+                                                </span>
+                                        <?php endif; ?>
 
 
-                    <?php if ($textEnable): ?>
-                        <span class="text">
-                            <?php echo wp_kses_post($textText); ?>
-                        </span>
-                    <?php endif; ?>
+                                        <?php if ($iconPosition == 'afterText'): ?>
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
+                                        <?php endif; ?>
+                                    </a>
+
+                            <?php else: ?>
+                                    <?php if ($iconPosition == 'beforeText'): ?>
+                                            <?php echo wp_kses_post($fontIconHtml); ?>
+                                    <?php endif; ?>
 
 
-                    <?php if ($iconPosition == 'afterText'): ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-                <?php endif; ?>
+                                    <?php if ($textEnable): ?>
+                                            <span class="text">
+                                                <?php echo wp_kses_post($textText); ?>
+                                            </span>
+                                    <?php endif; ?>
+
+
+                                    <?php if ($iconPosition == 'afterText'): ?>
+                                            <?php echo wp_kses_post($fontIconHtml); ?>
+                                    <?php endif; ?>
+                            <?php endif; ?>
 
 
 
 
-                <?php if ($iconPosition == 'beforePostfix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>">
-                        <?php echo wp_kses_post($postfixText); ?>
-                    </span>
-                <?php endif; ?>
+                            <?php if ($iconPosition == 'beforePostfix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+                            <?php if ($postfixText): ?>
+                                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                                        <?php echo wp_kses_post($postfixText); ?>
+                                    </span>
+                            <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                            <?php if ($iconPosition == 'afterPostfix'): ?>
+                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+                        </<?php echo esc_attr($wrapperTag); ?>>
+                        <?php
 
         endif;
 
@@ -265,74 +265,74 @@ class PGBlockIcon
             ?>
 
 
-            <?php if (empty($textLinkTo)): ?>
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
+                        <?php if (empty($textLinkTo)): ?>
+                                <?php if ($prefixText): ?>
+                                        <span class="<?php echo esc_attr($prefixClass); ?>">
+                                            <?php echo wp_kses_post($prefixText); ?>
+                                        </span>
+                                <?php endif; ?>
 
 
-                <?php if ($iconPosition == 'beforeText'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                                <?php if ($iconPosition == 'beforeText'): ?>
+                                        <?php echo wp_kses_post($fontIconHtml); ?>
+                                <?php endif; ?>
 
 
-                <?php if ($textEnable): ?>
-                    <span class="text">
-                        <?php echo wp_kses_post($textText); ?>
-                    </span>
-                <?php endif; ?>
+                                <?php if ($textEnable): ?>
+                                        <span class="text">
+                                            <?php echo wp_kses_post($textText); ?>
+                                        </span>
+                                <?php endif; ?>
 
 
-                <?php if ($iconPosition == 'afterText'): ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                                <?php if ($iconPosition == 'afterText'): ?>
+                                        <?php echo wp_kses_post($fontIconHtml); ?>
+                                <?php endif; ?>
 
 
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>">
-                        <?php echo wp_kses_post($postfixText); ?>
-                    </span>
-                <?php endif; ?>
-            <?php else:
-                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                ?>
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
-                <a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrText); ?>
-                    target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
-                    href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+                                <?php if ($postfixText): ?>
+                                        <span class="<?php echo esc_attr($postfixClass); ?>">
+                                            <?php echo wp_kses_post($postfixText); ?>
+                                        </span>
+                                <?php endif; ?>
+                        <?php else:
+                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                            ?>
+                                <?php if ($prefixText): ?>
+                                        <span class="<?php echo esc_attr($prefixClass); ?>">
+                                            <?php echo wp_kses_post($prefixText); ?>
+                                        </span>
+                                <?php endif; ?>
+                                <a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrText); ?>
+                                    target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
+                                    href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 
-                    <?php if ($iconPosition == 'beforeText'): ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-
-
-                    <?php if ($textEnable): ?>
-                        <span class='text'>
-                            <?php echo wp_kses_post($textText); ?>
-                        </span>
-                    <?php endif; ?>
+                                    <?php if ($iconPosition == 'beforeText'): ?>
+                                            <?php echo wp_kses_post($fontIconHtml); ?>
+                                    <?php endif; ?>
 
 
-                    <?php if ($iconPosition == 'afterText'): ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-
-                </a>
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>">
-                        <?php echo wp_kses_post($postfixText); ?>
-                    </span>
-                <?php endif; ?>
-            <?php endif; ?>
+                                    <?php if ($textEnable): ?>
+                                            <span class='text'>
+                                                <?php echo wp_kses_post($textText); ?>
+                                            </span>
+                                    <?php endif; ?>
 
 
-            <?php
+                                    <?php if ($iconPosition == 'afterText'): ?>
+                                            <?php echo wp_kses_post($fontIconHtml); ?>
+                                    <?php endif; ?>
+
+                                </a>
+                                <?php if ($postfixText): ?>
+                                        <span class="<?php echo esc_attr($postfixClass); ?>">
+                                            <?php echo wp_kses_post($postfixText); ?>
+                                        </span>
+                                <?php endif; ?>
+                        <?php endif; ?>
+
+
+                        <?php
 
         endif;
 
@@ -346,7 +346,7 @@ class PGBlockIcon
 
 
 
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

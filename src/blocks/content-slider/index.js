@@ -292,8 +292,9 @@ registerBlockType(metadata, {
 		}, [sliderOptionsRes]);
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+			var blockIdX = "pg" + clientId.split("-").pop();
 
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 

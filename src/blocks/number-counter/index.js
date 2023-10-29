@@ -65,7 +65,6 @@ import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -144,8 +143,6 @@ registerBlockType(metadata, {
 		var [commentCountEdited, setcommentCountEdited] = useState(
 			numberCount.options.start
 		);
-
-
 
 		// Wrapper CSS Class Selectors
 		const wrapperSelector = blockClass;
@@ -865,11 +862,9 @@ registerBlockType(metadata, {
 		}, [icon]);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
-
-			// setAttributes({ numberCount: numberCount });
-			// setAttributes({ wrapper: wrapper });
-
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 

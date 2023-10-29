@@ -62,7 +62,6 @@ import PGcssTextAlign from "../../components/css-text-align";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -70,6 +69,8 @@ import PGCssLibrary from "../../components/css-library";
 
 import { applyFilters } from "@wordpress/hooks";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -133,11 +134,12 @@ registerBlockType(metadata, {
 		let limitByArgs = applyFilters("limitByArgs", limitByArgsBasic);
 
 		useEffect(() => {
-			if (blockId.length == 0) {
-				setAttributes({ blockId: blockIdX });
+			// if (blockId.length == 0) {
+			var blockIdX = "pg" + clientId.split("-").pop();
+			setAttributes({ blockId: blockIdX });
 
-				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-			}
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			// }
 		}, [clientId]);
 
 		useEffect(() => {
@@ -146,17 +148,28 @@ registerBlockType(metadata, {
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [customCss]);
 
-		useEffect(() => {
-			//console.log('blockId', blockId);
+		// useEffect(() => {
+		// 	//console.log('blockId', blockId);
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [blockId]);
+		// 	myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		// }, [blockId]);
 
 		useEffect(() => {
 			//console.log('blockCssY', blockCssY.items);
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [blockCssY]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[textSelector] = text;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		function setLimitBy(option, index) {
 			var options = { ...text.options, limitBy: option.value };
@@ -337,7 +350,7 @@ registerBlockType(metadata, {
 		}
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-text`,
+			className: ` ${blockId} ${text.options.class}`,
 		});
 
 		return (
@@ -385,6 +398,31 @@ registerBlockType(metadata, {
 
                   </PanelRow> */}
 
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={text.options.class}
+										onChange={(newVal) => {
+											var options = { ...text.options, class: newVal };
+											setAttributes({
+												text: { styles: text.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -471,7 +509,6 @@ registerBlockType(metadata, {
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
-
 
 						<PanelBody title="Block Variations" initialOpen={false}>
 							<PGBlockPatterns

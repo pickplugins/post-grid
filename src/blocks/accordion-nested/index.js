@@ -73,6 +73,8 @@ import PGBlockPatterns from "../../components/block-patterns";
 
 import variations from "./variations";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -169,6 +171,8 @@ registerBlockType(metadata, {
 		);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
@@ -182,6 +186,29 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [blockCssY]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[contentSelector] = content;
+
+			blockCssObj[headerActiveSelector] = headerActive;
+			blockCssObj[headerSelector] = header;
+			blockCssObj[headerLabelSelector] = headerLabel;
+			blockCssObj[labelCounterSelector] = labelCounter;
+			blockCssObj[labelIconSelector] = labelIcon;
+			blockCssObj[searchWrapSelector] = searchWrap;
+			blockCssObj[searchInputSelector] = searchInput;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[iconToggleSelector] = iconToggle;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+			console.log("first");
+			console.log(blockCssRules);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		// useEffect(() => {
 		// 	var childBlocks =
@@ -1120,7 +1147,7 @@ registerBlockType(metadata, {
 		];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-accordion-nested`,
+			className: ` ${blockId} ${wrapper.options.class} `,
 		});
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -1191,6 +1218,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 

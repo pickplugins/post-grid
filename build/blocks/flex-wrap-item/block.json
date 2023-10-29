@@ -26,7 +26,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "flex-item-wrap"
+          "class": "pg-flex-wrap-item"
         },
         "styles": {
           "backgroundColor": {

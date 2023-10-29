@@ -30,6 +30,29 @@ function parse_css_class($classStr, $obj)
   $objType = $obj['type'];
   $objId = $obj['id'];
 
+  if (empty($objType)) {
+    // $active_plugins = get_option('active_plugins');
+
+    if (is_front_page() && is_home()) {
+    } elseif (is_front_page()) {
+    } elseif (is_home()) {
+    }
+    // else if (in_array('woocommerce/woocommerce.php', (array) $active_plugins) && is_woocommerce() && is_shop()) {
+    // } 
+    elseif (is_singular()) {
+      $objId = 'post';
+    } elseif (is_tax()) {
+    } else if (is_category()) {
+    } else if (is_tag()) {
+    } else if (is_author()) {
+    } elseif (is_search()) {
+    } else if (is_year()) {
+    } else if (is_month()) {
+    } else if (is_date()) {
+    } elseif (is_404()) {
+    }
+  }
+
 
   $classArr = explode(' ', $classStr);
 
@@ -46,61 +69,49 @@ function parse_css_class($classStr, $obj)
       $prams = explode(',', $prams);
       $format = wp_kses_stripslashes($prams[0]);
       $newArr[$index] = date($format);
-    }
-    if (strpos($item, 'currentMonth') !== false) {
+    } elseif (strpos($item, 'currentMonth') !== false) {
       $params = str_replace(['currentMonth[\'', '\']'], '', $item);
       $params = explode(',', $params);
       $format = wp_kses_stripslashes($params[0]);
 
       $newArr[$index] = date($format);
-    }
-    if (strpos($item, 'currentDay') !== false) {
+    } elseif (strpos($item, 'currentDay') !== false) {
       $params = str_replace(['currentDay[\'', '\']'], '', $item);
       $params = explode(',', $params);
       $format = wp_kses_stripslashes($params[0]);
       $newArr[$index] = date($format);
-    }
-    if (strpos($item, 'currentDate') !== false) {
+    } elseif (strpos($item, 'currentDate') !== false) {
       $prams = str_replace(['currentDate[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $format = wp_kses_stripslashes($prams[0]);
 
       $newArr[$index] = date($format);
-    }
-    if (strpos($item, 'currentTime') !== false) {
+    } elseif (strpos($item, 'currentTime') !== false) {
       $prams = str_replace(['currentTime[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $format = wp_kses_stripslashes($prams[0]);
 
       $newArr[$index] = date($format);
-    }
-    if (strpos($item, 'postPublishDate') !== false) {
+    } elseif (strpos($item, 'postPublishDate') !== false) {
       $prams = str_replace(['postPublishDate[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $format = wp_kses_stripslashes($prams[0]);
 
       $newArr[$index] = get_the_date($format, $objId);
-    }
-    if (strpos($item, 'postModifiedDate') !== false) {
+    } elseif (strpos($item, 'postModifiedDate') !== false) {
       $prams = str_replace(['postModifiedDate[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $format = wp_kses_stripslashes($prams[0]);
 
       $newArr[$index] = get_the_modified_date($format, $objId);
-    }
-
-
-    if (strpos($item, 'postTagTitle') !== false) {
+    } elseif (strpos($item, 'postTagTitle') !== false) {
 
       $posttags = get_the_tags();
       if ($posttags != false) {
         $posttags = $posttags[0]->name;
         $newArr[$index] = str_replace('postTagTitle', $posttags, $item);
       }
-    }
-
-
-    if (strpos($item, 'postTagsTitle') !== false) {
+    } elseif (strpos($item, 'postTagsTitle') !== false) {
       $posttags = get_the_tags();
       $prams = str_replace(['postTagsTitle[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
@@ -116,16 +127,13 @@ function parse_css_class($classStr, $obj)
         }
         $newArr[$index] = $str;
       }
-    }
-
-    if (strpos($item, 'postCategoryTitle') !== false) {
+    } elseif (strpos($item, 'postCategoryTitle') !== false) {
       $postcats = get_the_category();
       if ($postcats != false) {
         $postcats = $postcats[0]->name;
         $newArr[$index] = str_replace('postCategoryTitle', $postcats, $item);
       }
-    }
-    if (strpos($item, 'postCategoriesTitle') !== false) {
+    } elseif (strpos($item, 'postCategoriesTitle') !== false) {
       $postcats = get_the_category();
       $prams = str_replace(['postCategoriesTitle[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
@@ -141,38 +149,14 @@ function parse_css_class($classStr, $obj)
         }
         $newArr[$index] = $str;
       }
-    }
-
-
-
-
-
-
-
-
-
-
-    if (strpos($item, 'postTermTitle') !== false) {
+    } elseif (strpos($item, 'postTermTitle') !== false) {
 
       $prams = str_replace(['postTermTitle[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $taxonomy = wp_kses_stripslashes($prams[0]);
       $postterms = get_the_terms($objId, $taxonomy);
       $newArr[$index] = $postterms[0]->name;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    if (strpos($item, 'postTermsTitle') !== false) {
+    } elseif (strpos($item, 'postTermsTitle') !== false) {
       $prams = str_replace(['postTermsTitle[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $taxonomy = wp_kses_stripslashes($prams[0]);
@@ -189,85 +173,55 @@ function parse_css_class($classStr, $obj)
         }
         $newArr[$index] = $str;
       }
-    }
-
-
-
-
-    if (strpos($item, 'postSlug') !== false) {
+    } elseif (strpos($item, 'postSlug') !== false) {
       $postslug = get_post_field('post_name', get_post());
       $newArr[$index] = str_replace('postSlug', $postslug, $item);
-    }
-    if (strpos($item, 'postID') !== false) {
+    } elseif (strpos($item, 'postID') !== false) {
       $newArr[$index] = str_replace('postID', $objId, $item);
-    }
-    if (strpos($item, 'postStatus') !== false) {
+    } elseif (strpos($item, 'postStatus') !== false) {
       $poststatus = get_post_status();
       $newArr[$index] = str_replace('postStatus', $poststatus, $item);
-    }
-    if (strpos($item, 'authorId') !== false) {
+    } elseif (strpos($item, 'authorId') !== false) {
       $postauthor = get_the_author_meta($field = 'ID');
       $newArr[$index] = str_replace('authorId', $postauthor, $item);
-    }
-    if (strpos($item, 'authorName') !== false) {
+    } elseif (strpos($item, 'authorName') !== false) {
       $postauthor = get_the_author_meta($field = 'display_name');
       $newArr[$index] = str_replace('authorName', $postauthor, $item);
-    }
-    if (strpos($item, 'authorFirstName') !== false) {
+    } elseif (strpos($item, 'authorFirstName') !== false) {
       $postauthor = get_the_author_meta($field = 'first_name');
       $newArr[$index] = str_replace('authorFirstName', $postauthor, $item);
-    }
-    if (strpos($item, 'authorLastName') !== false) {
+    } elseif (strpos($item, 'authorLastName') !== false) {
       $postauthor = get_the_author_meta($field = 'last_name');
       $newArr[$index] = str_replace('authorLastName', $postauthor, $item);
-    }
-    if (strpos($item, 'authorDescription') !== false) {
+    } elseif (strpos($item, 'authorDescription') !== false) {
       $postauthor = get_the_author_meta($field = 'description');
       $newArr[$index] = str_replace('authorDescription', $postauthor, $item);
-    }
-    if (strpos($item, 'excerpt') !== false) {
+    } elseif (strpos($item, 'excerpt') !== false) {
       $excerpt = get_the_excerpt();
       $newArr[$index] = str_replace('expert', $excerpt, $item);
-    }
-
-
-    if (strpos($item, 'termId') !== false) {
+    } elseif (strpos($item, 'termId') !== false) {
       $queried_object = get_queried_object();
       $newArr[$index] = str_replace('termId', $queried_object->term_id, $item);
-    }
-    if (strpos($item, 'termTitle') !== false) {
+    } elseif (strpos($item, 'termTitle') !== false) {
       $queried_object = get_queried_object();
       $newArr[$index] = str_replace('termTitle', $queried_object->name, $item);
-    }
-    if (strpos($item, 'termDescription') !== false) {
+    } elseif (strpos($item, 'termDescription') !== false) {
       $queried_object = get_queried_object();
       $newArr[$index] = str_replace('termDescription', $queried_object->description, $item);
-    }
-    if (strpos($item, 'termPostCount') !== false) {
+    } elseif (strpos($item, 'termPostCount') !== false) {
       $queried_object = get_queried_object();
       $newArr[$index] = str_replace('termPostCount', $queried_object->count, $item);
-    }
-
-
-
-
-
-
-
-    if (strpos($item, 'rankmathTitle') !== false) {
+    } elseif (strpos($item, 'rankmathTitle') !== false) {
 
 
       $metaValue = get_post_meta($objId, 'rank_math_title', true);
 
       $newArr[$index] = str_replace('rankmathTitle', $metaValue, $item);
-    }
-
-    if (strpos($item, 'rankmathDescription') !== false) {
+    } elseif (strpos($item, 'rankmathDescription') !== false) {
       $metaValue = get_post_meta($objId, 'rank_math_description', true);
 
       $newArr[$index] = str_replace('rankmathDescription', $metaValue, $item);
-    }
-    if (strpos($item, 'rankmathFocusKeyword') !== false) {
+    } elseif (strpos($item, 'rankmathFocusKeyword') !== false) {
       $metaValue = get_post_meta($objId, 'rank_math_focus_keyword', true);
 
       $newArr[$index] = str_replace('rankmathFocusKeyword', $metaValue, $item);
@@ -275,57 +229,44 @@ function parse_css_class($classStr, $obj)
     // if (strpos($item, 'rankmathFocusKeywords') !== false) {
     //   $newArr[$index] = date('h:i:sa');
     // }
-    if (strpos($item, 'rankmathOrgname') !== false) {
+    elseif (strpos($item, 'rankmathOrgname') !== false) {
       $data = get_option('rank-math-options-titles');
       $orgname = $data['knowledgegraph_name'];
       $newArr[$index] = str_replace('rankmathOrgname', $orgname, $item);
-    }
-    if (strpos($item, 'rankmathOrgurl') !== false) {
+    } elseif (strpos($item, 'rankmathOrgurl') !== false) {
       $data = get_option('rank-math-options-titles');
       $url = $data['url'];
       $newArr[$index] = str_replace('rankmathOrgurl', $url, $item);
-    }
-    if (strpos($item, 'rankmathOrglogo') !== false) {
+    } elseif (strpos($item, 'rankmathOrglogo') !== false) {
       $data = get_option('rank-math-options-titles');
       $logo = $data['knowledgegraph_logo'];
       $newArr[$index] = str_replace('rankmathOrglogo', $logo, $item);
-    }
-
-
-
-
-
-    if (strpos($item, 'siteTitle') !== false) {
+    } elseif (strpos($item, 'siteTitle') !== false) {
       $siteinfo = get_bloginfo();
       $newArr[$index] = str_replace('siteTitle', $siteinfo, $item);
-    }
-    if (strpos($item, 'siteDescription') !== false) {
+    } elseif (strpos($item, 'siteDescription') !== false) {
       $siteinfo = get_bloginfo('description');
       $newArr[$index] = str_replace('siteDescription', $siteinfo, $item);
-    }
-
-
-    if (strpos($item, 'postMeta') !== false) {
+    } elseif (strpos($item, 'postMeta') !== false) {
 
       $prams = str_replace(['postMeta[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $key = wp_kses_stripslashes($prams[0]);
       $postmeta = get_post_meta($objId, $key);
       $newArr[$index] = $postmeta[0];
-    }
-    if (strpos($item, 'separator') !== false) {
+    } elseif (strpos($item, 'separator') !== false) {
       $prams = str_replace(['separator[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $separator = wp_kses_stripslashes($prams[0]);
       $newArr[$index] = $separator;
-    }
-    if (strpos($item, 'searchTerms') !== false) {
+    } elseif (strpos($item, 'searchTerms') !== false) {
       $current_query = sanitize_text_field(get_query_var('s'));
       $newArr[$index] = str_replace('searchTerms', $current_query, $item);
-    }
-    if (strpos($item, 'counter') !== false) {
+    } elseif (strpos($item, 'counter') !== false) {
       $newArr[$index] = date('h:i:sa');
 
+    } else {
+      $newArr[$index] = $item;
     }
   }
 
@@ -794,14 +735,14 @@ function post_grid_page_styles()
 
   $fonts = str_replace(" ", "+", $fontsArrStr);
 
-  ?>
+  if (!empty($fonts)) {
+    ?>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts);
 
+    ?>">
+    <?php
 
-
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts);
-  ?>">
-  <?php
+  }
 
   ?>
 

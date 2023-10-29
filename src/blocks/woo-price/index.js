@@ -95,8 +95,6 @@ registerBlockType(metadata, {
 		),
 	},
 
-	
-
 	edit: function (props) {
 		var attributes = props.attributes;
 		var setAttributes = props.setAttributes;
@@ -164,7 +162,7 @@ registerBlockType(metadata, {
 		};
 
 		const [productData, setproductData] = useState(defaultProductData);
-		const [customTags, setCustomTags] = useState({});
+
 		// const [productData, setproductData] = useState(null);
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 		const [loading, setloading] = useState(false);
@@ -843,61 +841,6 @@ registerBlockType(metadata, {
 			// setAttributes({ wrapper: wrapper });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-
-			customTags["currentYear"] = "2022";
-			customTags["currentMonth"] = "07";
-			customTags["currentDay"] = "27";
-			customTags["currentDate"] = "27";
-			customTags["currentTime"] = "27";
-
-			customTags["postPublishDate"] = "123";
-			customTags["postModifiedDate"] = "123";
-
-			customTags["termId"] = "";
-			customTags["termTitle"] = "";
-			customTags["termDescription"] = "";
-			customTags["termPostCount"] = "";
-
-			customTags["postTagTitle"] = "First Tag Title";
-			customTags["postTagsTitle"] = "First Tag Title";
-
-			customTags["postCategoryTitle"] = "First Category Title";
-			customTags["postCategoriesTitle"] = "First Categories Title";
-
-			customTags["postTermTitle"] = "First Term Title";
-			customTags["postTermsTitle"] = "List of all terms title";
-
-			customTags["postId"] = "123";
-			customTags["postStatus"] = "123";
-
-			customTags["authorId"] = "123";
-			customTags["authorName"] = "Nur Hasan";
-			customTags["authorFirstName"] = "Nur";
-			customTags["authorLastName"] = "Hasan";
-			customTags["authorDescription"] = "Hasan";
-
-			customTags["excerpt"] = "Here is the post excerpt";
-
-			customTags["rankmathTitle"] = "Hasan";
-			customTags["rankmathPermalink"] = "Hasan";
-			customTags["rankmathExcerpt"] = "Hasan";
-			customTags["rankmathFocusKeyword"] = "Hasan";
-			customTags["rankmathFocusKeywords"] = "Hasan";
-
-			customTags["rankmathOrgname"] = "Hasan";
-			customTags["rankmathOrgurl"] = "Hasan";
-			customTags["rankmathOrglogo"] = "Hasan";
-
-			customTags["siteTitle"] = "";
-			customTags["siteDescription"] = "";
-			customTags["siteTagline"] = "";
-
-			customTags["postMeta"] = "";
-
-			customTags["separator"] = "";
-			customTags["searchTerms"] = "";
-
-			customTags["counter"] = "1";
 		}, [clientId]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];

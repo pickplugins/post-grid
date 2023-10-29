@@ -1906,7 +1906,6 @@ registerBlockType(metadata, {
 			]);
 			setAttributes({ blockCssY: { items: cssObject } });
 		}
-		
 
 		function onAddStyleSeparator(sudoSource, key) {
 			var path = [sudoSource, key, breakPointX];
@@ -2160,11 +2159,9 @@ registerBlockType(metadata, {
 		}, [icon]);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
-
-			// setAttributes({ numberCount: numberCount });
-			// setAttributes({ wrapper: wrapper });
-
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 

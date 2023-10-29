@@ -70,7 +70,6 @@ import PGIconPicker from "../../components/icon-picker";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -99,7 +98,6 @@ registerBlockType(metadata, {
 			</svg>
 		),
 	},
-	
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -253,6 +251,7 @@ registerBlockType(metadata, {
 		];
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			// setAttributes({ postTitle: postTitle });
@@ -1719,11 +1718,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"post-tags"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"post-tags"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<div className="">
 						<div>

@@ -67,13 +67,14 @@ import colorsPresets from "../../colors-presets";
 import variations from "./variations";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -129,6 +130,7 @@ registerBlockType(metadata, {
 		var icons = { bed: "", layout: "", smiley: "", columns: "", globe: "" };
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -140,6 +142,19 @@ registerBlockType(metadata, {
 
 			//setAttributes({ wrapper: { ...wrapper, styles: { display: { Desktop: 'flex' }, gap: { Desktop: '20px' } } } });
 		}, [clientId]);
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			// blockCssObj[postTitleSelector] = postTitle;
+			// blockCssObj[prefixSelector] = prefix;
+			// blockCssObj[postfixSelector] = postfix;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		useEffect(() => {
 			setAttributes({ customCss: customCss });
@@ -150,7 +165,6 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [blockCssY]);
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -292,7 +306,7 @@ registerBlockType(metadata, {
 		];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-flex-wrap `,
+			className: ` ${blockId} ${wrapper.options.class} `,
 		});
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -312,7 +326,7 @@ registerBlockType(metadata, {
 						</label>
 						<div className="grid grid-cols-4 gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px] ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] == "flex-start"
@@ -356,7 +370,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px] ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] == "flex-end"
@@ -400,7 +414,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] == "center"
@@ -444,7 +458,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] ==
@@ -489,7 +503,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] ==
@@ -534,7 +548,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] ==
@@ -586,7 +600,7 @@ registerBlockType(metadata, {
 
 						<div className="grid grid-cols-4 gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "flex-start"
@@ -630,7 +644,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "flex-end"
@@ -677,7 +691,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "center"
@@ -724,7 +738,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "stretch"
@@ -778,7 +792,7 @@ registerBlockType(metadata, {
 
 						<div className="grid grid-cols-4 gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] == "row"
@@ -812,7 +826,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] == "row-reverse"
@@ -847,7 +861,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] == "column"
@@ -882,7 +896,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] ==
@@ -925,7 +939,7 @@ registerBlockType(metadata, {
 
 						<div className="grid grid-cols-4 gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.flexWrap == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexWrap[breakPointX] == "wrap"
@@ -935,7 +949,7 @@ registerBlockType(metadata, {
 								onClick={(ev) => {
 									applyFlex("flexWrap", "wrap");
 								}}>
-								<Tooltip text="Space">
+								<Tooltip text="Wrap">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
 										<rect
 											fill="#5655ff"
@@ -960,7 +974,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.flexWrap == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexWrap[breakPointX] == "wrap-reverse"
@@ -970,7 +984,7 @@ registerBlockType(metadata, {
 								onClick={(ev) => {
 									applyFlex("flexWrap", "wrap-reverse");
 								}}>
-								<Tooltip text="Space">
+								<Tooltip text="Wrap-reverse">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
 										<rect
 											fill="#5655ff"
@@ -996,7 +1010,7 @@ registerBlockType(metadata, {
 							</div>
 
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
 									wrapper.styles.flexWrap == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexWrap[breakPointX] == "nowrap"
@@ -1006,7 +1020,7 @@ registerBlockType(metadata, {
 								onClick={(ev) => {
 									applyFlex("flexWrap", "nowrap");
 								}}>
-								<Tooltip text="Space">
+								<Tooltip text="No-wrap">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
 										<rect
 											fill="#5655ff"
@@ -1050,6 +1064,31 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<label for="">CSS Class</label>
+
+								<PGcssClassPicker
+									tags={customTags}
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
 								<PanelRow>
 									<label for="">Wrapper Tag</label>
 
@@ -1090,16 +1129,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"accordion-nested"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody><PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"flex-wrap"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"accordion-nested"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<PanelBody title="Custom Style" initialOpen={false}>
 						<p className="">
@@ -1275,7 +1309,7 @@ registerBlockType(metadata, {
 		var blockId = attributes.blockId;
 
 		const blockProps = useBlockProps.save({
-			className: ` ${blockId} pg-flex-wrap`,
+			className: ` ${blockId} ${wrapper.options.class} `,
 		});
 
 		return <InnerBlocks.Content />;

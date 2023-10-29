@@ -62,7 +62,6 @@ import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -119,7 +118,6 @@ registerBlockType(metadata, {
 		),
 	},
 
-
 	edit: function (props) {
 		var attributes = props.attributes;
 		var setAttributes = props.setAttributes;
@@ -175,8 +173,9 @@ registerBlockType(metadata, {
 		var wrapperSelector = blockClass;
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+			var blockIdX = "pg" + clientId.split("-").pop();
 
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
@@ -194,7 +193,6 @@ registerBlockType(metadata, {
 		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
 		// }
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;

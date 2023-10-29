@@ -75,7 +75,6 @@ import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
@@ -344,6 +343,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			// setAttributes({ postTitle: postTitle });
@@ -1758,11 +1758,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"post-taxonomies"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"post-taxonomies"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<PanelBody title="Custom Style" initialOpen={false}>
 						<p>Please use following class selector to apply your custom CSS</p>

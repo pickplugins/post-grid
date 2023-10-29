@@ -73,7 +73,8 @@ var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
 	title: "Post Title",
-	description: "The post title block showcases the main title or headline of a blog post.",
+	description:
+		"The post title block showcases the main title or headline of a blog post.",
 
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -176,7 +177,7 @@ registerBlockType(metadata, {
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
-		useEffect(() => { }, [wrapper]);
+		useEffect(() => {}, [wrapper]);
 		useEffect(() => {
 			var blockCssObj = {};
 
@@ -900,7 +901,7 @@ registerBlockType(metadata, {
 
 		var postUrl =
 			postTitle.options.customUrl != undefined &&
-				postTitle.options.customUrl.length > 0
+			postTitle.options.customUrl.length > 0
 				? postTitle.options.customUrl
 				: currentPostUrl;
 
@@ -909,7 +910,7 @@ registerBlockType(metadata, {
 			postTitle.options.tag.length != 0 ? `${postTitle.options.tag}` : "div";
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-post-title ${wrapper.options.class}`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -918,10 +919,10 @@ registerBlockType(metadata, {
 					<div className="">
 						<PanelBody title="Wrapper" initialOpen={false}>
 							<PGtabs
-								activeTab="styles"
+								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -1022,7 +1023,7 @@ registerBlockType(metadata, {
 								activeTab="styles"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -1044,6 +1045,21 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<label for="">CSS Class</label>
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={postTitle.options.class}
+										onChange={(newVal) => {
+											var options = { ...postTitle.options, class: newVal };
+											setAttributes({
+												postTitle: {
+													styles: postTitle.styles,
+													options: options,
+												},
+											});
+										}}
+									/>
 									<ToggleControl
 										label="Linked?"
 										help={
@@ -1365,23 +1381,23 @@ registerBlockType(metadata, {
 
 									{(postTitle.options.limitBy == "word" ||
 										postTitle.options.limitBy == "character") && (
-											<PanelRow>
-												<label for="">Limit Count</label>
+										<PanelRow>
+											<label for="">Limit Count</label>
 
-												<InputControl
-													value={postTitle.options.limitCount}
-													onChange={(newVal) => {
-														var options = {
-															...postTitle.options,
-															limitCount: newVal,
-														};
-														setAttributes({
-															postTitle: { ...postTitle, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-										)}
+											<InputControl
+												value={postTitle.options.limitCount}
+												onChange={(newVal) => {
+													var options = {
+														...postTitle.options,
+														limitCount: newVal,
+													};
+													setAttributes({
+														postTitle: { ...postTitle, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									)}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1408,7 +1424,7 @@ registerBlockType(metadata, {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -1430,7 +1446,20 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
+									<label for="">Prefix</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={prefix.options.text}
+										onChange={(newVal) => {
+											var options = { ...prefix.options, text: newVal };
+											setAttributes({
+												prefix: { styles: prefix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 										<label for="">Prefix</label>
 
 										<InputControl
@@ -1442,7 +1471,7 @@ registerBlockType(metadata, {
 												});
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 
 									<PanelRow>
 										<label for="">Position</label>
@@ -1488,7 +1517,7 @@ registerBlockType(metadata, {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -1510,7 +1539,20 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
+									<label for="">Postfix</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={postfix.options.text}
+										onChange={(newVal) => {
+											var options = { ...postfix.options, text: newVal };
+											setAttributes({
+												postfix: { styles: postfix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 										<label for="">Postfix</label>
 										<InputControl
 											value={postfix.options.text}
@@ -1521,7 +1563,7 @@ registerBlockType(metadata, {
 												});
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 
 									<PanelRow>
 										<label for="">Position</label>
@@ -1650,6 +1692,7 @@ registerBlockType(metadata, {
 									onClick={handleLinkClick}
 									{...linkAttrItems}
 									href={postUrl}
+									className={postTitle.options.class}
 									target={postTitle.options.linkTarget}>
 									{prefix.options.position == "afterbegin" &&
 										prefix.options.text && (

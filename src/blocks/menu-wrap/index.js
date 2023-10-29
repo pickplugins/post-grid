@@ -73,13 +73,11 @@ import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
-
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -94,8 +92,6 @@ registerBlockType(metadata, {
 			</svg>
 		),
 	},
-
-	
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -136,6 +132,7 @@ registerBlockType(metadata, {
 		);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -166,7 +163,6 @@ registerBlockType(metadata, {
 		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
 		// }
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -1343,11 +1339,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"menu-wrap"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"menu-wrap"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<PanelBody title="Custom Style" initialOpen={false}>
 						<p className="">

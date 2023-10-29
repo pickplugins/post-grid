@@ -69,7 +69,6 @@ import metadata from "./block.json";
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
-
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -91,8 +90,6 @@ registerBlockType(metadata, {
 			</svg>
 		),
 	},
-
-	
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -138,6 +135,7 @@ registerBlockType(metadata, {
 		var errorWrapSelector = blockClass + " .error-wrap";
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -194,7 +192,19 @@ registerBlockType(metadata, {
 		}, [customCss]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			var blockCssObj = {};
+
+			// blockCssObj[wrapperSelector] = wrapper;
+			// blockCssObj[labelSelector] = postTitle;
+			// blockCssObj[checkboxSelector] = prefix;
+			// blockCssObj[labelWrapSelector] = postfix;
+			// blockCssObj[inputWrapSelector] = postfix;
+			// blockCssObj[errorWrapSelector] = postfix;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
 		function handleLinkClick(ev) {
@@ -1361,3 +1371,4 @@ registerBlockType(metadata, {
 		return null;
 	},
 });
+

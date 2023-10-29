@@ -936,8 +936,16 @@ img {
   height: 2.25rem;
 }
 
+.h-\[20px\] {
+  height: 20px;
+}
+
 .h-full {
   height: 100%;
+}
+
+.h-\[36px\] {
+  height: 36px;
 }
 
 .w-1\/2 {
@@ -1006,6 +1014,10 @@ img {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[36px\] {
+  width: 36px;
 }
 
 .max-w-6xl {

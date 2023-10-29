@@ -2,7 +2,29 @@
 if (!defined('ABSPATH')) exit;  // if direct access
 
 
+// add_shortcode('blockData', 'blockData');
 
+// function blockData()
+// {
+//     $build_dir = post_grid_plugin_dir . 'build/blocks';
+
+//     foreach (scandir($build_dir) as $result) {
+//         $block_location = $build_dir . '/' . $result;
+//         if (!is_dir($block_location) || '.' === $result || '..' === $result) {
+//             continue;
+//         }
+//         $blockJson = $block_location . '/block.json';
+
+//         $json = file_get_contents($blockJson);
+//         $jsonObj = json_decode($json);
+//         //echo $jsonObj->name;
+
+//         echo "registerBlockType('$jsonObj->name', { title: '$jsonObj->title', description: '$jsonObj->description' });
+// ";
+
+//         echo '<br>';
+//     }
+// }
 
 
 

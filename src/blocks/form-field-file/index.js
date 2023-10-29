@@ -129,8 +129,9 @@ registerBlockType(metadata, {
 		var errorWrapSelector = blockClass + " .error-wrap";
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+			var blockIdX = "pg" + clientId.split("-").pop();
 
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
@@ -1205,3 +1206,4 @@ registerBlockType(metadata, {
 		return null;
 	},
 });
+

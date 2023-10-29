@@ -104,6 +104,8 @@ registerBlockType(metadata, {
 		var breakPointX = myStore.getBreakPoint();
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);

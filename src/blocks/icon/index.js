@@ -65,7 +65,6 @@ import PGcssDisplay from "../../components/css-display";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -209,8 +208,9 @@ registerBlockType(metadata, {
 		const [linkPickerText, setLinkPickerText] = useState(false);
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+			var blockIdX = "pg" + clientId.split("-").pop();
 
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
@@ -230,7 +230,6 @@ registerBlockType(metadata, {
 		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
 		// }
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -268,7 +267,6 @@ registerBlockType(metadata, {
 				}
 			}
 		}
-
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();

@@ -66,7 +66,6 @@ import PGcssDisplay from "../../components/css-display";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 import PGIconPicker from "../../components/icon-picker";
@@ -209,6 +208,7 @@ registerBlockType(metadata, {
 		];
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			// setAttributes({ postTitle: postTitle });
@@ -330,7 +330,6 @@ registerBlockType(metadata, {
 
 			setIconHtml(iconHtml);
 		}, [icon]);
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -1705,11 +1704,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"post-categories"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"post-categories"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<div className="">
 						<div>

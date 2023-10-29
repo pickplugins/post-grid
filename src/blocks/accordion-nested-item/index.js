@@ -66,6 +66,8 @@ import PGStyles from "../../components/styles";
 import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -240,6 +242,26 @@ registerBlockType(metadata, {
 		}, [blockCssY]);
 
 		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[contentSelector] = content;
+			blockCssObj[headerSelector] = header;
+			blockCssObj[headerLabelSelector] = headerLabel;
+			blockCssObj[labelCounterSelector] = labelCounter;
+			blockCssObj[labelIconSelector] = labelIcon;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[iconToggleSelector] = iconToggle;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+			console.log(blockCssRules);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
+
+		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
@@ -840,6 +862,331 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
+		function onBulkAddHeader(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, header);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ header: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, headerSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+		function onBulkAddHeaderLabel(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, headerLabel);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ headerLabel: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				headerLabelSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+		function onBulkAddLabelIcon(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, labelIcon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ labelIcon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, labelIconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+		function onBulkAddLabelCounter(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, labelCounter);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ labelCounter: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				labelCounterSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+		function onBulkAddContent(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, content);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ content: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, contentSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+		function onBulkAddIcon(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, icon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ icon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetHeader(sudoScources) {
+			let obj = Object.assign({}, header);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						headerSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ header: obj });
+		}
+
+		function onResetHeaderLabel(sudoScources) {
+			let obj = Object.assign({}, headerLabel);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						headerLabelSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ headerLabel: obj });
+		}
+
+		function onResetLabelIcon(sudoScources) {
+			let obj = Object.assign({}, labelIcon);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						labelIconSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ labelIcon: obj });
+		}
+
+		function onResetLabelCounter(sudoScources) {
+			let obj = Object.assign({}, labelCounter);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						labelCounterSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ labelCounter: obj });
+		}
+
+		function onResetContent(sudoScources) {
+			let obj = Object.assign({}, content);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						contentSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ content: obj });
+		}
+
+		function onResetIcon(sudoScources) {
+			let obj = Object.assign({}, icon);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						iconSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ icon: obj });
+		}
+
 		const blockProps = useBlockProps();
 
 		var allowedExtraBlocks = [];
@@ -885,6 +1232,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={header.options.class}
+										onChange={(newVal) => {
+											var options = { ...header.options, class: newVal };
+											setAttributes({
+												header: { styles: header.styles, options: options },
+											});
+										}}
+									/>
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -918,6 +1289,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleHeader}
 										onAdd={onAddStyleHeader}
 										onRemove={onRemoveStyleHeader}
+										onBulkAdd={onBulkAddHeader}
+										onReset={onResetHeader}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1056,6 +1429,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleHeaderLabel}
 										onAdd={onAddStyleHeaderLabel}
 										onRemove={onRemoveStyleHeaderLabel}
+										onBulkAdd={onBulkAddHeaderLabel}
+										onReset={onResetHeaderLabel}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1147,6 +1522,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleLabelIcon}
 										onAdd={onAddStyleLabelIcon}
 										onRemove={onRemoveStyleLabelIcon}
+										onBulkAdd={onBulkAddLabelIcon}
+										onReset={onResetLabelIcon}
 									/>
 								</PGtab>
 							</PGtabs>
@@ -1254,6 +1631,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleLabelCounter}
 										onAdd={onAddStyleLabelCounter}
 										onRemove={onRemoveStyleLabelCounter}
+										onBulkAdd={onBulkAddLabelCounter}
+										onReset={onResetLabelCounter}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1326,6 +1705,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleContent}
 										onAdd={onAddStyleContent}
 										onRemove={onRemoveStyleContent}
+										onBulkAdd={onBulkAddContent}
+										onReset={onResetContent}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1429,6 +1810,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleIcon}
 										onAdd={onAddStyleIcon}
 										onRemove={onRemoveStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+										onReset={onResetIcon}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1472,8 +1855,8 @@ registerBlockType(metadata, {
 				<>
 					<div
 						className={`${blockId}-accordion-header accordion-header ${
-							toggled ? "accordion-header-active" : ""
-						}`}
+							header.options.class
+						} ${toggled ? "accordion-header-active" : ""}`}
 						onClick={(ev) => {
 							setToggled(!toggled);
 						}}>
@@ -1583,3 +1966,4 @@ registerBlockType(metadata, {
 		return <>{children}</>;
 	},
 });
+

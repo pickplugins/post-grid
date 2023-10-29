@@ -732,6 +732,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);

@@ -69,6 +69,8 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -127,7 +129,6 @@ registerBlockType(metadata, {
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
-		const [customTags, setCustomTags] = useState({});
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
 		var archiveLinkToArgsBasic = {
@@ -794,67 +795,10 @@ registerBlockType(metadata, {
 		);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
-
-			// setAttributes({ archiveTitle: archiveTitle });
-			// setAttributes({ wrapper: wrapper });
-
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-
-			customTags["currentYear"] = "2022";
-			customTags["currentMonth"] = "07";
-			customTags["currentDay"] = "27";
-			customTags["currentDate"] = "27";
-			customTags["currentTime"] = "27";
-
-			customTags["postPublishDate"] = "123";
-			customTags["postModifiedDate"] = "123";
-
-			customTags["termId"] = "";
-			customTags["termTitle"] = "";
-			customTags["termDescription"] = "";
-			customTags["termPostCount"] = "";
-
-			customTags["postTagTitle"] = "First Tag Title";
-			customTags["postTagsTitle"] = "First Tag Title";
-
-			customTags["postCategoryTitle"] = "First Category Title";
-			customTags["postCategoriesTitle"] = "First Categories Title";
-
-			customTags["postTermTitle"] = "First Term Title";
-			customTags["postTermsTitle"] = "List of all terms title";
-
-			customTags["postId"] = "123";
-			customTags["postStatus"] = "123";
-
-			customTags["authorId"] = "123";
-			customTags["authorName"] = "Nur Hasan";
-			customTags["authorFirstName"] = "Nur";
-			customTags["authorLastName"] = "Hasan";
-			customTags["authorDescription"] = "Hasan";
-
-			customTags["excerpt"] = "Here is the post excerpt";
-
-			customTags["rankmathTitle"] = "Hasan";
-			customTags["rankmathPermalink"] = "Hasan";
-			customTags["rankmathExcerpt"] = "Hasan";
-			customTags["rankmathFocusKeyword"] = "Hasan";
-			customTags["rankmathFocusKeywords"] = "Hasan";
-
-			customTags["rankmathOrgname"] = "Hasan";
-			customTags["rankmathOrgurl"] = "Hasan";
-			customTags["rankmathOrglogo"] = "Hasan";
-
-			customTags["siteTitle"] = "";
-			customTags["siteDescription"] = "";
-			customTags["siteTagline"] = "";
-
-			customTags["postMeta"] = "";
-
-			customTags["separator"] = "";
-			customTags["searchTerms"] = "";
-
-			customTags["counter"] = "1";
 		}, [clientId]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
@@ -978,6 +922,21 @@ registerBlockType(metadata, {
 		}, [blockCssY]);
 
 		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[archiveTitleSelector] = archiveTitle;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[prefixSelector] = prefix;
+			blockCssObj[postfixSelector] = postfix;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
+
+		useEffect(() => {
 			setAttributes({ customCss: customCss });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -1007,7 +966,7 @@ registerBlockType(metadata, {
 		const CustomTagPostTitle = `${archiveTitle.options.tag}`;
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-archive-description`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -1041,6 +1000,31 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									{/* <PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow> */}
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 										<SelectControl
@@ -1464,6 +1448,22 @@ registerBlockType(metadata, {
 											})}
 										</div>
 									)}
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={archiveTitle.options.class}
+										onChange={(newVal) => {
+											var options = { ...archiveTitle.options, class: newVal };
+											setAttributes({
+												archiveTitle: {
+													styles: archiveTitle.styles,
+													options: options,
+												},
+											});
+										}}
+									/>
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1597,7 +1597,20 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
+									<label for="">Prefix</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={prefix.options.text}
+										onChange={(newVal) => {
+											var options = { ...prefix.options, text: newVal };
+											setAttributes({
+												prefix: { styles: prefix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 										<label for="">Prefix</label>
 
 										<InputControl
@@ -1611,7 +1624,7 @@ registerBlockType(metadata, {
 												// setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1659,7 +1672,20 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
+									<label for="">Postfix</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={postfix.options.text}
+										onChange={(newVal) => {
+											var options = { ...postfix.options, text: newVal };
+											setAttributes({
+												postfix: { styles: postfix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 										<label for="">Postfix</label>
 
 										<InputControl
@@ -1673,7 +1699,7 @@ registerBlockType(metadata, {
 												// setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles

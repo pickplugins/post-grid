@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "h2",
-          "class": ""
+          "class": "pg-post-title"
         },
         "styles": {}
       }

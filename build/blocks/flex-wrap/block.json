@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-flex-wrap"
         },
         "styles": {
           "display": {

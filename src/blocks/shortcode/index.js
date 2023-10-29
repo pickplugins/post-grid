@@ -64,7 +64,6 @@ import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -257,11 +256,9 @@ registerBlockType(metadata, {
 		// }
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
-
-			// setAttributes({ numberCount: numberCount });
-			// setAttributes({ wrapper: wrapper });
-
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
@@ -664,13 +661,12 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"shortcode"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"shortcode"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<PanelBody title="Custom Style" initialOpen={false}>
 						<p>Please use following class selector to apply your custom CSS</p>

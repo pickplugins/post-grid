@@ -19,7 +19,7 @@
         "options": {
           "content": "",
           "tag": "div",
-          "class": ""
+          "class": "pg-accordion-nested"
         },
         "styles": {}
       }

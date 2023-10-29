@@ -73,7 +73,6 @@ import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -107,8 +106,6 @@ registerBlockType(metadata, {
 			</svg>
 		),
 	},
-
-	
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -370,6 +367,7 @@ registerBlockType(metadata, {
 		}, []);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -1553,7 +1551,6 @@ registerBlockType(metadata, {
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
-
 
 						<PanelBody title="Block Variations" initialOpen={false}>
 							<PGBlockPatterns

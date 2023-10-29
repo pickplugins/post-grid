@@ -156,6 +156,7 @@ registerBlockType("post-grid/table-of-contents", {
 		var textSelector = blockClass;
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			if (blockId.length == 0) {
 				setAttributes({ blockId: blockIdX });
 
@@ -467,3 +468,4 @@ registerBlockType("post-grid/table-of-contents", {
 		return null;
 	},
 });
+

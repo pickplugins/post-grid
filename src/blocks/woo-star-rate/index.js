@@ -66,7 +66,6 @@ import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -95,8 +94,6 @@ registerBlockType(metadata, {
 			</svg>
 		),
 	},
-
-	
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -127,7 +124,6 @@ registerBlockType(metadata, {
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
-		const [customTags, setCustomTags] = useState({});
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
 		var str = "bat, ball, cat";
@@ -204,7 +200,6 @@ registerBlockType(metadata, {
 				setloading(false);
 			});
 		}, []);
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -814,61 +809,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-
-			customTags["currentYear"] = "2022";
-			customTags["currentMonth"] = "07";
-			customTags["currentDay"] = "27";
-			customTags["currentDate"] = "27";
-			customTags["currentTime"] = "27";
-
-			customTags["postPublishDate"] = "123";
-			customTags["postModifiedDate"] = "123";
-
-			customTags["termId"] = "";
-			customTags["termTitle"] = "";
-			customTags["termDescription"] = "";
-			customTags["termPostCount"] = "";
-
-			customTags["postTagTitle"] = "First Tag Title";
-			customTags["postTagsTitle"] = "First Tag Title";
-
-			customTags["postCategoryTitle"] = "First Category Title";
-			customTags["postCategoriesTitle"] = "First Categories Title";
-
-			customTags["postTermTitle"] = "First Term Title";
-			customTags["postTermsTitle"] = "List of all terms title";
-
-			customTags["postId"] = "123";
-			customTags["postStatus"] = "123";
-
-			customTags["authorId"] = "123";
-			customTags["authorName"] = "Nur Hasan";
-			customTags["authorFirstName"] = "Nur";
-			customTags["authorLastName"] = "Hasan";
-			customTags["authorDescription"] = "Hasan";
-
-			customTags["excerpt"] = "Here is the post excerpt";
-
-			customTags["rankmathTitle"] = "Hasan";
-			customTags["rankmathPermalink"] = "Hasan";
-			customTags["rankmathExcerpt"] = "Hasan";
-			customTags["rankmathFocusKeyword"] = "Hasan";
-			customTags["rankmathFocusKeywords"] = "Hasan";
-
-			customTags["rankmathOrgname"] = "Hasan";
-			customTags["rankmathOrgurl"] = "Hasan";
-			customTags["rankmathOrglogo"] = "Hasan";
-
-			customTags["siteTitle"] = "";
-			customTags["siteDescription"] = "";
-			customTags["siteTagline"] = "";
-
-			customTags["postMeta"] = "";
-
-			customTags["separator"] = "";
-			customTags["searchTerms"] = "";
-
-			customTags["counter"] = "1";
 		}, [clientId]);
 
 		// Wrapper CSS Class Selectors
@@ -1349,7 +1289,6 @@ registerBlockType(metadata, {
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
-
 
 						<PanelBody title="Block Variations" initialOpen={false}>
 							<PGBlockPatterns

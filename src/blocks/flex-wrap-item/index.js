@@ -65,11 +65,12 @@ import PGStyles from "../../components/styles";
 import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
-
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -104,8 +105,6 @@ registerBlockType(metadata, {
 		),
 	},
 
-	
-
 	edit: function (props) {
 		var attributes = props.attributes;
 		var setAttributes = props.setAttributes;
@@ -134,9 +133,25 @@ registerBlockType(metadata, {
 		var wrapperSelector = blockClass;
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			// blockCssObj[postTitleSelector] = postTitle;
+			// blockCssObj[prefixSelector] = prefix;
+			// blockCssObj[postfixSelector] = postfix;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		useEffect(() => {
 			setAttributes({ customCss: customCss });
@@ -297,7 +312,7 @@ registerBlockType(metadata, {
 		];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-flex-wrap-item border border-dashed`,
+			className: ` ${blockId} ${wrapper.options.class} border border-dashed`,
 		});
 
 		//const isParentOfSelectedBlock = useSelect((select) => select('core/block-editor').hasSelectedInnerBlock(clientId, true))
@@ -335,6 +350,31 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -425,9 +465,10 @@ registerBlockType(metadata, {
 		var blockId = attributes.blockId;
 
 		const blockProps = useBlockProps.save({
-			className: ` ${blockId} pg-flex-wrap-item`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return <InnerBlocks.Content />;
 	},
 });
+

@@ -69,8 +69,6 @@ import metadata from "./block.json";
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
-
-
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -147,6 +145,7 @@ registerBlockType(metadata, {
 		}, [file.options.maxCount]);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -1383,3 +1382,4 @@ registerBlockType(metadata, {
 		return null;
 	},
 });
+

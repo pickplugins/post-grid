@@ -373,6 +373,8 @@ registerBlockType("post-grid/steps-wrap", {
 		);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
@@ -1741,3 +1743,4 @@ registerBlockType("post-grid/steps-wrap", {
 		//return null;
 	},
 });
+

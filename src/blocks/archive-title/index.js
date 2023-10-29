@@ -127,6 +127,25 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
+		const wrapperSelector = blockClass;
+
+		var archiveTitleSelector = "archive";
+
+		if (wrapper.options.tag.length != 0) {
+			if (archiveTitle.options.linkTo.length > 0) {
+				archiveTitleSelector = blockClass + " a";
+			} else {
+				archiveTitleSelector = blockClass;
+				//archiveTitleSelector = blockClass + ' .archiveTitle';
+			}
+		} else {
+			archiveTitleSelector = blockClass;
+		}
+
+		const prefixSelector = blockClass + " .prefix";
+		const postfixSelector = blockClass + " .postfix";
+		const iconSelector = blockClass + " .icon";
+
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
@@ -187,6 +206,34 @@ registerBlockType(metadata, {
 			setAttributes({ icon: { ...icon, options: options } });
 		}
 
+		useEffect(() => {
+			// var blockIdX = "pg" + clientId.split("-").pop();
+
+			setAttributes({ blockId: blockIdX });
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		}, [clientId]);
+
+		// useEffect(() => {
+		// 	var blockCssObj = {};
+		// 	console.log(wrapper);
+		// 	console.log(wrapperSelector);
+
+		// 	blockCssObj[wrapperSelector] = wrapper;
+		// 	blockCssObj[archiveTitleSelector] = archiveTitle;
+		// 	blockCssObj[iconSelector] = icon;
+		// 	blockCssObj[prefixSelector] = prefix;
+		// 	blockCssObj[postfixSelector] = postfix;
+
+		// 	var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+		// 	console.log(blockCssObj);
+
+		// 	var items = { ...blockCssY.items, ...blockCssRules };
+		// 	setAttributes({ blockCssY: { items: items } });
+		// }, [blockId]);
+
+		useEffect(() => {
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		}, [blockCssY]);
 		useEffect(() => {
 			var archiveType = archiveTitle.options.archiveType;
 
@@ -874,34 +921,7 @@ registerBlockType(metadata, {
 			postId
 		);
 
-		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
-
-			// setAttributes({ archiveTitle: archiveTitle });
-			// setAttributes({ wrapper: wrapper });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [clientId]);
-
 		// Wrapper CSS Class Selectors
-		const wrapperSelector = blockClass;
-
-		var archiveTitleSelector = "";
-
-		if (wrapper.options.tag.length != 0) {
-			if (archiveTitle.options.linkTo.length > 0) {
-				archiveTitleSelector = blockClass + " a";
-			} else {
-				archiveTitleSelector = blockClass;
-				//archiveTitleSelector = blockClass + ' .archiveTitle';
-			}
-		} else {
-			archiveTitleSelector = blockClass;
-		}
-
-		const prefixSelector = blockClass + " .prefix";
-		const postfixSelector = blockClass + " .postfix";
-		const iconSelector = blockClass + " .postdate-icon";
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
@@ -919,10 +939,6 @@ registerBlockType(metadata, {
 		}
 
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
-
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [blockCssY]);
 
 		useEffect(() => {
 			setAttributes({ customCss: customCss });
@@ -954,7 +970,7 @@ registerBlockType(metadata, {
 		const CustomTagPostTitle = `${archiveTitle.options.tag}`;
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-archive-title`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -1002,7 +1018,7 @@ registerBlockType(metadata, {
 										}}
 									/>
 
-									<PanelRow>
+									{/* <PanelRow>
 										<label for="">CSS ID</label>
 										<InputControl
 											value={blockId}
@@ -1012,7 +1028,7 @@ registerBlockType(metadata, {
 												});
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
@@ -1419,6 +1435,22 @@ registerBlockType(metadata, {
 											})}
 										</div>
 									)}
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={archiveTitle.options.class}
+										onChange={(newVal) => {
+											var options = { ...archiveTitle.options, class: newVal };
+											setAttributes({
+												archiveTitle: {
+													styles: archiveTitle.styles,
+													options: options,
+												},
+											});
+										}}
+									/>
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1552,7 +1584,20 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
+									<label for="">Prefix</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={prefix.options.text}
+										onChange={(newVal) => {
+											var options = { ...prefix.options, text: newVal };
+											setAttributes({
+												prefix: { styles: prefix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 										<label for="">Prefix</label>
 
 										<InputControl
@@ -1566,7 +1611,7 @@ registerBlockType(metadata, {
 												// setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1614,7 +1659,20 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
+									<label for="">Postfix</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={postfix.options.text}
+										onChange={(newVal) => {
+											var options = { ...postfix.options, text: newVal };
+											setAttributes({
+												postfix: { styles: postfix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 										<label for="">Postfix</label>
 
 										<InputControl
@@ -1628,7 +1686,7 @@ registerBlockType(metadata, {
 												// setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1809,7 +1867,6 @@ registerBlockType(metadata, {
 							)}
 						</CustomTag>
 					)}
-
 					{wrapper.options.tag.length == 0 && (
 						<>
 							{icon.options.position == "beforePostfix" && (

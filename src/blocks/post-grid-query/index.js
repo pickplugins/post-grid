@@ -355,6 +355,7 @@ registerBlockType("post-grid/post-grid-query", {
 		var icons = { bed: "", layout: "", smiley: "", columns: "", globe: "" };
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -2318,3 +2319,4 @@ registerBlockType("post-grid/post-grid-query", {
 		//return null;
 	},
 });
+

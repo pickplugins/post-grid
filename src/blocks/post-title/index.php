@@ -66,6 +66,7 @@ class PGBlockPostTitle
 
 		$postTitle = isset($attributes['postTitle']) ? $attributes['postTitle'] : [];
 		$postTitleOptions = isset($postTitle['options']) ? $postTitle['options'] : [];
+		$postTitleClass = isset($postTitleOptions['class']) ? $postTitleOptions['class'] : '';
 
 
 		$postTitleIsLink = isset($postTitleOptions['isLink']) ? $postTitleOptions['isLink'] : true;
@@ -82,13 +83,15 @@ class PGBlockPostTitle
 		$prefixOptions = isset($prefix['options']) ? $prefix['options'] : '';
 
 		$prefixText = isset($prefixOptions['text']) ? _wp_specialchars($prefixOptions['text']) : '';
-		$prefixClass = isset($prefixOptions['class']) ? $prefixOptions['class'] : 'prefix';
+		$prefixClass = isset($prefixOptions['class']) ? $prefixOptions['class'] : '';
+		$prefixPosition = isset($prefixOptions['position']) ? $prefixOptions['position'] : '';
 
 		$postfix = isset($attributes['postfix']) ? $attributes['postfix'] : '';
 		$postfixOptions = isset($postfix['options']) ? $postfix['options'] : '';
 
 		$postfixText = isset($postfixOptions['text']) ? _wp_specialchars($postfixOptions['text']) : '';
-		$postfixClass = isset($postfixOptions['class']) ? $postfixOptions['class'] : 'postfix';
+		$postfixClass = isset($postfixOptions['class']) ? $postfixOptions['class'] : '';
+		$postfixPosition = isset($postfixOptions['position']) ? $postfixOptions['position'] : '';
 
 		$blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
 		$postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
@@ -130,7 +133,13 @@ class PGBlockPostTitle
 		$obj['id'] = $post_ID;
 		$obj['type'] = 'post';
 
+
+
 		$wrapperClass = parse_css_class($wrapperClass, $obj);
+		$postTitleClass = parse_css_class($postTitleClass, $obj);
+		$prefixText = parse_css_class($prefixText, $obj);
+		$postfixText = parse_css_class($postfixText, $obj);
+
 
 
 		ob_start();
@@ -151,7 +160,10 @@ class PGBlockPostTitle
 
 				">
 				<?php if ($postTitleIsLink): ?>
-					<a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
+					<a class="
+				<?php echo esc_attr($postTitleClass); ?>
+
+				" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
 						rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
 
 									/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
@@ -191,7 +203,7 @@ class PGBlockPostTitle
 			?>
 
 			<?php if ($postTitleIsLink): ?>
-				<a class="<?php echo esc_attr($blockId); ?>"
+				<a class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($postTitleClass); ?>"
 					href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
 					rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
 								/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
@@ -208,6 +220,7 @@ class PGBlockPostTitle
 						</span>
 					<?php endif; ?>
 				</a>
+				
 			<?php else: ?>
 				<?php if (!empty($prefixText)): ?>
 					<span class="<?php echo esc_attr($prefixClass); ?>">

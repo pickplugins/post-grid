@@ -23,7 +23,7 @@ class PGBlocArchiveDescription
             post_grid_plugin_dir . 'build/blocks/archive-description/block.json',
             array(
 
-                'title' => 'Accordion Description',
+                'title' => 'Archive Description',
                 'render_callback' => array($this, 'theHTML'),
 
             )
@@ -64,12 +64,14 @@ class PGBlocArchiveDescription
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
 
 
         $archiveTitle = isset($attributes['archiveTitle']) ? $attributes['archiveTitle'] : [];
         $archiveTitleOptions = isset($archiveTitle['options']) ? $archiveTitle['options'] : [];
+        $archiveTitleClass = isset($archiveTitleOptions['class']) ? $archiveTitleOptions['class'] : '';
 
         $archiveType = isset($archiveTitleOptions['archiveType']) ? $archiveTitleOptions['archiveType'] : 'auto';
         $customLabel = isset($archiveTitleOptions['customLabel']) ? $archiveTitleOptions['customLabel'] : 'Archive: %s';
@@ -231,7 +233,15 @@ class PGBlocArchiveDescription
 
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
 
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
+        $archiveTitleClass = parse_css_class($archiveTitleClass, $obj);
+        $prefixText = parse_css_class($prefixText, $obj);
+        $postfixText = parse_css_class($postfixText, $obj);
 
 
 
@@ -242,7 +252,8 @@ class PGBlocArchiveDescription
 
             ?>
             <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>">
+                <?php echo esc_attr($blockId); ?>
+                <?php echo esc_attr($wrapperClass); ?>">
 
 
                 <?php if ($iconPosition == 'beforePrefix'): ?>
@@ -260,10 +271,10 @@ class PGBlocArchiveDescription
                 <?php endif; ?>
 
                 <?php if (!empty($archiveTitleLinkTo)): ?>
-                    <a class='archiveTitle' <?php
-                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                    echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>"
-                        rel="<?php echo esc_attr($archiveTitleRel); ?>"
+                    <a class='<?php echo esc_attr($archiveTitleClass); ?>' <?php
+                       /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                       echo ($linkAttrStrarchiveTitle); ?>
+                        target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>"
                         href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
@@ -276,9 +287,9 @@ class PGBlocArchiveDescription
 
                 <?php else: ?>
 
-                    <span class='archiveTitle' <?php
-                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                    echo ($linkAttrStrarchiveTitle); ?>>
+                    <span class='<?php echo esc_attr($archiveTitleClass); ?>' <?php
+                       /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                       echo ($linkAttrStrarchiveTitle); ?>>
                         <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -332,7 +343,7 @@ class PGBlocArchiveDescription
 
             <?php if (!empty($archiveTitleLinkTo)): ?>
 
-                <a class='archiveTitle' <?php echo esc_attr($linkAttrStrarchiveTitle); ?>
+                <a class='<?php echo esc_attr($archiveTitleClass); ?>' <?php echo esc_attr($linkAttrStrarchiveTitle); ?>
                     target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>"
                     href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
@@ -347,7 +358,7 @@ class PGBlocArchiveDescription
                 <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <span class='archiveTitle'>
+                <span class='<?php echo esc_attr($archiveTitleClass); ?>'>
                     <?php echo wp_kses_post($formatedArchiveTitle); ?>
                 </span>
                 <?php if ($iconPosition == 'afterArchiveTitle'): ?>

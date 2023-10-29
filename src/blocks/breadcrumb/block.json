@@ -23,22 +23,9 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-breadcrumb"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -48,20 +35,7 @@
           "class": "icon",
           "position": "beforeLabel"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "label": {
@@ -70,20 +44,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "separator": {
@@ -93,20 +54,7 @@
           "class": "",
           "text": "»"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "elements": {
@@ -119,26 +67,7 @@
           "showIcon": false,
           "iconPositon": "beforeLabel"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#18978F"
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "borderRadius": {
-            "Desktop": ""
-          },
-          "fontSize": {
-            "Desktop": ""
-          }
-        },
+        "styles": {},
         "items": [
           {
             "id": "text",
@@ -154,20 +83,7 @@
               "text": "You are here: ",
               "showSeparator": true
             },
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           },
           {
             "id": "homePage",
@@ -182,20 +98,7 @@
             "options": {
               "showSeparator": true
             },
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           },
           {
             "id": "postTitle",
@@ -210,20 +113,7 @@
             "options": {
               "showSeparator": true
             },
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           }
         ]
       }

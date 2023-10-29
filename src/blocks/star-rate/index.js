@@ -186,8 +186,9 @@ registerBlockType(metadata, {
 		const [linkPickerText, setLinkPickerText] = useState(false);
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+			var blockIdX = "pg" + clientId.split("-").pop();
 
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
@@ -1357,7 +1358,7 @@ registerBlockType(metadata, {
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
-            <PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody title="Block Variations" initialOpen={false}>
 							<PGBlockPatterns
 								blockName={"star-rate"}
 								onChange={onPickBlockPatterns}

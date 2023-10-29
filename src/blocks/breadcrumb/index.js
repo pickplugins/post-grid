@@ -72,12 +72,13 @@ import PGcssDisplay from "../../components/css-display";
 import PGIconPicker from "../../components/icon-picker";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -105,9 +106,6 @@ registerBlockType(metadata, {
 			</svg>
 		),
 	},
-
-
-	
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -154,9 +152,6 @@ registerBlockType(metadata, {
 		);
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-
 			blockCssY.items[itemSelector] = {
 				...blockCssY.items[itemSelector],
 				"font-size": { Desktop: "16px" },
@@ -177,7 +172,29 @@ registerBlockType(metadata, {
 				"margin-right": { Desktop: "10px" },
 			};
 			setAttributes({ blockCssY: { items: blockCssY.items } });
+
+			// var blockIdX = "pg" + clientId.split("-").pop();
+			setAttributes({ blockId: blockIdX });
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
+		// useEffect(() => {
+		// 	var blockCssObj = {};
+
+		// 	blockCssObj[wrapperSelector] = wrapper;
+		// 	blockCssObj[itemSelector] = elements;
+		// 	blockCssObj[iconSelector] = icon;
+		// 	blockCssObj[labelSelector] = label;
+		// 	blockCssObj[separatorSelector] = separator;
+
+		// 	var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+		// 	var items = { ...blockCssY.items, ...blockCssRules };
+		// 	setAttributes({ blockCssY: { items: items } });
+		// }, [blockId]);
+
+		useEffect(() => {
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		}, [blockCssY]);
 
 		useEffect(() => {
 			elements.items.map((x, index) => {
@@ -228,7 +245,6 @@ registerBlockType(metadata, {
 				//setAttributes({ blockCssY: { items: newValuesObjX } });
 			}, 2000);
 		}, [elements]);
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -1400,10 +1416,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [blockCssY]);
-
 		function onChangeBreakPoint(x, index) {
 			var asdsdsd = wp.data.dispatch("postgrid-shop").setBreakPoint(x.value);
 
@@ -1415,7 +1427,7 @@ registerBlockType(metadata, {
 		}
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-breadcrumb`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -1443,6 +1455,31 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -1503,6 +1540,19 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									{/* <label for="">CSS Class</label>
+
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/> */}
 									<div className="my-4">
 										<PanelRow>
 											<label for="">Add Element</label>

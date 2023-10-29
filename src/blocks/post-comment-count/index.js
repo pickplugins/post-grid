@@ -65,7 +65,6 @@ import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -1105,6 +1104,7 @@ registerBlockType(metadata, {
 		);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			// setAttributes({ commentCount: commentCount });

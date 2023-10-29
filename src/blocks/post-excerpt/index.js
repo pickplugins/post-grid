@@ -59,12 +59,13 @@ import PGContactSupport from "../../components/contact-support";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -289,11 +290,32 @@ registerBlockType(metadata, {
 		const [linkPickerExcerpt, setLinkPickerExcerpt] = useState(false);
 		const [linkPickerReadmore, setLinkPickerReadmore] = useState(false);
 
-		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+		// useEffect(() => {
+		// 	setAttributes({ blockId: blockIdX });
 
+		// 	myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		// }, [clientId]);
+		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[excerptSelector] = postExcerpt;
+			blockCssObj[readmoreSelector] = readMore;
+			blockCssObj[prefixSelector] = prefix;
+			blockCssObj[postfixSelector] = postfix;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
@@ -303,7 +325,6 @@ registerBlockType(metadata, {
 		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
 		// }
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -1035,7 +1056,7 @@ registerBlockType(metadata, {
 		const CustomTagExcerpt = `${postExcerpt.options.tag}`;
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-post-excerpt`,
+			className: ` ${blockId} ${wrapper.options.class} `,
 		});
 
 		return (
@@ -1068,6 +1089,31 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<label for="">CSS Class</label>
+
+								<PGcssClassPicker
+									tags={customTags}
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
+
 								<PanelRow>
 									<label for="">Wrapper Tag</label>
 									<SelectControl
@@ -1615,6 +1661,23 @@ registerBlockType(metadata, {
                       setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
                     }}
                   /> */}
+
+								<label for="">CSS Class</label>
+
+								<PGcssClassPicker
+									tags={customTags}
+									placeholder="Add Class"
+									value={postExcerpt.options.class}
+									onChange={(newVal) => {
+										var options = { ...postExcerpt.options, class: newVal };
+										setAttributes({
+											postExcerpt: {
+												styles: postExcerpt.styles,
+												options: options,
+											},
+										});
+									}}
+								/>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -1882,6 +1945,20 @@ registerBlockType(metadata, {
 											})}
 									</div>
 								)}
+
+								<label for="">CSS Class</label>
+
+								<PGcssClassPicker
+									tags={customTags}
+									placeholder="Add Class"
+									value={readMore.options.class}
+									onChange={(newVal) => {
+										var options = { ...readMore.options, class: newVal };
+										setAttributes({
+											readMore: { styles: readMore.styles, options: options },
+										});
+									}}
+								/>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -1929,7 +2006,20 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
-								<PanelRow>
+								<label for="">Prefix</label>
+
+								<PGcssClassPicker
+									tags={customTags}
+									placeholder="Add Class"
+									value={prefix.options.text}
+									onChange={(newVal) => {
+										var options = { ...prefix.options, text: newVal };
+										setAttributes({
+											prefix: { styles: prefix.styles, options: options },
+										});
+									}}
+								/>
+								{/* <PanelRow>
 									<label for="">Prefix</label>
 
 									<InputControl
@@ -1941,7 +2031,7 @@ registerBlockType(metadata, {
 											});
 										}}
 									/>
-								</PanelRow>
+								</PanelRow> */}
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -1989,7 +2079,20 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
-								<PanelRow>
+								<label for="">Postfix</label>
+
+								<PGcssClassPicker
+									tags={customTags}
+									placeholder="Add Class"
+									value={postfix.options.text}
+									onChange={(newVal) => {
+										var options = { ...postfix.options, text: newVal };
+										setAttributes({
+											postfix: { styles: postfix.styles, options: options },
+										});
+									}}
+								/>
+								{/* <PanelRow>
 									<label for="">Postfix</label>
 									<InputControl
 										value={postfix.options.text}
@@ -2000,7 +2103,7 @@ registerBlockType(metadata, {
 											});
 										}}
 									/>
-								</PanelRow>
+								</PanelRow> */}
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -2021,11 +2124,11 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"post-excerpt"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"post-excerpt"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<PanelBody title="Custom Style" initialOpen={false}>
 						<p>Please use following class selector to apply your custom CSS</p>
@@ -2186,7 +2289,7 @@ registerBlockType(metadata, {
 								<>
 									{readMore.options.isLink && (
 										<a
-											className="readmore"
+											className={readMore.options.class}
 											onClick={handleLinkClick}
 											{...linkAttrItemsReadmore}
 											target={readMore.options.linkTarget}

@@ -68,8 +68,6 @@ import PGCssLibrary from "../../components/css-library";
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType("post-grid/form-field-radio", {
-	
-
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -91,7 +89,6 @@ registerBlockType("post-grid/form-field-radio", {
 			</svg>
 		),
 	},
-
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -132,8 +129,9 @@ registerBlockType("post-grid/form-field-radio", {
 		var errorWrapSelector = blockClass + " .error-wrap";
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+			var blockIdX = "pg" + clientId.split("-").pop();
 
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
@@ -1189,3 +1187,4 @@ registerBlockType("post-grid/form-field-radio", {
 		return null;
 	},
 });
+

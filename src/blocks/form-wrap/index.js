@@ -71,7 +71,6 @@ import variations from "./variations";
 import PGDropdown from "../../components/dropdown";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -129,10 +128,6 @@ registerBlockType(metadata, {
 			</svg>
 		),
 	},
-
-	
-	
-	
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -490,6 +485,7 @@ registerBlockType(metadata, {
 		};
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -3030,13 +3026,12 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"form-wrap"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"form-wrap"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<PanelBody title="Custom Style" initialOpen={false}>
 						<p className="">

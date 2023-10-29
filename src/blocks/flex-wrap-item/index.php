@@ -47,6 +47,11 @@ class PGBlockFlexWrapItem
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
+
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
@@ -61,11 +66,12 @@ class PGBlockFlexWrapItem
         ob_start();
 
         ?>
-                <div class="pg-flex-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-                    <?php echo $content ?>
-                </div>
-                <?php
-                return ob_get_clean();
+        <div
+            class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+            <?php echo $content ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
 }
 

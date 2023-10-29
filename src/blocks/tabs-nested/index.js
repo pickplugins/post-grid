@@ -66,7 +66,6 @@ import colorsPresets from "../../colors-presets";
 import PGIconPicker from "../../components/icon-picker";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
@@ -77,7 +76,6 @@ import metadata from "./block.json";
 var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType(metadata, {
-
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -109,7 +107,6 @@ registerBlockType(metadata, {
 		),
 	},
 
-	
 	edit: function (props) {
 		var attributes = props.attributes;
 		var setAttributes = props.setAttributes;
@@ -168,6 +165,8 @@ registerBlockType(metadata, {
 		);
 
 		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);

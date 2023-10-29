@@ -72,7 +72,6 @@ import PGStyles from "../../components/styles";
 import PGIconPicker from "../../components/icon-picker";
 import PGBlockPatterns from "../../components/block-patterns";
 
-
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 import PGtabs from "../../components/tabs";
@@ -223,7 +222,6 @@ registerBlockType(metadata, {
 
 			setIconHtml(iconHtml);
 		}, [icon]);
-
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -765,8 +763,9 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
+			var blockIdX = "pg" + clientId.split("-").pop();
 
+			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [clientId]);
 
@@ -1654,13 +1653,12 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-
 					<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
-								blockName={"post-author-fields"}
-								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
+						<PGBlockPatterns
+							blockName={"post-author-fields"}
+							onChange={onPickBlockPatterns}
+						/>
+					</PanelBody>
 
 					<PanelBody title="Custom Style" initialOpen={false}>
 						<p>Please use following class selector to apply your custom CSS</p>

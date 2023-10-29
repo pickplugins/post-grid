@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-post-excerpt"
         },
         "styles": {
           "color": {
@@ -73,7 +73,7 @@
           "linkTarget": "_blank",
           "customUrl": "",
           "linkAttr": [],
-          "class": ""
+          "class": "readmore"
         },
         "styles": {
           "color": {

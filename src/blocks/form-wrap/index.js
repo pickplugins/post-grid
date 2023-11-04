@@ -69,7 +69,7 @@ import BreakpointToggle from "../../components/breakpoint-toggle";
 import colorsPresets from "../../colors-presets";
 import variations from "./variations";
 import PGDropdown from "../../components/dropdown";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -77,6 +77,8 @@ import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -150,7 +152,6 @@ registerBlockType(metadata, {
 		var onProcess = attributes.onProcess;
 		var afterSubmit = attributes.afterSubmit;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -175,6 +176,114 @@ registerBlockType(metadata, {
 			(select) => select(blockEditorStore).getBlocks(clientId).length > 0,
 			[clientId]
 		);
+
+		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+			setAttributes({ blockId: blockIdX });
+
+			myStore.generateBlockCss(blockCssY.items, blockId);
+
+			apiFetch({
+				path: "/post-grid/v2/user_roles_list",
+				method: "POST",
+				data: {},
+			}).then((res) => {
+				var roles = res.roles == undefined ? [] : res.roles;
+				var rolesX = {};
+				Object.entries(roles).map((role) => {
+					var index = role[0];
+					var val = role[1];
+					rolesX[index] = { label: val, value: index };
+				});
+				setuserRoles(rolesX);
+			});
+
+			apiFetch({
+				path: "/post-grid/v2/post_types",
+				method: "POST",
+				data: {},
+			}).then((res) => {
+				var types = [];
+				Object.entries(res).map((x) => {
+					var postTypeId = x[0];
+					var postTypeLabel = x[1];
+					types.push({ label: postTypeLabel, value: postTypeId });
+				});
+
+				setpostTypes(types);
+			});
+
+			apiFetch({
+				path: "/post-grid/v2/get_post_statuses",
+				method: "POST",
+				data: {},
+			}).then((res) => {
+				var types = [];
+				Object.entries(res).map((x) => {
+					var postTypeId = x[0];
+					var postTypeLabel = x[1];
+					types.push({ label: postTypeLabel, value: postTypeId });
+				});
+
+				setpostStatuses(types);
+			});
+
+			apiFetch({
+				path: "/post-grid/v2/fluentcrm_lists",
+				method: "POST",
+				data: {},
+			}).then((res) => {
+				var lists = {};
+				Object.entries(res).map((x) => {
+					var id = x[0];
+					var listData = x[1];
+
+					lists[listData.slug] = {
+						label: listData.title,
+						slug: listData.slug,
+						id: id,
+					};
+				});
+
+				setfluentcrmLists(lists);
+			});
+
+			apiFetch({
+				path: "/post-grid/v2/fluentcrm_tags",
+				method: "POST",
+				data: {},
+			}).then((res) => {
+				var tags = {};
+				Object.entries(res).map((x) => {
+					var id = x[0];
+					var listData = x[1];
+
+					tags[listData.slug] = {
+						label: listData.title,
+						slug: listData.slug,
+						id: id,
+					};
+				});
+
+				setfluentcrmTags(tags);
+			});
+		}, [clientId]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[formSelector] = form;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
+
+		useEffect(() => {
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [blockCssY]);
 
 		var visibleArgsBasic = {
 			userLogged: {
@@ -484,108 +593,6 @@ registerBlockType(metadata, {
 			23: { label: "11PM", value: 23 },
 		};
 
-		useEffect(() => {
-			var blockIdX = "pg" + clientId.split("-").pop();
-			setAttributes({ blockId: blockIdX });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-
-			apiFetch({
-				path: "/post-grid/v2/user_roles_list",
-				method: "POST",
-				data: {},
-			}).then((res) => {
-				var roles = res.roles == undefined ? [] : res.roles;
-				var rolesX = {};
-				Object.entries(roles).map((role) => {
-					var index = role[0];
-					var val = role[1];
-					rolesX[index] = { label: val, value: index };
-				});
-				setuserRoles(rolesX);
-			});
-
-			apiFetch({
-				path: "/post-grid/v2/post_types",
-				method: "POST",
-				data: {},
-			}).then((res) => {
-				var types = [];
-				Object.entries(res).map((x) => {
-					var postTypeId = x[0];
-					var postTypeLabel = x[1];
-					types.push({ label: postTypeLabel, value: postTypeId });
-				});
-
-				setpostTypes(types);
-			});
-
-			apiFetch({
-				path: "/post-grid/v2/get_post_statuses",
-				method: "POST",
-				data: {},
-			}).then((res) => {
-				var types = [];
-				Object.entries(res).map((x) => {
-					var postTypeId = x[0];
-					var postTypeLabel = x[1];
-					types.push({ label: postTypeLabel, value: postTypeId });
-				});
-
-				setpostStatuses(types);
-			});
-
-			apiFetch({
-				path: "/post-grid/v2/fluentcrm_lists",
-				method: "POST",
-				data: {},
-			}).then((res) => {
-				var lists = {};
-				Object.entries(res).map((x) => {
-					var id = x[0];
-					var listData = x[1];
-
-					lists[listData.slug] = {
-						label: listData.title,
-						slug: listData.slug,
-						id: id,
-					};
-				});
-
-				setfluentcrmLists(lists);
-			});
-
-			apiFetch({
-				path: "/post-grid/v2/fluentcrm_tags",
-				method: "POST",
-				data: {},
-			}).then((res) => {
-				var tags = {};
-				Object.entries(res).map((x) => {
-					var id = x[0];
-					var listData = x[1];
-
-					tags[listData.slug] = {
-						label: listData.title,
-						slug: listData.slug,
-						id: id,
-					};
-				});
-
-				setfluentcrmTags(tags);
-			});
-		}, [clientId]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [blockCssY]);
-
 		function onFormSubmit(ev) {
 			ev.preventDefault();
 
@@ -608,17 +615,58 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var formX = attributes.form;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var visibleX = attributes.visible;
+				var onSubmitX = attributes.onSubmit;
+				var onProcessX = attributes.onProcess;
+				var afterSubmitX = attributes.afterSubmit;
+
+				var blockCssYX = attributes.blockCssY;
+
+				var blockCssObj = {};
+
+				if (afterSubmitX != undefined) {
+					var afterSubmitY = { ...afterSubmitX, options: afterSubmit.options };
+					setAttributes({ afterSubmit: afterSubmitY });
+					blockCssObj[afterSubmitSelector] = afterSubmitY;
+				}
+
+				if (onProcessX != undefined) {
+					var onProcessY = { ...onProcessX, options: onProcess.options };
+					setAttributes({ onProcess: onProcessY });
+					blockCssObj[onProcessSelector] = onProcessY;
+				}
+
+				if (onSubmitX != undefined) {
+					var onSubmitY = { ...onSubmitX, options: onSubmit.options };
+					setAttributes({ onSubmit: onSubmitY });
+					blockCssObj[onSubmitSelector] = onSubmitY;
+				}
+
+				if (visibleX != undefined) {
+					var visibleY = { ...visibleX, options: visible.options };
+					setAttributes({ visible: visibleY });
+					blockCssObj[visibleSelector] = visibleY;
+				}
+
+				if (formX != undefined) {
+					var formY = { ...formX, options: form.options };
+					setAttributes({ form: formY });
+					blockCssObj[formSelector] = formY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -896,7 +944,7 @@ registerBlockType(metadata, {
 		const MY_TEMPLATE = [["form-field-input", {}]];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-form-wrap `,
+			className: ` ${blockId} ${wrapper.options.class} `,
 		});
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -922,10 +970,10 @@ registerBlockType(metadata, {
 									] == undefined
 										? "Form Type"
 										: formTypeArgs[
-												form.options == undefined
-													? form.type
-													: form.options.type
-										  ].label
+											form.options == undefined
+												? form.type
+												: form.options.type
+										].label
 								}
 								options={formTypeArgs}
 								onChange={(option, index) => {
@@ -945,7 +993,7 @@ registerBlockType(metadata, {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -961,6 +1009,30 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
 								<PanelRow>
 									<label for="">Wrapper Tag</label>
 
@@ -1005,7 +1077,7 @@ registerBlockType(metadata, {
 							activeTab="styles"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1020,7 +1092,20 @@ registerBlockType(metadata, {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={form.options.class}
+									onChange={(newVal) => {
+										var options = { ...form.options, class: newVal };
+										setAttributes({
+											form: { styles: form.styles, options: options },
+										});
+									}}
+								/>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={form}
@@ -1264,84 +1349,84 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={
-																						item.value.length == 0
-																							? "Choose Month"
-																							: monthsNum[item.value].label
-																					}
-																					options={monthsNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-																						visibleX[groupId]["args"][index][
-																							"value"
-																						] = option.value;
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.value}></PGDropdown>
-																			</PanelRow>
-																		</>
-																	)}
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={
+																							item.value.length == 0
+																								? "Choose Month"
+																								: monthsNum[item.value].label
+																						}
+																						options={monthsNum}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+																							visibleX[groupId]["args"][index][
+																								"value"
+																							] = option.value;
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.value}></PGDropdown>
+																				</PanelRow>
+																			</>
+																		)}
 
 																	{(item.compare == "between" ||
 																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={"Choose Month"}
-																					options={monthsNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={"Choose Month"}
+																						options={monthsNum}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
 
-																						visibleX[groupId]["args"][index][
-																							"values"
-																						].push(option.value);
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.values}></PGDropdown>
-																			</PanelRow>
+																							visibleX[groupId]["args"][index][
+																								"values"
+																							].push(option.value);
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.values}></PGDropdown>
+																				</PanelRow>
 
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>{monthsNum[x].label}</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
-																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>{monthsNum[x].label}</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = { ...visible };
+																										item.values.splice(i, 1);
 
-																									visibleX[groupId]["args"][
-																										index
-																									]["values"] = item.values;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
-																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
 																</>
 															)}
 
@@ -1378,86 +1463,86 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={
-																						item.value.length == 0
-																							? "Choose Day"
-																							: weekDayNumn[item.value].label
-																					}
-																					options={weekDayNumn}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-																						visibleX[groupId]["args"][index][
-																							"value"
-																						] = option.value;
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.value}></PGDropdown>
-																			</PanelRow>
-																		</>
-																	)}
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={
+																							item.value.length == 0
+																								? "Choose Day"
+																								: weekDayNumn[item.value].label
+																						}
+																						options={weekDayNumn}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+																							visibleX[groupId]["args"][index][
+																								"value"
+																							] = option.value;
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.value}></PGDropdown>
+																				</PanelRow>
+																			</>
+																		)}
 
 																	{(item.compare == "between" ||
 																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={"Choose Days"}
-																					options={weekDayNumn}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={"Choose Days"}
+																						options={weekDayNumn}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
 
-																						visibleX[groupId]["args"][index][
-																							"values"
-																						].push(option.value);
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.values}></PGDropdown>
-																			</PanelRow>
+																							visibleX[groupId]["args"][index][
+																								"values"
+																							].push(option.value);
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.values}></PGDropdown>
+																				</PanelRow>
 
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>
-																								{weekDayNumn[x].label}
-																							</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
-																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>
+																									{weekDayNumn[x].label}
+																								</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = { ...visible };
+																										item.values.splice(i, 1);
 
-																									visibleX[groupId]["args"][
-																										index
-																									]["values"] = item.values;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
-																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
 																</>
 															)}
 
@@ -1494,84 +1579,84 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={
-																						item.value.length == 0
-																							? "Choose Hours"
-																							: hoursNum[item.value].label
-																					}
-																					options={hoursNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-																						visibleX[groupId]["args"][index][
-																							"value"
-																						] = option.value;
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.value}></PGDropdown>
-																			</PanelRow>
-																		</>
-																	)}
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={
+																							item.value.length == 0
+																								? "Choose Hours"
+																								: hoursNum[item.value].label
+																						}
+																						options={hoursNum}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+																							visibleX[groupId]["args"][index][
+																								"value"
+																							] = option.value;
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.value}></PGDropdown>
+																				</PanelRow>
+																			</>
+																		)}
 
 																	{(item.compare == "between" ||
 																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={"Choose Month"}
-																					options={hoursNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={"Choose Month"}
+																						options={hoursNum}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
 
-																						visibleX[groupId]["args"][index][
-																							"values"
-																						].push(option.value);
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.values}></PGDropdown>
-																			</PanelRow>
+																							visibleX[groupId]["args"][index][
+																								"values"
+																							].push(option.value);
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.values}></PGDropdown>
+																				</PanelRow>
 
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>{hoursNum[x].label}</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
-																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>{hoursNum[x].label}</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = { ...visible };
+																										item.values.splice(i, 1);
 
-																									visibleX[groupId]["args"][
-																										index
-																									]["values"] = item.values;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
-																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
 																</>
 															)}
 
@@ -1608,151 +1693,151 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
 
-																				<Button
-																					className={
-																						enableDatePicker
-																							? "!bg-gray-400"
-																							: ""
-																					}
-																					onClick={(ev) => {
-																						setenableDatePicker(
-																							(prev) => !prev
-																						);
-																					}}>
-																					{item.value.length == 0
-																						? "Choose Date"
-																						: item.value}
-																				</Button>
-																			</PanelRow>
+																					<Button
+																						className={
+																							enableDatePicker
+																								? "!bg-gray-400"
+																								: ""
+																						}
+																						onClick={(ev) => {
+																							setenableDatePicker(
+																								(prev) => !prev
+																							);
+																						}}>
+																						{item.value.length == 0
+																							? "Choose Date"
+																							: item.value}
+																					</Button>
+																				</PanelRow>
 
-																			{enableDatePicker && (
-																				<Popover position="bottom left ">
-																					<div className="p-4">
-																						<DatePicker
-																							onChange={(newDate) => {
-																								const dateFull = new Date(
-																									newDate
-																								);
-																								let day = dateFull.getDate();
-																								let month =
-																									dateFull.getMonth() + 1;
-																								let year =
-																									dateFull.getFullYear();
+																				{enableDatePicker && (
+																					<Popover position="bottom left ">
+																						<div className="p-4">
+																							<DatePicker
+																								onChange={(newDate) => {
+																									const dateFull = new Date(
+																										newDate
+																									);
+																									let day = dateFull.getDate();
+																									let month =
+																										dateFull.getMonth() + 1;
+																									let year =
+																										dateFull.getFullYear();
 
-																								var dateStr =
-																									year +
-																									"-" +
-																									month +
-																									"-" +
-																									day;
+																									var dateStr =
+																										year +
+																										"-" +
+																										month +
+																										"-" +
+																										day;
 
-																								var visibleX = { ...visible };
-
-																								visibleX[groupId]["args"][
-																									index
-																								]["value"] = dateStr;
-																								setAttributes({
-																									visible: visibleX,
-																								});
-																							}}
-																							is12Hour={true}
-																						/>
-																					</div>
-																				</Popover>
-																			)}
-																		</>
-																	)}
-
-																	{(item.compare == "between" ||
-																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
-
-																				<Button
-																					className={
-																						enableDatePicker
-																							? "!bg-gray-400"
-																							: ""
-																					}
-																					onClick={(ev) => {
-																						setenableDatePicker(
-																							(prev) => !prev
-																						);
-																					}}>
-																					Choose Date
-																				</Button>
-																			</PanelRow>
-
-																			{enableDatePicker && (
-																				<Popover position="bottom left ">
-																					<div className="p-4">
-																						<DatePicker
-																							onChange={(newDate) => {
-																								const dateFull = new Date(
-																									newDate
-																								);
-																								let day = dateFull.getDate();
-																								let month =
-																									dateFull.getMonth() + 1;
-																								let year =
-																									dateFull.getFullYear();
-
-																								var dateStr =
-																									year +
-																									"-" +
-																									month +
-																									"-" +
-																									day;
-
-																								var visibleX = { ...visible };
-
-																								visibleX[groupId]["args"][
-																									index
-																								]["values"].push(dateStr);
-																								setAttributes({
-																									visible: visibleX,
-																								});
-																							}}
-																							is12Hour={true}
-																						/>
-																					</div>
-																				</Popover>
-																			)}
-
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>{x}</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
 																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
 
 																									visibleX[groupId]["args"][
 																										index
-																									]["values"] = item.values;
+																									]["value"] = dateStr;
 																									setAttributes({
 																										visible: visibleX,
 																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
+																								}}
+																								is12Hour={true}
+																							/>
 																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
+																					</Popover>
+																				)}
+																			</>
+																		)}
+
+																	{(item.compare == "between" ||
+																		item.compare == "exist") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label for="">Values</label>
+
+																					<Button
+																						className={
+																							enableDatePicker
+																								? "!bg-gray-400"
+																								: ""
+																						}
+																						onClick={(ev) => {
+																							setenableDatePicker(
+																								(prev) => !prev
+																							);
+																						}}>
+																						Choose Date
+																					</Button>
+																				</PanelRow>
+
+																				{enableDatePicker && (
+																					<Popover position="bottom left ">
+																						<div className="p-4">
+																							<DatePicker
+																								onChange={(newDate) => {
+																									const dateFull = new Date(
+																										newDate
+																									);
+																									let day = dateFull.getDate();
+																									let month =
+																										dateFull.getMonth() + 1;
+																									let year =
+																										dateFull.getFullYear();
+
+																									var dateStr =
+																										year +
+																										"-" +
+																										month +
+																										"-" +
+																										day;
+
+																									var visibleX = { ...visible };
+
+																									visibleX[groupId]["args"][
+																										index
+																									]["values"].push(dateStr);
+																									setAttributes({
+																										visible: visibleX,
+																									});
+																								}}
+																								is12Hour={true}
+																							/>
+																						</div>
+																					</Popover>
+																				)}
+
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>{x}</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = { ...visible };
+																										item.values.splice(i, 1);
+
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
 																</>
 															)}
 
@@ -2602,7 +2687,7 @@ registerBlockType(metadata, {
 															className="mr-2"
 															value={
 																groupData.type == undefined ||
-																groupData.type.length == 0
+																	groupData.type.length == 0
 																	? "comment"
 																	: groupData.type
 															}
@@ -3027,34 +3112,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"form-wrap"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p className="">
-							Please use following class selector to apply your custom CSS
-						</p>
-
-						<div className="my-3">
-							<p className="font-bold">Text </p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 
@@ -3118,7 +3180,6 @@ registerBlockType(metadata, {
 													var afterSubmit = { ...atts.afterSubmit };
 
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
@@ -3132,13 +3193,12 @@ registerBlockType(metadata, {
 														onSubmit: onSubmit,
 														onProcess: onProcess,
 														afterSubmit: afterSubmit,
-														customCss: customCss,
 													});
 
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 
@@ -3194,7 +3254,7 @@ registerBlockType(metadata, {
 		var blockId = attributes.blockId;
 
 		const blockProps = useBlockProps.save({
-			className: ` ${blockId} pg-form-wrap`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return <InnerBlocks.Content />;

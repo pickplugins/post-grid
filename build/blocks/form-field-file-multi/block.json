@@ -26,7 +26,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-form-field-file-multi"
         },
         "styles": {}
       }
@@ -152,10 +152,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -163,6 +159,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "form block for wordpress",
     "form block",

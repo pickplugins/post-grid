@@ -80,10 +80,6 @@
         "styles": {}
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -95,6 +91,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "Taxonomy title",
     "Terms title",

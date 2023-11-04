@@ -43,7 +43,7 @@ class PGBlockFormFieldSubmit
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -54,10 +54,13 @@ class PGBlockFormFieldSubmit
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
 
+
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
         $labelWrap = isset($attributes['labelWrap']) ? $attributes['labelWrap'] : [];
@@ -97,53 +100,59 @@ class PGBlockFormFieldSubmit
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
 
         ////var_dump($content);
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
+
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
         ob_start();
 
         ?>
 
-                        <div class="<?php echo esc_attr($blockId); ?>">
+                                                <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
 
 
-                            <div class='label-wrap'>
+                                                    <div class='label-wrap'>
 
-                                <?php if ($labelEnable): ?>
-                                            <label for=""><?php echo wp_kses_post($labelText); ?></label>
-                                <?php endif; ?>
-
-
-                                <?php if ($errorWrapPosition == 'afterlabel'): ?>
-                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                                <?php endif; ?>
+                                                        <?php if ($labelEnable): ?>
+                                                                                <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                                                        <?php endif; ?>
 
 
-                            </div>
-                            <div class='input-wrap'>
-                                <input type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                 <?php if ($inputDisabled): ?> disabled <?php endif; ?>                 <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
-                                <?php if ($errorWrapPosition == 'afterInput'): ?>
-                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-
-                                <?php endif; ?>
-                            </div>
+                                                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                                                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                                                        <?php endif; ?>
 
 
+                                                    </div>
+                                                    <div class='input-wrap'>
+                                                        <input type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                                         <?php if ($inputDisabled): ?> disabled <?php endif; ?>                                         <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
+                                                        <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                                                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
 
+                                                        <?php endif; ?>
+                                                    </div>
 
 
 
-                        </div>
 
-                <?php
 
-                return ob_get_clean();
+
+                                                </div>
+
+                                        <?php
+
+                                        return ob_get_clean();
     }
 }
 

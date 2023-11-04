@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "",
+          "class": "pg-star-rate",
           "attr": []
         },
         "styles": {
@@ -40,7 +40,7 @@
         "options": {
           "library": "fontAwesome",
           "srcType": "class",
-          "iconSrc": "fas fa-check-circle",
+          "iconSrc": "fas fa-star",
           "class": "text-icon",
           "text": "Custom Text",
           "isLink": true,
@@ -90,10 +90,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "linkAttr": {
       "type": "array",
       "default": []
@@ -105,7 +101,8 @@
       }
     }
   },
-  "style" : "front_style",
+  "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "star rate",
     "star rates",

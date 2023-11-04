@@ -58,7 +58,7 @@ class PGBlockPopup
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -66,9 +66,16 @@ class PGBlockPopup
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
         $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+
+        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+
+        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
         $closeWrap = isset($attributes['closeWrap']) ? $attributes['closeWrap'] : [];
@@ -97,7 +104,7 @@ class PGBlockPopup
 
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
         if ($closeWrapLibrary == 'fontAwesome') {
@@ -120,7 +127,12 @@ class PGBlockPopup
 
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
 
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
         ob_start();
@@ -128,7 +140,7 @@ class PGBlockPopup
 
 
         ?>
-                <div class="pg-popup   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+                <div class="<?php echo esc_attr($wrapperClass); ?>   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
                     popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>"
                     data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
                     <div class='inner'>

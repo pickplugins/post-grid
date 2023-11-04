@@ -76,12 +76,14 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 //import Splide from '@splidejs/splide';
 
 import "@splidejs/splide/dist/css/splide-core.min.css";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 //import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
 
 var myStore = wp.data.select("postgrid-shop");
@@ -128,7 +130,6 @@ registerBlockType(metadata, {
 		var sliderOptions = attributes.sliderOptions;
 		var sliderOptionsRes = attributes.sliderOptionsRes;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -156,6 +157,31 @@ registerBlockType(metadata, {
 		var paginationSelector = blockClass + " .splide__pagination__page";
 		var paginationActiveSelector =
 			blockClass + " .splide__pagination__page.is-active";
+
+		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+
+			setAttributes({ blockId: blockIdX });
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [clientId]);
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[nextSelector] = next;
+			blockCssObj[pervSelector] = perv;
+			blockCssObj[nextIconSelector] = nextIcon;
+			blockCssObj[pervIconSelector] = pervIcon;
+			blockCssObj[navsWrapSelector] = navsWrap;
+			blockCssObj[paginationWrapSelector] = paginationWrap;
+			blockCssObj[paginationSelector] = pagination;
+			blockCssObj[paginationActiveSelector] = paginationActive;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		var sliderOptionsArgs = {
 			autoplay: { label: "Auto play", value: 1 },
@@ -236,7 +262,7 @@ registerBlockType(metadata, {
 			asdsdsd.then((res) => {
 				setBreakPointX(res.breakpoint);
 
-				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+				myStore.generateBlockCss(blockCssY.items, blockId);
 			});
 
 			const { __experimentalGetPreviewDeviceType: getPreviewDeviceType } =
@@ -295,17 +321,11 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		var breakPointList = [{ label: "Select..", icon: "", value: "" }];
@@ -1167,7 +1187,7 @@ registerBlockType(metadata, {
 		const MY_TEMPLATE = [["post-grid/content-slider-item", {}]];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-content-slider  `,
+			className: ` ${blockId} ${wrapper.options.class}  `,
 		});
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -3195,7 +3215,32 @@ registerBlockType(metadata, {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={wrapper}
@@ -3583,34 +3628,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"content-slider"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p className="">
-							Please use following class selector to apply your custom CSS
-						</p>
-
-						<div className="my-3">
-							<p className="font-bold">Text </p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 
@@ -3678,7 +3700,7 @@ registerBlockType(metadata, {
 
 													var navsWrap = { ...atts.navsWrap };
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
+
 													var sliderOptions = { ...atts.sliderOptions };
 													var sliderOptionsRes = { ...atts.sliderOptionsRes };
 
@@ -3705,7 +3727,7 @@ registerBlockType(metadata, {
 														nextIcon: nextIcon,
 														paginationWrap: paginationWrap,
 														navsWrap: navsWrap,
-														customCss: customCss,
+
 														sliderOptions: sliderOptions,
 														sliderOptionsRes: sliderOptionsRes,
 													});
@@ -3713,7 +3735,7 @@ registerBlockType(metadata, {
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 

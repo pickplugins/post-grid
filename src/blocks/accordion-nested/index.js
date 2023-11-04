@@ -69,7 +69,7 @@ import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
 import PGDivider from "../../components/divider";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import variations from "./variations";
 import metadata from "./block.json";
@@ -139,7 +139,6 @@ registerBlockType(metadata, {
 		var icon = attributes.icon;
 		var iconToggle = attributes.iconToggle;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		let isProFeature = applyFilters("isProFeature", true);
@@ -174,17 +173,11 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
@@ -203,10 +196,10 @@ registerBlockType(metadata, {
 			blockCssObj[iconToggleSelector] = iconToggle;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-			console.log("first");
-			console.log(blockCssRules);
+			// console.log("first");
+			// console.log(blockCssRules);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
@@ -275,18 +268,86 @@ registerBlockType(metadata, {
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				// var blockId = attributes.blockId
+				var wrapperX = attributes.wrapper;
+				var headerX = attributes.header;
+				var headerActiveX = attributes.headerActive;
+				var headerLabelX = attributes.headerLabel;
+				var labelIconX = attributes.labelIcon;
+				var labelCounterX = attributes.labelCounter;
+				var schemaX = attributes.schema;
+				var contentX = attributes.content;
+				var iconX = attributes.icon;
+				var iconToggleX = attributes.iconToggle;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				console.log(contentX);
+
+				var blockCssObj = {};
+				if (wrapperX != undefined) {
+					//var wrapperY = { ...wrapperX, options: wrapper.options }
+					setAttributes({ wrapper: wrapperX });
+					blockCssObj[wrapperSelector] = wrapperX;
+				}
+
+				if (headerX != undefined) {
+					//var headerY = { ...headerX, options: header.options }
+					setAttributes({ header: headerX });
+					blockCssObj[headerSelector] = headerX;
+				}
+
+				if (headerActiveX != undefined) {
+					//var headerActiveY = { ...headerActiveX, options: headerActive.options }
+					setAttributes({ headerActive: headerActiveX });
+					blockCssObj[headerActiveSelector] = headerActiveX;
+				}
+
+				if (headerLabelX != undefined) {
+					//var headerLabelY = { ...headerLabelX, options: headerLabel.options }
+					setAttributes({ headerLabel: headerLabelX });
+					blockCssObj[headerLabelSelector] = headerLabelX;
+				}
+
+				if (labelIconX != undefined) {
+					//var labelIconY = { ...labelIconX, options: labelIcon.options }
+					setAttributes({ labelIcon: labelIconX });
+					blockCssObj[labelIconSelector] = labelIconX;
+				}
+
+				if (labelCounterX != undefined) {
+					//var labelCounterY = { ...labelCounterX, options: labelCounter.options }
+					setAttributes({ labelCounter: labelCounterX });
+					blockCssObj[labelCounterSelector] = labelCounterX;
+				}
+
+				if (schemaX != undefined) {
+					var schemaY = { ...schemaX, options: schema.options };
+					setAttributes({ schema: schemaY });
+					//blockCssObj[schemaSelector] = schemaY;
+				}
+
+				if (contentX != undefined) {
+					//var contentY = { ...contentX, options: content.options }
+
+					setAttributes({ content: contentX });
+					blockCssObj[contentSelector] = contentX;
+				}
+
+				if (iconX != undefined) {
+					//var iconY = { ...iconX, options: icon.options }
+					setAttributes({ icon: iconX });
+					blockCssObj[iconSelector] = iconX;
+				}
+
+				if (iconToggleX != undefined) {
+					//var iconToggleY = { ...iconToggleX, options: iconToggle.options }
+					setAttributes({ iconToggle: iconToggleX });
+					blockCssObj[iconToggleSelector] = iconToggleX;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -1218,10 +1279,9 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">CSS Class</label>
-
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={wrapper.options.class}
 										onChange={(newVal) => {
@@ -2040,34 +2100,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"accordion-nested"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 
@@ -2134,7 +2171,6 @@ registerBlockType(metadata, {
 													var icon = { ...atts.icon };
 													var iconToggle = { ...atts.iconToggle };
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
@@ -2160,13 +2196,12 @@ registerBlockType(metadata, {
 														labelIcon: labelIcon,
 														icon: icon,
 														iconToggle: iconToggle,
-														customCss: customCss,
 													});
 
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 

@@ -27,7 +27,7 @@ const variations = [
 				options: { type: "contactForm" },
 			},
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			visible: {},
@@ -612,7 +612,7 @@ const variations = [
 		isPro: false,
 		atts: {
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			form: {
@@ -642,7 +642,7 @@ const variations = [
 			},
 			afterSubmit: { 0: { id: "showResponse", message: "" } },
 			blockId: "pge431be43ba93",
-			customCss: {},
+
 			blockCssY: {
 				items: {
 					".pg9d6a07354523": {
@@ -1144,7 +1144,7 @@ const variations = [
 				options: { type: "loginForm" },
 			},
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			visible: {},
@@ -1648,7 +1648,7 @@ const variations = [
 				options: { type: "registerForm" },
 			},
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			visible: {},
@@ -2211,7 +2211,7 @@ const variations = [
 				},
 			},
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			visible: {},
@@ -3016,7 +3016,7 @@ const variations = [
 				options: { type: "termSubmitForm" },
 			},
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			visible: {},
@@ -3661,7 +3661,7 @@ const variations = [
 				options: { type: "postSubmitForm" },
 			},
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			visible: {},
@@ -4545,7 +4545,7 @@ const variations = [
 				options: { type: "optInForm" },
 			},
 			wrapper: {
-				options: { tag: "div", class: "" },
+				options: { tag: "div", class: "pg-form-wrap" },
 				styles: { gridTemplateColumns: {}, gap: {}, display: {} },
 			},
 			visible: {},
@@ -4994,3 +4994,4 @@ const variations = [
 ];
 
 export default variations;
+

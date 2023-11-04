@@ -63,7 +63,7 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 import PGcssClassPicker from "../../components/css-class-picker";
 
 import PGTemplates from "../../components/templates";
@@ -110,7 +110,7 @@ registerBlockType(metadata, {
 
 		var prefix = attributes.prefix;
 		var postfix = attributes.postfix;
-		var customCss = attributes.customCss;
+
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -174,7 +174,7 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {}, [wrapper]);
@@ -188,10 +188,26 @@ registerBlockType(metadata, {
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
+		const [prefixText, setprefixText] = useState(
+			myStore.parseCustomTags(prefix.options.text, customTags)
+		);
+		const [postfixText, setpostfixText] = useState(
+			myStore.parseCustomTags(postfix.options.text, customTags)
+		);
+
+		useEffect(() => {
+			var text = myStore.parseCustomTags(prefix.options.text, customTags);
+			setprefixText(text);
+		}, [prefix.options.text]);
+
+		useEffect(() => {
+			var text = myStore.parseCustomTags(postfix.options.text, customTags);
+			setpostfixText(text);
+		}, [postfix.options.text]);
 		// Wrapper CSS Class Selectors
 		const wrapperSelector = blockClass;
 
@@ -273,19 +289,59 @@ registerBlockType(metadata, {
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
-			if (action == "applyStyle") {
-				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+			// if (action == "applyStyle") {
+			// 	// var options = attributes.options
+			// 	var wrapper = attributes.wrapper;
+			// 	var postTitle = attributes.postTitle;
+			// 	var prefix = attributes.prefix;
+			// 	var postfix = attributes.postfix;
+			// 	var blockCssY = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+			// 	setAttributes({ wrapper: wrapper });
+			// 	setAttributes({ postTitle: postTitle });
+			// 	setAttributes({ prefix: prefix });
+			// 	// setAttributes({ postfix: postfix });
+			// 	setAttributes({ blockCssY: blockCssY });
+			// }
+			if (action == "applyStyle") {
+				// var blockId = attributes.blockId
+				var wrapperX = attributes.wrapper;
+				var postTitleX = attributes.postTitle;
+				var prefixX = attributes.prefix;
+				var postfixX = attributes.postfix;
+				var blockCssYX = attributes.blockCssY;
+
+				var blockCssObj = {};
+
+				if (postTitleX != undefined) {
+					var postTitleY = { ...postTitleX, options: postTitle.options };
+					setAttributes({ postTitle: postTitleY });
+					blockCssObj[postTitleSelector] = postTitleY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				if (prefixX != undefined) {
+					var prefixY = { ...prefixX, options: prefix.options };
+					console.log(prefixY);
+					setAttributes({ prefix: prefixY });
+					blockCssObj[prefixSelector] = prefixY;
+				}
+				if (postfixX != undefined) {
+					var postfixY = { ...postfixX, options: postfix.options };
+					console.log(postfixY);
+					setAttributes({ postfix: postfixY });
+					blockCssObj[postfixSelector] = postfixY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -876,14 +932,8 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		useEffect(() => {
 			linkAttrObj();
@@ -944,10 +994,9 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">CSS Class</label>
-
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={wrapper.options.class}
 										onChange={(newVal) => {
@@ -1045,9 +1094,9 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">CSS Class</label>
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={postTitle.options.class}
 										onChange={(newVal) => {
@@ -1446,11 +1495,10 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">Prefix</label>
-
 									<PGcssClassPicker
 										tags={customTags}
-										placeholder="Add Class"
+										label="Prefix"
+										placeholder="Add Prefix"
 										value={prefix.options.text}
 										onChange={(newVal) => {
 											var options = { ...prefix.options, text: newVal };
@@ -1463,7 +1511,7 @@ registerBlockType(metadata, {
 										<label for="">Prefix</label>
 
 										<InputControl
-											value={prefix.options.text}
+											value={prefixText}
 											onChange={(newVal) => {
 												var options = { ...prefix.options, text: newVal };
 												setAttributes({
@@ -1539,11 +1587,10 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">Postfix</label>
-
 									<PGcssClassPicker
 										tags={customTags}
-										placeholder="Add Class"
+										label="Postfix"
+										placeholder="Add Postfix"
 										value={postfix.options.text}
 										onChange={(newVal) => {
 											var options = { ...postfix.options, text: newVal };
@@ -1605,63 +1652,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"post-title"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-							<div className="my-3">
-								<p className="font-bold">Title Wrapper</p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{/* your CSS here*/}"}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Title link</p>
-								<p>
-									<code>
-										{postTitleSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Prefix</p>
-								<p>
-									<code>
-										{prefixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Postfix</p>
-								<p>
-									<code>
-										{postfixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 
@@ -1684,9 +1679,7 @@ registerBlockType(metadata, {
 							<>
 								{prefix.options.position == "beforebegin" &&
 									prefix.options.text && (
-										<span className={prefix.options.class}>
-											{prefix.options.text}
-										</span>
+										<span className={prefix.options.class}>{prefixText}</span>
 									)}
 								<a
 									onClick={handleLinkClick}
@@ -1696,23 +1689,19 @@ registerBlockType(metadata, {
 									target={postTitle.options.linkTarget}>
 									{prefix.options.position == "afterbegin" &&
 										prefix.options.text && (
-											<span className={prefix.options.class}>
-												{prefix.options.text}
-											</span>
+											<span className={prefix.options.class}>{prefixText}</span>
 										)}
 									{postTitleEdited}
 									{postfix.options.position == "beforeend" &&
 										postfix.options.text && (
 											<span className={postfix.options.class}>
-												{postfix.options.text}
+												{postfixText}
 											</span>
 										)}
 								</a>
 								{postfix.options.position == "afterend" &&
 									postfix.options.text && (
-										<span className={postfix.options.class}>
-											{postfix.options.text}
-										</span>
+										<span className={postfix.options.class}>{postfixText}</span>
 									)}
 							</>
 						)}
@@ -1723,14 +1712,14 @@ registerBlockType(metadata, {
 										{prefix.options.position != "none" &&
 											prefix.options.text && (
 												<span className={prefix.options.class}>
-													{prefix.options.text}
+													{prefixText}
 												</span>
 											)}
 										{postTitleEdited}
 										{postfix.options.position != "none" &&
 											postfix.options.text && (
 												<span className={postfix.options.class}>
-													{postfix.options.text}
+													{postfixText}
 												</span>
 											)}
 									</>
@@ -1741,28 +1730,28 @@ registerBlockType(metadata, {
 										{prefix.options.position == "beforebegin" &&
 											prefix.options.text && (
 												<span className={prefix.options.class}>
-													{prefix.options.text}
+													{prefixText}
 												</span>
 											)}
 										<CustomTagPostTitle>
 											{prefix.options.position == "afterbegin" &&
 												prefix.options.text && (
 													<span className={prefix.options.class}>
-														{prefix.options.text}
+														{prefixText}
 													</span>
 												)}
 											{postTitleEdited}
 											{postfix.options.position == "beforeend" &&
 												postfix.options.text && (
 													<span className={postfix.options.class}>
-														{postfix.options.text}
+														{postfixText}
 													</span>
 												)}
 										</CustomTagPostTitle>
 										{postfix.options.position == "afterend" &&
 											postfix.options.text && (
 												<span className={postfix.options.class}>
-													{postfix.options.text}
+													{postfixText}
 												</span>
 											)}
 									</>
@@ -1776,9 +1765,7 @@ registerBlockType(metadata, {
 					<>
 						{prefix.options.position == "beforebegin" &&
 							prefix.options.text && (
-								<span className={prefix.options.class}>
-									{prefix.options.text}
-								</span>
+								<span className={prefix.options.class}>{prefixText}</span>
 							)}
 						<a
 							onClick={handleLinkClick}
@@ -1788,22 +1775,16 @@ registerBlockType(metadata, {
 							target={postTitle.options.linkTarget}>
 							{prefix.options.position == "afterbegin" &&
 								prefix.options.text && (
-									<span className={prefix.options.class}>
-										{prefix.options.text}
-									</span>
+									<span className={prefix.options.class}>{prefixText}</span>
 								)}
 							{postTitleEdited}
 							{postfix.options.position == "beforeend" &&
 								postfix.options.text && (
-									<span className={postfix.options.class}>
-										{postfix.options.text}
-									</span>
+									<span className={postfix.options.class}>{postfixText}</span>
 								)}
 						</a>
 						{postfix.options.position == "afterend" && postfix.options.text && (
-							<span className={postfix.options.class}>
-								{postfix.options.text}
-							</span>
+							<span className={postfix.options.class}>{postfixText}</span>
 						)}
 					</>
 				)}
@@ -1813,30 +1794,22 @@ registerBlockType(metadata, {
 						{postTitle.options.tag.length > 0 && (
 							<CustomTagPostTitle {...blockProps}>
 								{prefix.options.position != "none" && prefix.options.text && (
-									<span className={prefix.options.class}>
-										{prefix.options.text}
-									</span>
+									<span className={prefix.options.class}>{prefixText}</span>
 								)}
 								{postTitleEdited}
 								{postfix.options.position != "none" && postfix.options.text && (
-									<span className={postfix.options.class}>
-										{postfix.options.text}
-									</span>
+									<span className={postfix.options.class}>{postfixText}</span>
 								)}
 							</CustomTagPostTitle>
 						)}
 						{postTitle.options.tag.length == 0 && (
 							<CustomTagPostTitle {...blockProps}>
 								{prefix.options.position != "none" && prefix.options.text && (
-									<span className={prefix.options.class}>
-										{prefix.options.text}
-									</span>
+									<span className={prefix.options.class}>{prefixText}</span>
 								)}
 								{postTitleEdited}
 								{postfix.options.position != "none" && postfix.options.text && (
-									<span className={postfix.options.class}>
-										{postfix.options.text}
-									</span>
+									<span className={postfix.options.class}>{postfixText}</span>
 								)}
 							</CustomTagPostTitle>
 						)}

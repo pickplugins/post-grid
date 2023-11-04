@@ -68,12 +68,14 @@ import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 import PGcssDisplay from "../../components/css-display";
 import PGIconPicker from "../../components/icon-picker";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -131,7 +133,6 @@ registerBlockType(metadata, {
 		var label = attributes.label;
 		var count = attributes.count;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -158,55 +159,83 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': { "Desktop": "30px" } };
+			// blockCssY.items[itemSelector] = {
+			// 	...blockCssY.items[itemSelector],
+			// 	"font-size": { Desktop: "30px" },
+			// };
 
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-top': { "Desktop": "10px" } };
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-right': { "Desktop": "10px" } };
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-bottom': { "Desktop": "10px" } };
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-left': { "Desktop": "10px" } };
-
-			setAttributes({ blockCssY: { items: blockCssY.items } });
+			// blockCssY.items[itemSelector] = {
+			// 	...blockCssY.items[itemSelector],
+			// 	"margin-top": { Desktop: "10px" },
+			// };
+			// blockCssY.items[itemSelector] = {
+			// 	...blockCssY.items[itemSelector],
+			// 	"margin-right": { Desktop: "10px" },
+			// };
+			// blockCssY.items[itemSelector] = {
+			// 	...blockCssY.items[itemSelector],
+			// 	"margin-bottom": { Desktop: "10px" },
+			// };
+			// blockCssY.items[itemSelector] = {
+			// 	...blockCssY.items[itemSelector],
+			// 	"margin-left": { Desktop: "10px" },
+			// };
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
-			elements.items.map((x, index) => {
-				var styles = x.styles;
+			var blockCssObj = {};
 
-				Object.entries(styles).map((y) => {
-					var attrId = y[0];
-					var attrVal = y[1];
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[itemSelector] = elements;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[labelSelector] = label;
+			blockCssObj[countSelector] = count;
 
-					if (Object.keys(attrVal).length != 0) {
-						var attrIdX = "";
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-						if (attrId == "backgroundColor") {
-							attrIdX = "background-color";
-						} else if (attrId == "textAlign") {
-							attrIdX = "text-align";
-						} else {
-							attrIdX = attrId;
-						}
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
-						if (blockCssY.items[itemSelector + ".item-" + index] == undefined) {
-							blockCssY.items[itemSelector + ".item-" + index] = {};
-							blockCssY.items[itemSelector + ".item-" + index][attrIdX] =
-								attrVal;
-						} else {
-							blockCssY.items[itemSelector + ".item-" + index][attrIdX] =
-								attrVal;
-						}
+		// useEffect(() => {
+		// 	elements.items.map((x, index) => {
+		// 		var styles = x.styles;
 
-						setAttributes({ blockCssY: { items: blockCssY.items } });
-					}
-				});
-			});
+		// 		Object.entries(styles).map((y) => {
+		// 			var attrId = y[0];
+		// 			var attrVal = y[1];
 
-			setTimeout((x) => {
-				//setAttributes({ blockCssY: { items: newValuesObjX } });
-			}, 2000);
-		}, [elements]);
+		// 			if (Object.keys(attrVal).length != 0) {
+		// 				var attrIdX = "";
+
+		// 				if (attrId == "backgroundColor") {
+		// 					attrIdX = "background-color";
+		// 				} else if (attrId == "textAlign") {
+		// 					attrIdX = "text-align";
+		// 				} else {
+		// 					attrIdX = attrId;
+		// 				}
+
+		// 				if (blockCssY.items[itemSelector + ".item-" + index] == undefined) {
+		// 					blockCssY.items[itemSelector + ".item-" + index] = {};
+		// 					blockCssY.items[itemSelector + ".item-" + index][attrIdX] =
+		// 						attrVal;
+		// 				} else {
+		// 					blockCssY.items[itemSelector + ".item-" + index][attrIdX] =
+		// 						attrVal;
+		// 				}
+
+		// 				setAttributes({ blockCssY: { items: blockCssY.items } });
+		// 			}
+		// 		});
+		// 	});
+
+		// 	setTimeout((x) => {
+		// 		//setAttributes({ blockCssY: { items: newValuesObjX } });
+		// 	}, 2000);
+		// }, [elements]);
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -224,17 +253,49 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var iconX = attributes.icon;
+				var labelX = attributes.label;
+				var countX = attributes.count;
+				var elementsX = attributes.elements;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (elementsX != undefined) {
+				var elementsY = { ...elementsX, options: elements.options };
+				setAttributes({ elements: elementsY });
+				blockCssObj[elementsSelector] = elementsY;
+				}
+
+				if (countX != undefined) {
+				var countY = { ...countX, options: count.options };
+				setAttributes({ count: countY });
+				blockCssObj[countSelector] = countY;
+				}
+
+				if (labelX != undefined) {
+				var labelY = { ...labelX, options: label.options };
+				setAttributes({ label: labelY });
+				blockCssObj[labelSelector] = labelY;
+				}
+
+				if (iconX != undefined) {
+				var iconY = { ...iconX, options: icon.options };
+				setAttributes({ icon: iconY });
+				blockCssObj[iconSelector] = iconY;
+				}
+
+				if (wrapperX != undefined) {
+				var wrapperY = { ...wrapperX, options: wrapper.options };
+				setAttributes({ wrapper: wrapperY });
+				blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+				
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -885,7 +946,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		function onChangeBreakPoint(x, index) {
@@ -893,12 +954,12 @@ registerBlockType(metadata, {
 
 			asdsdsd.then((res) => {
 				setBreakPointX(res.breakpoint);
-				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+				myStore.generateBlockCss(blockCssY.items, blockId);
 			});
 		}
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-social-share`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -926,6 +987,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -1422,43 +1507,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"social-share"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-							<div className="my-3">
-								<p className="font-bold">Wrapper Selector</p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{/* your CSS here*/}"}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Item Selector</p>
-								<p>
-									<code>
-										{itemSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 

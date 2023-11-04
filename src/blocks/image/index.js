@@ -65,7 +65,7 @@ import PGDropdown from "../../components/dropdown";
 import PGtoggle from "../../components/toggle";
 import colorsPresets from "../../colors-presets";
 import PGcssDisplay from "../../components/css-display";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import MyImage from "./placeholder.jpg";
 
@@ -74,6 +74,8 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -124,7 +126,6 @@ registerBlockType(metadata, {
 			: "pg" + clientId.split("-").pop();
 		var blockClass = "." + blockIdX;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -347,20 +348,20 @@ registerBlockType(metadata, {
 			image.options.imgSrcType,
 		]);
 
-		useEffect(() => {
-			var blockCssObj = {};
+		// useEffect(() => {
+		// 	var blockCssObj = {};
 
-			blockCssObj[wrapperSelector] = wrapper;
-			blockCssObj[imgSelector] = image;
+		// 	blockCssObj[wrapperSelector] = wrapper;
+		// 	blockCssObj[imgSelector] = image;
 
-			//setAttributes({ wrapper: wrapper, image: image, });
+		// 	//setAttributes({ wrapper: wrapper, image: image, });
 
-			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+		// 	var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+		// 	var items = blockCssRules;
 
-			setAttributes({ blockCssY: { items: items } });
-		}, [wrapper]);
+		// 	setAttributes({ blockCssY: { items: items } });
+		// }, [wrapper]);
 
 		function setFeaturedImageSize(option, index) {
 			var newValuesObj = {};
@@ -383,13 +384,23 @@ registerBlockType(metadata, {
 			// setAttributes({ image: image });
 			// setAttributes({ wrapper: wrapper });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			//blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': { "Desktop": "100%" } };
 			//blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': { "Desktop": "auto" } };
 
 			//setAttributes({ blockCssY: { items: blockCssY.items } });
 		}, [clientId]);
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -407,17 +418,35 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				let imageX = attributes.image;
+				var wrapperX = attributes.wrapper;
+				var lightboxX = attributes.lightbox;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (lightboxX != undefined) {
+					var lightboxY = { ...lightboxX, options: lightbox.options };
+					setAttributes({ lightbox: lightboxY });
+					blockCssObj[lightboxSelector] = lightboxY;
+				}
+
+				if (imageX != undefined) {
+					var imageY = { ...imageX, options: image.options };
+					setAttributes({ image: imageY });
+					blockCssObj[imageSelector] = imageY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -715,14 +744,8 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		useEffect(() => {
 			linkAttrObj();
@@ -747,7 +770,7 @@ registerBlockType(metadata, {
 		const CustomTag = `${wrapper.options.tag}`;
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-post-image`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -950,6 +973,30 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
 								<PanelRow>
 									<label for="">Wrapper Tag</label>
 									<SelectControl
@@ -1577,41 +1624,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"image"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p>Please use following class selector to apply your custom CSS</p>
-						<div className="my-3">
-							<p className="font-bold">Title Wrapper</p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{/* your CSS here*/}"}
-								</code>
-							</p>
-						</div>
-
-						<div className="my-3">
-							<p className="font-bold">Title link</p>
-							<p>
-								<code>
-									{linkSelector}
-									{"{/* your CSS here*/}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 

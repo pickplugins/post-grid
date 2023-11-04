@@ -43,30 +43,42 @@ class PGBlockContentSliderItem
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
+        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
-        $postGridCustomCss .= $customCss;
+        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
+
+
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
+
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
         ob_start();
 
         ?>
                 <div
-                    class="pg-content-slider-item splide__slide <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    class="<?php echo esc_attr($wrapperClass); ?> splide__slide <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
                     <?php echo $content ?>
                 </div>
                 <?php

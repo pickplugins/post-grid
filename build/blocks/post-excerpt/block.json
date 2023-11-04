@@ -117,10 +117,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "linkAttr": {
       "type": "array",
       "default": []
@@ -133,6 +129,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "post excerpt",
     "post excerpt html",

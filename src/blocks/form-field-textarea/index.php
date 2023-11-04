@@ -43,7 +43,7 @@ class PGBlockFormFieldTextarea
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -55,7 +55,12 @@ class PGBlockFormFieldTextarea
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
+
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
 
@@ -103,11 +108,17 @@ class PGBlockFormFieldTextarea
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
+
 
         ////var_dump($labelEnable);
         ////var_dump($labelText);
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
+
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
         ob_start();
@@ -115,40 +126,40 @@ class PGBlockFormFieldTextarea
 
         ?>
 
-                        <div class="<?php echo esc_attr($blockId); ?> pg-form-field" id="<?php echo esc_attr($blockId); ?>">
+                                                <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" id="<?php echo esc_attr($blockId); ?>">
 
 
-                            <div class='label-wrap'>
+                                                    <div class='label-wrap'>
 
-                                <?php if ($labelEnable): ?>
-                                            <label for=""><?php echo wp_kses_post($labelText); ?></label>
-                                <?php endif; ?>
-
-
-                                <?php if ($errorWrapPosition == 'afterlabel'): ?>
-                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                                <?php endif; ?>
+                                                        <?php if ($labelEnable): ?>
+                                                                                <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                                                        <?php endif; ?>
 
 
-                            </div>
-                            <div class='input-wrap'>
-                                <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                 <?php if ($inputDisabled): ?> disabled <?php endif; ?>                 <?php if ($inputReadonly): ?> readonly <?php endif; ?>                 <?php if ($inputAutocomplete): ?> autocomplete="on" <?php endif; ?>                 <?php if (!$inputAutocomplete): ?> autocomplete="off" <?php endif; ?>                 <?php if ($inputAutocorrect): ?> autocorrect="on" <?php endif; ?>                 <?php if (!$inputAutocorrect): ?> autocorrect="off" <?php endif; ?>                 <?php if ($inputCols): ?> cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?>                 <?php if ($inputRows): ?> rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?>                 <?php if ($inputMinLength): ?> minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?>                 <?php if ($inputMaxLength): ?> maxLength="<?php echo esc_attr($inputMaxLength); ?>" <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
-                                <?php if ($errorWrapPosition == 'afterInput'): ?>
-                                            <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-
-                                <?php endif; ?>
-                            </div>
+                                                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                                                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                                                        <?php endif; ?>
 
 
+                                                    </div>
+                                                    <div class='input-wrap'>
+                                                        <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                                         <?php if ($inputDisabled): ?> disabled <?php endif; ?>                                         <?php if ($inputReadonly): ?> readonly <?php endif; ?>                                         <?php if ($inputAutocomplete): ?> autocomplete="on" <?php endif; ?>                                         <?php if (!$inputAutocomplete): ?> autocomplete="off" <?php endif; ?>                                         <?php if ($inputAutocorrect): ?> autocorrect="on" <?php endif; ?>                                         <?php if (!$inputAutocorrect): ?> autocorrect="off" <?php endif; ?>                                         <?php if ($inputCols): ?> cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?>                                         <?php if ($inputRows): ?> rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?>                                         <?php if ($inputMinLength): ?> minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?>                                         <?php if ($inputMaxLength): ?> maxLength="<?php echo esc_attr($inputMaxLength); ?>" <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
+                                                        <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                                                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
 
+                                                        <?php endif; ?>
+                                                    </div>
 
 
 
-                        </div>
 
-                <?php
 
-                return ob_get_clean();
+
+                                                </div>
+
+                                        <?php
+
+                                        return ob_get_clean();
     }
 }
 

@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-archive-description"
         },
         "styles": {
           "color": {
@@ -139,10 +139,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -154,6 +150,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "Taxonomy description",
     "Terms description",

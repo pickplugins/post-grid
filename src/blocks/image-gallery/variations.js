@@ -22,8 +22,8 @@ const variations = [
         isPro: false,
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr ' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, } } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  } } }],
 
         ],
         scope: ['block'],
@@ -40,8 +40,8 @@ const variations = [
         isPro: false,
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr' }, gridTemplateRows: { Desktop: '400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, } } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  } } }],
         ],
         scope: ['block'],
         icon: (
@@ -57,7 +57,7 @@ const variations = [
         isPro: false,
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
         ],
@@ -78,7 +78,7 @@ const variations = [
         innerBlocks: [
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
 
         ],
         scope: ['block'],
@@ -96,7 +96,7 @@ const variations = [
         isPro: false,
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
         ],
@@ -115,7 +115,7 @@ const variations = [
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr ' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
         innerBlocks: [
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '2' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '2' } } } }],
 
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
         ],
@@ -158,7 +158,7 @@ const variations = [
         isPro: !isProFeature ? false : true,
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr 1fr' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
@@ -187,7 +187,7 @@ const variations = [
         innerBlocks: [
 
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '2' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '2' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
@@ -209,7 +209,7 @@ const variations = [
         innerBlocks: [
 
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '3' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
@@ -231,7 +231,7 @@ const variations = [
         isPro: !isProFeature ? false : true,
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr 1fr' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
@@ -255,7 +255,7 @@ const variations = [
 
         innerBlocks: [
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '2' }, gridColumnEnd: { Desktop: '4' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '2' }, gridColumnEnd: { Desktop: '4' } } } }],
 
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
@@ -282,7 +282,7 @@ const variations = [
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
 
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
 
@@ -311,7 +311,7 @@ const variations = [
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '2' }, gridColumnEnd: { Desktop: '4' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '2' }, gridColumnEnd: { Desktop: '4' } } } }],
 
 
 
@@ -331,12 +331,12 @@ const variations = [
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr 1fr 1fr' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
 
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '5' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '5' } } } }],
         ],
         scope: ['block'],
         icon: (
@@ -361,8 +361,8 @@ const variations = [
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
 
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '5' } } } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '5' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
 
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
 
@@ -383,8 +383,8 @@ const variations = [
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80"><rect fill="#1d4ed8" x="125" y="13.33" width="35" height="23.34" /><rect fill="#1d4ed8" x="83.33" y="13.33" width="35" height="23.34" /><polygon fill="#1d4ed8" points="0 13.33 0 43.33 0 66.67 35 66.67 35 43.33 35 13.33 0 13.33" /><rect fill="#1d4ed8" x="125" y="43.33" width="35" height="23.34" /><rect fill="#1d4ed8" x="83.33" y="43.33" width="35" height="23.34" /><polygon fill="#1d4ed8" points="41.67 13.33 41.67 43.33 41.67 66.67 76.67 66.67 76.67 43.33 76.67 13.33 41.67 13.33" /></svg>
         ),
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '2' } } } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '2' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '2' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '2' }, gridColumnEnd: { Desktop: '3' } } } }],
 
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
@@ -409,8 +409,8 @@ const variations = [
         innerBlocks: [
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '4' } } } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '4' }, gridColumnEnd: { Desktop: '5' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '4' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '4' }, gridColumnEnd: { Desktop: '5' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
 
@@ -429,10 +429,10 @@ const variations = [
         wrapObj: { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { gridTemplateColumns: { Desktop: '1fr 1fr 1fr 1fr' }, gridTemplateRows: { Desktop: '400px 400px ' }, gap: { Desktop: '1em' }, display: { Desktop: 'grid' }, } },
 
         innerBlocks: [
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridColumnStart: { Desktop: '1' }, gridColumnEnd: { Desktop: '3' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '4' } } } }],
-            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": { backgroundColor: { Desktop: '#2563eb24' }, gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '4' }, gridColumnEnd: { Desktop: '5' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '3' }, gridColumnEnd: { Desktop: '4' } } } }],
+            ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {  gridRowStart: { Desktop: '1' }, gridRowEnd: { Desktop: '3' }, gridColumnStart: { Desktop: '4' }, gridColumnEnd: { Desktop: '5' } } } }],
             ['post-grid/image-gallery-item', { "wrapper": { "options": { "tag": "div", "class": "grid-item-wrap" }, "styles": {} } }],
         ],
         scope: ['block'],

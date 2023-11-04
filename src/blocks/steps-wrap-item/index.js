@@ -192,10 +192,7 @@ registerBlockType("post-grid/steps-wrap-item", {
 			type: "string",
 			default: "",
 		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
+
 		blockCssY: {
 			type: "object",
 			default: { items: {} },
@@ -228,7 +225,6 @@ registerBlockType("post-grid/steps-wrap-item", {
 
 		var icon = attributes.icon;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 		let isProFeature = applyFilters("isProFeature", true);
 
@@ -244,14 +240,8 @@ registerBlockType("post-grid/steps-wrap-item", {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
@@ -539,7 +529,7 @@ registerBlockType("post-grid/steps-wrap-item", {
 		}, [icon]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const blockProps = useBlockProps();
@@ -784,31 +774,6 @@ registerBlockType("post-grid/steps-wrap-item", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
-						</PanelBody>
-
 						<div className="px-2">
 							<PGMailSubsctibe />
 							<PGContactSupport
@@ -864,3 +829,4 @@ registerBlockType("post-grid/steps-wrap-item", {
 		//return null;
 	},
 });
+

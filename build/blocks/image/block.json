@@ -25,7 +25,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "",
+          "class": "pg-post-image",
           "useAsBackground": "no"
         },
         "styles": {
@@ -99,10 +99,6 @@
           "enable": false
         }
       }
-    },
-    "customCss": {
-      "type": "string",
-      "default": ""
     },
     "blockId": {
       "type": "string",

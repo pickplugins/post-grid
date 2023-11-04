@@ -97,7 +97,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -168,7 +168,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -294,7 +294,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -365,7 +365,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -503,7 +503,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -574,7 +574,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -745,7 +745,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -822,7 +822,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -973,7 +973,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -1050,7 +1050,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -1188,7 +1188,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -1259,7 +1259,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -1383,7 +1383,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -1454,7 +1454,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -1595,7 +1595,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -1668,7 +1668,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -1819,7 +1819,7 @@ const variations = [
 				styles: {},
 			},
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [
@@ -1893,7 +1893,7 @@ const variations = [
 						styles: {},
 					},
 					blockId: "",
-					customCss: {},
+
 					blockCssY: { items: {} },
 				},
 			],
@@ -1926,3 +1926,4 @@ const variations = [
 ];
 
 export default variations;
+

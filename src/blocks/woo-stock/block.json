@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-woo-stock"
         },
         "styles": {
           "color": {
@@ -136,10 +136,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -152,8 +148,9 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
-  "stock count",
+    "stock count",
     "stock status",
     "stock block",
     "stock for woocommerce",

@@ -71,7 +71,7 @@ import PGContactSupport from "../../components/contact-support";
 import PGcssDisplay from "../../components/css-display";
 import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -125,7 +125,6 @@ registerBlockType(metadata, {
 		var prefix = attributes.prefix;
 		var itemInfo = attributes.itemInfo;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -186,29 +185,6 @@ registerBlockType(metadata, {
 			items.options.tag.length != 0 ? `${items.options.tag}` : "div";
 
 		var elementsArgsBase = [
-			{
-				id: "text",
-				label: "Text",
-				prefix: "",
-				postfix: "",
-				value: "",
-
-				siteIcon: {
-					library: "fontAwesome",
-					srcType: "class",
-					/*class, html, img, svg */ iconSrc: "",
-				},
-				options: {
-					text: "You are here: ",
-				},
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-
 			{
 				id: "weight",
 				label: "Weight",
@@ -370,62 +346,72 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': { "Desktop": "16px" } };
-
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'display': { "Desktop": "inline-block" } };
-
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'list-style': { "Desktop": "none" } };
-
-			// blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-right': { "Desktop": "10px" } };
-			// setAttributes({ blockCssY: { items: blockCssY.items } });
+			setAttributes({ blockCssY: { items: blockCssY.items } });
 		}, [clientId]);
 
 		useEffect(() => {
-			items.elements.map((x, index) => {
-				var styles = x.styles;
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [blockCssY]);
+		useEffect(() => {
+			var blockCssObj = {};
+			console.log(wrapper);
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[prefixSelector] = prefix;
+			blockCssObj[postfixSelector] = postfix;
 
-				Object.entries(styles).map((y) => {
-					var attrId = y[0];
-					var attrVal = y[1];
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+			console.log(blockCssRules);
 
-					if (Object.keys(attrVal).length != 0) {
-						var attrIdX = "";
-						var cssPropty = myStore.cssAttrParse(attrId);
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
-						if (
-							blockCssY.items[itemSelector + ".item-" + index + " a"] ==
-							undefined
-						) {
-							blockCssY.items[itemSelector + ".item-" + index + " a"] = {};
-							blockCssY.items[itemSelector + ".item-" + index + " a"][
-								cssPropty
-							] = attrVal;
-						} else {
-							blockCssY.items[itemSelector + ".item-" + index + " a"][
-								cssPropty
-							] = attrVal;
-						}
+		// useEffect(() => {
+		// 	items.elements.map((x, index) => {
+		// 		var styles = x.styles;
 
-						if (blockCssY.items[itemSelector + ".item-" + index] == undefined) {
-							blockCssY.items[itemSelector + ".item-" + index] = {};
-							blockCssY.items[itemSelector + ".item-" + index][cssPropty] =
-								attrVal;
-						} else {
-							blockCssY.items[itemSelector + ".item-" + index][cssPropty] =
-								attrVal;
-						}
+		// 		Object.entries(styles).map((y) => {
+		// 			var attrId = y[0];
+		// 			var attrVal = y[1];
 
-						setAttributes({ blockCssY: { items: blockCssY.items } });
-					}
-				});
-			});
+		// 			if (Object.keys(attrVal).length != 0) {
+		// 				var attrIdX = "";
+		// 				var cssPropty = myStore.cssAttrParse(attrId);
 
-			setTimeout((x) => {
-				//setAttributes({ blockCssY: { items: newValuesObjX } });
-			}, 2000);
-		}, [items]);
+		// 				if (
+		// 					blockCssY.items[itemSelector + ".item-" + index + " a"] ==
+		// 					undefined
+		// 				) {
+		// 					blockCssY.items[itemSelector + ".item-" + index + " a"] = {};
+		// 					blockCssY.items[itemSelector + ".item-" + index + " a"][
+		// 						cssPropty
+		// 					] = attrVal;
+		// 				} else {
+		// 					blockCssY.items[itemSelector + ".item-" + index + " a"][
+		// 						cssPropty
+		// 					] = attrVal;
+		// 				}
+
+		// 				if (blockCssY.items[itemSelector + ".item-" + index] == undefined) {
+		// 					blockCssY.items[itemSelector + ".item-" + index] = {};
+		// 					blockCssY.items[itemSelector + ".item-" + index][cssPropty] =
+		// 						attrVal;
+		// 				} else {
+		// 					blockCssY.items[itemSelector + ".item-" + index][cssPropty] =
+		// 						attrVal;
+		// 				}
+
+		// 				setAttributes({ blockCssY: { items: blockCssY.items } });
+		// 			}
+		// 		});
+		// 	});
+
+		// 	setTimeout((x) => {
+		// 		//setAttributes({ blockCssY: { items: newValuesObjX } });
+		// 	}, 2000);
+		// }, [items]);
 
 		//let elementsArgs = elementsArgsBase
 		let isProFeature = applyFilters("isProFeature", true);
@@ -446,17 +432,56 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var iconX = attributes.icon;
+				var prefixX = attributes.prefix;
+				var postfixX = attributes.postfix;
+				var itemInfoX = attributes.itemInfo;
+				var itemsX = attributes.items;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (itemsX != undefined) {
+					var itemsY = { ...itemsX, options: items.options };
+					setAttributes({ items: itemsY });
+					blockCssObj[itemsSelector] = itemsY;
+				}
+
+				if (itemInfoX != undefined) {
+					var itemInfoY = { ...itemInfoX, options: itemInfo.options };
+					setAttributes({ itemInfo: itemInfoY });
+					blockCssObj[itemInfoSelector] = itemInfoY;
+				}
+
+				if (postfixX != undefined) {
+					var postfixY = { ...postfixX, options: postfix.options };
+					setAttributes({ postfix: postfixY });
+					blockCssObj[postfixSelector] = postfixY;
+				}
+
+				if (prefixX != undefined) {
+					var prefixY = { ...prefixX, options: prefix.options };
+					setAttributes({ prefix: prefixY });
+					blockCssObj[prefixSelector] = prefixY;
+				}
+
+				if (iconX != undefined) {
+					var iconY = { ...iconX, options: icon.options };
+					setAttributes({ icon: iconY });
+					blockCssObj[iconSelector] = iconY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -1029,17 +1054,13 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [blockCssY]);
-
 		function onChangeBreakPoint(x, index) {
 			var asdsdsd = wp.data.dispatch("postgrid-shop").setBreakPoint(x.value);
 
 			asdsdsd.then((res) => {
 				setBreakPointX(res.breakpoint);
 
-				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+				myStore.generateBlockCss(blockCssY.items, blockId);
 			});
 		}
 
@@ -1553,43 +1574,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"woo-product-info"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-							<div className="my-3">
-								<p className="font-bold">Wrapper Selector</p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{/* your CSS here*/}"}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Item Selector</p>
-								<p>
-									<code>
-										{itemSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 

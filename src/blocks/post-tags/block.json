@@ -22,7 +22,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "",
+          "class": "pg-post-tags",
           "tag": "div"
         },
         "styles": {
@@ -192,10 +192,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -207,6 +203,7 @@
       "default": ""
     }
   },
+  "script": "front_script",
   "keywords": [
     "tag",
     "tags",

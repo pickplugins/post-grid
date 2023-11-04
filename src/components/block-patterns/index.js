@@ -177,7 +177,7 @@ function Html(props) {
 								</button>
 								<button
 									type="button"
-									className="px-3 py-2 hidden bg-blue-600 rounded-sm text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform   items-center justify-center "
+									className="px-3 py-2 bg-blue-600 rounded-sm text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform   items-center justify-center "
 									onClick={(ev) => {
 										props.onChange(content, "applyStyle");
 									}}>
@@ -246,4 +246,3 @@ class PGBlockPatterns extends Component {
 }
 
 export default PGBlockPatterns;
-

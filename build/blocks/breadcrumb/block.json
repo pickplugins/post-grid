@@ -67,7 +67,20 @@
           "showIcon": false,
           "iconPositon": "beforeLabel"
         },
-        "styles": {},
+        "styles": {
+          "display": {
+            "Desktop": "inline-block"
+          },
+          "listStyle": {
+            "Desktop": "none"
+          },
+          "marginRight": {
+            "Desktop": "10px"
+          },
+          "fontSize": {
+            "Desktop": "16px"
+          }
+        },
         "items": [
           {
             "id": "text",
@@ -126,10 +139,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -141,6 +150,7 @@
       "default": ""
     }
   },
+  "script": "front_script",
   "keywords": [
     "breadcrumb",
     "breadcrumb navs",

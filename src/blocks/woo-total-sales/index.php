@@ -48,7 +48,7 @@ class PGBlockWooTotalSales
 
 
         global $postGridCss;
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -58,12 +58,13 @@ class PGBlockWooTotalSales
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
         $sku = isset($attributes['saleCount']) ? $attributes['saleCount'] : [];
         $skuOptions = isset($sku['options']) ? $sku['options'] : [];
@@ -149,7 +150,7 @@ class PGBlockWooTotalSales
             }
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
@@ -178,7 +179,14 @@ class PGBlockWooTotalSales
 
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
 
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
+        $prefixText = parse_css_class($prefixText, $obj);
+        $postfixText = parse_css_class($postfixText, $obj);
 
 
         ob_start();
@@ -188,7 +196,8 @@ class PGBlockWooTotalSales
 
             ?>
                         <<?php echo esc_attr($wrapperTag); ?> class="
-                            <?php echo esc_attr($blockId); ?>">
+                            <?php echo esc_attr($blockId); ?>
+                            <?php echo esc_attr($wrapperClass); ?>">
 
 
                             <?php if ($iconPosition == 'beforePrefix'): ?>

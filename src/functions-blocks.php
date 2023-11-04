@@ -15,13 +15,10 @@ add_action('wp_footer', 'post_grid_global_css', 999);
 function post_grid_global_css()
 {
 
-  global $postGridCustomCss;
+
 
   ?>
-  <style>
-    /*Custom CSS*/
-    <?php echo $postGridCustomCss; ?>
-  </style>
+
 
   <?php
 }
@@ -116,11 +113,12 @@ function parse_css_class($classStr, $obj)
       $prams = str_replace(['postTagsTitle[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
       $count = wp_kses_stripslashes($prams[0]);
+      $sep = wp_kses_stripslashes($prams[1]);
       if ($posttags != false) {
         $str = "";
         $i = 1;
         foreach ($posttags as $itemx) {
-          $str .= $itemx->name . " ";
+          $str .= $itemx->name . $sep;
           if ($i >= (int) $count)
             break;
           $i++;
@@ -262,10 +260,12 @@ function parse_css_class($classStr, $obj)
     } elseif (strpos($item, 'searchTerms') !== false) {
       $current_query = sanitize_text_field(get_query_var('s'));
       $newArr[$index] = str_replace('searchTerms', $current_query, $item);
-    } elseif (strpos($item, 'counter') !== false) {
-      $newArr[$index] = date('h:i:sa');
+    }
+    // elseif (strpos($item, 'counter') !== false) {
+    //   $newArr[$index] = date('h:i:sa');
 
-    } else {
+    // } 
+    else {
       $newArr[$index] = $item;
     }
   }
@@ -435,9 +435,7 @@ function post_grid_global_cssY()
 
   if (!empty($fonts)) {
     ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts);
-
-    ?>">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
     <?php
 
   }
@@ -737,9 +735,7 @@ function post_grid_page_styles()
 
   if (!empty($fonts)) {
     ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts);
-
-    ?>">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
     <?php
 
   }
@@ -747,19 +743,9 @@ function post_grid_page_styles()
   ?>
 
 
-  <sty le>
+  <style>
     <?php echo ($reponsiveCss); ?>
-  </sty>
-
-  <?php
-
-  ?>
-
-  <!-- <pre> -->
-  <?php
-  //echo //var_export($reponsiveCss, true);
-  ?>
-  <!-- </pre> -->
+  </style>
 
   <?php
 

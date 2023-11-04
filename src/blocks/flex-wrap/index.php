@@ -60,7 +60,7 @@ class PGBlockFlexWrap
 	{
 
 
-		global $postGridCustomCss;
+
 		global $postGridCssY;
 
 
@@ -70,7 +70,7 @@ class PGBlockFlexWrap
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 		$blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
-		$customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 		$wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
 		$wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
@@ -83,7 +83,7 @@ class PGBlockFlexWrap
 		$postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-		$postGridCustomCss .= $customCss;
+
 
 		$obj['id'] = $post_ID;
 		$obj['type'] = 'post';
@@ -98,13 +98,13 @@ class PGBlockFlexWrap
 
 
 		?>
-		<div
-			class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
-			<?php echo $content ?>
-		</div>
-		<?php
+								<div
+									class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
+									<?php echo $content ?>
+								</div>
+								<?php
 
-		return ob_get_clean();
+								return ob_get_clean();
 	}
 }
 

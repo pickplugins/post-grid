@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "ul",
-          "class": ""
+          "class": "pg-list"
         },
         "styles": {
           "color": {
@@ -117,10 +117,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -128,6 +124,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "list",
     "list maker",

@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-date-countdown"
         },
         "styles": {
           "color": {
@@ -383,10 +383,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "editMode": {
       "type": "boolean",
       "default": true
@@ -407,6 +403,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "countdown",
     "countdown block",

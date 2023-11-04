@@ -63,12 +63,14 @@ import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 import PGcssDisplay from "../../components/css-display";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -114,7 +116,7 @@ registerBlockType(metadata, {
 
 		var linkAttr = attributes.linkAttr;
 		var blockCss = attributes.blockCss;
-		var customCss = attributes.customCss;
+
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -155,21 +157,20 @@ registerBlockType(metadata, {
 
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
 			var blockCssObj = {};
 
 			blockCssObj[wrapperSelector] = wrapper;
-			blockCssObj[postTitleSelector] = postTitle;
-			blockCssObj[prefixSelector] = prefix;
-			blockCssObj[postfixSelector] = postfix;
-			console.log(wrapper);
+			blockCssObj[nameSelector] = name;
+			blockCssObj[descriptionSelector] = description;
+			blockCssObj[avatarSelector] = avatar;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
@@ -319,17 +320,56 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
+				var wrapperX = attributes.wrapper;
+				var elementsX = attributes.elements;
+				var avatarX = attributes.avatar;
+				var nameX = attributes.name;
+				var descriptionX = attributes.description;
+				var linkAttrX = attributes.linkAttr;
 				var blockCssY = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (linkAttrX != undefined) {
+					var linkAttrY = { ...linkAttrX, options: linkAttr.options };
+					setAttributes({ linkAttr: linkAttrY });
+					blockCssObj[linkAttrSelector] = linkAttrY;
+				}
+
+				if (descriptionX != undefined) {
+					var descriptionY = { ...descriptionX, options: description.options };
+					setAttributes({ description: descriptionY });
+					blockCssObj[descriptionSelector] = descriptionY;
+				}
+
+				if (nameX != undefined) {
+					var nameY = { ...nameX, options: name.options };
+					setAttributes({ name: nameY });
+					blockCssObj[nameSelector] = nameY;
+				}
+
+				if (avatarX != undefined) {
+					var avatarY = { ...avatarX, options: avatar.options };
+					setAttributes({ avatar: avatarY });
+					blockCssObj[avatarSelector] = avatarY;
+				}
+
+				if (elementsX != undefined) {
+					var elementsY = { ...elementsX, options: elements.options };
+					setAttributes({ elements: elementsY });
+					blockCssObj[elementsSelector] = elementsY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -691,7 +731,7 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
@@ -712,7 +752,7 @@ registerBlockType(metadata, {
 		const CustomTag = `${wrapper.tag}`;
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-post-author`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -740,6 +780,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -1120,63 +1184,11 @@ registerBlockType(metadata, {
 						)}
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"post-author"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-							<div className="my-3">
-								<p className="font-bold">Wrapper Selector</p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{/* your CSS here*/}"}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Name Selector</p>
-								<p>
-									<code>
-										{nameSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Description Selector</p>
-								<p>
-									<code>
-										{descriptionSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Avatar Selector </p>
-								<p>
-									<code>
-										{avatarSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 

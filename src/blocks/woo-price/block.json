@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-woo-price"
         },
         "styles": {
           "color": {
@@ -207,10 +207,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -223,6 +219,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "product price",
     "woocommerce price block",

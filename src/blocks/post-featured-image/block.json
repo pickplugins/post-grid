@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "",
+          "class": "pg-post-featured-image",
           "useAsBackground": "no"
         },
         "styles": {
@@ -81,10 +81,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -97,6 +93,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "featured image",
     "post featured image",

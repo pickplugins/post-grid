@@ -296,10 +296,7 @@ registerBlockType("post-grid/steps-wrap", {
 			type: "string",
 			default: "",
 		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
+
 		blockCssY: {
 			type: "object",
 			default: { items: {} },
@@ -340,7 +337,6 @@ registerBlockType("post-grid/steps-wrap", {
 		var next = attributes.next;
 		var prev = attributes.prev;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 		var childBlocks =
 			select("core/block-editor").getBlocksByClientId(clientId)[0].innerBlocks;
@@ -376,17 +372,11 @@ registerBlockType("post-grid/steps-wrap", {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			//console.log(blockCssY.items);
 		}, [blockCssY]);
@@ -1403,31 +1393,6 @@ registerBlockType("post-grid/steps-wrap", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
-						</PanelBody>
-
 						<div className="px-2">
 							<PGMailSubsctibe />
 							<PGContactSupport
@@ -1489,7 +1454,6 @@ registerBlockType("post-grid/steps-wrap", {
 												var icon = { ...atts.icon };
 												var iconToggle = { ...atts.iconToggle };
 												var blockCssY = { ...atts.blockCssY };
-												var customCss = { ...atts.customCss };
 
 												var blockCssObj = {};
 
@@ -1511,13 +1475,12 @@ registerBlockType("post-grid/steps-wrap", {
 													navLabel: navLabel,
 													icon: icon,
 													iconToggle: iconToggle,
-													customCss: customCss,
 												});
 
 												var blockCssRules =
 													myStore.getBlockCssRules(blockCssObj);
 
-												var items = { ...blockCssY.items, ...blockCssRules };
+												var items = blockCssRules;
 
 												setAttributes({ blockCssY: { items: items } });
 

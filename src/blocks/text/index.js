@@ -60,7 +60,7 @@ import BreakpointToggle from "../../components/breakpoint-toggle";
 import colorsPresets from "../../colors-presets";
 import PGcssTextAlign from "../../components/css-text-align";
 import PGDropdown from "../../components/dropdown";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -111,7 +111,6 @@ registerBlockType(metadata, {
 
 		var text = attributes.text;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -138,26 +137,20 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 			// }
 		}, [clientId]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		// useEffect(() => {
 		// 	//console.log('blockId', blockId);
 
-		// 	myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		// 	myStore.generateBlockCss(blockCssY.items, blockId);
 		// }, [blockId]);
 
 		useEffect(() => {
 			//console.log('blockCssY', blockCssY.items);
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
@@ -167,7 +160,7 @@ registerBlockType(metadata, {
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
@@ -192,17 +185,22 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
+				var textX = attributes.text;
+
 				var blockCssY = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (textX != undefined) {
+					var textY = { ...textX, options: text.options };
+					setAttributes({ text: textY });
+					blockCssObj[textSelector] = textY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -398,10 +396,9 @@ registerBlockType(metadata, {
 
                   </PanelRow> */}
 
-									<label for="">CSS Class</label>
-
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={text.options.class}
 										onChange={(newVal) => {
@@ -511,34 +508,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"text"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{textSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 

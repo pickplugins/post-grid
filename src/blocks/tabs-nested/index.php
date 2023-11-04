@@ -62,7 +62,7 @@ class PGBlockTabs
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -74,7 +74,7 @@ class PGBlockTabs
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
 
@@ -85,6 +85,7 @@ class PGBlockTabs
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
         $tabs = isset($attributes['tabs']) ? $attributes['tabs'] : [];
 
@@ -127,7 +128,7 @@ class PGBlockTabs
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
 
@@ -141,64 +142,73 @@ class PGBlockTabs
 
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
+
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
+
         ob_start();
 
 
 
         ?>
-        <div id="<?php echo esc_attr($blockId); ?>"
-            class="pg-tabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-            <div class="navs-wrapper">
-                <?php
+                <div id="<?php echo esc_attr($blockId); ?>"
+                    class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                    <div class="navs-wrapper">
+                        <?php
 
-                foreach ($tabs as $tab) {
+                        foreach ($tabs as $tab) {
 
-                    ?>
-                    <div id="<?php echo esc_attr($tab['uid']); ?>" data-tab-id="<?php echo esc_attr($tab['uid']); ?>"
-                        class="<?php echo ($tab['uid'] == $activeTab) ? 'nav-item nav-item-active  ' : 'nav-item ' ?>" role="tab"
-                        tabIndex="0">
+                            ?>
+                                <div id="<?php echo esc_attr($tab['uid']); ?>" data-tab-id="<?php echo esc_attr($tab['uid']); ?>"
+                                    class="<?php echo ($tab['uid'] == $activeTab) ? 'nav-item nav-item-active  ' : 'nav-item ' ?>" role="tab"
+                                    tabIndex="0">
 
-                        <?php if ($iconPosition == 'before'): ?>
-                            <div class='nav-icon'>
-                                <?php echo wp_kses_post($iconHtml); ?>
-                            </div>
-                        <?php endif; ?>
+                                    <?php if ($iconPosition == 'before'): ?>
+                                            <div class='nav-icon'>
+                                                <?php echo wp_kses_post($iconHtml); ?>
+                                            </div>
+                                    <?php endif; ?>
 
 
-                        <div class="nav-label">
-                            <?php echo wp_kses_post($tab['title']); ?>
-                        </div>
-                        <?php if ($iconPosition == 'after'): ?>
-                            <div class='nav-icon'>
-                                <?php echo wp_kses_post($iconHtml); ?>
-                            </div>
-                        <?php endif; ?>
+                                    <div class="nav-label">
+                                        <?php echo wp_kses_post($tab['title']); ?>
+                                    </div>
+                                    <?php if ($iconPosition == 'after'): ?>
+                                            <div class='nav-icon'>
+                                                <?php echo wp_kses_post($iconHtml); ?>
+                                            </div>
+                                    <?php endif; ?>
+
+                                </div>
+
+                                <?php
+
+                        }
+
+                        ?>
+
 
                     </div>
+                    <div class='panels-wrap'>
+                        <?php echo $content; ?>
+                    </div>
+                </div>
 
-                    <?php
 
-                }
+
+
+
+                <?php
+
+
+
 
                 ?>
 
 
-            </div>
-            <div class='panels-wrap'>
-                <?php echo $content; ?>
-            </div>
-        </div>
-
-
-
-
-
-        <?php
-
-
-
-
-        ?>
 
 
 
@@ -206,9 +216,7 @@ class PGBlockTabs
 
 
 
-
-
-        <?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

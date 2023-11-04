@@ -45,7 +45,7 @@ class PGBlockStarRate
 
 
         global $postGridCss;
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -57,13 +57,14 @@ class PGBlockStarRate
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
         $wrapperAttr = isset($wrapperOptions['attr']) ? $wrapperOptions['attr'] : [];
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
 
@@ -160,11 +161,20 @@ class PGBlockStarRate
             }
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
+
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
+
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
+        $prefixText = parse_css_class($prefixText, $obj);
+        $postfixText = parse_css_class($postfixText, $obj);
 
         ob_start();
 
@@ -172,61 +182,62 @@ class PGBlockStarRate
         if (!empty($wrapperTag)):
 
             ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+                                    <<?php echo esc_attr($wrapperTag); ?> class="
+                                        <?php echo esc_attr($blockId); ?>
+                                        <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
 
 
 
 
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
+                                        <?php if ($prefixText): ?>
+                                                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                        <?php echo wp_kses_post($prefixText); ?>
+                                                    </span>
+                                        <?php endif; ?>
 
 
-                <?php if ($textIsLink): ?>
-                    <a class='text' <?php
-                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                    echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
-                        href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+                                        <?php if ($textIsLink): ?>
+                                                    <a class='text' <?php
+                                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                                    echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
+                                                        href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-
-
-
-
-                    </a>
-
-                <?php else: ?>
-
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-
-
-                <?php endif; ?>
+                                                        <?php echo wp_kses_post($fontIconHtml); ?>
+                                                        <?php echo wp_kses_post($fontIconHtml); ?>
+                                                        <?php echo wp_kses_post($fontIconHtml); ?>
+                                                        <?php echo wp_kses_post($fontIconHtml); ?>
+                                                        <?php echo wp_kses_post($fontIconHtml); ?>
 
 
 
 
+                                                    </a>
 
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>">
-                        <?php echo wp_kses_post($postfixText); ?>
-                    </span>
-                <?php endif; ?>
+                                        <?php else: ?>
+
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+
+
+                                        <?php endif; ?>
 
 
 
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+
+
+                                        <?php if ($postfixText): ?>
+                                                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                        <?php echo wp_kses_post($postfixText); ?>
+                                                    </span>
+                                        <?php endif; ?>
+
+
+
+                                    </<?php echo esc_attr($wrapperTag); ?>>
+                                    <?php
 
         endif;
 
@@ -235,61 +246,61 @@ class PGBlockStarRate
             ?>
 
 
-            <?php if (!$textIsLink): ?>
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
+                                    <?php if (!$textIsLink): ?>
+                                                <?php if ($prefixText): ?>
+                                                            <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                                <?php echo wp_kses_post($prefixText); ?>
+                                                            </span>
+                                                <?php endif; ?>
 
 
 
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-
-
-
-
-
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>">
-                        <?php echo wp_kses_post($postfixText); ?>
-                    </span>
-                <?php endif; ?>
-            <?php else: ?>
-                <?php if ($prefixText): ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
-                <a class='text' <?php
-                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
-                    href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
-
-
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
+                                                <?php echo wp_kses_post($fontIconHtml); ?>
 
 
 
 
-                </a>
-                <?php if ($postfixText): ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>">
-                        <?php echo wp_kses_post($postfixText); ?>
-                    </span>
-                <?php endif; ?>
-            <?php endif; ?>
+
+                                                <?php if ($postfixText): ?>
+                                                            <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                                <?php echo wp_kses_post($postfixText); ?>
+                                                            </span>
+                                                <?php endif; ?>
+                                    <?php else: ?>
+                                                <?php if ($prefixText): ?>
+                                                            <span class="<?php echo esc_attr($prefixClass); ?>">
+                                                                <?php echo wp_kses_post($prefixText); ?>
+                                                            </span>
+                                                <?php endif; ?>
+                                                <a class='text' <?php
+                                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
+                                                    href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 
 
-            <?php
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+                                                    <?php echo wp_kses_post($fontIconHtml); ?>
+
+
+
+
+                                                </a>
+                                                <?php if ($postfixText): ?>
+                                                            <span class="<?php echo esc_attr($postfixClass); ?>">
+                                                                <?php echo wp_kses_post($postfixText); ?>
+                                                            </span>
+                                                <?php endif; ?>
+                                    <?php endif; ?>
+
+
+                                    <?php
 
         endif;
 
@@ -303,7 +314,7 @@ class PGBlockStarRate
 
 
 
-        <?php return ob_get_clean();
+                        <?php return ob_get_clean();
     }
 }
 

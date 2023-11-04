@@ -22,7 +22,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "inline-block"
+          "class": "pg-shortcode"
         },
         "styles": {
           "color": {
@@ -60,10 +60,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -71,6 +67,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "advanced shortcode",
     "custom shortcode",

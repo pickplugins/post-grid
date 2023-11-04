@@ -121,7 +121,6 @@ registerBlockType(metadata, {
 		var icon = attributes.icon;
 		var subMenuWrap = attributes.subMenuWrap;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -138,14 +137,19 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
-
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
+			var blockCssObj = {};
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[subMenuWrapSelector] = subMenuWrap;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		function generateElementSudoCss(obj) {
 			var stylesObj = {};
@@ -189,9 +193,7 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			//console.log(wrapper);
 
-			//setAttributes({ customCss: customCss });
-
-			///myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			///myStore.generateBlockCss(blockCssY.items, blockId);
 
 			var elementCss = generateElementSudoCss(wrapper);
 
@@ -381,7 +383,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const MY_TEMPLATE = [
@@ -389,7 +391,7 @@ registerBlockType(metadata, {
 		];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-menu-wrap-item ${
+			className: ` ${blockId} ${wrapper.options.class} ${
 				wrapper.options.isActive ? "active" : ""
 			}`,
 		});
@@ -549,31 +551,6 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
-						</PanelBody>
-
 						<div className="px-2">
 							<PGMailSubsctibe />
 							<PGContactSupport
@@ -607,7 +584,7 @@ registerBlockType(metadata, {
 		var blockId = attributes.blockId;
 
 		const blockProps = useBlockProps.save({
-			className: ` ${blockId} pg-menu-wrap-item`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return <InnerBlocks.Content />;

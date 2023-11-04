@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "post-grid/woo-star-rate",
-  "title": "Star Rate",
+  "title": "Product Ratings",
   "textdomain": "post-grid",
   "category": "post-grid-woo",
   "usesContext": [
@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-woo-star-rate"
         },
         "styles": {
           "color": {
@@ -181,10 +181,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -197,6 +193,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "star rate",
     "product star rate",

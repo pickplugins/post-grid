@@ -22,7 +22,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "",
+          "class": "pg-author-fields",
           "tag": "div"
         },
         "styles": {
@@ -163,10 +163,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -178,6 +174,7 @@
       "default": ""
     }
   },
+  "script": "front_script",
   "keywords": [
     "post author fields",
     "post author fields block",

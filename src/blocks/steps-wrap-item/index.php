@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,67 +19,67 @@ class PGBlockStepsWrapItem
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/steps-wrap-item/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/steps-wrap-item', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-steps-wrap-item"
-                        ],
-                        "styles" => [
+        register_block_type(
+            'post-grid/steps-wrap-item',
+            array(
+                //'editor_script' => 'editor_script',
+                //'editor_style' => 'editor_style',
+                //'script' => 'front_script',
+                'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
+                //'style' => 'front_style',
+                'render_callback' => array($this, 'theHTML'),
+                'attributes' => [
+                    "wrapper" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "content" => "",
+                                "tag" => "div",
+                                "class" => "pg-steps-wrap-item"
+                            ],
+                            "styles" => [
 
-                            "color" => [],
+                                "color" => [],
 
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "position" => [],
-                            "zIndex" => [],
-                            "width" => [],
-                            "height" => [],
-                            "top" => [],
-                            "right" => [],
-                            "bottom" => [],
-                            "left" => []
+                                "padding" => [],
+                                "margin" => [],
+                                "display" => [],
+                                "position" => [],
+                                "zIndex" => [],
+                                "width" => [],
+                                "height" => [],
+                                "top" => [],
+                                "right" => [],
+                                "bottom" => [],
+                                "left" => []
+                            ]
+                        ]
+                    ],
+                    "blockId" => [
+                        "type" => "string",
+                        "default" => ""
+                    ],
+                    "uid" => [
+                        "type" => "string",
+                        "default" => ""
+                    ],
+                    "activeTab" => [
+                        "type" => "string",
+                        "default" => ""
+                    ],
+
+
+                    "blockCssY" => [
+                        "type" => "object",
+                        "default" => [
+                            "items" => []
                         ]
                     ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "uid" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "activeTab" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
                 ]
-            ]
 
 
-        ));
+            )
+        );
     }
 
     function front_script($attributes)
@@ -93,7 +94,7 @@ class PGBlockStepsWrapItem
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -105,7 +106,7 @@ class PGBlockStepsWrapItem
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
         $activeTab = isset($attributes['activeTab']) ? $attributes['activeTab'] : '';
@@ -140,7 +141,7 @@ class PGBlockStepsWrapItem
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
 
@@ -157,19 +158,20 @@ class PGBlockStepsWrapItem
         ob_start();
 
 
-?>
-        <div class="pg-tabs-panel <?php echo ($uid == $activeTab) ? 'pg-tabs-panel-active' : '' ?>" data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true">
+        ?>
+                <div class="pg-tabs-panel <?php echo ($uid == $activeTab) ? 'pg-tabs-panel-active' : '' ?>"
+                    data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true">
 
-            <?php echo  $content; ?>
+                    <?php echo $content; ?>
 
-        </div>
-
-
-
+                </div>
 
 
 
-<?php return ob_get_clean();
+
+
+
+                <?php return ob_get_clean();
     }
 }
 

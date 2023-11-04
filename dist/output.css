@@ -900,6 +900,10 @@ img {
   display: flow-root;
 }
 
+.\!grid {
+  display: grid !important;
+}
+
 .grid {
   display: grid;
 }
@@ -936,16 +940,12 @@ img {
   height: 2.25rem;
 }
 
-.h-\[20px\] {
-  height: 20px;
+.h-\[50px\] {
+  height: 50px;
 }
 
 .h-full {
   height: 100%;
-}
-
-.h-\[36px\] {
-  height: 36px;
 }
 
 .w-1\/2 {
@@ -1012,12 +1012,12 @@ img {
   width: 400px;
 }
 
-.w-full {
-  width: 100%;
+.w-\[50px\] {
+  width: 50px;
 }
 
-.w-\[36px\] {
-  width: 36px;
+.w-full {
+  width: 100%;
 }
 
 .max-w-6xl {
@@ -1091,6 +1091,10 @@ img {
   list-style-type: disc;
 }
 
+.\!grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
 .grid-cols-12 {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
@@ -1109,6 +1113,10 @@ img {
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.place-items-center {
+  place-items: center;
 }
 
 .items-center {
@@ -1640,6 +1648,10 @@ img {
   vertical-align: middle;
 }
 
+.\!text-\[13px\] {
+  font-size: 13px !important;
+}
+
 .\!text-lg {
   font-size: 1.125rem !important;
   line-height: 1.75rem !important;
@@ -1663,6 +1675,10 @@ img {
 .text-6xl {
   font-size: 3.75rem;
   line-height: 1;
+}
+
+.text-\[13px\] {
+  font-size: 13px;
 }
 
 .text-\[14px\] {
@@ -1724,6 +1740,10 @@ img {
 
 .lowercase {
   text-transform: lowercase;
+}
+
+.\!capitalize {
+  text-transform: capitalize !important;
 }
 
 .capitalize {

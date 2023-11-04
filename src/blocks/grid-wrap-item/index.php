@@ -25,51 +25,10 @@ class PGBlockGridWrapItem
                 //'editor_script' => 'editor_script',
                 //'editor_style' => 'editor_style',
                 //'script' => 'front_script',
-                'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
+
                 //'style' => 'front_style',
                 'render_callback' => array($this, 'theHTML'),
-                'attributes' => [
-                    "wrapper" => [
-                        "type" => "object",
-                        "default" => [
-                            "options" => [
-                                "content" => "",
-                                "tag" => "div",
-                                "class" => "pg-layers"
-                            ],
-                            "styles" => [
 
-                                "color" => [],
-
-                                "padding" => [],
-                                "margin" => [],
-                                "display" => [],
-                                "position" => [],
-                                "zIndex" => [],
-                                "width" => [],
-                                "height" => [],
-                                "top" => [],
-                                "right" => [],
-                                "bottom" => [],
-                                "left" => []
-                            ]
-                        ]
-                    ],
-                    "blockId" => [
-                        "type" => "string",
-                        "default" => ""
-                    ],
-                    "customCss" => [
-                        "type" => "string",
-                        "default" => ""
-                    ],
-                    "blockCssY" => [
-                        "type" => "object",
-                        "default" => [
-                            "items" => []
-                        ]
-                    ]
-                ]
 
 
             )
@@ -88,13 +47,19 @@ class PGBlockGridWrapItem
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
+        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
 
@@ -102,19 +67,25 @@ class PGBlockGridWrapItem
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
 
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
+
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
         ob_start();
 
         ?>
-                <div class="pg-grid-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-                    <?php echo $content ?>
-                </div>
-                <?php
-                return ob_get_clean();
+                                <div
+                                    class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                                    <?php echo $content ?>
+                                </div>
+                                <?php
+                                return ob_get_clean();
     }
 }
 

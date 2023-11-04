@@ -149,65 +149,65 @@ class PGBlockTermsList
 
             if (!empty($cat->children) || !empty($cat->posts)) {
                 ?>
-                <li class="has-child">
+                                                <li class="has-child">
 
-                    <div class="group-lable <?php echo ($itemsAccordionOpen) ? 'active' : ''; ?>" wrapId="<?php echo $cat->slug; ?>">
-                        <?php echo $cat->name; ?>
+                                                    <div class="group-lable <?php echo ($itemsAccordionOpen) ? 'active' : ''; ?>" wrapId="<?php echo $cat->slug; ?>">
+                                                        <?php echo $cat->name; ?>
 
-                        <span class="group-icon group-icon-active">
-                            <i class="fas fa-angle-up"></i>
-                        </span>
-                        <span class="group-icon group-icon-inactive">
-                            <i class="fas fa-angle-down"></i>
-                        </span>
+                                                        <span class="group-icon group-icon-active">
+                                                            <i class="fas fa-angle-up"></i>
+                                                        </span>
+                                                        <span class="group-icon group-icon-inactive">
+                                                            <i class="fas fa-angle-down"></i>
+                                                        </span>
 
-                    </div>
+                                                    </div>
 
-                    <ul class="child-wrap <?php echo $cat->slug; ?>" <?php echo ($itemsAccordionOpen) ? 'style="display: block;"' : ''; ?> id="child-wrap-<?php echo $cat->slug; ?>">
-                        <?php echo $this->html_terms_hierarchicaly($cat->children, $attributes); ?>
+                                                    <ul class="child-wrap <?php echo $cat->slug; ?>" <?php echo ($itemsAccordionOpen) ? 'style="display: block;"' : ''; ?> id="child-wrap-<?php echo $cat->slug; ?>">
+                                                        <?php echo $this->html_terms_hierarchicaly($cat->children, $attributes); ?>
 
-                        <?php
-                        if (!empty($cat->posts) && $itemsQueryPosts):
-                            foreach ($cat->posts as $post):
+                                                        <?php
+                                                        if (!empty($cat->posts) && $itemsQueryPosts):
+                                                            foreach ($cat->posts as $post):
 
-                                ?>
-                                <li>
-                                    <div class="group-lable-link">
-                                        <a href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
-                                            <span class="fas fa-external-link-alt"></span>
-                                            <?php echo isset($post['title']) ? $post['title'] : ''; ?>
-                                        </a>
-                                    </div>
-
-
-                                </li>
-                                <?php
-
-                            endforeach;
-                        endif;
-
-                        ?>
-
-                    </ul>
+                                                                ?>
+                                                                                <li>
+                                                                                    <div class="group-lable-link">
+                                                                                        <a href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
+                                                                                            <span class="fas fa-external-link-alt"></span>
+                                                                                            <?php echo isset($post['title']) ? $post['title'] : ''; ?>
+                                                                                        </a>
+                                                                                    </div>
 
 
+                                                                                </li>
+                                                                                <?php
+
+                                                            endforeach;
+                                                        endif;
+
+                                                        ?>
+
+                                                    </ul>
 
 
-                </li>
 
-                <?php
+
+                                                </li>
+
+                                                <?php
 
             } else {
 
                 ?>
-                <li>
-                    <div class="group-lable" wrapId="<?php echo isset($cat->slug) ? $cat->slug : ''; ?>">
-                        <?php echo isset($cat->name) ? $cat->name : ''; ?>
-                    </div>
+                                                <li>
+                                                    <div class="group-lable" wrapId="<?php echo isset($cat->slug) ? $cat->slug : ''; ?>">
+                                                        <?php echo isset($cat->name) ? $cat->name : ''; ?>
+                                                    </div>
 
 
-                </li>
-                <?php
+                                                </li>
+                                                <?php
 
             }
         }
@@ -247,58 +247,58 @@ class PGBlockTermsList
 
             if (!empty($cat->children) || !empty($cat->posts)) {
                 ?>
-                <span class="">
-                    <?php if ($itemsLinkToTerm):
-                        $term_link = get_term_link($cat->term_id);
-                        ?>
-                        <a href="<?php echo esc_url_raw($term_link); ?>">
-                            <?php echo $cat->name; ?>
-                        </a>
-                    <?php else: ?>
-                        <?php echo $cat->name; ?>
-                    <?php endif; ?>
-                    <span class="separator">
-                        <?php echo $separatorText; ?>
-                    </span>
+                                                <span class="">
+                                                    <?php if ($itemsLinkToTerm):
+                                                        $term_link = get_term_link($cat->term_id);
+                                                        ?>
+                                                                <a href="<?php echo esc_url_raw($term_link); ?>">
+                                                                    <?php echo $cat->name; ?>
+                                                                </a>
+                                                    <?php else: ?>
+                                                                <?php echo $cat->name; ?>
+                                                    <?php endif; ?>
+                                                    <span class="separator">
+                                                        <?php echo $separatorText; ?>
+                                                    </span>
 
-                </span>
-                <?php echo $this->html_terms_hierarchicaly_inline($cat->children, $attributes); ?>
+                                                </span>
+                                                <?php echo $this->html_terms_hierarchicaly_inline($cat->children, $attributes); ?>
 
-                <?php
-                if (!empty($cat->posts) && $itemsQueryPosts):
-                    foreach ($cat->posts as $post):
-                        ?>
-                        <span>
-                            <span class="">
-                                <a href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
-                                    <span class="fas fa-external-link-alt"></span>
-                                    <?php echo isset($post['title']) ? $post['title'] : ''; ?>
-                                </a>
-                            </span>
+                                                <?php
+                                                if (!empty($cat->posts) && $itemsQueryPosts):
+                                                    foreach ($cat->posts as $post):
+                                                        ?>
+                                                                        <span>
+                                                                            <span class="">
+                                                                                <a href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
+                                                                                    <span class="fas fa-external-link-alt"></span>
+                                                                                    <?php echo isset($post['title']) ? $post['title'] : ''; ?>
+                                                                                </a>
+                                                                            </span>
 
 
-                        </span>
-                        <?php
+                                                                        </span>
+                                                                        <?php
 
-                    endforeach;
-                endif;
+                                                    endforeach;
+                                                endif;
             } else {
                 ?>
-                <span class="">
-                    <?php if ($itemsLinkToTerm):
-                        $term_link = get_term_link($cat->term_id);
-                        ?>
-                        <a href="<?php echo esc_url_raw($term_link); ?>">
-                            <?php echo $cat->name; ?>
-                        </a>
-                    <?php else: ?>
-                        <?php echo $cat->name; ?>
-                    <?php endif; ?>
-                    <span class="separator">
-                        <?php echo $separatorText; ?>
-                    </span>
-                </span>
-                <?php
+                                                <span class="">
+                                                    <?php if ($itemsLinkToTerm):
+                                                        $term_link = get_term_link($cat->term_id);
+                                                        ?>
+                                                                <a href="<?php echo esc_url_raw($term_link); ?>">
+                                                                    <?php echo $cat->name; ?>
+                                                                </a>
+                                                    <?php else: ?>
+                                                                <?php echo $cat->name; ?>
+                                                    <?php endif; ?>
+                                                    <span class="separator">
+                                                        <?php echo $separatorText; ?>
+                                                    </span>
+                                                </span>
+                                                <?php
 
             }
         }
@@ -337,61 +337,61 @@ class PGBlockTermsList
 
             if (!empty($cat->children) || !empty($cat->posts)) {
                 ?>
-                <li class="">
-                    <?php if ($itemsLinkToTerm):
-                        $term_link = get_term_link($cat->term_id);
-                        ?>
-                        <a href="<?php echo esc_url_raw($term_link); ?>">
-                            <?php echo $cat->name; ?>
-                        </a>
-                    <?php else: ?>
-                        <?php echo $cat->name; ?>
-                    <?php endif; ?>
+                                                <li class="">
+                                                    <?php if ($itemsLinkToTerm):
+                                                        $term_link = get_term_link($cat->term_id);
+                                                        ?>
+                                                                <a href="<?php echo esc_url_raw($term_link); ?>">
+                                                                    <?php echo $cat->name; ?>
+                                                                </a>
+                                                    <?php else: ?>
+                                                                <?php echo $cat->name; ?>
+                                                    <?php endif; ?>
 
-                </li>
-                <ul>
-                    <?php echo $this->html_terms_hierarchicaly_list($cat->children, $attributes); ?>
-                    <?php
-                    if (!empty($cat->posts) && $itemsQueryPosts):
-                        foreach ($cat->posts as $post):
-                            ?>
-                            <li>
-                                <span class="">
-                                    <a class="<?php echo ($current_post_id == $post['id']) ? 'active' : ''; ?>"
-                                        href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
-                                        <span class="fas fa-external-link-alt"></span>
-                                        <?php echo isset($post['title']) ? $post['title'] : ''; ?>
-                                    </a>
-                                </span>
-
-
-                            </li>
-                            <?php
-
-                        endforeach;
-                    endif;
-
-                    ?>
-                </ul>
+                                                </li>
+                                                <ul>
+                                                    <?php echo $this->html_terms_hierarchicaly_list($cat->children, $attributes); ?>
+                                                    <?php
+                                                    if (!empty($cat->posts) && $itemsQueryPosts):
+                                                        foreach ($cat->posts as $post):
+                                                            ?>
+                                                                            <li>
+                                                                                <span class="">
+                                                                                    <a class="<?php echo ($current_post_id == $post['id']) ? 'active' : ''; ?>"
+                                                                                        href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
+                                                                                        <span class="fas fa-external-link-alt"></span>
+                                                                                        <?php echo isset($post['title']) ? $post['title'] : ''; ?>
+                                                                                    </a>
+                                                                                </span>
 
 
+                                                                            </li>
+                                                                            <?php
+
+                                                        endforeach;
+                                                    endif;
+
+                                                    ?>
+                                                </ul>
 
 
-                <?php
+
+
+                                                <?php
             } else {
                 ?>
-                <li class="">
-                    <?php if ($itemsLinkToTerm):
-                        $term_link = get_term_link($cat->term_id);
-                        ?>
-                        <a href="<?php echo esc_url_raw($term_link); ?>">
-                            <?php echo $cat->name; ?>
-                        </a>
-                    <?php else: ?>
-                        <?php echo $cat->name; ?>
-                    <?php endif; ?>
-                </li>
-                <?php
+                                                <li class="">
+                                                    <?php if ($itemsLinkToTerm):
+                                                        $term_link = get_term_link($cat->term_id);
+                                                        ?>
+                                                                <a href="<?php echo esc_url_raw($term_link); ?>">
+                                                                    <?php echo $cat->name; ?>
+                                                                </a>
+                                                    <?php else: ?>
+                                                                <?php echo $cat->name; ?>
+                                                    <?php endif; ?>
+                                                </li>
+                                                <?php
 
             }
         }
@@ -433,99 +433,99 @@ class PGBlockTermsList
 
             if (!empty($cat->children) || !empty($cat->posts)) {
                 ?>
-                <div class="grid-item">
+                                                <div class="grid-item">
 
 
-                    <div class="item-label">
+                                                    <div class="item-label">
 
 
-                        <?php echo ($postCountPosition == 'beforeTitle') ? sprintf($postCountText, $cat->count) : ''; ?>
+                                                        <?php echo ($postCountPosition == 'beforeTitle') ? sprintf($postCountText, $cat->count) : ''; ?>
 
-                        <?php if ($itemsLinkToTerm):
-                            $term_link = get_term_link($cat->term_id);
-                            ?>
-                            <a href="<?php echo esc_url_raw($term_link); ?>">
-                                <?php echo $cat->name; ?>
-                            </a>
-                        <?php else: ?>
-                            <?php echo $cat->name; ?>
-                        <?php endif; ?>
-                        <?php echo ($postCountPosition == 'afterTtile') ? sprintf($postCountText, $cat->count) : ''; ?>
-
-
-                    </div>
-
-                    <?php echo ($postCountPosition == 'beforePosts') ? sprintf($postCountText, $cat->count) : ''; ?>
+                                                        <?php if ($itemsLinkToTerm):
+                                                            $term_link = get_term_link($cat->term_id);
+                                                            ?>
+                                                                    <a href="<?php echo esc_url_raw($term_link); ?>">
+                                                                        <?php echo $cat->name; ?>
+                                                                    </a>
+                                                        <?php else: ?>
+                                                                    <?php echo $cat->name; ?>
+                                                        <?php endif; ?>
+                                                        <?php echo ($postCountPosition == 'afterTtile') ? sprintf($postCountText, $cat->count) : ''; ?>
 
 
+                                                    </div>
 
-
-                    <?php
-                    if (!empty($cat->posts) && $itemsQueryPosts):
-
-                        ?>
-                        <ul>
-                            <?php
-
-                            foreach ($cat->posts as $post):
-                                ?>
-                                <li>
-                                    <a class="<?php echo ($current_post_id == $post['id']) ? 'active' : ''; ?>"
-                                        href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
-                                        <span class="fas fa-external-link-alt"></span>
-                                        <?php echo isset($post['title']) ? $post['title'] : ''; ?>
-
-                                    </a>
-
-
-
-                                </li>
-                                <?php
-
-                            endforeach;
-
-                            ?>
-                            <ul>
-                                <?php
-                    endif;
-
-                    ?>
-
-
-                            <?php echo ($postCountPosition == 'afterPosts') ? sprintf($postCountText, $cat->count) : ''; ?>
-
-
-                </div>
+                                                    <?php echo ($postCountPosition == 'beforePosts') ? sprintf($postCountText, $cat->count) : ''; ?>
 
 
 
 
+                                                    <?php
+                                                    if (!empty($cat->posts) && $itemsQueryPosts):
 
-                <?php
+                                                        ?>
+                                                                <ul>
+                                                                    <?php
+
+                                                                    foreach ($cat->posts as $post):
+                                                                        ?>
+                                                                                <li>
+                                                                                    <a class="<?php echo ($current_post_id == $post['id']) ? 'active' : ''; ?>"
+                                                                                        href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
+                                                                                        <span class="fas fa-external-link-alt"></span>
+                                                                                        <?php echo isset($post['title']) ? $post['title'] : ''; ?>
+
+                                                                                    </a>
+
+
+
+                                                                                </li>
+                                                                                <?php
+
+                                                                    endforeach;
+
+                                                                    ?>
+                                                                    <ul>
+                                                                        <?php
+                                                    endif;
+
+                                                    ?>
+
+
+                                                            <?php echo ($postCountPosition == 'afterPosts') ? sprintf($postCountText, $cat->count) : ''; ?>
+
+
+                                                </div>
+
+
+
+
+
+                                                <?php
             } else {
                 ?>
-                <div class="grid-item">
+                                                <div class="grid-item">
 
-                    <div class="item-label">
-                        <?php echo ($postCountPosition == 'beforeTitle') ? sprintf($postCountText, $cat->count) : ''; ?>
-                        <?php if ($itemsLinkToTerm):
-                            $term_link = get_term_link($cat->term_id);
-                            ?>
-                            <a href="<?php echo esc_url_raw($term_link); ?>">
-                                <?php echo $cat->name; ?>
-                            </a>
-                        <?php else: ?>
-                            <?php echo $cat->name; ?>
-                        <?php endif; ?>
-                        <?php echo ($postCountPosition == 'afterTtile') ? sprintf($postCountText, $cat->count) : ''; ?>
-                    </div>
+                                                    <div class="item-label">
+                                                        <?php echo ($postCountPosition == 'beforeTitle') ? sprintf($postCountText, $cat->count) : ''; ?>
+                                                        <?php if ($itemsLinkToTerm):
+                                                            $term_link = get_term_link($cat->term_id);
+                                                            ?>
+                                                                    <a href="<?php echo esc_url_raw($term_link); ?>">
+                                                                        <?php echo $cat->name; ?>
+                                                                    </a>
+                                                        <?php else: ?>
+                                                                    <?php echo $cat->name; ?>
+                                                        <?php endif; ?>
+                                                        <?php echo ($postCountPosition == 'afterTtile') ? sprintf($postCountText, $cat->count) : ''; ?>
+                                                    </div>
 
-                    <?php echo ($postCountPosition == 'beforePosts') ? sprintf($postCountText, $cat->count) : ''; ?>
-                    <?php echo ($postCountPosition == 'afterPosts') ? sprintf($postCountText, $cat->count) : ''; ?>
+                                                    <?php echo ($postCountPosition == 'beforePosts') ? sprintf($postCountText, $cat->count) : ''; ?>
+                                                    <?php echo ($postCountPosition == 'afterPosts') ? sprintf($postCountText, $cat->count) : ''; ?>
 
 
-                </div>
-                <?php
+                                                </div>
+                                                <?php
 
             }
         }
@@ -542,7 +542,7 @@ class PGBlockTermsList
 
 
         global $postGridCss;
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
         $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -558,6 +558,7 @@ class PGBlockTermsList
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
         $taxonomies = isset($attributes['taxonomies']) ? $attributes['taxonomies'] : [];
@@ -600,10 +601,10 @@ class PGBlockTermsList
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
-        $postGridCustomCss .= $customCss;
+
+
 
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
@@ -624,7 +625,12 @@ class PGBlockTermsList
 
         $taxonomy = $taxName;
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
 
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
         ob_start();
 
@@ -649,159 +655,157 @@ class PGBlockTermsList
 
 
         ?>
-        <div class="<?php echo $blockId; ?>">
+                        <div class="<?php echo $blockId; ?> <?php echo esc_attr($wrapperClass); ?>">
 
-            <?php if ($itemsViewType == 'accordion'): ?>
-                <ul class="main-wrap term-list-accordion">
-                    <?php
-                    echo $this->html_terms_hierarchicaly($sorted_terms, $attributes);
-                    ?>
-                </ul>
-            <?php endif; ?>
+                            <?php if ($itemsViewType == 'accordion'): ?>
+                                        <ul class="main-wrap term-list-accordion">
+                                            <?php
+                                            echo $this->html_terms_hierarchicaly($sorted_terms, $attributes);
+                                            ?>
+                                        </ul>
+                            <?php endif; ?>
 
-            <?php if ($itemsViewType == 'inline'): ?>
-                <div class="main-wrap term-list-inline">
-                    <?php
-                    echo $this->html_terms_hierarchicaly_inline($sorted_terms, $attributes);
-                    ?>
-                </div>
-            <?php endif; ?>
+                            <?php if ($itemsViewType == 'inline'): ?>
+                                        <div class="main-wrap term-list-inline">
+                                            <?php
+                                            echo $this->html_terms_hierarchicaly_inline($sorted_terms, $attributes);
+                                            ?>
+                                        </div>
+                            <?php endif; ?>
 
-            <?php if ($itemsViewType == 'list'): ?>
-                <ul class="main-wrap term-list-list">
-                    <?php
-                    echo $this->html_terms_hierarchicaly_list($sorted_terms, $attributes);
-                    ?>
-                </ul>
-            <?php endif; ?>
+                            <?php if ($itemsViewType == 'list'): ?>
+                                        <ul class="main-wrap term-list-list">
+                                            <?php
+                                            echo $this->html_terms_hierarchicaly_list($sorted_terms, $attributes);
+                                            ?>
+                                        </ul>
+                            <?php endif; ?>
 
-            <?php if ($itemsViewType == 'grid'): ?>
-                <div class="main-wrap term-list-grid">
-                    <?php
-                    echo $this->html_terms_hierarchicaly_grid($terms, $attributes);
-                    ?>
-                </div>
-            <?php endif; ?>
-
-
+                            <?php if ($itemsViewType == 'grid'): ?>
+                                        <div class="main-wrap term-list-grid">
+                                            <?php
+                                            echo $this->html_terms_hierarchicaly_grid($terms, $attributes);
+                                            ?>
+                                        </div>
+                            <?php endif; ?>
 
 
 
-        </div>
-
-        <style>
-            .child-wrap {
-                padding-left: 10px;
-                margin: 0;
-                display: none;
-            }
-
-            .child-wrap li {
-                margin: 0;
-                list-style: none;
-            }
-
-            .main-wrap li {
-                margin: 0;
-                list-style: none;
-            }
 
 
-            .group-lable {
-                padding: 5px 10px;
-                background: #9dd6df4d;
-                margin: 0 0 3px 0;
-                cursor: pointer;
-            }
+                        </div>
 
-            .group-lable.active {
-                padding: 5px 10px;
-                background: #9DD6DF;
-                margin: 0 0 3px 0;
-                cursor: pointer;
-            }
+                        <style>
+                            .child-wrap {
+                                padding-left: 10px;
+                                margin: 0;
+                                display: none;
+                            }
 
-            .group-lable-link {
-                padding: 5px 0;
-            }
+                            .child-wrap li {
+                                margin: 0;
+                                list-style: none;
+                            }
 
-
-            .group-lable a {
-
-                color: #fff;
-            }
+                            .main-wrap li {
+                                margin: 0;
+                                list-style: none;
+                            }
 
 
-            .group-icon {
-                float: right;
-            }
+                            .group-lable {
+                                padding: 5px 10px;
+                                background: #9dd6df4d;
+                                margin: 0 0 3px 0;
+                                cursor: pointer;
+                            }
 
-            .group-icon-active {
-                display: inline-block;
+                            .group-lable.active {
+                                padding: 5px 10px;
+                                background: #9DD6DF;
+                                margin: 0 0 3px 0;
+                                cursor: pointer;
+                            }
 
-            }
-
-            .group-icon-inactive {
-                display: none;
-            }
-
-            .group-lable.active .group-icon-inactive {
-                display: inline-block;
-
-            }
-
-            .group-lable.active .group-icon-active {
-                display: none;
-
-            }
-
-            .term-list-list {}
-
-            .term-list-list ul {
-                padding: 0 0 0 12px;
-                margin: 0;
-            }
-
-            .term-list-list ul li {}
-
-            .term-list-list li {
-                padding: 5px 0;
-                list-style: disc;
-            }
-
-            .term-list-list .active {
-                font-weight: bold;
-            }
-
-            .term-list-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                row-gap: 15px;
-                column-gap: 15px;
-            }
-
-            .term-list-grid .grid-item {
-                padding: 15px;
-                background: #9DD6DF;
-            }
-
-            .term-list-grid .grid-item ul {
-                padding: 0;
-
-            }
-
-            .term-list-grid .item-label {
-                font-size: 20px;
-                /* text-align: center; */
-                margin: 0 0px 10px 0;
-            }
-
-            .term-list-grid .grid-item a {
-                color: #444;
-            }
-        </style>
+                            .group-lable-link {
+                                padding: 5px 0;
+                            }
 
 
+                            .group-lable a {
+
+                                color: #fff;
+                            }
+
+
+                            .group-icon {
+                                float: right;
+                            }
+
+                            .group-icon-active {
+                                display: inline-block;
+
+                            }
+
+                            .group-icon-inactive {
+                                display: none;
+                            }
+
+                            .group-lable.active .group-icon-inactive {
+                                display: inline-block;
+
+                            }
+
+                            .group-lable.active .group-icon-active {
+                                display: none;
+
+                            }
+
+                            .term-list-list {}
+
+                            .term-list-list ul {
+                                padding: 0 0 0 12px;
+                                margin: 0;
+                            }
+
+                            .term-list-list ul li {}
+
+                            .term-list-list li {
+                                padding: 5px 0;
+                                list-style: disc;
+                            }
+
+                            .term-list-list .active {
+                                font-weight: bold;
+                            }
+
+                            .term-list-grid {
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                                row-gap: 15px;
+                                column-gap: 15px;
+                            }
+
+                            .term-list-grid .grid-item {
+                                padding: 15px;
+                                background: #9DD6DF;
+                            }
+
+                            .term-list-grid .grid-item ul {
+                                padding: 0;
+
+                            }
+
+                            .term-list-grid .item-label {
+                                font-size: 20px;
+                                /* text-align: center; */
+                                margin: 0 0px 10px 0;
+                            }
+
+                            .term-list-grid .grid-item a {
+                                color: #444;
+                            }
+                        </style>
 
 
 
@@ -809,7 +813,9 @@ class PGBlockTermsList
 
 
 
-        <?php return ob_get_clean();
+
+
+                        <?php return ob_get_clean();
     }
 }
 

@@ -22,10 +22,29 @@
       "type": "object",
       "default": {
         "options": {
-          "tag": "h2",
+          "tag": "div",
           "class": "pg-post-title"
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "fontSize": {
+            "Desktop": "30px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "700"
+          },
+          "lineHeight": {
+            "Desktop": "155%"
+          }
+        }
       }
     },
     "postTitle": {
@@ -96,10 +115,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -111,6 +126,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "post title",
     "post title html",

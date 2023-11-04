@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-post-comment-count"
         },
         "styles": {
           "color": {
@@ -117,10 +117,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -133,6 +129,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "post comment",
     "post total comment count",

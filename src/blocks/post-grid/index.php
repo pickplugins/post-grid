@@ -262,7 +262,7 @@ class PGBlockPostGrid
     //wp_enqueue_script('anime.min');
 
     global $postGridCss;
-    global $postGridCustomCss;
+
     global $postGridCssY;
     global $postGridScriptData;
 
@@ -276,10 +276,10 @@ class PGBlockPostGrid
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-    $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
-    $postGridCustomCss .= $customCss;
+
+
 
     $container = isset($attributes['container']) ? $attributes['container'] : [];
     $containerOptions = isset($container['options']) ? $container['options'] : [];
@@ -352,7 +352,7 @@ class PGBlockPostGrid
 
     $layout = isset($attributes['layout']) ? $attributes['layout'] : [];
     $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
-    $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : [];
+    
     $scripts = isset($attributes['scripts']) ? $attributes['scripts'] : [];
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : ['items' => []];
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -486,140 +486,140 @@ class PGBlockPostGrid
     ?>
 
 
-        <?php if ($lazyLoadEnable == 'yes'): ?>
-            <div class=" PGBlockPostGrid-lazyload" id="lazyload-<?php echo esc_attr($blockId); ?>">
-              <?php
-              if (!empty($lazyLoadsrcUrl)):
-                ?>
-                  <img src="<?php echo esc_url_raw($lazyLoadsrcUrl); ?>" alt="Post Grid Lazy loading">
-                  <?php
-              else:
-                ?>
-                  <i class="<?php echo esc_attr($lazyLoadIconSrc); ?> fa-spin"></i>
-                  <?php
-              endif;
-              ?>
-            </div>
-        <?php endif; ?>
-        <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?>
-          class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>"
-          postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
-          <div class="loop-loading"></div>
-          <div class="items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>">
-            <?php
-            if (!empty($responses['posts'])) {
-              foreach ($responses['posts'] as $post) {
-                ?>
-                    <div class="item">
-                      <?php echo wp_kses_post($post); ?>
-                    </div>
-                    <?php
-              }
-            }
-            ?>
-          </div>
-
-          <?php if ($paginationType != 'none'): ?>
-              <div id="pagination-<?php echo esc_attr($blockId); ?>"
-                class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>"
-                blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-                <?php if ($paginationType == 'normal'): ?>
-                    <?php
-                    $big = 999999999; // need an unlikely integer
-                    $pagination_max_num_pages = isset($responses['max_num_pages']) ? $responses['max_num_pages'] : 0;
-
-                    $pages = paginate_links(
-                      array(
-                        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                        'format' => '?paged=%#%',
-                        'current' => max(1, $paged),
-                        'total' => $pagination_max_num_pages,
-                        'prev_text' => $prevText,
-                        'next_text' => $nextText,
-                        'type' => 'array',
-
-                      )
-                    );
-
-                    if (!empty($pages)):
-                      foreach ($pages as $page) {
-                        echo wp_kses_post($page);
-                      }
-                    endif;
-                    ?>
-                <?php endif; ?>
-
-
-                <?php if ($paginationType == 'ajax'): ?>
-                    <?php
-                    $big = 999999999; // need an unlikely integer
-                    $pagination_max_num_pages = $responses['max_num_pages'];
-
-
-
-                    $pages = paginate_links(
-                      array(
-                        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                        'format' => '?paged=%#%',
-                        'current' => max(1, $paged),
-                        'total' => $pagination_max_num_pages,
-                        'prev_text' => $prevText,
-                        'next_text' => $nextText,
-                        'type' => 'array',
-
-                      )
-                    );
-
-                    if (!empty($pages)):
-                      foreach ($pages as $page) {
-                        //$links = str_replace('<a ', '<a blockArgs="' . esc_attr(json_encode($blockArgs)) . '" ', $page);
-                        echo wp_kses_post($page);
-                      }
-                    endif;
-                    ?>
-                <?php endif; ?>
-
-
-                <?php if ($paginationType == 'next_previous'):
-                  $pagination_max_num_pages = $responses['max_num_pages'];
-
-
-                  if ($pagination_max_num_pages) {
-                    ?>
-                        <a class="page-numbers" href="<?php echo esc_url_raw(get_previous_posts_page_link()); ?>">
-                          <?php echo wp_kses_post($prevText); ?>
-                        </a>
-                        <a class="page-numbers" href="<?php echo esc_url_raw(get_next_posts_page_link()); ?>">
-                          <?php echo wp_kses_post($nextText); ?>
-                        </a>
+                    <?php if ($lazyLoadEnable == 'yes'): ?>
+                              <div class=" PGBlockPostGrid-lazyload" id="lazyload-<?php echo esc_attr($blockId); ?>">
+                                <?php
+                                if (!empty($lazyLoadsrcUrl)):
+                                  ?>
+                                          <img src="<?php echo esc_url_raw($lazyLoadsrcUrl); ?>" alt="Post Grid Lazy loading">
+                                          <?php
+                                else:
+                                  ?>
+                                          <i class="<?php echo esc_attr($lazyLoadIconSrc); ?> fa-spin"></i>
+                                          <?php
+                                endif;
+                                ?>
+                              </div>
+                    <?php endif; ?>
+                    <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?>
+                      class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>"
+                      postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
+                      <div class="loop-loading"></div>
+                      <div class="items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>">
                         <?php
-                  }
+                        if (!empty($responses['posts'])) {
+                          foreach ($responses['posts'] as $post) {
+                            ?>
+                                            <div class="item">
+                                              <?php echo wp_kses_post($post); ?>
+                                            </div>
+                                            <?php
+                          }
+                        }
+                        ?>
+                      </div>
 
-                  ?>
+                      <?php if ($paginationType != 'none'): ?>
+                                <div id="pagination-<?php echo esc_attr($blockId); ?>"
+                                  class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>"
+                                  blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+                                  <?php if ($paginationType == 'normal'): ?>
+                                            <?php
+                                            $big = 999999999; // need an unlikely integer
+                                            $pagination_max_num_pages = isset($responses['max_num_pages']) ? $responses['max_num_pages'] : 0;
 
-                <?php endif; ?>
+                                            $pages = paginate_links(
+                                              array(
+                                                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                                                'format' => '?paged=%#%',
+                                                'current' => max(1, $paged),
+                                                'total' => $pagination_max_num_pages,
+                                                'prev_text' => $prevText,
+                                                'next_text' => $nextText,
+                                                'type' => 'array',
 
-                <?php if ($paginationType == 'loadmore'): ?>
-                    <div class="page-numbers">
-                      <?php echo wp_kses_post($loadMoreText); ?>
+                                              )
+                                            );
+
+                                            if (!empty($pages)):
+                                              foreach ($pages as $page) {
+                                                echo wp_kses_post($page);
+                                              }
+                                            endif;
+                                            ?>
+                                  <?php endif; ?>
+
+
+                                  <?php if ($paginationType == 'ajax'): ?>
+                                            <?php
+                                            $big = 999999999; // need an unlikely integer
+                                            $pagination_max_num_pages = $responses['max_num_pages'];
+
+
+
+                                            $pages = paginate_links(
+                                              array(
+                                                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                                                'format' => '?paged=%#%',
+                                                'current' => max(1, $paged),
+                                                'total' => $pagination_max_num_pages,
+                                                'prev_text' => $prevText,
+                                                'next_text' => $nextText,
+                                                'type' => 'array',
+
+                                              )
+                                            );
+
+                                            if (!empty($pages)):
+                                              foreach ($pages as $page) {
+                                                //$links = str_replace('<a ', '<a blockArgs="' . esc_attr(json_encode($blockArgs)) . '" ', $page);
+                                                echo wp_kses_post($page);
+                                              }
+                                            endif;
+                                            ?>
+                                  <?php endif; ?>
+
+
+                                  <?php if ($paginationType == 'next_previous'):
+                                    $pagination_max_num_pages = $responses['max_num_pages'];
+
+
+                                    if ($pagination_max_num_pages) {
+                                      ?>
+                                                      <a class="page-numbers" href="<?php echo esc_url_raw(get_previous_posts_page_link()); ?>">
+                                                        <?php echo wp_kses_post($prevText); ?>
+                                                      </a>
+                                                      <a class="page-numbers" href="<?php echo esc_url_raw(get_next_posts_page_link()); ?>">
+                                                        <?php echo wp_kses_post($nextText); ?>
+                                                      </a>
+                                                      <?php
+                                    }
+
+                                    ?>
+
+                                  <?php endif; ?>
+
+                                  <?php if ($paginationType == 'loadmore'): ?>
+                                            <div class="page-numbers">
+                                              <?php echo wp_kses_post($loadMoreText); ?>
+                                            </div>
+                                  <?php endif; ?>
+
+                                  <?php if ($paginationType == 'infinite'): ?>
+                                            <div class="infinite-loader box">
+                                              <?php echo __('Loading...', 'post-grid'); ?>
+                                            </div>
+
+
+                                  <?php endif; ?>
+                                </div>
+                      <?php endif; ?>
                     </div>
-                <?php endif; ?>
-
-                <?php if ($paginationType == 'infinite'): ?>
-                    <div class="infinite-loader box">
-                      <?php echo __('Loading...', 'post-grid'); ?>
-                    </div>
-
-
-                <?php endif; ?>
-              </div>
-          <?php endif; ?>
-        </div>
-        <?php
+                    <?php
 
 
 
-        ?>
+                    ?>
 
 
 
@@ -629,7 +629,7 @@ class PGBlockPostGrid
 
 
 
-        <?php return ob_get_clean();
+                    <?php return ob_get_clean();
   }
 }
 

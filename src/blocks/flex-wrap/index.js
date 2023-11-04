@@ -65,7 +65,7 @@ import PGContactSupport from "../../components/contact-support";
 import BreakpointToggle from "../../components/breakpoint-toggle";
 import colorsPresets from "../../colors-presets";
 import variations from "./variations";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -108,7 +108,6 @@ registerBlockType(metadata, {
 
 		var wrapper = attributes.wrapper;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -133,7 +132,7 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			// blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'display': { "Desktop": "flex" } };
 			//blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'gap': { "Desktop": "1em" } };
@@ -142,29 +141,21 @@ registerBlockType(metadata, {
 
 			//setAttributes({ wrapper: { ...wrapper, styles: { display: { Desktop: 'flex' }, gap: { Desktop: '20px' } } } });
 		}, [clientId]);
+
+		useEffect(() => {
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [blockCssY]);
+
 		useEffect(() => {
 			var blockCssObj = {};
 
 			blockCssObj[wrapperSelector] = wrapper;
-			// blockCssObj[postTitleSelector] = postTitle;
-			// blockCssObj[prefixSelector] = prefix;
-			// blockCssObj[postfixSelector] = postfix;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [blockCssY]);
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -324,9 +315,9 @@ registerBlockType(metadata, {
 						<label for="" className="block my-3">
 							Justify Content
 						</label>
-						<div className="grid grid-cols-4 gap-3">
+						<div className="!grid !grid-cols-4 place-items-center gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px] ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px] ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] == "flex-start"
@@ -370,7 +361,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px] ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px] ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] == "flex-end"
@@ -414,7 +405,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] == "center"
@@ -458,7 +449,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] ==
@@ -503,7 +494,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] ==
@@ -548,7 +539,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.justifyContent == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.justifyContent[breakPointX] ==
@@ -598,9 +589,9 @@ registerBlockType(metadata, {
 							Align Items
 						</label>
 
-						<div className="grid grid-cols-4 gap-3">
+						<div className="!grid !grid-cols-4 place-items-center gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "flex-start"
@@ -644,7 +635,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "flex-end"
@@ -691,7 +682,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "center"
@@ -738,7 +729,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.alignItems == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.alignItems[breakPointX] == "stretch"
@@ -790,9 +781,9 @@ registerBlockType(metadata, {
 							Flex Direction
 						</label>
 
-						<div className="grid grid-cols-4 gap-3">
+						<div className="!grid !grid-cols-4 place-items-center gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] == "row"
@@ -826,7 +817,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] == "row-reverse"
@@ -861,7 +852,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] == "column"
@@ -896,7 +887,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.flexDirection == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexDirection[breakPointX] ==
@@ -937,9 +928,9 @@ registerBlockType(metadata, {
 							Flex Wrap
 						</label>
 
-						<div className="grid grid-cols-4 gap-3">
+						<div className="!grid !grid-cols-4 place-items-center gap-3">
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.flexWrap == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexWrap[breakPointX] == "wrap"
@@ -974,7 +965,7 @@ registerBlockType(metadata, {
 								</Tooltip>
 							</div>
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.flexWrap == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexWrap[breakPointX] == "wrap-reverse"
@@ -1010,7 +1001,7 @@ registerBlockType(metadata, {
 							</div>
 
 							<div
-								className={`hover:bg-[#3737c7] cursor-pointer h-[36px] w-[36px]  ${
+								className={`hover:bg-[#3737c7] cursor-pointer h-[50px] w-[50px]  ${
 									wrapper.styles.flexWrap == undefined
 										? "bg-[#5655ff]"
 										: wrapper.styles.flexWrap[breakPointX] == "nowrap"
@@ -1064,10 +1055,9 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
-								<label for="">CSS Class</label>
-
 								<PGcssClassPicker
 									tags={customTags}
+									label="CSS Class"
 									placeholder="Add Class"
 									value={wrapper.options.class}
 									onChange={(newVal) => {
@@ -1129,34 +1119,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"accordion-nested"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p className="">
-							Please use following class selector to apply your custom CSS
-						</p>
-
-						<div className="my-3">
-							<p className="font-bold">Text </p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 
@@ -1243,7 +1210,6 @@ registerBlockType(metadata, {
 													var wrapper = { ...atts.wrapper };
 
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
@@ -1251,13 +1217,12 @@ registerBlockType(metadata, {
 
 													setAttributes({
 														wrapper: wrapper,
-														customCss: customCss,
 													});
 
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 

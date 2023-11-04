@@ -5,7 +5,9 @@
   "title": "Tabs",
   "textdomain": "post-grid",
   "category": "post-grid",
-  "parent": ["post-grid/accordion-nested"],
+  "parent": [
+    "post-grid/accordion-nested"
+  ],
   "usesContext": [
     "postId",
     "loopIndex",
@@ -209,10 +211,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -220,7 +218,8 @@
       }
     }
   },
-  "style" : "front_style",
+  "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "advanced tabs",
     "tabs block",

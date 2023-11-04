@@ -5,9 +5,14 @@
   "title": "Grid Item",
   "textdomain": "post-grid",
   "category": "post-grid",
-  "parent": ["post-grid/grid-wrap"],
+  "parent": [
+    "post-grid/grid-wrap"
+  ],
   "usesContext": [
-    "postId", "loopIndex", "postType", "queryId"
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
   ],
   "supports": {
     "align": [
@@ -15,14 +20,13 @@
       "full"
     ]
   },
-  
   "attributes": {
     "wrapper": {
       "type": "object",
       "default": {
         "options": {
           "tag": "div",
-          "class": "grid-item-wrap"
+          "class": "pg-grid-wrap-item"
         },
         "styles": {
           "backgroundColor": {
@@ -35,10 +39,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -46,6 +46,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "grid builder",
     "grid css",

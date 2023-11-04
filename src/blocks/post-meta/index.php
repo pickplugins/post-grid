@@ -68,7 +68,7 @@ class BlockPostMeta
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
 
@@ -93,6 +93,7 @@ class BlockPostMeta
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
         $meta = isset($attributes['meta']) ? $attributes['meta'] : [];
         $metaOptions = isset($meta['options']) ? $meta['options'] : [];
@@ -118,6 +119,12 @@ class BlockPostMeta
         }
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
+
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
 
@@ -137,46 +144,47 @@ class BlockPostMeta
 
         if (!empty($wrapperTag)):
             ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>">
+                        <<?php echo esc_attr($wrapperTag); ?> class="
+                            <?php echo esc_attr($blockId); ?>
+                            <?php echo esc_attr($wrapperClass); ?>">
 
-                <?php
-
-
-                if (gettype($metaValue) == 'array' || gettype($metaValue) == 'object') {
+                            <?php
 
 
-                    if (!empty($templateLoop)) {
+                            if (gettype($metaValue) == 'array' || gettype($metaValue) == 'object') {
 
-                        if (is_array($metaValue))
-                            foreach ($metaValue as $items) {
 
-                                $tempArgs = [];
+                                if (!empty($templateLoop)) {
 
-                                if (is_array($items))
-                                    foreach ($items as $itemIndex => $item) {
-                                        $tempArgs['{' . $itemIndex . '}'] = $item;
-                                    }
+                                    if (is_array($metaValue))
+                                        foreach ($metaValue as $items) {
 
-                                echo strtr($templateLoop, (array) $tempArgs);
+                                            $tempArgs = [];
+
+                                            if (is_array($items))
+                                                foreach ($items as $itemIndex => $item) {
+                                                    $tempArgs['{' . $itemIndex . '}'] = $item;
+                                                }
+
+                                            echo strtr($templateLoop, (array) $tempArgs);
+                                        }
+                                } else {
+                                    $singleArrayForCategory = $this->nestedToSingle($metaValue);
+                                    echo strtr($template, (array) $singleArrayForCategory);
+                                }
+                            } else {
+
+                                $singleArray = ['{metaValue}' => $metaValue];
+
+                                echo strtr($template, (array) $singleArray);
                             }
-                    } else {
-                        $singleArrayForCategory = $this->nestedToSingle($metaValue);
-                        echo strtr($template, (array) $singleArrayForCategory);
-                    }
-                } else {
 
-                    $singleArray = ['{metaValue}' => $metaValue];
-
-                    echo strtr($template, (array) $singleArray);
-                }
-
-                ?>
+                            ?>
 
 
-            </<?php echo esc_attr($wrapperTag); ?>>
+                        </<?php echo esc_attr($wrapperTag); ?>>
 
-            <?php
+                        <?php
 
         endif;
 

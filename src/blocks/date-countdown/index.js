@@ -76,7 +76,7 @@ import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -84,6 +84,8 @@ import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import variations from "./variations";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -166,7 +168,7 @@ registerBlockType(metadata, {
 		var label = attributes.label;
 		var prefix = attributes.prefix;
 		var postfix = attributes.postfix;
-		var customCss = attributes.customCss;
+
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -243,17 +245,157 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var dateCountdownX = attributes.dateCountdown;
+				var scheduleTimeX = attributes.scheduleTime;
+				var countdownWrapperX = attributes.countdownWrapper;
+				var innerX = attributes.inner;
+				var itemsX = attributes.items;
+				var secondWrapX = attributes.secondWrap;
+				var secondX = attributes.second;
+				var minuteWrapX = attributes.minuteWrap;
+				var minuteX = attributes.minute;
+				var hourWrapX = attributes.hourWrap;
+				var hourX = attributes.hour;
+				var dayWrapX = attributes.dayWrap;
+				var dayX = attributes.day;
+				var iconX = attributes.icon;
+				var separatorX = attributes.separator;
+				var labelX = attributes.label;
+				var prefixX = attributes.prefix;
+				var postfixX = attributes.postfix;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (dateCountdownX != undefined) {
+					var dateCountdownY = {
+						...dateCountdownX,
+						options: dateCountdown.options,
+					};
+					setAttributes({ dateCountdown: dateCountdownY });
+					blockCssObj[dateCountdownSelector] = dateCountdownY;
+				}
+
+				if (scheduleTimeX != undefined) {
+					var scheduleTimeY = {
+						...scheduleTimeX,
+						options: scheduleTime.options,
+					};
+					setAttributes({ scheduleTime: scheduleTimeY });
+					blockCssObj[scheduleTimeSelector] = scheduleTimeY;
+				}
+
+				if (countdownWrapperX != undefined) {
+					var countdownWrapperY = {
+						...countdownWrapperX,
+						options: countdownWrapper.options,
+					};
+					setAttributes({ countdownWrapper: countdownWrapperY });
+					blockCssObj[countdownWrapperSelector] = countdownWrapperY;
+				}
+
+				if (innerX != undefined) {
+					var innerY = { ...innerX, options: inner.options };
+					setAttributes({ inner: innerY });
+					blockCssObj[innerSelector] = innerY;
+				}
+
+				if (itemsX != undefined) {
+					var itemsY = { ...itemsX, options: items.options };
+					setAttributes({ items: itemsY });
+					blockCssObj[itemsSelector] = itemsY;
+				}
+
+				if (secondWrapX != undefined) {
+					var secondWrapY = { ...secondWrapX, options: secondWrap.options };
+					setAttributes({ secondWrap: secondWrapY });
+					blockCssObj[secondWrapSelector] = secondWrapY;
+				}
+
+				if (secondX != undefined) {
+					var secondY = { ...secondX, options: second.options };
+					setAttributes({ second: secondY });
+					blockCssObj[secondSelector] = secondY;
+				}
+
+				if (minuteWrapX != undefined) {
+					var minuteWrapY = { ...minuteWrapX, options: minuteWrap.options };
+					setAttributes({ minuteWrap: minuteWrapY });
+					blockCssObj[minuteWrapSelector] = minuteWrapY;
+				}
+
+				if (minuteX != undefined) {
+					var minuteY = { ...minuteX, options: minute.options };
+					setAttributes({ minute: minuteY });
+					blockCssObj[minuteSelector] = minuteY;
+				}
+
+				if (hourWrapX != undefined) {
+					var hourWrapY = { ...hourWrapX, options: hourWrap.options };
+					setAttributes({ hourWrap: hourWrapY });
+					blockCssObj[hourWrapSelector] = hourWrapY;
+				}
+
+				if (hourX != undefined) {
+					var hourY = { ...hourX, options: hour.options };
+					setAttributes({ hour: hourY });
+					blockCssObj[hourSelector] = hourY;
+				}
+
+				if (dayWrapX != undefined) {
+					var dayWrapY = { ...dayWrapX, options: dayWrap.options };
+					setAttributes({ dayWrap: dayWrapY });
+					blockCssObj[dayWrapSelector] = dayWrapY;
+				}
+
+				if (dayX != undefined) {
+					var dayY = { ...dayX, options: day.options };
+					setAttributes({ day: dayY });
+					blockCssObj[daySelector] = dayY;
+				}
+
+				if (iconX != undefined) {
+					var iconY = { ...iconX, options: icon.options };
+					setAttributes({ icon: iconY });
+					blockCssObj[iconSelector] = iconY;
+				}
+
+				if (separatorX != undefined) {
+					var separatorY = { ...separatorX, options: separator.options };
+					setAttributes({ separator: separatorY });
+					blockCssObj[separatorSelector] = separatorY;
+				}
+
+				if (labelX != undefined) {
+					var labelY = { ...labelX, options: label.options };
+					setAttributes({ label: labelY });
+					blockCssObj[labelSelector] = labelY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				if (prefixX != undefined) {
+					var prefixY = { ...prefixX, options: prefix.options };
+					console.log(prefixY);
+					setAttributes({ prefix: prefixY });
+					blockCssObj[prefixSelector] = prefixY;
+				}
+				if (postfixX != undefined) {
+					var postfixY = { ...postfixX, options: postfix.options };
+					console.log(postfixY);
+					setAttributes({ postfix: postfixY });
+					blockCssObj[postfixSelector] = postfixY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -2162,8 +2304,34 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[countdownWrapperSelector] = countdownWrapper;
+			blockCssObj[labelSelector] = label;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[innerSelector] = inner;
+			blockCssObj[prefixSelector] = prefix;
+			blockCssObj[postfixSelector] = postfix;
+			blockCssObj[separatorSelector] = separator;
+			blockCssObj[itemsSelector] = items;
+			blockCssObj[secondWrapSelector] = secondWrap;
+			blockCssObj[secondSelector] = second;
+			blockCssObj[minuteWrapSelector] = minuteWrap;
+			blockCssObj[minuteSelector] = minute;
+			blockCssObj[hourWrapSelector] = hourWrap;
+			blockCssObj[hourSelector] = hour;
+			blockCssObj[dayWrapSelector] = dayWrap;
+			blockCssObj[daySelector] = day;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var itemX = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: itemX } });
+		}, [blockId]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
@@ -2177,22 +2345,16 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		useEffect(() => {}, [second]);
 
-		const CustomTag = `${wrapper.options.tag}`;
+		const CustomTagWrapper = `${wrapper.options.tag}`;
 		const CustomTagPostTitle = `${second.options.tag}`;
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-date-countdown`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -2920,6 +3082,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 										<SelectControl
@@ -3972,63 +4158,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"date-countdown"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-							<div className="my-3">
-								<p className="font-bold">Title Wrapper</p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{/* your CSS here*/}"}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Title link</p>
-								<p>
-									<code>
-										{secondSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Prefix</p>
-								<p>
-									<code>
-										{prefixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Postfix</p>
-								<p>
-									<code>
-										{postfixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 
@@ -4158,7 +4292,7 @@ registerBlockType(metadata, {
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 
@@ -4489,7 +4623,7 @@ registerBlockType(metadata, {
 		var blockId = attributes.blockId;
 
 		const blockProps = useBlockProps.save({
-			className: ` ${blockId} pg-date-countdown`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return <InnerBlocks.Content />;

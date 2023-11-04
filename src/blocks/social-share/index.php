@@ -44,7 +44,7 @@ class PGBlockSocialShare
 
 
         global $postGridCss;
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
         $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -88,17 +88,22 @@ class PGBlockSocialShare
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : [];
 
 
-        //$postGridCustomCss .= $customCss;
+
+        //
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
 
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
 
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
         ob_start();
@@ -107,7 +112,8 @@ class PGBlockSocialShare
 
             ?>
             <<?php echo esc_attr($wrapperTag); ?> class="
-                <?php echo esc_attr($blockId); ?>">
+                <?php echo esc_attr($blockId); ?>
+                <?php echo esc_attr($wrapperClass); ?>">
                 <?php
                 if (!empty($elementsItems))
                     foreach ($elementsItems as $index => $item) {

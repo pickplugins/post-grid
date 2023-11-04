@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-menu-wrap"
         },
         "styles": {
           "display": {
@@ -64,10 +64,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -76,6 +72,7 @@
     }
   },
   "editorStyle": "pgmenu_wrap_editor_style",
+  "script": "front_script",
   "keywords": [
     "menu",
     "menu block",

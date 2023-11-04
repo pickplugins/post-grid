@@ -65,13 +65,15 @@ import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -125,7 +127,6 @@ registerBlockType(metadata, {
 		var circleOverlay = attributes.circleOverlay;
 		var circleMask = attributes.circleMask;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -148,6 +149,34 @@ registerBlockType(metadata, {
 			// var end = parseInt(progressData.options.end)
 			// var duration = parseInt(progressData.options.duration)
 		}, [progressData]);
+		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+			setAttributes({ blockId: blockIdX });
+
+			// setAttributes({ progressBar: progressBar });
+			// setAttributes({ wrapper: wrapper });
+
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [clientId]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[progressBarSelector] = progressBar;
+			blockCssObj[progressFillSelector] = progressFill;
+			blockCssObj[progressCountSelector] = progressCount;
+			blockCssObj[progressLabelSelector] = progressLabel;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[circleOverlaySelector] = circleOverlay;
+			blockCssObj[circleMaskSelector] = circleMask;
+			blockCssObj[progressInfoSelector] = progressInfo;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -165,17 +194,102 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var progressDataX = attributes.progressData;
+				var progressInfoX = attributes.progressInfo;
+				var progressBarX = attributes.progressBar;
+				var progressFillX = attributes.progressFill;
+				var progressCountX = attributes.progressCount;
+				var circleOverlayX = attributes.circleOverlay;
+				var circleMaskX = attributes.circleMask;
+				var progressLabelX = attributes.progressLabel;
+				var iconX = attributes.icon;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (iconX != undefined) {
+					var iconY = { ...iconX, options: icon.options };
+					setAttributes({ icon: iconY });
+					blockCssObj[iconSelector] = iconY;
+				}
+
+				if (progressLabelX != undefined) {
+					var progressLabelY = {
+						...progressLabelX,
+						options: progressLabel.options,
+					};
+					setAttributes({ progressLabel: progressLabelY });
+					blockCssObj[progressLabelSelector] = progressLabelY;
+				}
+
+				if (circleMaskX != undefined) {
+					var circleMaskY = { ...circleMaskX, options: circleMask.options };
+					setAttributes({ circleMask: circleMaskY });
+					blockCssObj[circleMaskSelector] = circleMaskY;
+				}
+
+				if (circleOverlayX != undefined) {
+					var circleOverlayY = {
+						...circleOverlayX,
+						options: circleOverlay.options,
+					};
+					setAttributes({ circleOverlay: circleOverlayY });
+					blockCssObj[circleOverlaySelector] = circleOverlayY;
+				}
+
+				if (progressCountX != undefined) {
+					var progressCountY = {
+						...progressCountX,
+						options: progressCount.options,
+					};
+					setAttributes({ progressCount: progressCountY });
+					blockCssObj[progressCountSelector] = progressCountY;
+				}
+
+				if (progressFillX != undefined) {
+					var progressFillY = {
+						...progressFillX,
+						options: progressFill.options,
+					};
+					setAttributes({ progressFill: progressFillY });
+					blockCssObj[progressFillSelector] = progressFillY;
+				}
+
+				if (progressBarX != undefined) {
+					var progressBarY = { ...progressBarX, options: progressBar.options };
+					setAttributes({ progressBar: progressBarY });
+					blockCssObj[progressBarSelector] = progressBarY;
+				}
+
+				if (progressInfoX != undefined) {
+					var progressInfoY = {
+						...progressInfoX,
+						options: progressInfo.options,
+					};
+					setAttributes({ progressInfo: progressInfoY });
+					blockCssObj[progressInfoSelector] = progressInfoY;
+				}
+
+				if (progressDataX != undefined) {
+					var progressDataY = {
+						...progressDataX,
+						options: progressData.options,
+					};
+					setAttributes({ progressData: progressDataY });
+					blockCssObj[progressDataSelector] = progressDataY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -1004,16 +1118,6 @@ registerBlockType(metadata, {
 			setIconHtml(iconHtml);
 		}, [icon]);
 
-		useEffect(() => {
-			var blockIdX = "pg" + clientId.split("-").pop();
-			setAttributes({ blockId: blockIdX });
-
-			// setAttributes({ progressBar: progressBar });
-			// setAttributes({ wrapper: wrapper });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [clientId]);
-
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
 		// for (var x in breakPoints) {
@@ -1026,19 +1130,13 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		useEffect(() => {}, [progressBar]);
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-progress-bar`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -1152,7 +1250,32 @@ registerBlockType(metadata, {
 										className: "tab-style",
 									},
 								]}>
-								<PGtab name="options"></PGtab>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
 										obj={wrapper}
@@ -1591,13 +1714,13 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"progress-bar"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
 							/>
 						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}></PanelBody>
 
 						<PGMailSubsctibe />
 						<PGContactSupport
@@ -1662,7 +1785,6 @@ registerBlockType(metadata, {
 													var circleOverlay = { ...atts.circleOverlay };
 
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
@@ -1689,14 +1811,12 @@ registerBlockType(metadata, {
 														icon: icon,
 														circleMask: circleMask,
 														circleOverlay: circleOverlay,
-
-														customCss: customCss,
 													});
 
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 

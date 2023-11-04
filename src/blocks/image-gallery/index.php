@@ -57,7 +57,7 @@ class PGBlockImageGallery
   {
 
 
-    global $postGridCustomCss;
+
     global $postGridCssY;
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -66,15 +66,26 @@ class PGBlockImageGallery
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
 
-    $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
+
+
+    $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+    $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+
+    $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
     $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-    $postGridCustomCss .= $customCss;
 
+
+    $obj['id'] = $post_ID;
+    $obj['type'] = 'post';
+
+
+
+    $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
     ob_start();
@@ -82,7 +93,8 @@ class PGBlockImageGallery
 
 
     ?>
-        <div class="pg-image-gallery <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+        <div
+          class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
           <?php echo $content ?>
         </div>
         <?php

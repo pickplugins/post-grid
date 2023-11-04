@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-woo-sku"
         },
         "styles": {
           "display": {
@@ -261,10 +261,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -277,6 +273,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "add to cart",
     "wc add to cart",

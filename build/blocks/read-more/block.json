@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-read-more"
         },
         "styles": {
           "color": {
@@ -155,10 +155,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "linkAttr": {
       "type": "array",
       "default": []
@@ -171,6 +167,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "read more",
     "read more link",

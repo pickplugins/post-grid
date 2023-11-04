@@ -197,10 +197,7 @@ registerBlockType("post-grid/post-grid-pagination", {
 			type: "string",
 			default: "",
 		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
+
 		blockCssY: {
 			type: "object",
 			default: { items: {} },
@@ -231,7 +228,6 @@ registerBlockType("post-grid/post-grid-pagination", {
 		var paginationItem = attributes.paginationItem;
 		var paginationItemActive = attributes.paginationItemActive;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -247,14 +243,8 @@ registerBlockType("post-grid/post-grid-pagination", {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		function generateElementSudoCss(obj) {
 			var stylesObj = {};
@@ -298,9 +288,7 @@ registerBlockType("post-grid/post-grid-pagination", {
 		useEffect(() => {
 			//console.log(wrapper);
 
-			//setAttributes({ customCss: customCss });
-
-			///myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			///myStore.generateBlockCss(blockCssY.items, blockId);
 
 			var elementCss = generateElementSudoCss(wrapper);
 
@@ -665,7 +653,7 @@ registerBlockType("post-grid/post-grid-pagination", {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const MY_TEMPLATE = [
@@ -1030,31 +1018,6 @@ registerBlockType("post-grid/post-grid-pagination", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
-						</PanelBody>
-
 						<div className="px-3">
 							<PGMailSubsctibe />
 							<PGContactSupport
@@ -1078,3 +1041,4 @@ registerBlockType("post-grid/post-grid-pagination", {
 		return null;
 	},
 });
+

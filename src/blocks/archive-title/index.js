@@ -62,7 +62,7 @@ import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGcssClassPicker from "../../components/css-class-picker";
 import customTags from "../../custom-tags";
@@ -121,7 +121,7 @@ registerBlockType(metadata, {
 
 		var prefix = attributes.prefix;
 		var postfix = attributes.postfix;
-		var customCss = attributes.customCss;
+
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -150,6 +150,22 @@ registerBlockType(metadata, {
 		var breakPointX = myStore.getBreakPoint();
 
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
+		const [prefixText, setprefixText] = useState(
+			myStore.parseCustomTags(prefix.options.text, customTags)
+		);
+		const [postfixText, setpostfixText] = useState(
+			myStore.parseCustomTags(postfix.options.text, customTags)
+		);
+
+		useEffect(() => {
+			var text = myStore.parseCustomTags(prefix.options.text, customTags);
+			setprefixText(text);
+		}, [prefix.options.text]);
+
+		useEffect(() => {
+			var text = myStore.parseCustomTags(postfix.options.text, customTags);
+			setpostfixText(text);
+		}, [postfix.options.text]);
 
 		var archiveTypes = {
 			auto: { label: "Auto Detect", value: "auto" },
@@ -207,32 +223,30 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			// var blockIdX = "pg" + clientId.split("-").pop();
+			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
-		// useEffect(() => {
-		// 	var blockCssObj = {};
-		// 	console.log(wrapper);
-		// 	console.log(wrapperSelector);
+		useEffect(() => {
+			var blockCssObj = {};
+			console.log(wrapperSelector);
 
-		// 	blockCssObj[wrapperSelector] = wrapper;
-		// 	blockCssObj[archiveTitleSelector] = archiveTitle;
-		// 	blockCssObj[iconSelector] = icon;
-		// 	blockCssObj[prefixSelector] = prefix;
-		// 	blockCssObj[postfixSelector] = postfix;
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[archiveTitleSelector] = archiveTitle;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[prefixSelector] = prefix;
+			blockCssObj[postfixSelector] = postfix;
 
-		// 	var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-		// 	console.log(blockCssObj);
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-		// 	var items = { ...blockCssY.items, ...blockCssRules };
-		// 	setAttributes({ blockCssY: { items: items } });
-		// }, [blockId]);
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 		useEffect(() => {
 			var archiveType = archiveTitle.options.archiveType;
@@ -247,8 +261,6 @@ registerBlockType(metadata, {
 			const { parse } = wp.blockSerializationDefaultParser;
 
 			var blocks = content.length > 0 ? parse(content) : "";
-			console.log(content);
-			console.log(blocks);
 			const attributes = blocks[0].attrs;
 			// attributes.blockId = Date.now();
 			// console.log(Date.now());
@@ -258,18 +270,52 @@ registerBlockType(metadata, {
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				// var blockId = attributes.blockId
+				var wrapperX = attributes.wrapper;
+				var archiveTitleX = attributes.archiveTitle;
+				var iconX = attributes.icon;
+				var prefixX = attributes.prefix;
+				var postfixX = attributes.postfix;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+				if (archiveTitleX != undefined) {
+					var archiveTitleY = {
+						...archiveTitleX,
+						options: archiveTitle.options,
+					};
+					setAttributes({ archiveTitle: archiveTitleY });
+					blockCssObj[archiveTitleSelector] = archiveTitleY;
+				}
+				if (iconX != undefined) {
+					var iconY = { ...iconX, options: icon.options };
+					setAttributes({ icon: iconY });
+					blockCssObj[iconSelector] = iconY;
+				}
+
+				if (prefixX != undefined) {
+					var prefixY = { ...prefixX, options: prefix.options };
+					console.log(prefixY);
+					setAttributes({ prefix: prefixY });
+					blockCssObj[prefixSelector] = prefixY;
+				}
+				if (postfixX != undefined) {
+					var postfixY = { ...postfixX, options: postfix.options };
+					console.log(postfixY);
+					setAttributes({ postfix: postfixY });
+					blockCssObj[postfixSelector] = postfixY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -941,12 +987,6 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
 			linkAttrObj();
 		}, [archiveTitle]);
 
@@ -1004,10 +1044,9 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">CSS Class</label>
-
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={wrapper.options.class}
 										onChange={(newVal) => {
@@ -1018,7 +1057,7 @@ registerBlockType(metadata, {
 										}}
 									/>
 
-									{/* <PanelRow>
+									<PanelRow>
 										<label for="">CSS ID</label>
 										<InputControl
 											value={blockId}
@@ -1028,7 +1067,7 @@ registerBlockType(metadata, {
 												});
 											}}
 										/>
-									</PanelRow> */}
+									</PanelRow>
 
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
@@ -1435,10 +1474,9 @@ registerBlockType(metadata, {
 											})}
 										</div>
 									)}
-									<label for="">CSS Class</label>
-
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={archiveTitle.options.class}
 										onChange={(newVal) => {
@@ -1584,11 +1622,10 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">Prefix</label>
-
 									<PGcssClassPicker
 										tags={customTags}
-										placeholder="Add Class"
+										label="Prefix"
+										placeholder="Add Prefix"
 										value={prefix.options.text}
 										onChange={(newVal) => {
 											var options = { ...prefix.options, text: newVal };
@@ -1659,11 +1696,10 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">Postfix</label>
-
 									<PGcssClassPicker
 										tags={customTags}
-										placeholder="Add Class"
+										label="Postfix"
+										placeholder="Add Postfix"
 										value={postfix.options.text}
 										onChange={(newVal) => {
 											var options = { ...postfix.options, text: newVal };
@@ -1708,63 +1744,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"archive-title"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-							<div className="my-3">
-								<p className="font-bold">Title Wrapper</p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{/* your CSS here*/}"}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Title link</p>
-								<p>
-									<code>
-										{archiveTitleSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Prefix</p>
-								<p>
-									<code>
-										{prefixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Postfix</p>
-								<p>
-									<code>
-										{postfixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 
@@ -1792,9 +1776,7 @@ registerBlockType(metadata, {
 							)}
 
 							{prefix.options.text && (
-								<span className={prefix.options.class}>
-									{prefix.options.text}
-								</span>
+								<span className={prefix.options.class}>{prefixText}</span>
 							)}
 
 							{icon.options.position == "afterPrefix" && (
@@ -1855,9 +1837,7 @@ registerBlockType(metadata, {
 							)}
 
 							{postfix.options.text && (
-								<span className={postfix.options.class}>
-									{postfix.options.text}
-								</span>
+								<span className={postfix.options.class}>{postfixText}</span>
 							)}
 							{icon.options.position == "afterPostfix" && (
 								<span
@@ -1876,9 +1856,7 @@ registerBlockType(metadata, {
 								/>
 							)}
 							{prefix.options.text && (
-								<span className={prefix.options.class}>
-									{prefix.options.text}
-								</span>
+								<span className={prefix.options.class}>{prefixText}</span>
 							)}
 
 							{icon.options.position == "beforePostfix" && (

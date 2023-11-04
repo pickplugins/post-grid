@@ -50,7 +50,7 @@ class BlockPostShortcode
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
 
@@ -73,6 +73,7 @@ class BlockPostShortcode
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
         $shortcode = isset($attributes['shortcode']) ? $attributes['shortcode'] : [];
         $shortcodeOptions = isset($shortcode['options']) ? $shortcode['options'] : [];
@@ -82,7 +83,12 @@ class BlockPostShortcode
 
 
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
 
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
         ob_start();
 

@@ -41,7 +41,9 @@ import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGDropdown from "../../components/dropdown";
 import metadata from "./block.json";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -75,7 +77,7 @@ registerBlockType(metadata, {
 
 		var blockId = attributes.blockId;
 		var blockCssY = attributes.blockCssY;
-		var customCss = attributes.customCss;
+
 		var object = attributes.object;
 		var wrapper = attributes.wrapper;
 		var item = attributes.item;
@@ -107,15 +109,28 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[itemSelector] = item;
+			blockCssObj[thumbSelector] = thumb;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
+
+		useEffect(() => {
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-wordpress-org`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		var pluginFields = {
@@ -314,17 +329,49 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var elementsX = attributes.elements;
+				var itemX = attributes.item;
+				var thumbX = attributes.thumb;
+				var objectX = attributes.object;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (objectX != undefined) {
+					var objectY = { ...objectX, options: object.options };
+					setAttributes({ object: objectY });
+					blockCssObj[objectSelector] = objectY;
+				}
+
+				if (thumbX != undefined) {
+					var thumbY = { ...thumbX, options: thumb.options };
+					setAttributes({ thumb: thumbY });
+					blockCssObj[thumbSelector] = thumbY;
+				}
+
+				if (itemX != undefined) {
+					var itemY = { ...itemX, options: item.options };
+					setAttributes({ item: itemY });
+					blockCssObj[itemSelector] = itemY;
+				}
+
+				if (elementsX != undefined) {
+					var elementsY = { ...elementsX, options: elements.options };
+					setAttributes({ elements: elementsY });
+					blockCssObj[elementsSelector] = elementsY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -889,6 +936,30 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
 								<PanelRow>
 									<label for="">Wrapper Tag</label>
 									<SelectControl
@@ -1029,8 +1100,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"wordpress-org"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
 						/>
 					</PanelBody>

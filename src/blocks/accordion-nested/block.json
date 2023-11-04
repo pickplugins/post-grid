@@ -215,10 +215,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -232,6 +228,7 @@
     "post-grid/accordionNestedLabelIcon": "labelIcon",
     "post-grid/accordionNestedLabelCounter": "labelCounter"
   },
+  "script": "front_script",
   "keywords": [
     "accordion",
     "accordion faq",

@@ -22,7 +22,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "inline-block"
+          "class": "pg-terms-list"
         },
         "styles": {
           "color": {
@@ -138,10 +138,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -153,6 +149,7 @@
       "default": ""
     }
   },
+  "script": "front_script",
   "keywords": [
     "terms list",
     "term list",

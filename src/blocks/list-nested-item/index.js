@@ -61,6 +61,8 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -101,7 +103,6 @@ registerBlockType(metadata, {
 
 		var wrapper = attributes.wrapper;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -119,14 +120,19 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
+			var blockCssObj = {};
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
+			blockCssObj[wrapperSelector] = wrapper;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
@@ -197,13 +203,13 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const MY_TEMPLATE = [["core/paragraph", { content: "Hello" }]];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-list-nested`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -239,6 +245,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -277,31 +307,6 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
-						</PanelBody>
-
 						<div className="px-2">
 							<PGMailSubsctibe />
 							<PGContactSupport
@@ -328,7 +333,7 @@ registerBlockType(metadata, {
 		var blockId = attributes.blockId;
 
 		const blockProps = useBlockProps.save({
-			className: ` ${blockId} pg-list-nested-item`,
+			className: ` ${blockId} `,
 		});
 		return (
 			<li {...blockProps}>

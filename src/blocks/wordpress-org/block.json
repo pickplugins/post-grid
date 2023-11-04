@@ -40,7 +40,7 @@
       "default": {
         "options": {
           "tag": "ul",
-          "class": ""
+          "class": "pg-wordpress-org"
         },
         "styles": {}
       }
@@ -96,13 +96,10 @@
       "default": {
         "items": {}
       }
-    },
-    "customCss": {
-      "type": "string",
-      "default": ""
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "wordpress.org",
     "plugin information",

@@ -63,13 +63,15 @@ import IconToggle from "../../components/icon-toggle";
 import BreakpointToggle from "../../components/breakpoint-toggle";
 import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -118,8 +120,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		var customCss = attributes.customCss;
-
 		var postId = context["postId"];
 		var postType = context["postType"];
 
@@ -133,6 +133,27 @@ registerBlockType(metadata, {
 		// Wrapper CSS Class Selectors
 		const wrapperSelector = blockClass;
 		const metaValueSelector = blockClass + " .metaValue";
+		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+			setAttributes({ blockId: blockIdX });
+
+			// setAttributes({ postTitle: postTitle });
+			// setAttributes({ wrapper: wrapper });
+
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [clientId]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[metaValueSelector] = meta;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		var metaKeyTypeArgsBasic = {
 			string: { label: "String", value: "string" },
@@ -238,16 +259,6 @@ registerBlockType(metadata, {
 
 		// }, [template]);
 
-		useEffect(() => {
-			var blockIdX = "pg" + clientId.split("-").pop();
-			setAttributes({ blockId: blockIdX });
-
-			// setAttributes({ postTitle: postTitle });
-			// setAttributes({ wrapper: wrapper });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [clientId]);
-
 		// var breakPointList = [];
 
 		// for (var x in breakPoints) {
@@ -283,17 +294,59 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var metaX = attributes.meta;
+				var prefixX = attributes.prefix;
+				var postfixX = attributes.postfix;
+				var templateX = attributes.template;
+				var templateLoopX = attributes.templateLoop;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (templateLoopX != undefined) {
+					var templateLoopY = {
+						...templateLoopX,
+						options: templateLoop.options,
+					};
+					setAttributes({ templateLoop: templateLoopY });
+					blockCssObj[templateLoopSelector] = templateLoopY;
+				}
+
+				if (templateX != undefined) {
+					var templateY = { ...templateX, options: template.options };
+					setAttributes({ template: templateY });
+					blockCssObj[templateSelector] = templateY;
+				}
+
+				if (postfixX != undefined) {
+					var postfixY = { ...postfixX, options: postfix.options };
+					setAttributes({ postfix: postfixY });
+					blockCssObj[postfixSelector] = postfixY;
+				}
+
+				if (prefixX != undefined) {
+					var prefixY = { ...prefixX, options: prefix.options };
+					setAttributes({ prefix: prefixY });
+					blockCssObj[prefixSelector] = prefixY;
+				}
+
+				if (metaX != undefined) {
+					var metaY = { ...metaX, options: meta.options };
+					setAttributes({ meta: metaY });
+					blockCssObj[metaSelector] = metaY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -647,11 +700,11 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [items]);
 
 		const post = useSelect((select) =>
@@ -667,7 +720,7 @@ registerBlockType(metadata, {
 		);
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-post-meta`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -700,6 +753,30 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
 								<PanelRow>
 									<label for="">Wrapper Tag</label>
 									<SelectControl
@@ -897,31 +974,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"post-meta"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p>Please use following class selector to apply your custom CSS</p>
-						<div className="my-3">
-							<p className="font-bold">Items Wrapper</p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{/* your CSS here*/}"}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -962,3 +1019,4 @@ registerBlockType(metadata, {
 		return null;
 	},
 });
+

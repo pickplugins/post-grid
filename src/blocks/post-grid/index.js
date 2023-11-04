@@ -77,7 +77,7 @@ import PGcssOutline from "../../components/css-outline";
 import PGcssBorder from "../../components/css-border";
 import PGcssBoxShadow from "../../components/css-box-shadow";
 import PGinputSelect from "../../components/input-select";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import breakPoints from "../../breakpoints";
 import queryPresets from "./query-presets";
@@ -145,7 +145,7 @@ registerBlockType(metadata, {
 		var layout = attributes.layout;
 		var queryArgs = attributes.queryArgs;
 		var blockCssY = attributes.blockCssY;
-		var customCss = attributes.customCss;
+
 		var blockId = attributes.blockId;
 
 		var blockIdX = attributes.blockId
@@ -217,17 +217,104 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var lazyLoadX = attributes.lazyLoad;
+				var searchX = attributes.search;
+				var containerX = attributes.container;
+				var itemsWrapX = attributes.itemsWrap;
+				var itemWrapX = attributes.itemWrap;
+				var noPostsWrapX = attributes.noPostsWrap;
+				var spinnerWrapX = attributes.spinnerWrap;
+				var gridX = attributes.grid;
+				var paginationX = attributes.pagination;
+				var paginationItemX = attributes.paginationItem;
+				var paginationItemActiveX = attributes.paginationItemActive;
+				var layoutX = attributes.layout;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (layoutX != undefined) {
+					var layoutY = { ...layoutX, options: layout.options };
+					setAttributes({ layout: layoutY });
+					blockCssObj[layoutSelector] = layoutY;
+				}
+
+				if (paginationItemActiveX != undefined) {
+					var paginationItemActiveY = {
+						...paginationItemActiveX,
+						options: paginationItemActive.options,
+					};
+					setAttributes({ paginationItemActive: paginationItemActiveY });
+					blockCssObj[paginationItemActiveSelector] = paginationItemActiveY;
+				}
+
+				if (paginationItemX != undefined) {
+					var paginationItemY = {
+						...paginationItemX,
+						options: paginationItem.options,
+					};
+					setAttributes({ paginationItem: paginationItemY });
+					blockCssObj[paginationItemSelector] = paginationItemY;
+				}
+
+				if (paginationX != undefined) {
+					var paginationY = { ...paginationX, options: pagination.options };
+					setAttributes({ pagination: paginationY });
+					blockCssObj[paginationSelector] = paginationY;
+				}
+
+				if (gridX != undefined) {
+					var gridY = { ...gridX, options: grid.options };
+					setAttributes({ grid: gridY });
+					blockCssObj[gridSelector] = gridY;
+				}
+
+				if (spinnerWrapX != undefined) {
+					var spinnerWrapY = { ...spinnerWrapX, options: spinnerWrap.options };
+					setAttributes({ spinnerWrap: spinnerWrapY });
+					blockCssObj[spinnerWrapSelector] = spinnerWrapY;
+				}
+
+				if (noPostsWrapX != undefined) {
+					var noPostsWrapY = { ...noPostsWrapX, options: noPostsWrap.options };
+					setAttributes({ noPostsWrap: noPostsWrapY });
+					blockCssObj[noPostsWrapSelector] = noPostsWrapY;
+				}
+
+				if (itemWrapX != undefined) {
+					var itemWrapY = { ...itemWrapX, options: itemWrap.options };
+					setAttributes({ itemWrap: itemWrapY });
+					blockCssObj[itemWrapSelector] = itemWrapY;
+				}
+
+				if (itemsWrapX != undefined) {
+					var itemsWrapY = { ...itemsWrapX, options: itemsWrap.options };
+					setAttributes({ itemsWrap: itemsWrapY });
+					blockCssObj[itemsWrapSelector] = itemsWrapY;
+				}
+
+				if (containerX != undefined) {
+					var containerY = { ...containerX, options: container.options };
+					setAttributes({ container: containerY });
+					blockCssObj[containerSelector] = containerY;
+				}
+
+				if (searchX != undefined) {
+					var searchY = { ...searchX, options: search.options };
+					setAttributes({ search: searchY });
+					blockCssObj[searchSelector] = searchY;
+				}
+
+				if (lazyLoadX != undefined) {
+					var lazyLoadY = { ...lazyLoadX, options: lazyLoad.options };
+					setAttributes({ lazyLoad: lazyLoadY });
+					blockCssObj[lazyLoadSelector] = lazyLoadY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -735,7 +822,7 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			// blockCssY.items[itemWrapSelector] = (blockCssY.items[itemWrapSelector] != undefined) ? blockCssY.items[itemWrapSelector] : {};
 			//blockCssY.items[paginationSelector] = (blockCssY.items[paginationSelector] != undefined) ? blockCssY.items[paginationSelector] : {};
@@ -1012,7 +1099,7 @@ registerBlockType(metadata, {
 			asdsdsd.then((res) => {
 				setBreakPointX(res.breakpoint);
 
-				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+				myStore.generateBlockCss(blockCssY.items, blockId);
 			});
 
 			const { __experimentalGetPreviewDeviceType: getPreviewDeviceType } =
@@ -1022,7 +1109,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const [posts, setPosts] = useState([]); // Using the hook.
@@ -3464,8 +3551,10 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"post-grid"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
 						/>
 					</PanelBody>

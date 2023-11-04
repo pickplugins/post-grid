@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "",
+          "class": "pg-icon",
           "attr": []
         },
         "styles": {
@@ -109,10 +109,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "linkAttr": {
       "type": "array",
       "default": []
@@ -126,6 +122,7 @@
   },
   "editorStyle": "font-awesome-5",
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "icon",
     "icons",

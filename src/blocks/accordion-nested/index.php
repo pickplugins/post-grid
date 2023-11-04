@@ -60,7 +60,7 @@ class PGBlockAccordionNested
   {
 
 
-    global $postGridCustomCss;
+
     global $postGridCssY;
 
 
@@ -71,7 +71,7 @@ class PGBlockAccordionNested
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-    $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
 
@@ -105,7 +105,7 @@ class PGBlockAccordionNested
     $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-    $postGridCustomCss .= $customCss;
+
 
 
     //echo '<pre>' . //var_export($iconOptions, true) . '</pre>';
@@ -150,25 +150,25 @@ class PGBlockAccordionNested
     ?>
 
 
-        <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-          <?php echo $content; ?>
-        </div>
+                    <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                      <?php echo $content; ?>
+                    </div>
 
-        <?php
-        if ($schemaEnable):
-          ?>
-            <script type="application/ld+json">
-                                                                                                                                        <?php echo wp_unslash(json_encode($json)); ?>
-                                                                                                                                    </script>
-            <?php
-        endif;
-        ?>
-
-
+                    <?php
+                    if ($schemaEnable):
+                      ?>
+                              <script type="application/ld+json">
+                                                                                                                                                          <?php echo wp_unslash(json_encode($json)); ?>
+                                                                                                                                                      </script>
+                              <?php
+                    endif;
+                    ?>
 
 
 
-        <?php return ob_get_clean();
+
+
+                    <?php return ob_get_clean();
   }
 }
 

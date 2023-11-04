@@ -144,7 +144,6 @@ registerBlockType(metadata, {
 		var icon = attributes.icon;
 		var iconToggle = attributes.iconToggle;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -238,7 +237,7 @@ registerBlockType(metadata, {
 		}, [parentLabelCounter]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
@@ -253,9 +252,9 @@ registerBlockType(metadata, {
 			blockCssObj[iconToggleSelector] = iconToggle;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-			console.log(blockCssRules);
+			// console.log(blockCssRules);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
@@ -263,14 +262,8 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
@@ -1232,10 +1225,9 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">CSS Class</label>
-
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={header.options.class}
 										onChange={(newVal) => {
@@ -1822,21 +1814,6 @@ registerBlockType(metadata, {
 									/>
 								</PGtab>
 							</PGtabs>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
 						</PanelBody>
 
 						<div className="px-2">

@@ -71,9 +71,11 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -110,7 +112,6 @@ registerBlockType(metadata, {
 		var menuWrap = attributes.menuWrap;
 		var subMenuWrap = attributes.subMenuWrap;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -135,7 +136,7 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			// blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'display': { "Desktop": "flex" } };
 			//blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'gap': { "Desktop": "1em" } };
@@ -146,13 +147,20 @@ registerBlockType(metadata, {
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
+			var blockCssObj = {};
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[menuWrapSelector] = menuWrap;
+			blockCssObj[subMenuWrapSelector] = subMenuWrap;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
@@ -180,17 +188,35 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
+				var wrapperX = attributes.wrapper;
+				var menuWrapX = attributes.menuWrap;
+				var subMenuWrapX = attributes.subMenuWrap;
 				var blockCssY = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (subMenuWrapX != undefined) {
+					var subMenuWrapY = { ...subMenuWrapX, options: subMenuWrap.options };
+					setAttributes({ subMenuWrap: subMenuWrapY });
+					blockCssObj[subMenuWrapSelector] = subMenuWrapY;
+				}
+
+				if (menuWrapX != undefined) {
+					var menuWrapY = { ...menuWrapX, options: menuWrap.options };
+					setAttributes({ menuWrap: menuWrapY });
+					blockCssObj[menuWrapSelector] = menuWrapY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -1234,6 +1260,30 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
 								<PanelRow>
 									<label for="">Wrapper Tag</label>
 									<SelectControl
@@ -1339,34 +1389,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"menu-wrap"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p className="">
-							Please use following class selector to apply your custom CSS
-						</p>
-
-						<div className="my-3">
-							<p className="font-bold">Text </p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 
@@ -1453,7 +1480,6 @@ registerBlockType(metadata, {
 													var wrapper = { ...atts.wrapper };
 
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
@@ -1461,13 +1487,12 @@ registerBlockType(metadata, {
 
 													setAttributes({
 														wrapper: wrapper,
-														customCss: customCss,
 													});
 
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 
@@ -1521,7 +1546,7 @@ registerBlockType(metadata, {
 		var blockId = attributes.blockId;
 
 		const blockProps = useBlockProps.save({
-			className: ` ${blockId} pg-menu-wrap`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return <InnerBlocks.Content />;

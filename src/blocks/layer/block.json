@@ -46,10 +46,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -57,6 +53,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "layer",
     "html element",

@@ -62,12 +62,14 @@ import IconToggle from "../../components/icon-toggle";
 import BreakpointToggle from "../../components/breakpoint-toggle";
 import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -113,8 +115,6 @@ registerBlockType(metadata, {
 		var items = attributes.items;
 
 		var blockCssY = attributes.blockCssY;
-
-		var customCss = attributes.customCss;
 
 		var postId = context["postId"];
 		var postType = context["postType"];
@@ -259,8 +259,18 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -278,17 +288,35 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var shortcodeClassicX = attributes.shortcodeClassic;
+				var shortcodeX = attributes.shortcode;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (shortcodeX != undefined) {
+				var shortcodeY = { ...shortcodeX, options: shortcode.options };
+				setAttributes({ shortcode: shortcodeY });
+				blockCssObj[shortcodeSelector] = shortcodeY;
+				}
+
+				if (shortcodeClassicX != undefined) {
+				var shortcodeClassicY = { ...shortcodeClassicX, options: shortcodeClassic.options };
+				setAttributes({ shortcodeClassic: shortcodeClassicY });
+				blockCssObj[shortcodeClassicSelector] = shortcodeClassicY;
+				}
+
+				if (wrapperX != undefined) {
+				var wrapperY = { ...wrapperX, options: wrapper.options };
+				setAttributes({ wrapper: wrapperY });
+				blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+				
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -386,11 +414,11 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [items]);
 
 		const post = useSelect((select) =>
@@ -406,7 +434,7 @@ registerBlockType(metadata, {
 		);
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-shortcode`,
+			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
 		return (
@@ -635,6 +663,30 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
 								<PanelRow>
 									<label for="">Wrapper Class</label>
 
@@ -662,54 +714,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"shortcode"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p>Please use following class selector to apply your custom CSS</p>
-						<div className="my-3">
-							<p className="font-bold">Items Wrapper</p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{/* your CSS here*/}"}
-								</code>
-							</p>
-						</div>
-
-						<div className="my-3">
-							<p className="font-bold">Caetgory Items</p>
-							<p>
-								<code>
-									{itemSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-							<p>
-								<code>.pg-shortcode a{"{/* your CSS here*/}"}</code>
-							</p>
-						</div>
-
-						<div className="my-3">
-							<p className="font-bold">Post Count</p>
-							<p>
-								<code>
-									{postCountSelector}
-									{"{/* your CSS here*/}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 				</InspectorControls>

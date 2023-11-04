@@ -28,7 +28,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "grid-item-wrap"
+          "class": "pg-image-gallery-item"
         },
         "styles": {
           "backgroundColor": {
@@ -41,10 +41,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -52,6 +48,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "image gallery",
     "image gallery block",

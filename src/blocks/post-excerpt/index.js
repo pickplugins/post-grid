@@ -57,7 +57,7 @@ import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 import PGDropdown from "../../components/dropdown";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -106,7 +106,7 @@ registerBlockType(metadata, {
 		var linkAttr = attributes.linkAttr;
 		var prefix = attributes.prefix;
 		var postfix = attributes.postfix;
-		var customCss = attributes.customCss;
+
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -225,12 +225,6 @@ registerBlockType(metadata, {
 			}
 		}, [postExcerpt]);
 
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
 		const [postExcerptEdited, setPostExcerptEdited] =
 			useState(currentPostExcerpt);
 		//const [postContentEdited, setPostContentEdited] = useState(currentPostContent);
@@ -293,13 +287,13 @@ registerBlockType(metadata, {
 		// useEffect(() => {
 		// 	setAttributes({ blockId: blockIdX });
 
-		// 	myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		// 	myStore.generateBlockCss(blockCssY.items, blockId);
 		// }, [clientId]);
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
 
 		useEffect(() => {
@@ -313,7 +307,7 @@ registerBlockType(metadata, {
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
@@ -342,17 +336,49 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var postExcerptX = attributes.postExcerpt;
+				var readMoreX = attributes.readMore;
+				var prefixX = attributes.prefix;
+				var postfixX = attributes.postfix;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (postfixX != undefined) {
+				var postfixY = { ...postfixX, options: postfix.options };
+				setAttributes({ postfix: postfixY });
+				blockCssObj[postfixSelector] = postfixY;
+				}
+
+				if (prefixX != undefined) {
+				var prefixY = { ...prefixX, options: prefix.options };
+				setAttributes({ prefix: prefixY });
+				blockCssObj[prefixSelector] = prefixY;
+				}
+
+				if (readMoreX != undefined) {
+				var readMoreY = { ...readMoreX, options: readMore.options };
+				setAttributes({ readMore: readMoreY });
+				blockCssObj[readMoreSelector] = readMoreY;
+				}
+
+				if (postExcerptX != undefined) {
+				var postExcerptY = { ...postExcerptX, options: postExcerpt.options };
+				setAttributes({ postExcerpt: postExcerptY });
+				blockCssObj[postExcerptSelector] = postExcerptY;
+				}
+
+				if (wrapperX != undefined) {
+				var wrapperY = { ...wrapperX, options: wrapper.options };
+				setAttributes({ wrapper: wrapperY });
+				blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+				
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -1023,7 +1049,7 @@ registerBlockType(metadata, {
 		var [linkAttrItemsReadmore, setlinkAttrItemsReadmore] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
@@ -1089,10 +1115,9 @@ registerBlockType(metadata, {
 								},
 							]}>
 							<PGtab name="options">
-								<label for="">CSS Class</label>
-
 								<PGcssClassPicker
 									tags={customTags}
+									label="CSS Class"
 									placeholder="Add Class"
 									value={wrapper.options.class}
 									onChange={(newVal) => {
@@ -1662,10 +1687,9 @@ registerBlockType(metadata, {
                     }}
                   /> */}
 
-								<label for="">CSS Class</label>
-
 								<PGcssClassPicker
 									tags={customTags}
+									label="CSS Class"
 									placeholder="Add Class"
 									value={postExcerpt.options.class}
 									onChange={(newVal) => {
@@ -1946,10 +1970,9 @@ registerBlockType(metadata, {
 									</div>
 								)}
 
-								<label for="">CSS Class</label>
-
 								<PGcssClassPicker
 									tags={customTags}
+									label="CSS Class"
 									placeholder="Add Class"
 									value={readMore.options.class}
 									onChange={(newVal) => {
@@ -2124,71 +2147,11 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"post-excerpt"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p>Please use following class selector to apply your custom CSS</p>
-						<div className="my-3">
-							<p className="font-bold">Excerpt Wrapper</p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{/* your CSS here*/}"}
-								</code>
-							</p>
-						</div>
-
-						<div className="my-3">
-							<p className="font-bold">Excerpt - With Link</p>
-							<p>
-								<code>
-									{excerptSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<div className="my-3">
-							<p className="font-bold">Read More</p>
-							<p>
-								<code>
-									{readmoreSelector}
-									{"{/* your CSS here*/}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<div className="my-3">
-							<p className="font-bold">Prefix Selector</p>
-							<p>
-								<code>
-									{prefixSelector}
-									{"{/* your CSS here*/}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<div className="my-3">
-							<p className="font-bold">Postfix Selector</p>
-							<p>
-								<code>
-									{postfixSelector}
-									{"{/* your CSS here*/}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 

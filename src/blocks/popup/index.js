@@ -69,7 +69,7 @@ import colorsPresets from "../../colors-presets";
 import variations from "./variations";
 
 import PGDropdown from "../../components/dropdown";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -80,6 +80,8 @@ import PGIconPicker from "../../components/icon-picker";
 import "animate.css";
 import "../../../node_modules/animate.css/animate.css";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -128,7 +130,6 @@ registerBlockType(metadata, {
 		var visible = attributes.visible;
 		var editMode = attributes.editMode;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -356,7 +357,7 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			// blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'display': { "Desktop": "grid" } };
 			// blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'gap': { "Desktop": "20px" } };
@@ -367,13 +368,20 @@ registerBlockType(metadata, {
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
+			var blockCssObj = {};
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[innerSelector] = closeWrap;
+			blockCssObj[innerSelector] = inner;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
@@ -401,17 +409,42 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
+				var wrapperX = attributes.wrapper;
+				var innerX = attributes.inner;
+				var closeWrapX = attributes.closeWrap;
+				var visibleX = attributes.visible;
 				var blockCssY = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (visibleX != undefined) {
+				var visibleY = { ...visibleX, options: visible.options };
+				setAttributes({ visible: visibleY });
+				blockCssObj[visibleSelector] = visibleY;
+				}
+
+				if (closeWrapX != undefined) {
+				var closeWrapY = { ...closeWrapX, options: closeWrap.options };
+				setAttributes({ closeWrap: closeWrapY });
+				blockCssObj[closeWrapSelector] = closeWrapY;
+				}
+
+				if (innerX != undefined) {
+				var innerY = { ...innerX, options: inner.options };
+				setAttributes({ inner: innerY });
+				blockCssObj[innerSelector] = innerY;
+				}
+
+				if (wrapperX != undefined) {
+				var wrapperY = { ...wrapperX, options: wrapper.options };
+				setAttributes({ wrapper: wrapperY });
+				blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+				
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -721,7 +754,7 @@ registerBlockType(metadata, {
 		const MY_TEMPLATE = [["post-grid/text", {}]];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-popup `,
+			className: ` ${blockId} ${wrapper.options.class} `,
 		});
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -1374,7 +1407,32 @@ registerBlockType(metadata, {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<PGcssClassPicker
+									tags={customTags}
+									label="CSS Class"
+									placeholder="Add Class"
+									value={wrapper.options.class}
+									onChange={(newVal) => {
+										var options = { ...wrapper.options, class: newVal };
+										setAttributes({
+											wrapper: { styles: wrapper.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={wrapper}
@@ -1515,34 +1573,11 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGBlockPatterns
+						<PGLibraryBlockVariations
 							blockName={"popup"}
+							blockId={blockId}
+							clientId={clientId}
 							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p className="">
-							Please use following class selector to apply your custom CSS
-						</p>
-
-						<div className="my-3">
-							<p className="font-bold">Text </p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
 						/>
 					</PanelBody>
 
@@ -1602,7 +1637,6 @@ registerBlockType(metadata, {
 													var inner = { ...atts.inner };
 
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
@@ -1614,13 +1648,12 @@ registerBlockType(metadata, {
 														wrapper: wrapper,
 														closeWrap: closeWrap,
 														inner: inner,
-														customCss: customCss,
 													});
 
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													var items = { ...blockCssY.items, ...blockCssRules };
+													var items = blockCssRules;
 
 													setAttributes({ blockCssY: { items: items } });
 

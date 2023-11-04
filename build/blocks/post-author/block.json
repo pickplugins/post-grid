@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-post-author"
         },
         "styles": {
           "color": {
@@ -152,10 +152,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "linkAttr": {
       "type": "array",
       "default": []
@@ -177,6 +173,7 @@
       "default": ""
     }
   },
+  "script": "front_script",
   "keywords": [
     "post author",
     "author profile",

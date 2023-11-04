@@ -64,6 +64,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					//     //console.log(pair[0] + ', ' + pair[1]);
 					// }
 
+					var onsubmitProceed = false;
+
 					onsubmitObj.map((action) => {
 						var actionId = action.id;
 
@@ -73,6 +75,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							responsesWrap.innerHTML = "";
 
 							loadingWrap.style.display = "none";
+
+
 							if (Object.keys(errors).length > 0) {
 								var responseHtml = "";
 								Object.entries(errors).map((x) => {
@@ -85,24 +89,34 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								responsesWrap.style.display = "block";
 
 								loadingWrap.style.display = "none";
+								onsubmitProceed = true;
 								throw errors;
 							}
 						}
 
 						if (actionId == "submitConfirm") {
 							if (confirm("Are you confirmed?")) {
+								onsubmitProceed = true;
 								processSubmit(formId, formData);
 
 								document.dispatchEvent(pgFormSubmitted);
 							} else {
-								return;
+								onsubmitProceed = false;
 							}
 						}
 					});
 
+
+					if (!onsubmitProceed) {
+						processSubmit(formId, formData);
+						document.dispatchEvent(pgFormSubmitted);
+					}
+
+
+
 					//formData.append('formData', formData);
 
-					setTimeout(() => {}, 3000);
+					setTimeout(() => { }, 3000);
 				});
 			});
 		}
@@ -250,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 								fetch(
 									post_grid_vars["siteUrl"] +
-										"/wp-json/post-grid/v2/loggedout_current_user",
+									"/wp-json/post-grid/v2/loggedout_current_user",
 									{
 										method: "POST",
 										body: { nonce: formFieldNames.form_wrap_nonce },
@@ -258,10 +272,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								)
 									.then((response) => {
 										if (response.ok && response.status < 400) {
-											response.json().then((data) => {});
+											response.json().then((data) => { });
 										}
 									})
-									.catch((error) => {});
+									.catch((error) => { });
 							}
 
 							if (actionId == "hideForm") {
@@ -288,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 				}
 			})
-			.catch((error) => {});
+			.catch((error) => { });
 	}
 
 	/*Form Visiblity*/
@@ -810,7 +824,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								}
 							);
 
-							
+
 							let intersection = userRoles.filter((x) =>
 								currentUserRolesX.includes(x)
 							);

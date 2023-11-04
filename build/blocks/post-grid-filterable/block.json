@@ -509,10 +509,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "scripts": {
       "type": "object",
       "default": {
@@ -583,6 +579,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "post grid filterable",
     "post filterable block",

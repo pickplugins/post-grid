@@ -64,13 +64,15 @@ import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
-import PGBlockPatterns from "../../components/block-patterns";
+import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -115,7 +117,7 @@ registerBlockType(metadata, {
 
 		var prefix = attributes.prefix;
 		var postfix = attributes.postfix;
-		var customCss = attributes.customCss;
+
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -217,17 +219,64 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var summuryX = attributes.summury;
+				var prefixX = attributes.prefix;
+				var postfixX = attributes.postfix;
+				var iconsWrapX = attributes.iconsWrap;
+				var iconsIdleX = attributes.iconsIdle;
+				var iconsFilledX = attributes.iconsFilled;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (iconsFilledX != undefined) {
+				var iconsFilledY = { ...iconsFilledX, options: iconsFilled.options };
+				setAttributes({ iconsFilled: iconsFilledY });
+				blockCssObj[iconsFilledSelector] = iconsFilledY;
+				}
+
+				if (iconsIdleX != undefined) {
+				var iconsIdleY = { ...iconsIdleX, options: iconsIdle.options };
+				setAttributes({ iconsIdle: iconsIdleY });
+				blockCssObj[iconsIdleSelector] = iconsIdleY;
+				}
+
+				if (iconsWrapX != undefined) {
+				var iconsWrapY = { ...iconsWrapX, options: iconsWrap.options };
+				setAttributes({ iconsWrap: iconsWrapY });
+				blockCssObj[iconsWrapSelector] = iconsWrapY;
+				}
+
+				if (postfixX != undefined) {
+				var postfixY = { ...postfixX, options: postfix.options };
+				setAttributes({ postfix: postfixY });
+				blockCssObj[postfixSelector] = postfixY;
+				}
+
+				if (prefixX != undefined) {
+				var prefixY = { ...prefixX, options: prefix.options };
+				setAttributes({ prefix: prefixY });
+				blockCssObj[prefixSelector] = prefixY;
+				}
+
+				if (summuryX != undefined) {
+				var summuryY = { ...summuryX, options: summury.options };
+				setAttributes({ summury: summuryY });
+				blockCssObj[summurySelector] = summuryY;
+				}
+
+				if (wrapperX != undefined) {
+				var wrapperY = { ...wrapperX, options: wrapper.options };
+				setAttributes({ wrapper: wrapperY });
+				blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+				
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {
@@ -805,12 +854,6 @@ registerBlockType(metadata, {
 			postId
 		);
 
-		useEffect(() => {
-			setAttributes({ blockId: blockIdX });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [clientId]);
-
 		// Wrapper CSS Class Selectors
 		const wrapperSelector = blockClass;
 
@@ -821,6 +864,46 @@ registerBlockType(metadata, {
 		const iconsIdleSelector = blockClass + " .icons-idle";
 		const summurySelector = blockClass + " .summury";
 
+		useEffect(() => {
+			var blockIdX = "pg" + clientId.split("-").pop();
+			setAttributes({ blockId: blockIdX });
+
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [clientId]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[iconsWrapSelector] = iconsWrap;
+			blockCssObj[iconsFilledSelector] = iconsFilled;
+			blockCssObj[iconsIdleSelector] = iconsIdle;
+			blockCssObj[summurySelector] = summury;
+			blockCssObj[prefixSelector] = prefix;
+			blockCssObj[postfixSelector] = postfix;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
+
+		const [prefixText, setprefixText] = useState(
+			myStore.parseCustomTags(prefix.options.text, customTags)
+		);
+		const [postfixText, setpostfixText] = useState(
+			myStore.parseCustomTags(postfix.options.text, customTags)
+		);
+
+		useEffect(() => {
+			var text = myStore.parseCustomTags(prefix.options.text, customTags);
+			setprefixText(text);
+		}, [prefix.options.text]);
+
+		useEffect(() => {
+			var text = myStore.parseCustomTags(postfix.options.text, customTags);
+			setpostfixText(text);
+		}, [postfix.options.text]);
 		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
 		// for (var x in breakPoints) {
@@ -839,14 +922,8 @@ registerBlockType(metadata, {
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		function replaceAll(str, correction) {
 			Object.keys(correction).forEach((key) => {
@@ -891,6 +968,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 										<SelectControl
@@ -1199,19 +1300,18 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
-										<label for="">Prefix</label>
-
-										<InputControl
-											value={prefix.options.text}
-											onChange={(newVal) => {
-												var options = { ...prefix.options, text: newVal };
-												setAttributes({
-													prefix: { styles: prefix.styles, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
+									<PGcssClassPicker
+										tags={customTags}
+										label="Prefix"
+										placeholder="Add Prefix"
+										value={prefix.options.text}
+										onChange={(newVal) => {
+											var options = { ...prefix.options, text: newVal };
+											setAttributes({
+												prefix: { styles: prefix.styles, options: options },
+											});
+										}}
+									/>
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1258,19 +1358,18 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<PanelRow>
-										<label for="">Postfix</label>
-
-										<InputControl
-											value={postfix.options.text}
-											onChange={(newVal) => {
-												var options = { ...postfix.options, text: newVal };
-												setAttributes({
-													postfix: { ...postfix, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
+									<PGcssClassPicker
+										tags={customTags}
+										label="Postfix"
+										placeholder="Add Postfix"
+										value={postfix.options.text}
+										onChange={(newVal) => {
+											var options = { ...postfix.options, text: newVal };
+											setAttributes({
+												postfix: { styles: postfix.styles, options: options },
+											});
+										}}
+									/>
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1291,53 +1390,11 @@ registerBlockType(metadata, {
 						</PanelBody>
 
 						<PanelBody title="Block Variations" initialOpen={false}>
-							<PGBlockPatterns
+							<PGLibraryBlockVariations
 								blockName={"woo-star-rate"}
+								blockId={blockId}
+								clientId={clientId}
 								onChange={onPickBlockPatterns}
-							/>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-							<div className="my-3">
-								<p className="font-bold">Title Wrapper</p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{/* your CSS here*/}"}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Prefix</p>
-								<p>
-									<code>
-										{prefixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<div className="my-3">
-								<p className="font-bold">Postfix</p>
-								<p>
-									<code>
-										{postfixSelector}
-										{"{/* your CSS here*/}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
 							/>
 						</PanelBody>
 
@@ -1355,9 +1412,7 @@ registerBlockType(metadata, {
 				<>
 					<div {...blockProps}>
 						{prefix.options.text && (
-							<span className={prefix.options.class}>
-								{prefix.options.text}
-							</span>
+							<span className={prefix.options.class}>{prefixText}</span>
 						)}
 
 						<div class="icons-wrap">
@@ -1417,9 +1472,7 @@ registerBlockType(metadata, {
 						</div>
 
 						{postfix.options.text && (
-							<span className={postfix.options.class}>
-								{postfix.options.text}
-							</span>
+							<span className={postfix.options.class}>{postfixText}</span>
 						)}
 					</div>
 				</>

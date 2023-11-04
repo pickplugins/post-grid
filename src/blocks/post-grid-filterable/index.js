@@ -143,7 +143,7 @@ registerBlockType(metadata, {
 		var layout = attributes.layout;
 		var queryArgs = attributes.queryArgs;
 		var blockCssY = attributes.blockCssY;
-		var customCss = attributes.customCss;
+
 		var blockId = attributes.blockId;
 
 		var blockIdX = attributes.blockId
@@ -350,7 +350,7 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			blockCssY.items[itemWrapSelector] =
 				blockCssY.items[itemWrapSelector] != undefined
@@ -790,7 +790,7 @@ registerBlockType(metadata, {
 
 			asdsdsd.then((res) => {
 				setBreakPointX(res.breakpoint);
-				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+				myStore.generateBlockCss(blockCssY.items, blockId);
 			});
 		}
 
@@ -1669,7 +1669,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		function generateBlockCssY() {
@@ -1775,7 +1775,7 @@ registerBlockType(metadata, {
 					body.insertAdjacentHTML("beforeend", divWrap);
 
 					var csswrappg = iframeDocument.getElementById("css-block-" + blockId);
-					var str = "<style>" + reponsiveCss + customCss + "</style>";
+					var str = "<style>" + reponsiveCss + "</style>";
 
 					csswrappg.insertAdjacentHTML("beforeend", str);
 				}, 200);
@@ -1791,7 +1791,7 @@ registerBlockType(metadata, {
 				wpfooter.insertAdjacentHTML("beforeend", divWrap);
 
 				var csswrappg = document.getElementById("css-block-" + blockId);
-				var str = "<style>" + reponsiveCss + customCss + "</style>";
+				var str = "<style>" + reponsiveCss + "</style>";
 				csswrappg.insertAdjacentHTML("beforeend", "");
 
 				setTimeout(() => {

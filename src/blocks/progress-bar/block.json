@@ -17,7 +17,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": ""
+          "class": "pg-progress-bar"
         },
         "styles": {
           "color": {
@@ -174,10 +174,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -190,6 +186,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "progress bar",
     "progress bars",

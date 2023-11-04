@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -41,171 +42,171 @@ class PGBlockAccordion
 
 
 
-        register_block_type('post-grid/accordion', array(
-            //'editor_script' => 'pgaccordion_editor_script',
-            //'script' => array($this, 'front_script'),
-            //'editor_style' => 'pgaccordion_editor_style',
-            //'style' => 'pgaccordion_front_style',
+        register_block_type(
+            'post-grid/accordion',
+            array(
+                //'editor_script' => 'pgaccordion_editor_script',
+                //'script' => array($this, 'front_script'),
+                //'editor_style' => 'pgaccordion_editor_style',
+                //'style' => 'pgaccordion_front_style',
 
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-accordion"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "items" => [
-                    "type" => "array",
-                    "default" => [
-                        [
-                            "isActive" => false,
-                            "headerText" => "What is Lorem Ipsum?",
-                            "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "icon" => "",
-                            "iconToggle" => "",
-                            "styles" => []
-                        ]
-                    ]
-                ],
-                "header" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "What is Lorem Ipsum?",
-                            "tag" => "div",
-                            "class" => "pg-accordion-header"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "headerActive" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "What is Lorem Ipsum?",
-                            "tag" => "div",
-                            "class" => "pg-accordion-header "
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "content" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "tag" => "div",
-                            "class" => "pg-accordion-content"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "icon" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "fas fa-chevron-right",
-                            "class" => "icon",
-                            "positon" => "beforeHeader",
-                            "enableToggle" => "yes"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
+                'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
+                'render_callback' => array($this, 'theHTML'),
+                'attributes' => [
+                    "wrapper" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "content" => "",
+                                "tag" => "div",
+                                "class" => "pg-accordion"
                             ],
-                            "textDecoration" => []
+                            "styles" => [
+
+                                "color" => [],
+
+                                "padding" => [],
+                                "margin" => [],
+                                "display" => []
+                            ]
                         ]
-                    ]
-                ],
-                "iconToggle" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "fas fa-chevron-down",
-                            "class" => "iconToggle"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
+                    ],
+                    "items" => [
+                        "type" => "array",
+                        "default" => [
+                            [
+                                "isActive" => false,
+                                "headerText" => "What is Lorem Ipsum?",
+                                "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                                "icon" => "",
+                                "iconToggle" => "",
+                                "styles" => []
+                            ]
+                        ]
+                    ],
+                    "header" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "text" => "What is Lorem Ipsum?",
+                                "tag" => "div",
+                                "class" => "pg-accordion-header"
                             ],
-                            "textDecoration" => []
+                            "styles" => [
+
+                                "color" => [],
+
+                                "padding" => [],
+                                "margin" => [],
+                                "display" => []
+                            ]
                         ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
+                    ],
+                    "headerActive" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "text" => "What is Lorem Ipsum?",
+                                "tag" => "div",
+                                "class" => "pg-accordion-header "
+                            ],
+                            "styles" => [
+
+                                "color" => [],
+
+                                "padding" => [],
+                                "margin" => [],
+                                "display" => []
+                            ]
+                        ]
+                    ],
+                    "content" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "text" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                                "tag" => "div",
+                                "class" => "pg-accordion-content"
+                            ],
+                            "styles" => [
+
+                                "color" => [],
+
+                                "padding" => [],
+                                "margin" => [],
+                                "display" => []
+                            ]
+                        ]
+                    ],
+                    "icon" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "library" => "fontAwesome",
+                                "srcType" => "class",
+                                "iconSrc" => "fas fa-chevron-right",
+                                "class" => "icon",
+                                "positon" => "beforeHeader",
+                                "enableToggle" => "yes"
+                            ],
+                            "styles" => [
+                                "color" => [],
+
+                                "padding" => [],
+                                "margin" => [],
+
+                                "display" => [],
+                                "fontSize" => [],
+                                "lineHeight" => [],
+                                "fontWeight" => [
+                                    "Desktop" => "700"
+                                ],
+                                "textDecoration" => []
+                            ]
+                        ]
+                    ],
+                    "iconToggle" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "library" => "fontAwesome",
+                                "srcType" => "class",
+                                "iconSrc" => "fas fa-chevron-down",
+                                "class" => "iconToggle"
+                            ],
+                            "styles" => [
+                                "color" => [],
+
+                                "padding" => [],
+                                "margin" => [],
+
+                                "display" => [],
+                                "fontSize" => [],
+                                "lineHeight" => [],
+                                "fontWeight" => [
+                                    "Desktop" => "700"
+                                ],
+                                "textDecoration" => []
+                            ]
+                        ]
+                    ],
+                    "blockId" => [
+                        "type" => "string",
+                        "default" => ""
+                    ],
+
+                    "blockCssY" => [
+                        "type" => "object",
+                        "default" => [
+                            "items" => []
+                        ]
                     ]
                 ]
-            ]
 
 
 
-        ));
+            )
+        );
     }
 
 
@@ -221,7 +222,7 @@ class PGBlockAccordion
 
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -232,7 +233,7 @@ class PGBlockAccordion
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $textOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
@@ -276,7 +277,7 @@ class PGBlockAccordion
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
 
@@ -297,77 +298,91 @@ class PGBlockAccordion
 
 
 
-        if (!empty($wrapperTag)) :
-?>
+        if (!empty($wrapperTag)):
+            ?>
 
-            <div class="PGBlockAccordion <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-
-
-
-                <?php
-                foreach ($items as $index => $item) {
-
-                ?>
-                    <div class="ac">
-                        <<?php echo esc_attr($headerTag); ?> class="ac-header ac-trigger <?php echo esc_attr($headerOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
-                            <?php if ($iconPosition == 'beforeHeader') : ?>
-                                <span class="icon-idle"><?php echo wp_kses_post($iconHtml); ?></span>
-                                <span class="icon-toggled"><?php echo wp_kses_post($iconToggleHtml); ?></span>
-
-                            <?php endif; ?>
-                            <span><?php echo $item['headerText']; ?></span>
-                            <?php if ($iconPosition == 'afterHeader') : ?>
-                                <span class="float-right">
-                                    <span class="icon-idle"><?php echo wp_kses_post($iconHtml); ?></span>
-                                    <span class="icon-toggled"><?php echo wp_kses_post($iconToggleHtml); ?></span>
-                                </span>
-                            <?php endif; ?>
-                        </<?php echo esc_attr($headerTag); ?>>
-
-                        <div class="ac-panel <?php echo esc_attr($contentOptions['class']); ?>" id="<?php echo esc_attr($blockId . $index); ?>">
-
-                            <?php  ?>
-                            <div class="ac-text"><?php echo wp_kses_post($item['content']); ?></div>
-                            <?php  ?>
-                        </div>
-                    </div>
+                                    <div class="PGBlockAccordion <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
-                <?php
-                }
 
-                ?>
-            </div>
-        <?php
+                                        <?php
+                                        foreach ($items as $index => $item) {
+
+                                            ?>
+                                                    <div class="ac">
+                                                        <<?php echo esc_attr($headerTag); ?> class="ac-header ac-trigger
+                                                            <?php echo esc_attr($headerOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
+                                                            <?php if ($iconPosition == 'beforeHeader'): ?>
+                                                                        <span class="icon-idle">
+                                                                            <?php echo wp_kses_post($iconHtml); ?>
+                                                                        </span>
+                                                                        <span class="icon-toggled">
+                                                                            <?php echo wp_kses_post($iconToggleHtml); ?>
+                                                                        </span>
+
+                                                            <?php endif; ?>
+                                                            <span>
+                                                                <?php echo $item['headerText']; ?>
+                                                            </span>
+                                                            <?php if ($iconPosition == 'afterHeader'): ?>
+                                                                        <span class="float-right">
+                                                                            <span class="icon-idle">
+                                                                                <?php echo wp_kses_post($iconHtml); ?>
+                                                                            </span>
+                                                                            <span class="icon-toggled">
+                                                                                <?php echo wp_kses_post($iconToggleHtml); ?>
+                                                                            </span>
+                                                                        </span>
+                                                            <?php endif; ?>
+                                                        </<?php echo esc_attr($headerTag); ?>>
+
+                                                        <div class="ac-panel <?php echo esc_attr($contentOptions['class']); ?>"
+                                                            id="<?php echo esc_attr($blockId . $index); ?>">
+
+                                                            <?php ?>
+                                                            <div class="ac-text">
+                                                                <?php echo wp_kses_post($item['content']); ?>
+                                                            </div>
+                                                            <?php ?>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <?php
+                                        }
+
+                                        ?>
+                                    </div>
+                                    <?php
 
         endif;
         ?>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                new Accordion('.<?php echo esc_attr($blockId); ?>', {
-                    duration: 400,
-                    onOpen: (currElement) => {},
-                    onClose: (currElement) => {},
-                    beforeOpen: (currElement) => {
-                        var iconIdle = currElement.querySelector('.icon-idle');
-                        var iconToggled = currElement.querySelector('.icon-toggled');
-                        if (iconIdle != null) {
-                            iconIdle.style.display = 'none';
-                            iconToggled.style.display = 'inline-block';
-                        }
-                    },
-                    beforeClose: (currElement) => {
-                        var iconIdle = currElement.querySelector('.icon-idle');
-                        var iconToggled = currElement.querySelector('.icon-toggled');
-                        if (iconIdle != null) {
-                            iconIdle.style.display = 'inline-block';
-                            iconToggled.style.display = 'none';
-                        }
-                    }
-                });
-            })
-        </script>
-<?php return ob_get_clean();
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function (event) {
+                                new Accordion('.<?php echo esc_attr($blockId); ?>', {
+                                    duration: 400,
+                                    onOpen: (currElement) => { },
+                                    onClose: (currElement) => { },
+                                    beforeOpen: (currElement) => {
+                                        var iconIdle = currElement.querySelector('.icon-idle');
+                                        var iconToggled = currElement.querySelector('.icon-toggled');
+                                        if (iconIdle != null) {
+                                            iconIdle.style.display = 'none';
+                                            iconToggled.style.display = 'inline-block';
+                                        }
+                                    },
+                                    beforeClose: (currElement) => {
+                                        var iconIdle = currElement.querySelector('.icon-idle');
+                                        var iconToggled = currElement.querySelector('.icon-toggled');
+                                        if (iconIdle != null) {
+                                            iconIdle.style.display = 'inline-block';
+                                            iconToggled.style.display = 'none';
+                                        }
+                                    }
+                                });
+                            })
+                        </script>
+                        <?php return ob_get_clean();
     }
 }
 

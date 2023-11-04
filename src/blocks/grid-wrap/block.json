@@ -23,16 +23,12 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-grid-wrap"
         },
         "styles": {}
       }
     },
     "blockId": {
-      "type": "string",
-      "default": ""
-    },
-    "customCss": {
       "type": "string",
       "default": ""
     },
@@ -43,6 +39,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "grid builder",
     "grid css",

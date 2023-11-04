@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "ul",
-          "class": ""
+          "class": "pg-woo-product-info"
         },
         "styles": {
           "color": {
@@ -327,10 +327,6 @@
         ]
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -343,6 +339,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "product info",
     "product additional info",

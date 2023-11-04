@@ -26,16 +26,12 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "flex-item-wrap"
+          "class": " pg-content-slider-item"
         },
         "styles": {}
       }
     },
     "blockId": {
-      "type": "string",
-      "default": ""
-    },
-    "customCss": {
       "type": "string",
       "default": ""
     },
@@ -47,6 +43,7 @@
     }
   },
   "editorStyle": "pgcontent-slider-splide-core",
+  "script": "front_script",
   "keywords": [
     "Content slider",
     "Image slider",

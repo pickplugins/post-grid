@@ -109,11 +109,6 @@ registerBlockType("post-grid/table-of-contents", {
 			default: "",
 		},
 
-		customCss: {
-			type: "string",
-			default: "",
-		},
-
 		blockCssY: {
 			type: "object",
 			default: { items: {} },
@@ -141,7 +136,6 @@ registerBlockType("post-grid/table-of-contents", {
 
 		var text = attributes.text;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -160,26 +154,20 @@ registerBlockType("post-grid/table-of-contents", {
 			if (blockId.length == 0) {
 				setAttributes({ blockId: blockIdX });
 
-				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+				myStore.generateBlockCss(blockCssY.items, blockId);
 			}
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
 			//console.log('blockId', blockId);
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockId]);
 
 		useEffect(() => {
 			//console.log('blockCssY', blockCssY.items);
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		function onPickCssLibraryText(args) {
@@ -409,31 +397,6 @@ registerBlockType("post-grid/table-of-contents", {
 									/>
 								</PGtab>
 							</PGtabs>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{textSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
 						</PanelBody>
 
 						<div className="px-3">

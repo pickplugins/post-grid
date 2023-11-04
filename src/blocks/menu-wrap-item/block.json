@@ -26,7 +26,7 @@
       "default": {
         "options": {
           "tag": "li",
-          "class": "flex-item-wrap",
+          "class": "flex-item-wrap pg-menu-wrap-item",
           "isActive": false
         },
         "styles": {
@@ -87,10 +87,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -99,6 +95,7 @@
     }
   },
   "editorStyle": "pgmenu_wrap_editor_style",
+  "script": "front_script",
   "keywords": [
     "menu",
     "menu block",

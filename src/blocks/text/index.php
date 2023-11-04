@@ -41,7 +41,7 @@ class PGBlockPostText
   {
 
 
-    global $postGridCustomCss;
+
     global $postGridCssY;
 
 
@@ -52,7 +52,7 @@ class PGBlockPostText
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-    $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
     $text = isset($attributes['text']) ? $attributes['text'] : [];
@@ -74,7 +74,7 @@ class PGBlockPostText
     $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-    $postGridCustomCss .= $customCss;
+
 
 
     if ($limitBy == 'character') {
@@ -104,12 +104,12 @@ class PGBlockPostText
 
     if (!empty($wrapperTag)):
       ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="
-        <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($textClass); ?>">
-        <?php echo $content; ?>
-      </<?php echo esc_attr($wrapperTag); ?>>
-      <?php
+                  <<?php echo esc_attr($wrapperTag); ?> class="
+                    <?php echo esc_attr($blockId); ?>
+                    <?php echo esc_attr($textClass); ?>">
+                    <?php echo $content; ?>
+                  </<?php echo esc_attr($wrapperTag); ?>>
+                  <?php
 
     endif;
 
@@ -125,7 +125,7 @@ class PGBlockPostText
 
 
 
-    <?php return ob_get_clean();
+            <?php return ob_get_clean();
   }
 }
 

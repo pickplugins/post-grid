@@ -65,6 +65,8 @@ import PGStyles from "../../components/styles";
 import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -156,7 +158,6 @@ registerBlockType(metadata, {
 
 		var wrapper = attributes.wrapper;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -171,7 +172,7 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			//blockCssY.items = [];
 
@@ -180,12 +181,16 @@ registerBlockType(metadata, {
 
 			//setAttributes({ blockCssY: { items: blockCssY.items } });
 		}, [clientId]);
-
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
+			var blockCssObj = {};
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
+			blockCssObj[wrapperSelector] = wrapper;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		function generateElementSudoCss(obj) {
 			var stylesObj = {};
@@ -229,9 +234,7 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			//console.log(wrapper);
 
-			//setAttributes({ customCss: customCss });
-
-			///myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			///myStore.generateBlockCss(blockCssY.items, blockId);
 
 			var elementCss = generateElementSudoCss(wrapper);
 
@@ -332,7 +335,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const MY_TEMPLATE = [
@@ -340,7 +343,7 @@ registerBlockType(metadata, {
 		];
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-grid-wrap-item border border-dashed`,
+			className: ` ${blockId} ${wrapper.options.class} border border-dashed`,
 		});
 
 		//const isParentOfSelectedBlock = useSelect((select) => select('core/block-editor').hasSelectedInnerBlock(clientId, true))
@@ -383,6 +386,30 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 									<PanelRow>
 										<label for="">Wrapper Tag</label>
 
@@ -420,31 +447,6 @@ registerBlockType(metadata, {
 									/>
 								</PGtab>
 							</PGtabs>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
 						</PanelBody>
 
 						<div className="px-2">

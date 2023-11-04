@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-social-share"
         },
         "styles": {
           "color": {
@@ -119,26 +119,12 @@
           "iconPositon": "beforeLabel"
         },
         "styles": {
-          "color": {
-            "Desktop": "#18978F"
-          },
-          "backgroundColor": {},
-          "padding": {
-            "Desktop": ""
-          },
           "margin": {
-            "Desktop": "5px 5px 5px 5px"
+            "Desktop": "10px 10px 10px 10px"
           },
-          "display": {},
-          "borderRadius": {},
           "fontSize": {
-            "Desktop": "35px"
-          },
-          "lineHeight": {},
-          "letterSpacing": {},
-          "fontWeight": {},
-          "textDecoration": {},
-          "textTransform": {}
+            "Desktop": "30px"
+          }
         },
         "items": [
           {
@@ -216,10 +202,6 @@
         ]
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -231,6 +213,7 @@
       "default": ""
     }
   },
+  "script": "front_script",
   "keywords": [
     "social share",
     "social share button",

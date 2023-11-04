@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,57 +19,57 @@ class PGBlockPostText
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/text/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/text', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "text" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-text"
-                        ],
-                        "styles" => [
+        register_block_type(
+            'post-grid/text',
+            array(
+                //'editor_script' => 'editor_script',
+                //'editor_style' => 'editor_style',
+                //'script' => 'front_script',
+                'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
+                //'style' => 'front_style',
+                'render_callback' => array($this, 'theHTML'),
+                'attributes' => [
+                    "text" => [
+                        "type" => "object",
+                        "default" => [
+                            "options" => [
+                                "content" => "",
+                                "tag" => "div",
+                                "class" => "pg-text"
+                            ],
+                            "styles" => [
 
-                            "color" => [],
+                                "color" => [],
 
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
+                                "padding" => [],
+                                "margin" => [],
+                                "display" => [],
+                                "fontSize" => [],
+                                "lineHeight" => [],
+                                "letterSpacing" => [],
+                                "fontFamily" => [],
+                                "fontWeight" => [],
+                                "textDecoration" => [],
+                                "textTransform" => []
+                            ]
+                        ]
+                    ],
+                    "blockId" => [
+                        "type" => "string",
+                        "default" => ""
+                    ],
+
+                    "blockCssY" => [
+                        "type" => "object",
+                        "default" => [
+                            "items" => []
                         ]
                     ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
                 ]
-            ]
 
 
-        ));
+            )
+        );
     }
 
     function front_script($attributes)
@@ -83,7 +84,7 @@ class PGBlockPostText
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -95,7 +96,7 @@ class PGBlockPostText
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
+
 
 
         $text = isset($attributes['text']) ? $attributes['text'] : [];
@@ -114,7 +115,7 @@ class PGBlockPostText
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
 
@@ -125,12 +126,13 @@ class PGBlockPostText
 
 
 
-        if (!empty($wrapperTag)) :
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
-                <?php echo  $content; ?>
-            </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+        if (!empty($wrapperTag)):
+            ?>
+                        <<?php echo esc_attr($wrapperTag); ?> class="
+                            <?php echo esc_attr($blockId); ?>">
+                            <?php echo $content; ?>
+                        </<?php echo esc_attr($wrapperTag); ?>>
+                        <?php
 
         endif;
 
@@ -146,7 +148,7 @@ class PGBlockPostText
 
 
 
-<?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

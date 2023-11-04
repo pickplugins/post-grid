@@ -43,7 +43,7 @@ class PGBlockListNestedItem
     {
 
 
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
 
@@ -55,14 +55,15 @@ class PGBlockListNestedItem
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
-
-
-        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
 
 
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+
+        $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
+
+
         $textOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
         $wrapperTag = isset($textOptions['tag']) ? $textOptions['tag'] : 'div';
@@ -74,7 +75,7 @@ class PGBlockListNestedItem
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        $postGridCustomCss .= $customCss;
+
 
 
 

@@ -30,7 +30,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "",
+          "class": "pg-post-meta",
           "tag": "div"
         },
         "styles": {
@@ -108,10 +108,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -123,6 +119,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "post meta",
     "custom field",

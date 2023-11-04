@@ -44,7 +44,7 @@ class PGBlockWooProductInfo
 
 
         global $postGridCss;
-        global $postGridCustomCss;
+
         global $postGridCssY;
 
         $post_ID = get_the_ID();
@@ -89,10 +89,10 @@ class PGBlockWooProductInfo
         $separatorText = isset($separatorOptions['text']) ? $separatorOptions['text'] : '';
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : [];
 
 
-        //$postGridCustomCss .= $customCss;
+
+        //
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
         //$product = wc_get_product($post_ID);
@@ -105,194 +105,200 @@ class PGBlockWooProductInfo
             $product = null;
         }
 
+        $obj['id'] = $post_ID;
+        $obj['type'] = 'post';
 
+
+
+        $wrapperClass = parse_css_class($wrapperClass, $obj);
 
         ob_start();
 
         if (!empty($wrapperTag)):
 
             ?>
-                        <<?php echo esc_attr($wrapperTag); ?> class="
-                            <?php echo esc_attr($blockId); ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>
+                <?php echo esc_attr($wrapperClass); ?>">
 
+
+                <?php
+
+
+
+                $i = 0;
+
+                if (!empty($itemsElements))
+                    foreach ($itemsElements as $index => $item) {
+                        $id = isset($item['id']) ? $item['id'] : '';
+
+                        $label = isset($item['label']) ? $item['label'] : '';
+                        $value = isset($item['value']) ? $item['value'] : '';
+
+                        $prefix = isset($item['prefix']) ? $item['prefix'] : '';
+                        $postfix = isset($item['postfix']) ? $item['postfix'] : '';
+                        $type = isset($item['type']) ? $item['type'] : '';
+
+                        $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
+
+                        $iconLibrary = isset($siteIcon['library']) ? $siteIcon['library'] : '';
+                        $iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
+                        $iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
+
+
+
+                        if ($iconLibrary == 'fontAwesome') {
+                            wp_enqueue_style('fontawesome-icons');
+                        } else if ($iconLibrary == 'iconFont') {
+                            wp_enqueue_style('icofont-icons');
+                        } else if ($iconLibrary == 'bootstrap') {
+                            wp_enqueue_style('bootstrap-icons');
+                        }
+
+                        $fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
+
+                        ?>
+
+                        <li class="item item-<?php echo esc_attr($i); ?>">
+
+
+                            <?php if (!empty($prefix)): ?>
+                                <span class='prefix'>
+                                    <?php echo wp_kses_post($prefix); ?>
+                                </span>
+                            <?php endif; ?>
+
+                            <?php echo wp_kses_post($fontIconHtml); ?>
 
                             <?php
 
 
+                            if ($product != null) {
 
-                            $i = 0;
+                                if ($id == 'weight') {
 
-                            if (!empty($itemsElements))
-                                foreach ($itemsElements as $index => $item) {
-                                    $id = isset($item['id']) ? $item['id'] : '';
-
-                                    $label = isset($item['label']) ? $item['label'] : '';
-                                    $value = isset($item['value']) ? $item['value'] : '';
-
-                                    $prefix = isset($item['prefix']) ? $item['prefix'] : '';
-                                    $postfix = isset($item['postfix']) ? $item['postfix'] : '';
-                                    $type = isset($item['type']) ? $item['type'] : '';
-
-                                    $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
-
-                                    $iconLibrary = isset($siteIcon['library']) ? $siteIcon['library'] : '';
-                                    $iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
-                                    $iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
-
-
-
-                                    if ($iconLibrary == 'fontAwesome') {
-                                        wp_enqueue_style('fontawesome-icons');
-                                    } else if ($iconLibrary == 'iconFont') {
-                                        wp_enqueue_style('icofont-icons');
-                                    } else if ($iconLibrary == 'bootstrap') {
-                                        wp_enqueue_style('bootstrap-icons');
-                                    }
-
-                                    $fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
+                                    $weight = ($product == null) ? 0 : $product->get_weight();
 
                                     ?>
-
-                                            <li class="item item-<?php echo esc_attr($i); ?>">
-
-
-                                                <?php if (!empty($prefix)): ?>
-                                                        <span class='prefix'>
-                                                            <?php echo wp_kses_post($prefix); ?>
-                                                        </span>
-                                                <?php endif; ?>
-
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-
-                                                <?php
-
-
-                                                if ($product != null) {
-
-                                                    if ($id == 'weight') {
-
-                                                        $weight = ($product == null) ? 0 : $product->get_weight();
-
-                                                        ?>
-                                                                <span class='value'>
-                                                                    <?php echo wp_kses_post($weight); ?>kg
-                                                                </span>
-                                                                <?php
-                                                    }
-                                                    if ($id == 'text') {
-
-
-                                                        ?>
-                                                                <span class='value'>
-                                                                    <?php echo wp_kses_post($value); ?>
-                                                                </span>
-                                                                <?php
-                                                    }
-
-
-
-                                                    if ($id == 'length') {
-                                                        $length = ($product == null) ? 0 : $product->get_length();
-
-                                                        ?>
-                                                                <span class='value'>
-                                                                    <?php echo wp_kses_post($length); ?>cm
-                                                                </span>
-                                                                <?php
-                                                    }
-                                                    if ($id == 'width') {
-                                                        $width = ($product == null) ? 0 : $product->get_width();
-
-                                                        ?>
-                                                                <span class='value'>
-                                                                    <?php echo wp_kses_post($width); ?>cm
-                                                                </span>
-                                                                <?php
-                                                    }
-                                                    if ($id == 'height') {
-                                                        $height = ($product == null) ? 0 : $product->get_height();
-                                                        ?>
-                                                                <span class='value'>
-                                                                    <?php echo wp_kses_post($height); ?>cm
-                                                                </span>
-                                                                <?php
-                                                    }
-                                                    if ($id == 'dimensions') {
-                                                        //$dimensions = $product->get_dimensions();
-                            
-                                                        ?>
-                                                                <span class='value'>
-                                                                    <?php //echo wp_kses_post($dimensions); 
-                                                                                                ?>
-                                                                </span>
-                                                                <?php
-                                                    }
-
-                                                    if ($type == 'taxonomy') {
-                                                        if (function_exists("wc_get_product_terms")) {
-
-                                                            $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
-                                                        } else {
-                                                            $terms = [];
-                                                        }
-
-                                                        $termsCount = count($terms);
-
-                                                        if (!empty($terms)) {
-                                                            $j = 1;
-                                                            foreach ($terms as $term) {
-                                                                echo $term;
-                                                                $termsCount = count($terms);
-                                                                if ($termsCount > $j) {
-                                                                    echo ', ';
-                                                                }
-
-                                                                $j++;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-
-
-
-
-                                                ?>
-
-
-
-                                                <?php if (!empty($postfix)): ?>
-                                                        <span class='postfix'>
-                                                            <?php echo wp_kses_post($postfix); ?>
-                                                        </span>
-                                                <?php endif; ?>
-
-                                            </li>
-
-                                            <?php
-                                            $i++;
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($weight); ?>kg
+                                    </span>
+                                    <?php
                                 }
+                                if ($id == 'text') {
+
+
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($value); ?>
+                                    </span>
+                                    <?php
+                                }
+
+
+
+                                if ($id == 'length') {
+                                    $length = ($product == null) ? 0 : $product->get_length();
+
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($length); ?>cm
+                                    </span>
+                                    <?php
+                                }
+                                if ($id == 'width') {
+                                    $width = ($product == null) ? 0 : $product->get_width();
+
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($width); ?>cm
+                                    </span>
+                                    <?php
+                                }
+                                if ($id == 'height') {
+                                    $height = ($product == null) ? 0 : $product->get_height();
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($height); ?>cm
+                                    </span>
+                                    <?php
+                                }
+                                if ($id == 'dimensions') {
+                                    //$dimensions = $product->get_dimensions();
+        
+                                    ?>
+                                    <span class='value'>
+                                        <?php //echo wp_kses_post($dimensions); 
+                                                                    ?>
+                                    </span>
+                                    <?php
+                                }
+
+                                if ($type == 'taxonomy') {
+                                    if (function_exists("wc_get_product_terms")) {
+
+                                        $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
+                                    } else {
+                                        $terms = [];
+                                    }
+
+                                    $termsCount = count($terms);
+
+                                    if (!empty($terms)) {
+                                        $j = 1;
+                                        foreach ($terms as $term) {
+                                            echo $term;
+                                            $termsCount = count($terms);
+                                            if ($termsCount > $j) {
+                                                echo ', ';
+                                            }
+
+                                            $j++;
+                                        }
+                                    }
+                                }
+                            }
+
+
+
 
 
                             ?>
 
 
 
+                            <?php if (!empty($postfix)): ?>
+                                <span class='postfix'>
+                                    <?php echo wp_kses_post($postfix); ?>
+                                </span>
+                            <?php endif; ?>
 
-
-                        </<?php echo esc_attr($wrapperTag); ?>>
-
-
-
-
+                        </li>
 
                         <?php
+                        $i++;
+                    }
+
+
+                ?>
+
+
+
+
+
+            </<?php echo esc_attr($wrapperTag); ?>>
+
+
+
+
+
+            <?php
 
         endif;
 
         ?>
 
-                <?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

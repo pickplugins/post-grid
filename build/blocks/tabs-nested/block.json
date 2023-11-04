@@ -187,7 +187,7 @@
         "options": {
           "content": "",
           "tag": "div",
-          "class": ""
+          "class": "pg-tabs"
         },
         "styles": {
           "color": {
@@ -203,10 +203,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -215,6 +211,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "nested tabs",
     "multi level tabs",

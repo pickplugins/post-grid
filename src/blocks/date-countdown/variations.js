@@ -20,7 +20,7 @@ const variations = [
 			wrapper: {
 				options: {
 					tag: "div",
-					class: "",
+					class: "pg-date-countdown",
 				},
 				styles: {},
 			},
@@ -311,7 +311,7 @@ const variations = [
 			expiredArg: {},
 
 			blockId: "",
-			customCss: "",
+
 			blockCssY: { items: {} },
 		},
 		innerBlocks: [["post-grid/text", {}]],
@@ -337,3 +337,4 @@ const variations = [
 ];
 
 export default variations;
+

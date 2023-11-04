@@ -27,7 +27,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-image-gallery"
         },
         "styles": {}
       }
@@ -36,15 +36,11 @@
       "type": "object",
       "default": {
         "options": {
-          "enable": true
+          "enable": false
         }
       }
     },
     "blockId": {
-      "type": "string",
-      "default": ""
-    },
-    "customCss": {
       "type": "string",
       "default": ""
     },
@@ -55,6 +51,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "image gallery",
     "image gallery block",

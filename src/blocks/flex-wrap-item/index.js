@@ -120,7 +120,6 @@ registerBlockType(metadata, {
 
 		var wrapper = attributes.wrapper;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -136,28 +135,20 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
 			setAttributes({ blockId: blockIdX });
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
+			setAttributes({ blockCssY: { items: blockCssY.items } });
 		}, [clientId]);
 
 		useEffect(() => {
 			var blockCssObj = {};
 
 			blockCssObj[wrapperSelector] = wrapper;
-			// blockCssObj[postTitleSelector] = postTitle;
-			// blockCssObj[prefixSelector] = prefix;
-			// blockCssObj[postfixSelector] = postfix;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
-
-		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
 
 		function generateElementSudoCss(obj) {
 			var stylesObj = {};
@@ -201,9 +192,7 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			//console.log(wrapper);
 
-			//setAttributes({ customCss: customCss });
-
-			///myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			///myStore.generateBlockCss(blockCssY.items, blockId);
 
 			var elementCss = generateElementSudoCss(wrapper);
 
@@ -304,7 +293,7 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const MY_TEMPLATE = [
@@ -350,10 +339,9 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
-									<label for="">CSS Class</label>
-
 									<PGcssClassPicker
 										tags={customTags}
+										label="CSS Class"
 										placeholder="Add Class"
 										value={wrapper.options.class}
 										onChange={(newVal) => {
@@ -414,32 +402,7 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Text </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
-						</PanelBody>
-
-						<div className="px-3">
+						<div className="px-3 ">
 							<PGMailSubsctibe />
 							<PGContactSupport
 								utm={{

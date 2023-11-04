@@ -258,10 +258,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -307,6 +303,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "post grid",
     "content grid",

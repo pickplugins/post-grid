@@ -65,6 +65,8 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -113,7 +115,6 @@ registerBlockType(metadata, {
 		var errorWrap = attributes.errorWrap;
 		var labelWrap = attributes.labelWrap;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -138,7 +139,7 @@ registerBlockType(metadata, {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			apiFetch({
 				path: "/post-grid/v2/post_types",
@@ -186,24 +187,18 @@ registerBlockType(metadata, {
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
 			var blockCssObj = {};
 
-			// blockCssObj[wrapperSelector] = wrapper;
-			// blockCssObj[labelSelector] = postTitle;
-			// blockCssObj[checkboxSelector] = prefix;
-			// blockCssObj[labelWrapSelector] = postfix;
-			// blockCssObj[inputWrapSelector] = postfix;
-			// blockCssObj[errorWrapSelector] = postfix;
+			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[labelSelector] = label;
+			blockCssObj[checkboxSelector] = input;
+			blockCssObj[labelWrapSelector] = labelWrap;
+			blockCssObj[inputWrapSelector] = inputWrap;
+			blockCssObj[errorWrapSelector] = errorWrap;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
-			var items = { ...blockCssY.items, ...blockCssRules };
+			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
@@ -718,11 +713,11 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-form-field-input`,
+			className: ` ${blockId}  ${wrapper.options.class}`,
 		});
 
 		return (
@@ -749,7 +744,32 @@ registerBlockType(metadata, {
 										className: "tab-style",
 									},
 								]}>
-								<PGtab name="options"></PGtab>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
 										obj={wrapper}
@@ -1273,31 +1293,6 @@ registerBlockType(metadata, {
 									/>
 								</PGtab>
 							</PGtabs>
-						</PanelBody>
-
-						<PanelBody title="Custom Style" initialOpen={false}>
-							<p>
-								Please use following class selector to apply your custom CSS
-							</p>
-
-							<div className="my-3">
-								<p className="font-bold">Wrapper </p>
-								<p>
-									<code>
-										{wrapperSelector}
-										{"{}"}{" "}
-									</code>
-								</p>
-							</div>
-
-							<TextareaControl
-								label="Custom CSS"
-								help="Do not use 'style' tag"
-								value={customCss}
-								onChange={(value) => {
-									setAttributes({ customCss: value });
-								}}
-							/>
 						</PanelBody>
 
 						<div className="px-2">

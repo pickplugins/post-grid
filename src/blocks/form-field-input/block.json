@@ -7,13 +7,13 @@
   "category": "post-grid",
   "parent": [
     "post-grid/form-wrap",
-		"post-grid/flex-wrap",
-		"post-grid/flex-wrap-item",
-		"post-grid/grid-wrap",
-		"post-grid/grid-wrap-item",
-		"core/columns",
-		"post-grid/tabs-nested-item",
-		"post-grid/accordion-nested-item"
+    "post-grid/flex-wrap",
+    "post-grid/flex-wrap-item",
+    "post-grid/grid-wrap",
+    "post-grid/grid-wrap-item",
+    "core/columns",
+    "post-grid/tabs-nested-item",
+    "post-grid/accordion-nested-item"
   ],
   "usesContext": [
     "postId",
@@ -33,7 +33,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-form-field-text"
         }
       }
     },
@@ -124,10 +124,6 @@
       "type": "string",
       "default": ""
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockCssY": {
       "type": "object",
       "default": {
@@ -135,6 +131,7 @@
       }
     }
   },
+  "script": "front_script",
   "keywords": [
     "form block for wordpress",
     "form block",

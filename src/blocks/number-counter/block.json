@@ -23,7 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": ""
+          "class": "pg-number-counter"
         },
         "styles": {
           "color": {
@@ -112,10 +112,6 @@
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
-    },
     "blockId": {
       "type": "string",
       "default": ""
@@ -128,6 +124,7 @@
     }
   },
   "style": "front_style",
+  "script": "front_script",
   "keywords": [
     "number counter",
     "number counter block",

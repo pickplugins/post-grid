@@ -271,10 +271,7 @@ registerBlockType("post-grid/post-grid-query", {
 			type: "string",
 			default: "",
 		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
+
 		blockCssY: {
 			type: "object",
 			default: { items: {} },
@@ -312,7 +309,6 @@ registerBlockType("post-grid/post-grid-query", {
 		var layout = attributes.layout;
 		var queryArgs = attributes.queryArgs;
 
-		var customCss = attributes.customCss;
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
@@ -358,7 +354,7 @@ registerBlockType("post-grid/post-grid-query", {
 			var blockIdX = "pg" + clientId.split("-").pop();
 			setAttributes({ blockId: blockIdX });
 
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 
 			// blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'display': { "Desktop": "flex" } };
 			//blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'gap': { "Desktop": "1em" } };
@@ -369,13 +365,7 @@ registerBlockType("post-grid/post-grid-query", {
 		}, [clientId]);
 
 		useEffect(() => {
-			setAttributes({ customCss: customCss });
-
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-		}, [customCss]);
-
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		const [posts, setPosts] = useState([]); // Using the hook.
@@ -2266,31 +2256,6 @@ registerBlockType("post-grid/post-grid-query", {
 								/>
 							</PGtab>
 						</PGtabs>
-					</PanelBody>
-
-					<PanelBody title="Custom Style" initialOpen={false}>
-						<p className="">
-							Please use following class selector to apply your custom CSS
-						</p>
-
-						<div className="my-3">
-							<p className="font-bold">Text </p>
-							<p>
-								<code>
-									{wrapperSelector}
-									{"{}"}{" "}
-								</code>
-							</p>
-						</div>
-
-						<TextareaControl
-							label="Custom CSS"
-							help="Do not use 'style' tag"
-							value={customCss}
-							onChange={(value) => {
-								setAttributes({ customCss: value });
-							}}
-						/>
 					</PanelBody>
 
 					<div className="px-2">

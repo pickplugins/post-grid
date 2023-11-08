@@ -30,15 +30,12 @@
           "class": "pg-layers"
         },
         "styles": {
-          "color": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "block"
           },
-          "position": {},
-          "zIndex": {},
-          "top": {},
-          "right": {},
-          "bottom": {},
-          "left": {}
+          "backgroundColor": {
+            "Desktop": "#F1F7F9"
+          }
         }
       }
     },

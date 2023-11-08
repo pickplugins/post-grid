@@ -137,6 +137,9 @@ registerBlockType(metadata, {
 		var wrapper = attributes.wrapper;
 		var lightbox = attributes.lightbox;
 
+		const lightboxEnable =
+			lightbox.options.enable == undefined ? true : lightbox.options.enable;
+
 		var blockCssY = attributes.blockCssY;
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -427,17 +430,17 @@ registerBlockType(metadata, {
 
 					<PanelBody title="Lightbox" initialOpen={false}>
 						<PanelRow>
-							<label for="">Enable</label>
-							<SelectControl
-								label=""
-								value={lightbox.options.enable}
-								options={[
-									{ label: "Choose...", value: "" },
-									{ label: "True", value: "true" },
-									{ label: "False", value: "false" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...lightbox.options, enable: newVal };
+							<ToggleControl
+								label="Enable?"
+								help={
+									lightboxEnable ? "Lightbox Enabled" : "Lightbox Disabled."
+								}
+								checked={lightboxEnable ? true : false}
+								onChange={(e) => {
+									var options = {
+										...lightbox.options,
+										enable: lightboxEnable ? false : true,
+									};
 									setAttributes({
 										lightbox: { ...lightbox, options: options },
 									});

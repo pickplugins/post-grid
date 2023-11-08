@@ -49,7 +49,6 @@ const variations = [
 			],
 			countdownWrapper: {
 				styles: {
-					color: {},
 					backgroundColor: { Desktop: "#9DD6DF" },
 					display: { Desktop: "flex" },
 					alignItems: { Desktop: "center" },
@@ -64,7 +63,13 @@ const variations = [
 			},
 			inner: {
 				options: { enable: true, tag: "div", class: "" },
-				styles: { display: {} },
+				styles: {
+					color: { Desktop: "#000000 !important" },
+					fontSize: { Desktop: "18px" },
+					fontFamily: { Desktop: "Poppins" },
+					fontStyle: { Desktop: "normal" },
+					fontWeight: { Desktop: "400" },
+				},
 			},
 			items: {
 				options: {
@@ -76,18 +81,11 @@ const variations = [
 					dayEnable: true,
 				},
 				styles: {
-					textAlign: [],
 					color: { Desktop: "#000000" },
-					padding: [],
 					margin: { Desktop: "0px 0px 0px 0px !important" },
-					display: [],
 					fontSize: { Desktop: "30px" },
-					lineHeight: [],
-					letterSpacing: [],
 					fontFamily: { Desktop: "Righteous" },
 					fontWeight: { Desktop: "600" },
-					textDecoration: [],
-					textTransform: [],
 					fontStyle: { Desktop: "normal" },
 				},
 			},
@@ -99,17 +97,14 @@ const variations = [
 					label: "",
 					prefix: "",
 				},
-				styles: { color: { Desktop: "" }, fontSize: { Desktop: "" } },
+				styles: {},
 			},
 			second: {
 				styles: {
 					color: { Desktop: "#d9eaf2" },
 					backgroundColor: { Desktop: "#18978F" },
 					padding: { Desktop: "20px 20px 20px 20px" },
-					margin: [],
-					backgroundImage: [],
 					textDecoration: { Desktop: "none #000000 wavy 1px" },
-					borderBottom: [],
 					transition: { Desktop: "all 0.4s ease 0s" },
 					fontSize: { Desktop: "5rem" },
 					fontWeight: { Desktop: "700" },
@@ -136,17 +131,14 @@ const variations = [
 					label: "",
 					prefix: "",
 				},
-				styles: { color: { Desktop: "" }, fontSize: { Desktop: "" } },
+				styles: {},
 			},
 			minute: {
 				styles: {
 					color: { Desktop: "#d9eaf2" },
 					backgroundColor: { Desktop: "#18978F" },
 					padding: { Desktop: "20px 20px 20px 20px" },
-					margin: [],
-					backgroundImage: [],
 					textDecoration: { Desktop: "none #000000 wavy 1px" },
-					borderBottom: [],
 					transition: { Desktop: "all 0.4s ease 0s" },
 					fontSize: { Desktop: "5rem" },
 					fontWeight: { Desktop: "700" },
@@ -173,17 +165,14 @@ const variations = [
 					label: "",
 					prefix: "",
 				},
-				styles: { color: { Desktop: "" }, fontSize: { Desktop: "" } },
+				styles: {},
 			},
 			hour: {
 				styles: {
 					color: { Desktop: "#d9eaf2" },
 					backgroundColor: { Desktop: "#18978F" },
 					padding: { Desktop: "20px 20px 20px 20px" },
-					margin: [],
-					backgroundImage: [],
 					textDecoration: { Desktop: "none #000000 wavy 1px" },
-					borderBottom: [],
 					transition: { Desktop: "all 0.4s ease 0s" },
 					fontSize: { Desktop: "5rem" },
 					fontWeight: { Desktop: "700" },
@@ -210,38 +199,20 @@ const variations = [
 					label: "",
 					prefix: "",
 				},
-				styles: {
-					textAlign: [],
-					color: {},
-					padding: [],
-					margin: {},
-					display: [],
-					fontSize: {},
-					lineHeight: [],
-					letterSpacing: [],
-					fontFamily: {},
-					fontWeight: {},
-					textDecoration: [],
-					textTransform: [],
-					fontStyle: {},
-				},
+				styles: {},
 			},
 			day: {
 				styles: {
 					color: { Desktop: "#d9eaf2" },
 					backgroundColor: { Desktop: "#18978F" },
 					padding: { Desktop: "20px 20px 20px 20px" },
-					margin: [],
-					backgroundImage: [],
 					textDecoration: { Desktop: "none #000000 wavy 1px" },
-					borderBottom: [],
 					transition: { Desktop: "all 0.4s ease 0s" },
 					fontSize: { Desktop: "5rem" },
 					fontWeight: { Desktop: "700" },
 					textShadow: { Desktop: "5px 5px 0px #4d4d4d" },
 					display: { Desktop: "flex" },
 					flexDirection: { Desktop: "column" },
-					alignContent: {},
 					alignItems: { Desktop: "center" },
 					borderRadius: { Desktop: "10px 10px 10px 10px" },
 				},
@@ -264,48 +235,98 @@ const variations = [
 					class: "date-countdown-icon",
 				},
 				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					fontSize: { Desktop: "" },
+					color: {
+						Desktop: "#000000 !important",
+					},
+					fontSize: {
+						Desktop: "18px",
+					},
+					fontFamily: {
+						Desktop: "Poppins",
+					},
+					fontStyle: {
+						Desktop: "normal",
+					},
+					fontWeight: {
+						Desktop: "400",
+					},
 				},
 			},
 			separator: {
 				options: { text: ":", class: "separator", position: "afterEachItems" },
 				styles: {
 					color: { Desktop: "#d9eaf2" },
-					backgroundColor: [],
-					padding: [],
-					margin: [],
-					backgroundImage: [],
 					textDecoration: { Desktop: "none #000000 wavy 1px" },
-					borderBottom: [],
 					transition: { Desktop: "all 0.4s ease 0s" },
 					fontSize: { Desktop: "5rem" },
 					fontWeight: { Desktop: "700" },
 					textShadow: { Desktop: "5px 5px 0px #4d4d4d" },
 				},
-				hover: {
-					borderBottom: [],
-					color: { Desktop: "#ffffff" },
-					backgroundColor: [],
-					boxShadow: [],
-					textShadow: { Desktop: "6px 6px 0px #252424" },
-				},
 			},
 			label: {
 				options: { enable: true, text: "", class: "label", position: "" },
-				styles: { color: { Desktop: "" }, backgroundColor: { Desktop: "" } },
+				styles: {
+					color: {
+						Desktop: "#000000 !important",
+					},
+					fontSize: {
+						Desktop: "18px",
+					},
+					fontFamily: {
+						Desktop: "Poppins",
+					},
+					fontStyle: {
+						Desktop: "normal",
+					},
+					fontWeight: {
+						Desktop: "400",
+					},
+				},
 			},
 			prefix: {
 				options: { text: "", class: "prefix" },
-				styles: { color: { Desktop: "#DFBB9D" }, backgroundColor: {} },
+				styles: {
+					color: {
+						Desktop: "#000000 !important",
+					},
+					fontSize: {
+						Desktop: "18px",
+					},
+					fontFamily: {
+						Desktop: "Poppins",
+					},
+					fontStyle: {
+						Desktop: "normal",
+					},
+					fontWeight: {
+						Desktop: "400",
+					},
+					margin: {
+						Desktop: "0px 10px 0px 0px",
+					},
+				},
 			},
 			postfix: {
 				options: { text: "", class: "postfix" },
 				styles: {
-					color: {},
-					backgroundColor: {},
-					fontSize: { Desktop: "30px" },
+					color: {
+						Desktop: "#000000 !important",
+					},
+					fontSize: {
+						Desktop: "18px",
+					},
+					fontFamily: {
+						Desktop: "Poppins",
+					},
+					fontStyle: {
+						Desktop: "normal",
+					},
+					fontWeight: {
+						Desktop: "400",
+					},
+					margin: {
+						Desktop: "0px 0px 0px 10px",
+					},
 				},
 			},
 			expiredArg: {},

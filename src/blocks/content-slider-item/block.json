@@ -38,7 +38,11 @@
     "blockCssY": {
       "type": "object",
       "default": {
-        "items": {}
+        "items": {
+          "height": {
+            "Desktop": "300px"
+          }
+        }
       }
     }
   },

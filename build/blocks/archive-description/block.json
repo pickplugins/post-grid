@@ -26,17 +26,8 @@
           "class": "pg-archive-description"
         },
         "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "block"
           }
         }
       }
@@ -59,19 +50,19 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+            "Desktop": "#000000 !important"
           },
           "fontSize": {
-            "Desktop": ""
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
           }
         }
       }
@@ -88,19 +79,13 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+            "Desktop": "#000000 !important"
           },
           "fontSize": {
-            "Desktop": ""
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 0px"
           }
         }
       }
@@ -114,10 +99,22 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000 !important"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 0px"
           }
         }
       }
@@ -131,10 +128,22 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000 !important"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "margin": {
+            "Desktop": "0px 0px 0px 10px"
           }
         }
       }

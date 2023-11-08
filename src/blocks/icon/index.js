@@ -616,19 +616,21 @@ registerBlockType(metadata, {
 		}
 
 		function onRemoveStyleText(sudoScource, key) {
-			var object = myStore.deletePropertyDeep(text, [
+			var textX = { ...text };
+			var object = myStore.deletePropertyDeep(textX, [
 				sudoScource,
 				key,
 				breakPointX,
 			]);
 			setAttributes({ text: object });
 
+			var blockCssX = { ...blockCssY };
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
 				textSelector
 			);
 			var cssPropty = myStore.cssAttrParse(key);
-			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+			var cssObject = myStore.deletePropertyDeep(blockCssX.items, [
 				elementSelector,
 				cssPropty,
 				breakPointX,

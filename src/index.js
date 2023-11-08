@@ -154,6 +154,8 @@ import "./blocks/layers";
 import "./blocks/layer";
 import "./blocks/flex-wrap";
 import "./blocks/flex-wrap-item";
+import "./blocks/masonry-wrap";
+import "./blocks/masonry-wrap-item";
 
 import "./blocks/grid-wrap";
 import "./blocks/grid-wrap-item";

@@ -28,11 +28,7 @@
           "tag": "div",
           "class": "pg-grid-wrap-item"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "blockId": {

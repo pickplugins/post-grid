@@ -68,7 +68,7 @@ class PGBlockImage
 
 
 
-      if ($lightboxEnable === 'true') {
+      if ($lightboxEnable === true) {
         wp_enqueue_script('fslightbox');
         wp_enqueue_script('pgimage_front_script');
       }
@@ -88,7 +88,6 @@ class PGBlockImage
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
     $galleryId = isset($block->context['post-grid/galleryId']) ? $block->context['post-grid/galleryId'] : $blockId;
-
 
 
 
@@ -223,7 +222,7 @@ class PGBlockImage
     }
 
 
-    if ($lightboxEnable == 'true') {
+    if ($lightboxEnable == true) {
 
       $linkUrl = $attachment_url;
     }
@@ -288,7 +287,7 @@ class PGBlockImage
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
 
-
+    
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
@@ -304,7 +303,7 @@ class PGBlockImage
               <?php echo esc_attr($blockId); ?>
               <?php echo esc_attr($wrapperClass); ?>">
               <?php if (!empty($featuredImageLinkTo)): ?>
-                  <a <?php if ($lightboxEnable == 'true'): ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>
+                  <a <?php if ($lightboxEnable == true): ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>
                     href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
                     rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
@@ -315,7 +314,7 @@ class PGBlockImage
                   </a>
               <?php else: ?>
 
-                  <?php if ($lightboxEnable == 'true'): ?>
+                  <?php if ($lightboxEnable == true): ?>
                       <a href=" <?php echo esc_url_raw($attachment_url); ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
                         <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
                           srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>"
@@ -340,7 +339,7 @@ class PGBlockImage
             <?php if (!empty($featuredImageLinkTo)): ?>
                 <a class=" <?php echo esc_attr($blockId); ?>"
                   href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
-                  rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php if ($lightboxEnable == 'true'): ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
+                  rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php if ($lightboxEnable == true): ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
 
 
                   <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
@@ -350,7 +349,7 @@ class PGBlockImage
                 </a>
             <?php else: ?>
 
-                <?php if ($lightboxEnable == 'true'): ?>
+                <?php if ($lightboxEnable == true): ?>
                     <a class=" <?php echo esc_attr($blockId); ?>"
                       href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
                       data-fslightbox=" <?php echo esc_attr($galleryId); ?>"> <img <?php echo esc_attr($linkAttrStr); ?>

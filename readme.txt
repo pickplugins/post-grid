@@ -382,6 +382,15 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 == Changelog ==
 
+= 2.2.64 =
+
+- 2023-10-25 - fix - block duplicate issue fixed.
+- 2023-10-25 - fix - image light-box issue fixed.
+- 2023-10-25 - added - block variation added.
+- 2023-10-25 - added - Masonry block added.
+- 2023-10-25 - added - CSS class picker added.
+- 2023-10-25 - update - Accordion Item Block - copy style feature update.
+
 = 2.2.63 =
 
 - 2023-10-25 - fix - accordion block - schema data issue fixed.

@@ -12,10 +12,6 @@
     "post-grid/galleryId",
     "post-grid/lightbox"
   ],
-  "providesContext": {
-    "post-grid/galleryId": "blockId",
-    "post-grid/lightbox": "lightbox"
-  },
   "supports": {
     "align": [
       "wide",
@@ -32,7 +28,7 @@
         },
         "styles": {
           "backgroundColor": {
-            "Desktop": ""
+            "Desktop": "#F1F7F9"
           }
         }
       }

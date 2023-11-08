@@ -1449,6 +1449,8 @@ registerBlockType(metadata, {
 			className: ` ${blockId} ${wrapper.options.class}`,
 		});
 
+		let counts = 0;
+
 		return (
 			<>
 				<InspectorControls>
@@ -1498,7 +1500,7 @@ registerBlockType(metadata, {
 											}}
 										/>
 									</PanelRow>
-									<PanelRow>
+									{/* <PanelRow>
 										<label for="">Wrapper Tag</label>
 
 										<SelectControl
@@ -1523,7 +1525,7 @@ registerBlockType(metadata, {
 												});
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -2136,67 +2138,72 @@ registerBlockType(metadata, {
 					</div>
 				</InspectorControls>
 
-				<div {...blockProps}>
-					<ol>
-						{elements.items.map((x, index) => {
-							return (
-								<li className={"item item-" + index}>
-									{x.url.length > 0 && (
-										<a href={x.url}>
-											{elements.options.showIcon &&
-												icon.options.position == "beforeLabel" && (
-													<span className={`icon ${x.siteIcon.iconSrc}`}></span>
-												)}
-											{elements.options.showLabel && (
-												<span className="label">
-													{x.customText.length > 0 ? x.customText : x.label}
-												</span>
-											)}
-											{elements.options.showIcon &&
-												icon.options.position == "afterLabel" && (
-													<span className={`icon ${x.siteIcon.iconSrc}`}></span>
-												)}
-										</a>
-									)}
+				{/* <div {...blockProps}> */}
+				<ol {...blockProps}>
+					{elements.items.map((x, index) => {
+						counts++;
+						const showSeparator = counts < elements.items.length;
 
-									{x.url.length == 0 && (
-										<span>
-											{elements.options.showIcon &&
-												icon.options.position == "beforeLabel" && (
-													<span className={`icon ${x.siteIcon.iconSrc}`}></span>
-												)}
-											{elements.options.showLabel && (
-												<span className="label">
-													{x.customText.length > 0 ? x.customText : x.label}
-												</span>
+						return (
+							<li className={"item item-" + index}>
+								{x.url.length > 0 && (
+									<a href={x.url}>
+										{elements.options.showIcon &&
+											icon.options.position == "beforeLabel" && (
+												<span className={`icon ${x.siteIcon.iconSrc}`}></span>
 											)}
-											{elements.options.showIcon &&
-												icon.options.position == "afterLabel" && (
-													<span className={`icon ${x.siteIcon.iconSrc}`}></span>
-												)}
-										</span>
-									)}
+										{elements.options.showLabel && (
+											<span className="label">
+												{x.customText.length > 0 ? x.customText : x.label}
+											</span>
+										)}
+										{elements.options.showIcon &&
+											icon.options.position == "afterLabel" && (
+												<span className={`icon ${x.siteIcon.iconSrc}`}></span>
+											)}
+									</a>
+								)}
 
-									{elements.options.showSeparator && (
-										<>
-											{elements.options.showIcon &&
-												icon.options.position == "beforeSeparator" && (
-													<span className={`icon ${x.siteIcon.iconSrc}`}></span>
-												)}
-											{elements.items.length > index && (
-												<span class="separator">{separator.options.text}</span>
+								{x.url.length == 0 && (
+									<span>
+										{elements.options.showIcon &&
+											icon.options.position == "beforeLabel" && (
+												<span className={`icon ${x.siteIcon.iconSrc}`}></span>
 											)}
-											{elements.options.showIcon &&
-												icon.options.position == "afterSeparator" && (
-													<span className={`icon ${x.siteIcon.iconSrc}`}></span>
-												)}
-										</>
-									)}
-								</li>
-							);
-						})}
-					</ol>
-				</div>
+										{elements.options.showLabel && (
+											<span className="label">
+												{x.customText.length > 0 ? x.customText : x.label}
+											</span>
+										)}
+										{elements.options.showIcon &&
+											icon.options.position == "afterLabel" && (
+												<span className={`icon ${x.siteIcon.iconSrc}`}></span>
+											)}
+									</span>
+								)}
+
+								{elements.options.showSeparator && showSeparator && (
+									<>
+										{elements.options.showIcon &&
+											icon.options.position == "beforeSeparator" && (
+												<span className={`icon ${x.siteIcon.iconSrc}`}></span>
+											)}
+										{showSeparator && (
+											<span className="separator">
+												{separator.options.text}
+											</span>
+										)}
+										{elements.options.showIcon &&
+											icon.options.position == "afterSeparator" && (
+												<span className={`icon ${x.siteIcon.iconSrc}`}></span>
+											)}
+									</>
+								)}
+							</li>
+						);
+					})}
+				</ol>
+				{/* </div> */}
 			</>
 		);
 	},

@@ -970,10 +970,10 @@ registerBlockType(metadata, {
 									] == undefined
 										? "Form Type"
 										: formTypeArgs[
-											form.options == undefined
-												? form.type
-												: form.options.type
-										].label
+												form.options == undefined
+													? form.type
+													: form.options.type
+										  ].label
 								}
 								options={formTypeArgs}
 								onChange={(option, index) => {
@@ -993,7 +993,7 @@ registerBlockType(metadata, {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1077,7 +1077,7 @@ registerBlockType(metadata, {
 							activeTab="styles"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1349,84 +1349,84 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
-																					<PGDropdown
-																						position="bottom right"
-																						variant="secondary"
-																						buttonTitle={
-																							item.value.length == 0
-																								? "Choose Month"
-																								: monthsNum[item.value].label
-																						}
-																						options={monthsNum}
-																						onChange={(option, optionIndex) => {
-																							var visibleX = { ...visible };
-																							visibleX[groupId]["args"][index][
-																								"value"
-																							] = option.value;
-																							setAttributes({
-																								visible: visibleX,
-																							});
-																						}}
-																						value={item.value}></PGDropdown>
-																				</PanelRow>
-																			</>
-																		)}
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
+																				<PGDropdown
+																					position="bottom right"
+																					variant="secondary"
+																					buttonTitle={
+																						item.value.length == 0
+																							? "Choose Month"
+																							: monthsNum[item.value].label
+																					}
+																					options={monthsNum}
+																					onChange={(option, optionIndex) => {
+																						var visibleX = { ...visible };
+																						visibleX[groupId]["args"][index][
+																							"value"
+																						] = option.value;
+																						setAttributes({
+																							visible: visibleX,
+																						});
+																					}}
+																					value={item.value}></PGDropdown>
+																			</PanelRow>
+																		</>
+																	)}
 
 																	{(item.compare == "between" ||
 																		item.compare == "exist") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
-																					<PGDropdown
-																						position="bottom right"
-																						variant="secondary"
-																						buttonTitle={"Choose Month"}
-																						options={monthsNum}
-																						onChange={(option, optionIndex) => {
-																							var visibleX = { ...visible };
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
+																				<PGDropdown
+																					position="bottom right"
+																					variant="secondary"
+																					buttonTitle={"Choose Month"}
+																					options={monthsNum}
+																					onChange={(option, optionIndex) => {
+																						var visibleX = { ...visible };
 
-																							visibleX[groupId]["args"][index][
-																								"values"
-																							].push(option.value);
-																							setAttributes({
-																								visible: visibleX,
-																							});
-																						}}
-																						value={item.values}></PGDropdown>
-																				</PanelRow>
+																						visibleX[groupId]["args"][index][
+																							"values"
+																						].push(option.value);
+																						setAttributes({
+																							visible: visibleX,
+																						});
+																					}}
+																					value={item.values}></PGDropdown>
+																			</PanelRow>
 
-																				<div>
-																					{item.values.map((x, i) => {
-																						return (
-																							<div className="flex justify-between my-1">
-																								<span>{monthsNum[x].label}</span>
-																								<span
-																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																									onClick={(ev) => {
-																										var visibleX = { ...visible };
-																										item.values.splice(i, 1);
+																			<div>
+																				{item.values.map((x, i) => {
+																					return (
+																						<div className="flex justify-between my-1">
+																							<span>{monthsNum[x].label}</span>
+																							<span
+																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																								onClick={(ev) => {
+																									var visibleX = { ...visible };
+																									item.values.splice(i, 1);
 
-																										visibleX[groupId]["args"][
-																											index
-																										]["values"] = item.values;
-																										setAttributes({
-																											visible: visibleX,
-																										});
-																									}}>
-																									<Icon
-																										fill="#fff"
-																										icon={close}
-																									/>
-																								</span>
-																							</div>
-																						);
-																					})}
-																				</div>
-																			</>
-																		)}
+																									visibleX[groupId]["args"][
+																										index
+																									]["values"] = item.values;
+																									setAttributes({
+																										visible: visibleX,
+																									});
+																								}}>
+																								<Icon
+																									fill="#fff"
+																									icon={close}
+																								/>
+																							</span>
+																						</div>
+																					);
+																				})}
+																			</div>
+																		</>
+																	)}
 																</>
 															)}
 
@@ -1463,86 +1463,86 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
-																					<PGDropdown
-																						position="bottom right"
-																						variant="secondary"
-																						buttonTitle={
-																							item.value.length == 0
-																								? "Choose Day"
-																								: weekDayNumn[item.value].label
-																						}
-																						options={weekDayNumn}
-																						onChange={(option, optionIndex) => {
-																							var visibleX = { ...visible };
-																							visibleX[groupId]["args"][index][
-																								"value"
-																							] = option.value;
-																							setAttributes({
-																								visible: visibleX,
-																							});
-																						}}
-																						value={item.value}></PGDropdown>
-																				</PanelRow>
-																			</>
-																		)}
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
+																				<PGDropdown
+																					position="bottom right"
+																					variant="secondary"
+																					buttonTitle={
+																						item.value.length == 0
+																							? "Choose Day"
+																							: weekDayNumn[item.value].label
+																					}
+																					options={weekDayNumn}
+																					onChange={(option, optionIndex) => {
+																						var visibleX = { ...visible };
+																						visibleX[groupId]["args"][index][
+																							"value"
+																						] = option.value;
+																						setAttributes({
+																							visible: visibleX,
+																						});
+																					}}
+																					value={item.value}></PGDropdown>
+																			</PanelRow>
+																		</>
+																	)}
 
 																	{(item.compare == "between" ||
 																		item.compare == "exist") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
-																					<PGDropdown
-																						position="bottom right"
-																						variant="secondary"
-																						buttonTitle={"Choose Days"}
-																						options={weekDayNumn}
-																						onChange={(option, optionIndex) => {
-																							var visibleX = { ...visible };
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
+																				<PGDropdown
+																					position="bottom right"
+																					variant="secondary"
+																					buttonTitle={"Choose Days"}
+																					options={weekDayNumn}
+																					onChange={(option, optionIndex) => {
+																						var visibleX = { ...visible };
 
-																							visibleX[groupId]["args"][index][
-																								"values"
-																							].push(option.value);
-																							setAttributes({
-																								visible: visibleX,
-																							});
-																						}}
-																						value={item.values}></PGDropdown>
-																				</PanelRow>
+																						visibleX[groupId]["args"][index][
+																							"values"
+																						].push(option.value);
+																						setAttributes({
+																							visible: visibleX,
+																						});
+																					}}
+																					value={item.values}></PGDropdown>
+																			</PanelRow>
 
-																				<div>
-																					{item.values.map((x, i) => {
-																						return (
-																							<div className="flex justify-between my-1">
-																								<span>
-																									{weekDayNumn[x].label}
-																								</span>
-																								<span
-																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																									onClick={(ev) => {
-																										var visibleX = { ...visible };
-																										item.values.splice(i, 1);
+																			<div>
+																				{item.values.map((x, i) => {
+																					return (
+																						<div className="flex justify-between my-1">
+																							<span>
+																								{weekDayNumn[x].label}
+																							</span>
+																							<span
+																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																								onClick={(ev) => {
+																									var visibleX = { ...visible };
+																									item.values.splice(i, 1);
 
-																										visibleX[groupId]["args"][
-																											index
-																										]["values"] = item.values;
-																										setAttributes({
-																											visible: visibleX,
-																										});
-																									}}>
-																									<Icon
-																										fill="#fff"
-																										icon={close}
-																									/>
-																								</span>
-																							</div>
-																						);
-																					})}
-																				</div>
-																			</>
-																		)}
+																									visibleX[groupId]["args"][
+																										index
+																									]["values"] = item.values;
+																									setAttributes({
+																										visible: visibleX,
+																									});
+																								}}>
+																								<Icon
+																									fill="#fff"
+																									icon={close}
+																								/>
+																							</span>
+																						</div>
+																					);
+																				})}
+																			</div>
+																		</>
+																	)}
 																</>
 															)}
 
@@ -1579,84 +1579,84 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
-																					<PGDropdown
-																						position="bottom right"
-																						variant="secondary"
-																						buttonTitle={
-																							item.value.length == 0
-																								? "Choose Hours"
-																								: hoursNum[item.value].label
-																						}
-																						options={hoursNum}
-																						onChange={(option, optionIndex) => {
-																							var visibleX = { ...visible };
-																							visibleX[groupId]["args"][index][
-																								"value"
-																							] = option.value;
-																							setAttributes({
-																								visible: visibleX,
-																							});
-																						}}
-																						value={item.value}></PGDropdown>
-																				</PanelRow>
-																			</>
-																		)}
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
+																				<PGDropdown
+																					position="bottom right"
+																					variant="secondary"
+																					buttonTitle={
+																						item.value.length == 0
+																							? "Choose Hours"
+																							: hoursNum[item.value].label
+																					}
+																					options={hoursNum}
+																					onChange={(option, optionIndex) => {
+																						var visibleX = { ...visible };
+																						visibleX[groupId]["args"][index][
+																							"value"
+																						] = option.value;
+																						setAttributes({
+																							visible: visibleX,
+																						});
+																					}}
+																					value={item.value}></PGDropdown>
+																			</PanelRow>
+																		</>
+																	)}
 
 																	{(item.compare == "between" ||
 																		item.compare == "exist") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
-																					<PGDropdown
-																						position="bottom right"
-																						variant="secondary"
-																						buttonTitle={"Choose Month"}
-																						options={hoursNum}
-																						onChange={(option, optionIndex) => {
-																							var visibleX = { ...visible };
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
+																				<PGDropdown
+																					position="bottom right"
+																					variant="secondary"
+																					buttonTitle={"Choose Month"}
+																					options={hoursNum}
+																					onChange={(option, optionIndex) => {
+																						var visibleX = { ...visible };
 
-																							visibleX[groupId]["args"][index][
-																								"values"
-																							].push(option.value);
-																							setAttributes({
-																								visible: visibleX,
-																							});
-																						}}
-																						value={item.values}></PGDropdown>
-																				</PanelRow>
+																						visibleX[groupId]["args"][index][
+																							"values"
+																						].push(option.value);
+																						setAttributes({
+																							visible: visibleX,
+																						});
+																					}}
+																					value={item.values}></PGDropdown>
+																			</PanelRow>
 
-																				<div>
-																					{item.values.map((x, i) => {
-																						return (
-																							<div className="flex justify-between my-1">
-																								<span>{hoursNum[x].label}</span>
-																								<span
-																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																									onClick={(ev) => {
-																										var visibleX = { ...visible };
-																										item.values.splice(i, 1);
+																			<div>
+																				{item.values.map((x, i) => {
+																					return (
+																						<div className="flex justify-between my-1">
+																							<span>{hoursNum[x].label}</span>
+																							<span
+																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																								onClick={(ev) => {
+																									var visibleX = { ...visible };
+																									item.values.splice(i, 1);
 
-																										visibleX[groupId]["args"][
-																											index
-																										]["values"] = item.values;
-																										setAttributes({
-																											visible: visibleX,
-																										});
-																									}}>
-																									<Icon
-																										fill="#fff"
-																										icon={close}
-																									/>
-																								</span>
-																							</div>
-																						);
-																					})}
-																				</div>
-																			</>
-																		)}
+																									visibleX[groupId]["args"][
+																										index
+																									]["values"] = item.values;
+																									setAttributes({
+																										visible: visibleX,
+																									});
+																								}}>
+																								<Icon
+																									fill="#fff"
+																									icon={close}
+																								/>
+																							</span>
+																						</div>
+																					);
+																				})}
+																			</div>
+																		</>
+																	)}
 																</>
 															)}
 
@@ -1693,151 +1693,151 @@ registerBlockType(metadata, {
 																		item.compare == "<" ||
 																		item.compare == ">=" ||
 																		item.compare == "<=") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
 
-																					<Button
-																						className={
-																							enableDatePicker
-																								? "!bg-gray-400"
-																								: ""
-																						}
-																						onClick={(ev) => {
-																							setenableDatePicker(
-																								(prev) => !prev
-																							);
-																						}}>
-																						{item.value.length == 0
-																							? "Choose Date"
-																							: item.value}
-																					</Button>
-																				</PanelRow>
+																				<Button
+																					className={
+																						enableDatePicker
+																							? "!bg-gray-400"
+																							: ""
+																					}
+																					onClick={(ev) => {
+																						setenableDatePicker(
+																							(prev) => !prev
+																						);
+																					}}>
+																					{item.value.length == 0
+																						? "Choose Date"
+																						: item.value}
+																				</Button>
+																			</PanelRow>
 
-																				{enableDatePicker && (
-																					<Popover position="bottom left ">
-																						<div className="p-4">
-																							<DatePicker
-																								onChange={(newDate) => {
-																									const dateFull = new Date(
-																										newDate
-																									);
-																									let day = dateFull.getDate();
-																									let month =
-																										dateFull.getMonth() + 1;
-																									let year =
-																										dateFull.getFullYear();
+																			{enableDatePicker && (
+																				<Popover position="bottom left ">
+																					<div className="p-4">
+																						<DatePicker
+																							onChange={(newDate) => {
+																								const dateFull = new Date(
+																									newDate
+																								);
+																								let day = dateFull.getDate();
+																								let month =
+																									dateFull.getMonth() + 1;
+																								let year =
+																									dateFull.getFullYear();
 
-																									var dateStr =
-																										year +
-																										"-" +
-																										month +
-																										"-" +
-																										day;
+																								var dateStr =
+																									year +
+																									"-" +
+																									month +
+																									"-" +
+																									day;
 
-																									var visibleX = { ...visible };
+																								var visibleX = { ...visible };
 
-																									visibleX[groupId]["args"][
-																										index
-																									]["value"] = dateStr;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}
-																								is12Hour={true}
-																							/>
-																						</div>
-																					</Popover>
-																				)}
-																			</>
-																		)}
+																								visibleX[groupId]["args"][
+																									index
+																								]["value"] = dateStr;
+																								setAttributes({
+																									visible: visibleX,
+																								});
+																							}}
+																							is12Hour={true}
+																						/>
+																					</div>
+																				</Popover>
+																			)}
+																		</>
+																	)}
 
 																	{(item.compare == "between" ||
 																		item.compare == "exist") && (
-																			<>
-																				<PanelRow className="mb-4">
-																					<label for="">Values</label>
+																		<>
+																			<PanelRow className="mb-4">
+																				<label for="">Values</label>
 
-																					<Button
-																						className={
-																							enableDatePicker
-																								? "!bg-gray-400"
-																								: ""
-																						}
-																						onClick={(ev) => {
-																							setenableDatePicker(
-																								(prev) => !prev
-																							);
-																						}}>
-																						Choose Date
-																					</Button>
-																				</PanelRow>
+																				<Button
+																					className={
+																						enableDatePicker
+																							? "!bg-gray-400"
+																							: ""
+																					}
+																					onClick={(ev) => {
+																						setenableDatePicker(
+																							(prev) => !prev
+																						);
+																					}}>
+																					Choose Date
+																				</Button>
+																			</PanelRow>
 
-																				{enableDatePicker && (
-																					<Popover position="bottom left ">
-																						<div className="p-4">
-																							<DatePicker
-																								onChange={(newDate) => {
-																									const dateFull = new Date(
-																										newDate
-																									);
-																									let day = dateFull.getDate();
-																									let month =
-																										dateFull.getMonth() + 1;
-																									let year =
-																										dateFull.getFullYear();
+																			{enableDatePicker && (
+																				<Popover position="bottom left ">
+																					<div className="p-4">
+																						<DatePicker
+																							onChange={(newDate) => {
+																								const dateFull = new Date(
+																									newDate
+																								);
+																								let day = dateFull.getDate();
+																								let month =
+																									dateFull.getMonth() + 1;
+																								let year =
+																									dateFull.getFullYear();
 
-																									var dateStr =
-																										year +
-																										"-" +
-																										month +
-																										"-" +
-																										day;
+																								var dateStr =
+																									year +
+																									"-" +
+																									month +
+																									"-" +
+																									day;
 
+																								var visibleX = { ...visible };
+
+																								visibleX[groupId]["args"][
+																									index
+																								]["values"].push(dateStr);
+																								setAttributes({
+																									visible: visibleX,
+																								});
+																							}}
+																							is12Hour={true}
+																						/>
+																					</div>
+																				</Popover>
+																			)}
+
+																			<div>
+																				{item.values.map((x, i) => {
+																					return (
+																						<div className="flex justify-between my-1">
+																							<span>{x}</span>
+																							<span
+																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																								onClick={(ev) => {
 																									var visibleX = { ...visible };
+																									item.values.splice(i, 1);
 
 																									visibleX[groupId]["args"][
 																										index
-																									]["values"].push(dateStr);
+																									]["values"] = item.values;
 																									setAttributes({
 																										visible: visibleX,
 																									});
-																								}}
-																								is12Hour={true}
-																							/>
+																								}}>
+																								<Icon
+																									fill="#fff"
+																									icon={close}
+																								/>
+																							</span>
 																						</div>
-																					</Popover>
-																				)}
-
-																				<div>
-																					{item.values.map((x, i) => {
-																						return (
-																							<div className="flex justify-between my-1">
-																								<span>{x}</span>
-																								<span
-																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																									onClick={(ev) => {
-																										var visibleX = { ...visible };
-																										item.values.splice(i, 1);
-
-																										visibleX[groupId]["args"][
-																											index
-																										]["values"] = item.values;
-																										setAttributes({
-																											visible: visibleX,
-																										});
-																									}}>
-																									<Icon
-																										fill="#fff"
-																										icon={close}
-																									/>
-																								</span>
-																							</div>
-																						);
-																					})}
-																				</div>
-																			</>
-																		)}
+																					);
+																				})}
+																			</div>
+																		</>
+																	)}
 																</>
 															)}
 
@@ -2687,7 +2687,7 @@ registerBlockType(metadata, {
 															className="mr-2"
 															value={
 																groupData.type == undefined ||
-																	groupData.type.length == 0
+																groupData.type.length == 0
 																	? "comment"
 																	: groupData.type
 															}

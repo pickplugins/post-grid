@@ -62,7 +62,6 @@ class PGBlockImageGalleryItem
 
 
 
-
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 

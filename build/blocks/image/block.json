@@ -30,19 +30,13 @@
         },
         "styles": {
           "width": {
-            "Desktop": ""
+            "Desktop": "100%"
           },
           "height": {
-            "Desktop": ""
+            "Desktop": "100%"
           },
           "overflow": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+            "Desktop": "hidden"
           }
         }
       }
@@ -76,18 +70,14 @@
           }
         },
         "styles": {
+          "display": {
+            "Desktop": "block"
+          },
           "maxWidth": {
             "Desktop": "100%"
           },
           "height": {
             "Desktop": "auto"
-          },
-          "filter": {},
-          "objectFit": {
-            "Desktop": "cover"
-          },
-          "margin": {
-            "Desktop": ""
           }
         }
       }

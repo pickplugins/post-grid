@@ -341,11 +341,11 @@ registerBlockType(metadata, {
 				"post-grid/image",
 				{
 					wrapper: {
-						options: { tag: "", class: "", useAsBackground: "no" },
+						options: { tag: "div", class: "", useAsBackground: "no" },
 						styles: {
 							width: { Desktop: "100%" },
-							height: { Desktop: "100% !important" },
-							objectFit: { Desktop: "cover" },
+							height: { Desktop: "100%" },
+							overflow: { Desktop: "hidden" },
 						},
 					},
 					image: {
@@ -371,9 +371,9 @@ registerBlockType(metadata, {
 							size: { Desktop: "full", Tablet: "full", Mobile: "full" },
 						},
 						styles: {
-							width: { Desktop: "100%" },
-							height: { Desktop: "100%" },
-							objectFit: { Desktop: "cover" },
+							maxWidth: { Desktop: "100%" },
+							height: { Desktop: "auto" },
+							display: { Desktop: "block" },
 						},
 					},
 					lightbox: { options: { enable: false, class: "" }, styles: {} },
@@ -515,4 +515,3 @@ registerBlockType(metadata, {
 		return <InnerBlocks.Content />;
 	},
 });
-

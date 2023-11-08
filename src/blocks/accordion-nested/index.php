@@ -131,6 +131,7 @@ class PGBlockAccordionNested
 
 
       $json['mainEntity'][$i]['@type'] = "Question";
+      $json['mainEntity'][$i]['@id'] = "#" . $block['attrs']['blockId'];
       $json['mainEntity'][$i]['name'] = isset($block['attrs']['headerLabel']['options']['text']) ? $block['attrs']['headerLabel']['options']['text'] : '';
       $json['mainEntity'][$i]['acceptedAnswer']['@type'] = "Answer";
       $json['mainEntity'][$i]['acceptedAnswer']['text'] = _wp_specialchars(render_block($block), ENT_QUOTES);
@@ -150,25 +151,25 @@ class PGBlockAccordionNested
     ?>
 
 
-                    <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-                      <?php echo $content; ?>
-                    </div>
+    <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+      <?php echo $content; ?>
+    </div>
 
-                    <?php
-                    if ($schemaEnable):
-                      ?>
-                              <script type="application/ld+json">
-                                                                                                                                                          <?php echo wp_unslash(json_encode($json)); ?>
-                                                                                                                                                      </script>
-                              <?php
-                    endif;
-                    ?>
-
-
+    <?php
+    if ($schemaEnable):
+      ?>
+      <script type="application/ld+json">
+                                                                                                                                                                      <?php echo wp_unslash(json_encode($json)); ?>
+                                                                                                                                                                  </script>
+      <?php
+    endif;
+    ?>
 
 
 
-                    <?php return ob_get_clean();
+
+
+    <?php return ob_get_clean();
   }
 }
 

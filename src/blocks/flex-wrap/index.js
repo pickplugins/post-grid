@@ -173,17 +173,22 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
+				var wrapperX = attributes.wrapper;
+
 				var blockCssY = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {

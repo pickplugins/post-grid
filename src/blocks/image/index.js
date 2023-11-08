@@ -796,10 +796,69 @@ registerBlockType(metadata, {
 						</PanelRow>
 
 						{image.options.srcUrl.length > 0 && (
-							<img src={image.options.srcUrl} alt="" />
+							<MediaUploadCheck>
+								<MediaUpload
+									class="bg-blue-500"
+									onSelect={(media) => {
+										// media.id
+										setCurrentPostImageId(media.id);
+
+										var options = {
+											...image.options,
+											srcUrl: media.url,
+											srcId: media.id,
+										};
+										setAttributes({ image: { ...image, options: options } });
+									}}
+									onClose={() => {}}
+									allowedTypes={ALLOWED_MEDIA_TYPES}
+									value={image.options.srcId}
+									render={({ open }) => (
+										<img
+											src={image.options.srcUrl}
+											alt=""
+											className="cursor-pointer"
+											onClick={open}
+										/>
+									)}
+								/>
+							</MediaUploadCheck>
 						)}
 
-						{image.options.srcUrl.length == 0 && <img src={MyImage} alt="" />}
+						{image.options.srcUrl.length == 0 && (
+							<MediaUploadCheck>
+								<MediaUpload
+									class="bg-blue-500"
+									onSelect={(media) => {
+										// media.id
+										setCurrentPostImageId(media.id);
+
+										var options = {
+											...image.options,
+											srcUrl: media.url,
+											srcId: media.id,
+										};
+										setAttributes({ image: { ...image, options: options } });
+									}}
+									onClose={() => {}}
+									allowedTypes={ALLOWED_MEDIA_TYPES}
+									value={image.options.srcId}
+									render={({ open }) => (
+										// <Button
+										// 	className="my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full"
+										// 	onClick={open}>
+										// 	Open Media Library
+										// </Button>
+										<img
+											src={MyImage}
+											alt=""
+											className="cursor-pointer"
+											onClick={open}
+										/>
+									)}
+								/>
+							</MediaUploadCheck>
+						)}
 
 						{image.options.imgSrcType == "media" && (
 							<>
@@ -826,7 +885,7 @@ registerBlockType(metadata, {
 										value={image.options.srcId}
 										render={({ open }) => (
 											<Button
-												className="my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full"
+												className="my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full hover:text-white "
 												onClick={open}>
 												Open Media Library
 											</Button>

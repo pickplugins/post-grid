@@ -26,16 +26,9 @@
           "class": "pg-list-nested"
         },
         "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {}
+          "display": {
+            "Desktop": "block"
+          }
         }
       }
     },
@@ -73,16 +66,22 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000"
           },
-          "padding": {
-            "Desktop": ""
+          "fontSize": {
+            "Desktop": "18px"
           },
-          "margin": {
-            "Desktop": ""
+          "fontFamily": {
+            "Desktop": "Poppins"
           },
-          "display": {
-            "Desktop": ""
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "listStyle": {
+            "Desktop": "circle outside url(sqpurple.gif)"
           }
         }
       }
@@ -99,16 +98,13 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+            "Desktop": "#000000"
           },
           "fontSize": {
-            "Desktop": ""
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 10px"
           }
         }
       }

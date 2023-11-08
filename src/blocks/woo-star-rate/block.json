@@ -26,17 +26,11 @@
           "class": "pg-woo-star-rate"
         },
         "styles": {
-          "color": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "flex"
           },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+          "alignItems": {
+            "Desktop": "center"
           }
         }
       }
@@ -52,27 +46,18 @@
           "class": ""
         },
         "styles": {
-          "color": {
-            "Desktop": ""
+          "position": {
+            "Desktop": "relative"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "inline-block"
           },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {},
           "fontSize": {
-            "Desktop": ""
+            "Desktop": "30px"
           },
-          "lineHeight": {},
           "fontWeight": {
             "Desktop": "700"
-          },
-          "textDecoration": {}
+          }
         }
       }
     },
@@ -85,16 +70,10 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#fde68a"
           },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "flex"
           }
         }
       }
@@ -108,16 +87,25 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#f59e0b"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "flex"
           },
-          "padding": {
-            "Desktop": ""
+          "position": {
+            "Desktop": "absolute"
           },
-          "margin": {
-            "Desktop": ""
+          "overflow": {
+            "Desktop": "hidden"
+          },
+          "top": {
+            "Desktop": "0px"
+          },
+          "left": {
+            "Desktop": "0px"
+          },
+          "width": {
+            "Desktop": "75%"
           }
         }
       }
@@ -133,16 +121,22 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "fontSize": {
+            "Desktop": "18px"
           },
-          "padding": {
-            "Desktop": ""
+          "fontFamily": {
+            "Desktop": "Poppins"
           },
-          "margin": {
-            "Desktop": ""
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "lineHeight": {
+            "Desktop": "155%"
           }
         }
       }

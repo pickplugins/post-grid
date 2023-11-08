@@ -21,7 +21,11 @@
           "tag": "div",
           "class": "pg-accordion-nested"
         },
-        "styles": {}
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          }
+        }
       }
     },
     "searchWrap": {

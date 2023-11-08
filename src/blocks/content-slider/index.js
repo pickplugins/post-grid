@@ -365,17 +365,103 @@ registerBlockType(metadata, {
 			}
 			if (action == "applyStyle") {
 				// var options = attributes.options
-				var wrapper = attributes.wrapper;
-				var postTitle = attributes.postTitle;
-				var prefix = attributes.prefix;
-				var postfix = attributes.postfix;
-				var blockCssY = attributes.blockCssY;
+				var wrapperX = attributes.wrapper;
+				var navsWrapX = attributes.navsWrap;
+				var pervX = attributes.perv;
+				var pervIconX = attributes.pervIcon;
+				var nextX = attributes.next;
+				var nextIconX = attributes.nextIcon;
+				var paginationWrapX = attributes.paginationWrap;
+				var paginationX = attributes.pagination;
+				var paginationActiveX = attributes.paginationActive;
+				var sliderOptionsX = attributes.sliderOptions;
+				var sliderOptionsResX = attributes.sliderOptionsRes;
+				var blockCssYX = attributes.blockCssY;
 
-				setAttributes({ wrapper: wrapper });
-				setAttributes({ postTitle: postTitle });
-				setAttributes({ prefix: prefix });
-				// setAttributes({ postfix: postfix });
-				setAttributes({ blockCssY: blockCssY });
+				var blockCssObj = {};
+
+				if (sliderOptionsResX != undefined) {
+					var sliderOptionsResY = {
+						...sliderOptionsResX,
+						options: sliderOptionsRes.options,
+					};
+					setAttributes({ sliderOptionsRes: sliderOptionsResY });
+					blockCssObj[sliderOptionsResSelector] = sliderOptionsResY;
+				}
+
+				if (sliderOptionsX != undefined) {
+					var sliderOptionsY = {
+						...sliderOptionsX,
+						options: sliderOptions.options,
+					};
+					setAttributes({ sliderOptions: sliderOptionsY });
+					blockCssObj[sliderOptionsSelector] = sliderOptionsY;
+				}
+
+				if (paginationActiveX != undefined) {
+					var paginationActiveY = {
+						...paginationActiveX,
+						options: paginationActive.options,
+					};
+					setAttributes({ paginationActive: paginationActiveY });
+					blockCssObj[paginationActiveSelector] = paginationActiveY;
+				}
+
+				if (paginationX != undefined) {
+					var paginationY = { ...paginationX, options: pagination.options };
+					setAttributes({ pagination: paginationY });
+					blockCssObj[paginationSelector] = paginationY;
+				}
+
+				if (paginationWrapX != undefined) {
+					var paginationWrapY = {
+						...paginationWrapX,
+						options: paginationWrap.options,
+					};
+					setAttributes({ paginationWrap: paginationWrapY });
+					blockCssObj[paginationWrapSelector] = paginationWrapY;
+				}
+
+				if (nextIconX != undefined) {
+					var nextIconY = { ...nextIconX, options: nextIcon.options };
+					setAttributes({ nextIcon: nextIconY });
+					blockCssObj[nextIconSelector] = nextIconY;
+				}
+
+				if (nextX != undefined) {
+					var nextY = { ...nextX, options: next.options };
+					setAttributes({ next: nextY });
+					blockCssObj[nextSelector] = nextY;
+				}
+
+				if (pervIconX != undefined) {
+					var pervIconY = { ...pervIconX, options: pervIcon.options };
+					setAttributes({ pervIcon: pervIconY });
+					blockCssObj[pervIconSelector] = pervIconY;
+				}
+
+				if (pervX != undefined) {
+					var pervY = { ...pervX, options: perv.options };
+					setAttributes({ perv: pervY });
+					blockCssObj[pervSelector] = pervY;
+				}
+
+				if (navsWrapX != undefined) {
+					var navsWrapY = { ...navsWrapX, options: navsWrap.options };
+					setAttributes({ navsWrap: navsWrapY });
+					blockCssObj[navsWrapSelector] = navsWrapY;
+				}
+
+				if (wrapperX != undefined) {
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
+				}
+
+				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+				var items = blockCssRules;
+				setAttributes({ blockCssY: { items: items } });
 			}
 			if (action == "replace") {
 				if (confirm("Do you want to replace?")) {

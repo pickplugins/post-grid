@@ -45,6 +45,8 @@ import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 
+import { createBlock } from "@wordpress/blocks";
+
 import {
 	InspectorControls,
 	BlockControls,
@@ -118,7 +120,6 @@ registerBlockType(metadata, {
 
 		const lightboxEnable =
 			lightbox.options.enable == undefined ? true : lightbox.options.enable;
-
 
 		var blockCssY = attributes.blockCssY;
 
@@ -510,10 +511,27 @@ registerBlockType(metadata, {
 			//renderAppender: InnerBlocks.ButtonBlockAppender
 		});
 
+		const addChild = () => {
+			var childBlocks = wp.data.select(blockEditorStore).getBlocks(clientId);
+
+			const slide = createBlock("post-grid/masonry-wrap-item");
+			const position = childBlocks.length;
+			dispatch("core/block-editor").insertBlock(slide, position, clientId);
+
+			wp.data.dispatch("core/block-editor").selectBlock(clientId);
+			//setActiveTab(slide.clientId);
+		};
+
 		return (
 			<>
 				<InspectorControls>
-					
+					<div
+						className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
+						onClick={(ev) => {
+							addChild();
+						}}>
+						Add Item
+					</div>
 
 					<PanelBody title="Wrapper" initialOpen={false}>
 						<PGtabs
@@ -744,7 +762,7 @@ registerBlockType(metadata, {
 										<PanelRow>
 											<div className="flex items-center">
 												<RemoveMasonryArg index={id} />
-												<label for="">Gutter</label>
+												<label for="">Stamp</label>
 											</div>
 										</PanelRow>
 									)}
@@ -980,9 +998,7 @@ registerBlockType(metadata, {
 																	tag: "div",
 																	class: "pg-masonry-wrap-item",
 																},
-																styles: {
-																	
-																},
+																styles: {},
 															},
 														},
 													],
@@ -994,9 +1010,7 @@ registerBlockType(metadata, {
 																	tag: "div",
 																	class: "pg-masonry-wrap-item",
 																},
-																styles: {
-																	
-																},
+																styles: {},
 															},
 														},
 													],

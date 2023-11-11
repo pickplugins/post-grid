@@ -58,7 +58,7 @@ import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
-import { Icon, close, settings, cloud, pencil } from "@wordpress/icons";
+import { Icon, close, settings, cloud, pencil, styles } from "@wordpress/icons";
 
 import Typography from "../../components/typography";
 import IconToggle from "../../components/icon-toggle";
@@ -97,6 +97,8 @@ import PGCssLibrary from "../../components/css-library";
 
 const ALLOWED_MEDIA_TYPES = ["image"];
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 // var queryPramsX = queryPrams.map((x, i) => {
 
@@ -824,39 +826,32 @@ registerBlockType(metadata, {
 
 			myStore.generateBlockCss(blockCssY.items, blockId);
 
-			// blockCssY.items[itemWrapSelector] = (blockCssY.items[itemWrapSelector] != undefined) ? blockCssY.items[itemWrapSelector] : {};
-			//blockCssY.items[paginationSelector] = (blockCssY.items[paginationSelector] != undefined) ? blockCssY.items[paginationSelector] : {};
-
-			// var wordBreak = (blockCssY.items[itemWrapSelector]['word-break'] != undefined) ? blockCssY.items[itemWrapSelector]['word-break'] : {};
-			// wordBreak[breakPointX] = 'break-word'
-
-			// blockCssY.items[itemWrapSelector] = { ...blockCssY.items[itemWrapSelector], 'word-break': wordBreak };
-
-			// blockCssY.items[paginationSelector] = { ...blockCssY.items[paginationSelector], 'text-align': { "Desktop": "center" } };
-
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'display': { "Desktop": "inline-block" } };
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'cursor': { "Desktop": "pointer" } };
-
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'color': { "Desktop": "#18978F" } };
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'background-color': { "Desktop": "#9DD6DF" } };
-
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-left': { "Desktop": "5px" } };
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-right': { "Desktop": "5px" } };
-
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-top': { "Desktop": "10px" } };
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-right': { "Desktop": "10px" } };
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-bottom': { "Desktop": "10px" } };
-			// blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': { "Desktop": "10px" } };
-
-			// blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'grid-template-columns': { "Desktop": "1fr 1fr 1fr", "Tablet": "1fr 1fr", "Mobile": "1fr" } };
-
-			//setAttributes({ blockCssY: { items: blockCssY.items } });
 
 			if (pagination.options.type.length == 0) {
 				//var paginationOptons = { ...pagination.options, type: 'normal' }
 				//setAttributes({ pagination: { ...pagination, options: paginationOptons } });
 			}
 		}, [clientId]);
+
+		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[containerSelector] = container;
+			blockCssObj[itemsWrapSelector] = itemsWrap;
+			blockCssObj[itemWrapSelector] = itemWrap;
+			blockCssObj[noPostsSelector] = noPostsWrap;
+			blockCssObj[searchWrapSelector] = search;
+			blockCssObj[lazyloadWrapSelector] = lazyLoad;
+			blockCssObj[spinnerSelector] = spinnerWrap;
+			blockCssObj[paginationSelector] = pagination;
+			blockCssObj[paginationItemSelector] = paginationItem;
+			blockCssObj[paginationItemActiveSelector] = paginationItemActive;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = { ...blockCssY.items, ...blockCssRules };
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
 
 		useEffect(() => {
 			blockCssY.items[itemsWrapSelector] =
@@ -988,10 +983,16 @@ registerBlockType(metadata, {
 		}
 
 		function addQueryPreset(option, index) {
-			var queryArgsX = { ...queryArgs };
 
-			queryArgsX.items = option.value.items;
-			setAttributes({ queryArgs: { items: queryArgsX.items } });
+			var items = [...queryArgs.items];
+			var item = { ...queryArgs.items[index] };
+			//var queryArgsX = { ...queryArgs };
+			items = option.value.items;
+			//setAttributes({ queryArgs: { items: queryArgsX.items } });
+			setAttributes({
+				queryArgs: { ...queryArgs, items: items },
+			});
+
 			fetchPosts();
 		}
 
@@ -1117,6 +1118,10 @@ registerBlockType(metadata, {
 		const [paginationItems, setPaginationItems] = useState([]); // Using the hook.
 
 		function fetchPosts() {
+
+			console.log(queryArgs);
+
+
 			setPostsQuery(true);
 			setIsBusy(true);
 
@@ -1186,6 +1191,10 @@ registerBlockType(metadata, {
 		}, [layout]);
 
 		useEffect(() => {
+
+			console.log(queryArgs);
+
+
 			fetchPosts();
 		}, [queryArgs]);
 
@@ -1403,11 +1412,11 @@ registerBlockType(metadata, {
 			} else {
 				fetch(
 					"https://getpostgrid.com/wp-json/postlayout/v2/get_post_layouts?category=" +
-						queryLayouts.category +
-						"&page=" +
-						queryLayouts.page +
-						"&keyword=" +
-						queryLayouts.keyword,
+					queryLayouts.category +
+					"&page=" +
+					queryLayouts.page +
+					"&keyword=" +
+					queryLayouts.keyword,
 					{
 						method: "GET",
 						headers: {
@@ -1459,31 +1468,15 @@ registerBlockType(metadata, {
 		}
 
 		function updateQueryPram(newVal, index) {
-			var queryArgsX = { ...queryArgs };
-			// var itemsX = queryArgsX.items;
+			var items = [...queryArgs.items];
+			var item = { ...queryArgs.items[index] };
 
-			// itemsX[index].val = newVal
+			item.val = newVal;
+			items[index] = item;
 
-			// var cssPath = [index, 'val']
-			// const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
-			// var result = [];
-
-			// Object.entries(cssItems).map((arg) => {
-
-			//   var i = arg[0];
-			//   var val = arg[1]
-
-			//   result.push(val)
-
-			// })
-
-			// console.log(result);
-
-			var itemData = queryArgsX.items[index];
-
-			itemData.val = newVal;
-			queryArgsX.items[index] = itemData;
-			setAttributes({ queryArgs: { items: queryArgsX.items } });
+			setAttributes({
+				queryArgs: { ...queryArgs, items: items },
+			});
 
 			fetchPosts();
 		}
@@ -1608,15 +1601,26 @@ registerBlockType(metadata, {
 									<div
 										className="cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm"
 										onClick={(_ev) => {
-											var queryArgsX = { ...queryArgs };
 
-											var itemData = queryArgsX.items[index];
-											var xx = itemData.val.concat({
+											var items = [...queryArgs.items];
+											var item = { ...queryArgs.items[index] };
+
+
+
+
+
+											var xx = item.val.concat({
 												fields: [{ key: "", value: "", type: "", compare: "" }],
 												relation: "OR",
 											});
-											queryArgsX.items[index].val = xx;
-											setAttributes({ queryArgs: { items: queryArgsX.items } });
+											items[index].val = xx;
+											//setAttributes({ queryArgs: { items: queryArgsX.items } });
+
+											setAttributes({
+												queryArgs: { ...queryArgs, items: items },
+											});
+
+
 										}}>
 										Add
 									</div>
@@ -1627,14 +1631,23 @@ registerBlockType(metadata, {
 													<div
 														className="cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm"
 														onClick={(_ev) => {
-															var queryArgsX = { ...queryArgs };
+															var items = [...queryArgs.items];
+															var item = { ...queryArgs.items[index] };
 
-															var itemData = queryArgsX.items[index];
-															var xx = itemData.val.splice(j, 1);
-															queryArgsX.items[index].val = itemData.val;
+
+
+
+															var xx = item.val.splice(j, 1);
+															items[index].val = item.val;
+															// setAttributes({
+															// 	queryArgs: { items: queryArgsX.items },
+															// });
+
 															setAttributes({
-																queryArgs: { items: queryArgsX.items },
+																queryArgs: { ...queryArgs, items: items },
 															});
+
+
 														}}>
 														Remove
 													</div>
@@ -1650,20 +1663,30 @@ registerBlockType(metadata, {
 																{ label: "AND", value: "AND" },
 															]}
 															onChange={(newVal) => {
-																var queryArgsX = { ...queryArgs };
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
 
-																var itemData = queryArgsX.items[index];
 
-																//itemData.val.relation = newVal;
-																itemData.val[j].relation = newVal;
+
+
+
+
+																item.val[j].relation = newVal;
 
 																//var term = itemData.val[j].fields[k]
 																//term.taxonomy = newVal;
 
-																queryArgsX.items[index].val = itemData.val;
+																items[index].val = item.val;
+																// setAttributes({
+																// 	queryArgs: { items: queryArgsX.items },
+																// });
+
+
 																setAttributes({
-																	queryArgs: { items: queryArgsX.items },
+																	queryArgs: { ...queryArgs, items: items },
 																});
+
+
 															}}
 														/>
 													</PanelRow>
@@ -1673,19 +1696,28 @@ registerBlockType(metadata, {
 																<div
 																	className="cursor-pointer block text-right mb-2 px-3 py-1 text-white bg-red-600 text-sm"
 																	onClick={(_ev) => {
-																		var queryArgsX = { ...queryArgs };
+																		var items = [...queryArgs.items];
+																		var item = { ...queryArgs.items[index] };
 
-																		var itemData = queryArgsX.items[index];
-																		var fields = itemData.val[j].fields;
-																		var xx = itemData.val[j].fields.splice(
+
+
+
+																		var fields = item.val[j].fields;
+																		var xx = item.val[j].fields.splice(
 																			k,
 																			1
 																		);
 
-																		queryArgsX.items[index].val = itemData.val;
+																		items[index].val = item.val;
+																		// setAttributes({
+																		// 	queryArgs: { items: queryArgsX.items },
+																		// });
+
 																		setAttributes({
-																			queryArgs: { items: queryArgsX.items },
+																			queryArgs: { ...queryArgs, items: items },
 																		});
+
+
 																	}}>
 																	Remove
 																</div>
@@ -1695,17 +1727,26 @@ registerBlockType(metadata, {
 																	value={y.key}
 																	placeholder="meta_key"
 																	onChange={(newVal) => {
-																		var queryArgsX = { ...queryArgs };
+																		var items = [...queryArgs.items];
+																		var item = { ...queryArgs.items[index] };
 
-																		var itemData = queryArgsX.items[index];
 
-																		var term = itemData.val[j].fields[k];
+
+
+
+																		var term = item.val[j].fields[k];
 																		term.key = newVal;
 
-																		queryArgsX.items[index].val = itemData.val;
+																		items[index].val = item.val;
+																		// setAttributes({
+																		// 	queryArgs: { items: queryArgsX.items },
+																		// });
+
 																		setAttributes({
-																			queryArgs: { items: queryArgsX.items },
+																			queryArgs: { ...queryArgs, items: items },
 																		});
+
+
 																	}}
 																/>
 
@@ -1714,17 +1755,27 @@ registerBlockType(metadata, {
 																	value={y.value}
 																	placeholder="25"
 																	onChange={(newVal) => {
-																		var queryArgsX = { ...queryArgs };
 
-																		var itemData = queryArgsX.items[index];
+																		var items = [...queryArgs.items];
+																		var item = { ...queryArgs.items[index] };
 
-																		var term = itemData.val[j].fields[k];
+
+
+
+
+
+																		var term = item.val[j].fields[k];
 																		term.value = newVal;
 
-																		queryArgsX.items[index].val = itemData.val;
+																		items[index].val = item.val;
+																		// setAttributes({
+																		// 	queryArgs: { items: queryArgsX.items },
+																		// });
+
 																		setAttributes({
-																			queryArgs: { items: queryArgsX.items },
+																			queryArgs: { ...queryArgs, items: items },
 																		});
+
 																	}}
 																/>
 
@@ -1745,18 +1796,26 @@ registerBlockType(metadata, {
 																			{ label: "UNSIGNED", value: "UNSIGNED" },
 																		]}
 																		onChange={(newVal) => {
-																			var queryArgsX = { ...queryArgs };
+																			var items = [...queryArgs.items];
+																			var item = { ...queryArgs.items[index] };
 
-																			var itemData = queryArgsX.items[index];
 
-																			var term = itemData.val[j].fields[k];
+
+
+
+																			var term = item.val[j].fields[k];
 																			term.type = newVal;
 
-																			queryArgsX.items[index].val =
-																				itemData.val;
+																			items[index].val =
+																				item.val;
+																			// setAttributes({
+																			// 	queryArgs: { items: queryArgsX.items },
+																			// });
 																			setAttributes({
-																				queryArgs: { items: queryArgsX.items },
+																				queryArgs: { ...queryArgs, items: items },
 																			});
+
+
 																		}}
 																	/>
 																	<SelectControl
@@ -1786,18 +1845,22 @@ registerBlockType(metadata, {
 																			},
 																		]}
 																		onChange={(newVal) => {
-																			var queryArgsX = { ...queryArgs };
+																			var items = [...queryArgs.items];
+																			var item = { ...queryArgs.items[index] };
 
-																			var itemData = queryArgsX.items[index];
 
-																			var term = itemData.val[j].fields[k];
+
+																			var term = item.val[j].fields[k];
 																			term.compare = newVal;
 
-																			queryArgsX.items[index].val =
-																				itemData.val;
+																			items[index].val =
+																				item.val;
+
+
 																			setAttributes({
-																				queryArgs: { items: queryArgsX.items },
+																				queryArgs: { ...queryArgs, items: items },
 																			});
+
 																		}}
 																	/>
 																</PanelRow>
@@ -1807,20 +1870,24 @@ registerBlockType(metadata, {
 													<div
 														className="cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm"
 														onClick={(_ev) => {
-															var queryArgsX = { ...queryArgs };
+															var items = [...queryArgs.items];
+															var item = { ...queryArgs.items[index] };
 
-															var itemData = queryArgsX.items[index];
 
-															var xx = itemData.val[j].fields.concat({
+
+															var xx = item.val[j].fields.concat({
 																key: "",
 																value: "",
 																type: "",
 																compare: "",
 															});
-															queryArgsX.items[index].val[j].fields = xx;
+															items[index].val[j].fields = xx;
+
+
+
 
 															setAttributes({
-																queryArgs: { items: queryArgsX.items },
+																queryArgs: { ...queryArgs, items: items },
 															});
 														}}>
 														Add
@@ -1856,9 +1923,11 @@ registerBlockType(metadata, {
 											{ value: "relation", label: "Relation" },
 										]}
 										onChange={(newVal) => {
-											var queryArgsX = { ...queryArgs };
 
-											var itemData = queryArgsX.items[index];
+											var items = [...queryArgs.items];
+											var itemData = { ...queryArgs.items[index] };
+
+
 
 											if (newVal == "year") {
 												var xx = itemData.val.concat({
@@ -1953,9 +2022,10 @@ registerBlockType(metadata, {
 												});
 											}
 
-											queryArgsX.items[index].val = xx;
-
-											setAttributes({ queryArgs: { items: queryArgsX.items } });
+											items[index].val = xx;
+											setAttributes({
+												queryArgs: { ...queryArgs, items: items },
+											});
 										}}
 									/>
 								</PanelRow>
@@ -1967,12 +2037,30 @@ registerBlockType(metadata, {
 												<span
 													className="cursor-pointer px-3 py-1 text-white bg-red-600 text-sm my-2 inline-block"
 													onClick={(_ev) => {
-														var queryArgsX = { ...queryArgs };
 
-														queryArgsX.items[index].val.splice(j, 1);
+														var items = [...queryArgs.items];
+														var item = { ...queryArgs.items[index] };
+
+														//item.val = newVal;
+
+
+
+
+														//queryArgsX.items[index].val.splice(j, 1);
+														item.val.splice(j, 1);
+
+														items[index] = item;
+
+
+														// setAttributes({
+														// 	queryArgs: { items: queryArgsX.items },
+														// });
+
 														setAttributes({
-															queryArgs: { items: queryArgsX.items },
+															queryArgs: { ...queryArgs, items: items },
 														});
+
+
 													}}>
 													Delete
 												</span>
@@ -1984,16 +2072,26 @@ registerBlockType(metadata, {
 															<InputControl
 																placeholder=""
 																onChange={(newVal) => {
-																	var queryArgsX = { ...queryArgs };
 
-																	//clearTimeout(debounce);
-																	// debounce = setTimeout(() => {
+																	var items = [...queryArgs.items];
+																	var item = { ...queryArgs.items[index] };
 
-																	queryArgsX.items[index].val[j].year = newVal;
+
+
+																	//queryArgsX.items[index].val[j].year = newVal;
+																	item.val[j].year = newVal;
+																	items[index] = item;
+
+
+																	// setAttributes({
+																	// 	queryArgs: { items: queryArgsX.items },
+																	// });
+
 																	setAttributes({
-																		queryArgs: { items: queryArgsX.items },
+																		queryArgs: { ...queryArgs, items: items },
 																	});
-																	//}, 1000);
+
+
 																}}
 															/>
 														</PanelRow>
@@ -2003,16 +2101,26 @@ registerBlockType(metadata, {
 															<InputControl
 																placeholder=""
 																onChange={(newVal) => {
-																	var queryArgsX = { ...queryArgs };
 
-																	// clearTimeout(debounce);
-																	//debounce = setTimeout(() => {
+																	var items = [...queryArgs.items];
+																	var item = { ...queryArgs.items[index] };
 
-																	queryArgsX.items[index].val[j].month = newVal;
+
+
+																	//queryArgsX.items[index].val[j].month = newVal;
+																	item.val[j].month = newVal;
+																	items[index] = item;
+
+
+																	// setAttributes({
+																	// 	queryArgs: { items: queryArgsX.items },
+																	// });
+
 																	setAttributes({
-																		queryArgs: { items: queryArgsX.items },
+																		queryArgs: { ...queryArgs, items: items },
 																	});
-																	//}, 1000);
+
+
 																}}
 															/>
 														</PanelRow>
@@ -2024,12 +2132,31 @@ registerBlockType(metadata, {
 																onChange={(newVal) => {
 																	clearTimeout(debounce);
 																	debounce = setTimeout(() => {
-																		var queryArgsX = { ...queryArgs };
 
-																		queryArgsX.items[index].val[j].day = newVal;
+
+																		var items = [...queryArgs.items];
+																		var item = { ...queryArgs.items[index] };
+
+
+
+
+
+																		//queryArgsX.items[index].val[j].day = newVal;
+																		item.val[j].day = newVal;
+																		items[index] = item;
+
+
+																		// setAttributes({
+																		// 	queryArgs: { items: queryArgsX.items },
+																		// });
+
+
 																		setAttributes({
-																			queryArgs: { items: queryArgsX.items },
+																			queryArgs: { ...queryArgs, items: items },
 																		});
+
+
+
 																	}, 1000);
 																}}
 															/>
@@ -2046,12 +2173,26 @@ registerBlockType(metadata, {
 																{ label: "False", value: false },
 															]}
 															onChange={(newVal) => {
-																var queryArgsX = { ...queryArgs };
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
 
-																queryArgsX.items[index].val[j].value = newVal;
+
+
+
+																//queryArgsX.items[index].val[j].value = newVal;
+																item.val[j].value = newVal;
+																items[index] = item;
+
+																// setAttributes({
+																// 	queryArgs: { items: queryArgsX.items },
+																// });
+
+
 																setAttributes({
-																	queryArgs: { items: queryArgsX.items },
+																	queryArgs: { ...queryArgs, items: items },
 																});
+
+
 															}}
 														/>
 													</div>
@@ -2076,12 +2217,25 @@ registerBlockType(metadata, {
 																{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
 															]}
 															onChange={(newVal) => {
-																var queryArgsX = { ...queryArgs };
 
-																queryArgsX.items[index].val[j].value = newVal;
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
+
+
+
+
+																//queryArgsX.items[index].val[j].value = newVal;
+																item.val[j].value = newVal;
+
+
+																// setAttributes({
+																// 	queryArgs: { items: queryArgsX.items },
+																// });
+
 																setAttributes({
-																	queryArgs: { items: queryArgsX.items },
+																	queryArgs: { ...queryArgs, items: items },
 																});
+
 															}}
 														/>
 													</div>
@@ -2093,12 +2247,22 @@ registerBlockType(metadata, {
 															onChange={(newVal) => {
 																clearTimeout(debounce);
 																debounce = setTimeout(() => {
-																	var queryArgsX = { ...queryArgs };
+																	var items = [...queryArgs.items];
+																	var item = { ...queryArgs.items[index] };
 
-																	queryArgsX.items[index].val[j].value = newVal;
+
+
+																	// queryArgsX.items[index].val[j].value = newVal;
+																	item.val[j].value = newVal;
+
+																	// setAttributes({
+																	// 	queryArgs: { items: queryArgsX.items },
+																	// });
+
 																	setAttributes({
-																		queryArgs: { items: queryArgsX.items },
+																		queryArgs: { ...queryArgs, items: items },
 																	});
+
 																}, 1000);
 															}}
 														/>
@@ -2114,12 +2278,29 @@ registerBlockType(metadata, {
 																{ label: "AND", value: "AND" },
 															]}
 															onChange={(newVal) => {
-																var queryArgsX = { ...queryArgs };
 
-																queryArgsX.items[index].val[j].value = newVal;
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
+
+
+
+
+																//queryArgsX.items[index].val[j].value = newVal;
+																item.val[j].value = newVal;
+																items[index] = item;
+
+
+																// setAttributes({
+																// 	queryArgs: { items: queryArgsX.items },
+																// });
+
+
 																setAttributes({
-																	queryArgs: { items: queryArgsX.items },
+																	queryArgs: { ...queryArgs, items: items },
 																});
+
+
+
 															}}
 														/>
 													</div>
@@ -2132,52 +2313,74 @@ registerBlockType(metadata, {
 													x.id == "hour" ||
 													x.id == "minute" ||
 													x.id == "second") && (
-													<div>
-														<InputControl
-															label="Value"
-															placeholder=""
-															onChange={(newVal) => {
-																var queryArgsX = { ...queryArgs };
+														<div>
+															<InputControl
+																label="Value"
+																placeholder=""
+																onChange={(newVal) => {
 
-																//clearTimeout(debounce);
-																//debounce = setTimeout(() => {
+																	var items = [...queryArgs.items];
+																	var item = { ...queryArgs.items[index] };
 
-																queryArgsX.items[index].val[j].value = newVal;
-																setAttributes({
-																	queryArgs: { items: queryArgsX.items },
-																});
-																//}, 1000);
-															}}
-														/>
 
-														<SelectControl
-															style={{ margin: 0 }}
-															label="compare "
-															options={[
-																{ label: "=", value: "=" },
-																{ label: "!=", value: "!=" },
-																{ label: ">", value: ">" },
-																{ label: ">=", value: ">=" },
-																{ label: "<", value: "<" },
-																{ label: "<=", value: "<=" },
-																{ label: "IN", value: "IN" },
-																{ label: "NOT IN", value: "NOT IN" },
-																{ label: "EXISTS", value: "EXISTS" },
-																{ label: "NOT EXISTS", value: "NOT EXISTS" },
-																{ label: "BETWEEN", value: "BETWEEN" },
-																{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
-															]}
-															onChange={(newVal) => {
-																var queryArgsX = { ...queryArgs };
 
-																queryArgsX.items[index].val[j].compare = newVal;
-																setAttributes({
-																	queryArgs: { items: queryArgsX.items },
-																});
-															}}
-														/>
-													</div>
-												)}
+
+
+																	//clearTimeout(debounce);
+																	//debounce = setTimeout(() => {
+
+																	//queryArgsX.items[index].val[j].value = newVal;
+																	item.val[j].value = newVal;
+																	items[index] = item;
+
+
+																	// setAttributes({
+																	// 	queryArgs: { items: queryArgsX.items },
+																	// });
+
+																	setAttributes({
+																		queryArgs: { ...queryArgs, items: items },
+																	});
+
+
+																	//}, 1000);
+																}}
+															/>
+
+															<SelectControl
+																style={{ margin: 0 }}
+																label="compare "
+																options={[
+																	{ label: "=", value: "=" },
+																	{ label: "!=", value: "!=" },
+																	{ label: ">", value: ">" },
+																	{ label: ">=", value: ">=" },
+																	{ label: "<", value: "<" },
+																	{ label: "<=", value: "<=" },
+																	{ label: "IN", value: "IN" },
+																	{ label: "NOT IN", value: "NOT IN" },
+																	{ label: "EXISTS", value: "EXISTS" },
+																	{ label: "NOT EXISTS", value: "NOT EXISTS" },
+																	{ label: "BETWEEN", value: "BETWEEN" },
+																	{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
+																]}
+																onChange={(newVal) => {
+																	var items = [...queryArgs.items];
+																	var item = { ...queryArgs.items[index] };
+
+
+
+																	item.val[j].compare = newVal;
+
+																	setAttributes({
+																		queryArgs: { ...queryArgs, items: items },
+																	});
+
+
+																}}
+															/>
+														</div>
+													)}
 											</PanelBody>
 										</div>
 									);
@@ -2191,17 +2394,28 @@ registerBlockType(metadata, {
 									<div
 										className="cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm"
 										onClick={(_ev) => {
-											var queryArgsX = { ...queryArgs };
+											var items = [...queryArgs.items];
+											var item = { ...queryArgs.items[index] };
 
-											var itemData = queryArgsX.items[index];
-											var xx = itemData.val.concat({
+
+
+
+											var xx = item.val.concat({
 												terms: [
 													{ taxonomy: "", field: "", terms: [], operator: "" },
 												],
 												relation: "OR",
 											});
-											queryArgsX.items[index].val = xx;
-											setAttributes({ queryArgs: { items: queryArgsX.items } });
+											items[index].val = xx;
+
+
+
+
+											setAttributes({
+												queryArgs: { ...queryArgs, items: items },
+											});
+
+
 										}}>
 										Add
 									</div>
@@ -2212,14 +2426,21 @@ registerBlockType(metadata, {
 													<div
 														className="cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm"
 														onClick={(_ev) => {
-															var queryArgsX = { ...queryArgs };
+															var items = [...queryArgs.items];
+															var item = { ...queryArgs.items[index] };
 
-															var itemData = queryArgsX.items[index];
-															var xx = itemData.val.splice(j, 1);
-															queryArgsX.items[index].val = itemData.val;
+
+															//var itemData = items[index];
+															var xx = item.val.splice(j, 1);
+															items[index].val = item.val;
+															// setAttributes({
+															// 	queryArgs: { items: queryArgsX.items },
+															// });
+
 															setAttributes({
-																queryArgs: { items: queryArgsX.items },
+																queryArgs: { ...queryArgs, items: items },
 															});
+
 														}}>
 														Remove
 													</div>
@@ -2235,20 +2456,17 @@ registerBlockType(metadata, {
 																{ label: "AND", value: "AND" },
 															]}
 															onChange={(newVal) => {
-																var queryArgsX = { ...queryArgs };
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
 
-																var itemData = queryArgsX.items[index];
+																item.val[j].relation = newVal;
+																items[index].val = itemData.val;
 
-																//itemData.val.relation = newVal;
-																itemData.val[j].relation = newVal;
-
-																//var term = itemData.val[j].terms[k]
-																//term.taxonomy = newVal;
-
-																queryArgsX.items[index].val = itemData.val;
 																setAttributes({
-																	queryArgs: { items: queryArgsX.items },
+																	queryArgs: { ...queryArgs, items: items },
 																});
+
+
 															}}
 														/>
 													</PanelRow>
@@ -2260,16 +2478,14 @@ registerBlockType(metadata, {
 																	value={y.taxonomy}
 																	placeholder="Taxonomy"
 																	onChange={(newVal) => {
-																		var queryArgsX = { ...queryArgs };
-
-																		var itemData = queryArgsX.items[index];
-
-																		var term = itemData.val[j].terms[k];
+																		var items = [...queryArgs.items];
+																		var item = { ...queryArgs.items[index] };
+																		var term = item.val[j].terms[k];
 																		term.taxonomy = newVal;
+																		items[index].val = item.val;
 
-																		queryArgsX.items[index].val = itemData.val;
 																		setAttributes({
-																			queryArgs: { items: queryArgsX.items },
+																			queryArgs: { ...queryArgs, items: items },
 																		});
 																	}}
 																/>
@@ -2279,17 +2495,22 @@ registerBlockType(metadata, {
 																	value={y.terms.join(",")}
 																	placeholder="Comma separated"
 																	onChange={(newVal) => {
-																		var queryArgsX = { ...queryArgs };
+																		var items = [...queryArgs.items];
+																		var item = { ...queryArgs.items[index] };
 
-																		var itemData = queryArgsX.items[index];
 
-																		var term = itemData.val[j].terms[k];
+
+
+																		var term = item.val[j].terms[k];
 																		term.terms = newVal.split(",");
 
-																		queryArgsX.items[index].val = itemData.val;
+																		items[index].val = item.val;
+
+
 																		setAttributes({
-																			queryArgs: { items: queryArgsX.items },
+																			queryArgs: { ...queryArgs, items: items },
 																		});
+
 																	}}
 																/>
 
@@ -2310,18 +2531,22 @@ registerBlockType(metadata, {
 																			},
 																		]}
 																		onChange={(newVal) => {
-																			var queryArgsX = { ...queryArgs };
+																			var items = [...queryArgs.items];
+																			var item = { ...queryArgs.items[index] };
 
-																			var itemData = queryArgsX.items[index];
 
-																			var term = itemData.val[j].terms[k];
+
+																			var term = item.val[j].terms[k];
 																			term.field = newVal;
 
-																			queryArgsX.items[index].val =
-																				itemData.val;
+																			items[index].val =
+																				item.val;
+
+
 																			setAttributes({
-																				queryArgs: { items: queryArgsX.items },
+																				queryArgs: { ...queryArgs, items: items },
 																			});
+
 																		}}
 																	/>
 																	<SelectControl
@@ -2341,18 +2566,22 @@ registerBlockType(metadata, {
 																			},
 																		]}
 																		onChange={(newVal) => {
-																			var queryArgsX = { ...queryArgs };
+																			var items = [...queryArgs.items];
+																			var item = { ...queryArgs.items[index] };
 
-																			var itemData = queryArgsX.items[index];
 
-																			var term = itemData.val[j].terms[k];
+
+																			var term = item.val[j].terms[k];
 																			term.operator = newVal;
 
-																			queryArgsX.items[index].val =
-																				itemData.val;
+																			items[index].val = item.val;
+
+
 																			setAttributes({
-																				queryArgs: { items: queryArgsX.items },
+																				queryArgs: { ...queryArgs, items: items },
 																			});
+
+
 																		}}
 																	/>
 																</PanelRow>
@@ -2360,16 +2589,22 @@ registerBlockType(metadata, {
 																<div
 																	className="cursor-pointer block text-center my-2 px-3 py-1 text-white bg-red-600 text-sm"
 																	onClick={(_ev) => {
-																		var queryArgsX = { ...queryArgs };
+																		var items = [...queryArgs.items];
+																		var item = { ...queryArgs.items[index] };
 
-																		var itemData = queryArgsX.items[index];
-																		var terms = itemData.val[j].terms;
 
-																		var xx = itemData.val[j].terms.splice(k, 1);
-																		queryArgsX.items[index].val = itemData.val;
+																		var terms = item.val[j].terms;
+
+																		var xx = item.val[j].terms.splice(k, 1);
+																		items[index].val = item.val;
+
+
 																		setAttributes({
-																			queryArgs: { items: queryArgsX.items },
+																			queryArgs: { ...queryArgs, items: items },
 																		});
+
+
+
 																	}}>
 																	Remove
 																</div>
@@ -2379,21 +2614,28 @@ registerBlockType(metadata, {
 													<div
 														className="cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm"
 														onClick={(_ev) => {
-															var queryArgsX = { ...queryArgs };
+															var items = [...queryArgs.items];
+															var item = { ...queryArgs.items[index] };
 
-															var itemData = queryArgsX.items[index];
 
-															var xx = itemData.val[j].terms.concat({
+
+															var xx = item.val[j].terms.concat({
 																taxonomy: "",
 																field: "",
 																terms: [],
 																operator: "",
 															});
-															queryArgsX.items[index].val[j].terms = xx;
+															items[index].val[j].terms = xx;
+
+
+
 
 															setAttributes({
-																queryArgs: { items: queryArgsX.items },
+																queryArgs: { ...queryArgs, items: items },
 															});
+
+
+
 														}}>
 														Add
 													</div>
@@ -2433,18 +2675,18 @@ registerBlockType(metadata, {
 							item.id == "offset" ||
 							item.id == "postsPerArchivePage" ||
 							item.id == "perm") && (
-							<div>
-								<InputControl
-									value={item.val}
-									onChange={(newVal) => {
-										clearTimeout(debounce);
-										debounce = setTimeout(() => {
-											updateQueryPram(newVal, index);
-										}, 1000);
-									}}
-								/>
-							</div>
-						)}
+								<div>
+									<InputControl
+										value={item.val}
+										onChange={(newVal) => {
+											clearTimeout(debounce);
+											debounce = setTimeout(() => {
+												updateQueryPram(newVal, index);
+											}, 1000);
+										}}
+									/>
+								</div>
+							)}
 						{item.id == "metaCompare" && (
 							<div>
 								<SelectControl
@@ -2500,30 +2742,14 @@ registerBlockType(metadata, {
 							item.id == "categoryNotIn" ||
 							item.id == "categoryIn" ||
 							item.id == "categoryAnd") && (
-							<div>
-								<InputControl
-									value={item.val}
-									placeholder="Comma separated"
-									onChange={(newVal) => updateQueryPram(newVal, index)}
-								/>
-							</div>
-						)}
-						<div className={item.id == "postNameIndd" ? "" : "hidden"}>
-							<div
-								className="cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm"
-								onClick={(_ev) => {
-									var queryArgsX = { ...queryArgs };
-
-									var itemData = queryArgsX.items[index];
-
-									var val = itemData.val.concat({ slug: "" });
-									itemData.val = val;
-									queryArgsX.items[index] = itemData;
-									setAttributes({ queryArgs: { items: queryArgsX.items } });
-								}}>
-								Add
-							</div>
-						</div>
+								<div>
+									<InputControl
+										value={item.val}
+										placeholder="Comma separated"
+										onChange={(newVal) => updateQueryPram(newVal, index)}
+									/>
+								</div>
+							)}
 
 						{item.id == "commentCount" && (
 							<div>
@@ -2581,19 +2807,19 @@ registerBlockType(metadata, {
 							item.id == "hasPassword" ||
 							item.id == "updatePostMetaCache" ||
 							item.id == "updatePostTermCache") && (
-							<div>
-								<SelectControl
-									style={{ margin: 0 }}
-									label=""
-									value={item.val}
-									options={[
-										{ label: "True", value: true },
-										{ label: "False", value: false },
-									]}
-									onChange={(newVal) => updateQueryPram(newVal, index)}
-								/>
-							</div>
-						)}
+								<div>
+									<SelectControl
+										style={{ margin: 0 }}
+										label=""
+										value={item.val}
+										options={[
+											{ label: "True", value: true },
+											{ label: "False", value: false },
+										]}
+										onChange={(newVal) => updateQueryPram(newVal, index)}
+									/>
+								</div>
+							)}
 
 						{item.id == "ignoreStickyPosts" && (
 							<div>
@@ -2623,19 +2849,29 @@ registerBlockType(metadata, {
 
 		function addQueryPram(option, index) {
 			var id = option.id;
-			var queryArgsX = { ...queryArgs };
+
+			var items = [...queryArgs.items];
+			var itemX = { ...queryArgs.items[index] };
+
+
+			//var queryArgsX = { ...queryArgs };
 
 			var data = { val: queryPrams[id].value, id: id };
 			var multiple = data.multiple;
 
-			var isExist = queryArgsX.items.map((item) => {
+			var isExist = items.map((item) => {
 				if (item.id == id) {
 					return true;
 				}
 			});
 
-			var items = queryArgsX.items.concat([data]);
-			setAttributes({ queryArgs: { items: items } });
+			var itemsX = items.concat([data]);
+			console.log(itemsX);
+
+			//setAttributes({ queryArgs: { items: items } });
+			setAttributes({
+				queryArgs: { ...queryArgs, items: itemsX },
+			});
 		}
 
 		var RemoveQueryPram = function ({ title, index }) {
@@ -2644,10 +2880,21 @@ registerBlockType(metadata, {
 					<span
 						className="cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1"
 						onClick={(ev) => {
-							var queryArgsX = { ...queryArgs };
 
-							queryArgsX.items.splice(index, 1);
-							setAttributes({ queryArgs: { items: queryArgsX.items } });
+							var items = [...queryArgs.items];
+							var item = { ...queryArgs.items[index] };
+
+
+							//var queryArgsX = { ...queryArgs };
+
+							items.splice(index, 1);
+							//setAttributes({ queryArgs: { items: queryArgsX.items } });
+
+							setAttributes({
+								queryArgs: { ...queryArgs, items: items },
+							});
+
+
 						}}>
 						<Icon icon={close} />
 					</span>
@@ -2957,12 +3204,61 @@ registerBlockType(metadata, {
 					</PanelBody>
 
 					<PanelBody title="Container" initialOpen={false}>
-						<PGStyles
-							obj={container}
-							onChange={onChangeStyleContainer}
-							onAdd={onAddStyleContainer}
-							onRemove={onRemoveStyleContainer}
-						/>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => { }}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: styles,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<label for="">CSS Class</label>
+
+								<PGcssClassPicker
+									tags={customTags}
+									placeholder="Add Class"
+									value={container.options.class}
+									onChange={(newVal) => {
+										var options = { ...container.options, class: newVal };
+										setAttributes({
+											container: { styles: container.styles, options: options },
+										});
+									}}
+								/>
+
+								<PanelRow>
+									<label for="">CSS ID</label>
+									<InputControl
+										value={blockId}
+										onChange={(newVal) => {
+											setAttributes({
+												blockId: newVal,
+											});
+										}}
+									/>
+								</PanelRow>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={container}
+									onChange={onChangeStyleContainer}
+									onAdd={onAddStyleContainer}
+									onRemove={onRemoveStyleContainer}
+								/>
+							</PGtab>
+						</PGtabs>
 					</PanelBody>
 
 					<PanelBody title="Grid Wrap" initialOpen={false}>
@@ -3208,140 +3504,140 @@ registerBlockType(metadata, {
 
 							{(pagination.options.type == "normal" ||
 								pagination.options.type == "ajax") && (
-								<>
-									<PanelRow>
-										<label for="">Max Number of Pagination</label>
-										<InputControl
-											value={pagination.options.maxPageNum}
-											onChange={(newVal) => {
-												var options = {
-													...pagination.options,
-													maxPageNum: newVal,
-												};
-												setAttributes({
-													pagination: { ...pagination, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-								</>
-							)}
+									<>
+										<PanelRow>
+											<label for="">Max Number of Pagination</label>
+											<InputControl
+												value={pagination.options.maxPageNum}
+												onChange={(newVal) => {
+													var options = {
+														...pagination.options,
+														maxPageNum: newVal,
+													};
+													setAttributes({
+														pagination: { ...pagination, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									</>
+								)}
 
 							{(pagination.options.type == "normal" ||
 								pagination.options.type == "ajax" ||
 								pagination.options.type == "next_previous") && (
-								<>
-									<PanelRow>
-										<label for="">Previous Text</label>
-										<InputControl
-											value={pagination.options.prevText}
-											onChange={(newVal) => {
-												var options = {
-													...pagination.options,
-													prevText: newVal,
-												};
-												setAttributes({
-													pagination: { ...pagination, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label for="">Next Text</label>
-										<InputControl
-											value={pagination.options.nextText}
-											onChange={(newVal) => {
-												var options = {
-													...pagination.options,
-													nextText: newVal,
-												};
-												setAttributes({
-													pagination: { ...pagination, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-								</>
-							)}
+									<>
+										<PanelRow>
+											<label for="">Previous Text</label>
+											<InputControl
+												value={pagination.options.prevText}
+												onChange={(newVal) => {
+													var options = {
+														...pagination.options,
+														prevText: newVal,
+													};
+													setAttributes({
+														pagination: { ...pagination, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+										<PanelRow>
+											<label for="">Next Text</label>
+											<InputControl
+												value={pagination.options.nextText}
+												onChange={(newVal) => {
+													var options = {
+														...pagination.options,
+														nextText: newVal,
+													};
+													setAttributes({
+														pagination: { ...pagination, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									</>
+								)}
 
 							{(pagination.options.type == "loadmore" ||
 								pagination.options.type == "infinite") && (
-								<>
-									<PanelRow>
-										<label for="">Load More Text</label>
+									<>
+										<PanelRow>
+											<label for="">Load More Text</label>
 
-										<InputControl
-											value={pagination.options.loadMoreText}
-											onChange={(newVal) => {
-												var options = {
-													...pagination.options,
-													loadMoreText: newVal,
-												};
-												setAttributes({
-													pagination: { ...pagination, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
+											<InputControl
+												value={pagination.options.loadMoreText}
+												onChange={(newVal) => {
+													var options = {
+														...pagination.options,
+														loadMoreText: newVal,
+													};
+													setAttributes({
+														pagination: { ...pagination, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
 
-									<PanelRow>
-										<label for="">No Posts Text</label>
+										<PanelRow>
+											<label for="">No Posts Text</label>
 
-										<InputControl
-											value={pagination.options.noMorePosts}
-											onChange={(newVal) => {
-												var options = {
-													...pagination.options,
-													noMorePosts: newVal,
-												};
-												setAttributes({
-													pagination: { ...pagination, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label for="">Loading Text</label>
+											<InputControl
+												value={pagination.options.noMorePosts}
+												onChange={(newVal) => {
+													var options = {
+														...pagination.options,
+														noMorePosts: newVal,
+													};
+													setAttributes({
+														pagination: { ...pagination, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+										<PanelRow>
+											<label for="">Loading Text</label>
 
-										<InputControl
-											value={pagination.options.loadingText}
-											onChange={(newVal) => {
-												var options = {
-													...pagination.options,
-													loadingText: newVal,
-												};
-												setAttributes({
-													pagination: { ...pagination, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
+											<InputControl
+												value={pagination.options.loadingText}
+												onChange={(newVal) => {
+													var options = {
+														...pagination.options,
+														loadingText: newVal,
+													};
+													setAttributes({
+														pagination: { ...pagination, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
 
-									<PanelRow>
-										<label for="">Loading Icon</label>
+										<PanelRow>
+											<label for="">Loading Icon</label>
 
-										<PGIconPicker
-											library={pagination.options.loadingIcon.library}
-											srcType={pagination.options.loadingIcon.srcType}
-											iconSrc={pagination.options.loadingIcon.iconSrc}
-											onChange={(arg) => {
-												var options = {
-													...pagination.options,
-													loadingIcon: {
-														srcType: arg.srcType,
-														library: arg.library,
-														iconSrc: arg.iconSrc,
-													},
-												};
+											<PGIconPicker
+												library={pagination.options.loadingIcon.library}
+												srcType={pagination.options.loadingIcon.srcType}
+												iconSrc={pagination.options.loadingIcon.iconSrc}
+												onChange={(arg) => {
+													var options = {
+														...pagination.options,
+														loadingIcon: {
+															srcType: arg.srcType,
+															library: arg.library,
+															iconSrc: arg.iconSrc,
+														},
+													};
 
-												setAttributes({
-													pagination: { ...pagination, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-								</>
-							)}
+													setAttributes({
+														pagination: { ...pagination, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									</>
+								)}
 						</div>
 
 						<PanelBody
@@ -3352,7 +3648,7 @@ registerBlockType(metadata, {
 								activeTab="styles"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "styles",
@@ -3390,7 +3686,7 @@ registerBlockType(metadata, {
 								activeTab="styles"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "styles",
@@ -3428,7 +3724,7 @@ registerBlockType(metadata, {
 								activeTab="styles"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "styles",
@@ -3535,7 +3831,7 @@ registerBlockType(metadata, {
 											lazyLoad: { ...lazyLoad, options: options },
 										});
 									}}
-									onClose={() => {}}
+									onClose={() => { }}
 									allowedTypes={ALLOWED_MEDIA_TYPES}
 									value={lazyLoad.options.srcId}
 									render={({ open }) => (
@@ -3625,6 +3921,9 @@ registerBlockType(metadata, {
 					</PanelBody>
 				</InspectorControls>
 
+
+
+
 				<div {...blockProps}>
 					{lazyLoad.options.enable == "yes" && isBusy && (
 						<div className={lazyLoad.options.class}></div>
@@ -3659,50 +3958,6 @@ registerBlockType(metadata, {
 									</div>
 								);
 							})}
-
-							{/* 
-                    {posts.map(post => {
-
-
-                      return (
-
-                        <>
-                          <BlockContextProvider
-                            key={post.ID}
-                            value={post}
-                          >
-                            {post.ID ===
-                              (activeBlockContextId ||
-                                posts[0]?.ID) ? (
-
-                              <>
-                                {post.ID}
-                                <PostTemplateInnerBlocks attsx={TEMPLATEX} />
-                              </>
-
-
-                            ) : null}
-
-
-                            <MemoizedPostTemplateBlockPreview
-                              blocks={blocks}
-                              blockContextId={post.ID}
-                              setActiveBlockContextId={setActiveBlockContextId}
-                              isHidden={
-                                post.ID ===
-                                (activeBlockContextId ||
-                                  posts[0]?.ID)
-                              }
-                            />
-
-
-
-                          </BlockContextProvider>
-                        </>
-
-
-                      )
-                    })} */}
 						</div>
 					)}
 

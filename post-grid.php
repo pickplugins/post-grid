@@ -97,6 +97,8 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/flex-wrap-item/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/masonry-wrap/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/masonry-wrap-item/index.php');
+            // require_once(post_grid_plugin_dir . 'src/blocks/justified-wrap/index.php');
+            // require_once(post_grid_plugin_dir . 'src/blocks/justified-wrap-item/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/grid-wrap/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/grid-wrap-item/index.php');
 

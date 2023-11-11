@@ -20,11 +20,8 @@
           "class": "pg-progress-bar"
         },
         "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "block"
           }
         }
       }
@@ -47,7 +44,17 @@
           "class": "",
           "position": "beforeBar"
         },
-        "styles": {}
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "justifyContent": {
+            "Desktop": "space-between"
+          },
+          "padding": {
+            "Desktop": "10px 15px 10px 15px"
+          }
+        }
       }
     },
     "progressBar": {
@@ -57,11 +64,14 @@
           "class": ""
         },
         "styles": {
-          "color": {
-            "Desktop": ""
+          "borderRadius": {
+            "Desktop": "30px"
           },
-          "fontSize": {
-            "Desktop": ""
+          "padding": {
+            "Desktop": "6px"
+          },
+          "backgroundColor": {
+            "Desktop": "#1f2e45"
           }
         }
       }
@@ -73,11 +83,17 @@
           "class": ""
         },
         "styles": {
-          "color": {
-            "Desktop": ""
+          "borderRadius": {
+            "Desktop": "30px"
           },
-          "fontSize": {
-            "Desktop": ""
+          "height": {
+            "Desktop": "18px"
+          },
+          "width": {
+            "Desktop": "45%"
+          },
+          "backgroundColor": {
+            "Desktop": "#1f2e45"
           }
         }
       }
@@ -93,10 +109,19 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000"
           },
           "fontSize": {
-            "Desktop": ""
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
           }
         }
       }
@@ -143,10 +168,19 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000"
           },
           "fontSize": {
-            "Desktop": ""
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
           }
         }
       }
@@ -163,13 +197,13 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "margin": {
+            "Desktop": "0px 10px 0px 0px"
           },
           "fontSize": {
-            "Desktop": ""
+            "Desktop": "18px"
           }
         }
       }

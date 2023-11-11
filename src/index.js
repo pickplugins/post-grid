@@ -84,7 +84,7 @@ import "./sidebars";
 
 import "./blocks/post-grid";
 import "./blocks/post-grid-pagination";
-import "./blocks/post-grid-query";
+import "./blocks/post-query";
 
 import "./blocks/post-grid-filterable";
 
@@ -156,6 +156,8 @@ import "./blocks/flex-wrap";
 import "./blocks/flex-wrap-item";
 import "./blocks/masonry-wrap";
 import "./blocks/masonry-wrap-item";
+// import "./blocks/justified-wrap";
+// import "./blocks/justified-wrap-item";
 
 import "./blocks/grid-wrap";
 import "./blocks/grid-wrap-item";

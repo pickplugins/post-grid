@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/justified-wrap-item",
+  "title": "Justified Item",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "parent": [
+    "post-grid/justified-wrap"
+  ],
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-justified-wrap-item"
+        },
+        "styles": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "masonry wrapper",
+    "masonry layout",
+    "masonry wordpress",
+    "masonry block for wordpress"
+  ],
+  "description": "This block is the inner block of masonry wrap block"
+}

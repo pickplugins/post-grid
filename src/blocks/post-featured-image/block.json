@@ -27,20 +27,15 @@
           "useAsBackground": "no"
         },
         "styles": {
-          "height": {},
-          "overflow": {},
-          "color": {
-            "Desktop": ""
+          "width": {
+            "Desktop": "100%"
           },
-          "display": {},
-          "padding": {
-            "Desktop": ""
+          "height": {
+            "Desktop": "100%"
           },
-          "margin": {
-            "Desktop": ""
-          },
-          "backgroundPosition": {},
-          "backgroundSize": {}
+          "overflow": {
+            "Desktop": "hidden"
+          }
         }
       }
     },
@@ -68,16 +63,15 @@
           }
         },
         "styles": {
-          "width": {},
-          "height": {},
-          "filter": {},
-          "padding": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "block"
           },
-          "margin": {}
-        },
-        "hoverStyles": {
-          "filter": {}
+          "maxWidth": {
+            "Desktop": "100%"
+          },
+          "height": {
+            "Desktop": "auto"
+          }
         }
       }
     },

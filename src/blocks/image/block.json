@@ -32,9 +32,6 @@
           "width": {
             "Desktop": "100%"
           },
-          "height": {
-            "Desktop": "100%"
-          },
           "overflow": {
             "Desktop": "hidden"
           }

@@ -47,212 +47,7 @@ class PGBlockPostGrid
   {
   }
 
-  public function parse_query_prams($queryArgs)
-  {
 
-    $query_args = [];
-
-
-
-    foreach ($queryArgs as $item) {
-
-
-
-      $id = isset($item['id']) ? $item['id'] : '';
-      $val = isset($item['val']) ? $item['val'] : '';
-
-
-      if (isset($item['val'])) {
-        if ($id == 'postType') {
-          $query_args['post_type'] = $val;
-        } elseif ($id == 'postStatus') {
-          $query_args['post_status'] = $val;
-        } elseif ($id == 'order') {
-          $query_args['order'] = $val;
-        } elseif ($id == 'orderby') {
-          $query_args['orderby'] = implode(' ', $val);
-        } elseif ($id == 'metaKey') {
-          $query_args['meta_key'] = $val;
-        } elseif ($id == 'dateQuery') {
-
-
-          $date_query = [];
-
-          foreach ($val as $arg) {
-            $id = isset($arg['id']) ? $arg['id'] : '';
-            $value = isset($arg['value']) ? $arg['value'] : '';
-
-
-            if ($id == 'year' || $id == 'month' || $id == 'week' || $id == 'day' || $id == 'hour' || $id == 'minute' || $id == 'second') {
-              $compare = isset($arg['compare']) ? $arg['compare'] : '';
-
-              if (!empty($value))
-                $date_query[] = [$id => $value, 'compare' => $compare,];
-            }
-
-
-            if ($id == 'inclusive' || $id == 'compare' || $id == 'relation') {
-
-              if (!empty($value))
-                $date_query[$id] = $value;
-            }
-
-            if ($id == 'after' || $id == 'before') {
-              $year = isset($arg['year']) ? $arg['year'] : '';
-              $month = isset($arg['month']) ? $arg['month'] : '';
-              $day = isset($arg['day']) ? $arg['day'] : '';
-
-              if (!empty($year))
-                $date_query[$id]['year'] = $year;
-
-              if (!empty($month))
-                $date_query[$id]['month'] = $month;
-
-              if (!empty($day))
-                $date_query[$id]['day'] = $day;
-            }
-          }
-
-
-
-          $query_args['date_query'] = $date_query;
-        } elseif ($id == 'year') {
-
-
-
-          $query_args['year'] = $val;
-        } elseif ($id == 'monthnum') {
-          $query_args['monthnum'] = $val;
-        } elseif ($id == 'w') {
-          $query_args['w'] = $val;
-        } elseif ($id == 'day') {
-          $query_args['day'] = $val;
-        } elseif ($id == 'hour') {
-          $query_args['hour'] = $val;
-        } elseif ($id == 'minute') {
-          $query_args['minute'] = $val;
-        } elseif ($id == 'second') {
-          $query_args['second'] = $val;
-        } elseif ($id == 'm') {
-          $query_args['m'] = $val;
-        } elseif ($id == 'author') {
-          $query_args['author'] = $val;
-        } elseif ($id == 'authorName') {
-          $query_args['author_name'] = $val;
-        } elseif ($id == 'authorIn') {
-          $query_args['author_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'authorNotIn') {
-          $query_args['author__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'cat') {
-          $query_args['cat'] = $val;
-        } elseif ($id == 'categoryName') {
-          $query_args['category_name'] = $val;
-        } elseif ($id == 'categoryAnd') {
-          $query_args['category_and'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'categoryIn') {
-          $query_args['category__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'categoryNotIn') {
-          $query_args['category__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tag') {
-          $query_args['tag'] = $val;
-        } elseif ($id == 'tagId') {
-          $query_args['tag_id'] = $val;
-        } elseif ($id == 'tagAnd') {
-          $query_args['tag__and'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagIn') {
-          $query_args['tag__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagNotIn') {
-          $query_args['tag__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagSlugAnd') {
-          $query_args['tag_slug__and'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagSlugIn') {
-          $query_args['tag_slug__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'taxQuery') {
-          $query_args['tax_query'] = isset($val[0]) ? $val[0] : $val;
-        } elseif ($id == 'p') {
-          $query_args['p'] = $val;
-        } elseif ($id == 'name') {
-          $query_args['name'] = $val;
-        } elseif ($id == 'pageId') {
-          $query_args['page_id'] = $val;
-        } elseif ($id == 'pagename') {
-          $query_args['pagename'] = $val;
-        } elseif ($id == 'postParent') {
-          $query_args['post_parent'] = $val;
-        } elseif ($id == 'postParentIn') {
-          $query_args['post_parent__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postParentNotIn') {
-          $query_args['post_parent__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postIn') {
-
-          $query_args['post__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postNotIn') {
-          $query_args['post__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postNameIn') {
-          $query_args['post_name__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'hasPassword') {
-
-          $query_args['has_password'] = $val;
-        } elseif ($id == 'postPassword') {
-          $query_args['post_password'] = $val;
-        } elseif ($id == 'commentCount') {
-          $query_args['comment_count'] = $val;
-        } elseif ($id == 'nopaging') {
-          $query_args['nopaging'] = $val;
-        } elseif ($id == 'postsPerPage') {
-          $query_args['posts_per_page'] = $val;
-        } elseif ($id == 'paged') {
-          $query_args['paged'] = $val;
-        } elseif ($id == 'offset') {
-
-          $query_args['offset'] = $val;
-        } elseif ($id == 'postsPerArchivePage') {
-          $query_args['posts_per_archive_page'] = $val;
-        } elseif ($id == 'ignoreStickyPosts') {
-          $query_args['ignore_sticky_posts'] = $val;
-        } elseif ($id == 'metaKey') {
-          $query_args['meta_key'] = $val;
-        } elseif ($id == 'metaValue') {
-
-          $query_args['meta_value'] = $val;
-        } elseif ($id == 'metaValueNum') {
-
-
-
-          $query_args['meta_value_num'] = $val;
-        } elseif ($id == 'metaCompare') {
-          $query_args['meta_compare'] = $val;
-        } elseif ($id == 'metaQuery') {
-          $query_args['meta_query'] = $val;
-        } elseif ($id == 'perm') {
-          $query_args['perm'] = $val;
-        } elseif ($id == 'postMimeType') {
-          $query_args['post_mime_type'] = $val;
-        } elseif ($id == 'cacheResults') {
-          $query_args['cache_results'] = $val;
-        } elseif ($id == 'updatePostMetaCache') {
-          $query_args['update_post_meta_cache '] = $val;
-        } elseif ($id == 'updatePostTermCache') {
-          $query_args['update_post_term_cache'] = $val;
-        }
-      }
-    }
-
-
-    if (get_query_var('paged')) {
-      $paged = get_query_var('paged');
-    } elseif (get_query_var('page')) {
-      $paged = get_query_var('page');
-    } else {
-      $paged = 1;
-    }
-
-    if (!empty($paged))
-      $query_args['paged'] = $paged;
-
-
-    return $query_args;
-  }
 
 
   // front-end output from the gutenberg editor 
@@ -353,7 +148,7 @@ class PGBlockPostGrid
 
     $layout = isset($attributes['layout']) ? $attributes['layout'] : [];
     $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
-    
+
     $scripts = isset($attributes['scripts']) ? $attributes['scripts'] : [];
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : ['items' => []];
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -387,7 +182,7 @@ class PGBlockPostGrid
     $layout_id = isset($layout['id']) ? $layout['id'] : '';
     $layout_id = apply_filters('pgb_post_grid_post_layout_id', $layout_id);
 
-    ob_start();
+
 
     $rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
     $rawData = !empty($layout['rawData']) ? $layout['rawData'] : $rawData;
@@ -404,7 +199,7 @@ class PGBlockPostGrid
 
 
 
-    $query_args = $this->parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
+    $query_args = post_grid_parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
 
 
     if (get_query_var('paged')) {
@@ -425,9 +220,9 @@ class PGBlockPostGrid
 
 
 
-    if ($post_grid_wp_query->have_posts()):
+    if ($post_grid_wp_query->have_posts()) :
 
-      while ($post_grid_wp_query->have_posts()):
+      while ($post_grid_wp_query->have_posts()) :
         $post_grid_wp_query->the_post();
 
         $post_id = get_the_id();
@@ -447,8 +242,7 @@ class PGBlockPostGrid
 
 
       $responses['posts'] = $posts;
-      $responses['max_num_pages'] = isset($post_grid_wp_query->max_num_pages) ? $post_grid_wp_query->max_num_pages : 0;
-      ;
+      $responses['max_num_pages'] = isset($post_grid_wp_query->max_num_pages) ? $post_grid_wp_query->max_num_pages : 0;;
 
       wp_reset_query();
       wp_reset_postdata();
@@ -484,160 +278,25 @@ class PGBlockPostGrid
     ];
 
     $obj['id'] = $post_ID;
-		$obj['type'] = 'post';
+    $obj['type'] = 'post';
 
 
 
-		$containerClass = parse_css_class($containerClass, $obj);
-
-
-    ?>
-
-
-      <?php if ($lazyLoadEnable == 'yes'): ?>
-                <div class=" PGBlockPostGrid-lazyload" id="lazyload-<?php echo esc_attr($blockId); ?>">
-                  <?php
-                  if (!empty($lazyLoadsrcUrl)):
-                    ?>
-                            <img src="<?php echo esc_url_raw($lazyLoadsrcUrl); ?>" alt="Post Grid Lazy loading">
-                            <?php
-                  else:
-                    ?>
-                            <i class="<?php echo esc_attr($lazyLoadIconSrc); ?> fa-spin"></i>
-                            <?php
-                  endif;
-                  ?>
-                </div>
-      <?php endif; ?>
-      <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?>
-        class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($containerClass); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>"
-        postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
-        <div class="loop-loading"></div>
-        <div class="items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>">
-          <?php
-          if (!empty($responses['posts'])) {
-            foreach ($responses['posts'] as $post) {
-              ?>
-                              <div class="item">
-                                <?php echo wp_kses_post($post); ?>
-                              </div>
-                              <?php
-            }
-          }
-          ?>
-        </div>
-
-        <?php if ($paginationType != 'none'): ?>
-                  <div id="pagination-<?php echo esc_attr($blockId); ?>"
-                    class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>"
-                    blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-                    <?php if ($paginationType == 'normal'): ?>
-                              <?php
-                              $big = 999999999; // need an unlikely integer
-                              $pagination_max_num_pages = isset($responses['max_num_pages']) ? $responses['max_num_pages'] : 0;
-
-                              $pages = paginate_links(
-                                array(
-                                  'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                                  'format' => '?paged=%#%',
-                                  'current' => max(1, $paged),
-                                  'total' => $pagination_max_num_pages,
-                                  'prev_text' => $prevText,
-                                  'next_text' => $nextText,
-                                  'type' => 'array',
-
-                                )
-                              );
-
-                              if (!empty($pages)):
-                                foreach ($pages as $page) {
-                                  echo wp_kses_post($page);
-                                }
-                              endif;
-                              ?>
-                    <?php endif; ?>
-
-
-                    <?php if ($paginationType == 'ajax'): ?>
-                              <?php
-                              $big = 999999999; // need an unlikely integer
-                              $pagination_max_num_pages = $responses['max_num_pages'];
+    $containerClass = parse_css_class($containerClass, $obj);
+    ob_start();
 
 
 
-                              $pages = paginate_links(
-                                array(
-                                  'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                                  'format' => '?paged=%#%',
-                                  'current' => max(1, $paged),
-                                  'total' => $pagination_max_num_pages,
-                                  'prev_text' => $prevText,
-                                  'next_text' => $nextText,
-                                  'type' => 'array',
-
-                                )
-                              );
-
-                              if (!empty($pages)):
-                                foreach ($pages as $page) {
-                                  //$links = str_replace('<a ', '<a blockArgs="' . esc_attr(json_encode($blockArgs)) . '" ', $page);
-                                  echo wp_kses_post($page);
-                                }
-                              endif;
-                              ?>
-                    <?php endif; ?>
-
-
-                    <?php if ($paginationType == 'next_previous'):
-                      $pagination_max_num_pages = $responses['max_num_pages'];
-
-
-                      if ($pagination_max_num_pages) {
-                        ?>
-                                        <a class="page-numbers" href="<?php echo esc_url_raw(get_previous_posts_page_link()); ?>">
-                                          <?php echo wp_kses_post($prevText); ?>
-                                        </a>
-                                        <a class="page-numbers" href="<?php echo esc_url_raw(get_next_posts_page_link()); ?>">
-                                          <?php echo wp_kses_post($nextText); ?>
-                                        </a>
-                                        <?php
-                      }
-
-                      ?>
-
-                    <?php endif; ?>
-
-                    <?php if ($paginationType == 'loadmore'): ?>
-                              <div class="page-numbers">
-                                <?php echo wp_kses_post($loadMoreText); ?>
-                              </div>
-                    <?php endif; ?>
-
-                    <?php if ($paginationType == 'infinite'): ?>
-                              <div class="infinite-loader box">
-                                <?php echo __('Loading...', 'post-grid'); ?>
-                              </div>
-
-
-                    <?php endif; ?>
-                  </div>
-        <?php endif; ?>
-      </div>
-      <?php
+?>
 
 
 
-      ?>
+    <div class="pg-post-grid <?php echo esc_attr($containerClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
+      <?php echo $content ?>
+    </div>
+<?php
 
-
-
-
-
-
-
-
-
-      <?php return ob_get_clean();
+    return ob_get_clean();
   }
 }
 

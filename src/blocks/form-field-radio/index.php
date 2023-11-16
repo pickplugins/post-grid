@@ -117,7 +117,7 @@ class PGBlockFormFieldRadio
                                     <div class='label-wrap'>
 
                                         <?php if ($labelEnable): ?>
-                                                        <label for="">
+                                                        <label for=""  className="font-medium text-slate-900 " >
                                                             <?php echo wp_kses_post($labelText); ?>
                                                         </label>
                                         <?php endif; ?>

@@ -48,8 +48,18 @@ import {
 	BlockContextProvider,
 	__experimentalUseBlockPreview as useBlockPreview,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
+const { parse } = wp.blockSerializationDefaultParser;
 
 import {
 	InspectorControls,
@@ -82,6 +92,7 @@ import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
 import PGDropdown from "../../components/dropdown";
 import PGinputSelect from "../../components/input-select";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -90,10 +101,9 @@ var myStore = wp.data.select("postgrid-shop");
 //   return { value: i, label: x.label, description: x.description, isPro: x.isPro, }
 // })
 
-registerBlockType("post-grid/post-query", {
-	apiVersion: 2,
-	title: "Post Query",
-	//parent: ["post-grid/post-grid"],
+registerBlockType(metadata, {
+	
+	
 
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -110,179 +120,6 @@ registerBlockType("post-grid/post-query", {
 		),
 	},
 
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-
-				styles: {
-					display: { Desktop: "flex" },
-				},
-			},
-		},
-
-		itemsWrap: {
-			type: "object",
-			default: {
-				options: { class: "items-loop" },
-				styles: {},
-			},
-		},
-
-		itemWrap: {
-			type: "object",
-			default: {
-				options: { class: "item" },
-				styles: {},
-			},
-		},
-
-		noPostsWrap: {
-			type: "object",
-			default: {
-				options: { class: "no-posts text-center" },
-				styles: {},
-			},
-		},
-
-		grid: {
-			type: "object",
-			default: {
-				options: {
-					itemCss: {},
-				},
-
-				styles: {
-					gridTemplateColumns: {
-						Tablet: [
-							{ val: 1, unit: "fr" },
-							{ val: 1, unit: "fr" },
-						],
-						Mobile: [{ val: 1, unit: "fr" }],
-					},
-					gridTemplateRows: {},
-					colGap: {},
-					rowGap: {},
-
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-		spinnerWrap: {
-			type: "object",
-			default: {
-				options: {
-					class: "spinner"
-				},
-				styles: {}
-			}
-		},
-		layout: {
-			type: "object",
-			default: {
-				id: "",
-				srcServer: "library",
-				data: [
-					{
-						blockName: "core/post-title",
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "",
-						innerContent: [],
-					},
-					{
-						blockName: null,
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "\n\n",
-						innerContent: ["\n\n"],
-					},
-					{
-						blockName: "core/post-date",
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "",
-						innerContent: [],
-					},
-					{
-						blockName: null,
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "\n\n",
-						innerContent: ["\n\n"],
-					},
-					{
-						blockName: "core/post-excerpt",
-						attrs: { moreText: "", textColor: "primary" },
-						innerBlocks: [],
-						innerHTML: "",
-						innerContent: [],
-					},
-				],
-				rawData:
-					"<!-- wp:post-featured-image  /-->\n\n<!-- wp:post-title /-->\n\n<!-- wp:post-excerpt  /-->",
-			},
-		},
-		queryArgs: {
-			type: "object",
-			default: {
-				items: [
-					{
-						val: ["post"],
-						multiple: false,
-						id: "postType",
-					},
-					{
-						val: ["publish"],
-						multiple: false,
-						id: "postStatus",
-					},
-					{
-						val: "DESC",
-						multiple: false,
-						id: "order",
-					},
-					{
-						val: ["date"],
-						multiple: false,
-						id: "orderby",
-					},
-					{
-						val: 10,
-						multiple: false,
-						id: "postsPerPage",
-					},
-					{
-						val: 1,
-						multiple: false,
-						id: "paged",
-					},
-				],
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -298,21 +135,21 @@ registerBlockType("post-grid/post-query", {
 		var blockClass = "." + blockIdX;
 
 		var wrapper = attributes.wrapper;
-		var container = attributes.container;
 
-		var itemsWrap = attributes.itemsWrap;
-		var itemWrap = attributes.itemWrap;
 		var noPostsWrap = attributes.noPostsWrap;
 		var spinnerWrap = attributes.spinnerWrap;
 
-		var grid = attributes.grid;
 		var layout = attributes.layout;
 		var queryArgs = attributes.queryArgs;
 
 		var blockCssY = attributes.blockCssY;
 
-		var postId = context["postId"];
-		var postType = context["postType"];
+
+		var parentQueryArgs = context["post-grid/queryArgs"] == undefined ? null : context["post-grid/queryArgs"];
+		var parentLayout = context["post-grid/layout"] == undefined ? null : context["post-grid/layout"];
+		var postGridId = context["post-grid/postGridId"] == undefined ? null : context["post-grid/postGridId"];
+
+
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
@@ -331,32 +168,36 @@ registerBlockType("post-grid/post-query", {
 			setClientData(myStore != null ? myStore.getclientdata() : "");
 		}, [clientDataX]);
 
-		// Wrapper CSS Class Selectors
-		var wrapperSelector = blockClass;
-		var containerSelector = blockClass;
-		const itemsWrapSelector = blockClass + " .items-loop";
-		const itemWrapSelector = blockClass + " .item";
+		useEffect(() => {
+			if (parentQueryArgs != null) {
+				setAttributes({ queryArgs: parentQueryArgs });
+			}
+		}, [parentQueryArgs]);
 
-		const noPostsSelector = blockClass + " .no-posts";
-		const lazyloadWrapSelector = blockClass + " .lazyLoad";
-		const spinnerSelector = blockClass + " .spinner";
+		useEffect(() => {
+			if (parentLayout != null) {
+				setAttributes({ layout: parentLayout });
+			}
+		}, [parentLayout]);
+
+
 
 		const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
-		const hasInnerBlocks = useSelect(
-			(select) => select(blockEditorStore).getBlocks(clientId).length > 0,
-			[clientId]
-		);
 
-		var icons = { bed: "", layout: "", smiley: "", columns: "", globe: "" };
 		const TEMPLATE = [
-			["core/post-title"],
-			["core/post-excerpt"],
-			["core/post-date"],
+			["post-grid/post-featured-image"],
+			["post-grid/post-title"],
+			["post-grid/post-excerpt"],
 		];
-		var [TEMPLATEX, setTEMPLATEX] = useState(TEMPLATE); // Using the hook.
+
+		var oldLayout = (parentLayout.rawData.length != 0) ? parse(parentLayout.rawData) : [];
+
+		var oldTemplate = ObjectToArr(oldLayout);
+		// console.log(oldTemplate);
 
 
+		var [TEMPLATEX, setTEMPLATEX] = useState((oldTemplate.length > 0) ? oldTemplate : TEMPLATE); // Using the hook.
 
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
@@ -364,12 +205,7 @@ registerBlockType("post-grid/post-query", {
 
 			myStore.generateBlockCss(blockCssY.items, blockId);
 
-			// blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'display': { "Desktop": "flex" } };
-			//blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'gap': { "Desktop": "1em" } };
-
 			setAttributes({ blockCssY: { items: blockCssY.items } });
-
-			//setAttributes({ wrapper: { ...wrapper, styles: { display: { Desktop: 'flex' }, gap: { Desktop: '20px' } } } });
 		}, [clientId]);
 
 		useEffect(() => {
@@ -378,7 +214,6 @@ registerBlockType("post-grid/post-query", {
 
 		const [posts, setPosts] = useState([]); // Using the hook.
 		const [activeBlockContextId, setActiveBlockContextId] = useState();
-		const MemoizedPostTemplateBlockPreview = memo(PostTemplateBlockPreview);
 
 		const [queryLayouts, setQueryLayouts] = useState({
 			keyword: "",
@@ -389,10 +224,9 @@ registerBlockType("post-grid/post-query", {
 		var [layoutData, setLayoutData] = useState({ source: "library" });
 		var [layoutLoading, setLayoutLoading] = useState(false);
 		var [layoutCats, setLayoutCats] = useState([]);
-		var select = wp.data.select('core/block-editor')
+		var select = wp.data.select("core/block-editor");
 
 		var blocks = select.getBlocks(clientId);
-
 
 		function PostTemplateInnerBlocks({ attsx }) {
 			const innerBlocksProps = useInnerBlocksProps(
@@ -427,20 +261,16 @@ registerBlockType("post-grid/post-query", {
 				<div
 					{...blockPreviewProps}
 					tabIndex={0}
-					// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
 					role="button"
 					onClick={handleOnClick}
-					onKeyPress={handleOnClick}
 					style={style}
 				/>
 			);
 		}
 
-
-
+		const MemoizedPostTemplateBlockPreview = memo(PostTemplateBlockPreview);
 
 		function fetchPosts() {
-			console.log(queryArgs);
 
 			setIsBusy(true);
 
@@ -459,44 +289,69 @@ registerBlockType("post-grid/post-query", {
 			});
 		}
 
+		const removeEmptyLines = (str) =>
+			str
+				.split(/\r?\n/)
+				.filter((line) => line.trim() !== "")
+				.join("\n");
+
+
+		function ObjectToArr(obj, arr = []) {
+
+			obj.map(item => {
+				var blockName = item.blockName;
+				var attrs = item.attrs;
+				var innerBlocks = item.innerBlocks;
+				var blockData = [blockName, attrs];
+
+
+				if (innerBlocks.length > 0) {
+					var inner = ObjectToArr(innerBlocks, []);
+					var blockData = [blockName, attrs, inner];
+
+				}
+
+
+				arr.push(blockData);
+
+				//return { blockName, attrs }
+
+			})
+
+			// console.log(arr);
+
+
+			return arr;
+
+		}
+
+
 		function selectLayout(id, postContent) {
+			var str = removeEmptyLines(postContent);
+			var someText = str.replace(/(\r\n|\n|\r)/gm, "");
+
+			console.log(someText);
+
 			var srcServer = layoutData.source;
 
 			if (srcServer == "library") {
-				var blocks = parse(postContent);
+				var blocks = parse(someText);
 
-				setAttributes({
-					layout: {
-						id: null,
-						srcServer: srcServer,
-						data: blocks,
-						rawData: postContent,
-					},
-				});
+
+				var arrs = ObjectToArr(blocks);
+
+
+				replaceInnerBlocks(
+					clientId,
+					createBlocksFromInnerBlocksTemplate(arrs)
+				);
+
+
 
 				var allStyle = {};
 
 				var allStyleX = getCssfromBlocks(allStyle, blocks);
-
-				// blocks.map((block, i) => {
-
-				//   var items = (block.attrs.blockCssY != undefined) ? block.attrs.blockCssY.items : [];
-
-				//   if (Object.entries(items).length > 0) {
-
-				//     Object.entries(items).map(data => {
-
-				//       var handle = data[0];
-				//       var css = data[1];
-
-				//       allStyle[handle] = css;
-				//     })
-				//   }
-
-				// })
-
 				var xxx = { ...blockCssY.items, ...allStyleX };
-
 				setAttributes({ blockCssY: { items: xxx } });
 			} else {
 				apiFetch({
@@ -506,15 +361,6 @@ registerBlockType("post-grid/post-query", {
 				}).then((res) => {
 					var postContent = res.post_content.replace(/(^[ \t]*\n)/gm, "");
 					var blocks = parse(postContent);
-
-					setAttributes({
-						layout: {
-							id: id,
-							srcServer: srcServer,
-							data: blocks,
-							rawData: postContent,
-						},
-					});
 
 					var allStyle = {};
 					var flatObj = [];
@@ -612,9 +458,6 @@ registerBlockType("post-grid/post-query", {
 
 		useEffect(() => {
 
-			console.log(queryArgs);
-
-
 			fetchPosts();
 		}, [queryArgs]);
 
@@ -643,6 +486,22 @@ registerBlockType("post-grid/post-query", {
 				fetchLayouts();
 			}
 		}, [queryLayouts]);
+
+		var [layoutImporting, setlayoutImporting] = useState(false); // Using the hook.
+
+		function importLayout(postData) {
+			setTimeout(() => {
+				apiFetch({
+					path: "/post-grid/v2/import_post_grid_template",
+					method: "POST",
+					data: { postData: postData },
+				}).then((res) => {
+					setlayoutImporting(false);
+				});
+			}, 2000);
+		}
+
+
 
 		function fetchLayouts() {
 			setLayoutLoading(true);
@@ -734,7 +593,6 @@ registerBlockType("post-grid/post-query", {
 
 			fetchPosts();
 		}
-
 
 		function generateQueryArgOptions(item, index) {
 			var itemId = item.id;
@@ -856,13 +714,8 @@ registerBlockType("post-grid/post-query", {
 									<div
 										className="cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm"
 										onClick={(_ev) => {
-
 											var items = [...queryArgs.items];
 											var item = { ...queryArgs.items[index] };
-
-
-
-
 
 											var xx = item.val.concat({
 												fields: [{ key: "", value: "", type: "", compare: "" }],
@@ -874,8 +727,6 @@ registerBlockType("post-grid/post-query", {
 											setAttributes({
 												queryArgs: { ...queryArgs, items: items },
 											});
-
-
 										}}>
 										Add
 									</div>
@@ -889,9 +740,6 @@ registerBlockType("post-grid/post-query", {
 															var items = [...queryArgs.items];
 															var item = { ...queryArgs.items[index] };
 
-
-
-
 															var xx = item.val.splice(j, 1);
 															items[index].val = item.val;
 															// setAttributes({
@@ -901,8 +749,6 @@ registerBlockType("post-grid/post-query", {
 															setAttributes({
 																queryArgs: { ...queryArgs, items: items },
 															});
-
-
 														}}>
 														Remove
 													</div>
@@ -921,11 +767,6 @@ registerBlockType("post-grid/post-query", {
 																var items = [...queryArgs.items];
 																var item = { ...queryArgs.items[index] };
 
-
-
-
-
-
 																item.val[j].relation = newVal;
 
 																//var term = itemData.val[j].fields[k]
@@ -936,12 +777,9 @@ registerBlockType("post-grid/post-query", {
 																// 	queryArgs: { items: queryArgsX.items },
 																// });
 
-
 																setAttributes({
 																	queryArgs: { ...queryArgs, items: items },
 																});
-
-
 															}}
 														/>
 													</PanelRow>
@@ -954,14 +792,8 @@ registerBlockType("post-grid/post-query", {
 																		var items = [...queryArgs.items];
 																		var item = { ...queryArgs.items[index] };
 
-
-
-
 																		var fields = item.val[j].fields;
-																		var xx = item.val[j].fields.splice(
-																			k,
-																			1
-																		);
+																		var xx = item.val[j].fields.splice(k, 1);
 
 																		items[index].val = item.val;
 																		// setAttributes({
@@ -971,8 +803,6 @@ registerBlockType("post-grid/post-query", {
 																		setAttributes({
 																			queryArgs: { ...queryArgs, items: items },
 																		});
-
-
 																	}}>
 																	Remove
 																</div>
@@ -985,10 +815,6 @@ registerBlockType("post-grid/post-query", {
 																		var items = [...queryArgs.items];
 																		var item = { ...queryArgs.items[index] };
 
-
-
-
-
 																		var term = item.val[j].fields[k];
 																		term.key = newVal;
 
@@ -1000,8 +826,6 @@ registerBlockType("post-grid/post-query", {
 																		setAttributes({
 																			queryArgs: { ...queryArgs, items: items },
 																		});
-
-
 																	}}
 																/>
 
@@ -1010,14 +834,8 @@ registerBlockType("post-grid/post-query", {
 																	value={y.value}
 																	placeholder="25"
 																	onChange={(newVal) => {
-
 																		var items = [...queryArgs.items];
 																		var item = { ...queryArgs.items[index] };
-
-
-
-
-
 
 																		var term = item.val[j].fields[k];
 																		term.value = newVal;
@@ -1030,7 +848,6 @@ registerBlockType("post-grid/post-query", {
 																		setAttributes({
 																			queryArgs: { ...queryArgs, items: items },
 																		});
-
 																	}}
 																/>
 
@@ -1054,23 +871,19 @@ registerBlockType("post-grid/post-query", {
 																			var items = [...queryArgs.items];
 																			var item = { ...queryArgs.items[index] };
 
-
-
-
-
 																			var term = item.val[j].fields[k];
 																			term.type = newVal;
 
-																			items[index].val =
-																				item.val;
+																			items[index].val = item.val;
 																			// setAttributes({
 																			// 	queryArgs: { items: queryArgsX.items },
 																			// });
 																			setAttributes({
-																				queryArgs: { ...queryArgs, items: items },
+																				queryArgs: {
+																					...queryArgs,
+																					items: items,
+																				},
 																			});
-
-
 																		}}
 																	/>
 																	<SelectControl
@@ -1103,19 +916,17 @@ registerBlockType("post-grid/post-query", {
 																			var items = [...queryArgs.items];
 																			var item = { ...queryArgs.items[index] };
 
-
-
 																			var term = item.val[j].fields[k];
 																			term.compare = newVal;
 
-																			items[index].val =
-																				item.val;
-
+																			items[index].val = item.val;
 
 																			setAttributes({
-																				queryArgs: { ...queryArgs, items: items },
+																				queryArgs: {
+																					...queryArgs,
+																					items: items,
+																				},
 																			});
-
 																		}}
 																	/>
 																</PanelRow>
@@ -1128,8 +939,6 @@ registerBlockType("post-grid/post-query", {
 															var items = [...queryArgs.items];
 															var item = { ...queryArgs.items[index] };
 
-
-
 															var xx = item.val[j].fields.concat({
 																key: "",
 																value: "",
@@ -1137,9 +946,6 @@ registerBlockType("post-grid/post-query", {
 																compare: "",
 															});
 															items[index].val[j].fields = xx;
-
-
-
 
 															setAttributes({
 																queryArgs: { ...queryArgs, items: items },
@@ -1178,11 +984,8 @@ registerBlockType("post-grid/post-query", {
 											{ value: "relation", label: "Relation" },
 										]}
 										onChange={(newVal) => {
-
 											var items = [...queryArgs.items];
 											var itemData = { ...queryArgs.items[index] };
-
-
 
 											if (newVal == "year") {
 												var xx = itemData.val.concat({
@@ -1292,20 +1095,15 @@ registerBlockType("post-grid/post-query", {
 												<span
 													className="cursor-pointer px-3 py-1 text-white bg-red-600 text-sm my-2 inline-block"
 													onClick={(_ev) => {
-
 														var items = [...queryArgs.items];
 														var item = { ...queryArgs.items[index] };
 
 														//item.val = newVal;
 
-
-
-
 														//queryArgsX.items[index].val.splice(j, 1);
 														item.val.splice(j, 1);
 
 														items[index] = item;
-
 
 														// setAttributes({
 														// 	queryArgs: { items: queryArgsX.items },
@@ -1314,8 +1112,6 @@ registerBlockType("post-grid/post-query", {
 														setAttributes({
 															queryArgs: { ...queryArgs, items: items },
 														});
-
-
 													}}>
 													Delete
 												</span>
@@ -1327,16 +1123,12 @@ registerBlockType("post-grid/post-query", {
 															<InputControl
 																placeholder=""
 																onChange={(newVal) => {
-
 																	var items = [...queryArgs.items];
 																	var item = { ...queryArgs.items[index] };
-
-
 
 																	//queryArgsX.items[index].val[j].year = newVal;
 																	item.val[j].year = newVal;
 																	items[index] = item;
-
 
 																	// setAttributes({
 																	// 	queryArgs: { items: queryArgsX.items },
@@ -1345,8 +1137,6 @@ registerBlockType("post-grid/post-query", {
 																	setAttributes({
 																		queryArgs: { ...queryArgs, items: items },
 																	});
-
-
 																}}
 															/>
 														</PanelRow>
@@ -1356,16 +1146,12 @@ registerBlockType("post-grid/post-query", {
 															<InputControl
 																placeholder=""
 																onChange={(newVal) => {
-
 																	var items = [...queryArgs.items];
 																	var item = { ...queryArgs.items[index] };
-
-
 
 																	//queryArgsX.items[index].val[j].month = newVal;
 																	item.val[j].month = newVal;
 																	items[index] = item;
-
 
 																	// setAttributes({
 																	// 	queryArgs: { items: queryArgsX.items },
@@ -1374,8 +1160,6 @@ registerBlockType("post-grid/post-query", {
 																	setAttributes({
 																		queryArgs: { ...queryArgs, items: items },
 																	});
-
-
 																}}
 															/>
 														</PanelRow>
@@ -1385,34 +1169,23 @@ registerBlockType("post-grid/post-query", {
 															<InputControl
 																placeholder=""
 																onChange={(newVal) => {
-																	clearTimeout(debounce);
-																	debounce = setTimeout(() => {
+																	//clearTimeout(debounce);
+																	//debounce = setTimeout(() => {
+																	var items = [...queryArgs.items];
+																	var item = { ...queryArgs.items[index] };
 
+																	//queryArgsX.items[index].val[j].day = newVal;
+																	item.val[j].day = newVal;
+																	items[index] = item;
 
-																		var items = [...queryArgs.items];
-																		var item = { ...queryArgs.items[index] };
+																	// setAttributes({
+																	// 	queryArgs: { items: queryArgsX.items },
+																	// });
 
-
-
-
-
-																		//queryArgsX.items[index].val[j].day = newVal;
-																		item.val[j].day = newVal;
-																		items[index] = item;
-
-
-																		// setAttributes({
-																		// 	queryArgs: { items: queryArgsX.items },
-																		// });
-
-
-																		setAttributes({
-																			queryArgs: { ...queryArgs, items: items },
-																		});
-
-
-
-																	}, 1000);
+																	setAttributes({
+																		queryArgs: { ...queryArgs, items: items },
+																	});
+																	//}, 1000);
 																}}
 															/>
 														</PanelRow>
@@ -1431,9 +1204,6 @@ registerBlockType("post-grid/post-query", {
 																var items = [...queryArgs.items];
 																var item = { ...queryArgs.items[index] };
 
-
-
-
 																//queryArgsX.items[index].val[j].value = newVal;
 																item.val[j].value = newVal;
 																items[index] = item;
@@ -1442,12 +1212,9 @@ registerBlockType("post-grid/post-query", {
 																// 	queryArgs: { items: queryArgsX.items },
 																// });
 
-
 																setAttributes({
 																	queryArgs: { ...queryArgs, items: items },
 																});
-
-
 															}}
 														/>
 													</div>
@@ -1472,16 +1239,11 @@ registerBlockType("post-grid/post-query", {
 																{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
 															]}
 															onChange={(newVal) => {
-
 																var items = [...queryArgs.items];
 																var item = { ...queryArgs.items[index] };
 
-
-
-
 																//queryArgsX.items[index].val[j].value = newVal;
 																item.val[j].value = newVal;
-
 
 																// setAttributes({
 																// 	queryArgs: { items: queryArgsX.items },
@@ -1490,7 +1252,6 @@ registerBlockType("post-grid/post-query", {
 																setAttributes({
 																	queryArgs: { ...queryArgs, items: items },
 																});
-
 															}}
 														/>
 													</div>
@@ -1500,25 +1261,22 @@ registerBlockType("post-grid/post-query", {
 														<InputControl
 															placeholder=""
 															onChange={(newVal) => {
-																clearTimeout(debounce);
-																debounce = setTimeout(() => {
-																	var items = [...queryArgs.items];
-																	var item = { ...queryArgs.items[index] };
+																//clearTimeout(debounce);
+																//debounce = setTimeout(() => {
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
 
+																// queryArgsX.items[index].val[j].value = newVal;
+																item.val[j].value = newVal;
 
+																// setAttributes({
+																// 	queryArgs: { items: queryArgsX.items },
+																// });
 
-																	// queryArgsX.items[index].val[j].value = newVal;
-																	item.val[j].value = newVal;
-
-																	// setAttributes({
-																	// 	queryArgs: { items: queryArgsX.items },
-																	// });
-
-																	setAttributes({
-																		queryArgs: { ...queryArgs, items: items },
-																	});
-
-																}, 1000);
+																setAttributes({
+																	queryArgs: { ...queryArgs, items: items },
+																});
+																//}, 1000);
 															}}
 														/>
 													</div>
@@ -1533,29 +1291,20 @@ registerBlockType("post-grid/post-query", {
 																{ label: "AND", value: "AND" },
 															]}
 															onChange={(newVal) => {
-
 																var items = [...queryArgs.items];
 																var item = { ...queryArgs.items[index] };
-
-
-
 
 																//queryArgsX.items[index].val[j].value = newVal;
 																item.val[j].value = newVal;
 																items[index] = item;
 
-
 																// setAttributes({
 																// 	queryArgs: { items: queryArgsX.items },
 																// });
 
-
 																setAttributes({
 																	queryArgs: { ...queryArgs, items: items },
 																});
-
-
-
 															}}
 														/>
 													</div>
@@ -1573,13 +1322,8 @@ registerBlockType("post-grid/post-query", {
 																label="Value"
 																placeholder=""
 																onChange={(newVal) => {
-
 																	var items = [...queryArgs.items];
 																	var item = { ...queryArgs.items[index] };
-
-
-
-
 
 																	//clearTimeout(debounce);
 																	//debounce = setTimeout(() => {
@@ -1588,7 +1332,6 @@ registerBlockType("post-grid/post-query", {
 																	item.val[j].value = newVal;
 																	items[index] = item;
 
-
 																	// setAttributes({
 																	// 	queryArgs: { items: queryArgsX.items },
 																	// });
@@ -1596,7 +1339,6 @@ registerBlockType("post-grid/post-query", {
 																	setAttributes({
 																		queryArgs: { ...queryArgs, items: items },
 																	});
-
 
 																	//}, 1000);
 																}}
@@ -1623,15 +1365,11 @@ registerBlockType("post-grid/post-query", {
 																	var items = [...queryArgs.items];
 																	var item = { ...queryArgs.items[index] };
 
-
-
 																	item.val[j].compare = newVal;
 
 																	setAttributes({
 																		queryArgs: { ...queryArgs, items: items },
 																	});
-
-
 																}}
 															/>
 														</div>
@@ -1652,9 +1390,6 @@ registerBlockType("post-grid/post-query", {
 											var items = [...queryArgs.items];
 											var item = { ...queryArgs.items[index] };
 
-
-
-
 											var xx = item.val.concat({
 												terms: [
 													{ taxonomy: "", field: "", terms: [], operator: "" },
@@ -1663,14 +1398,9 @@ registerBlockType("post-grid/post-query", {
 											});
 											items[index].val = xx;
 
-
-
-
 											setAttributes({
 												queryArgs: { ...queryArgs, items: items },
 											});
-
-
 										}}>
 										Add
 									</div>
@@ -1684,7 +1414,6 @@ registerBlockType("post-grid/post-query", {
 															var items = [...queryArgs.items];
 															var item = { ...queryArgs.items[index] };
 
-
 															//var itemData = items[index];
 															var xx = item.val.splice(j, 1);
 															items[index].val = item.val;
@@ -1695,7 +1424,6 @@ registerBlockType("post-grid/post-query", {
 															setAttributes({
 																queryArgs: { ...queryArgs, items: items },
 															});
-
 														}}>
 														Remove
 													</div>
@@ -1720,8 +1448,6 @@ registerBlockType("post-grid/post-query", {
 																setAttributes({
 																	queryArgs: { ...queryArgs, items: items },
 																});
-
-
 															}}
 														/>
 													</PanelRow>
@@ -1753,19 +1479,14 @@ registerBlockType("post-grid/post-query", {
 																		var items = [...queryArgs.items];
 																		var item = { ...queryArgs.items[index] };
 
-
-
-
 																		var term = item.val[j].terms[k];
 																		term.terms = newVal.split(",");
 
 																		items[index].val = item.val;
 
-
 																		setAttributes({
 																			queryArgs: { ...queryArgs, items: items },
 																		});
-
 																	}}
 																/>
 
@@ -1789,19 +1510,17 @@ registerBlockType("post-grid/post-query", {
 																			var items = [...queryArgs.items];
 																			var item = { ...queryArgs.items[index] };
 
-
-
 																			var term = item.val[j].terms[k];
 																			term.field = newVal;
 
-																			items[index].val =
-																				item.val;
-
+																			items[index].val = item.val;
 
 																			setAttributes({
-																				queryArgs: { ...queryArgs, items: items },
+																				queryArgs: {
+																					...queryArgs,
+																					items: items,
+																				},
 																			});
-
 																		}}
 																	/>
 																	<SelectControl
@@ -1824,19 +1543,17 @@ registerBlockType("post-grid/post-query", {
 																			var items = [...queryArgs.items];
 																			var item = { ...queryArgs.items[index] };
 
-
-
 																			var term = item.val[j].terms[k];
 																			term.operator = newVal;
 
 																			items[index].val = item.val;
 
-
 																			setAttributes({
-																				queryArgs: { ...queryArgs, items: items },
+																				queryArgs: {
+																					...queryArgs,
+																					items: items,
+																				},
 																			});
-
-
 																		}}
 																	/>
 																</PanelRow>
@@ -1847,19 +1564,14 @@ registerBlockType("post-grid/post-query", {
 																		var items = [...queryArgs.items];
 																		var item = { ...queryArgs.items[index] };
 
-
 																		var terms = item.val[j].terms;
 
 																		var xx = item.val[j].terms.splice(k, 1);
 																		items[index].val = item.val;
 
-
 																		setAttributes({
 																			queryArgs: { ...queryArgs, items: items },
 																		});
-
-
-
 																	}}>
 																	Remove
 																</div>
@@ -1872,8 +1584,6 @@ registerBlockType("post-grid/post-query", {
 															var items = [...queryArgs.items];
 															var item = { ...queryArgs.items[index] };
 
-
-
 															var xx = item.val[j].terms.concat({
 																taxonomy: "",
 																field: "",
@@ -1882,15 +1592,9 @@ registerBlockType("post-grid/post-query", {
 															});
 															items[index].val[j].terms = xx;
 
-
-
-
 															setAttributes({
 																queryArgs: { ...queryArgs, items: items },
 															});
-
-
-
 														}}>
 														Add
 													</div>
@@ -1934,10 +1638,10 @@ registerBlockType("post-grid/post-query", {
 									<InputControl
 										value={item.val}
 										onChange={(newVal) => {
-											clearTimeout(debounce);
-											debounce = setTimeout(() => {
-												updateQueryPram(newVal, index);
-											}, 1000);
+											//clearTimeout(debounce);
+											//debounce = setTimeout(() => {
+											updateQueryPram(newVal, index);
+											//}, 1000);
 										}}
 									/>
 								</div>
@@ -2108,9 +1812,6 @@ registerBlockType("post-grid/post-query", {
 			var items = [...queryArgs.items];
 			var itemX = { ...queryArgs.items[index] };
 
-
-
-
 			var data = { val: queryPrams[id].value, id: id };
 			var multiple = data.multiple;
 
@@ -2121,7 +1822,6 @@ registerBlockType("post-grid/post-query", {
 			});
 
 			var itemsX = items.concat([data]);
-			console.log(itemsX);
 
 			//setAttributes({ queryArgs: { items: items } });
 			setAttributes({
@@ -2129,18 +1829,14 @@ registerBlockType("post-grid/post-query", {
 			});
 		}
 
-
 		var RemoveQueryPram = function ({ title, index }) {
 			return (
 				<>
 					<span
 						className="cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1"
 						onClick={(ev) => {
-
 							var items = [...queryArgs.items];
 							var item = { ...queryArgs.items[index] };
-
-
 
 							items.splice(index, 1);
 							//setAttributes({ queryArgs: { items: queryArgsX.items } });
@@ -2148,8 +1844,6 @@ registerBlockType("post-grid/post-query", {
 							setAttributes({
 								queryArgs: { ...queryArgs, items: items },
 							});
-
-
 						}}>
 						<Icon icon={close} />
 					</span>
@@ -2158,10 +1852,7 @@ registerBlockType("post-grid/post-query", {
 			);
 		};
 
-
-
 		function addQueryPreset(option, index) {
-
 			var items = [...queryArgs.items];
 			var item = { ...queryArgs.items[index] };
 
@@ -2173,7 +1864,6 @@ registerBlockType("post-grid/post-query", {
 
 			fetchPosts();
 		}
-
 
 		var postTypes = [];
 
@@ -2192,8 +1882,6 @@ registerBlockType("post-grid/post-query", {
 			ev.preventDefault();
 			return false;
 		}
-
-
 
 		const ALLOWED_BLOCKS = ["post-grid/post-grid-item"];
 
@@ -2252,14 +1940,14 @@ registerBlockType("post-grid/post-query", {
 								type="text"
 								placeholder="Search Layouts..."
 								onChange={(newVal) => {
-									clearTimeout(debounce);
-									debounce = setTimeout(() => {
-										setQueryLayouts({
-											keyword: newVal,
-											page: queryLayouts.page,
-											category: queryLayouts.category,
-										});
-									}, 1000);
+									//clearTimeout(debounce);
+									//debounce = setTimeout(() => {
+									setQueryLayouts({
+										keyword: newVal,
+										page: queryLayouts.page,
+										category: queryLayouts.category,
+									});
+									//}, 1000);
 
 									//fetchLayouts();
 								}}
@@ -2489,7 +2177,6 @@ registerBlockType("post-grid/post-query", {
 					</PanelBody>
 
 					<PanelBody title="Query Post" initialOpen={false}>
-
 						<PanelRow className="my-3">
 							<PGDropdown
 								position="bottom right"
@@ -2507,16 +2194,10 @@ registerBlockType("post-grid/post-query", {
 								values=""></PGDropdown>
 						</PanelRow>
 
-
-
 						{queryArgs.items.map((item, index) => {
 							return generateQueryArgOptions(item, index);
 						})}
-
-
 					</PanelBody>
-
-
 
 					<div className="px-2">
 						<PGMailSubsctibe />
@@ -2534,74 +2215,48 @@ registerBlockType("post-grid/post-query", {
 
 
 					{isBusy == false && posts == null && (
-						<div className={noPostsWrap.options.class}>No Post found</div>
-					)}
-
-					{isBusy && (
-						<div className={spinnerWrap.options.class}>
-							<Spinner />
+						<div {...blockProps}>
+							<div className={noPostsWrap.options.class}>No Post found</div>
 						</div>
 					)}
 
+					{isBusy && (
+						<div {...blockProps}>
+							<div className={spinnerWrap.options.class}>
+								<Spinner />
+							</div>						</div>
+
+					)}
+
 					{isBusy == false && posts != null && posts.length > 0 && (
-						<div {...blockProps} >
-							{/* {posts.map((x, _i) => {
+						<div {...blockProps}>
+
+							{posts.map((post) => {
 								return (
-									<div className={itemWrap.options.class}>
-										<RawHTML>{x.html}</RawHTML>
-									</div>
-								);
-							})} */}
-
-
-							{posts.map(post => {
-
-
-								return (
-
 									<>
 										<BlockContextProvider
 											key={post.ID}
-											value={post}
-										>
-											{post.ID ===
-												(activeBlockContextId ||
-													posts[0]?.ID) ? (
-
+											value={{ postId: post.ID, postType: post.post_type }}>
+											{post.ID === (activeBlockContextId || posts[0]?.ID) ? (
 												<>
 													<PostTemplateInnerBlocks attsx={TEMPLATEX} />
 												</>
-
-
 											) : null}
-
 
 											<MemoizedPostTemplateBlockPreview
 												blocks={blocks}
 												blockContextId={post.ID}
 												setActiveBlockContextId={setActiveBlockContextId}
 												isHidden={
-													post.ID ===
-													(activeBlockContextId ||
-														posts[0]?.ID)
+													post.ID === (activeBlockContextId || posts[0]?.ID)
 												}
 											/>
-
-
-
 										</BlockContextProvider>
 									</>
-
-
-								)
+								);
 							})}
-
-
-
 						</div>
 					)}
-
-
 				</>
 			</>
 		);

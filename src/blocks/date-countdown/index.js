@@ -53,6 +53,8 @@ import {
 	linkOff,
 	close,
 	menu,
+	brush,
+	mediaAndText,
 } from "@wordpress/icons";
 
 import {
@@ -268,23 +270,23 @@ registerBlockType(metadata, {
 
 				var blockCssObj = {};
 
-				if (dateCountdownX != undefined) {
-					var dateCountdownY = {
-						...dateCountdownX,
-						options: dateCountdown.options,
-					};
-					setAttributes({ dateCountdown: dateCountdownY });
-					blockCssObj[dateCountdownSelector] = dateCountdownY;
-				}
+				// if (dateCountdownX != undefined) {
+				// 	var dateCountdownY = {
+				// 		...dateCountdownX,
+				// 		options: dateCountdown.options,
+				// 	};
+				// 	setAttributes({ dateCountdown: dateCountdownY });
+				// 	blockCssObj[dateCountdownSelector] = dateCountdownY;
+				// }
 
-				if (scheduleTimeX != undefined) {
-					var scheduleTimeY = {
-						...scheduleTimeX,
-						options: scheduleTime.options,
-					};
-					setAttributes({ scheduleTime: scheduleTimeY });
-					blockCssObj[scheduleTimeSelector] = scheduleTimeY;
-				}
+				// if (scheduleTimeX != undefined) {
+				// 	var scheduleTimeY = {
+				// 		...scheduleTimeX,
+				// 		options: scheduleTime.options,
+				// 	};
+				// 	setAttributes({ scheduleTime: scheduleTimeY });
+				// 	blockCssObj[scheduleTimeSelector] = scheduleTimeY;
+				// }
 
 				if (countdownWrapperX != undefined) {
 					var countdownWrapperY = {
@@ -301,11 +303,11 @@ registerBlockType(metadata, {
 					blockCssObj[innerSelector] = innerY;
 				}
 
-				if (itemsX != undefined) {
-					var itemsY = { ...itemsX, options: items.options };
-					setAttributes({ items: itemsY });
-					blockCssObj[itemsSelector] = itemsY;
-				}
+				// if (itemsX != undefined) {
+				// 	var itemsY = { ...itemsX, options: items.options };
+				// 	setAttributes({ items: itemsY });
+				// 	blockCssObj[itemsSelector] = itemsY;
+				// }
 
 				if (secondWrapX != undefined) {
 					var secondWrapY = { ...secondWrapX, options: secondWrap.options };
@@ -2269,6 +2271,941 @@ registerBlockType(metadata, {
 			setAttributes({ postfix: object });
 		}
 
+		// add bulk style start
+
+		function onBulkAddWrapper(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, wrapper);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ wrapper: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddCountdownWrapper(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, countdownWrapper);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ countdownWrapper: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				countdownWrapperSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddInner(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, inner);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ inner: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, innerSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddItems(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, items);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ items: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, itemsSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddSecondWrap(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, secondWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ secondWrap: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				secondWrapSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddSecond(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, second);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ second: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, secondSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddMinuteWrap(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, minuteWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ minuteWrap: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				minuteWrapSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddMinute(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, minute);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ minute: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, minuteSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddHourWrap(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, hourWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ hourWrap: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, hourWrapSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddHour(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, hour);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ hour: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, hourSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddDayWrap(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, dayWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ dayWrap: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, dayWrapSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddDay(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, day);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ day: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, daySelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddIcon(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, icon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ icon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddSeparator(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, separator);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ separator: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, separatorSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddLabel(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, label);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ label: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, labelSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddPrefix(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, prefix);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ prefix: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, prefixSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddPostfix(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, postfix);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ postfix: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, postfixSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		// add bulk style end
+
+		// reset style start
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+
+		function onResetCountdownWrapper(sudoScources) {
+			let obj = Object.assign({}, countdownWrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						countdownWrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ countdownWrapper: obj });
+		}
+
+		function onResetInner(sudoScources) {
+			let obj = Object.assign({}, inner);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						innerSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ inner: obj });
+		}
+
+		function onResetItems(sudoScources) {
+			let obj = Object.assign({}, items);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						itemsSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ items: obj });
+		}
+
+		function onResetSecondWrap(sudoScources) {
+			let obj = Object.assign({}, secondWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						secondWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ secondWrap: obj });
+		}
+
+		function onResetSecond(sudoScources) {
+			let obj = Object.assign({}, second);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						secondSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ second: obj });
+		}
+
+		function onResetMinuteWrap(sudoScources) {
+			let obj = Object.assign({}, minuteWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						minuteWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ minuteWrap: obj });
+		}
+
+		function onResetMinute(sudoScources) {
+			let obj = Object.assign({}, minute);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						minuteSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ minute: obj });
+		}
+
+		function onResetHourWrap(sudoScources) {
+			let obj = Object.assign({}, hourWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						hourWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ hourWrap: obj });
+		}
+
+		function onResetHour(sudoScources) {
+			let obj = Object.assign({}, hour);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						hourSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ hour: obj });
+		}
+
+		function onResetDayWrap(sudoScources) {
+			let obj = Object.assign({}, dayWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						dayWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ dayWrap: obj });
+		}
+
+		function onResetDay(sudoScources) {
+			let obj = Object.assign({}, day);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						daySelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ day: obj });
+		}
+
+		function onResetIcon(sudoScources) {
+			let obj = Object.assign({}, icon);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						iconSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ icon: obj });
+		}
+
+		function onResetSeparator(sudoScources) {
+			let obj = Object.assign({}, separator);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						separatorSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ separator: obj });
+		}
+
+		function onResetLabel(sudoScources) {
+			let obj = Object.assign({}, label);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						labelSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ label: obj });
+		}
+
+		function onResetPrefix(sudoScources) {
+			let obj = Object.assign({}, prefix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						prefixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ prefix: obj });
+		}
+
+		function onResetPostfix(sudoScources) {
+			let obj = Object.assign({}, postfix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						postfixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ postfix: obj });
+		}
+
+		// reset style end
+
 		String.prototype.strtr = function (dic) {
 			const str = this.toString(),
 				makeToken = (inx) => `{{###~${inx}~###}}`,
@@ -2371,7 +3308,9 @@ registerBlockType(metadata, {
 					<div className="px-3 ">
 						<div className="pb-3 mb-4">
 							<PanelRow className="my-4">
-								<label for="">Date Countdown Type</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Date Countdown Type
+								</label>
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
@@ -2401,7 +3340,9 @@ registerBlockType(metadata, {
 								<>
 									{dateCountdown.options.startDateSrc?.length == 0 && (
 										<PanelRow className="block mb-4">
-											<label for="" className="font-bold mb-2 ">
+											<label
+												for=""
+												className="font-medium text-slate-900 mb-2 ">
 												Start Date?
 											</label>
 											<br />
@@ -2426,7 +3367,9 @@ registerBlockType(metadata, {
 									)}
 
 									<PanelRow>
-										<label for="">Start Date Source</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Start Date Source
+										</label>
 										<SelectControl
 											label=""
 											value={dateCountdown.options.startDateSrc}
@@ -2451,7 +3394,9 @@ registerBlockType(metadata, {
 
 									{dateCountdown.options.endDateSrc.length == 0 && (
 										<PanelRow className="block mb-2">
-											<label for="" className="font-bold mb-2 ">
+											<label
+												for=""
+												className="font-medium text-slate-900 mb-2 ">
 												End Date?
 											</label>
 
@@ -2476,7 +3421,9 @@ registerBlockType(metadata, {
 									)}
 
 									<PanelRow>
-										<label for="">End Date Source</label>
+										<label for="" className="font-medium text-slate-900 ">
+											End Date Source
+										</label>
 										<SelectControl
 											label=""
 											value={dateCountdown.options.endDateSrc}
@@ -2586,7 +3533,7 @@ registerBlockType(metadata, {
 							{dateCountdown.options.type == "scheduled" && (
 								<>
 									<PanelRow className="my-4">
-										{/* <label for="">Add Media</label> */}
+										{/* <label for=""  className="font-medium text-slate-900 " >Add Media</label> */}
 										<div
 											onClick={(ev) => {
 												var scheduleTimeX = scheduleTime.concat({
@@ -2642,7 +3589,11 @@ registerBlockType(metadata, {
 													}
 													initialOpen={false}>
 													<PanelRow>
-														<label for="">startTime</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															startTime
+														</label>
 														<InputControl
 															type="time"
 															value={item.startTime}
@@ -2657,7 +3608,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">endTime</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															endTime
+														</label>
 														<InputControl
 															type="time"
 															value={item.endTime}
@@ -2673,7 +3628,11 @@ registerBlockType(metadata, {
 													<>
 														<>
 															<PanelRow>
-																<label for="">Compare</label>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Compare
+																</label>
 																<SelectControl
 																	label=""
 																	value={item.weekdays?.compare}
@@ -2707,7 +3666,11 @@ registerBlockType(metadata, {
 																item.weekdays?.compare == "<=") && (
 																<>
 																	<PanelRow className="mb-4">
-																		<label for="">Values</label>
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Values
+																		</label>
 																		<PGDropdown
 																			position="bottom right"
 																			variant="secondary"
@@ -2832,7 +3795,10 @@ registerBlockType(metadata, {
 
 						{/* visibility start */}
 
-						<PanelBody title="Expired Arguments" initialOpen={true}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Expired Arguments"
+							initialOpen={true}>
 							<div
 								className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
 								onClick={(ev) => {
@@ -2895,7 +3861,11 @@ registerBlockType(metadata, {
 																	initialOpen={false}>
 																	<div>
 																		<PanelRow className="mb-4">
-																			<label for="">Write URL</label>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				Write URL
+																			</label>
 																			<InputControl
 																				className="mr-2"
 																				placeholder="Enter URL"
@@ -2914,7 +3884,11 @@ registerBlockType(metadata, {
 																		{/* </div>
                                   <div> */}
 																		<PanelRow className="mb-4">
-																			<label for="">Delay</label>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				Delay
+																			</label>
 																			<InputControl
 																				className="mr-2"
 																				placeholder="Add delay in millisecond"
@@ -3006,7 +3980,11 @@ registerBlockType(metadata, {
 																	initialOpen={false}>
 																	<div>
 																		<PanelRow className="mb-4">
-																			<label for="">ID/Class</label>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				ID/Class
+																			</label>
 																			<InputControl
 																				className="mr-2"
 																				placeholder=".element or #element"
@@ -3055,7 +4033,10 @@ registerBlockType(metadata, {
 
 						{/* visibility end */}
 
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3071,13 +4052,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -3096,7 +4077,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -3107,7 +4090,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 										<SelectControl
 											label=""
 											value={wrapper.options.tag}
@@ -3138,6 +4123,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleWrapper}
 										onAdd={onAddStyleWrapper}
 										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -3150,7 +4137,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="countdown Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="countdown Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3160,13 +4150,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -3176,6 +4166,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleCountdownWrapper}
 										onAdd={onAddStyleCountdownWrapper}
 										onRemove={onRemoveStyleCountdownWrapper}
+										onBulkAdd={onBulkAddCountdownWrapper}
+										onReset={onResetCountdownWrapper}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -3188,7 +4180,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Inner" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Inner"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3204,13 +4199,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -3237,6 +4232,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleInner}
 										onAdd={onAddStyleInner}
 										onRemove={onRemoveStyleInner}
+										onBulkAdd={onBulkAddInner}
+										onReset={onResetInner}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -3249,7 +4246,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Items" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Items"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3259,13 +4259,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -3275,6 +4275,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleItems}
 										onAdd={onAddStyleItems}
 										onRemove={onRemoveStyleItems}
+										onBulkAdd={onBulkAddItems}
+										onReset={onResetItems}
 									/>
 								</PGtab>
 
@@ -3288,9 +4290,14 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Second" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Second"
+							initialOpen={false}>
 							<PanelRow className="mb-4">
-								<label for="">Label: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Label:{" "}
+								</label>
 								<InputControl
 									value={second.options.label}
 									onChange={(newVal) => {
@@ -3302,7 +4309,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="mb-4">
-								<label for="">Prefix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Prefix:{" "}
+								</label>
 								<InputControl
 									value={second.options.prefix}
 									onChange={(newVal) => {
@@ -3314,7 +4323,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="mb-4">
-								<label for="">Postfix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Postfix:{" "}
+								</label>
 								<InputControl
 									value={second.options.postfix}
 									onChange={(newVal) => {
@@ -3325,7 +4336,10 @@ registerBlockType(metadata, {
 									}}
 								/>
 							</PanelRow>
-							<PanelBody title="Second Wrap" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Second Wrap"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3341,13 +4355,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3357,6 +4371,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleSecondWrap}
 											onAdd={onAddStyleSecondWrap}
 											onRemove={onRemoveStyleSecondWrap}
+											onBulkAdd={onBulkAddSecondWrap}
+											onReset={onResetSecondWrap}
 										/>
 									</PGtab>
 
@@ -3369,7 +4385,10 @@ registerBlockType(metadata, {
 									</PGtab>
 								</PGtabs>
 							</PanelBody>
-							<PanelBody title="Second Count" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Second Count"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3385,13 +4404,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3401,6 +4420,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleSecondCountdown}
 											onAdd={onAddStyleSecondCountdown}
 											onRemove={onRemoveStyleSecondCountdown}
+											onBulkAdd={onBulkAddSecond}
+											onReset={onResetSecond}
 										/>
 									</PGtab>
 
@@ -3415,9 +4436,14 @@ registerBlockType(metadata, {
 							</PanelBody>
 						</PanelBody>
 
-						<PanelBody title="Minute" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Minute"
+							initialOpen={false}>
 							<PanelRow className="my-4">
-								<label for="">Label: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Label:{" "}
+								</label>
 								<InputControl
 									value={minute.options.label}
 									onChange={(newVal) => {
@@ -3429,7 +4455,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="my-4">
-								<label for="">Prefix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Prefix:{" "}
+								</label>
 								<InputControl
 									value={minute.options.prefix}
 									onChange={(newVal) => {
@@ -3441,7 +4469,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="my-4">
-								<label for="">Postfix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Postfix:{" "}
+								</label>
 								<InputControl
 									value={minute.options.postfix}
 									onChange={(newVal) => {
@@ -3452,7 +4482,10 @@ registerBlockType(metadata, {
 									}}
 								/>
 							</PanelRow>
-							<PanelBody title="Minute Wrap" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Minute Wrap"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3462,13 +4495,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3478,6 +4511,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleMinuteWrap}
 											onAdd={onAddStyleMinuteWrap}
 											onRemove={onRemoveStyleMinuteWrap}
+											onBulkAdd={onBulkAddMinuteWrap}
+											onReset={onResetMinuteWrap}
 										/>
 									</PGtab>
 
@@ -3490,7 +4525,10 @@ registerBlockType(metadata, {
 									</PGtab>
 								</PGtabs>
 							</PanelBody>
-							<PanelBody title="Minute Count" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Minute Count"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3500,13 +4538,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3516,6 +4554,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleMinuteCountdown}
 											onAdd={onAddStyleMinuteCountdown}
 											onRemove={onRemoveStyleMinuteCountdown}
+											onBulkAdd={onBulkAddMinute}
+											onReset={onResetMinute}
 										/>
 									</PGtab>
 
@@ -3530,9 +4570,14 @@ registerBlockType(metadata, {
 							</PanelBody>
 						</PanelBody>
 
-						<PanelBody title="Hour" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Hour"
+							initialOpen={false}>
 							<PanelRow className="my-4">
-								<label for="">Label: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Label:{" "}
+								</label>
 								<InputControl
 									value={hour.options.label}
 									onChange={(newVal) => {
@@ -3544,7 +4589,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="my-4">
-								<label for="">Prefix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Prefix:{" "}
+								</label>
 								<InputControl
 									value={hour.options.prefix}
 									onChange={(newVal) => {
@@ -3556,7 +4603,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="my-4">
-								<label for="">Postfix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Postfix:{" "}
+								</label>
 								<InputControl
 									value={hour.options.postfix}
 									onChange={(newVal) => {
@@ -3567,7 +4616,10 @@ registerBlockType(metadata, {
 									}}
 								/>
 							</PanelRow>
-							<PanelBody title="Hour Wrap" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Hour Wrap"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3577,13 +4629,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3593,6 +4645,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleHourWrap}
 											onAdd={onAddStyleHourWrap}
 											onRemove={onRemoveStyleHourWrap}
+											onBulkAdd={onBulkAddHourWrap}
+											onReset={onResetHourWrap}
 										/>
 									</PGtab>
 
@@ -3605,7 +4659,10 @@ registerBlockType(metadata, {
 									</PGtab>
 								</PGtabs>
 							</PanelBody>
-							<PanelBody title="Hour Count" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Hour Count"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3615,13 +4672,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3631,6 +4688,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleHourCountdown}
 											onAdd={onAddStyleHourCountdown}
 											onRemove={onRemoveStyleHourCountdown}
+											onBulkAdd={onBulkAddHour}
+											onReset={onResetHour}
 										/>
 									</PGtab>
 
@@ -3645,9 +4704,14 @@ registerBlockType(metadata, {
 							</PanelBody>
 						</PanelBody>
 
-						<PanelBody title="Day" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Day"
+							initialOpen={false}>
 							<PanelRow className="my-4">
-								<label for="">Label: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Label:{" "}
+								</label>
 								<InputControl
 									value={day.options.label}
 									onChange={(newVal) => {
@@ -3659,7 +4723,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="my-4">
-								<label for="">Prefix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Prefix:{" "}
+								</label>
 								<InputControl
 									value={day.options.prefix}
 									onChange={(newVal) => {
@@ -3671,7 +4737,9 @@ registerBlockType(metadata, {
 								/>
 							</PanelRow>
 							<PanelRow className="my-4">
-								<label for="">Postfix: </label>
+								<label for="" className="font-medium text-slate-900 ">
+									Postfix:{" "}
+								</label>
 								<InputControl
 									value={day.options.postfix}
 									onChange={(newVal) => {
@@ -3682,7 +4750,10 @@ registerBlockType(metadata, {
 									}}
 								/>
 							</PanelRow>
-							<PanelBody title="Day Wrap" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Day Wrap"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3692,13 +4763,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3708,6 +4779,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleDayWrap}
 											onAdd={onAddStyleDayWrap}
 											onRemove={onRemoveStyleDayWrap}
+											onBulkAdd={onBulkAddDayWrap}
+											onReset={onResetDayWrap}
 										/>
 									</PGtab>
 
@@ -3720,7 +4793,10 @@ registerBlockType(metadata, {
 									</PGtab>
 								</PGtabs>
 							</PanelBody>
-							<PanelBody title="Day Count" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Day Count"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -3730,13 +4806,13 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 										{
 											name: "css",
 											title: "CSS Library",
-											icon: styles,
+											icon: mediaAndText,
 											className: "tab-css",
 										},
 									]}>
@@ -3746,6 +4822,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleDayCountdown}
 											onAdd={onAddStyleDayCountdown}
 											onRemove={onRemoveStyleDayCountdown}
+											onBulkAdd={onBulkAddDay}
+											onReset={onResetDay}
 										/>
 									</PGtab>
 
@@ -3760,7 +4838,10 @@ registerBlockType(metadata, {
 							</PanelBody>
 						</PanelBody>
 
-						<PanelBody title="Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3776,19 +4857,21 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow className="my-4">
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={icon.options.library}
@@ -3822,6 +4905,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleIcon}
 										onAdd={onAddStyleIcon}
 										onRemove={onRemoveStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+										onReset={onResetIcon}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -3834,7 +4919,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Separator" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Separator"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3850,19 +4938,21 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow className="my-4">
-										<label for="">Separator</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Separator
+										</label>
 
 										<InputControl
 											value={separator.options.text}
@@ -3900,7 +4990,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow className="my-4">
-										<label for="">Separator position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Separator position
+										</label>
 
 										<SelectControl
 											label=""
@@ -3930,6 +5022,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleSeparator}
 										onAdd={onAddStyleSeparator}
 										onRemove={onRemoveStyleSeparator}
+										onBulkAdd={onBulkAddSeparator}
+										onReset={onResetSeparator}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -3942,7 +5036,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Label" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Label"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3958,13 +5055,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -3987,7 +5084,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow className="my-4">
-										<label for="">Label position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Label position
+										</label>
 
 										<SelectControl
 											label=""
@@ -4015,6 +5114,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleLabel}
 										onAdd={onAddStyleLabel}
 										onRemove={onRemoveStyleLabel}
+										onBulkAdd={onBulkAddLabel}
+										onReset={onResetLabel}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -4027,7 +5128,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Prefix" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Prefix"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -4043,13 +5147,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -4080,6 +5184,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStylePrefix}
 										onAdd={onAddStylePrefix}
 										onRemove={onRemoveStylePrefix}
+										onBulkAdd={onBulkAddPrefix}
+										onReset={onResetPrefix}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -4092,7 +5198,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Postfix" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Postfix"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -4108,13 +5217,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -4145,6 +5254,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStylePostfix}
 										onAdd={onAddStylePostfix}
 										onRemove={onRemoveStylePostfix}
+										onBulkAdd={onBulkAddPostfix}
+										onReset={onResetPostfix}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -4157,7 +5268,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"date-countdown"}
 								blockId={blockId}

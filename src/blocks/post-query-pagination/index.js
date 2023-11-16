@@ -1,6 +1,7 @@
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
 import { useSelect, select, useDispatch, dispatch } from "@wordpress/data";
+
 import { useEntityRecord } from "@wordpress/core-data";
 import {
 	createElement,
@@ -29,12 +30,38 @@ import {
 	TextareaControl,
 	Popover,
 	Spinner,
-	Placeholder,
+	Tooltip,
 } from "@wordpress/components";
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
 import { useEntityProp } from "@wordpress/core-data";
 import apiFetch from "@wordpress/api-fetch";
+import {
+	InnerBlocks,
+	useBlockProps,
+	useInnerBlocksProps,
+	store as blockEditorStore,
+} from "@wordpress/block-editor";
+import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 import { applyFilters } from "@wordpress/hooks";
+import { store as coreStore } from "@wordpress/core-data";
+import {
+	BlockContextProvider,
+	__experimentalUseBlockPreview as useBlockPreview,
+} from "@wordpress/block-editor";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	pencil,
+	cloud,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
+import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
+const { parse } = wp.blockSerializationDefaultParser;
 
 import {
 	InspectorControls,
@@ -42,24 +69,12 @@ import {
 	AlignmentToolbar,
 	RichText,
 	__experimentalLinkControl as LinkControl,
-	InnerBlocks,
-	useBlockProps,
-	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 import { __experimentalInputControl as InputControl } from "@wordpress/components";
 import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
-import {
-	Icon,
-	styles,
-	settings,
-	pencil,
-	cloud,
-	link,
-	linkOff,
-	more,
-} from "@wordpress/icons";
+import { __experimentalScrollable as Scrollable } from "@wordpress/components";
 
 import IconToggle from "../../components/icon-toggle";
 import Typography from "../../components/typography";
@@ -67,24 +82,27 @@ import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 import BreakpointToggle from "../../components/breakpoint-toggle";
 import colorsPresets from "../../colors-presets";
+import variations from "./variations";
+
+import paginationTypes from "./pagination-types";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
-import PGDropdown from "../../components/dropdown";
-import paginationTypes from "./pagination-types";
-
 import PGStyles from "../../components/styles";
-import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
+import PGIconPicker from "../../components/icon-picker";
+import PGDropdown from "../../components/dropdown";
+import PGinputSelect from "../../components/input-select";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/post-grid-pagination", {
-	apiVersion: 2,
-	title: "Post Grid Pagination",
+// var queryPramsX = queryPrams.map((x, i) => {
 
-	parent: ["post-grid/post-grid"],
+//   return { value: i, label: x.label, description: x.description, isPro: x.isPro, }
+// })
 
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -93,122 +111,12 @@ registerBlockType("post-grid/post-grid-pagination", {
 		// Specifying an icon for the block
 		src: (
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-				<rect fill="#1d4ed8" y="10.4" width="7.49" height="15.2" />
-				<rect fill="#1d4ed8" x="28.51" y="10.4" width="7.49" height="15.2" />
-				<polygon
-					fill="#1d4ed8"
-					points="25.18 26.5 22.47 26.5 22.47 24.7 23.37 24.7 23.37 23.79 25.18 23.79 25.18 26.5"
-				/>
-				<rect fill="#1d4ed8" x="16.51" y="24.69" width="2.98" height="1.81" />
-				<polygon
-					fill="#1d4ed8"
-					points="13.53 26.5 10.82 26.5 10.82 23.79 12.63 23.79 12.63 24.7 13.53 24.7 13.53 26.5"
-				/>
-				<rect fill="#1d4ed8" x="10.82" y="16.07" width="1.81" height="3.86" />
-				<polygon
-					fill="#1d4ed8"
-					points="12.63 12.21 10.82 12.21 10.82 9.5 13.53 9.5 13.53 11.3 12.63 11.3 12.63 12.21"
-				/>
-				<rect fill="#1d4ed8" x="16.51" y="9.5" width="2.98" height="1.81" />
-				<polygon
-					fill="#1d4ed8"
-					points="25.18 12.21 23.37 12.21 23.37 11.3 22.47 11.3 22.47 9.5 25.18 9.5 25.18 12.21"
-				/>
-				<rect fill="#1d4ed8" x="23.37" y="16.07" width="1.81" height="3.86" />
+				<rect fill="#1d4ed8" y="9.59" width="8.29" height="16.82" />
+				<rect fill="#1d4ed8" x="27.71" y="9.59" width="8.29" height="16.82" />
+				<rect fill="#1d4ed8" x="11.05" y="9.59" width="13.9" height="16.82" />
 			</svg>
 		),
 	},
-
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "flex-item-wrap",
-				},
-
-				styles: {
-					backgroundColor: { Desktop: "" },
-					flexBasis: { Desktop: "0" },
-					flexGrow: { Desktop: "1" },
-				},
-			},
-		},
-
-		pagination: {
-			type: "object",
-			default: {
-				options: {
-					class: "pagination",
-					type: "normal",
-					maxPageNum: "",
-					prevText: "Previous",
-					nextText: "Next",
-					loadMoreText: "Load More",
-					noMorePosts: "No More Posts",
-					loadingText: "Loading...",
-					loadingIcon: {
-						library: "",
-						srcType: "class",
-						/*class, html, img, svg */ iconSrc: "",
-					},
-				},
-
-				styles: {
-					textAlign: { Desktop: "center" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		paginationItem: {
-			type: "object",
-			default: {
-				options: { class: "page-numbers inline-block" },
-
-				styles: {
-					display: { Desktop: "inline-block" },
-					color: { Desktop: "#18978F" },
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		paginationItemActive: {
-			type: "object",
-			default: {
-				options: { class: "page-numbers inline-block" },
-
-				styles: {
-					display: {},
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: false,
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -223,170 +131,66 @@ registerBlockType("post-grid/post-grid-pagination", {
 			: "pg" + clientId.split("-").pop();
 		var blockClass = "." + blockIdX;
 
-		var wrapper = attributes.wrapper;
 		var pagination = attributes.pagination;
 		var paginationItem = attributes.paginationItem;
 		var paginationItemActive = attributes.paginationItemActive;
 
 		var blockCssY = attributes.blockCssY;
 
-		var postId = context["postId"];
-		var postType = context["postType"];
+		const [paginationItems, setPaginationItems] = useState([]); // Using the hook.
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
+		let isProFeature = applyFilters("isProFeature", true);
 
-		// Wrapper CSS Class Selectors
-		var wrapperSelector = blockClass;
+		var [isBusy, setIsBusy] = useState(false); // Using the hook.
+
+		const paginationSelector = blockClass + " .pagination";
+		const paginationItemSelector = blockClass + " .pagination .page-numbers";
+		const paginationItemActiveSelector =
+			blockClass + " .pagination .page-numbers.current";
+
+		var parentPagination =
+			context["post-grid/pagination"] == undefined
+				? null
+				: context["post-grid/pagination"];
+		var parentPaginationItem =
+			context["post-grid/paginationItem"] == undefined
+				? null
+				: context["post-grid/paginationItem"];
+		var parentPaginationItemActive =
+			context["post-grid/paginationItemActive"] == undefined
+				? null
+				: context["post-grid/paginationItemActive"];
+		var postGridId =
+			context["post-grid/postGridId"] == undefined
+				? null
+				: context["post-grid/postGridId"];
 
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
-
 			setAttributes({ blockId: blockIdX });
+
 			myStore.generateBlockCss(blockCssY.items, blockId);
+
+			setAttributes({ blockCssY: { items: blockCssY.items } });
 		}, [clientId]);
 
-		function generateElementSudoCss(obj) {
-			var stylesObj = {};
-
-			Object.entries(obj).map((args) => {
-				var sudoSrc = args[0];
-				var sudoArgs = args[1];
-
-				if (sudoSrc != "options") {
-					var selector = myStore.getElementSelector(sudoSrc, wrapperSelector);
-
-					//console.log(selector);
-					//console.log(sudoArgs);
-
-					Object.entries(args[1]).map((x) => {
-						var attr = x[0];
-						var cssPropty = myStore.cssAttrParse(attr);
-
-						if (stylesObj[selector] == undefined) {
-							stylesObj[selector] = {};
-						}
-
-						if (stylesObj[selector][cssPropty] == undefined) {
-							stylesObj[selector][cssPropty] = {};
-						}
-
-						stylesObj[selector][cssPropty] = x[1];
-					});
-				}
-
-				//console.log(stylesObj);
-			});
-
-			var cssItems = { ...blockCssY.items };
-			var cssItemsX = { ...cssItems, ...stylesObj };
-			//console.log(cssItemsX);
-
-			setAttributes({ blockCssY: { items: cssItemsX } });
-		}
+		useEffect(() => {
+			myStore.generateBlockCss(blockCssY.items, blockId);
+		}, [blockCssY]);
 
 		useEffect(() => {
-			//console.log(wrapper);
+			//setAttributes({ pagination: parentPagination });
+		}, [parentPagination]);
 
-			///myStore.generateBlockCss(blockCssY.items, blockId);
+		useEffect(() => {
+			//setAttributes({ paginationItem: parentPagination });
+		}, [parentPaginationItem]);
 
-			var elementCss = generateElementSudoCss(wrapper);
-
-			//console.log(elementCss);
-		}, [wrapper]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
-		function onChangeStyleWrapper(sudoScource, newVal, attr) {
-			var path = [sudoScource, attr, breakPointX];
-			let obj = Object.assign({}, wrapper);
-			const object = myStore.updatePropertyDeep(obj, path, newVal);
-
-			setAttributes({ wrapper: object });
-
-			var elementSelector = myStore.getElementSelector(
-				sudoScource,
-				wrapperSelector
-			);
-			var cssPropty = myStore.cssAttrParse(attr);
-
-			let itemsX = Object.assign({}, blockCssY.items);
-
-			if (itemsX[elementSelector] == undefined) {
-				itemsX[elementSelector] = {};
-			}
-
-			var cssPath = [elementSelector, cssPropty, breakPointX];
-			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
-
-			setAttributes({ blockCssY: { items: cssItems } });
-		}
-
-		function onRemoveStyleWrapper(sudoScource, key) {
-			var object = myStore.deletePropertyDeep(wrapper, [
-				sudoScource,
-				key,
-				breakPointX,
-			]);
-			setAttributes({ wrapper: object });
-
-			var elementSelector = myStore.getElementSelector(
-				sudoScource,
-				wrapperSelector
-			);
-			var cssPropty = myStore.cssAttrParse(key);
-			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
-				elementSelector,
-				cssPropty,
-				breakPointX,
-			]);
-			setAttributes({ blockCssY: { items: cssObject } });
-		}
-
-		function onAddStyleWrapper(sudoScource, key) {
-			var path = [sudoScource, key, breakPointX];
-			let obj = Object.assign({}, wrapper);
-			const object = myStore.addPropertyDeep(obj, path, "");
-			setAttributes({ wrapper: object });
-		}
-
-		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
-			let obj = Object.assign({}, wrapper);
-			obj[sudoScource] = cssObj;
-
-			setAttributes({ wrapper: obj });
-
-			var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
-			var stylesObj = {};
-
-			Object.entries(cssObj).map((args) => {
-				var attr = args[0];
-				var cssPropty = myStore.cssAttrParse(attr);
-
-				if (stylesObj[selector] == undefined) {
-					stylesObj[selector] = {};
-				}
-
-				if (stylesObj[selector][cssPropty] == undefined) {
-					stylesObj[selector][cssPropty] = {};
-				}
-
-				stylesObj[selector][cssPropty] = args[1];
-			});
-
-			var cssItems = { ...blockCssY.items };
-			var cssItemsX = { ...cssItems, ...stylesObj };
-
-			setAttributes({ blockCssY: { items: cssItemsX } });
-		}
+		useEffect(() => {
+			//setAttributes({ paginationItemActive: parentPagination });
+		}, [parentPaginationItemActive]);
 
 		function onPickCssLibraryPaginationItemActive(args) {
 			Object.entries(args).map((x) => {
@@ -652,40 +456,26 @@ registerBlockType("post-grid/post-grid-pagination", {
 			setAttributes({ paginationItem: object });
 		}
 
-		useEffect(() => {
-			myStore.generateBlockCss(blockCssY.items, blockId);
-		}, [blockCssY]);
-
-		const MY_TEMPLATE = [
-			//['core/paragraph', { placeholder: '', content: 'Hello Text...' }],
-		];
-
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-post-grid-pagination border border-dashed`,
-		});
-
-		//const isParentOfSelectedBlock = useSelect((select) => select('core/block-editor').hasSelectedInnerBlock(clientId, true))
-
-		const innerBlocksProps = useInnerBlocksProps(blockProps, {
-			//allowedBlocks: ALLOWED_BLOCKS,
-			template: MY_TEMPLATE,
-			//orientation: 'horizontal',
-			templateInsertUpdatesSelection: true,
-			renderAppender: InnerBlocks.ButtonBlockAppender,
+			className: ` ${blockId} pg-post-query-pagination items-loop`,
 		});
 
 		return (
 			<>
-				<InspectorControls className="">
-					<div className="">
-						<PanelBody title="Pagination" initialOpen={false}>
+				<InspectorControls>
+					<div className="px-3">
+						<div className="my-4">
 							<PanelRow className="mb-4">
 								<label for="">Pagination Type</label>
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
 									options={paginationTypes}
-									buttonTitle="Choose"
+									buttonTitle={
+										paginationTypes[pagination.options.type] != undefined
+											? paginationTypes[pagination.options.type].label
+											: "Choose"
+									}
 									onChange={(arg, index) => {
 										var options = { ...pagination.options, type: arg.value };
 										setAttributes({
@@ -694,14 +484,6 @@ registerBlockType("post-grid/post-grid-pagination", {
 									}}
 									values={""}></PGDropdown>
 							</PanelRow>
-
-							{pagination.options.type.length != 0 && (
-								<div className="bg-gray-500 text-white px-3 py-2 my-5">
-									{paginationTypes[pagination.options.type] != undefined
-										? paginationTypes[pagination.options.type].label
-										: ""}
-								</div>
-							)}
 
 							{(pagination.options.type == "normal" ||
 								pagination.options.type == "ajax") && (
@@ -839,204 +621,195 @@ registerBlockType("post-grid/post-grid-pagination", {
 									</PanelRow>
 								</>
 							)}
+						</div>
 
-							<PanelBody
-								className="my-5"
-								title="Pagination Wrapper"
-								initialOpen={false}>
-								<PGtabs
-									activeTab="styles"
-									orientation="horizontal"
-									activeClass="active-tab"
-									onSelect={(tabName) => {}}
-									tabs={[
-										{
-											name: "styles",
-											title: "Styles",
-											icon: pencil,
-											className: "tab-style",
-										},
-										{
-											name: "css",
-											title: "CSS Library",
-											icon: cloud,
-											className: "tab-css",
-										},
-									]}>
-									<PGtab name="styles">
-										<PGStyles
-											obj={pagination}
-											onChange={onChangeStylePagination}
-											onAdd={onAddStylePagination}
-											onRemove={onRemoveStylePagination}
-										/>
-									</PGtab>
-									<PGtab name="css">
-										<PGCssLibrary
-											blockId={blockId}
-											obj={pagination}
-											onChange={onPickCssLibraryPagination}
-										/>
-									</PGtab>
-								</PGtabs>
-							</PanelBody>
-
-							<PanelBody title="Pagination Items" initialOpen={false}>
-								<PGtabs
-									activeTab="styles"
-									orientation="horizontal"
-									activeClass="active-tab"
-									onSelect={(tabName) => {}}
-									tabs={[
-										{
-											name: "styles",
-											title: "Styles",
-											icon: pencil,
-											className: "tab-style",
-										},
-										{
-											name: "css",
-											title: "CSS Library",
-											icon: cloud,
-											className: "tab-css",
-										},
-									]}>
-									<PGtab name="styles">
-										<PGStyles
-											obj={paginationItem}
-											onChange={onChangeStylePaginationItem}
-											onAdd={onAddStylePaginationItem}
-											onRemove={onRemoveStylePaginationItem}
-										/>
-									</PGtab>
-									<PGtab name="css">
-										<PGCssLibrary
-											blockId={blockId}
-											obj={paginationItem}
-											onChange={onPickCssLibraryPaginationItem}
-										/>
-									</PGtab>
-								</PGtabs>
-							</PanelBody>
-
-							<PanelBody title="Pagination Active" initialOpen={false}>
-								<PGtabs
-									activeTab="styles"
-									orientation="horizontal"
-									activeClass="active-tab"
-									onSelect={(tabName) => {}}
-									tabs={[
-										{
-											name: "styles",
-											title: "Styles",
-											icon: pencil,
-											className: "tab-style",
-										},
-										{
-											name: "css",
-											title: "CSS Library",
-											icon: cloud,
-											className: "tab-css",
-										},
-									]}>
-									<PGtab name="styles">
-										<PGStyles
-											obj={paginationItemActive}
-											onChange={onChangeStylePaginationItemActive}
-											onAdd={onAddStylePaginationItemActive}
-											onRemove={onRemoveStylePaginationItemActive}
-										/>
-									</PGtab>
-									<PGtab name="css">
-										<PGCssLibrary
-											blockId={blockId}
-											obj={paginationItemActive}
-											onChange={onPickCssLibraryPaginationItemActive}
-										/>
-									</PGtab>
-								</PGtabs>
-							</PanelBody>
-						</PanelBody>
-
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className=""
+							title="Pagination Wrapper"
+							initialOpen={false}>
 							<PGtabs
-								activeTab="options"
+								activeTab="styles"
 								orientation="horizontal"
 								activeClass="active-tab"
 								onSelect={(tabName) => {}}
 								tabs={[
 									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: pencil,
 										className: "tab-style",
 									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: cloud,
+										className: "tab-css",
+									},
 								]}>
-								<PGtab name="options">
-									<PanelRow>
-										<label for="">Wrapper Tag</label>
-
-										<SelectControl
-											label=""
-											value={wrapper.options.tag}
-											options={[
-												{ label: "Choose", value: "" },
-												{ label: "H1", value: "h1" },
-												{ label: "H2", value: "h2" },
-												{ label: "H3", value: "h3" },
-												{ label: "H4", value: "h4" },
-												{ label: "H5", value: "h5" },
-												{ label: "H6", value: "h6" },
-												{ label: "SPAN", value: "span" },
-												{ label: "DIV", value: "div" },
-												{ label: "P", value: "p" },
-											]}
-											onChange={(newVal) => {
-												var options = { ...wrapper.options, tag: newVal };
-												setAttributes({
-													wrapper: { ...wrapper, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
-										obj={wrapper}
-										onChange={onChangeStyleWrapper}
-										onAdd={onAddStyleWrapper}
-										onRemove={onRemoveStyleWrapper}
-										onBulkAdd={onBulkAddWrapper}
+										obj={pagination}
+										onChange={onChangeStylePagination}
+										onAdd={onAddStylePagination}
+										onRemove={onRemoveStylePagination}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={pagination}
+										onChange={onPickCssLibraryPagination}
 									/>
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
 
-						<div className="px-3">
-							<PGMailSubsctibe />
-							<PGContactSupport
-								utm={{
-									utm_source: "BlockText",
-									utm_campaign: "PostGridCombo",
-									utm_content: "BlockOptions",
-								}}
-							/>
-						</div>
+						<PanelBody title="Pagination Items" initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "styles",
+										title: "Styles",
+										icon: pencil,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: cloud,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="styles">
+									<PGStyles
+										obj={paginationItem}
+										onChange={onChangeStylePaginationItem}
+										onAdd={onAddStylePaginationItem}
+										onRemove={onRemoveStylePaginationItem}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={paginationItem}
+										onChange={onPickCssLibraryPaginationItem}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody title="Pagination Active" initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "styles",
+										title: "Styles",
+										icon: pencil,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: cloud,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="styles">
+									<PGStyles
+										obj={paginationItemActive}
+										onChange={onChangeStylePaginationItemActive}
+										onAdd={onAddStylePaginationItemActive}
+										onRemove={onRemoveStylePaginationItemActive}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={paginationItemActive}
+										onChange={onPickCssLibraryPaginationItemActive}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+					</div>
+
+					<div className="px-2">
+						<PGMailSubsctibe />
+						<PGContactSupport
+							utm={{
+								utm_source: "BlockText",
+								utm_campaign: "PostGridCombo",
+								utm_content: "BlockOptions",
+							}}
+						/>
 					</div>
 				</InspectorControls>
 
-				<div {...blockProps}>1 2 3...</div>
+				<>
+					<div className={pagination.options.class}>
+						{pagination.options.type == "normal" && (
+							<>
+								<span className="page-numbers">Prev</span>
+								<span className="page-numbers">1</span>
+								<span className="page-numbers">2</span>
+								<span className="page-numbers">3</span>
+								<span className="page-numbers">Next</span>
+							</>
+						)}
+
+						{pagination.options.type == "ajax" && (
+							<>
+								<span className="page-numbers">Prev</span>
+								<span className="page-numbers">1</span>
+								<span className="page-numbers">2</span>
+								<span className="page-numbers">3</span>
+								<span className="page-numbers">Next</span>
+							</>
+						)}
+
+						{pagination.options.type == "next_previous" && (
+							<>
+								<div className="pagination-prev page-numbers">
+									{pagination.options.prevText}
+								</div>
+								<div className="pagination-next page-numbers">
+									{pagination.options.nextText}
+								</div>
+							</>
+						)}
+
+						{pagination.options.type == "loadmore" && (
+							<>
+								<div className="page-numbers">
+									{pagination.options.loadMoreText}
+								</div>
+							</>
+						)}
+
+						{pagination.options.type == "infinite" && (
+							<div className="page-numbers">
+								{pagination.options.loadingText}
+							</div>
+						)}
+					</div>
+				</>
 			</>
 		);
 	},
 	save: function (props) {
 		// to make a truly dynamic block, we're handling front end by render_callback under index.php file
+
+		var attributes = props.attributes;
+
+		//return <InnerBlocks.Content />;
 
 		return null;
 	},

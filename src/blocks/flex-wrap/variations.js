@@ -27,7 +27,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { flexBasis: { Desktop: "0" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -72,7 +72,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { flexBasis: { Desktop: "0" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -81,7 +81,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { flexBasis: { Desktop: "0" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -116,7 +116,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { flexBasis: { Desktop: "0" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -125,7 +125,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { flexBasis: { Desktop: "0" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -134,7 +134,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { flexBasis: { Desktop: "0" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -181,7 +181,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -194,7 +194,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -207,7 +207,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -220,7 +220,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -273,7 +273,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -286,7 +286,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -299,7 +299,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -312,7 +312,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -325,7 +325,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: {
 							width: { Desktop: "25%" },
 							flexBasis: { Desktop: "0" },
@@ -369,7 +369,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "33%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -378,7 +378,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "66%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -415,7 +415,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "66%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -424,7 +424,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "33%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -461,7 +461,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "25%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -470,7 +470,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "50%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -479,7 +479,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "25%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -517,7 +517,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "25%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -526,7 +526,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "25%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -535,7 +535,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "50%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -573,7 +573,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "50%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -582,7 +582,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "25%" }, flexGrow: { Desktop: "1" } },
 					},
 				},
@@ -591,7 +591,7 @@ const variations = [
 				"post-grid/flex-wrap-item",
 				{
 					wrapper: {
-						options: { tag: "div", class: "flex-item-wrap" },
+						options: { tag: "div", class: "pg-flex-wrap-item" },
 						styles: { width: { Desktop: "25%" }, flexGrow: { Desktop: "1" } },
 					},
 				},

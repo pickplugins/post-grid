@@ -46,6 +46,8 @@ import {
 	linkOff,
 	close,
 	menu,
+	brush,
+	mediaAndText
 } from "@wordpress/icons";
 
 import { applyFilters } from "@wordpress/hooks";
@@ -1455,7 +1457,10 @@ registerBlockType(metadata, {
 			<>
 				<InspectorControls>
 					<div className="">
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1471,7 +1476,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1490,7 +1495,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -1501,7 +1508,7 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									{/* <PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for=""  className="font-medium text-slate-900 " >Wrapper Tag</label>
 
 										<SelectControl
 											label=""
@@ -1539,7 +1546,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Items" initialOpen={true}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Items"
+							initialOpen={true}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1555,7 +1565,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1574,7 +1584,9 @@ registerBlockType(metadata, {
 									/> */}
 									<div className="my-4">
 										<PanelRow>
-											<label for="">Add Element</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Add Element
+											</label>
 											<PGDropdown
 												position="bottom right"
 												variant="secondary"
@@ -1621,7 +1633,11 @@ registerBlockType(metadata, {
 													}
 													initialOpen={false}>
 													<div>
-														<label for="">Custom Label</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Custom Label
+														</label>
 														<InputControl
 															value={item.customText}
 															placeholder="You Text: %s"
@@ -1641,7 +1657,11 @@ registerBlockType(metadata, {
 													</div>
 
 													<div className="my-3">
-														<label for="">Custom URL</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Custom URL
+														</label>
 														<InputControl
 															value={item.url}
 															onChange={(newVal) => {
@@ -1659,7 +1679,11 @@ registerBlockType(metadata, {
 													{(item.id == "postTerms" ||
 														item.id == "postTerm") && (
 														<div className="my-3">
-															<label for="">Taxonomy</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Taxonomy
+															</label>
 															<InputControl
 																value={item.options.taxonomy}
 																onChange={(newVal) => {
@@ -1680,7 +1704,11 @@ registerBlockType(metadata, {
 														item.id == "postAncestors") && (
 														<>
 															<div className="my-3">
-																<label for="">Max Count</label>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Max Count
+																</label>
 																<InputControl
 																	value={item.options.count}
 																	onChange={(newVal) => {
@@ -1710,7 +1738,11 @@ registerBlockType(metadata, {
 														item.id == "postMonth" ||
 														item.id == "postYear") && (
 														<div className="my-3">
-															<label for="">Date Format</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Date Format
+															</label>
 															<InputControl
 																value={item.options.format}
 																onChange={(newVal) => {
@@ -1727,7 +1759,11 @@ registerBlockType(metadata, {
 													)}
 
 													<PanelRow>
-														<label for="">Choose Icon</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Choose Icon
+														</label>
 														<PGIconPicker
 															library={item.siteIcon.library}
 															srcType={item.siteIcon.srcType}
@@ -1967,7 +2003,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1983,13 +2022,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Icon position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
 
 										<SelectControl
 											label=""
@@ -2021,7 +2062,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Label" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Label"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -2037,7 +2081,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -2054,7 +2098,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Separator" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Separator"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -2070,13 +2117,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Separator Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Separator Text
+										</label>
 										<InputControl
 											value={separator.options.text}
 											onChange={(newVal) => {
@@ -2099,7 +2148,10 @@ registerBlockType(metadata, {
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
-						<PanelBody title="Schema" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Schema"
+							initialOpen={false}>
 							<ToggleControl
 								label="Enable Schema?"
 								help={
@@ -2116,7 +2168,10 @@ registerBlockType(metadata, {
 							/>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"breadcrumb"}
 								blockId={blockId}

@@ -32,8 +32,17 @@ import {
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
 import { useEntityProp } from "@wordpress/core-data";
 import { applyFilters } from "@wordpress/hooks";
-import { Icon, styles, settings } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	brush,
+	mediaAndText,
+	link,
+	linkOff,
+} from "@wordpress/icons";
 import apiFetch from "@wordpress/api-fetch";
+
 import {
 	InnerBlocks,
 	useBlockProps,
@@ -53,8 +62,6 @@ import customTags from "../../custom-tags";
 const { RawHTML } = wp.element;
 
 import { store } from "../../store";
-
-import { link, linkOff } from "@wordpress/icons";
 
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
@@ -251,11 +258,16 @@ registerBlockType(metadata, {
 			var count =
 				postTitle.options.limitCount > 0 ? postTitle.options.limitCount : 999;
 
+			var currentPostTitleX =
+				currentPostTitle != undefined
+					? currentPostTitle
+					: "What is Lorem Ipsum?";
+
 			if (postTitle.options.limitBy == "character") {
-				setpostTitleEdited(currentPostTitle.substring(0, count));
+				setpostTitleEdited(currentPostTitleX.substring(0, count));
 			} else {
 				setpostTitleEdited(
-					currentPostTitle.split(" ").splice(0, count).join(" ")
+					currentPostTitleX.split(" ").splice(0, count).join(" ")
 				);
 			}
 		}, [postTitle]);
@@ -263,8 +275,10 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			var count =
 				postTitle.options.limitCount > 0 ? postTitle.options.limitCount : 0;
-			var currentPostTitleX =
-				currentPostTitle.length > 0 ? currentPostTitle : "What is Lorem Ipsum?";
+				var currentPostTitleX =
+				currentPostTitle != undefined
+					? currentPostTitle
+					: "What is Lorem Ipsum?";
 
 			if (postTitle.options.limitBy == "character") {
 				setpostTitleEdited(currentPostTitleX.substring(0, count));
@@ -966,8 +980,11 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
-						<PanelBody title="Wrapper" initialOpen={false}>
+					<div className=" pg-setting-input-text">
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -983,32 +1000,37 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
-									<PGcssClassPicker
-										tags={customTags}
-										label="CSS Class"
-										placeholder="Add Class"
-										value={wrapper.options.class}
-										onChange={(newVal) => {
-											var options = { ...wrapper.options, class: newVal };
-											setAttributes({
-												wrapper: { styles: wrapper.styles, options: options },
-											});
-										}}
-									/>
+									{/* <div className="pg-setting-input-textarea"> */}
+										<PGcssClassPicker
+											tags={customTags}
+											label="CSS Class"
+											className="pg-setting-input-textarea"
+											placeholder="Add Class"
+											value={wrapper.options.class}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, class: newVal };
+												setAttributes({
+													wrapper: { styles: wrapper.styles, options: options },
+												});
+											}}
+										/>
+									{/* </div> */}
 
-									<PanelRow>
-										<label for="">CSS ID</label>
+									<PanelRow className="pg-setting-input-text">
+										<label for="" className="font-medium text-slate-900 pg-font ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -1019,8 +1041,10 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 
-									<PanelRow>
-										<label for="">Wrapper Tag</label>
+									<PanelRow className="pg-setting-select">
+										<label for="" className="font-medium text-slate-900 pg-font ">
+											Wrapper Tag
+										</label>
 										<SelectControl
 											label=""
 											value={wrapper.options.tag}
@@ -1067,9 +1091,12 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Post Title" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Post Title"
+							initialOpen={false}>
 							<PGtabs
-								activeTab="styles"
+								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
 								onSelect={(tabName) => {}}
@@ -1083,32 +1110,34 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
-									<PGcssClassPicker
-										tags={customTags}
-										label="CSS Class"
-										placeholder="Add Class"
-										value={postTitle.options.class}
-										onChange={(newVal) => {
-											var options = { ...postTitle.options, class: newVal };
-											setAttributes({
-												postTitle: {
-													styles: postTitle.styles,
-													options: options,
-												},
-											});
-										}}
-									/>
+									<div className="pg-setting-input-textarea">
+										<PGcssClassPicker
+											tags={customTags}
+											label="CSS Class"
+											placeholder="Add Class"
+											value={postTitle.options.class}
+											onChange={(newVal) => {
+												var options = { ...postTitle.options, class: newVal };
+												setAttributes({
+													postTitle: {
+														styles: postTitle.styles,
+														options: options,
+													},
+												});
+											}}
+										/>
+									</div>
 									<ToggleControl
 										label="Linked?"
 										help={
@@ -1130,7 +1159,9 @@ registerBlockType(metadata, {
 
 									{!postTitle.options.isLink && (
 										<PanelRow>
-											<label for="">Custom Tag</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Tag
+											</label>
 											<SelectControl
 												label=""
 												value={postTitle.options.tag}
@@ -1159,11 +1190,14 @@ registerBlockType(metadata, {
 									{postTitle.options.isLink && (
 										<>
 											<PanelRow>
-												<label for="">Link To</label>
+												<label for="" className="font-medium text-slate-900  pg-font  ">
+													Link To
+												</label>
 
 												<PGDropdown
 													position="bottom right"
-													variant="secondary"
+													btnClass="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+													// variant="secondary"
 													options={linkToArgs}
 													buttonTitle={
 														postTitle.options.linkTo == undefined
@@ -1174,15 +1208,17 @@ registerBlockType(metadata, {
 													values={[]}></PGDropdown>
 											</PanelRow>
 
-											<div className="bg-gray-500 p-2 my-3 text-white">
+											{/* <div className="bg-gray-500 p-2 my-3 text-white">
 												{linkToArgs[postTitle.options.linkTo] != undefined
 													? linkToArgs[postTitle.options.linkTo].label
 													: ""}
-											</div>
+											</div> */}
 
 											{postTitle.options.linkTo == "authorMeta" && (
 												<PanelRow>
-													<label for="">Author Meta Key</label>
+													<label for="" className="font-medium text-slate-900  pg-font  ">
+														Author Meta Key
+													</label>
 
 													<InputControl
 														value={postTitle.options.linkToAuthorMeta}
@@ -1201,7 +1237,9 @@ registerBlockType(metadata, {
 
 											{postTitle.options.linkTo == "customField" && (
 												<PanelRow>
-													<label for="">Custom Meta Key</label>
+													<label for="" className="font-medium text-slate-900  pg-font  ">
+														Custom Meta Key
+													</label>
 
 													<InputControl
 														value={postTitle.options.linkToAuthorMeta}
@@ -1220,7 +1258,9 @@ registerBlockType(metadata, {
 
 											{postTitle.options.linkTo == "customUrl" && (
 												<PanelRow>
-													<label for="">Custom Url</label>
+													<label for="" className="font-medium text-slate-900  pg-font  ">
+														Custom Url
+													</label>
 
 													<div className="relative">
 														<Button
@@ -1281,8 +1321,10 @@ registerBlockType(metadata, {
 												</PanelRow>
 											)}
 
-											<PanelRow>
-												<label for="">Link Target</label>
+											<PanelRow className="pg-setting-select">
+												<label for="" className="font-medium text-slate-900 pg-font  ">
+													Link Target
+												</label>
 
 												<SelectControl
 													label=""
@@ -1310,9 +1352,11 @@ registerBlockType(metadata, {
 									{postTitle.options.isLink && (
 										<div>
 											<PanelRow>
-												<label for="">Custom Attributes</label>
+												<label for="" className="font-medium text-slate-900 pg-font  ">
+													Custom Attributes
+												</label>
 												<div
-													className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+													className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
 													onClick={(ev) => {
 														var sdsd = postTitle.options.linkAttr.concat({
 															id: "",
@@ -1411,11 +1455,14 @@ registerBlockType(metadata, {
 									)}
 
 									<PanelRow>
-										<label for="">Limit By</label>
+										<label for="" className="font-medium text-slate-900 pg-font  ">
+											Limit By
+										</label>
 
 										<PGDropdown
 											position="bottom right"
-											variant="secondary"
+											btnClass="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+											// variant="secondary"
 											options={limitByArgs}
 											buttonTitle="Choose"
 											onChange={setLimitBy}
@@ -1431,7 +1478,9 @@ registerBlockType(metadata, {
 									{(postTitle.options.limitBy == "word" ||
 										postTitle.options.limitBy == "character") && (
 										<PanelRow>
-											<label for="">Limit Count</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Limit Count
+											</label>
 
 											<InputControl
 												value={postTitle.options.limitCount}
@@ -1468,7 +1517,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Prefix" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Prefix"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1484,31 +1536,34 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
-									<PGcssClassPicker
-										tags={customTags}
-										label="Prefix"
-										placeholder="Add Prefix"
-										value={prefix.options.text}
-										onChange={(newVal) => {
-											var options = { ...prefix.options, text: newVal };
-											setAttributes({
-												prefix: { styles: prefix.styles, options: options },
-											});
-										}}
-									/>
+									<div className="pg-setting-input-textarea">
+										<PGcssClassPicker
+											tags={customTags}
+											label="Prefix"
+											placeholder="Add Prefix"
+											value={prefix.options.text}
+											onChange={(newVal) => {
+												var options = { ...prefix.options, text: newVal };
+												setAttributes({
+													prefix: { styles: prefix.styles, options: options },
+												});
+											}}
+										/>
+									</div>
+
 									{/* <PanelRow>
-										<label for="">Prefix</label>
+										<label for=""  className="font-medium text-slate-900 " >Prefix</label>
 
 										<InputControl
 											value={prefixText}
@@ -1521,8 +1576,10 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow> */}
 
-									<PanelRow>
-										<label for="">Position</label>
+									<PanelRow className="pg-setting-select">
+										<label for="" className="font-medium text-slate-900 pg-font  ">
+											Position
+										</label>
 										<SelectControl
 											label=""
 											value={prefix.options.position}
@@ -1560,7 +1617,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Postfix" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Postfix"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1576,31 +1636,33 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
-									<PGcssClassPicker
-										tags={customTags}
-										label="Postfix"
-										placeholder="Add Postfix"
-										value={postfix.options.text}
-										onChange={(newVal) => {
-											var options = { ...postfix.options, text: newVal };
-											setAttributes({
-												postfix: { styles: postfix.styles, options: options },
-											});
-										}}
-									/>
+									<div className="pg-setting-input-textarea">
+										<PGcssClassPicker
+											tags={customTags}
+											label="Postfix"
+											placeholder="Add Postfix"
+											value={postfix.options.text}
+											onChange={(newVal) => {
+												var options = { ...postfix.options, text: newVal };
+												setAttributes({
+													postfix: { styles: postfix.styles, options: options },
+												});
+											}}
+										/>
+									</div>
 									{/* <PanelRow>
-										<label for="">Postfix</label>
+										<label for=""  className="font-medium text-slate-900 " >Postfix</label>
 										<InputControl
 											value={postfix.options.text}
 											onChange={(newVal) => {
@@ -1612,8 +1674,10 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow> */}
 
-									<PanelRow>
-										<label for="">Position</label>
+									<PanelRow className="pg-setting-select">
+										<label for="" className="font-medium text-slate-900 pg-font  ">
+											Position
+										</label>
 										<SelectControl
 											label=""
 											value={postfix.options.position}
@@ -1651,7 +1715,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"post-title"}
 								blockId={blockId}

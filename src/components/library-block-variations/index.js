@@ -18,7 +18,7 @@ import { useSelect } from "@wordpress/data";
 import { memo, useMemo, useState, useEffect } from "@wordpress/element";
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
-import { Icon, styles, settings, lineDotted } from "@wordpress/icons";
+import { Icon, styles, settings, lineDotted, list, upload } from "@wordpress/icons";
 
 import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
@@ -149,13 +149,13 @@ function Html(props) {
 					{
 						name: "cssItems",
 						title: "Library",
-						icon: settings,
+						icon: list,
 						className: "tab-cssItems",
 					},
 					{
 						name: "submit",
 						title: "Submission",
-						icon: styles,
+						icon: upload,
 						className: "tab-submit",
 					},
 				]}>

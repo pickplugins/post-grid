@@ -42,7 +42,16 @@ import {
 } from "@wordpress/block-editor";
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 
 import { createBlock } from "@wordpress/blocks";
@@ -78,9 +87,14 @@ import metadata from "./block.json";
 import PGcssClassPicker from "../../components/css-class-picker";
 import customTags from "../../custom-tags";
 
-import justifiedGallery from "justifiedGallery";
+import LightGallery from "lightgallery/react";
 
-import Masonry from "masonry-layout";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
 
 import imagesLoaded from "imagesloaded";
 import PGDropdown from "../../components/dropdown";
@@ -148,7 +162,6 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			if (blockId.length != 0) {
 				const galleryContainer = document.querySelector("." + blockId);
-				JustifiedGallery(galleryContainer, justifiedOptions);
 			}
 		}, [justifiedOptions]);
 
@@ -432,16 +445,21 @@ registerBlockType(metadata, {
 		}
 
 		var justifiedOptionsArgs = {
-			rowHeight: { label: "Row Height", value: 200 },
-			maxRowHeight: { label: "Max Row Height", value: 200 },
-			maxRowsCount: { label: "Max Rows Count", value: 0 },
-			lastRow: { label: "Last Row", value: "nojustify" },
-			captions: { label: "Captions", value: true },
-			margins: { label: "Margin", value: 10 },
-			border: { label: "Border", value: 2 },
-			waitThumbnailsLoad: { label: "Wait Thumbnails Load", value: true },
-			randomize: { label: "Randomize", value: true },
-			justifyThreshold: { label: "Justify Threshold", value: 0.75 },
+			speed: { label: "speed", value: 500 },
+			backdropDuration: { label: "Backdrop Duration", value: 500 },
+			controls: { label: "Controls", value: true },
+			closeOnTap: { label: "Close On Tap", value: true },
+			download: { label: "Download", value: true },
+			enableDrag: { label: "Enable Drag", value: true },
+			enableSwipe: { label: "Enable Swipe", value: true },
+			escKey: { label: "Esc Key", value: true },
+			getCaptionFromTitleOrAlt: {
+				label: "Get Caption From Title Or Alt",
+				value: true,
+			},
+			defaultCaptionHeight: { label: "Default Caption Height", value: 0 },
+			keyPress: { label: "Key Press", value: true },
+			slideDelay: { label: "Slide Delay", value: 200 },
 		};
 
 		var RemoveJustifiedArg = function ({ index }) {
@@ -459,7 +477,7 @@ registerBlockType(metadata, {
 			);
 		};
 
-		const ALLOWED_BLOCKS = ["post-grid/justified-wrap-item"];
+		const ALLOWED_BLOCKS = ["post-grid/image"];
 
 		const MY_TEMPLATE = [
 			["post-grid/justified-wrap-item", {}],
@@ -490,6 +508,10 @@ registerBlockType(metadata, {
 			//setActiveTab(slide.clientId);
 		};
 
+		// const onInit = () => {
+		console.log(justifiedOptions);
+		// };
+
 		return (
 			<>
 				<InspectorControls>
@@ -501,7 +523,10 @@ registerBlockType(metadata, {
 						Add Item
 					</div>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -517,7 +542,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -536,7 +561,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -547,7 +574,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 
 									<SelectControl
 										label=""
@@ -585,7 +614,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Justified" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Justified"
+						initialOpen={false}>
 						<PanelRow className="my-3">
 							<PGDropdown
 								position="bottom right"
@@ -609,21 +641,23 @@ registerBlockType(metadata, {
 							var value = item[1];
 							return (
 								<>
-									{id == "rowHeight" && (
+									{id == "speed" && (
 										<PanelRow>
 											<div className="flex items-center justify-between w-full mb-2">
 												<div className="flex items-center  ">
 													<RemoveJustifiedArg index={id} />
-													<label for="">Row Height</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Speed
+													</label>
 												</div>
 												<InputControl
 													type="number"
-													value={justifiedOptions.rowHeight}
+													value={justifiedOptions.speed}
 													onChange={(newVal) => {
 														setAttributes({
 															justifiedOptions: {
 																...justifiedOptions,
-																rowHeight: parseInt(newVal),
+																speed: parseInt(newVal),
 															},
 														});
 													}}
@@ -631,22 +665,24 @@ registerBlockType(metadata, {
 											</div>
 										</PanelRow>
 									)}
-									{id == "maxRowHeight" && (
+									{id == "backdropDuration" && (
 										<PanelRow>
 											<div className="flex items-center justify-between w-full mb-2">
 												<div className="flex items-center  ">
 													<RemoveJustifiedArg index={id} />
-													<label for="">Max Row Height</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Backdrop Duration
+													</label>
 												</div>
 
 												<InputControl
 													type="number"
-													value={justifiedOptions.maxRowHeight}
+													value={justifiedOptions.backdropDuration}
 													onChange={(newVal) => {
 														setAttributes({
 															justifiedOptions: {
 																...justifiedOptions,
-																maxRowHeight: parseInt(newVal),
+																backdropDuration: parseInt(newVal),
 															},
 														});
 													}}
@@ -654,22 +690,25 @@ registerBlockType(metadata, {
 											</div>
 										</PanelRow>
 									)}
-									{id == "maxRowsCount" && (
+
+									{id == "defaultCaptionHeight" && (
 										<PanelRow>
 											<div className="flex items-center justify-between w-full mb-2">
 												<div className="flex items-center  ">
 													<RemoveJustifiedArg index={id} />
-													<label for="">Max Rows Count</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Default Caption Height
+													</label>
 												</div>
 
 												<InputControl
 													type="number"
-													value={justifiedOptions.maxRowsCount}
+													value={justifiedOptions.defaultCaptionHeight}
 													onChange={(newVal) => {
 														setAttributes({
 															justifiedOptions: {
 																...justifiedOptions,
-																maxRowsCount: parseInt(newVal),
+																defaultCaptionHeight: parseInt(newVal),
 															},
 														});
 													}}
@@ -677,28 +716,127 @@ registerBlockType(metadata, {
 											</div>
 										</PanelRow>
 									)}
-									{id == "lastRow" && (
+									{id == "slideDelay" && (
 										<PanelRow>
 											<div className="flex items-center justify-between w-full mb-2">
 												<div className="flex items-center  ">
 													<RemoveJustifiedArg index={id} />
-													<label htmlFor="">Last Row</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Slide Delay
+													</label>
 												</div>
-												<SelectControl
-													label=""
-													value={justifiedOptions.lastRow}
-													options={[
-														{ label: "No Justify", value: "nojustify" },
-														{ label: "Justify", value: "justify" },
-														{ label: "Hide", value: "hide" },
-														{ label: "Left", value: "left" },
-														{ label: "Center", value: "center" },
-														{ label: "Right", value: "right" },
-													]}
+
+												<InputControl
+													type="number"
+													value={justifiedOptions.slideDelay}
+													onChange={(newVal) => {
+														setAttributes({
+															justifiedOptions: {
+																...justifiedOptions,
+																slideDelay: parseInt(newVal),
+															},
+														});
+													}}
+												/>
+											</div>
+										</PanelRow>
+									)}
+
+									{id == "keyPress" && (
+										<PanelRow>
+											<div className="flex items-center mb-2 ">
+												<RemoveJustifiedArg index={id} />
+
+												<ToggleControl
+													label="Key Press?"
+													help={
+														justifiedOptions.keyPress
+															? "Key Press Enabled"
+															: "Key Press Disabled"
+													}
+													checked={justifiedOptions.keyPress}
+													onChange={(newVal) => {
+														const options = {
+															...justifiedOptions,
+															keyPress: newVal,
+														};
+														setAttributes({
+															justifiedOptions: options,
+														});
+													}}
+												/>
+											</div>
+										</PanelRow>
+									)}
+									{id == "controls" && (
+										<PanelRow>
+											<div className="flex items-center mb-2 ">
+												<RemoveJustifiedArg index={id} />
+
+												<ToggleControl
+													label="Controls?"
+													help={
+														justifiedOptions.controls
+															? "Controls Enabled"
+															: "Controls Disabled"
+													}
+													checked={justifiedOptions.controls}
+													onChange={(newVal) => {
+														const options = {
+															...justifiedOptions,
+															controls: newVal,
+														};
+														setAttributes({
+															justifiedOptions: options,
+														});
+													}}
+												/>
+											</div>
+										</PanelRow>
+									)}
+									{id == "closeOnTap" && (
+										<PanelRow>
+											<div className="flex items-center mb-2 ">
+												<RemoveJustifiedArg index={id} />
+
+												<ToggleControl
+													label="Close On Tap?"
+													help={
+														justifiedOptions.closeOnTap
+															? "Close On Tap Enabled"
+															: "Close On Tap Disabled"
+													}
+													checked={justifiedOptions.closeOnTap}
+													onChange={(newVal) => {
+														const options = {
+															...justifiedOptions,
+															closeOnTap: newVal,
+														};
+														setAttributes({
+															justifiedOptions: options,
+														});
+													}}
+												/>
+											</div>
+										</PanelRow>
+									)}
+									{id == "download" && (
+										<PanelRow>
+											<div className="flex items-center mb-2 ">
+												<RemoveJustifiedArg index={id} />
+
+												<ToggleControl
+													label="Download?"
+													help={
+														justifiedOptions.download
+															? "Download Enabled"
+															: "Download Disabled."
+													}
+													checked={justifiedOptions.download}
 													onChange={(newVal) => {
 														const updatedJustifiedOptions = {
 															...justifiedOptions,
-															lastRow: newVal,
+															download: newVal,
 														};
 														setAttributes({
 															justifiedOptions: updatedJustifiedOptions,
@@ -708,93 +846,23 @@ registerBlockType(metadata, {
 											</div>
 										</PanelRow>
 									)}
-									{id == "captions" && (
+									{id == "enableDrag" && (
 										<PanelRow>
 											<div className="flex items-center mb-2 ">
 												<RemoveJustifiedArg index={id} />
 
 												<ToggleControl
-													label="Percent Position?"
+													label="Enable Drag?"
 													help={
-														justifiedOptions.captions
-															? "Percent Position Enabled"
-															: "Percent Position Disabled"
+														justifiedOptions.enableDrag
+															? "Drag Enabled"
+															: "Drag Disabled."
 													}
-													checked={justifiedOptions.captions}
-													onChange={(newVal) => {
-														const newCaptions = {
-															...justifiedOptions,
-															captions: newVal,
-														};
-														setAttributes({
-															justifiedOptions: newCaptions,
-														});
-													}}
-												/>
-											</div>
-										</PanelRow>
-									)}
-									{id == "margins" && (
-										<PanelRow>
-											<div className="flex items-center justify-between w-full mb-2">
-												<div className="flex items-center  ">
-													<RemoveJustifiedArg index={id} />
-													<label for="">Margin</label>
-												</div>
-												<InputControl
-													type="number"
-													value={justifiedOptions.margins}
-													onChange={(newVal) => {
-														setAttributes({
-															justifiedOptions: {
-																...justifiedOptions,
-																margins: parseInt(newVal),
-															},
-														});
-													}}
-												/>
-											</div>
-										</PanelRow>
-									)}
-									{id == "border" && (
-										<PanelRow>
-											<div className="flex items-center justify-between w-full mb-2">
-												<div className="flex items-center  ">
-													<RemoveJustifiedArg index={id} />
-													<label for="">Border</label>
-												</div>
-												<InputControl
-													type="number"
-													value={justifiedOptions.border}
-													onChange={(newVal) => {
-														setAttributes({
-															justifiedOptions: {
-																...justifiedOptions,
-																border: parseInt(newVal),
-															},
-														});
-													}}
-												/>
-											</div>
-										</PanelRow>
-									)}
-									{id == "waitThumbnailsLoad" && (
-										<PanelRow>
-											<div className="flex items-center mb-2 ">
-												<RemoveJustifiedArg index={id} />
-
-												<ToggleControl
-													label="Wait Thumbnails Load?"
-													help={
-														justifiedOptions.waitThumbnailsLoad
-															? "Origin Left Enabled"
-															: "Origin Left Disabled."
-													}
-													checked={justifiedOptions.waitThumbnailsLoad}
+													checked={justifiedOptions.enableDrag}
 													onChange={(newVal) => {
 														const updatedJustifiedOptions = {
 															...justifiedOptions,
-															waitThumbnailsLoad: newVal,
+															enableDrag: newVal,
 														};
 														setAttributes({
 															justifiedOptions: updatedJustifiedOptions,
@@ -804,23 +872,23 @@ registerBlockType(metadata, {
 											</div>
 										</PanelRow>
 									)}
-									{id == "randomize" && (
+									{id == "enableSwipe" && (
 										<PanelRow>
 											<div className="flex items-center mb-2 ">
 												<RemoveJustifiedArg index={id} />
 
 												<ToggleControl
-													label="Randomize?"
+													label="Enable Swipe?"
 													help={
-														justifiedOptions.randomize
-															? "Origin Top Enabled"
-															: "Origin Top Disabled."
+														justifiedOptions.enableSwipe
+															? "Swipe Enabled"
+															: "Swipe Disabled."
 													}
-													checked={justifiedOptions.randomize}
-													onChange={(randomize) => {
+													checked={justifiedOptions.enableSwipe}
+													onChange={(newVal) => {
 														const updatedJustifiedOptions = {
 															...justifiedOptions,
-															randomize: randomize,
+															enableSwipe: newVal,
 														};
 														setAttributes({
 															justifiedOptions: updatedJustifiedOptions,
@@ -830,25 +898,52 @@ registerBlockType(metadata, {
 											</div>
 										</PanelRow>
 									)}
-									{id == "justifyThreshold" && (
+									{id == "escKey" && (
 										<PanelRow>
-											<div className="flex items-center justify-between w-full mb-2">
-												<div className="flex items-center  ">
-													<RemoveJustifiedArg index={id} />
-													<label htmlFor="">Justify Threshold</label>
-												</div>
-												<InputControl
-													type="number"
-													step="0.01"
-													min="0"
-													max="1"
-													value={justifiedOptions.justifyThreshold}
+											<div className="flex items-center mb-2 ">
+												<RemoveJustifiedArg index={id} />
+
+												<ToggleControl
+													label="Esc key?"
+													help={
+														justifiedOptions.escKey
+															? "Esc Key Enabled"
+															: "Esc Key Disabled."
+													}
+													checked={justifiedOptions.escKey}
 													onChange={(newVal) => {
+														const updatedJustifiedOptions = {
+															...justifiedOptions,
+															escKey: newVal,
+														};
 														setAttributes({
-															justifiedOptions: {
-																...justifiedOptions,
-																justifyThreshold: parseInt(newVal),
-															},
+															justifiedOptions: updatedJustifiedOptions,
+														});
+													}}
+												/>
+											</div>
+										</PanelRow>
+									)}
+									{id == "getCaptionFromTitleOrAlt" && (
+										<PanelRow>
+											<div className="flex items-center mb-2 ">
+												<RemoveJustifiedArg index={id} />
+
+												<ToggleControl
+													label="Get Caption From Title Or Alt?"
+													help={
+														justifiedOptions.getCaptionFromTitleOrAlt
+															? "Get Caption From Title Or Alt Enabled"
+															: "Get Caption From Title Or Alt Disabled."
+													}
+													checked={justifiedOptions.getCaptionFromTitleOrAlt}
+													onChange={(newVal) => {
+														const updatedJustifiedOptions = {
+															...justifiedOptions,
+															getCaptionFromTitleOrAlt: newVal,
+														};
+														setAttributes({
+															justifiedOptions: updatedJustifiedOptions,
 														});
 													}}
 												/>
@@ -860,7 +955,10 @@ registerBlockType(metadata, {
 						})}
 					</PanelBody>
 
-					<PanelBody title="Item" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Item"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -876,7 +974,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -892,7 +990,10 @@ registerBlockType(metadata, {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					<PanelBody title="Lightbox" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Lightbox"
+						initialOpen={false}>
 						<PanelRow>
 							<ToggleControl
 								label="Enable?"
@@ -913,7 +1014,10 @@ registerBlockType(metadata, {
 						</PanelRow>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"accordion-nested"}
 							blockId={blockId}
@@ -949,30 +1053,84 @@ registerBlockType(metadata, {
 											replaceInnerBlocks(
 												clientId,
 												createBlocksFromInnerBlocksTemplate([
-													[
-														"post-grid/justified-wrap-item",
-														{
-															wrapper: {
-																options: {
-																	tag: "div",
-																	class: "pg-justified-wrap-item",
-																},
-																styles: {},
-															},
-														},
-													],
-													[
-														"post-grid/justified-wrap-item",
-														{
-															wrapper: {
-																options: {
-																	tag: "div",
-																	class: "pg-justified-wrap-item",
-																},
-																styles: {},
-															},
-														},
-													],
+													// [
+													// 	"post-grid/justified-image",
+													// 	{
+													// 		wrapper: {
+													// 			options: {
+													// 				tag: "a",
+													// 				class: "pg-justified-wrap-item",
+													// 				useAsBackground: "no",
+													// 			},
+													// 			styles: {},
+													// 		},
+													// 	},
+													// ],
+													// [
+													// 	"post-grid/justified-image",
+													// 	{
+													// 		wrapper: {
+													// 			options: {
+													// 				tag: "a",
+													// 				class: "pg-justified-wrap-item",
+													// 				useAsBackground: "no",
+													// 			},
+													// 			styles: {},
+													// 		},
+													// 	},
+													// ],
+													// [
+													// 	"post-grid/justified-image",
+													// 	{
+													// 		wrapper: {
+													// 			options: {
+													// 				tag: "a",
+													// 				class: "pg-justified-wrap-item",
+													// 				useAsBackground: "no",
+													// 			},
+													// 			styles: {},
+													// 		},
+													// 	},
+													// ],
+													// [
+													// 	"post-grid/justified-image",
+													// 	{
+													// 		wrapper: {
+													// 			options: {
+													// 				tag: "a",
+													// 				class: "pg-justified-wrap-item",
+													// 				useAsBackground: "no",
+													// 			},
+													// 			styles: {},
+													// 		},
+													// 	},
+													// ],
+													// [
+													// 	"post-grid/justified-image",
+													// 	{
+													// 		wrapper: {
+													// 			options: {
+													// 				tag: "a",
+													// 				class: "pg-justified-wrap-item",
+													// 				useAsBackground: "no",
+													// 			},
+													// 			styles: {},
+													// 		},
+													// 	},
+													// ],
+													// [
+													// 	"post-grid/justified-image",
+													// 	{
+													// 		wrapper: {
+													// 			options: {
+													// 				tag: "a",
+													// 				class: "pg-justified-wrap-item",
+													// 				useAsBackground: "no",
+													// 			},
+													// 			styles: {},
+													// 		},
+													// 	},
+													// ],
 												]),
 												true
 											);
@@ -1048,7 +1206,76 @@ registerBlockType(metadata, {
 					)}
 
 					{hasInnerBlocks && (
-						<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
+						<div {...innerBlocksProps}>
+							<LightGallery
+								speed={500}
+								backdropDuration={500}
+								controls={true}
+								closeOnTap={false}
+								download={true}
+								height="100px"
+								iframeHeight="100px"
+								easing="ease"
+								enableDrag={false}
+								enableSwipe={true}
+								escKey={false}
+								getCaptionFromTitleOrAlt={true}
+								defaultCaptionHeight={0}
+								keyPress={true}
+								slideDelay={200}
+								plugins={[lgThumbnail, lgZoom]}
+								>
+								{/* {innerBlocksProps.children} */}
+								<a
+									className="aaa"
+									href="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+									<img
+										alt="img1"
+										src="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+									/>
+								</a>
+								<a
+									className="aaa"
+									href="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+									<img
+										alt="img2"
+										src="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+									/>
+								</a>
+								<a
+									className="aaa"
+									href="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+									<img
+										alt="img1"
+										src="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+									/>
+								</a>
+								<a
+									className="aaa"
+									href="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+									<img
+										alt="img2"
+										src="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+									/>
+								</a>
+								<a
+									className="aaa"
+									href="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+									<img
+										alt="img1"
+										src="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+									/>
+								</a>
+								<a
+									className="aaa"
+									href="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+									<img
+										alt="img2"
+										src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+									/>
+								</a>
+							</LightGallery>
+						</div>
 					)}
 				</>
 			</>

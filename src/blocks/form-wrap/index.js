@@ -45,7 +45,16 @@ import {
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 import { applyFilters } from "@wordpress/hooks";
 
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 
 import {
@@ -960,7 +969,9 @@ registerBlockType(metadata, {
 				<InspectorControls>
 					<div className="p-3">
 						<PanelRow>
-							<label for="">Choose Form Type</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Choose Form Type
+							</label>
 							<PGDropdown
 								position="bottom right"
 								variant="secondary"
@@ -988,7 +999,10 @@ registerBlockType(metadata, {
 						</PanelRow>
 					</div>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1004,7 +1018,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1023,7 +1037,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -1034,7 +1050,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 
 									<SelectControl
 										label=""
@@ -1072,7 +1090,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Form Wrap" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Form Wrap"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="styles"
 							orientation="horizontal"
@@ -1088,7 +1109,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1118,7 +1139,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Visiblity" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Visiblity"
+						initialOpen={false}>
 						<div
 							className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
 							onClick={(ev) => {
@@ -1261,7 +1285,11 @@ registerBlockType(metadata, {
 															{(id == "isYears" || id == "isMinutes") && (
 																<>
 																	<PanelRow className="mb-4">
-																		<label for="">From</label>
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			From
+																		</label>
 																		<InputControl
 																			className="mr-2"
 																			value={item.from}
@@ -1290,7 +1318,11 @@ registerBlockType(metadata, {
 																	)}
 
 																	<PanelRow>
-																		<label for="">Compare</label>
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Compare
+																		</label>
 																		<SelectControl
 																			label=""
 																			value={item.compare}
@@ -1319,7 +1351,11 @@ registerBlockType(metadata, {
 															{id == "isMonths" && (
 																<>
 																	<PanelRow>
-																		<label for="">Compare</label>
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Compare
+																		</label>
 																		<SelectControl
 																			label=""
 																			value={item.compare}
@@ -1351,7 +1387,11 @@ registerBlockType(metadata, {
 																		item.compare == "<=") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 																				<PGDropdown
 																					position="bottom right"
 																					variant="secondary"
@@ -1379,7 +1419,11 @@ registerBlockType(metadata, {
 																		item.compare == "exist") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 																				<PGDropdown
 																					position="bottom right"
 																					variant="secondary"
@@ -1433,7 +1477,11 @@ registerBlockType(metadata, {
 															{id == "weekDays" && (
 																<>
 																	<PanelRow>
-																		<label for="">Compare</label>
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Compare
+																		</label>
 																		<SelectControl
 																			label=""
 																			value={item.compare}
@@ -1465,7 +1513,11 @@ registerBlockType(metadata, {
 																		item.compare == "<=") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 																				<PGDropdown
 																					position="bottom right"
 																					variant="secondary"
@@ -1493,7 +1545,11 @@ registerBlockType(metadata, {
 																		item.compare == "exist") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 																				<PGDropdown
 																					position="bottom right"
 																					variant="secondary"
@@ -1549,7 +1605,11 @@ registerBlockType(metadata, {
 															{id == "isHours" && (
 																<>
 																	<PanelRow>
-																		<label for="">Compare</label>
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Compare
+																		</label>
 																		<SelectControl
 																			label=""
 																			value={item.compare}
@@ -1581,7 +1641,11 @@ registerBlockType(metadata, {
 																		item.compare == "<=") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 																				<PGDropdown
 																					position="bottom right"
 																					variant="secondary"
@@ -1609,7 +1673,11 @@ registerBlockType(metadata, {
 																		item.compare == "exist") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 																				<PGDropdown
 																					position="bottom right"
 																					variant="secondary"
@@ -1663,7 +1731,11 @@ registerBlockType(metadata, {
 															{id == "isDate" && (
 																<>
 																	<PanelRow>
-																		<label for="">Compare</label>
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Compare
+																		</label>
 																		<SelectControl
 																			label=""
 																			value={item.compare}
@@ -1695,7 +1767,11 @@ registerBlockType(metadata, {
 																		item.compare == "<=") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 
 																				<Button
 																					className={
@@ -1756,7 +1832,11 @@ registerBlockType(metadata, {
 																		item.compare == "exist") && (
 																		<>
 																			<PanelRow className="mb-4">
-																				<label for="">Values</label>
+																				<label
+																					for=""
+																					className="font-medium text-slate-900 ">
+																					Values
+																				</label>
 
 																				<Button
 																					className={
@@ -1856,7 +1936,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="On Submit" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="On Submit"
+						initialOpen={false}>
 						<PanelRow className="my-3">
 							<PGDropdown
 								position="bottom right"
@@ -1906,7 +1989,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="On Process" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="On Process"
+						initialOpen={false}>
 						<PanelRow className="my-3">
 							<PGDropdown
 								position="bottom right"
@@ -1945,7 +2031,11 @@ registerBlockType(metadata, {
 											{id == "sendMail" && (
 												<>
 													<PanelRow className="mb-4">
-														<label for="">Subject</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Subject
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.subject}
@@ -1959,7 +2049,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow className="mb-4">
-														<label for="">Mail To</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail To
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.mailTo}
@@ -1973,7 +2067,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow className="mb-4">
-														<label for="">BCC</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															BCC
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.bcc}
@@ -1987,7 +2085,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<div className="mb-4">
-														<label for="">Email Footer</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Email Footer
+														</label>
 														<TextareaControl
 															value={groupData.footer}
 															onChange={(newVal) => {
@@ -2014,7 +2116,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2026,7 +2132,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2045,7 +2155,11 @@ registerBlockType(metadata, {
 											{id == "emailBcc" && (
 												<>
 													<PanelRow className="mb-4">
-														<label for="">Mail To</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail To
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.mailTo}
@@ -2059,7 +2173,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow className="mb-4">
-														<label for="">Mail from</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail from
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.fromEmail}
@@ -2072,7 +2190,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Mail From Name</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail From Name
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.fromName}
@@ -2085,7 +2207,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Reply To Email</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Reply To Email
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.replyTo}
@@ -2098,7 +2224,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Reply To Name</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Reply To Name
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.replyToName}
@@ -2111,7 +2241,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<div className="mb-4">
-														<label for="">Email Footer</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Email Footer
+														</label>
 														<TextareaControl
 															value={groupData.footer}
 															onChange={(newVal) => {
@@ -2138,7 +2272,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2150,7 +2288,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2169,7 +2311,11 @@ registerBlockType(metadata, {
 											{id == "emailCopyUser" && (
 												<>
 													<PanelRow className="mb-4">
-														<label for="">Mail from</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail from
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.fromEmail}
@@ -2182,7 +2328,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Mail From Name</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail From Name
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.fromName}
@@ -2195,7 +2345,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Reply To Email</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Reply To Email
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.replyTo}
@@ -2208,7 +2362,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Reply To Name</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Reply To Name
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.replyToName}
@@ -2221,7 +2379,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<div className="mb-4">
-														<label for="">Email Footer</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Email Footer
+														</label>
 														<TextareaControl
 															value={groupData.footer}
 															onChange={(newVal) => {
@@ -2248,7 +2410,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2260,7 +2426,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2293,7 +2463,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2305,7 +2479,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2324,7 +2502,11 @@ registerBlockType(metadata, {
 											{id == "autoReply" && (
 												<>
 													<PanelRow className="mb-4">
-														<label for="">Mail from</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail from
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.fromEmail}
@@ -2337,7 +2519,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Mail From Name</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Mail From Name
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.fromName}
@@ -2350,7 +2536,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Reply To Email</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Reply To Email
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.replyTo}
@@ -2363,7 +2553,11 @@ registerBlockType(metadata, {
 														/>
 													</PanelRow>
 													<PanelRow className="mb-4">
-														<label for="">Reply To Name</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Reply To Name
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.replyToName}
@@ -2377,7 +2571,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow className="mb-4">
-														<label for="">Message</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Message
+														</label>
 														<TextareaControl
 															value={groupData.message}
 															onChange={(newVal) => {
@@ -2390,7 +2588,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<div className="mb-4">
-														<label for="">Email Footer</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Email Footer
+														</label>
 														<TextareaControl
 															value={groupData.footer}
 															onChange={(newVal) => {
@@ -2418,7 +2620,11 @@ registerBlockType(metadata, {
 
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2430,7 +2636,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2464,7 +2674,11 @@ registerBlockType(metadata, {
 
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2476,7 +2690,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2510,7 +2728,11 @@ registerBlockType(metadata, {
 
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2522,7 +2744,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2541,7 +2767,11 @@ registerBlockType(metadata, {
 											{id == "postSubmit" && (
 												<>
 													<PanelRow>
-														<label for="">Post Type</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Post Type
+														</label>
 														<SelectControl
 															label=""
 															value={groupData.postType}
@@ -2555,7 +2785,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">Post Status</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Post Status
+														</label>
 														<SelectControl
 															label=""
 															value={groupData.postStatus}
@@ -2569,7 +2803,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">Comment Status</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Comment Status
+														</label>
 														<SelectControl
 															label=""
 															value={groupData.commentStatus}
@@ -2587,7 +2825,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">Ping Status</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Ping Status
+														</label>
 														<SelectControl
 															label=""
 															value={groupData.pingStatus}
@@ -2632,7 +2874,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2644,7 +2890,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2663,7 +2913,11 @@ registerBlockType(metadata, {
 											{id == "commentSubmit" && (
 												<>
 													<PanelRow>
-														<label for="">Status</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Status
+														</label>
 														<SelectControl
 															label=""
 															value={groupData.status}
@@ -2682,7 +2936,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">Type</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Type
+														</label>
 														<InputControl
 															className="mr-2"
 															value={
@@ -2729,7 +2987,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2741,7 +3003,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2759,7 +3025,11 @@ registerBlockType(metadata, {
 											{id == "termSubmit" && (
 												<>
 													<PanelRow>
-														<label for="">Taxonomy</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Taxonomy
+														</label>
 														<InputControl
 															className="mr-2"
 															value={groupData.taxonomy}
@@ -2787,7 +3057,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2799,7 +3073,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2818,7 +3096,11 @@ registerBlockType(metadata, {
 											{id == "fluentcrmAddContact" && (
 												<>
 													<PanelRow>
-														<label for="">Fluent-CRM Lists</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Fluent-CRM Lists
+														</label>
 														<PGDropdown
 															position="bottom right"
 															variant="secondary"
@@ -2865,7 +3147,11 @@ registerBlockType(metadata, {
 													)}
 
 													<PanelRow>
-														<label for="">Fluent-CRM Tags</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Fluent-CRM Tags
+														</label>
 														<PGDropdown
 															position="bottom right"
 															variant="secondary"
@@ -2926,7 +3212,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2938,7 +3228,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -2971,7 +3265,11 @@ registerBlockType(metadata, {
 													/>
 													{groupData.showOnResponse && (
 														<>
-															<label for="">Success Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Success Message
+															</label>
 															<TextareaControl
 																value={groupData.successMessage}
 																onChange={(newVal) => {
@@ -2983,7 +3281,11 @@ registerBlockType(metadata, {
 																}}
 															/>
 
-															<label for="">Error Message</label>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Error Message
+															</label>
 															<TextareaControl
 																value={groupData.errorMessage}
 																onChange={(newVal) => {
@@ -3005,7 +3307,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="After Submit" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="After Submit"
+						initialOpen={false}>
 						<PanelRow className="my-3">
 							<PGDropdown
 								position="bottom right"
@@ -3052,7 +3357,11 @@ registerBlockType(metadata, {
 											{id == "redirectToURL" && (
 												<>
 													<div className="mb-4">
-														<label for="">Redirect URL</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Redirect URL
+														</label>
 														<TextareaControl
 															value={groupData.url}
 															onChange={(newVal) => {
@@ -3068,7 +3377,11 @@ registerBlockType(metadata, {
 											{id == "refreshPage" && (
 												<>
 													<div className="mb-4">
-														<label for="">Delay</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Delay
+														</label>
 
 														<InputControl
 															className="mr-2"
@@ -3088,7 +3401,11 @@ registerBlockType(metadata, {
 											{id == "delay" && (
 												<>
 													<PanelRow className="mb-4">
-														<label for="">Delay</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Delay
+														</label>
 
 														<InputControl
 															className="mr-2"
@@ -3111,7 +3428,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"form-wrap"}
 							blockId={blockId}

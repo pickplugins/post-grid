@@ -46,7 +46,7 @@
     "fslightbox": "^3.4.1",
     "html-to-image": "^1.11.11",
     "imagesloaded": "^5.0.0",
-    "justifiedGallery": "^3.8.1",
+    "lightgallery": "^2.7.2",
     "masonry-layout": "^4.2.2",
     "npmignore": "^0.3.0",
     "openai": "^4.0.1",

@@ -43,7 +43,15 @@ import {
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 import { applyFilters } from "@wordpress/hooks";
 
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 
 import {
@@ -58,6 +66,7 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 import { __experimentalScrollable as Scrollable } from "@wordpress/components";
+import { createBlock } from "@wordpress/blocks";
 
 import IconToggle from "../../components/icon-toggle";
 import Typography from "../../components/typography";
@@ -136,6 +145,7 @@ registerBlockType(metadata, {
 
 		var wrapper = attributes.wrapper;
 		var lightbox = attributes.lightbox;
+		var item = attributes.item;
 
 		const lightboxEnable =
 			lightbox.options.enable == undefined ? true : lightbox.options.enable;
@@ -148,6 +158,8 @@ registerBlockType(metadata, {
 
 		// Wrapper CSS Class Selectors
 		var wrapperSelector = blockClass;
+
+		var itemSelector = blockClass + " .pg-image-gallery-item";
 
 		const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
@@ -321,6 +333,93 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
+
+		function onChangeStyleItem(sudoScource, newVal, attr) {
+			var path = [sudoScource, attr, breakPointX];
+			let obj = Object.assign({}, item);
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ item: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				itemSelector
+			);
+			var cssPropty = myStore.cssAttrParse(attr);
+
+			let itemsX = Object.assign({}, blockCssY.items);
+
+			if (itemsX[elementSelector] == undefined) {
+				itemsX[elementSelector] = {};
+			}
+
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
+
+		function onRemoveStyleItem(sudoScource, key) {
+			var object = myStore.deletePropertyDeep(item, [
+				sudoScource,
+				key,
+				breakPointX,
+			]);
+			setAttributes({ item: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				itemSelector
+			);
+			var cssPropty = myStore.cssAttrParse(key);
+			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+				elementSelector,
+				cssPropty,
+				breakPointX,
+			]);
+			setAttributes({ blockCssY: { items: cssObject } });
+		}
+
+		function onAddStyleItem(sudoScource, key) {
+			var path = [sudoScource, key, breakPointX];
+			let obj = Object.assign({}, item);
+			const object = myStore.addPropertyDeep(obj, path, "");
+			setAttributes({ item: object });
+		}
+
+		function onBulkAddItem(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, item);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ item: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, itemSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+
+
 		const ALLOWED_BLOCKS = ["post-grid/image-gallery-item"];
 
 		const MY_TEMPLATE = [
@@ -341,10 +440,31 @@ registerBlockType(metadata, {
 			//renderAppender: InnerBlocks.ButtonBlockAppender
 		});
 
+		const addChild = () => {
+			var childBlocks = wp.data.select(blockEditorStore).getBlocks(clientId);
+
+			const slide = createBlock("post-grid/image-gallery-item");
+			const position = childBlocks.length;
+			dispatch("core/block-editor").insertBlock(slide, position, clientId);
+
+			wp.data.dispatch("core/block-editor").selectBlock(clientId);
+			//setActiveTab(slide.clientId);
+		};
+
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<div
+						className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
+						onClick={(ev) => {
+							addChild();
+						}}>
+						Add Item
+					</div>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -360,7 +480,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -379,7 +499,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -390,7 +512,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 
 									<SelectControl
 										label=""
@@ -428,7 +552,46 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Lightbox" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Item"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={item}
+									onChange={onChangeStyleItem}
+									onAdd={onAddStyleItem}
+									onRemove={onRemoveStyleItem}
+									onBulkAdd={onBulkAddItem}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Lightbox"
+						initialOpen={false}>
 						<PanelRow>
 							<ToggleControl
 								label="Enable?"
@@ -449,7 +612,10 @@ registerBlockType(metadata, {
 						</PanelRow>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"image-gallery"}
 							blockId={blockId}
@@ -511,7 +677,7 @@ registerBlockType(metadata, {
 															wrapper: {
 																options: {
 																	tag: "div",
-																	class: "grid-item-wrap",
+																	class: "pg-image-gallery-item",
 																},
 																styles: {},
 															},
@@ -523,7 +689,7 @@ registerBlockType(metadata, {
 															wrapper: {
 																options: {
 																	tag: "div",
-																	class: "grid-item-wrap",
+																	class: "pg-image-gallery-item",
 																},
 																styles: {},
 															},

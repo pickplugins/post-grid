@@ -52,7 +52,14 @@ import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
-import { Icon, close, pencil, cloud } from "@wordpress/icons";
+import {
+	Icon,
+	close,
+	pencil,
+	cloud,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import IconToggle from "../../components/icon-toggle";
 import PGDropdown from "../../components/dropdown";
@@ -2248,7 +2255,10 @@ registerBlockType(metadata, {
 									{item.val.map((x, j) => {
 										return (
 											<div>
-												<PanelBody title="Meta Field" initialOpen={false}>
+												<PanelBody
+													className="font-medium text-slate-900 "
+													title="Meta Field"
+													initialOpen={false}>
 													<div
 														className="cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm"
 														onClick={(_ev) => {
@@ -2537,7 +2547,10 @@ registerBlockType(metadata, {
 								{item.val.map((x, j) => {
 									return (
 										<div>
-											<PanelBody title={x.id} initialOpen={false}>
+											<PanelBody
+												className="font-medium text-slate-900 "
+												title={x.id}
+												initialOpen={false}>
 												<span
 													className="cursor-pointer px-3 py-1 text-white bg-red-600 text-sm my-2 inline-block"
 													onClick={(_ev) => {
@@ -2760,7 +2773,10 @@ registerBlockType(metadata, {
 									{item.val.map((x, j) => {
 										return (
 											<div>
-												<PanelBody title="Term" initialOpen={false}>
+												<PanelBody
+													className="font-medium text-slate-900 "
+													title="Term"
+													initialOpen={false}>
 													<div
 														className="cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm"
 														onClick={(_ev) => {
@@ -3178,7 +3194,10 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Layouts" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Layouts"
+						initialOpen={false}>
 						<div className="text-white cursor-pointer">
 							<div
 								className={
@@ -3429,7 +3448,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="Query Post" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Query Post"
+						initialOpen={false}>
 						<PanelRow className="my-3">
 							<label>Add Query Parameters</label>
 							<PGDropdown
@@ -3446,7 +3468,9 @@ registerBlockType(metadata, {
 						})}
 
 						<PanelRow className="mb-4">
-							<label for="">Query Presets</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Query Presets
+							</label>
 							<PGDropdown
 								position="bottom right"
 								variant="secondary"
@@ -3457,7 +3481,10 @@ registerBlockType(metadata, {
 						</PanelRow>
 					</PanelBody>
 
-					<PanelBody title="Grid Settings" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Grid Settings"
+						initialOpen={false}>
 						<PanelRow className="my-3">
 							<Button
 								onClick={(_ev) => {
@@ -3854,7 +3881,9 @@ registerBlockType(metadata, {
 
 						<div>
 							<PanelRow>
-								<label for="">N'th Item CSS</label>
+								<label for="" className="font-medium text-slate-900 ">
+									N'th Item CSS
+								</label>
 								<Button
 									className="my-3"
 									variant="secondary"
@@ -3907,7 +3936,10 @@ registerBlockType(metadata, {
 							{grid.options.itemCss[breakPointX] != undefined &&
 								grid.options.itemCss[breakPointX].map((x, i) => {
 									return (
-										<PanelBody title={i + 1 + "'th Item"} initialOpen={false}>
+										<PanelBody
+											className="font-medium text-slate-900 "
+											title={i + 1 + "'th Item"}
+											initialOpen={false}>
 											<Button
 												icon="no-alt"
 												variant="secondary"
@@ -3926,7 +3958,9 @@ registerBlockType(metadata, {
 											</Button>
 
 											<PanelRow>
-												<label for="">grid-column-start</label>
+												<label for="" className="font-medium text-slate-900 ">
+													grid-column-start
+												</label>
 												<InputControl
 													value={x["grid-column-start"]}
 													type="number"
@@ -3947,7 +3981,9 @@ registerBlockType(metadata, {
 											</PanelRow>
 
 											<PanelRow>
-												<label for="">grid-column-end</label>
+												<label for="" className="font-medium text-slate-900 ">
+													grid-column-end
+												</label>
 												<InputControl
 													value={x["grid-column-end"]}
 													type="number"
@@ -3968,7 +4004,9 @@ registerBlockType(metadata, {
 											</PanelRow>
 
 											<PanelRow>
-												<label for="">grid-row-start</label>
+												<label for="" className="font-medium text-slate-900 ">
+													grid-row-start
+												</label>
 												<InputControl
 													value={x["grid-row-start"]}
 													type="number"
@@ -3989,7 +4027,9 @@ registerBlockType(metadata, {
 											</PanelRow>
 
 											<PanelRow>
-												<label for="">grid-row-end</label>
+												<label for="" className="font-medium text-slate-900 ">
+													grid-row-end
+												</label>
 												<InputControl
 													value={x["grid-row-end"]}
 													type="number"
@@ -4051,7 +4091,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="Container" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Container"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="styles"
 							orientation="horizontal"
@@ -4089,7 +4132,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Items Wrap" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Items Wrap"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="styles"
 							orientation="horizontal"
@@ -4127,7 +4173,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Loop Item" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Loop Item"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="styles"
 							orientation="horizontal"
@@ -4165,7 +4214,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Filterable" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Filterable"
+						initialOpen={false}>
 						<div>
 							<Button
 								variant="secondary"
@@ -4210,7 +4262,9 @@ registerBlockType(metadata, {
 										</span>
 
 										<PanelRow>
-											<label for="">Group Title</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Group Title
+											</label>
 
 											<InputControl
 												value={x.groupTitle}
@@ -4229,7 +4283,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Group Type</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Group Type
+											</label>
 
 											<SelectControl
 												value={x.type}
@@ -4254,7 +4310,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Data Logic</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Data Logic
+											</label>
 
 											<SelectControl
 												value={x.logic}
@@ -4277,7 +4335,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Show Post Count</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Show Post Count
+											</label>
 
 											<SelectControl
 												value={x.showPostCount}
@@ -4299,7 +4359,10 @@ registerBlockType(metadata, {
 											/>
 										</PanelRow>
 
-										<label for="" className="my-3 font-bold">
+										<label
+											for=""
+											className="font-medium text-slate-900 "
+											className="my-3 font-bold">
 											Search Terms
 										</label>
 
@@ -4445,7 +4508,9 @@ registerBlockType(metadata, {
 						</div>
 
 						<PanelRow>
-							<label for="">Enable Multifilter </label>
+							<label for="" className="font-medium text-slate-900 ">
+								Enable Multifilter{" "}
+							</label>
 
 							<SelectControl
 								label=""
@@ -4464,7 +4529,9 @@ registerBlockType(metadata, {
 						</PanelRow>
 
 						<PanelRow>
-							<label for="">Enable Filter Toggle </label>
+							<label for="" className="font-medium text-slate-900 ">
+								Enable Filter Toggle{" "}
+							</label>
 
 							<SelectControl
 								label=""
@@ -4485,7 +4552,9 @@ registerBlockType(metadata, {
 						{filterable.options.multifilter && (
 							<>
 								<PanelRow>
-									<label for="">Logic Within Group </label>
+									<label for="" className="font-medium text-slate-900 ">
+										Logic Within Group{" "}
+									</label>
 
 									<SelectControl
 										label=""
@@ -4507,7 +4576,9 @@ registerBlockType(metadata, {
 								</PanelRow>
 
 								<PanelRow>
-									<label for="">Logic Between Groups </label>
+									<label for="" className="font-medium text-slate-900 ">
+										Logic Between Groups{" "}
+									</label>
 
 									<SelectControl
 										label=""
@@ -4531,7 +4602,9 @@ registerBlockType(metadata, {
 						)}
 
 						<PanelRow>
-							<label for="">Show Sort Filter </label>
+							<label for="" className="font-medium text-slate-900 ">
+								Show Sort Filter{" "}
+							</label>
 
 							<SelectControl
 								label=""
@@ -4550,7 +4623,9 @@ registerBlockType(metadata, {
 						</PanelRow>
 
 						<PanelRow>
-							<label for="">Show Random Filter </label>
+							<label for="" className="font-medium text-slate-900 ">
+								Show Random Filter{" "}
+							</label>
 
 							<SelectControl
 								label=""
@@ -4569,7 +4644,9 @@ registerBlockType(metadata, {
 						</PanelRow>
 
 						<PanelRow>
-							<label for="">Show Clear Filter </label>
+							<label for="" className="font-medium text-slate-900 ">
+								Show Clear Filter{" "}
+							</label>
 
 							<SelectControl
 								label=""
@@ -4588,7 +4665,9 @@ registerBlockType(metadata, {
 						</PanelRow>
 
 						<PanelRow>
-							<label for="">Show All Filter </label>
+							<label for="" className="font-medium text-slate-900 ">
+								Show All Filter{" "}
+							</label>
 
 							<SelectControl
 								label=""
@@ -4624,7 +4703,10 @@ registerBlockType(metadata, {
 							/>
 						</PanelRow>
 
-						<PanelBody title="Filter" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Filter"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="styles"
 								orientation="horizontal"
@@ -4662,7 +4744,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Active Filter" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Active Filter"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="styles"
 								orientation="horizontal"
@@ -4700,7 +4785,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Filter Group" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Filter Group"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="styles"
 								orientation="horizontal"
@@ -4738,7 +4826,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Filter Group Wrap" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Filter Group Wrap"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="styles"
 								orientation="horizontal"
@@ -4777,9 +4868,14 @@ registerBlockType(metadata, {
 						</PanelBody>
 					</PanelBody>
 
-					<PanelBody title="Pagination" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Pagination"
+						initialOpen={false}>
 						<PanelRow className="mb-4">
-							<label for="">Pagination Type</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Pagination Type
+							</label>
 							<PGDropdown
 								position="bottom right"
 								variant="secondary"
@@ -4805,7 +4901,9 @@ registerBlockType(metadata, {
 						{(pagination.options.type == "normal" ||
 							pagination.options.type == "ajax") && (
 							<>
-								<label for="">Max Number of Pagination</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Max Number of Pagination
+								</label>
 								<InputControl
 									value={pagination.options.maxPageNum}
 									onChange={(newVal) => {
@@ -4822,7 +4920,9 @@ registerBlockType(metadata, {
 							pagination.options.type == "ajax" ||
 							pagination.options.type == "next_previous") && (
 							<>
-								<label for="">Previous Text</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Previous Text
+								</label>
 								<InputControl
 									value={pagination.options.prevText}
 									onChange={(newVal) => {
@@ -4833,7 +4933,9 @@ registerBlockType(metadata, {
 									}}
 								/>
 
-								<label for="">Next Text</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Next Text
+								</label>
 								<InputControl
 									value={pagination.options.nextText}
 									onChange={(newVal) => {
@@ -4849,7 +4951,9 @@ registerBlockType(metadata, {
 						{(pagination.options.type == "loadmore" ||
 							pagination.options.type == "infinite") && (
 							<>
-								<label for="">Load More Text</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Load More Text
+								</label>
 
 								<InputControl
 									value={pagination.options.loadMoreText}
@@ -4864,7 +4968,9 @@ registerBlockType(metadata, {
 									}}
 								/>
 
-								<label for="">No Posts Text</label>
+								<label for="" className="font-medium text-slate-900 ">
+									No Posts Text
+								</label>
 
 								<InputControl
 									value={pagination.options.noMorePosts}
@@ -4879,7 +4985,9 @@ registerBlockType(metadata, {
 									}}
 								/>
 
-								<label for="">Loading Text</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Loading Text
+								</label>
 
 								<InputControl
 									value={pagination.options.loadingText}
@@ -4895,7 +5003,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">Loading Icon</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Loading Icon
+									</label>
 
 									<PGIconPicker
 										library={pagination.options.loadingIcon.library}
@@ -4920,7 +5030,10 @@ registerBlockType(metadata, {
 							</>
 						)}
 
-						<PanelBody title="Pagination Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Pagination Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="styles"
 								orientation="horizontal"
@@ -4958,7 +5071,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Pagination Items" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Pagination Items"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="styles"
 								orientation="horizontal"
@@ -4996,7 +5112,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Pagination Item Active" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Pagination Item Active"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="styles"
 								orientation="horizontal"
@@ -5035,9 +5154,14 @@ registerBlockType(metadata, {
 						</PanelBody>
 					</PanelBody>
 
-					<PanelBody title="Lazy load" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Lazy load"
+						initialOpen={false}>
 						<PanelRow>
-							<label for="">Enable Lazyload </label>
+							<label for="" className="font-medium text-slate-900 ">
+								Enable Lazyload{" "}
+							</label>
 
 							<SelectControl
 								value={lazyLoad.options.enable}
@@ -5055,7 +5179,9 @@ registerBlockType(metadata, {
 						</PanelRow>
 
 						<PanelRow>
-							<label for="">Lazyload Icon</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Lazyload Icon
+							</label>
 
 							<PGIconPicker
 								library={
@@ -5091,7 +5217,9 @@ registerBlockType(metadata, {
 						</PanelRow>
 
 						<PanelRow>
-							<label for="">Lazy Load Image</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Lazy Load Image
+							</label>
 
 							<MediaUploadCheck>
 								<MediaUpload
@@ -5120,7 +5248,11 @@ registerBlockType(metadata, {
 						<img className="my-4" src={lazyLoad.options.srcUrl} alt="" />
 					</PanelBody>
 
-					<PanelBody className="hidden" title="Search" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						className="hidden"
+						title="Search"
+						initialOpen={false}>
 						<SelectControl
 							label="Enable"
 							value={search.enable}
@@ -5221,7 +5353,11 @@ registerBlockType(metadata, {
 						/>
 					</div>
 
-					<PanelBody className="" title="Tutorials" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						className=""
+						title="Tutorials"
+						initialOpen={false}>
 						<PGTutorials links={tutorialsLinks} />
 					</PanelBody>
 				</InspectorControls>

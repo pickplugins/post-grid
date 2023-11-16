@@ -27,7 +27,7 @@
         },
         "styles": {
           "display": {
-            "Desktop": "block"
+            "Desktop": "flex"
           },
           "margin": {
             "Desktop": "0px 0px 0px 0px"

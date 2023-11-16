@@ -19,6 +19,7 @@ class PGBlockMasonryWrap
 
 		wp_register_script('pgmasonry-wrap_masonry_core', post_grid_plugin_url . 'src/blocks/masonry-wrap/masonry.pkgd.js', [], '', true);
 		wp_register_script('pgmasonry-wrap_masonry_min', post_grid_plugin_url . 'src/blocks/masonry-wrap/masonry.pkgd.min.js', [], '', true);
+		wp_register_script('pgmasonry-wrap_image_loaded', post_grid_plugin_url . 'src/blocks/masonry-wrap/imagesloaded.pkgd.min.js', [], '', true);
 
 
 		if (has_block('post-grid/masonry-wrap')) {
@@ -27,6 +28,7 @@ class PGBlockMasonryWrap
 
 			//wp_enqueue_script('pgmasonry-wrap_masonry_core');
 			wp_enqueue_script('pgmasonry-wrap_masonry_min');
+			wp_enqueue_script('pgmasonry-wrap_image_loaded');
 
 
 

@@ -49,7 +49,16 @@ import { __experimentalInputControl as InputControl } from "@wordpress/component
 import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
-import { Icon, styles, settings, link, linkOff, more } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	more,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import IconToggle from "../../components/icon-toggle";
 import Typography from "../../components/typography";
@@ -419,7 +428,9 @@ registerBlockType(metadata, {
 					<div className="px-3">
 						<div className="p-3">
 							<PanelRow className="mb-4">
-								<label for="">Menu Label</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Menu Label
+								</label>
 								<InputControl
 									className="mr-2"
 									value={link.options.text}
@@ -431,7 +442,9 @@ registerBlockType(metadata, {
 							</PanelRow>
 
 							<PanelRow className="mb-4">
-								<label for="">Menu URL</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Menu URL
+								</label>
 								<InputControl
 									className="mr-2"
 									value={link.options.url}
@@ -458,7 +471,10 @@ registerBlockType(metadata, {
 							/>
 						</div>
 
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -474,13 +490,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 
 										<SelectControl
 											label=""
@@ -518,7 +536,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Sub MenuWrap" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Sub MenuWrap"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -534,7 +555,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -590,4 +611,3 @@ registerBlockType(metadata, {
 		return <InnerBlocks.Content />;
 	},
 });
-

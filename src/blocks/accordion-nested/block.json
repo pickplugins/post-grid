@@ -144,7 +144,7 @@
       "default": {
         "options": {
           "enable": false,
-          "position": "left",
+          "position": "",
           "tag": "div",
           "class": "label-counter"
         },

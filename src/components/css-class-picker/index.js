@@ -6,7 +6,7 @@ import {
 	Popover,
 	TextareaControl,
 } from "@wordpress/components";
-import { Icon, styles, settings, close } from "@wordpress/icons";
+import { Icon, styles, settings, close, plusCircle } from "@wordpress/icons";
 import {
 	createElement,
 	useCallback,
@@ -54,33 +54,36 @@ function Html(props) {
 	return (
 		<div className=" p-1">
 			<div className="">
-				<div className="flex justify-between items-center capitalize text-[13px] ">
-					<h3 className="!capitalize !text-[13px] !mb-0 ">{props.label}</h3>
+				<div className="flex justify-between items-center capitalize font-medium text-slate-900 text-[13px] ">
+					<h3 className="!capitalize !text-[13px] !mb-0 pg-font ">{props.label}</h3>
 					<div
-						className="relative cursor-pointer my-2 inline-block bg-blue-500 text-white px-3 p-1"
+						className="relative flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
 						onClick={(ev) => {
 							setsearch({ ...search, enable: !search.enable });
 						}}>
-						Add
+						<Icon fill="#fff" size="20" icon={plusCircle} />
+						<span className="text-[13px] ">Add</span>
 					</div>
 				</div>
-
-				<TextareaControl
-					className="w-full"
-					value={props.val}
-					onChange={(newVal) => {
-						props.onChange(newVal);
-					}}
-				/>
+				<div className="pg-setting-input-textarea">
+					<TextareaControl
+						className="w-full"
+						value={props.val}
+						placeholder={props.placeholder}
+						onChange={(newVal) => {
+							props.onChange(newVal);
+						}}
+					/>
+				</div>
 			</div>
 
 			{search.enable && (
 				<>
 					<Popover position="bottom left">
-						<div className=" p-2 w-60">
+						<div className=" p-2 w-60 pg-font pg-setting-input-text">
 							<div className="flex justify-between items-center ">
 								<InputControl
-									autocomplete="off"
+									autoComplete="off"
 									className="p-3 w-full"
 									placeholder={
 										props.placeholder == undefined
@@ -480,3 +483,4 @@ class PGcssClassPicker extends Component {
 }
 
 export default PGcssClassPicker;
+

@@ -39,7 +39,17 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff, plus } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	plus,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { applyFilters } from "@wordpress/hooks";
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
@@ -194,6 +204,19 @@ registerBlockType(metadata, {
 
 			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
+
+			setTimeout(() => {
+				var tabsX = [...tabs];
+
+				// console.log(childBlocks);
+				childBlocks.map((item, index) => {
+					tabsX[index].uid = item.clientId;
+					// console.log(item);
+				});
+
+				// console.log(tabsX);
+				setAttributes({ tabs: tabsX });
+			}, 1000);
 		}, [blockId]);
 
 		function bulkCssGenerate(cssObj) {
@@ -935,6 +958,395 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
+		// add bulk style start
+
+		function onBulkAddWrapper(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, wrapper);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ wrapper: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddNavsWrap(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, navsWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ navsWrap: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, navsWrapSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddNavItem(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, navItem);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ navItem: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, navItemSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddActiveNavItem(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, activeNavItem);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ activeNavItem: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				activeNavItemSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddNavLabel(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, navLabel);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ navLabel: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, navLabelSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddPanelWrap(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, panelWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ panelWrap: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, panelWrapSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddIcon(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]s
+			let obj = Object.assign({}, icon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ icon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		// add bulk style end
+
+		// reset bulk style start
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+
+		function onResetNavsWrap(sudoScources) {
+			let obj = Object.assign({}, navsWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						navsWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ navsWrap: obj });
+		}
+
+		function onResetNavItem(sudoScources) {
+			let obj = Object.assign({}, navItem);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						navItemSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ navItem: obj });
+		}
+
+		function onResetActiveNavItem(sudoScources) {
+			let obj = Object.assign({}, activeNavItem);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						activeNavItemSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ activeNavItem: obj });
+		}
+
+		function onResetNavLabel(sudoScources) {
+			let obj = Object.assign({}, navLabel);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						navLabelSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ navLabel: obj });
+		}
+
+		function onResetPanelWrap(sudoScources) {
+			let obj = Object.assign({}, panelWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						panelWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ panelWrap: obj });
+		}
+
+		function onResetIcon(sudoScources) {
+			let obj = Object.assign({}, icon);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						navIconSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ icon: obj });
+		}
+
+		// reset bulk style end
+
 		const ALLOWED_BLOCKS = ["post-grid/tabs-nested-item"];
 
 		const MY_TEMPLATE = [
@@ -1012,8 +1424,18 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
+					<div
+						className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
+						onClick={(ev) => {
+							addNewTab();
+						}}>
+						Add Item
+					</div>
 					<div className="">
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1029,7 +1451,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1048,7 +1470,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -1065,12 +1489,17 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleWrapper}
 										onAdd={onAddStyleWrapper}
 										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
 									/>
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Navs Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Navs Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1086,7 +1515,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1097,6 +1526,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleNavsWrap}
 										onAdd={onAddStyleNavsWrap}
 										onRemove={onRemoveStyleNavsWrap}
+										onBulkAdd={onBulkAddNavsWrap}
+										onReset={onResetNavsWrap}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1109,7 +1540,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Nav Item" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Item"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1125,7 +1559,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1136,6 +1570,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleNavItem}
 										onAdd={onAddStyleNavItem}
 										onRemove={onRemoveStyleNavItem}
+										onBulkAdd={onBulkAddNavItem}
+										onReset={onResetNavItem}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1148,7 +1584,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Active Nav Item" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Active Nav Item"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1164,7 +1603,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1175,6 +1614,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleActiveNavItem}
 										onAdd={onAddStyleActiveNavItem}
 										onRemove={onRemoveStyleActiveNavItem}
+										onBulkAdd={onBulkAddActiveNavItem}
+										onReset={onResetActiveNavItem}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1187,7 +1628,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Nav Label" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Label"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1203,7 +1647,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1214,6 +1658,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleNavLabel}
 										onAdd={onAddStyleNavLabel}
 										onRemove={onRemoveStyleNavLabel}
+										onBulkAdd={onBulkAddNavLabel}
+										onReset={onResetNavLabel}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1226,7 +1672,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Content Wrap" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Content Wrap"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1242,7 +1691,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1253,6 +1702,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStylepanelWrap}
 										onAdd={onAddStylepanelWrap}
 										onRemove={onRemoveStylepanelWrap}
+										onBulkAdd={onBulkAddPanelWrap}
+										onReset={onResetPanelWrap}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1265,7 +1716,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Nav Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1281,19 +1735,21 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={icon.options.library}
@@ -1312,7 +1768,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Icon position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
 
 										<SelectControl
 											label=""
@@ -1335,6 +1793,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleIcon}
 										onAdd={onAddStyleIcon}
 										onRemove={onRemoveStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+										onReset={onResetIcon}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1347,7 +1807,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"tabs-nested"}
 								blockId={blockId}
@@ -1368,7 +1831,6 @@ registerBlockType(metadata, {
 						</div>
 					</div>
 				</InspectorControls>
-
 				{!hasInnerBlocks && (
 					<div {...innerBlocksProps}>
 						<div className="border p-5">
@@ -1625,6 +2087,19 @@ registerBlockType(metadata, {
 												)}
 											</>
 										)}
+
+										<Icon
+											fill="red"
+											icon={close}
+											onClick={(ev) => {
+												var tabX = [...tabs];
+												tabX.splice(index, 1);
+												setAttributes({ tabs: tabX });
+												dispatch("core/block-editor").removeBlock(
+													tabs[index].uid
+												);
+											}}
+										/>
 									</div>
 								);
 							})}

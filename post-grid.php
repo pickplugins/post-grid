@@ -37,7 +37,13 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/functions-rest.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/post-query/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/post-query-pagination/index.php');
+
+
             require_once(post_grid_plugin_dir . 'src/blocks/wordpress-org/index.php');
+
+            
             require_once(post_grid_plugin_dir . 'src/blocks/menu-wrap/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/menu-wrap-item/index.php');
 
@@ -64,8 +70,8 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/layers/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/layer/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/image/index.php');
-            // require_once(post_grid_plugin_dir . 'src/blocks/list-nested/index.php');
-            // require_once(post_grid_plugin_dir . 'src/blocks/list-nested-item/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/list-nested/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/list-nested-item/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/number-counter/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/date-countdown/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/popup/index.php');
@@ -98,6 +104,7 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/masonry-wrap/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/masonry-wrap-item/index.php');
             // require_once(post_grid_plugin_dir . 'src/blocks/justified-wrap/index.php');
+            // require_once(post_grid_plugin_dir . 'src/blocks/justified-image/index.php');
             // require_once(post_grid_plugin_dir . 'src/blocks/justified-wrap-item/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/grid-wrap/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/grid-wrap-item/index.php');

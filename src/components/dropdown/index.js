@@ -56,9 +56,9 @@ function Html(props) {
 
 			{pickerOpen && (
 				<Popover position={position}>
-					<div className="p-2 w-60	">
+					<div className="p-2 w-60 pg-font pg-setting-input-text	">
 						<InputControl
-							autocomplete="off"
+							autoComplete="off"
 							className="p-3 w-full"
 							placeholder={
 								props.searchPlaceholder == undefined

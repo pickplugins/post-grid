@@ -46,6 +46,8 @@ import {
 	linkOff,
 	close,
 	menu,
+	brush,
+	mediaAndText,
 } from "@wordpress/icons";
 
 import {
@@ -263,37 +265,37 @@ registerBlockType(metadata, {
 				var blockCssObj = {};
 
 				if (elementsX != undefined) {
-				var elementsY = { ...elementsX, options: elements.options };
-				setAttributes({ elements: elementsY });
-				blockCssObj[elementsSelector] = elementsY;
+					var elementsY = { ...elementsX, options: elements.options };
+					setAttributes({ elements: elementsY });
+					blockCssObj[elementsSelector] = elementsY;
 				}
 
 				if (countX != undefined) {
-				var countY = { ...countX, options: count.options };
-				setAttributes({ count: countY });
-				blockCssObj[countSelector] = countY;
+					var countY = { ...countX, options: count.options };
+					setAttributes({ count: countY });
+					blockCssObj[countSelector] = countY;
 				}
 
 				if (labelX != undefined) {
-				var labelY = { ...labelX, options: label.options };
-				setAttributes({ label: labelY });
-				blockCssObj[labelSelector] = labelY;
+					var labelY = { ...labelX, options: label.options };
+					setAttributes({ label: labelY });
+					blockCssObj[labelSelector] = labelY;
 				}
 
 				if (iconX != undefined) {
-				var iconY = { ...iconX, options: icon.options };
-				setAttributes({ icon: iconY });
-				blockCssObj[iconSelector] = iconY;
+					var iconY = { ...iconX, options: icon.options };
+					setAttributes({ icon: iconY });
+					blockCssObj[iconSelector] = iconY;
 				}
 
 				if (wrapperX != undefined) {
-				var wrapperY = { ...wrapperX, options: wrapper.options };
-				setAttributes({ wrapper: wrapperY });
-				blockCssObj[wrapperSelector] = wrapperY;
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
 				}
 
 				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-				
+
 				var items = blockCssRules;
 				setAttributes({ blockCssY: { items: items } });
 			}
@@ -966,7 +968,10 @@ registerBlockType(metadata, {
 			<>
 				<InspectorControls>
 					<div className="">
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -982,7 +987,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1001,7 +1006,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -1012,7 +1019,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 
 										<SelectControl
 											label=""
@@ -1050,7 +1059,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Items" initialOpen={true}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Items"
+							initialOpen={true}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1066,13 +1078,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow className="my-4">
-										<label for="">Add Media</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Add Media
+										</label>
 										<PGDropdown
 											position="bottom right"
 											variant="secondary"
@@ -1124,7 +1138,11 @@ registerBlockType(metadata, {
 													}
 													initialOpen={false}>
 													<PanelRow>
-														<label for="">Label</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Label
+														</label>
 														<InputControl
 															value={item.label}
 															onChange={(newVal) => {
@@ -1140,7 +1158,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">URL</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															URL
+														</label>
 														<InputControl
 															value={item.url}
 															onChange={(newVal) => {
@@ -1156,7 +1178,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">Count</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Count
+														</label>
 														<InputControl
 															value={item.count}
 															onChange={(newVal) => {
@@ -1172,7 +1198,11 @@ registerBlockType(metadata, {
 													</PanelRow>
 
 													<PanelRow>
-														<label for="">Choose Icon</label>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															Choose Icon
+														</label>
 														<PGIconPicker
 															library={item.siteIcon.library}
 															srcType={item.siteIcon.srcType}
@@ -1326,7 +1356,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1342,13 +1375,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Icon position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
 
 										<SelectControl
 											label=""
@@ -1400,7 +1435,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Label" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Label"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1416,7 +1454,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1453,7 +1491,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Count" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Count"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1469,7 +1510,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1506,7 +1547,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"social-share"}
 								blockId={blockId}

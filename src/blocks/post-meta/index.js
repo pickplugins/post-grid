@@ -25,7 +25,15 @@ import {
 	useEffect,
 } from "@wordpress/element";
 import { applyFilters } from "@wordpress/hooks";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	PanelBody,
@@ -726,7 +734,10 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -742,13 +753,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -767,7 +778,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -778,7 +791,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 									<SelectControl
 										label=""
 										value={wrapper.options.tag}
@@ -803,7 +818,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Class</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Class
+									</label>
 
 									<InputControl
 										value={wrapper.options.class}
@@ -834,7 +851,10 @@ registerBlockType(metadata, {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					<PanelBody title="Meta Key" initialOpen={true}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Meta Key"
+						initialOpen={true}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -850,7 +870,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								// {
@@ -862,7 +882,9 @@ registerBlockType(metadata, {
 							]}>
 							<PGtab name="options">
 								<PanelRow>
-									<label for="">Meta Key</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Meta Key
+									</label>
 
 									<InputControl
 										placeholder="Meta key"
@@ -929,7 +951,9 @@ registerBlockType(metadata, {
 											</p>
 										</div>
 										<div className="my-3">
-											<label for="">Parameters</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Parameters
+											</label>
 											<div className="">
 												{metaArgs != undefined &&
 													Object.entries(metaArgs).map((arg, i) => {
@@ -973,7 +997,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"post-meta"}
 							blockId={blockId}
@@ -988,7 +1015,10 @@ registerBlockType(metadata, {
 						<div {...blockProps}>
 							<div className="bg-slate-300 p-10 ">
 								<div className="w-[400px] mx-auto my-0">
-									<label for="" className="my-4 block">
+									<label
+										for=""
+										className="font-medium text-slate-900 "
+										className="my-4 block">
 										Meta Field Key
 									</label>
 									<InputControl
@@ -1019,4 +1049,3 @@ registerBlockType(metadata, {
 		return null;
 	},
 });
-

@@ -41,11 +41,19 @@ import {
 	store as blockEditorStore,
 } from "@wordpress/block-editor";
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
-
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
-import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
-
 import { createBlock } from "@wordpress/blocks";
+
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
+import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 
 import {
 	InspectorControls,
@@ -144,42 +152,19 @@ registerBlockType(metadata, {
 		var icons = { bed: "", layout: "", smiley: "", columns: "", globe: "" };
 
 		useEffect(() => {
-			// console.log(Math.floor(new Date("2012.08.10").getTime() / 1000));
 			setTimeout(() => {
 				loadMasonry();
 			}, 500);
 		}, [masonryOptions]);
 
 		function loadMasonry() {
-			var elemX = document.querySelectorAll("." + blockId);
+			// var elemX = document.querySelectorAll("." + blockId);
+			var elemX = document.querySelectorAll(blockClass);
 
-			// console.log(elemX);
 			if (elemX != null) {
 				elemX.forEach((arg) => {
-					// var postgridargs = arg.getAttribute("postgridargs");
-					// console.log("arg : ", arg);
 					// imagesLoaded(arg, function () {
-					var msnry = new Masonry(
-						arg,
-						masonryOptions
-						// 	{
-						// 	// options
-
-						// itemSelector: masonryOptions.itemSelector,
-						// columnWidth: parseInt(masonryOptions.columnWidth),
-						// gutter: parseInt(masonryOptions.gutter),
-						// horizontalOrder: masonryOptions.horizontalOrder,
-						// percentPosition: masonryOptions.percentPosition,
-						// stamp: masonryOptions.stamp,
-						// fitWidth: masonryOptions.fitWidth,
-						// originLeft: masonryOptions.originLeft,
-						// originTop: masonryOptions.originTop,
-						// // stagger: masonryOptions.stagger,
-						// resize: masonryOptions.resize,
-
-						// }
-					);
-
+					var msnry = new Masonry(arg, masonryOptions);
 					// });
 				});
 			}
@@ -213,6 +198,7 @@ registerBlockType(metadata, {
 
 			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
+			loadMasonry();
 		}, [blockId]);
 
 		function onPickBlockPatterns(content, action) {
@@ -377,8 +363,6 @@ registerBlockType(metadata, {
 		}
 
 		function onChangeStyleItem(sudoScource, newVal, attr) {
-			console.log(item);
-
 			var path = [sudoScource, attr, breakPointX];
 			let obj = Object.assign({}, item);
 			const object = myStore.updatePropertyDeep(obj, path, newVal);
@@ -533,7 +517,10 @@ registerBlockType(metadata, {
 						Add Item
 					</div>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -549,7 +536,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -568,7 +555,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -579,7 +568,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 
 									<SelectControl
 										label=""
@@ -617,7 +608,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Masonry" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Masonry"
+						initialOpen={false}>
 						<PanelRow className="my-3">
 							<PGDropdown
 								position="bottom right"
@@ -643,7 +637,9 @@ registerBlockType(metadata, {
 										<PanelRow>
 											<div className="flex items-center">
 												<RemoveMasonryArg index={id} />
-												<label for="">Item Selector</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Item Selector
+												</label>
 											</div>
 
 											{/* <InputControl
@@ -663,7 +659,9 @@ registerBlockType(metadata, {
 										<PanelRow>
 											<div className="flex items-center">
 												<RemoveMasonryArg index={id} />
-												<label for="">Gutter</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Gutter
+												</label>
 											</div>
 
 											<InputControl
@@ -689,7 +687,9 @@ registerBlockType(metadata, {
 										<PanelRow>
 											<div className="flex items-center">
 												<RemoveMasonryArg index={id} />
-												<label for="">Column width</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Column width
+												</label>
 											</div>
 
 											<InputControl
@@ -762,7 +762,9 @@ registerBlockType(metadata, {
 										<PanelRow>
 											<div className="flex items-center">
 												<RemoveMasonryArg index={id} />
-												<label for="">Stamp</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Stamp
+												</label>
 											</div>
 										</PanelRow>
 									)}
@@ -901,7 +903,10 @@ registerBlockType(metadata, {
 						})}
 					</PanelBody>
 
-					<PanelBody title="Item" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Item"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -917,7 +922,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -933,7 +938,10 @@ registerBlockType(metadata, {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					<PanelBody title="Lightbox" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Lightbox"
+						initialOpen={false}>
 						<PanelRow>
 							<ToggleControl
 								label="Enable?"
@@ -954,7 +962,10 @@ registerBlockType(metadata, {
 						</PanelRow>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"accordion-nested"}
 							blockId={blockId}

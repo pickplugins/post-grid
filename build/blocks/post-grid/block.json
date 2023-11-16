@@ -5,13 +5,13 @@
   "title": "Post Grid",
   "textdomain": "post-grid",
   "category": "post-grid",
-  "usesContext": [
-    "postId",
-    "loopIndex",
-    "postType",
-    "queryId"
-  ],
   "providesContext": {
+    "post-grid/queryArgs": "queryArgs",
+    "post-grid/layout": "layout",
+    "post-grid/pagination": "pagination",
+    "post-grid/paginationItem": "paginationItem",
+    "post-grid/paginationItemActive": "paginationItemActive",
+    "post-grid/postGridId": "blockId",
     "queryId": "queryId",
     "loopIndex": "loopIndex",
     "query": "query",
@@ -217,51 +217,8 @@
       "default": {
         "id": "",
         "srcServer": "library",
-        "data": [
-          {
-            "blockName": "core/post-title",
-            "attrs": {},
-            "innerBlocks": [],
-            "innerHTML": "",
-            "innerContent": []
-          },
-          {
-            "blockName": null,
-            "attrs": {},
-            "innerBlocks": [],
-            "innerHTML": "\n\n",
-            "innerContent": [
-              "\n\n"
-            ]
-          },
-          {
-            "blockName": "core/post-date",
-            "attrs": {},
-            "innerBlocks": [],
-            "innerHTML": "",
-            "innerContent": []
-          },
-          {
-            "blockName": null,
-            "attrs": {},
-            "innerBlocks": [],
-            "innerHTML": "\n\n",
-            "innerContent": [
-              "\n\n"
-            ]
-          },
-          {
-            "blockName": "core/post-excerpt",
-            "attrs": {
-              "moreText": "",
-              "textColor": "primary"
-            },
-            "innerBlocks": [],
-            "innerHTML": "",
-            "innerContent": []
-          }
-        ],
-        "rawData": "<!-- wp:post-featured-image  /-->\n\n<!-- wp:post-title /-->\n\n<!-- wp:post-excerpt  /-->"
+        "data": [],
+        "rawData": ""
       }
     },
     "blockId": {

@@ -38,7 +38,15 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	InspectorControls,
@@ -314,7 +322,10 @@ registerBlockType("post-grid/table-of-contents", {
 			<>
 				<InspectorControls>
 					<div className="">
-						<PanelBody title="Text" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Text"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -330,19 +341,19 @@ registerBlockType("post-grid/table-of-contents", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									{/* <PanelRow>
-                    <label for="">Block Class</label>
+                    <label for=""  className="font-medium text-slate-900 " >Block Class</label>
 
                     <InputControl
                       value={blockId}
@@ -356,7 +367,9 @@ registerBlockType("post-grid/table-of-contents", {
                   </PanelRow> */}
 
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 
 										<SelectControl
 											label=""

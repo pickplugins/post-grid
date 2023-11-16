@@ -38,7 +38,16 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	InspectorControls,
@@ -705,7 +714,10 @@ registerBlockType(metadata, {
 			<>
 				<InspectorControls>
 					<div className="px-3" initialOpen={false}>
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -721,7 +733,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -740,7 +752,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -762,8 +776,14 @@ registerBlockType(metadata, {
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
-						<PanelBody title="Label" initialOpen={false}>
-							<PanelBody title="Label Wrap" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Label"
+							initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Label Wrap"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -779,7 +799,7 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 									]}>
@@ -796,7 +816,10 @@ registerBlockType(metadata, {
 								</PGtabs>
 							</PanelBody>
 
-							<PanelBody title="Label" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Label"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -812,7 +835,7 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 									]}>
@@ -838,7 +861,9 @@ registerBlockType(metadata, {
 										/>
 
 										<PanelRow className="mb-4">
-											<label for="">Label Text</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Label Text
+											</label>
 											<InputControl
 												className="mr-2"
 												value={label.options.text}
@@ -863,8 +888,14 @@ registerBlockType(metadata, {
 								</PGtabs>
 							</PanelBody>
 						</PanelBody>
-						<PanelBody title="Input" initialOpen={false}>
-							<PanelBody title="Input Wrap" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Input"
+							initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Input Wrap"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -880,7 +911,7 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 									]}>
@@ -897,7 +928,10 @@ registerBlockType(metadata, {
 								</PGtabs>
 							</PanelBody>
 
-							<PanelBody title="Select" initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Select"
+								initialOpen={false}>
 								<PGtabs
 									activeTab="options"
 									orientation="horizontal"
@@ -913,7 +947,7 @@ registerBlockType(metadata, {
 										{
 											name: "styles",
 											title: "Styles",
-											icon: styles,
+											icon: brush,
 											className: "tab-style",
 										},
 									]}>
@@ -990,7 +1024,11 @@ registerBlockType(metadata, {
 															</div>
 
 															<PanelRow className="mb-4">
-																<label for="">Group Label</label>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Group Label
+																</label>
 																<InputControl
 																	className="mr-2"
 																	value={arg.label}
@@ -1135,7 +1173,9 @@ registerBlockType(metadata, {
 										</div>
 
 										<PanelRow className="mb-4">
-											<label for="">Field Name</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Field Name
+											</label>
 											<InputControl
 												className="mr-2"
 												value={select.options.name}
@@ -1150,7 +1190,9 @@ registerBlockType(metadata, {
 
 										{typeof select.options.value == "object" && (
 											<PanelRow className="mb-4">
-												<label for="">Field Value</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Field Value
+												</label>
 												<ul>
 													{select.options.value != null &&
 														Object.entries(select.options.value).map((x) => {
@@ -1164,7 +1206,9 @@ registerBlockType(metadata, {
 										{typeof select.options.value == "string" && (
 											<div>
 												<PanelRow className="mb-4">
-													<label for="">Field Value</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Field Value
+													</label>
 													<InputControl
 														className="mr-2"
 														value={select.options.value}
@@ -1183,7 +1227,9 @@ registerBlockType(metadata, {
 										)}
 
 										<PanelRow className="mb-4">
-											<label for="">Placeholder</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Placeholder
+											</label>
 											<InputControl
 												className="mr-2"
 												value={select.options.placeholder}
@@ -1292,7 +1338,10 @@ registerBlockType(metadata, {
 							</PanelBody>
 						</PanelBody>
 
-						<PanelBody title="Error Wrap" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Error Wrap"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1308,13 +1357,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow className="mb-4">
-										<label for="">Error Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Error Text
+										</label>
 										<InputControl
 											className="mr-2"
 											value={errorWrap.options.text}
@@ -1328,7 +1379,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Position
+										</label>
 
 										<SelectControl
 											label=""
@@ -1378,7 +1431,11 @@ registerBlockType(metadata, {
 
 				<div {...blockProps}>
 					<div className="label-wrap">
-						{label.options.enable && <label for="">{label.options.text}</label>}
+						{label.options.enable && (
+							<label for="" className="font-medium text-slate-900 ">
+								{label.options.text}
+							</label>
+						)}
 						{errorWrap.options.position == "afterlabel" && (
 							<div className="error-wrap">{errorWrap.options.text}</div>
 						)}
@@ -1452,4 +1509,3 @@ registerBlockType(metadata, {
 		return null;
 	},
 });
-

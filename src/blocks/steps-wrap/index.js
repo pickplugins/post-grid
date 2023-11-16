@@ -39,7 +39,16 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff, plus } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	plus,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { applyFilters } from "@wordpress/hooks";
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
@@ -1084,7 +1093,10 @@ registerBlockType("post-grid/steps-wrap", {
 			<>
 				<InspectorControls>
 					<div className="px-3">
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1100,7 +1112,7 @@ registerBlockType("post-grid/steps-wrap", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1116,7 +1128,10 @@ registerBlockType("post-grid/steps-wrap", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Navs Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Navs Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1132,7 +1147,7 @@ registerBlockType("post-grid/steps-wrap", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1155,7 +1170,10 @@ registerBlockType("post-grid/steps-wrap", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Nav Item" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Item"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1171,7 +1189,7 @@ registerBlockType("post-grid/steps-wrap", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1194,7 +1212,10 @@ registerBlockType("post-grid/steps-wrap", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Active Nav Item" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Active Nav Item"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1210,7 +1231,7 @@ registerBlockType("post-grid/steps-wrap", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1233,7 +1254,10 @@ registerBlockType("post-grid/steps-wrap", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Nav Label" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Label"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1249,7 +1273,7 @@ registerBlockType("post-grid/steps-wrap", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1272,7 +1296,10 @@ registerBlockType("post-grid/steps-wrap", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Content Wrap" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Content Wrap"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1288,7 +1315,7 @@ registerBlockType("post-grid/steps-wrap", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1311,7 +1338,10 @@ registerBlockType("post-grid/steps-wrap", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Nav Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1327,19 +1357,21 @@ registerBlockType("post-grid/steps-wrap", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={icon.options.library}
@@ -1358,7 +1390,9 @@ registerBlockType("post-grid/steps-wrap", {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Icon position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
 
 										<SelectControl
 											label=""

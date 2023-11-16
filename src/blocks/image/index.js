@@ -11,7 +11,16 @@ import {
 	useEffect,
 } from "@wordpress/element";
 import { applyFilters } from "@wordpress/hooks";
-import { Icon, styles, settings, link, close, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	close,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	PanelBody,
@@ -130,6 +139,11 @@ registerBlockType(metadata, {
 
 		var postId = context["postId"];
 		var postType = context["postType"];
+
+		const wrapperSelector = blockClass;
+
+		var linkSelector = "";
+		var imgSelector = "";
 
 		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
@@ -279,12 +293,13 @@ registerBlockType(metadata, {
 						var width = res.media_details.sizes[x].width;
 						//var crop = res[x].crop
 
-						imgSizes.push({
-							label: x + "(" + width + "*" + height + ")",
-							value: x,
-							height: height,
-							width: width,
-						});
+						var label = x.replaceAll("_", " ");
+					imgSizes[x] = {
+						label: label + "(" + width + "*" + height + ")",
+						value: x,
+						height: height,
+						width: width,
+					};
 					});
 
 					setImageSizes(imgSizes);
@@ -395,6 +410,7 @@ registerBlockType(metadata, {
 			var blockCssObj = {};
 
 			blockCssObj[wrapperSelector] = wrapper;
+			blockCssObj[imgSelector] = image;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
@@ -458,10 +474,7 @@ registerBlockType(metadata, {
 		}
 
 		// Wrapper CSS Class Selectors
-		const wrapperSelector = blockClass;
-
-		var linkSelector = "";
-		var imgSelector = "";
+		
 
 		if (wrapper.options.tag.length != 0) {
 			var imgSelector = blockClass + " img";
@@ -778,7 +791,9 @@ registerBlockType(metadata, {
 				<InspectorControls>
 					<div className="p-3">
 						<PanelRow>
-							<label for="">Image Sources</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Image Sources
+							</label>
 							<SelectControl
 								label=""
 								value={image.options.imgSrcType}
@@ -898,7 +913,9 @@ registerBlockType(metadata, {
 						{image.options.imgSrcType == "customField" && (
 							<>
 								<PanelRow>
-									<label for="">Custom Field Key</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Custom Field Key
+									</label>
 									<InputControl
 										className="mr-2"
 										value={image.options.imgSrcMetaKey}
@@ -910,7 +927,9 @@ registerBlockType(metadata, {
 								</PanelRow>
 
 								<PanelRow>
-									<label for="">Metakey Type</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Metakey Type
+									</label>
 									<SelectControl
 										label=""
 										value={image.options.imgSrcMetaKeyType}
@@ -933,7 +952,9 @@ registerBlockType(metadata, {
 						{image.options.imgSrcType == "customUrl" && (
 							<>
 								<PanelRow>
-									<label for="">Image URL</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Image URL
+									</label>
 
 									<div className="relative">
 										<Button
@@ -992,7 +1013,9 @@ registerBlockType(metadata, {
 
 						{image.options.imgSrcType == "imgId" && (
 							<PanelRow>
-								<label for="">Image ID</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Image ID
+								</label>
 								<InputControl
 									className="mr-2"
 									value={image.options.imgSrcImgId}
@@ -1005,7 +1028,10 @@ registerBlockType(metadata, {
 						)}
 					</div>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1021,13 +1047,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -1046,7 +1072,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -1057,7 +1085,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 									<SelectControl
 										label=""
 										value={wrapper.options.tag}
@@ -1084,7 +1114,9 @@ registerBlockType(metadata, {
 
 								{wrapper.options.tag.length > 0 && (
 									<PanelRow>
-										<label for="">Image as Background</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Image as Background
+										</label>
 										<SelectControl
 											label=""
 											value={wrapper.options.useAsBackground}
@@ -1177,7 +1209,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Image" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Image"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1193,13 +1228,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -1207,22 +1242,35 @@ registerBlockType(metadata, {
 								{(image.options.imgSrcType == "media" ||
 									image.options.imgSrcType == "customField") && (
 									<>
-										<PanelRow className="mb-4">
-											<label for="">Thumbnail Size</label>
+										<div className="mb-4">
+											<label for="" className="font-medium text-slate-900 block pb-2 ">
+												Thumbnail Size
+											</label>
 											<PGDropdown
 												position="bottom right"
-												variant="secondary"
+												// btnClass="w-full block text-center "
+												btnClass="flex w-full gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+												// variant="secondary"
 												options={imageSizes}
-												buttonTitle="Choose"
+												// buttonTitle="Choose"
+												buttonTitle={
+													image.options.size == undefined
+														? "Choose"
+														: imageSizes[image.options.size[breakPointX]] ==
+															undefined
+														? "Choose"
+														: imageSizes[image.options.size[breakPointX]]
+																.label
+												}
 												onChange={setFeaturedImageSize}
 												values={image.options.size[breakPointX]}></PGDropdown>
-										</PanelRow>
-										{image.options.size[breakPointX] != undefined && (
+										</div>
+										{/* {image.options.size[breakPointX] != undefined && (
 											<div className="bg-gray-400 text-white px-3 py-2 my-3">
 												{" "}
 												{image.options.size[breakPointX]}
 											</div>
-										)}
+										)} */}
 									</>
 								)}
 
@@ -1247,7 +1295,9 @@ registerBlockType(metadata, {
 
 								{image.options.linkTo == "customField" && (
 									<PanelRow>
-										<label for="">Custom Field Key</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Field Key
+										</label>
 										<InputControl
 											className="mr-2"
 											value={image.options.linkToMetaKey}
@@ -1266,7 +1316,9 @@ registerBlockType(metadata, {
 
 								{image.options.linkTo == "customUrl" && (
 									<PanelRow>
-										<label for="">Custom URL</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom URL
+										</label>
 
 										<div className="relative">
 											<Button
@@ -1322,7 +1374,9 @@ registerBlockType(metadata, {
 								{image.options.linkTo.length > 0 && (
 									<div>
 										<PanelRow>
-											<label for="">Link Target</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Link Target
+											</label>
 
 											<SelectControl
 												label=""
@@ -1421,7 +1475,9 @@ registerBlockType(metadata, {
 												values=""></PGDropdown>
 										</PanelRow>
 										<PanelRow>
-											<label for="">Custom Field Key</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Field Key
+											</label>
 											<InputControl
 												className="mr-2"
 												value={image.options.altTextMetaKey}
@@ -1441,7 +1497,9 @@ registerBlockType(metadata, {
 
 								{image.options.altTextSrc == "custom" && (
 									<PanelRow>
-										<label for="">Custom Alt Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Alt Text
+										</label>
 										<InputControl
 											className="mr-2"
 											value={image.options.altTextCustom}
@@ -1531,7 +1589,9 @@ registerBlockType(metadata, {
 												values=""></PGDropdown>
 										</PanelRow>
 										<PanelRow>
-											<label for="">Custom Field Key</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Field Key
+											</label>
 											<InputControl
 												className="mr-2"
 												value={image.options.titleTextMetaKey}
@@ -1551,7 +1611,9 @@ registerBlockType(metadata, {
 
 								{image.options.titleTextSrc == "custom" && (
 									<PanelRow>
-										<label for="">Custom Title Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Title Text
+										</label>
 										<InputControl
 											className="mr-2"
 											value={image.options.titleTextCustom}
@@ -1569,7 +1631,9 @@ registerBlockType(metadata, {
 								)}
 
 								<PanelRow>
-									<label for="">Custom Attributes</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Custom Attributes
+									</label>
 									<div
 										className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
 										onClick={(ev) => {
@@ -1682,7 +1746,10 @@ registerBlockType(metadata, {
 						</PanelRow>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"image"}
 							blockId={blockId}

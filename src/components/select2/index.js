@@ -58,7 +58,7 @@ function Html(props) {
 				<Popover position={position}>
 					<div className="p-2 w-60	">
 						<InputControl
-							autocomplete="off"
+							autoComplete="off"
 							className="p-3 w-full"
 							placeholder={
 								props.searchPlaceholder == undefined
@@ -373,3 +373,4 @@ class PGSelect2 extends Component {
 }
 
 export default PGSelect2;
+

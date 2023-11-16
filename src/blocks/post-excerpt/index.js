@@ -52,7 +52,15 @@ import { __experimentalInputControl as InputControl } from "@wordpress/component
 import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
@@ -152,7 +160,7 @@ registerBlockType(metadata, {
 		let linkToArgs = applyFilters("linkToArgs", linkToArgsBasic);
 
 		var limitByArgsBasic = {
-			none: { label: "Choose..", value: "" },
+			none: { label: "Choose..", value: "none" },
 			word: { label: "Word", value: "word" },
 			character: { label: "Character", value: "character", isPro: true },
 		};
@@ -271,10 +279,12 @@ registerBlockType(metadata, {
 
 				if (postExcerpt.options.limitBy == "character") {
 					setPostExcerptEdited(excerptText.substring(0, count));
-				} else {
+				} else if (postExcerpt.options.limitBy == "word") {
 					setPostExcerptEdited(
 						excerptText.split(" ").splice(0, count).join(" ")
 					);
+				} else {
+					setPostExcerptEdited(excerptText);
 				}
 
 				//setisLoading(false);
@@ -346,37 +356,37 @@ registerBlockType(metadata, {
 				var blockCssObj = {};
 
 				if (postfixX != undefined) {
-				var postfixY = { ...postfixX, options: postfix.options };
-				setAttributes({ postfix: postfixY });
-				blockCssObj[postfixSelector] = postfixY;
+					var postfixY = { ...postfixX, options: postfix.options };
+					setAttributes({ postfix: postfixY });
+					blockCssObj[postfixSelector] = postfixY;
 				}
 
 				if (prefixX != undefined) {
-				var prefixY = { ...prefixX, options: prefix.options };
-				setAttributes({ prefix: prefixY });
-				blockCssObj[prefixSelector] = prefixY;
+					var prefixY = { ...prefixX, options: prefix.options };
+					setAttributes({ prefix: prefixY });
+					blockCssObj[prefixSelector] = prefixY;
 				}
 
 				if (readMoreX != undefined) {
-				var readMoreY = { ...readMoreX, options: readMore.options };
-				setAttributes({ readMore: readMoreY });
-				blockCssObj[readMoreSelector] = readMoreY;
+					var readMoreY = { ...readMoreX, options: readMore.options };
+					setAttributes({ readMore: readMoreY });
+					blockCssObj[readMoreSelector] = readMoreY;
 				}
 
 				if (postExcerptX != undefined) {
-				var postExcerptY = { ...postExcerptX, options: postExcerpt.options };
-				setAttributes({ postExcerpt: postExcerptY });
-				blockCssObj[postExcerptSelector] = postExcerptY;
+					var postExcerptY = { ...postExcerptX, options: postExcerpt.options };
+					setAttributes({ postExcerpt: postExcerptY });
+					blockCssObj[postExcerptSelector] = postExcerptY;
 				}
 
 				if (wrapperX != undefined) {
-				var wrapperY = { ...wrapperX, options: wrapper.options };
-				setAttributes({ wrapper: wrapperY });
-				blockCssObj[wrapperSelector] = wrapperY;
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
 				}
 
 				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-				
+
 				var items = blockCssRules;
 				setAttributes({ blockCssY: { items: items } });
 			}
@@ -1088,7 +1098,10 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1104,13 +1117,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -1128,7 +1141,9 @@ registerBlockType(metadata, {
 									}}
 								/>
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -1140,7 +1155,9 @@ registerBlockType(metadata, {
 								</PanelRow>
 
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 									<SelectControl
 										label=""
 										value={wrapper.options.tag}
@@ -1184,7 +1201,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Post Excerpt" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Post Excerpt"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1200,13 +1220,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -1232,7 +1252,9 @@ registerBlockType(metadata, {
 
 								{!postExcerpt.options.isLink && (
 									<PanelRow>
-										<label for="">Custom Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Tag
+										</label>
 										<SelectControl
 											label=""
 											value={postExcerpt.options.tag}
@@ -1261,7 +1283,9 @@ registerBlockType(metadata, {
 								{postExcerpt.options.isLink && (
 									<div>
 										<PanelRow>
-											<label for="">Link Target</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Link Target
+											</label>
 
 											<SelectControl
 												label=""
@@ -1285,7 +1309,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Custom Url</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Url
+											</label>
 
 											<div className="relative">
 												<Button
@@ -1344,7 +1370,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Custom Attributes</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Attributes
+											</label>
 											<div
 												className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
 												onClick={(ev) => {
@@ -1444,27 +1472,39 @@ registerBlockType(metadata, {
 								)}
 
 								<PanelRow>
-									<label for="">Limit By</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Limit By
+									</label>
 
 									<PGDropdown
 										position="bottom right"
-										variant="secondary"
+										btnClass="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+										// variant="secondary"
 										options={limitByArgs}
-										buttonTitle="Choose"
+										// buttonTitle="Choose"
+										buttonTitle={
+											postExcerpt.options.limitBy == undefined
+												? "Choose"
+												: limitByArgs[postExcerpt.options.limitBy] == undefined
+												? "Choose"
+												: limitByArgs[postExcerpt.options.limitBy].label
+										}
 										onChange={setLimitBy}
 										values={[]}></PGDropdown>
 								</PanelRow>
 
-								{postExcerpt.options.limitBy.length > 0 && (
+								{/* {postExcerpt.options.limitBy.length > 0 && (
 									<div className="bg-gray-500 my-3 text-white p-2">
 										{limitByArgs[postExcerpt.options.limitBy].label}
 									</div>
-								)}
+								)} */}
 
 								{(postExcerpt.options.limitBy == "word" ||
 									postExcerpt.options.limitBy == "character") && (
 									<PanelRow>
-										<label for="">Limit Count</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Limit Count
+										</label>
 
 										<InputControl
 											value={postExcerpt.options.limitCount}
@@ -1516,7 +1556,9 @@ registerBlockType(metadata, {
 								{postExcerpt.options.excerptSource == "meta" && (
 									<div>
 										<PanelRow className="my-4">
-											<label for="">Meta Field</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Meta Field
+											</label>
 											<SelectControl
 												label=""
 												value={postExcerpt.options.excerptSourceMeta}
@@ -1563,7 +1605,9 @@ registerBlockType(metadata, {
 											/>
 										</PanelRow>
 										<PanelRow>
-											<label for="">Custom Meta Key</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Meta Key
+											</label>
 											<InputControl
 												value={postExcerpt.options.excerptSourceMeta}
 												onChange={(newVal) => {
@@ -1722,7 +1766,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Read More" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Read More"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1738,13 +1785,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -1769,7 +1816,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">Read More Text</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Read More Text
+									</label>
 
 									<InputControl
 										value={readMore.options.text}
@@ -1806,7 +1855,9 @@ registerBlockType(metadata, {
 								{readMore.options.isLink && (
 									<div>
 										<PanelRow>
-											<label for="">Link Target</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Link Target
+											</label>
 
 											<SelectControl
 												label=""
@@ -1830,7 +1881,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Custom Url</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Url
+											</label>
 
 											<div className="relative">
 												<Button
@@ -1883,7 +1936,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Custom Attributes</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Attributes
+											</label>
 											<div
 												className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
 												onClick={(ev) => {
@@ -2002,7 +2057,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Prefix" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Prefix"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -2018,21 +2076,20 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
 							<PGtab name="options">
-								<label for="">Prefix</label>
-
 								<PGcssClassPicker
 									tags={customTags}
+									label="Prefix"
 									placeholder="Add Class"
 									value={prefix.options.text}
 									onChange={(newVal) => {
@@ -2043,7 +2100,7 @@ registerBlockType(metadata, {
 									}}
 								/>
 								{/* <PanelRow>
-									<label for="">Prefix</label>
+									<label for=""  className="font-medium text-slate-900 " >Prefix</label>
 
 									<InputControl
 										value={prefix.options.text}
@@ -2075,7 +2132,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Postfix" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Postfix"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -2091,21 +2151,20 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
 							<PGtab name="options">
-								<label for="">Postfix</label>
-
 								<PGcssClassPicker
 									tags={customTags}
+									label="Postfix"
 									placeholder="Add Class"
 									value={postfix.options.text}
 									onChange={(newVal) => {
@@ -2116,7 +2175,7 @@ registerBlockType(metadata, {
 									}}
 								/>
 								{/* <PanelRow>
-									<label for="">Postfix</label>
+									<label for=""  className="font-medium text-slate-900 " >Postfix</label>
 									<InputControl
 										value={postfix.options.text}
 										onChange={(newVal) => {
@@ -2146,7 +2205,10 @@ registerBlockType(metadata, {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"post-excerpt"}
 							blockId={blockId}

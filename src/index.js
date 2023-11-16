@@ -83,8 +83,8 @@ import "./templates";
 import "./sidebars";
 
 import "./blocks/post-grid";
-import "./blocks/post-grid-pagination";
 import "./blocks/post-query";
+import "./blocks/post-query-pagination";
 
 import "./blocks/post-grid-filterable";
 
@@ -107,7 +107,7 @@ import "./blocks/post-meta";
 import "./blocks/read-more";
 import "./blocks/post-comment-count";
 
-//import './blocks/view-count'
+
 
 import "./blocks/menu-wrap";
 import "./blocks/menu-wrap-item";
@@ -144,7 +144,6 @@ import "./blocks/star-rate";
 import "./blocks/breadcrumb";
 import "./blocks/shortcode";
 import "./blocks/social-share";
-// import './blocks/divider'
 
 import "./blocks/terms-list";
 import "./blocks/archive-title";
@@ -157,6 +156,7 @@ import "./blocks/flex-wrap-item";
 import "./blocks/masonry-wrap";
 import "./blocks/masonry-wrap-item";
 // import "./blocks/justified-wrap";
+// import "./blocks/justified-image";
 // import "./blocks/justified-wrap-item";
 
 import "./blocks/grid-wrap";

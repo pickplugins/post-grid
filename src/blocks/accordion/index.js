@@ -50,7 +50,15 @@ import { __experimentalInputControl as InputControl } from "@wordpress/component
 import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import IconToggle from "../../components/icon-toggle";
 import Typography from "../../components/typography";
@@ -854,7 +862,10 @@ registerBlockType("post-grid/accordion", {
 			<>
 				<InspectorControls>
 					<div className="px-2" title="header" initialOpen={false}>
-						<PanelBody title="Header" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Header"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -870,19 +881,21 @@ registerBlockType("post-grid/accordion", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 
 										<SelectControl
 											label=""
@@ -927,7 +940,10 @@ registerBlockType("post-grid/accordion", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Header - Active" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Header - Active"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -943,13 +959,13 @@ registerBlockType("post-grid/accordion", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -966,7 +982,10 @@ registerBlockType("post-grid/accordion", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Content" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Content"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -982,19 +1001,21 @@ registerBlockType("post-grid/accordion", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 
 										<SelectControl
 											label=""
@@ -1039,7 +1060,10 @@ registerBlockType("post-grid/accordion", {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1055,19 +1079,21 @@ registerBlockType("post-grid/accordion", {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={icon.options.library}
@@ -1078,7 +1104,9 @@ registerBlockType("post-grid/accordion", {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Choose Toggled Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Toggled Icon
+										</label>
 
 										<PGIconPicker
 											library={iconToggle.options.library}
@@ -1089,7 +1117,9 @@ registerBlockType("post-grid/accordion", {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Icon position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
 
 										<SelectControl
 											label=""
@@ -1108,7 +1138,9 @@ registerBlockType("post-grid/accordion", {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Enable Icon Toggle</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Enable Icon Toggle
+										</label>
 
 										<SelectControl
 											label=""

@@ -35,7 +35,16 @@ import {
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
 import { useEntityProp } from "@wordpress/core-data";
 import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	InspectorControls,
@@ -246,19 +255,20 @@ registerBlockType(metadata, {
 				data: { id: currentPostImageId },
 			}).then((res) => {
 				setPostImage(res);
-				var imgSizes = [];
+				var imgSizes = {};
 
 				Object.keys(res.media_details.sizes).map((x) => {
 					var height = res.media_details.sizes[x].height;
 					var width = res.media_details.sizes[x].width;
 					//var crop = res[x].crop
 
-					imgSizes.push({
-						label: x + "(" + width + "*" + height + ")",
+					var label = x.replaceAll("_", " ");
+					imgSizes[x] = {
+						label: label + "(" + width + "*" + height + ")",
 						value: x,
 						height: height,
 						width: width,
-					});
+					};
 				});
 
 				setImageSizes(imgSizes);
@@ -306,23 +316,26 @@ registerBlockType(metadata, {
 				var wrapperX = attributes.wrapper;
 				var featuredImageX = attributes.featuredImage;
 				var blockCssYX = attributes.blockCssY;
-				
+
 				var blockCssObj = {};
 
 				if (featuredImageX != undefined) {
-				var featuredImageY = { ...featuredImageX, options: featuredImage.options };
-				setAttributes({ featuredImage: featuredImageY });
-				blockCssObj[featuredImageSelector] = featuredImageY;
+					var featuredImageY = {
+						...featuredImageX,
+						options: featuredImage.options,
+					};
+					setAttributes({ featuredImage: featuredImageY });
+					blockCssObj[featuredImageSelector] = featuredImageY;
 				}
 
 				if (wrapperX != undefined) {
-				var wrapperY = { ...wrapperX, options: wrapper.options };
-				setAttributes({ wrapper: wrapperY });
-				blockCssObj[wrapperSelector] = wrapperY;
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
 				}
 
 				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-				
+
 				var items = blockCssRules;
 				setAttributes({ blockCssY: { items: items } });
 			}
@@ -724,7 +737,10 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -740,13 +756,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -765,7 +781,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -776,7 +794,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 									<SelectControl
 										label=""
 										value={wrapper.options.tag}
@@ -803,7 +823,9 @@ registerBlockType(metadata, {
 
 								{wrapper.options.tag.length > 0 && (
 									<PanelRow>
-										<label for="">Image as Background</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Image as Background
+										</label>
 										<SelectControl
 											label=""
 											value={wrapper.options.useAsBackground}
@@ -900,7 +922,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Featured Image" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Featured Image"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -916,36 +941,51 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
 							<PGtab name="options">
-								<PanelRow className="mb-4">
-									<label for="">Thumbnail Size</label>
+								<div className="mb-4">
+									<label
+										for=""
+										className="font-medium text-slate-900 block pb-2 ">
+										Thumbnail Size
+									</label>
 									<PGDropdown
 										position="bottom right"
-										variant="secondary"
+										// btnClass="w-full block text-center "
+										btnClass="flex w-full gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+										// variant="secondary"
 										options={imageSizes}
-										buttonTitle="Choose"
+										// buttonTitle="Choose"
+										buttonTitle={
+											featuredImage.options.size == undefined
+												? "Choose"
+												: imageSizes[featuredImage.options.size[breakPointX]] ==
+												  undefined
+												? "Choose"
+												: imageSizes[featuredImage.options.size[breakPointX]]
+														.label
+										}
 										onChange={setFeaturedImageSize}
 										values={
 											featuredImage.options.size[breakPointX]
 										}></PGDropdown>
-								</PanelRow>
+								</div>
 
-								{featuredImage.options.size[breakPointX] != undefined && (
+								{/* {featuredImage.options.size[breakPointX] != undefined && (
 									<div className="bg-gray-400 text-white px-3 py-2 my-3">
 										{" "}
 										{featuredImage.options.size[breakPointX]}
 									</div>
-								)}
+								)} */}
 
 								<PanelRow className="my-3">
 									<label>Link To</label>
@@ -972,7 +1012,9 @@ registerBlockType(metadata, {
 
 								{featuredImage.options.linkTo == "customField" && (
 									<PanelRow>
-										<label for="">Custom Field Key</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Field Key
+										</label>
 										<InputControl
 											className="mr-2"
 											value={featuredImage.options.linkToMetaKey}
@@ -991,7 +1033,9 @@ registerBlockType(metadata, {
 
 								{featuredImage.options.linkTo == "customUrl" && (
 									<PanelRow>
-										<label for="">Custom URL</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom URL
+										</label>
 
 										<div className="relative">
 											<Button
@@ -1053,7 +1097,9 @@ registerBlockType(metadata, {
 								{featuredImage.options.linkTo.length > 0 && (
 									<div>
 										<PanelRow>
-											<label for="">Link Target</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Link Target
+											</label>
 
 											<SelectControl
 												label=""
@@ -1084,7 +1130,9 @@ registerBlockType(metadata, {
 								)}
 
 								<PanelRow>
-									<label for="">Custom Attributes</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Custom Attributes
+									</label>
 									<div
 										className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
 										onClick={(ev) => {
@@ -1259,7 +1307,9 @@ registerBlockType(metadata, {
 												values=""></PGDropdown>
 										</PanelRow>
 										<PanelRow>
-											<label for="">Custom Field Key</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Field Key
+											</label>
 											<InputControl
 												className="mr-2"
 												value={featuredImage.options.altTextMetaKey}
@@ -1282,7 +1332,9 @@ registerBlockType(metadata, {
 
 								{featuredImage.options.altTextSrc == "custom" && (
 									<PanelRow>
-										<label for="">Custom Alt Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Alt Text
+										</label>
 										<InputControl
 											className="mr-2"
 											value={featuredImage.options.altTextCustom}
@@ -1378,7 +1430,9 @@ registerBlockType(metadata, {
 												values=""></PGDropdown>
 										</PanelRow>
 										<PanelRow>
-											<label for="">Custom Field Key</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Field Key
+											</label>
 											<InputControl
 												className="mr-2"
 												value={featuredImage.options.titleTextMetaKey}
@@ -1401,7 +1455,9 @@ registerBlockType(metadata, {
 
 								{featuredImage.options.titleTextSrc == "custom" && (
 									<PanelRow>
-										<label for="">Custom Title Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Title Text
+										</label>
 										<InputControl
 											className="mr-2"
 											value={featuredImage.options.titleTextCustom}
@@ -1437,7 +1493,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"post-featured-image"}
 							blockId={blockId}

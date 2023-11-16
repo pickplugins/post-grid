@@ -52,7 +52,15 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import IconToggle from "../../components/icon-toggle";
 import Typography from "../../components/typography";
@@ -908,7 +916,10 @@ registerBlockType(metadata, {
 			<>
 				<InspectorControls>
 					<div className="">
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -924,13 +935,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -949,7 +960,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -960,7 +973,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 										<SelectControl
 											label=""
 											value={wrapper.options.tag}
@@ -1003,7 +1018,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="saleCount" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="saleCount"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1019,19 +1037,21 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Link To</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Link To
+										</label>
 
 										<PGDropdown
 											position="bottom right"
@@ -1049,7 +1069,7 @@ registerBlockType(metadata, {
 									{(saleCount.options.linkTo == "authorMeta" ||
 										saleCount.options.linkTo == "customField") && (
 										<PanelRow>
-											<label for="">
+											<label for="" className="font-medium text-slate-900 ">
 												{saleCount.options.linkTo == "authorMeta" && (
 													<>Author Meta Key</>
 												)}
@@ -1076,7 +1096,9 @@ registerBlockType(metadata, {
 
 									{saleCount.options.linkTo == "customUrl" && (
 										<PanelRow>
-											<label for="">Custom URL</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom URL
+											</label>
 
 											<div className="relative">
 												<Button
@@ -1131,7 +1153,9 @@ registerBlockType(metadata, {
 
 									{saleCount.options.linkTo.length == 0 && (
 										<PanelRow>
-											<label for="">Custom Tag</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Tag
+											</label>
 											<SelectControl
 												label=""
 												value={saleCount.options.tag}
@@ -1160,7 +1184,9 @@ registerBlockType(metadata, {
 									{saleCount.options.linkTo.length > 0 && (
 										<div>
 											<PanelRow>
-												<label for="">Link Target</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Link Target
+												</label>
 
 												<SelectControl
 													label=""
@@ -1186,7 +1212,9 @@ registerBlockType(metadata, {
 											</PanelRow>
 
 											<PanelRow>
-												<label for="">Custom Attributes</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Attributes
+												</label>
 												<div
 													className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
 													onClick={(ev) => {
@@ -1304,7 +1332,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1320,19 +1351,21 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={icon.options.library}
@@ -1343,7 +1376,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Icon position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
 
 										<SelectControl
 											label=""
@@ -1383,7 +1418,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Prefix" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Prefix"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1399,13 +1437,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -1441,7 +1479,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Postfix" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Postfix"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1457,13 +1498,13 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
@@ -1499,7 +1540,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"woo-total-sales"}
 								blockId={blockId}

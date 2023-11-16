@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -1111,6 +1111,10 @@ img {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -1354,6 +1358,11 @@ img {
 .bg-gray-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
 .bg-green-500 {
@@ -1604,6 +1613,10 @@ img {
   padding-bottom: 4rem;
 }
 
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
 .pb-3 {
   padding-bottom: 0.75rem;
 }
@@ -1754,6 +1767,10 @@ img {
   font-style: italic;
 }
 
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+
 .\!text-red-500 {
   --tw-text-opacity: 1 !important;
   color: rgb(239 68 68 / var(--tw-text-opacity)) !important;
@@ -1842,6 +1859,11 @@ img {
 .text-slate-400 {
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+
+.text-slate-900 {
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -2000,6 +2022,11 @@ img {
   border-color: rgb(129 140 248 / var(--tw-border-opacity));
 }
 
+.hover\:\!bg-gray-700:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
+}
+
 .hover\:bg-\[\#3737c7\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(55 55 199 / var(--tw-bg-opacity));
@@ -2053,6 +2080,11 @@ img {
 .hover\:bg-gray-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-green-500:hover {
@@ -2127,6 +2159,16 @@ img {
 
 .hover\:underline:hover {
   text-decoration-line: underline;
+}
+
+.focus\:bg-gray-700:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .focus\:ring-4:focus {

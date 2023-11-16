@@ -20,7 +20,7 @@ class PGBlockJustifiedWrapItem
 
 
     register_block_type(
-      post_grid_plugin_dir . 'build/blocks/masonry-wrap-item/block.json',
+      post_grid_plugin_dir . 'build/blocks/justified-wrap-item/block.json',
       array(
         'render_callback' => array($this, 'theHTML'),
       )

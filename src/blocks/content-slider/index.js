@@ -42,7 +42,16 @@ import {
 } from "@wordpress/block-editor";
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 import { createBlock } from "@wordpress/blocks";
 
@@ -380,14 +389,14 @@ registerBlockType(metadata, {
 
 				var blockCssObj = {};
 
-				if (sliderOptionsResX != undefined) {
-					var sliderOptionsResY = {
-						...sliderOptionsResX,
-						options: sliderOptionsRes.options,
-					};
-					setAttributes({ sliderOptionsRes: sliderOptionsResY });
-					blockCssObj[sliderOptionsResSelector] = sliderOptionsResY;
-				}
+				// if (sliderOptionsResX != undefined) {
+				// 	var sliderOptionsResY = {
+				// 		...sliderOptionsResX,
+				// 		options: sliderOptionsRes.options,
+				// 	};
+				// 	setAttributes({ sliderOptionsRes: sliderOptionsResY });
+				// 	blockCssObj[sliderOptionsResSelector] = sliderOptionsResY;
+				// }
 
 				if (sliderOptionsX != undefined) {
 					var sliderOptionsY = {
@@ -1325,7 +1334,10 @@ registerBlockType(metadata, {
 						Add Slide Item
 					</div>
 
-					<PanelBody title="Slider Options" initialOpen={true}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Slider Options"
+						initialOpen={true}>
 						<PGtabs
 							activeTab="normal"
 							orientation="horizontal"
@@ -1717,7 +1729,9 @@ registerBlockType(metadata, {
 														<RemoveSliderArg index={id} />
 														<span>Pause On Focus?</span>
 													</div>
-													<label for="">?</label>
+													<label for="" className="font-medium text-slate-900 ">
+														?
+													</label>
 													<SelectControl
 														label=""
 														value={value}
@@ -2680,7 +2694,9 @@ registerBlockType(metadata, {
 														<RemoveSliderArgRes index={id} />
 														<span>Pause On Focus?</span>
 													</div>
-													<label for="">?</label>
+													<label for="" className="font-medium text-slate-900 ">
+														?
+													</label>
 													<SelectControl
 														label=""
 														value={
@@ -3281,7 +3297,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -3297,7 +3316,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -3316,7 +3335,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -3339,8 +3360,14 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Navigation" initialOpen={false}>
-						<PanelBody title="Nav Wrap" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Navigation"
+						initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Wrap"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3356,7 +3383,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -3373,7 +3400,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Prev" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Prev"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3389,13 +3419,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Previuos Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Previuos Text
+										</label>
 										<InputControl
 											value={perv.options.text}
 											onChange={(newVal) => {
@@ -3417,7 +3449,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Prev Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Prev Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3433,13 +3468,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={pervIcon.options.library}
@@ -3461,7 +3498,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Icon Position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon Position
+										</label>
 
 										<SelectControl
 											label=""
@@ -3492,7 +3531,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Next" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Next"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3508,13 +3550,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Previuos Text</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Previuos Text
+										</label>
 										<InputControl
 											value={next.options.text}
 											onChange={(newVal) => {
@@ -3536,7 +3580,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Next Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Next Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3552,13 +3599,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={nextIcon.options.library}
@@ -3580,7 +3629,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Icon Position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon Position
+										</label>
 
 										<SelectControl
 											label=""
@@ -3612,8 +3663,14 @@ registerBlockType(metadata, {
 						</PanelBody>
 					</PanelBody>
 
-					<PanelBody title="Pagination" initialOpen={false}>
-						<PanelBody title="Pagination Wrap" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Pagination"
+						initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Pagination Wrap"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3629,7 +3686,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -3646,7 +3703,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Pagination Idle" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Pagination Idle"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3662,7 +3722,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -3679,7 +3739,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Pagination Active" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Pagination Active"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -3695,7 +3758,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -3713,7 +3776,10 @@ registerBlockType(metadata, {
 						</PanelBody>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"content-slider"}
 							blockId={blockId}

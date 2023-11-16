@@ -32,7 +32,14 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { ReactSortable } from "react-sortablejs";
 
 import PGtabs from "../../components/tabs";
@@ -755,7 +762,9 @@ registerBlockType(metadata, {
 					<div className="">
 						<div className="px-3">
 							<PanelRow>
-								<label for="">Object Type</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Object Type
+								</label>
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
@@ -775,7 +784,9 @@ registerBlockType(metadata, {
 							</PanelRow>
 
 							<PanelRow>
-								<label for="">Slug</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Slug
+								</label>
 
 								<InputControl
 									value={object.options.slug}
@@ -790,7 +801,9 @@ registerBlockType(metadata, {
 								{object.options.type == "plugin" && (
 									<>
 										<PanelRow>
-											<label for="">Add Fields</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Add Fields
+											</label>
 											<PGDropdown
 												position="bottom right"
 												variant="secondary"
@@ -805,7 +818,9 @@ registerBlockType(metadata, {
 								{object.options.type == "theme" && (
 									<>
 										<PanelRow>
-											<label for="">Add Fields</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Add Fields
+											</label>
 											<PGDropdown
 												position="bottom right"
 												variant="secondary"
@@ -849,7 +864,9 @@ registerBlockType(metadata, {
 										</Button>
 
 										<PanelRow>
-											<label for="">Prefix</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Prefix
+											</label>
 											<InputControl
 												value={item.prefix}
 												onChange={(newVal) => {
@@ -867,7 +884,9 @@ registerBlockType(metadata, {
 											item.id == "contributors") && (
 											<>
 												<PanelRow>
-													<label for="">linkText</label>
+													<label for="" className="font-medium text-slate-900 ">
+														linkText
+													</label>
 													<InputControl
 														value={item.linkText}
 														onChange={(newVal) => {
@@ -909,7 +928,10 @@ registerBlockType(metadata, {
 						</ReactSortable>
 					</div>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="styles"
 							orientation="horizontal"
@@ -925,13 +947,13 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 								{
 									name: "css",
 									title: "CSS Library",
-									icon: styles,
+									icon: mediaAndText,
 									className: "tab-css",
 								},
 							]}>
@@ -950,7 +972,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -961,7 +985,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 									<SelectControl
 										label=""
 										value={wrapper.options.tag}
@@ -1002,7 +1028,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Thumb" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Thumb"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="styles"
 							orientation="horizontal"
@@ -1018,7 +1047,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1037,7 +1066,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="item" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="item"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="styles"
 							orientation="horizontal"
@@ -1053,13 +1085,15 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
 							<PGtab name="options">
 								<PanelRow>
-									<label for="">item Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										item Tag
+									</label>
 									<SelectControl
 										label=""
 										value={item.options.tag}
@@ -1099,7 +1133,10 @@ registerBlockType(metadata, {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"wordpress-org"}
 							blockId={blockId}

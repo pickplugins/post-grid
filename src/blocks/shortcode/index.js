@@ -45,7 +45,16 @@ import {
 	Popover,
 } from "@wordpress/components";
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
-import { Icon, styles, settings, link, linkOff, plus } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	plus,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	InspectorControls,
@@ -296,25 +305,28 @@ registerBlockType(metadata, {
 				var blockCssObj = {};
 
 				if (shortcodeX != undefined) {
-				var shortcodeY = { ...shortcodeX, options: shortcode.options };
-				setAttributes({ shortcode: shortcodeY });
-				blockCssObj[shortcodeSelector] = shortcodeY;
+					var shortcodeY = { ...shortcodeX, options: shortcode.options };
+					setAttributes({ shortcode: shortcodeY });
+					blockCssObj[shortcodeSelector] = shortcodeY;
 				}
 
 				if (shortcodeClassicX != undefined) {
-				var shortcodeClassicY = { ...shortcodeClassicX, options: shortcodeClassic.options };
-				setAttributes({ shortcodeClassic: shortcodeClassicY });
-				blockCssObj[shortcodeClassicSelector] = shortcodeClassicY;
+					var shortcodeClassicY = {
+						...shortcodeClassicX,
+						options: shortcodeClassic.options,
+					};
+					setAttributes({ shortcodeClassic: shortcodeClassicY });
+					blockCssObj[shortcodeClassicSelector] = shortcodeClassicY;
 				}
 
 				if (wrapperX != undefined) {
-				var wrapperY = { ...wrapperX, options: wrapper.options };
-				setAttributes({ wrapper: wrapperY });
-				blockCssObj[wrapperSelector] = wrapperY;
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
 				}
 
 				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-				
+
 				var items = blockCssRules;
 				setAttributes({ blockCssY: { items: items } });
 			}
@@ -440,7 +452,10 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Shortcode Key" initialOpen={true}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Shortcode Key"
+						initialOpen={true}>
 						<label className="mb-3">Choose Shortcode </label>
 						<PGDropdown
 							position="bottom right"
@@ -462,7 +477,9 @@ registerBlockType(metadata, {
 							value={shortcode.options.key}></PGDropdown>
 
 						<PanelRow>
-							<label for="">Shortcode Key</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Shortcode Key
+							</label>
 
 							<InputControl
 								placeholder="Shortcode key"
@@ -521,7 +538,9 @@ registerBlockType(metadata, {
 						<code>[shortcode attr1="value1" attr2="value2"]</code>
 
 						<PanelRow>
-							<label for="">Parameters</label>
+							<label for="" className="font-medium text-slate-900 ">
+								Parameters
+							</label>
 							<Button
 								className={linkPickerText ? "!bg-gray-400" : ""}
 								icon={plus}
@@ -535,7 +554,9 @@ registerBlockType(metadata, {
 								<Popover position="bottom right ">
 									<div className="p-3 w-60">
 										<PanelRow>
-											<label for="">ID</label>
+											<label for="" className="font-medium text-slate-900 ">
+												ID
+											</label>
 
 											<InputControl
 												value={shortcodePrams.id}
@@ -546,7 +567,9 @@ registerBlockType(metadata, {
 										</PanelRow>
 
 										<PanelRow>
-											<label for="">Label</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Label
+											</label>
 
 											<InputControl
 												value={shortcodePrams.label}
@@ -559,7 +582,9 @@ registerBlockType(metadata, {
 											/>
 										</PanelRow>
 										<PanelRow>
-											<label for="">Value</label>
+											<label for="" className="font-medium text-slate-900 ">
+												Value
+											</label>
 
 											<InputControl
 												value={shortcodePrams.val}
@@ -597,7 +622,7 @@ registerBlockType(metadata, {
 										<div className="my-2 bg-gray-300">
 											<div className="bg-gray-500 px-3 text-white">
 												<PanelRow>
-													<label for="">
+													<label for="" className="font-medium text-slate-900 ">
 														{arg.label} ({arg.id})
 													</label>
 
@@ -642,7 +667,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -658,7 +686,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -677,7 +705,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -688,7 +718,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Class</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Class
+									</label>
 
 									<InputControl
 										value={wrapper.options.class}
@@ -713,7 +745,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"shortcode"}
 							blockId={blockId}

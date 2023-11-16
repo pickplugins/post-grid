@@ -38,7 +38,15 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	InspectorControls,
@@ -355,7 +363,10 @@ registerBlockType(metadata, {
 			<>
 				<InspectorControls>
 					<div className="">
-						<PanelBody title="Text" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Text"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -371,19 +382,19 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 									{
 										name: "css",
 										title: "CSS Library",
-										icon: styles,
+										icon: mediaAndText,
 										className: "tab-css",
 									},
 								]}>
 								<PGtab name="options">
 									{/* <PanelRow>
-                    <label for="">Block Class</label>
+                    <label for=""  className="font-medium text-slate-900 " >Block Class</label>
 
                     <InputControl
                       value={blockId}
@@ -410,7 +421,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -421,7 +434,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 
 										<SelectControl
 											label=""
@@ -445,7 +460,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow>
-										<label for="">Limit By</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Limit By
+										</label>
 
 										<PGDropdown
 											position="bottom right"
@@ -467,7 +484,9 @@ registerBlockType(metadata, {
 										(text.options.limitBy == "word" ||
 											text.options.limitBy == "character") && (
 											<PanelRow>
-												<label for="">Limit Count</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Limit Count
+												</label>
 
 												<InputControl
 													value={
@@ -507,7 +526,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"text"}
 								blockId={blockId}

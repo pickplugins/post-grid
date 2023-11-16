@@ -44,7 +44,16 @@ import {
 } from "@wordpress/block-editor";
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	close,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 
 import {
@@ -418,31 +427,31 @@ registerBlockType(metadata, {
 				var blockCssObj = {};
 
 				if (visibleX != undefined) {
-				var visibleY = { ...visibleX, options: visible.options };
-				setAttributes({ visible: visibleY });
-				blockCssObj[visibleSelector] = visibleY;
+					var visibleY = { ...visibleX, options: visible.options };
+					setAttributes({ visible: visibleY });
+					blockCssObj[visibleSelector] = visibleY;
 				}
 
 				if (closeWrapX != undefined) {
-				var closeWrapY = { ...closeWrapX, options: closeWrap.options };
-				setAttributes({ closeWrap: closeWrapY });
-				blockCssObj[closeWrapSelector] = closeWrapY;
+					var closeWrapY = { ...closeWrapX, options: closeWrap.options };
+					setAttributes({ closeWrap: closeWrapY });
+					blockCssObj[closeWrapSelector] = closeWrapY;
 				}
 
 				if (innerX != undefined) {
-				var innerY = { ...innerX, options: inner.options };
-				setAttributes({ inner: innerY });
-				blockCssObj[innerSelector] = innerY;
+					var innerY = { ...innerX, options: inner.options };
+					setAttributes({ inner: innerY });
+					blockCssObj[innerSelector] = innerY;
 				}
 
 				if (wrapperX != undefined) {
-				var wrapperY = { ...wrapperX, options: wrapper.options };
-				setAttributes({ wrapper: wrapperY });
-				blockCssObj[wrapperSelector] = wrapperY;
+					var wrapperY = { ...wrapperX, options: wrapper.options };
+					setAttributes({ wrapper: wrapperY });
+					blockCssObj[wrapperSelector] = wrapperY;
 				}
 
 				var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-				
+
 				var items = blockCssRules;
 				setAttributes({ blockCssY: { items: items } });
 			}
@@ -779,10 +788,13 @@ registerBlockType(metadata, {
 						/>
 					</div>
 
-					{/* <PanelBody title="Templates" initialOpen={false}>
+					{/* <PanelBody className="font-medium text-slate-900 " title="Templates" initialOpen={false}>
           </PanelBody> */}
 
-					<PanelBody title="Visiblity" initialOpen={true}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Visiblity"
+						initialOpen={true}>
 						<div
 							className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
 							onClick={(ev) => {
@@ -877,7 +889,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Element ID/Class</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Element ID/Class
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		placeholder=".element or #elementId"
@@ -908,7 +924,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Scroll Minimum</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Scroll Minimum
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.min}
@@ -922,7 +942,11 @@ registerBlockType(metadata, {
 																</PanelRow>
 
 																<PanelRow className="mb-4">
-																	<label for="">Scroll Max</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Scroll Max
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.max}
@@ -952,7 +976,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Scroll Minimum</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Scroll Minimum
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.min}
@@ -966,7 +994,11 @@ registerBlockType(metadata, {
 																</PanelRow>
 
 																<PanelRow className="mb-4">
-																	<label for="">Scroll Max</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Scroll Max
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.max}
@@ -1016,7 +1048,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Element Class/ID</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Element Class/ID
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.value}
@@ -1066,7 +1102,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Click Count</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Click Count
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.value}
@@ -1148,7 +1188,9 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
 																		{__("Element ID/Class", "post-grid")}
 																	</label>
 																	<InputControl
@@ -1197,7 +1239,7 @@ registerBlockType(metadata, {
 																	}}
 																/>
 																{/* <PanelRow className='mb-4'>
-                                <label for="">{__('Element ID/Class', 'post-grid')}</label>
+                                <label for=""  className="font-medium text-slate-900 " >{__('Element ID/Class', 'post-grid')}</label>
                                 <InputControl
                                   className='mr-2'
                                   placeholder=".element or #elementId"
@@ -1227,7 +1269,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Cookie Name</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Cookie Name
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.value}
@@ -1256,7 +1302,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Cookie Name</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Cookie Name
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.value}
@@ -1305,7 +1355,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">User IDs</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		User IDs
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		placeholder="1,2,3"
@@ -1335,7 +1389,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">URL Parameter</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		URL Parameter
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.value}
@@ -1364,7 +1422,11 @@ registerBlockType(metadata, {
 																}
 																initialOpen={false}>
 																<PanelRow className="mb-4">
-																	<label for="">Referrer Domain</label>
+																	<label
+																		for=""
+																		className="font-medium text-slate-900 ">
+																		Referrer Domain
+																	</label>
 																	<InputControl
 																		className="mr-2"
 																		value={item.value}
@@ -1387,7 +1449,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1403,7 +1468,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1422,7 +1487,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -1444,7 +1511,10 @@ registerBlockType(metadata, {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					<PanelBody title="Inner" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Inner"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1460,7 +1530,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1477,7 +1547,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Close" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Close"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1493,13 +1566,15 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
 							<PGtab name="options">
 								<PanelRow>
-									<label for="">Choose Icon</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Choose Icon
+									</label>
 
 									<PGIconPicker
 										library={closeWrap.options.library}
@@ -1521,7 +1596,9 @@ registerBlockType(metadata, {
 								</PanelRow>
 
 								<PanelRow>
-									<label for="">Out animation</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Out animation
+									</label>
 
 									<PGDropdown
 										position="bottom right"
@@ -1572,7 +1649,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"popup"}
 							blockId={blockId}

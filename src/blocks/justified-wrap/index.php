@@ -15,18 +15,18 @@ class PGBlockJustifiedWrap
 
 	function front_scripts($attributes)
 	{
-		wp_register_script('pgmasonry-wrap_front_script', post_grid_plugin_url . 'src/blocks/masonry-wrap/front-scripts.js', [], '', true);
+		wp_register_script('pgjustified-wrap_front_script', post_grid_plugin_url . 'src/blocks/justified-wrap/front-scripts.js', [], '', true);
 
-		wp_register_script('pgmasonry-wrap_masonry_core', post_grid_plugin_url . 'src/blocks/masonry-wrap/masonry.pkgd.js', [], '', true);
-		wp_register_script('pgmasonry-wrap_masonry_min', post_grid_plugin_url . 'src/blocks/masonry-wrap/masonry.pkgd.min.js', [], '', true);
+		wp_register_script('pgjustified-wrap_justified_core', post_grid_plugin_url . 'src/blocks/justified-wrap/lightgallery.min.js', [], '', true);
+		// wp_register_script('pgjustified-wrap_justified_min', post_grid_plugin_url . 'src/blocks/justified-wrap/justified.pkgd.min.js', [], '', true);
 
 
-		if (has_block('post-grid/masonry-wrap')) {
+		if (has_block('post-grid/justified-wrap')) {
 
-			wp_enqueue_script('pgmasonry-wrap_front_script');
+			wp_enqueue_script('pgjustified-wrap_front_script');
 
-			//wp_enqueue_script('pgmasonry-wrap_masonry_core');
-			wp_enqueue_script('pgmasonry-wrap_masonry_min');
+			//wp_enqueue_script('pgjustified-wrap_justified_core');
+			wp_enqueue_script('pgjustified-wrap_justified_min');
 
 
 
@@ -43,14 +43,14 @@ class PGBlockJustifiedWrap
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
-		//wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/layers/index.css');
+		wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/justified-wrap/lightgallery.css');
 		//wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
 		register_block_type(
-			post_grid_plugin_dir . 'build/blocks/masonry-wrap/block.json',
+			post_grid_plugin_dir . 'build/blocks/justified-wrap/block.json',
 			array(
-				'title' => 'Masonry Wrap',
+				'title' => 'justified Wrap',
 				'render_callback' => array($this, 'theHTML'),
 
 
@@ -89,26 +89,26 @@ class PGBlockJustifiedWrap
 		$wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
-		$masonryOpt = isset($attributes['masonryOpt']) ? $attributes['masonryOpt'] : [];
-		$masonryOptOptions = isset($masonryOpt['options']) ? $masonryOpt['options'] : [];
+		$justifiedOpt = isset($attributes['justifiedOpt']) ? $attributes['justifiedOpt'] : [];
+		$justifiedOptOptions = isset($justifiedOpt['options']) ? $justifiedOpt['options'] : [];
 
 
 
-		$masonryOptItemSelector = isset($masonryOpt['itemSelector']) ? $masonryOpt['itemSelector'] : ".pg-masonryOpt-wrap-item";
-		$masonryOptColumnWidth = isset($masonryOpt['columnWidth']) ? $masonryOpt['columnWidth'] : "";
-		$masonryOptGutter = isset($masonryOpt['gutter']) ? $masonryOpt['gutter'] : "";
-		$masonryOptHorizontalOrder = isset($masonryOpt['horizontalOrder']) ? $masonryOpt['horizontalOrder'] : true;
-		$masonryOPtpercentPosition = isset($masonryOpt['percentPosition']) ? $masonryOpt['percentPosition'] : true;
-		$masonryOptStamp = isset($masonryOpt['stamp']) ? $masonryOpt['stamp'] : ".stamp";
-		$masonryOptFitWidth = isset($masonryOpt['fitWidth']) ? $masonryOpt['fitWidth'] : true;
-		$masonryOptOriginLeft = isset($masonryOpt['originLeft']) ? $masonryOpt['originLeft'] : true;
-		$masonryOptOriginTop = isset($masonryOpt['originTop']) ? $masonryOpt['originTop'] : true;
-		$masonryOptStagger = isset($masonryOpt['stagger']) ? $masonryOpt['stagger'] : 30;
-		$masonryOptResize = isset($masonryOpt['resize']) ? $masonryOpt['resize'] : true;
+		$justifiedOptItemSelector = isset($justifiedOpt['itemSelector']) ? $justifiedOpt['itemSelector'] : ".pg-justifiedOpt-wrap-item";
+		$justifiedOptColumnWidth = isset($justifiedOpt['columnWidth']) ? $justifiedOpt['columnWidth'] : "";
+		$justifiedOptGutter = isset($justifiedOpt['gutter']) ? $justifiedOpt['gutter'] : "";
+		$justifiedOptHorizontalOrder = isset($justifiedOpt['horizontalOrder']) ? $justifiedOpt['horizontalOrder'] : true;
+		$justifiedOPtpercentPosition = isset($justifiedOpt['percentPosition']) ? $justifiedOpt['percentPosition'] : true;
+		$justifiedOptStamp = isset($justifiedOpt['stamp']) ? $justifiedOpt['stamp'] : ".stamp";
+		$justifiedOptFitWidth = isset($justifiedOpt['fitWidth']) ? $justifiedOpt['fitWidth'] : true;
+		$justifiedOptOriginLeft = isset($justifiedOpt['originLeft']) ? $justifiedOpt['originLeft'] : true;
+		$justifiedOptOriginTop = isset($justifiedOpt['originTop']) ? $justifiedOpt['originTop'] : true;
+		$justifiedOptStagger = isset($justifiedOpt['stagger']) ? $justifiedOpt['stagger'] : 30;
+		$justifiedOptResize = isset($justifiedOpt['resize']) ? $justifiedOpt['resize'] : true;
 
 
 
-		$masonryOptions = isset($attributes['masonryOptions']) ? $attributes['masonryOptions'] : [];
+		$justifiedOptions = isset($attributes['justifiedOptions']) ? $attributes['justifiedOptions'] : [];
 
 		
 
@@ -125,18 +125,18 @@ class PGBlockJustifiedWrap
 
 		// $dataAtts = [
 			
-		// 	// "itemSelector" => $masonryOptItemSelector,
-		// 	// "columnWidth" => $masonryOptColumnWidth,
-		// 	// "gutter" => $masonryOptGutter,
-		// 	// "horizontalOrder" => $masonryOptHorizontalOrder,
-		// 	// "percentPosition" => $masonryOPtpercentPosition,
-		// 	// "stamp" => $masonryOptStamp,
-		// 	// "fitWidth" => $masonryOptFitWidth,
-		// 	// "originLeft" => $masonryOptOriginLeft,
-		// 	// "originTop" => $masonryOptOriginTop,
-		// 	// "stagger" => $masonryOptStagger,
-		// 	// "resize" => $masonryOptResize,
-		// 	"masonryOptions" => $masonryOptions
+		// 	// "itemSelector" => $justifiedOptItemSelector,
+		// 	// "columnWidth" => $justifiedOptColumnWidth,
+		// 	// "gutter" => $justifiedOptGutter,
+		// 	// "horizontalOrder" => $justifiedOptHorizontalOrder,
+		// 	// "percentPosition" => $justifiedOPtpercentPosition,
+		// 	// "stamp" => $justifiedOptStamp,
+		// 	// "fitWidth" => $justifiedOptFitWidth,
+		// 	// "originLeft" => $justifiedOptOriginLeft,
+		// 	// "originTop" => $justifiedOptOriginTop,
+		// 	// "stagger" => $justifiedOptStagger,
+		// 	// "resize" => $justifiedOptResize,
+		// 	"justifiedOptions" => $justifiedOptions
 		// ];
 
 
@@ -157,16 +157,33 @@ class PGBlockJustifiedWrap
 
 
 ?>
-		<div id="<?php echo esc_attr($blockId); ?>" class="PGBlockJustifiedWrap <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>" data-masonry="<?php echo esc_attr(json_encode($masonryOptions)) ?>"  data-block-id="<?php echo esc_attr(json_encode($dataBlockId)) ?>">
+		<div id="<?php echo esc_attr($blockId); ?>" class="PGBlockJustifiedWrap <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>" data-justified="<?php echo esc_attr(json_encode($justifiedOptions)) ?>"  data-block-id="<?php echo esc_attr(json_encode($dataBlockId)) ?>">
 
-			<?php echo $content ?>
+		<div className='aaa' data-src="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+                    <img alt="img1" src="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+                </div>
+                <div className='aaa' data-src="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+                    <img alt="img2" src="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+                </div>
+                <div className='aaa' data-src="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+                    <img alt="img1" src="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+                </div>
+                <div className='aaa' data-src="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+                    <img alt="img2" src="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+                </div>
+                <div className='aaa' data-src="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+                    <img alt="img1" src="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+                </div>
+                <div className='aaa' data-src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+                    <img alt="img2" src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+                </div>
 		</div>
 		<style>
-			.pg-masonry-wrap-item {
+			.pg-justified-wrap-item {
 				display: inline-block;
 			}
 
-			.pg-masonry-wrap-item {
+			.pg-justified-wrap-item {
 				margin-bottom: 20px;
 			}
 		</style>

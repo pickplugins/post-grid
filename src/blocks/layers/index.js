@@ -38,7 +38,15 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { applyFilters } from "@wordpress/hooks";
 
 import {
@@ -357,7 +365,10 @@ registerBlockType(metadata, {
 			<>
 				<InspectorControls>
 					<div className="">
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -373,7 +384,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -392,7 +403,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -403,7 +416,9 @@ registerBlockType(metadata, {
 										/>
 									</PanelRow>
 									<PanelRow>
-										<label for="">Wrapper Tag</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
 
 										<SelectControl
 											label=""
@@ -434,7 +449,9 @@ registerBlockType(metadata, {
 									{wrapper.options.tag == "a" && (
 										<>
 											<PanelRow>
-												<label for="">Link To</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Link To
+												</label>
 
 												<PGDropdown
 													position="bottom right"
@@ -457,7 +474,9 @@ registerBlockType(metadata, {
 
 											{wrapper.options.linkTo == "authorMeta" && (
 												<PanelRow>
-													<label for="">Author Meta Key</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Author Meta Key
+													</label>
 
 													<InputControl
 														value={wrapper.options.linkToAuthorMeta}
@@ -476,7 +495,9 @@ registerBlockType(metadata, {
 
 											{wrapper.options.linkTo == "customField" && (
 												<PanelRow>
-													<label for="">Custom Meta Key</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Custom Meta Key
+													</label>
 
 													<InputControl
 														value={wrapper.options.linkToAuthorMeta}
@@ -495,7 +516,9 @@ registerBlockType(metadata, {
 
 											{wrapper.options.linkTo == "customUrl" && (
 												<PanelRow>
-													<label for="">Custom Url</label>
+													<label for="" className="font-medium text-slate-900 ">
+														Custom Url
+													</label>
 
 													<div className="relative">
 														<Button
@@ -551,7 +574,9 @@ registerBlockType(metadata, {
 											)}
 
 											<PanelRow>
-												<label for="">Link Target</label>
+												<label for="" className="font-medium text-slate-900 ">
+													Link Target
+												</label>
 
 												<SelectControl
 													label=""
@@ -588,7 +613,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"layers"}
 								blockId={blockId}

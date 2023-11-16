@@ -687,7 +687,7 @@ function Html(props) {
 				</div>
 			</PanelRow>
 
-			<div className="my-5">
+			<div className="my-5 pg-setting-input-text ">
 				{
 					//Object.entries(cssAtts).map(([key, value]) => (
 					props.obj[sudoScource] != undefined &&

@@ -40,7 +40,15 @@ import {
 } from "@wordpress/components";
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
 import { useEntityProp } from "@wordpress/core-data";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 
 import {
 	InspectorControls,
@@ -271,14 +279,14 @@ registerBlockType(metadata, {
 					blockCssObj[progressInfoSelector] = progressInfoY;
 				}
 
-				if (progressDataX != undefined) {
-					var progressDataY = {
-						...progressDataX,
-						options: progressData.options,
-					};
-					setAttributes({ progressData: progressDataY });
-					blockCssObj[progressDataSelector] = progressDataY;
-				}
+				// if (progressDataX != undefined) {
+				// 	var progressDataY = {
+				// 		...progressDataX,
+				// 		options: progressData.options,
+				// 	};
+				// 	setAttributes({ progressData: progressDataY });
+				// 	blockCssObj[progressDataSelector] = progressDataY;
+				// }
 
 				if (wrapperX != undefined) {
 					var wrapperY = { ...wrapperX, options: wrapper.options };
@@ -1145,7 +1153,9 @@ registerBlockType(metadata, {
 					<div className="">
 						<div className="p-3">
 							<PanelRow className="my-3">
-								<label for="">Type</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Type
+								</label>
 
 								<SelectControl
 									label=""
@@ -1167,7 +1177,9 @@ registerBlockType(metadata, {
 							</PanelRow>
 
 							<PanelRow>
-								<label for="">Fill?</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Fill?
+								</label>
 								<InputControl
 									type="number"
 									className="mr-2"
@@ -1186,7 +1198,9 @@ registerBlockType(metadata, {
 							</PanelRow>
 
 							<PanelRow>
-								<label for="">Animate On</label>
+								<label for="" className="font-medium text-slate-900 ">
+									Animate On
+								</label>
 								<SelectControl
 									label=""
 									value={
@@ -1211,7 +1225,9 @@ registerBlockType(metadata, {
 							{progressData.animate != undefined &&
 								progressData.animate.length > 0 && (
 									<PanelRow>
-										<label for="">Duration?</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Duration?
+										</label>
 										<InputControl
 											type="number"
 											className="mr-2"
@@ -1230,7 +1246,10 @@ registerBlockType(metadata, {
 								)}
 						</div>
 
-						<PanelBody title="Wrapper" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1246,7 +1265,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1265,7 +1284,9 @@ registerBlockType(metadata, {
 									/>
 
 									<PanelRow>
-										<label for="">CSS ID</label>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
 										<InputControl
 											value={blockId}
 											onChange={(newVal) => {
@@ -1288,7 +1309,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Progress Label" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Progress Label"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1304,13 +1328,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Label Text?</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Label Text?
+										</label>
 										<InputControl
 											type="text"
 											className="mr-2"
@@ -1329,7 +1355,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Label Position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Label Position
+										</label>
 										<SelectControl
 											label=""
 											value={progressLabel.options.position}
@@ -1366,7 +1394,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Progress Count" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Progress Count"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1382,13 +1413,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Counter Position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Counter Position
+										</label>
 										<SelectControl
 											label=""
 											value={progressCount.options.position}
@@ -1416,7 +1449,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Prefix</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Prefix
+										</label>
 										<InputControl
 											type="text"
 											className="mr-2"
@@ -1434,7 +1469,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Postfix</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Postfix
+										</label>
 										<InputControl
 											type="text"
 											className="mr-2"
@@ -1463,7 +1500,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Progress Bar" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Progress Bar"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1479,7 +1519,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1496,7 +1536,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Progress Fill" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Progress Fill"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1512,7 +1555,7 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
@@ -1531,7 +1574,10 @@ registerBlockType(metadata, {
 
 						{progressData.type == "circleBorder" && (
 							<>
-								<PanelBody title="Circle Overlay" initialOpen={false}>
+								<PanelBody
+									className="font-medium text-slate-900 "
+									title="Circle Overlay"
+									initialOpen={false}>
 									<PGtabs
 										activeTab="options"
 										orientation="horizontal"
@@ -1564,7 +1610,10 @@ registerBlockType(metadata, {
 									</PGtabs>
 								</PanelBody>
 
-								<PanelBody title="Circle Mask" initialOpen={false}>
+								<PanelBody
+									className="font-medium text-slate-900 "
+									title="Circle Mask"
+									initialOpen={false}>
 									<PGtabs
 										activeTab="options"
 										orientation="horizontal"
@@ -1599,7 +1648,10 @@ registerBlockType(metadata, {
 							</>
 						)}
 
-						<PanelBody title="Icon" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1615,13 +1667,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Choose Icon</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
 										<PGIconPicker
 											library={icon.options.library}
@@ -1632,7 +1686,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow>
-										<label for="">Icon position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
 
 										<SelectControl
 											label=""
@@ -1657,7 +1713,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Progress Info" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Progress Info"
+							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
@@ -1673,13 +1732,15 @@ registerBlockType(metadata, {
 									{
 										name: "styles",
 										title: "Styles",
-										icon: styles,
+										icon: brush,
 										className: "tab-style",
 									},
 								]}>
 								<PGtab name="options">
 									<PanelRow>
-										<label for="">Info Position</label>
+										<label for="" className="font-medium text-slate-900 ">
+											Info Position
+										</label>
 
 										<SelectControl
 											label=""
@@ -1713,7 +1774,10 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
-						<PanelBody title="Block Variations" initialOpen={false}>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
 							<PGLibraryBlockVariations
 								blockName={"progress-bar"}
 								blockId={blockId}

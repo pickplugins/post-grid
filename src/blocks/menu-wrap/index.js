@@ -42,7 +42,15 @@ import {
 } from "@wordpress/block-editor";
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import {
+	Icon,
+	styles,
+	settings,
+	link,
+	linkOff,
+	brush,
+	mediaAndText,
+} from "@wordpress/icons";
 import { __experimentalBlockVariationPicker as BlockVariationPicker } from "@wordpress/block-editor";
 
 import {
@@ -516,8 +524,14 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Flex Options" initialOpen={true}>
-						<label for="" className="block my-3">
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Flex Options"
+						initialOpen={true}>
+						<label
+							for=""
+							className="font-medium text-slate-900 "
+							className="block my-3">
 							Justify Content
 						</label>
 						<div className="grid grid-cols-4 gap-3">
@@ -790,7 +804,10 @@ registerBlockType(metadata, {
 							</div>
 						</div>
 
-						<label for="" className="my-3 block">
+						<label
+							for=""
+							className="font-medium text-slate-900 "
+							className="my-3 block">
 							Align Items
 						</label>
 
@@ -982,7 +999,10 @@ registerBlockType(metadata, {
 							</div>
 						</div>
 
-						<label for="" className="my-3 block">
+						<label
+							for=""
+							className="font-medium text-slate-900 "
+							className="my-3 block">
 							Flex Direction
 						</label>
 
@@ -1129,7 +1149,10 @@ registerBlockType(metadata, {
 							</div>
 						</div>
 
-						<label for="" className="my-3 block">
+						<label
+							for=""
+							className="font-medium text-slate-900 "
+							className="my-3 block">
 							Flex Wrap
 						</label>
 
@@ -1239,7 +1262,10 @@ registerBlockType(metadata, {
 						</div>
 					</PanelBody>
 
-					<PanelBody title="Wrapper" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Wrapper"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1255,7 +1281,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1274,7 +1300,9 @@ registerBlockType(metadata, {
 								/>
 
 								<PanelRow>
-									<label for="">CSS ID</label>
+									<label for="" className="font-medium text-slate-900 ">
+										CSS ID
+									</label>
 									<InputControl
 										value={blockId}
 										onChange={(newVal) => {
@@ -1285,7 +1313,9 @@ registerBlockType(metadata, {
 									/>
 								</PanelRow>
 								<PanelRow>
-									<label for="">Wrapper Tag</label>
+									<label for="" className="font-medium text-slate-900 ">
+										Wrapper Tag
+									</label>
 									<SelectControl
 										label=""
 										value={wrapper.options.tag}
@@ -1322,7 +1352,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Menu Wrap" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Menu Wrap"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1338,7 +1371,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1355,7 +1388,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Sub MenuWrap" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Sub MenuWrap"
+						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
@@ -1371,7 +1407,7 @@ registerBlockType(metadata, {
 								{
 									name: "styles",
 									title: "Styles",
-									icon: styles,
+									icon: brush,
 									className: "tab-style",
 								},
 							]}>
@@ -1388,7 +1424,10 @@ registerBlockType(metadata, {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Block Variations"
+						initialOpen={false}>
 						<PGLibraryBlockVariations
 							blockName={"menu-wrap"}
 							blockId={blockId}

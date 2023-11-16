@@ -1,0 +1,142 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/post-query-pagination",
+  "title": "Post Query - Pagination",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "parent": [
+    "post-grid/post-grid"
+  ],
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId",
+    "post-grid/postGridId",
+    "post-grid/pagination",
+    "post-grid/paginationItem",
+    "post-grid/paginationItemActive"
+  ],
+  "providesContext": {
+    "queryId": "queryId",
+    "loopIndex": "loopIndex",
+    "query": "query",
+    "displayLayout": "displayLayout"
+  },
+  "supports": {
+    "align": [
+      "left",
+      "right",
+      "center",
+      "wide",
+      "full"
+    ],
+    "html": false
+  },
+  "attributes": {
+    "pagination": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pagination",
+          "type": "",
+          "maxPageNum": "5",
+          "prevText": "Previous",
+          "nextText": "Next",
+          "loadMoreText": "Load More",
+          "noMorePosts": "No More Posts",
+          "loadingText": "Loading...",
+          "loadingIcon": {
+            "library": "",
+            "srcType": "class",
+            "iconSrc": ""
+          }
+        },
+        "styles": {
+          "margin": {
+            "Desktop": "20px 0px 20px 0px"
+          },
+          "display": {
+            "Desktop": "flex"
+          },
+          "justifyContent": {
+            "Desktop": "center"
+          },
+          "alignItems": {
+            "Desktop": "center"
+          },
+          "gap": {
+            "Desktop": "1em"
+          }
+        }
+      }
+    },
+    "paginationItem": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "page-numbers "
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#ffffff"
+          },
+          "fontSize": {
+            "Desktop": "16px"
+          },
+          "padding": {
+            "Desktop": "5px 15px 5px 15px"
+          },
+          "backgroundColor": {
+            "Desktop": "#2445ffab"
+          },
+          "borderRadius": {
+            "Desktop": "5px 5px 5px 5px"
+          }
+        }
+      }
+    },
+    "paginationItemActive": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "page-numbers "
+        },
+        "styles": {
+          "backgroundColor": {
+            "Desktop": "#3223cb"
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "style": "front_style",
+  "script": "front_script",
+  "keywords": [
+    "post grid",
+    "content grid",
+    "grid archive",
+    "post query",
+    "grid layout",
+    "advanced post grid",
+    "custom post grid",
+    "custom post type grid",
+    "post grid",
+    "post grid",
+    "post grid block",
+    "post grid for wordpress",
+    "post grid block for wordpress"
+  ],
+  "description": "The post grid block arranges blog posts in a grid format, making it easy for users to browse and access content efficiently."
+}

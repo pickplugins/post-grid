@@ -26,11 +26,7 @@
           "class": "pg-icon",
           "attr": []
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "text": {
@@ -48,35 +44,7 @@
           "linkAttr": [],
           "class": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "inline-block"
-          },
-          "color": {
-            "Desktop": "#ffffff"
-          },
-          "backgroundColor": {
-            "Desktop": "#1F2E45"
-          },
-          "padding": {
-            "Desktop": "10px 45px 10px 45px"
-          },
-          "borderRadius": {
-            "Desktop": "50px 50px 50px 50px"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -90,14 +58,7 @@
           "position": "beforeText",
           "class": "text-icon"
         },
-        "styles": {
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -107,26 +68,7 @@
           "text": "",
           "class": "prefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -136,26 +78,7 @@
           "text": "",
           "class": "postfix"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 0px 0px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "blockId": {

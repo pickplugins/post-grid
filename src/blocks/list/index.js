@@ -60,14 +60,11 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import PGIconPicker from "../../components/icon-picker";
-import PGcssDisplay from "../../components/css-display";
+
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
@@ -147,7 +144,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -188,8 +184,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
 		// for (var x in breakPoints) {
 
 		//   var itemX = breakPoints[x];
@@ -213,15 +207,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var itemsX = attributes.items;
 				var itemsXX = attributes.itemsX;
@@ -397,18 +389,17 @@ registerBlockType(metadata, {
 		}
 
 		function onChangeStyleWrapper(sudoScource, newVal, attr) {
-			var path = sudoScource + "." + attr + "." + breakPointX;
+			var path = [sudoScource, attr, breakPointX];
 			let obj = Object.assign({}, wrapper);
-			const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
-			setAttributes({ wrapper: updatedObj });
-			var sudoScourceX = { ...updatedObj[sudoScource] };
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ wrapper: object });
 
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
 				wrapperSelector
 			);
-
-			sudoScourceX[attr][breakPointX] = newVal;
+			var cssPropty = myStore.cssAttrParse(attr);
 
 			let itemsX = Object.assign({}, blockCssY.items);
 
@@ -416,13 +407,10 @@ registerBlockType(metadata, {
 				itemsX[elementSelector] = {};
 			}
 
-			Object.entries(sudoScourceX).map((args) => {
-				var argAttr = myStore.cssAttrParse(args[0]);
-				var argAttrVal = args[1];
-				blockCssY.items[elementSelector][argAttr] = argAttrVal;
-			});
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
-			setAttributes({ blockCssY: { items: blockCssY.items } });
+			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
 		function onRemoveStyleWrapper(sudoScource, key) {
@@ -507,18 +495,17 @@ registerBlockType(metadata, {
 		}
 
 		function onChangeStyleIcon(sudoScource, newVal, attr) {
-			var path = sudoScource + "." + attr + "." + breakPointX;
+			var path = [sudoScource, attr, breakPointX];
 			let obj = Object.assign({}, icon);
-			const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
-			setAttributes({ icon: updatedObj });
-			var sudoScourceX = { ...updatedObj[sudoScource] };
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ icon: object });
 
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
 				iconSelector
 			);
-
-			sudoScourceX[attr][breakPointX] = newVal;
+			var cssPropty = myStore.cssAttrParse(attr);
 
 			let itemsX = Object.assign({}, blockCssY.items);
 
@@ -526,13 +513,10 @@ registerBlockType(metadata, {
 				itemsX[elementSelector] = {};
 			}
 
-			Object.entries(sudoScourceX).map((args) => {
-				var argAttr = myStore.cssAttrParse(args[0]);
-				var argAttrVal = args[1];
-				blockCssY.items[elementSelector][argAttr] = argAttrVal;
-			});
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
-			setAttributes({ blockCssY: { items: blockCssY.items } });
+			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
 		function onRemoveStyleIcon(sudoScource, key) {
@@ -564,7 +548,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -595,7 +578,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItems(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, items);
 			obj[sudoScource] = cssObj;
 
@@ -626,7 +608,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -667,9 +648,10 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div>
+					<div className="pg-setting-input-text">
 						<div
-							className="bg-blue-500 p-2 mx-3 px-5 text-white my-4 text-center cursor-pointer"
+							className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 mx-3"
+							// className="bg-blue-500 p-2 mx-3 px-5 text-white my-4 text-center cursor-pointer"
 							onClick={(ev) => {
 								var itemsZ = { ...itemsX };
 								var itemx = itemsZ.items.concat({

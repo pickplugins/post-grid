@@ -26,7 +26,6 @@ import apiFetch from "@wordpress/api-fetch";
 import { Icon, close, arrowRight, settings, copy } from "@wordpress/icons";
 
 import PGDropdown from "../../components/dropdown";
-import BreakpointToggle from "../../components/breakpoint-toggle";
 import PGDropdownSudoSelector from "../../components/dropdown-sudo-selector";
 
 import PGcssAlignContent from "../../components/css-align-content";
@@ -555,9 +554,10 @@ function Html(props) {
 					{extraOpt && (
 						<Popover position="bottom left">
 							<div className="p-3 w-80">
-								<div className="">
+								<div className="flex flex-wrap gap-3 justify-center">
 									<div
-										className="px-4 inline-block m-2 py-2 bg-sky-600 text-white cursor-pointer"
+										className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+										// className="px-4 inline-block m-2 py-2 bg-sky-600 text-white cursor-pointer"
 										onClick={(ev) => {
 											var styleStr = JSON.stringify(props.obj[sudoScource]);
 
@@ -582,7 +582,8 @@ function Html(props) {
 									</div>
 
 									<div
-										className="px-4 inline-block m-2 py-2 bg-sky-600 text-white cursor-pointer"
+										className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+										// className="px-4 inline-block m-2 py-2 bg-sky-600 text-white cursor-pointer"
 										onClick={(ev) => {
 											var styleStr = JSON.stringify(props.obj[sudoScource]);
 
@@ -603,7 +604,8 @@ function Html(props) {
 									</div>
 
 									<div
-										className="px-4 inline-block m-2 py-2 bg-sky-600  text-white cursor-pointer"
+										className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+										// className="px-4 inline-block m-2 py-2 bg-sky-600  text-white cursor-pointer"
 										onClick={(ev) => {
 											var stylesClipboard = myStore.getStylesClipboard();
 
@@ -1528,3 +1530,4 @@ class PGStyles extends Component {
 }
 
 export default PGStyles;
+

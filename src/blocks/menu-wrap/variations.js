@@ -17,9 +17,9 @@ const variations = [
         description: __('1 Col'),
         isDefault: true,
         isPro: false,
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } }, }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } }, }],
         ],
         scope: ['block'],
         icon: (
@@ -37,11 +37,11 @@ const variations = [
 
             <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.29 82.57"><rect fill="#1d4ed8" x="119.78" width="32.5" height="82.57" /><rect fill="#1d4ed8" x="79.58" width="72.71" height="82.57" /><rect fill="#1d4ed8" width="72.71" height="82.57" /></svg>
         ),
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } }, }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } }, }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
 
         ],
         scope: ['block'],
@@ -55,12 +55,12 @@ const variations = [
 
             <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.29 82.57"><rect fill="#1d4ed8" width="46.18" height="82.57" /><rect fill="#1d4ed8" x="53.05" width="99.24" height="82.57" /></svg>
         ),
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
         ],
         scope: ['block'],
         icon: (
@@ -79,13 +79,13 @@ const variations = [
             <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.29 82.57"><rect fill="#1d4ed8" width="39.15" height="82.57" /><rect fill="#1d4ed8" x="46.02" width="60.25" height="82.57" /><rect fill="#1d4ed8" x="113.14" width="39.15" height="82.57" /></svg>
 
         ),
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
         ],
         scope: ['block'],
         icon: (
@@ -106,14 +106,14 @@ const variations = [
             <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.29 82.57"><rect fill="#1d4ed8" width="39.15" height="82.57" /><rect fill="#1d4ed8" x="46.02" width="60.25" height="82.57" /><rect fill="#1d4ed8" x="113.14" width="39.15" height="82.57" /></svg>
 
         ),
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexBasis": { "Desktop": "0" }, "flexGrow": { "Desktop": "1" } } } }],
         ],
         scope: ['block'],
         icon: (
@@ -134,11 +134,11 @@ const variations = [
         description: __('33-66'),
         isDefault: true,
         isPro: !isProFeature ? false : true,
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "33%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "66%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "33%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "66%" }, "flexGrow": { "Desktop": "1" } } } }],
         ],
         scope: ['block'],
         icon: (
@@ -155,11 +155,11 @@ const variations = [
         description: __('66-33'),
         isDefault: true,
         isPro: !isProFeature ? false : true,
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "66%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "33%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "66%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "33%" }, "flexGrow": { "Desktop": "1" } } } }],
         ],
         scope: ['block'],
         icon: (
@@ -178,12 +178,12 @@ const variations = [
         description: __('25-50-25'),
         isDefault: true,
         isPro: !isProFeature ? false : true,
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "50%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "50%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
         ],
         scope: ['block'],
         icon: (
@@ -200,12 +200,12 @@ const variations = [
         description: __('25-25-50'),
         isDefault: true,
         isPro: !isProFeature ? false : true,
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "50%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "50%" }, "flexGrow": { "Desktop": "1" } } } }],
 
         ],
         scope: ['block'],
@@ -222,12 +222,12 @@ const variations = [
         description: __('50-25-25'),
         isDefault: true,
         isPro: !isProFeature ? false : true,
-        atts: { "wrapper": { "options": { "tag": "div", "class": "menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
+        atts: { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap" }, "styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" } } }, },
 
         innerBlocks: [
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "50%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
-            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "flex-item-wrap" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "50%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
+            ['post-grid/menu-wrap-item', { "wrapper": { "options": { "tag": "div", "class": "pg-menu-wrap-item" }, "styles": { "width": { "Desktop": "25%" }, "flexGrow": { "Desktop": "1" } } } }],
 
 
         ],

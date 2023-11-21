@@ -14,7 +14,9 @@ function TemplatesBtn(props) {
     return (
 
         <>
-            <div id="pgTemplatesEnable" class="bg-blue-700 px-5 py-2 cursor-pointer rounded-sm text-white font-bold hover:text-white"
+            <div id="pgTemplatesEnable" 
+            class="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+            // class="bg-blue-700 px-5 py-2 cursor-pointer rounded-sm text-white font-bold hover:text-white"
                 onClick={(ev) => {
                     setEnable(!enable);
 

@@ -321,9 +321,10 @@ function Html(props) {
 							}}
 						/>
 					</div>
-					<div className="flex">
+					<div className="flex items-center">
 						<div
-							className="bg-blue-600 flex items-center cursor-pointer hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white"
+						className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+							// className="bg-blue-600 flex items-center cursor-pointer hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white"
 							onClick={() => {
 								setcustomTemplate(!customTemplate);
 

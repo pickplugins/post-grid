@@ -16,7 +16,6 @@ import {
 	useEffect,
 	useCallback,
 } from "@wordpress/element";
-import BreakpointSwitch from "../../components/breakpoint-switch";
 import breakPoints from "../../breakpoints";
 
 function WarningBanner(props) {
@@ -116,3 +115,4 @@ class PGColorPicker extends Component {
 }
 
 export default PGColorPicker;
+

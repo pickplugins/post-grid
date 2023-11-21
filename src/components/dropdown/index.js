@@ -42,7 +42,10 @@ function Html(props) {
 					setPickerOpen((prev) => !prev);
 				}}>
 				{typeof value == "string" && (
-					<Button className={btnClass} variant={variant}>
+					<Button
+						className={`${btnClass} pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize  bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700`}
+						// variant={variant}
+					>
 						{options[value] != undefined ? options[value].label : buttonTitle}
 					</Button>
 				)}
@@ -56,7 +59,7 @@ function Html(props) {
 
 			{pickerOpen && (
 				<Popover position={position}>
-					<div className="p-2 w-60 pg-font pg-setting-input-text	">
+					<div className="p-2 w-60 pg-font pg-setting-input-text  custom-scrollbar	">
 						<InputControl
 							autoComplete="off"
 							className="p-3 w-full"
@@ -373,3 +376,4 @@ class PGDropdown extends Component {
 }
 
 export default PGDropdown;
+

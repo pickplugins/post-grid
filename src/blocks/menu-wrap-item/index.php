@@ -30,6 +30,7 @@ class PGBlockMenuWrapItem
   {
     //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/menu-wrap-item/index.css');
     //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/menu-wrap-item/index.js', array('wp-blocks', 'wp-element'));
+    wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/global/css/font-awesome-5.css', []);
 
 
     register_block_type(
@@ -72,10 +73,23 @@ class PGBlockMenuWrapItem
     $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
     $menuWrap = isset($attributes['menuWrap']) ? $attributes['menuWrap'] : [];
     $subMenuWrap = isset($attributes['subMenuWrap']) ? $attributes['subMenuWrap'] : [];
+    $subMenuWrapOptions = isset($subMenuWrap['options']) ? $subMenuWrap['options'] : [];
+    $subMenuWrapClass = isset($subMenuWrapOptions['class']) ? $subMenuWrapOptions['class'] : '';
+
+
+    $icon = isset($attributes['icon']) ? $attributes['icon'] : [];
+    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
+    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
+    $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : '';
+    $iconSrc = isset($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : '';
+    $iconPosition = isset($iconOptions['position']) ? $iconOptions['position'] : '';
+    $iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : '';
+
 
 
     $link = isset($attributes['link']) ? $attributes['link'] : [];
     $linkOptions = isset($link['options']) ? $link['options'] : [];
+    $linkClass = isset($linkOptions['class']) ? $linkOptions['class'] : '';
 
 
     $linktext = isset($linkOptions['text']) ? $linkOptions['text'] : '';
@@ -88,6 +102,16 @@ class PGBlockMenuWrapItem
 
 
 
+    if ($iconLibrary == 'fontAwesome') {
+      wp_enqueue_style('fontawesome-icons');
+    } else if ($iconLibrary == 'iconFont') {
+      wp_enqueue_style('icofont-icons');
+    } else if ($iconLibrary == 'bootstrap') {
+      wp_enqueue_style('bootstrap-icons');
+    }
+
+
+    $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
     ////var_dump($link);
 
     $obj['id'] = $post_ID;
@@ -99,25 +123,38 @@ class PGBlockMenuWrapItem
 
     ob_start();
 
-    ?>
+?>
 
 
-    <li
-      class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+    <li class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
-      <?php if (!empty($linktext)): ?>
-        <a class='menuLink' href="<?php echo esc_url_raw($linkurl); ?>">
+
+
+      <?php if (!empty($linktext)) : ?>
+        <?php if ($iconPosition == 'beforeLink') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
+        <a class=<?php echo esc_attr($linkClass); ?> href="<?php echo esc_url_raw($linkurl); ?>">
+          <?php if ($iconPosition == 'beforeLabel') : ?>
+            <?php echo wp_kses_post($fontIconHtml); ?>
+          <?php endif; ?>
           <?php echo esc_html($linktext) ?>
+          <?php if ($iconPosition == 'afterLabel') : ?>
+            <?php echo wp_kses_post($fontIconHtml); ?>
+          <?php endif; ?>
         </a>
+        <?php if ($iconPosition == 'afterLink') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
       <?php endif; ?>
 
-      <ul class='subMenu'>
+      <ul class=<?php echo esc_attr($subMenuWrapClass); ?>>
         <?php echo $content ?>
       </ul>
     </li>
 
 
-    <?php
+<?php
     return ob_get_clean();
   }
 }

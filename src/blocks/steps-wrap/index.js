@@ -66,12 +66,9 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import PGIconPicker from "../../components/icon-picker";
 
 import PGtabs from "../../components/tabs";
@@ -352,7 +349,6 @@ registerBlockType("post-grid/steps-wrap", {
 
 		let isProFeature = applyFilters("isProFeature", true);
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [iconPickerIndex, setIconPickerIndex] = useState(99);
@@ -414,19 +410,9 @@ registerBlockType("post-grid/steps-wrap", {
 
 			var cssItems = { ...blockCssY.items };
 			var cssItemsX = { ...cssItems, ...stylesObj };
-			//console.log(cssItemsX);
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
@@ -1092,7 +1078,7 @@ registerBlockType("post-grid/steps-wrap", {
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-3">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"

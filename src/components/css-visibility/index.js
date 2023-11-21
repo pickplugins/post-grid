@@ -23,7 +23,7 @@ function Html(props) {
   const [isImportant, setImportant] = useState((valArgs[1] == undefined) ? false : true);
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center pg-font">
 
       <Dropdown
         position="bottom"
@@ -41,7 +41,7 @@ function Html(props) {
 
           </Button>
         )}
-        renderContent={() => <div className='w-32'>
+        renderContent={() => <div className='w-32 pg-font'>
 
           {Object.entries(args).map((args) => {
 

@@ -11,6 +11,10 @@
     "postType",
     "queryId"
   ],
+  "providesContext": {
+    "post-grid/listNestedId": "blockId",
+    "post-grid/icon": "icon"
+  },
   "supports": {
     "align": [
       "wide",

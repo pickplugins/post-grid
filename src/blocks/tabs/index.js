@@ -60,15 +60,9 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 import PGIconPicker from "../../components/icon-picker";
-import PGcssCursor from "../../components/css-cursor";
-import PGcssTextAlign from "../../components/css-text-align";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -126,7 +120,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -149,15 +142,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		const [iconHtml, setIconHtml] = useState("");
 
@@ -574,7 +558,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddHeaderWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, headerWrap);
 			obj[sudoScource] = cssObj;
 
@@ -645,7 +628,10 @@ registerBlockType(metadata, {
 				</BlockControls>
 
 				<InspectorControls>
-					<div className="px-2" title="header" initialOpen={false}>
+					<div
+						className="pg-setting-input-text"
+						title="header"
+						initialOpen={false}>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Navs Wrap"

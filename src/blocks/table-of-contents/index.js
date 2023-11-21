@@ -60,13 +60,8 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import PGcssTextAlign from "../../components/css-text-align";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -146,7 +141,6 @@ registerBlockType("post-grid/table-of-contents", {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -284,7 +278,6 @@ registerBlockType("post-grid/table-of-contents", {
 		}
 
 		function onBulkAddText(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, text);
 			obj[sudoScource] = cssObj;
 
@@ -321,7 +314,7 @@ registerBlockType("post-grid/table-of-contents", {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Text"

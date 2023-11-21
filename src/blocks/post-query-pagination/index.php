@@ -57,38 +57,13 @@ class PGBlockPostQueryPagination
 
         global $postGridCssY;
         global $postGridScriptData;
+        global $PGPostQuery;
 
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
-
-
-
-
-        $container = isset($attributes['container']) ? $attributes['container'] : [];
-        $containerOptions = isset($container['options']) ? $container['options'] : [];
-        $containerClass = isset($containerOptions['class']) ? $containerOptions['class'] : '';
-
-
-        $itemsWrap = isset($attributes['itemsWrap']) ? $attributes['itemsWrap'] : [];
-        $itemsWrapOptions = isset($itemsWrap['options']) ? $itemsWrap['options'] : [];
-
-        /*#######itemWrap######*/
-        $itemWrap = isset($attributes['itemWrap']) ? $attributes['itemWrap'] : [];
-        $itemWrapOptions = isset($itemWrap['options']) ? $itemWrap['options'] : [];
-
-
-        /*#########$noPostsWrap#########*/
-        $noPostsWrap = isset($attributes['noPostsWrap']) ? $attributes['noPostsWrap'] : [];
-        $noPostsWrapOptions = isset($noPostsWrap['options']) ? $noPostsWrap['options'] : [];
-
-        $grid = isset($attributes['grid']) ? $attributes['grid'] : [];
-        $gridOptions = isset($grid['options']) ? $grid['options'] : [];
-        $gridOptionsItemCss = isset($gridOptions['itemCss']) ? $gridOptions['itemCss'] : [];
-
-
-        /*#######pagination######*/
+        $postGridId = isset($block->context['post-grid/postGridId']) ? $block->context['post-grid/postGridId'] : '';
 
         /*#######pagination######*/
         $pagination = isset($attributes['pagination']) ? $attributes['pagination'] : [];
@@ -114,58 +89,16 @@ class PGBlockPostQueryPagination
         //var_dump($maxPageNum);
 
         $layout = isset($attributes['layout']) ? $attributes['layout'] : [];
-        $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : ['items' => []];
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
-        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
 
-        $itemCssArr = [];
-        if (!empty($gridOptionsItemCss)) {
-            foreach ($gridOptionsItemCss as $device => $args) {
-
-                foreach ($args as $index => $items) {
-                    foreach ($items as $attr => $val) {
-                        $nth = $index + 1;
-
-                        $itemCssArr[".$blockId .item:nth-child($nth)"][$attr][$device] = $val;
-                    }
-                }
-            }
-        }
-
-        $postGridCssY[] = array_merge($blockCssY['items'], $itemCssArr);
-
-
-
-
-        $postGridScriptData[$blockId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
-        $postGridScriptData[$blockId]['layout']['id'] = isset($layout['id']) ? $layout['id'] : '';
-        $postGridScriptData[$blockId]['layout']['rawData'] = isset($layout['rawData']) ? $layout['rawData'] : '';
-        $postGridScriptData[$blockId]['pagination']['type'] = $paginationType;
-
-        $layout_id = isset($layout['id']) ? $layout['id'] : '';
-        $layout_id = apply_filters('pgb_post_grid_post_layout_id', $layout_id);
 
         ob_start();
 
-        $rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
-        $rawData = !empty($layout['rawData']) ? $layout['rawData'] : $rawData;
-
-
-        $srcServer = !empty($layout['srcServer']) ? $layout['srcServer'] : 'library';
-
-
-        if ($srcServer == 'saved') {
-            $postData = get_post($layout_id);
-            $rawDatabyId = isset($postData->post_content) ? $postData->post_content : '';
-            $rawData = !empty($rawDatabyId) ? $rawDatabyId : $rawData;
-        }
 
 
 
-        $query_args = post_grid_parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
 
 
         if (get_query_var('paged')) {
@@ -176,12 +109,20 @@ class PGBlockPostQueryPagination
             $paged = 1;
         }
 
+        $postGridScriptData[$postGridId]['pagination']['type'] = $paginationType;
+        $postGridScriptData[$postGridId]['pagination']['prevText'] = $prevText;
+        $postGridScriptData[$postGridId]['pagination']['nextText'] = $nextText;
+        $postGridScriptData[$postGridId]['pagination']['maxPageNum'] = $maxPageNum;
+        $postGridScriptData[$postGridId]['pagination']['noMorePosts'] = $noMorePosts;
+        $postGridScriptData[$postGridId]['pagination']['loadMoreText'] = $loadMoreText;
+        $postGridScriptData[$postGridId]['pagination']['loadingText'] = $loadingText;
+        $postGridScriptData[$postGridId]['pagination']['page'] = $paged;
+        $postGridScriptData[$postGridId]['pagination']['loadingIcon'] = '<i class="loademore-icon ' . $loadingIconSrc . '"></i>';
 
-        $posts = [];
-        $responses = [];
+
 
         $blockArgs = [
-            'blockId' => $blockId,
+            'blockId' => $postGridId,
             'pagination' => [
                 'type' => $paginationType,
                 'loadMoreText' => $loadMoreText,
@@ -192,42 +133,14 @@ class PGBlockPostQueryPagination
                 'prevText' => $prevText,
                 'nextText' => $nextText,
                 'maxPageNum' => $maxPageNum,
-
-
             ],
             'noPosts' => false
         ];
 
-        $post_grid_wp_query = new WP_Query($query_args);
 
 
 
-        if ($post_grid_wp_query->have_posts()) :
-
-            while ($post_grid_wp_query->have_posts()) :
-                $post_grid_wp_query->the_post();
-
-                $post_id = get_the_id();
-                $blocks = parse_blocks($rawData);
-
-                $html = '';
-
-                foreach ($blocks as $block) {
-                    //look to see if your block is in the post content -> if yes continue past it if no then render block as normal
-                    $html .= render_block($block);
-                }
-
-
-                $posts[$post_id] = $html;
-
-            endwhile;
-
-
-            $responses['max_num_pages'] = isset($post_grid_wp_query->max_num_pages) ? $post_grid_wp_query->max_num_pages : 0;;
-
-            wp_reset_query();
-            wp_reset_postdata();
-        endif;
+        $max_num_pages = isset($PGPostQuery->max_num_pages) ? $PGPostQuery->max_num_pages : 0;;
 
 
 
@@ -243,14 +156,13 @@ class PGBlockPostQueryPagination
                 <?php if ($paginationType == 'normal') : ?>
                     <?php
                     $big = 999999999; // need an unlikely integer
-                    $pagination_max_num_pages = isset($responses['max_num_pages']) ? $responses['max_num_pages'] : 0;
 
                     $pages = paginate_links(
                         array(
                             'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
                             'format' => '?paged=%#%',
                             'current' => max(1, $paged),
-                            'total' => $pagination_max_num_pages,
+                            'total' => $max_num_pages,
                             'prev_text' => $prevText,
                             'next_text' => $nextText,
                             'type' => 'array',
@@ -270,7 +182,6 @@ class PGBlockPostQueryPagination
                 <?php if ($paginationType == 'ajax') : ?>
                     <?php
                     $big = 999999999; // need an unlikely integer
-                    $pagination_max_num_pages = $responses['max_num_pages'];
 
 
 
@@ -279,7 +190,7 @@ class PGBlockPostQueryPagination
                             'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
                             'format' => '?paged=%#%',
                             'current' => max(1, $paged),
-                            'total' => $pagination_max_num_pages,
+                            'total' => $max_num_pages,
                             'prev_text' => $prevText,
                             'next_text' => $nextText,
                             'type' => 'array',
@@ -298,10 +209,9 @@ class PGBlockPostQueryPagination
 
 
                 <?php if ($paginationType == 'next_previous') :
-                    $pagination_max_num_pages = $responses['max_num_pages'];
 
 
-                    if ($pagination_max_num_pages) {
+                    if ($max_num_pages) {
                 ?>
                         <a class="page-numbers" href="<?php echo esc_url_raw(get_previous_posts_page_link()); ?>">
                             <?php echo wp_kses_post($prevText); ?>

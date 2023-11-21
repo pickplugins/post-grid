@@ -63,14 +63,10 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
-import Typography from "../../components/typography";
+
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import PGcssDisplay from "../../components/css-display";
 import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
@@ -79,6 +75,8 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import metadata from "./block.json";
+import PGcssClassPicker from "../../components/css-class-picker";
+import customTags from "../../custom-tags";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -358,16 +356,16 @@ registerBlockType(metadata, {
 		}, [blockCssY]);
 		useEffect(() => {
 			var blockCssObj = {};
-			console.log(wrapper);
 			blockCssObj[wrapperSelector] = wrapper;
 			blockCssObj[prefixSelector] = prefix;
 			blockCssObj[postfixSelector] = postfix;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[itemSelector] = items;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
-			console.log(blockCssRules);
 
-			var items = blockCssRules;
-			setAttributes({ blockCssY: { items: items } });
+			var itemX = blockCssRules;
+			setAttributes({ blockCssY: { items: itemX } });
 		}, [blockId]);
 
 		// useEffect(() => {
@@ -425,15 +423,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var iconX = attributes.icon;
 				var prefixX = attributes.prefix;
@@ -496,10 +492,6 @@ registerBlockType(metadata, {
 
 		function addMedia(option, index) {
 			//var isExist = items.elements.find(x => x.label === option.label);
-
-			//if (isExist == undefined) {
-
-			//}
 
 			var elementsX = items.elements.push(option);
 			setAttributes({ items: { ...items, elements: items.elements } });
@@ -828,7 +820,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPrefix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, prefix);
 			obj[sudoScource] = cssObj;
 
@@ -859,7 +850,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostfix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, postfix);
 			obj[sudoScource] = cssObj;
 
@@ -1026,7 +1016,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItem(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, items);
 			obj[sudoScource] = cssObj;
 
@@ -1056,6 +1045,111 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
+		function onBulkAddWrapper(sudoScource, cssObj) {
+			let obj = Object.assign({}, wrapper);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ wrapper: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+		function onBulkAddIcon(sudoScource, cssObj) {
+			let obj = Object.assign({}, icon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ icon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+
+		function onResetIcon(sudoScources) {
+			let obj = Object.assign({}, icon);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						iconSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ icon: obj });
+		}
+
 		function onChangeBreakPoint(x, index) {
 			var asdsdsd = wp.data.dispatch("postgrid-shop").setBreakPoint(x.value);
 
@@ -1073,7 +1167,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -1128,6 +1222,33 @@ registerBlockType(metadata, {
 											}}
 										/>
 									</PanelRow>
+
+									{/* <PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/> */}
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -1135,6 +1256,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleWrapper}
 										onAdd={onAddStyleWrapper}
 										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
 									/>
 								</PGtab>
 							</PGtabs>
@@ -1509,6 +1632,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleIcon}
 										onAdd={onAddStyleIcon}
 										onRemove={onRemoveStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+										onReset={onResetIcon}
 									/>
 								</PGtab>
 							</PGtabs>

@@ -66,13 +66,10 @@ const { RawHTML } = wp.element;
 import { store } from "../../store";
 
 import IconToggle from "../../components/icon-toggle";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import Typography from "../../components/typography";
+
 import PGDropdown from "../../components/dropdown";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import PGcssDisplay from "../../components/css-display";
 import PGIconPicker from "../../components/icon-picker";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -143,7 +140,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [postObjects, setPostObjects] = useState([]);
@@ -393,15 +389,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var itemsX = attributes.items;
 				var taxonomiesX = attributes.taxonomies;
@@ -738,7 +732,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -769,7 +762,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItems(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, items);
 			obj[sudoScource] = cssObj;
 
@@ -800,7 +792,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -831,7 +822,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddFrontText(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, frontText);
 			obj[sudoScource] = cssObj;
 
@@ -862,7 +852,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddSeperator(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, separator);
 			obj[sudoScource] = cssObj;
 
@@ -941,378 +930,194 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-3">
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Select Taxonomy
-							</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={postObjects}
-								buttonTitle="Choose"
-								onChange={setTaxonomy}
-								values={taxonomies.options.taxName}></PGDropdown>
-						</PanelRow>
+					<div className="pg-setting-input-text">
+						<div className="px-3">
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Select Taxonomy
+								</label>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									options={postObjects}
+									buttonTitle="Choose"
+									onChange={setTaxonomy}
+									values={taxonomies.options.taxName}></PGDropdown>
+							</PanelRow>
 
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Custom Taxonomy
-							</label>
-							<InputControl
-								value={taxonomies.options.taxName}
-								onChange={(newVal) => {
-									var options = { ...taxonomies.options, taxName: newVal };
-									setAttributes({
-										taxonomies: { ...taxonomies, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
-					</div>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Custom Taxonomy
+								</label>
+								<InputControl
+									value={taxonomies.options.taxName}
 									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
+										var options = { ...taxonomies.options, taxName: newVal };
 										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
+											taxonomies: { ...taxonomies, options: options },
 										});
 									}}
 								/>
+							</PanelRow>
+						</div>
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
 										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
-												blockId: newVal,
+												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-									onRemove={onRemoveStyleWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Items"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										View Type
-									</label>
-									<SelectControl
-										label=""
-										value={items.options.viewType}
-										options={[
-											{ label: "Accordion", value: "accordion" },
-											{ label: "Inline", value: "inline" },
-											{ label: "Grid", value: "grid" },
-											{ label: "List", value: "list" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...items.options, viewType: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Query Posts
-									</label>
-									<SelectControl
-										label=""
-										value={items.options.queryPosts}
-										options={[
-											{ label: "True", value: 1 },
-											{ label: "False", value: 0 },
-										]}
-										onChange={(newVal) => {
-											var options = { ...items.options, queryPosts: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Hide Empty Terms
-									</label>
-									<SelectControl
-										label=""
-										value={items.options.hideEmpty}
-										options={[
-											{ label: "True", value: 1 },
-											{ label: "False", value: 0 },
-										]}
-										onChange={(newVal) => {
-											var options = { ...items.options, hideEmpty: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								{items.options.viewType == "accordion" && (
 									<PanelRow>
 										<label for="" className="font-medium text-slate-900 ">
-											Accordion Open
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onRemove={onRemoveStyleWrapper}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Items"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											View Type
 										</label>
 										<SelectControl
 											label=""
-											value={items.options.accordionOpen}
+											value={items.options.viewType}
 											options={[
-												{ label: "True", value: 1 },
-												{ label: "False", value: 0 },
+												{ label: "Accordion", value: "accordion" },
+												{ label: "Inline", value: "inline" },
+												{ label: "Grid", value: "grid" },
+												{ label: "List", value: "list" },
 											]}
 											onChange={(newVal) => {
-												var options = {
-													...items.options,
-													accordionOpen: newVal,
-												};
+												var options = { ...items.options, viewType: newVal };
 												setAttributes({
 													items: { ...items, options: options },
 												});
 											}}
 										/>
 									</PanelRow>
-								)}
 
-								{items.options.viewType == "grid" && (
-									<>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Query Posts
+										</label>
+										<SelectControl
+											label=""
+											value={items.options.queryPosts}
+											options={[
+												{ label: "True", value: 1 },
+												{ label: "False", value: 0 },
+											]}
+											onChange={(newVal) => {
+												var options = { ...items.options, queryPosts: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Hide Empty Terms
+										</label>
+										<SelectControl
+											label=""
+											value={items.options.hideEmpty}
+											options={[
+												{ label: "True", value: 1 },
+												{ label: "False", value: 0 },
+											]}
+											onChange={(newVal) => {
+												var options = { ...items.options, hideEmpty: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									{items.options.viewType == "accordion" && (
 										<PanelRow>
 											<label for="" className="font-medium text-slate-900 ">
-												Post Count Position
+												Accordion Open
 											</label>
 											<SelectControl
 												label=""
-												value={items.options.postCountPosition}
-												options={[
-													{ label: "Before Title", value: "beforeTitle" },
-													{ label: "After Ttile", value: "afterTtile" },
-													{ label: "Before Posts", value: "beforePosts" },
-
-													{ label: "After Posts", value: "afterPosts" },
-												]}
-												onChange={(newVal) => {
-													var options = {
-														...items.options,
-														postCountPosition: newVal,
-													};
-													setAttributes({
-														items: { ...items, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Post Count Text
-											</label>
-											<InputControl
-												value={items.options.postCountText}
-												onChange={(newVal) => {
-													var options = {
-														...items.options,
-														postCountText: newVal,
-													};
-													setAttributes({
-														items: { ...items, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-
-										<PanelRow className="my-3">
-											<label>Column Count</label>
-											<IconToggle
-												position="bottom"
-												variant="secondary"
-												iconList={breakPointList}
-												buttonTitle="Break Point Switch"
-												onChange={onChangeBreakPoint}
-												activeIcon={breakPoints[breakPointX].icon}
-												value={breakPointX}
-											/>
-										</PanelRow>
-										<PanelRow>
-											<InputControl
-												value={
-													items.options.gridColNumber == undefined ||
-													items.options.gridColNumber[breakPointX] == undefined
-														? 1
-														: items.options.gridColNumber[breakPointX].val
-												}
-												type="number"
-												onChange={(newVal) => {
-													var newValuesObj = {};
-													if (
-														Object.keys(items.options.gridColNumber).length == 0
-													) {
-														newValuesObj[breakPointX] = {
-															val: newVal,
-															unit: "fr",
-														};
-													} else {
-														var unit =
-															newValuesObj[breakPointX] != undefined
-																? newValuesObj[breakPointX].unit
-																: "fr";
-
-														newValuesObj = items.options.gridColNumber;
-														newValuesObj[breakPointX] = {
-															val: newVal,
-															unit: unit,
-														};
-													}
-
-													var options = {
-														...items.options,
-														gridColNumber: newValuesObj,
-													};
-													setAttributes({
-														items: { ...items, options: options },
-													});
-												}}
-											/>
-											<SelectControl
-												className="mb-0"
-												value={
-													items.options.gridColNumber == undefined ||
-													items.options.gridColNumber[breakPointX] == undefined
-														? "fr"
-														: items.options.gridColNumber[breakPointX].unit
-												}
-												options={[
-													{ label: "fr", value: "fr" },
-													{ label: "px", value: "px" },
-													{ label: "%", value: "%" },
-													{ label: "em", value: "em" },
-												]}
-												onChange={(newVal) => {
-													var newValuesObj = {};
-													if (
-														Object.keys(items.options.gridColNumber).length == 0
-													) {
-														newValuesObj[breakPointX] = {
-															val: 1,
-															unit: newVal,
-														};
-													} else {
-														var val =
-															newValuesObj[breakPointX] != undefined
-																? newValuesObj[breakPointX].val
-																: "fr";
-
-														newValuesObj = items.options.gridColNumber;
-														newValuesObj[breakPointX] = {
-															val: val,
-															unit: newVal,
-														};
-													}
-
-													var options = {
-														...items.options,
-														gridColNumber: newValuesObj,
-													};
-													setAttributes({
-														items: { ...items, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-									</>
-								)}
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Link To Term
-									</label>
-									<SelectControl
-										label=""
-										value={items.options.linkToTerm}
-										options={[
-											{ label: "True", value: 1 },
-											{ label: "False", value: 0 },
-										]}
-										onChange={(newVal) => {
-											var options = { ...items.options, linkToTerm: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								{items.options.viewType == "accordion" ||
-									(items.options.viewType == "list" && (
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Hierarchicaly
-											</label>
-											<SelectControl
-												label=""
-												value={items.options.hierarchicaly}
+												value={items.options.accordionOpen}
 												options={[
 													{ label: "True", value: 1 },
 													{ label: "False", value: 0 },
@@ -1320,7 +1125,7 @@ registerBlockType(metadata, {
 												onChange={(newVal) => {
 													var options = {
 														...items.options,
-														hierarchicaly: newVal,
+														accordionOpen: newVal,
 													};
 													setAttributes({
 														items: { ...items, options: options },
@@ -1328,383 +1133,597 @@ registerBlockType(metadata, {
 												}}
 											/>
 										</PanelRow>
-									))}
+									)}
 
-								<ToggleControl
-									label="Display Post Count"
-									help={
-										items.options.postCount
-											? "Post Count Enabled"
-											: "Post Count Disabled"
-									}
-									checked={items.options.postCount ? true : false}
-									onChange={(e) => {
-										var options = {
-											...items.options,
-											postCount: items.options.postCount ? false : true,
-										};
-										setAttributes({ items: { ...items, options: options } });
-									}}
-								/>
+									{items.options.viewType == "grid" && (
+										<>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Post Count Position
+												</label>
+												<SelectControl
+													label=""
+													value={items.options.postCountPosition}
+													options={[
+														{ label: "Before Title", value: "beforeTitle" },
+														{ label: "After Ttile", value: "afterTtile" },
+														{ label: "Before Posts", value: "beforePosts" },
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Item Class
-									</label>
+														{ label: "After Posts", value: "afterPosts" },
+													]}
+													onChange={(newVal) => {
+														var options = {
+															...items.options,
+															postCountPosition: newVal,
+														};
+														setAttributes({
+															items: { ...items, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
 
-									<InputControl
-										value={items.options.class}
-										onChange={(newVal) => {
-											var options = { ...items.options, class: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Post Count Text
+												</label>
+												<InputControl
+													value={items.options.postCountText}
+													onChange={(newVal) => {
+														var options = {
+															...items.options,
+															postCountText: newVal,
+														};
+														setAttributes({
+															items: { ...items, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Max Count
-									</label>
-
-									<InputControl
-										value={items.options.maxCount}
-										onChange={(newVal) => {
-											var options = { ...items.options, maxCount: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Link Target
-									</label>
-
-									<SelectControl
-										label=""
-										value={items.options.linkTarget}
-										options={[
-											{ label: "_self", value: "_self" },
-											{ label: "_blank", value: "_blank" },
-											{ label: "_parent", value: "_parent" },
-											{ label: "_top", value: "_top" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...items.options, linkTarget: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Prefix
-									</label>
-
-									<InputControl
-										value={items.options.prefix}
-										onChange={(newVal) => {
-											var options = { ...items.options, prefix: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Postfix
-									</label>
-									<InputControl
-										value={items.options.postfix}
-										onChange={(newVal) => {
-											var options = { ...items.options, postfix: newVal };
-											setAttributes({ items: { ...items, options: options } });
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Custom Attributes
-									</label>
-									<div
-										className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
-										onClick={(ev) => {
-											var sdsd = items.options.linkAttr.concat({
-												id: "",
-												val: "",
-											});
-											var options = { ...items.options, linkAttr: sdsd };
-											setAttributes({ items: { ...items, options: options } });
-											linkAttrObj();
-										}}>
-										Add
-									</div>
-								</PanelRow>
-
-								{items.options.linkAttr.length > 0 &&
-									items.options.linkAttr.map((x, i) => {
-										return (
-											<div className="my-2">
-												<PanelRow>
-													<InputControl
-														className="mr-2"
-														placeholder="Name"
-														value={items.options.linkAttr[i].id}
-														onChange={(newVal) => {
-															items.options.linkAttr[i].id = newVal;
-															var ssdsd = items.options.linkAttr.concat([]);
-															var options = {
-																...items.options,
-																linkAttr: ssdsd,
+											<PanelRow className="my-3">
+												<label>Column Count</label>
+												<IconToggle
+													position="bottom"
+													variant="secondary"
+													iconList={breakPointList}
+													buttonTitle="Break Point Switch"
+													onChange={onChangeBreakPoint}
+													activeIcon={breakPoints[breakPointX].icon}
+													value={breakPointX}
+												/>
+											</PanelRow>
+											<PanelRow>
+												<InputControl
+													value={
+														items.options.gridColNumber == undefined ||
+														items.options.gridColNumber[breakPointX] ==
+															undefined
+															? 1
+															: items.options.gridColNumber[breakPointX].val
+													}
+													type="number"
+													onChange={(newVal) => {
+														var newValuesObj = {};
+														if (
+															Object.keys(items.options.gridColNumber).length ==
+															0
+														) {
+															newValuesObj[breakPointX] = {
+																val: newVal,
+																unit: "fr",
 															};
-															setAttributes({
-																items: { ...items, options: options },
-															});
-														}}
-													/>
+														} else {
+															var unit =
+																newValuesObj[breakPointX] != undefined
+																	? newValuesObj[breakPointX].unit
+																	: "fr";
 
-													<InputControl
-														className="mr-2"
-														placeholder="Value"
-														value={x.val}
-														onChange={(newVal) => {
-															items.options.linkAttr[i].val = newVal;
-															var ssdsd = items.options.linkAttr.concat([]);
-															var options = {
-																...items.options,
-																linkAttr: ssdsd,
+															newValuesObj = items.options.gridColNumber;
+															newValuesObj[breakPointX] = {
+																val: newVal,
+																unit: unit,
 															};
-															setAttributes({
-																items: { ...items, options: options },
-															});
-														}}
-													/>
-													<span
-														className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
-														onClick={(ev) => {
-															items.options.linkAttr.splice(i, 1);
-															var ssdsd = items.options.linkAttr.concat([]);
-															var options = {
-																...items.options,
-																linkAttr: ssdsd,
+														}
+
+														var options = {
+															...items.options,
+															gridColNumber: newValuesObj,
+														};
+														setAttributes({
+															items: { ...items, options: options },
+														});
+													}}
+												/>
+												<SelectControl
+													className="mb-0"
+													value={
+														items.options.gridColNumber == undefined ||
+														items.options.gridColNumber[breakPointX] ==
+															undefined
+															? "fr"
+															: items.options.gridColNumber[breakPointX].unit
+													}
+													options={[
+														{ label: "fr", value: "fr" },
+														{ label: "px", value: "px" },
+														{ label: "%", value: "%" },
+														{ label: "em", value: "em" },
+													]}
+													onChange={(newVal) => {
+														var newValuesObj = {};
+														if (
+															Object.keys(items.options.gridColNumber).length ==
+															0
+														) {
+															newValuesObj[breakPointX] = {
+																val: 1,
+																unit: newVal,
 															};
-															setAttributes({
-																items: { ...items, options: options },
-															});
-														}}></span>
-												</PanelRow>
-											</div>
-										);
-									})}
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={items}
-									onChange={onChangeStyleItems}
-									onBulkAdd={onBulkAddItems}
-									onAdd={onAddStyleItems}
-									onRemove={onRemoveStyleItems}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+														} else {
+															var val =
+																newValuesObj[breakPointX] != undefined
+																	? newValuesObj[breakPointX].val
+																	: "fr";
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Icon"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Choose Icon
-									</label>
+															newValuesObj = items.options.gridColNumber;
+															newValuesObj[breakPointX] = {
+																val: val,
+																unit: newVal,
+															};
+														}
 
-									<PGIconPicker
-										library={icon.options.library}
-										srcType={icon.options.srcType}
-										iconSrc={icon.options.iconSrc}
-										onChange={onChangeIcon}
-									/>
-								</PanelRow>
+														var options = {
+															...items.options,
+															gridColNumber: newValuesObj,
+														};
+														setAttributes({
+															items: { ...items, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+										</>
+									)}
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Icon position
-									</label>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Link To Term
+										</label>
+										<SelectControl
+											label=""
+											value={items.options.linkToTerm}
+											options={[
+												{ label: "True", value: 1 },
+												{ label: "False", value: 0 },
+											]}
+											onChange={(newVal) => {
+												var options = { ...items.options, linkToTerm: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
 
-									<SelectControl
-										label=""
-										value={icon.options.position}
-										options={[
-											{ label: "Choose Position", value: "" },
+									{items.options.viewType == "accordion" ||
+										(items.options.viewType == "list" && (
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Hierarchicaly
+												</label>
+												<SelectControl
+													label=""
+													value={items.options.hierarchicaly}
+													options={[
+														{ label: "True", value: 1 },
+														{ label: "False", value: 0 },
+													]}
+													onChange={(newVal) => {
+														var options = {
+															...items.options,
+															hierarchicaly: newVal,
+														};
+														setAttributes({
+															items: { ...items, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+										))}
 
-											{ label: "Before Front text", value: "beforeFronttext" },
-											{ label: "After Front text", value: "afterFronttext" },
-											{ label: "Before Items", value: "beforeItems" },
-											{ label: "After Items", value: "afterItems" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...icon.options, position: newVal };
-											setAttributes({ icon: { ...icon, options: options } });
+									<ToggleControl
+										label="Display Post Count"
+										help={
+											items.options.postCount
+												? "Post Count Enabled"
+												: "Post Count Disabled"
+										}
+										checked={items.options.postCount ? true : false}
+										onChange={(e) => {
+											var options = {
+												...items.options,
+												postCount: items.options.postCount ? false : true,
+											};
+											setAttributes({ items: { ...items, options: options } });
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={icon}
-									onChange={onChangeStyleIcon}
-									onBulkAdd={onBulkAddIcon}
-									onAdd={onAddStyleIcon}
-									onRemove={onRemoveStyleIcon}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Front Text"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Front Text
-									</label>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Item Class
+										</label>
 
-									<InputControl
-										value={frontText.options.text}
-										onChange={(newVal) => {
-											var options = { ...frontText.options, text: newVal };
-											setAttributes({
-												frontText: { ...frontText, options: options },
-											});
-										}}
+										<InputControl
+											value={items.options.class}
+											onChange={(newVal) => {
+												var options = { ...items.options, class: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Max Count
+										</label>
+
+										<InputControl
+											value={items.options.maxCount}
+											onChange={(newVal) => {
+												var options = { ...items.options, maxCount: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Link Target
+										</label>
+
+										<SelectControl
+											label=""
+											value={items.options.linkTarget}
+											options={[
+												{ label: "_self", value: "_self" },
+												{ label: "_blank", value: "_blank" },
+												{ label: "_parent", value: "_parent" },
+												{ label: "_top", value: "_top" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...items.options, linkTarget: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Prefix
+										</label>
+
+										<InputControl
+											value={items.options.prefix}
+											onChange={(newVal) => {
+												var options = { ...items.options, prefix: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Postfix
+										</label>
+										<InputControl
+											value={items.options.postfix}
+											onChange={(newVal) => {
+												var options = { ...items.options, postfix: newVal };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Attributes
+										</label>
+										<div
+											// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+											className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+											onClick={(ev) => {
+												var sdsd = items.options.linkAttr.concat({
+													id: "",
+													val: "",
+												});
+												var options = { ...items.options, linkAttr: sdsd };
+												setAttributes({
+													items: { ...items, options: options },
+												});
+												linkAttrObj();
+											}}>
+											Add
+										</div>
+									</PanelRow>
+
+									{items.options.linkAttr.length > 0 &&
+										items.options.linkAttr.map((x, i) => {
+											return (
+												<div className="my-2">
+													<PanelRow>
+														<InputControl
+															className="mr-2"
+															placeholder="Name"
+															value={items.options.linkAttr[i].id}
+															onChange={(newVal) => {
+																items.options.linkAttr[i].id = newVal;
+																var ssdsd = items.options.linkAttr.concat([]);
+																var options = {
+																	...items.options,
+																	linkAttr: ssdsd,
+																};
+																setAttributes({
+																	items: { ...items, options: options },
+																});
+															}}
+														/>
+
+														<InputControl
+															className="mr-2"
+															placeholder="Value"
+															value={x.val}
+															onChange={(newVal) => {
+																items.options.linkAttr[i].val = newVal;
+																var ssdsd = items.options.linkAttr.concat([]);
+																var options = {
+																	...items.options,
+																	linkAttr: ssdsd,
+																};
+																setAttributes({
+																	items: { ...items, options: options },
+																});
+															}}
+														/>
+														<span
+															className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
+															onClick={(ev) => {
+																items.options.linkAttr.splice(i, 1);
+																var ssdsd = items.options.linkAttr.concat([]);
+																var options = {
+																	...items.options,
+																	linkAttr: ssdsd,
+																};
+																setAttributes({
+																	items: { ...items, options: options },
+																});
+															}}></span>
+													</PanelRow>
+												</div>
+											);
+										})}
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={items}
+										onChange={onChangeStyleItems}
+										onBulkAdd={onBulkAddItems}
+										onAdd={onAddStyleItems}
+										onRemove={onRemoveStyleItems}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={frontText}
-									onChange={onChangeStyleFrontText}
-									onAdd={onAddStyleFrontText}
-									onBulkAdd={onBulkAddFrontText}
-									onRemove={onRemoveStyleFrontText}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Separator"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Separator
-									</label>
-									<InputControl
-										value={separator.options.text}
-										onChange={(newVal) => {
-											var options = { ...separator.options, text: newVal };
-											setAttributes({
-												separator: { ...separator, options: options },
-											});
-										}}
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
+
+										<PGIconPicker
+											library={icon.options.library}
+											srcType={icon.options.srcType}
+											iconSrc={icon.options.iconSrc}
+											onChange={onChangeIcon}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
+
+										<SelectControl
+											label=""
+											value={icon.options.position}
+											options={[
+												{ label: "Choose Position", value: "" },
+
+												{
+													label: "Before Front text",
+													value: "beforeFronttext",
+												},
+												{ label: "After Front text", value: "afterFronttext" },
+												{ label: "Before Items", value: "beforeItems" },
+												{ label: "After Items", value: "afterItems" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...icon.options, position: newVal };
+												setAttributes({ icon: { ...icon, options: options } });
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={icon}
+										onChange={onChangeStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+										onAdd={onAddStyleIcon}
+										onRemove={onRemoveStyleIcon}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={separator}
-									onChange={onChangeStyleSeparator}
-									onAdd={onAddStyleSeparator}
-									onBulkAdd={onBulkAddSeperator}
-									onRemove={onRemoveStyleSeparator}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"terms-list"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Front Text"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Front Text
+										</label>
 
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockPostTitle",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+										<InputControl
+											value={frontText.options.text}
+											onChange={(newVal) => {
+												var options = { ...frontText.options, text: newVal };
+												setAttributes({
+													frontText: { ...frontText, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={frontText}
+										onChange={onChangeStyleFrontText}
+										onAdd={onAddStyleFrontText}
+										onBulkAdd={onBulkAddFrontText}
+										onRemove={onRemoveStyleFrontText}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Separator"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Separator
+										</label>
+										<InputControl
+											value={separator.options.text}
+											onChange={(newVal) => {
+												var options = { ...separator.options, text: newVal };
+												setAttributes({
+													separator: { ...separator, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={separator}
+										onChange={onChangeStyleSeparator}
+										onAdd={onAddStyleSeparator}
+										onBulkAdd={onBulkAddSeperator}
+										onRemove={onRemoveStyleSeparator}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"terms-list"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
+
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockPostTitle",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 					</div>
 				</InspectorControls>
 

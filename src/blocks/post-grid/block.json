@@ -6,16 +6,12 @@
   "textdomain": "post-grid",
   "category": "post-grid",
   "providesContext": {
+    "post-grid/postGridId": "blockId",
     "post-grid/queryArgs": "queryArgs",
     "post-grid/layout": "layout",
     "post-grid/pagination": "pagination",
     "post-grid/paginationItem": "paginationItem",
-    "post-grid/paginationItemActive": "paginationItemActive",
-    "post-grid/postGridId": "blockId",
-    "queryId": "queryId",
-    "loopIndex": "loopIndex",
-    "query": "query",
-    "displayLayout": "displayLayout"
+    "post-grid/paginationItemActive": "paginationItemActive"
   },
   "supports": {
     "align": [
@@ -141,7 +137,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "pagination",
+          "class": "pagination ",
           "type": "normal",
           "maxPageNum": "",
           "prevText": "Previous",

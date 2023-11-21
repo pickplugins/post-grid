@@ -58,12 +58,9 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
+import PGIconPicker from "../../components/icon-picker";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -71,6 +68,7 @@ import PGStyles from "../../components/styles";
 import metadata from "./block.json";
 import PGcssClassPicker from "../../components/css-class-picker";
 import customTags from "../../custom-tags";
+import PGCssLibrary from "../../components/css-library";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -110,19 +108,23 @@ registerBlockType(metadata, {
 		var blockClass = "." + blockIdX;
 
 		var wrapper = attributes.wrapper;
+		var icon = attributes.icon;
+
+		var parentIcon =
+			context["post-grid/icon"] == undefined ? [] : context["post-grid/icon"];
 
 		var blockCssY = attributes.blockCssY;
 
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
 
 		// Wrapper CSS Class Selectors
 		var wrapperSelector = blockClass;
+		const iconSelector = blockClass + " .icon";
 
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
@@ -130,6 +132,9 @@ registerBlockType(metadata, {
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
+		useEffect(() => {
+			setAttributes({ icon: parentIcon });
+		}, [parentIcon]);
 
 		useEffect(() => {
 			var blockCssObj = {};
@@ -141,15 +146,6 @@ registerBlockType(metadata, {
 			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
@@ -210,9 +206,147 @@ registerBlockType(metadata, {
 			setAttributes({ wrapper: object });
 		}
 
+		function onChangeIcon(arg) {
+			var options = {
+				...icon.options,
+				srcType: arg.srcType,
+				library: arg.library,
+				iconSrc: arg.iconSrc,
+			};
+			setAttributes({ icon: { ...icon, options: options } });
+		}
+
+		function onChangeStyleIcon(sudoScource, newVal, attr) {
+			var path = [sudoScource, attr, breakPointX];
+			let obj = Object.assign({}, icon);
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ icon: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				iconSelector
+			);
+			var cssPropty = myStore.cssAttrParse(attr);
+
+			let itemsX = Object.assign({}, blockCssY.items);
+
+			if (itemsX[elementSelector] == undefined) {
+				itemsX[elementSelector] = {};
+			}
+
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
+
+		function onRemoveStyleIcon(sudoScource, key) {
+			var object = myStore.deletePropertyDeep(icon, [
+				sudoScource,
+				key,
+				breakPointX,
+			]);
+			setAttributes({ icon: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				iconSelector
+			);
+			var cssPropty = myStore.cssAttrParse(key);
+			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+				elementSelector,
+				cssPropty,
+				breakPointX,
+			]);
+			setAttributes({ blockCssY: { items: cssObject } });
+		}
+
+		function onAddStyleIcon(sudoScource, key) {
+			var path = [sudoScource, key, breakPointX];
+			let obj = Object.assign({}, icon);
+			const object = myStore.addPropertyDeep(obj, path, "");
+			setAttributes({ icon: object });
+		}
+
+		function onBulkAddIcon(sudoScource, cssObj) {
+			let obj = Object.assign({}, icon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ icon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onPickCssLibraryIcon(args) {
+			Object.entries(args).map((x) => {
+				var sudoScource = x[0];
+				var sudoScourceArgs = x[1];
+				icon[sudoScource] = sudoScourceArgs;
+			});
+
+			var iconX = Object.assign({}, icon);
+			setAttributes({ icon: iconX });
+
+			var styleObj = {};
+
+			Object.entries(args).map((x) => {
+				var sudoScource = x[0];
+				var sudoScourceArgs = x[1];
+				var elementSelector = myStore.getElementSelector(
+					sudoScource,
+					iconSelector
+				);
+
+				var sudoObj = {};
+				Object.entries(sudoScourceArgs).map((y) => {
+					var cssPropty = y[0];
+					var cssProptyVal = y[1];
+					var cssProptyKey = myStore.cssAttrParse(cssPropty);
+					sudoObj[cssProptyKey] = cssProptyVal;
+				});
+
+				styleObj[elementSelector] = sudoObj;
+			});
+
+			var cssItems = Object.assign(blockCssY.items, styleObj);
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
+
 		useEffect(() => {
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
+
+		const [iconHtml, setIconHtml] = useState("");
+
+		useEffect(() => {
+			var iconSrc = icon.options.iconSrc;
+
+			var iconHtml = `<span class="${iconSrc}"></span>`;
+
+			setIconHtml(iconHtml);
+		}, [icon]);
 
 		const MY_TEMPLATE = [["core/paragraph", { content: "Hello" }]];
 
@@ -231,7 +365,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-3">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -322,6 +456,88 @@ registerBlockType(metadata, {
 							</PGtabs>
 						</PanelBody>
 
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
+										<PGIconPicker
+											library={icon.options.library}
+											srcType={icon.options.srcType}
+											iconSrc={icon.options.iconSrc}
+											onChange={onChangeIcon}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
+										<SelectControl
+											label=""
+											value={icon.options.position}
+											options={[
+												{ label: "Choose...", value: "" },
+												// { label: "Left", value: "left" },
+												{ label: "Before Text", value: "before" },
+												{ label: "After Text", value: "after" },
+												// { label: "Right", value: "right" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...icon.options, position: newVal };
+												setAttributes({ icon: { ...icon, options: options } });
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={icon}
+										onChange={onChangeStyleIcon}
+										onAdd={onAddStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+										onRemove={onRemoveStyleIcon}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={icon}
+										onChange={onPickCssLibraryIcon}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
 						<div className="px-2">
 							<PGMailSubsctibe />
 							<PGContactSupport
@@ -335,7 +551,21 @@ registerBlockType(metadata, {
 					</div>
 				</InspectorControls>
 
-				<li {...innerBlocksProps}>{innerBlocksProps.children}</li>
+				<li {...innerBlocksProps}>
+					{icon.options.position == "before" && (
+						<span
+							className={icon.options.class}
+							dangerouslySetInnerHTML={{ __html: iconHtml }}
+						/>
+					)}
+					{innerBlocksProps.children}
+					{icon.options.position == "after" && (
+						<span
+							className={icon.options.class}
+							dangerouslySetInnerHTML={{ __html: iconHtml }}
+						/>
+					)}
+				</li>
 			</>
 		);
 	},
@@ -344,6 +574,7 @@ registerBlockType(metadata, {
 
 		var attributes = props.attributes;
 		var wrapper = attributes.wrapper;
+		var icon = attributes.icon;
 
 		var blockId = attributes.blockId;
 
@@ -352,7 +583,19 @@ registerBlockType(metadata, {
 		});
 		return (
 			<li {...blockProps}>
+				{/* {icon.options.position == "before" && (
+									<span
+										className={icon.options.class}
+										dangerouslySetInnerHTML={{ __html: iconHtml }}
+									/>
+								)} */}
 				<InnerBlocks.Content />
+				{/* {icon.options.position == "after" && (
+									<span
+										className={icon.options.class}
+										dangerouslySetInnerHTML={{ __html: iconHtml }}
+									/>
+								)} */}
 			</li>
 		);
 	},

@@ -174,10 +174,8 @@ class PGBlockPostGrid
 
 
 
-    $postGridScriptData[$blockId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
-    $postGridScriptData[$blockId]['layout']['id'] = isset($layout['id']) ? $layout['id'] : '';
-    $postGridScriptData[$blockId]['layout']['rawData'] = isset($layout['rawData']) ? $layout['rawData'] : '';
-    $postGridScriptData[$blockId]['pagination']['type'] = $paginationType;
+
+    $postGridScriptData[$blockId]['lazyLoad']['enable'] = $lazyLoadEnable;
 
     $layout_id = isset($layout['id']) ? $layout['id'] : '';
     $layout_id = apply_filters('pgb_post_grid_post_layout_id', $layout_id);

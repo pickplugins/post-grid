@@ -66,8 +66,13 @@ class PGBlockMenuWrap
     $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
     $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
     $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
+
     $menuWrap = isset($attributes['menuWrap']) ? $attributes['menuWrap'] : [];
+    $menuWrapOptions = isset($menuWrap['options']) ? $menuWrap['options'] : [];
+    $menuWrapClass = isset($menuWrapOptions['class']) ? $menuWrapOptions['class'] : '';
     $subMenuWrap = isset($attributes['subMenuWrap']) ? $attributes['subMenuWrap'] : [];
+    $subMenuWrapOptions = isset($subMenuWrap['options']) ? $subMenuWrap['options'] : [];
+    $subMenuWrapClass = isset($subMenuWrapOptions['class']) ? $subMenuWrapOptions['class'] : '';
 
 
 
@@ -76,11 +81,11 @@ class PGBlockMenuWrap
 
 
     $obj['id'] = $post_ID;
-		$obj['type'] = 'post';
+    $obj['type'] = 'post';
 
 
 
-		$wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = parse_css_class($wrapperClass, $obj);
 
     ////var_dump($blockCssY);
 
@@ -88,13 +93,13 @@ class PGBlockMenuWrap
 
 
 
-    ?>
+?>
     <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-      <ul class="menu">
+      <ul class="<?php echo esc_attr($menuWrapClass); ?>">
         <?php echo $content ?>
       </ul>
     </div>
-    <?php
+<?php
 
     return ob_get_clean();
   }

@@ -60,14 +60,11 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import PGIconPicker from "../../components/icon-picker";
-import PGcssDisplay from "../../components/css-display";
+
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
@@ -167,7 +164,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -208,8 +204,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
 		// for (var x in breakPoints) {
 
 		//   var itemX = breakPoints[x];
@@ -233,15 +227,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var itemsX = attributes.items;
 				var itemsXX = attributes.itemsX;
@@ -550,18 +542,17 @@ registerBlockType(metadata, {
 		}
 
 		function onChangeStyleIcon(sudoScource, newVal, attr) {
-			var path = sudoScource + "." + attr + "." + breakPointX;
-			let obj = Object.assign({}, icon);
-			const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
-			setAttributes({ icon: updatedObj });
-			var sudoScourceX = { ...updatedObj[sudoScource] };
+			var path = [sudoScource, attr, breakPointX];
+			let obj = Object.assign({}, Icon);
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ Icon: object });
 
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
-				iconSelector
+				IconSelector
 			);
-
-			sudoScourceX[attr][breakPointX] = newVal;
+			var cssPropty = myStore.cssAttrParse(attr);
 
 			let itemsX = Object.assign({}, blockCssY.items);
 
@@ -569,13 +560,10 @@ registerBlockType(metadata, {
 				itemsX[elementSelector] = {};
 			}
 
-			Object.entries(sudoScourceX).map((args) => {
-				var argAttr = myStore.cssAttrParse(args[0]);
-				var argAttrVal = args[1];
-				blockCssY.items[elementSelector][argAttr] = argAttrVal;
-			});
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
-			setAttributes({ blockCssY: { items: blockCssY.items } });
+			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
 		function onRemoveStyleIcon(sudoScource, key) {
@@ -607,7 +595,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -638,7 +625,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItems(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, items);
 			obj[sudoScource] = cssObj;
 
@@ -669,7 +655,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -705,7 +690,26 @@ registerBlockType(metadata, {
 
 		const ALLOWED_BLOCKS = ["post-grid/list-nested-item"];
 
-		const MY_TEMPLATE = [["post-grid/list-nested-item", {}]];
+		const MY_TEMPLATE = [
+			[
+				"post-grid/list-nested-item",
+				{
+					wrapper: {
+						options: { tag: "span", class: "pg-list-nested-item" },
+						styles: {},
+					},
+					icon: {
+						options: {
+							library: "fontAwesome",
+							srcType: "class",
+							iconSrc: "fas fa-chevron-right",
+							class: "icon",
+							position: "before",
+						},
+					},
+				},
+			],
+		];
 
 		const blockProps = useBlockProps({
 			className: ` ${blockId} ${wrapper.options.class}`,
@@ -724,7 +728,10 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="" title="Items" initialOpen={false}>
+					<div
+						className="pg-setting-input-text"
+						title="Items"
+						initialOpen={false}>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -1040,10 +1047,10 @@ registerBlockType(metadata, {
 											value={icon.options.position}
 											options={[
 												{ label: "Choose...", value: "" },
-												{ label: "Left", value: "left" },
+												// { label: "Left", value: "left" },
 												{ label: "Before Text", value: "before" },
 												{ label: "After Text", value: "after" },
-												{ label: "Right", value: "right" },
+												// { label: "Right", value: "right" },
 											]}
 											onChange={(newVal) => {
 												var options = { ...icon.options, position: newVal };

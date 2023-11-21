@@ -66,14 +66,10 @@ import {
 } from "@wordpress/block-editor";
 require("fslightbox");
 
-import IconToggle from "../../components/icon-toggle";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
+
 import PGDropdown from "../../components/dropdown";
-import PGtoggle from "../../components/toggle";
-import colorsPresets from "../../colors-presets";
-import PGcssDisplay from "../../components/css-display";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import MyImage from "./placeholder.jpg";
@@ -145,7 +141,6 @@ registerBlockType(metadata, {
 		var linkSelector = "";
 		var imgSelector = "";
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [loading, setLoading] = useState(false);
@@ -294,12 +289,12 @@ registerBlockType(metadata, {
 						//var crop = res[x].crop
 
 						var label = x.replaceAll("_", " ");
-					imgSizes[x] = {
-						label: label + "(" + width + "*" + height + ")",
-						value: x,
-						height: height,
-						width: width,
-					};
+						imgSizes[x] = {
+							label: label + "(" + width + "*" + height + ")",
+							value: x,
+							height: height,
+							width: width,
+						};
 					});
 
 					setImageSizes(imgSizes);
@@ -425,15 +420,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				let imageX = attributes.image;
 				var wrapperX = attributes.wrapper;
 				var lightboxX = attributes.lightbox;
@@ -474,7 +467,6 @@ registerBlockType(metadata, {
 		}
 
 		// Wrapper CSS Class Selectors
-		
 
 		if (wrapper.options.tag.length != 0) {
 			var imgSelector = blockClass + " img";
@@ -488,15 +480,6 @@ registerBlockType(metadata, {
 			linkSelector = blockClass;
 			var imgSelector = "img" + blockClass;
 		}
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
@@ -693,7 +676,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -724,13 +706,12 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddImage(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, image);
 			obj[sudoScource] = cssObj;
 
 			setAttributes({ image: obj });
 
-			var selector = myStore.getElementSelector(sudoScource, imageSelector);
+			var selector = myStore.getElementSelector(sudoScource, imgSelector);
 			var stylesObj = {};
 
 			Object.entries(cssObj).map((args) => {
@@ -752,6 +733,51 @@ registerBlockType(metadata, {
 			var cssItemsX = { ...cssItems, ...stylesObj };
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+		function onResetImage(sudoScources) {
+			let obj = Object.assign({}, image);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						imgSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ image: obj });
 		}
 
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
@@ -789,7 +815,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="p-3">
+					<div className="px-3 pg-setting-input-text">
 						<PanelRow>
 							<label for="" className="font-medium text-slate-900 ">
 								Image Sources
@@ -1197,6 +1223,7 @@ registerBlockType(metadata, {
 									onAdd={onAddStyleWrapper}
 									onRemove={onRemoveStyleWrapper}
 									onBulkAdd={onBulkAddWrapper}
+									onReset={onResetWrapper}
 								/>
 							</PGtab>
 							<PGtab name="css">
@@ -1243,7 +1270,9 @@ registerBlockType(metadata, {
 									image.options.imgSrcType == "customField") && (
 									<>
 										<div className="mb-4">
-											<label for="" className="font-medium text-slate-900 block pb-2 ">
+											<label
+												for=""
+												className="font-medium text-slate-900 block pb-2 ">
 												Thumbnail Size
 											</label>
 											<PGDropdown
@@ -1257,10 +1286,9 @@ registerBlockType(metadata, {
 													image.options.size == undefined
 														? "Choose"
 														: imageSizes[image.options.size[breakPointX]] ==
-															undefined
+														  undefined
 														? "Choose"
-														: imageSizes[image.options.size[breakPointX]]
-																.label
+														: imageSizes[image.options.size[breakPointX]].label
 												}
 												onChange={setFeaturedImageSize}
 												values={image.options.size[breakPointX]}></PGDropdown>
@@ -1635,7 +1663,8 @@ registerBlockType(metadata, {
 										Custom Attributes
 									</label>
 									<div
-										className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+										// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+										className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
 										onClick={(ev) => {
 											var sdsd = image.options.linkAttr.concat({
 												id: "",
@@ -1709,6 +1738,7 @@ registerBlockType(metadata, {
 									onAdd={onAddStyleImage}
 									onRemove={onRemoveStyleImage}
 									onBulkAdd={onBulkAddImage}
+									onReset={onResetImage}
 								/>
 							</PGtab>
 

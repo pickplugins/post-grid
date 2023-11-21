@@ -124,7 +124,7 @@ function Html(props) {
 
             </Button>
           )}
-          renderContent={() => <div className='w-32'>
+          renderContent={() => <div className='w-32 pg-font'>
 
             {Object.entries(unitArgs).map((y) => {
 

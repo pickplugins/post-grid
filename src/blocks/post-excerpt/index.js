@@ -120,7 +120,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -321,8 +320,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
 		// for (var x in breakPoints) {
 
 		//   var item = breakPoints[x];
@@ -337,15 +334,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var postExcerptX = attributes.postExcerpt;
 				var readMoreX = attributes.readMore;
@@ -870,7 +865,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -901,7 +895,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostExcerpt(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, postExcerpt);
 			obj[sudoScource] = cssObj;
 
@@ -932,7 +925,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddReadmore(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, readMore);
 			obj[sudoScource] = cssObj;
 
@@ -963,7 +955,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -994,7 +985,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPrefix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, prefix);
 			obj[sudoScource] = cssObj;
 
@@ -1025,7 +1015,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostfix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, postfix);
 			obj[sudoScource] = cssObj;
 
@@ -1053,6 +1042,117 @@ registerBlockType(metadata, {
 			var cssItemsX = { ...cssItems, ...stylesObj };
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+		function onResetPostExcerpt(sudoScources) {
+			let obj = Object.assign({}, postExcerpt);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						excerptSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ postExcerpt: obj });
+		}
+		function onResetReadMore(sudoScources) {
+			let obj = Object.assign({}, readMore);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						readmoreSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ readMore: obj });
+		}
+		function onResetPrefix(sudoScources) {
+			let obj = Object.assign({}, prefix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						prefixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ prefix: obj });
+		}
+		function onResetPostfix(sudoScources) {
+			let obj = Object.assign({}, postfix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						postfixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ postfix: obj });
 		}
 
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
@@ -1098,166 +1198,70 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
-										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
-										});
-									}}
-								/>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
+					<div className="pg-setting-input-text">
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
 										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
-												blockId: newVal,
+												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Tag
-									</label>
-									<SelectControl
-										label=""
-										value={wrapper.options.tag}
-										options={[
-											{ label: "Choose", value: "" },
-											{ label: "H1", value: "h1" },
-											{ label: "H2", value: "h2" },
-											{ label: "H3", value: "h3" },
-											{ label: "H4", value: "h4" },
-											{ label: "H5", value: "h5" },
-											{ label: "H6", value: "h6" },
-											{ label: "SPAN", value: "span" },
-											{ label: "DIV", value: "div" },
-											{ label: "P", value: "p" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...wrapper.options, tag: newVal };
-											setAttributes({
-												wrapper: { ...wrapper, options: options },
-											});
-										}}
-									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={wrapper}
-									onChange={onPickCssLibraryWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Post Excerpt"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<ToggleControl
-									label="Linked with post?"
-									help={
-										postExcerpt.options.isLink
-											? "Linked with post URL"
-											: "Not linked to post URL."
-									}
-									checked={postExcerpt.options.isLink ? true : false}
-									onChange={(e) => {
-										var options = {
-											...postExcerpt.options,
-											isLink: postExcerpt.options.isLink ? false : true,
-										};
-										setAttributes({
-											postExcerpt: { ...postExcerpt, options: options },
-										});
-									}}
-								/>
-
-								{!postExcerpt.options.isLink && (
 									<PanelRow>
 										<label for="" className="font-medium text-slate-900 ">
-											Custom Tag
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
 										</label>
 										<SelectControl
 											label=""
-											value={postExcerpt.options.tag}
+											value={wrapper.options.tag}
 											options={[
 												{ label: "Choose", value: "" },
 												{ label: "H1", value: "h1" },
@@ -1271,457 +1275,560 @@ registerBlockType(metadata, {
 												{ label: "P", value: "p" },
 											]}
 											onChange={(newVal) => {
-												var options = { ...postExcerpt.options, tag: newVal };
+												var options = { ...wrapper.options, tag: newVal };
 												setAttributes({
-													postExcerpt: { ...postExcerpt, options: options },
+													wrapper: { ...wrapper, options: options },
 												});
 											}}
 										/>
 									</PanelRow>
-								)}
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={wrapper}
+										onChange={onPickCssLibraryWrapper}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-								{postExcerpt.options.isLink && (
-									<div>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Post Excerpt"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<ToggleControl
+										label="Linked with post?"
+										help={
+											postExcerpt.options.isLink
+												? "Linked with post URL"
+												: "Not linked to post URL."
+										}
+										checked={postExcerpt.options.isLink ? true : false}
+										onChange={(e) => {
+											var options = {
+												...postExcerpt.options,
+												isLink: postExcerpt.options.isLink ? false : true,
+											};
+											setAttributes({
+												postExcerpt: { ...postExcerpt, options: options },
+											});
+										}}
+									/>
+
+									{!postExcerpt.options.isLink && (
 										<PanelRow>
 											<label for="" className="font-medium text-slate-900 ">
-												Link Target
+												Custom Tag
 											</label>
-
 											<SelectControl
 												label=""
-												value={postExcerpt.options.linkTarget}
+												value={postExcerpt.options.tag}
 												options={[
-													{ label: "_self", value: "_self" },
-													{ label: "_blank", value: "_blank" },
-													{ label: "_parent", value: "_parent" },
-													{ label: "_top", value: "_top" },
+													{ label: "Choose", value: "" },
+													{ label: "H1", value: "h1" },
+													{ label: "H2", value: "h2" },
+													{ label: "H3", value: "h3" },
+													{ label: "H4", value: "h4" },
+													{ label: "H5", value: "h5" },
+													{ label: "H6", value: "h6" },
+													{ label: "SPAN", value: "span" },
+													{ label: "DIV", value: "div" },
+													{ label: "P", value: "p" },
 												]}
 												onChange={(newVal) => {
-													var options = {
-														...postExcerpt.options,
-														linkTarget: newVal,
-													};
+													var options = { ...postExcerpt.options, tag: newVal };
 													setAttributes({
 														postExcerpt: { ...postExcerpt, options: options },
 													});
 												}}
 											/>
 										</PanelRow>
+									)}
 
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Custom Url
-											</label>
+									{postExcerpt.options.isLink && (
+										<div>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Link Target
+												</label>
 
-											<div className="relative">
-												<Button
-													className={linkPickerExcerpt ? "!bg-gray-400" : ""}
-													icon={link}
-													onClick={(ev) => {
-														setLinkPickerExcerpt((prev) => !prev);
-													}}></Button>
-												{postExcerpt.options.customUrl.length > 0 && (
+												<SelectControl
+													label=""
+													value={postExcerpt.options.linkTarget}
+													options={[
+														{ label: "_self", value: "_self" },
+														{ label: "_blank", value: "_blank" },
+														{ label: "_parent", value: "_parent" },
+														{ label: "_top", value: "_top" },
+													]}
+													onChange={(newVal) => {
+														var options = {
+															...postExcerpt.options,
+															linkTarget: newVal,
+														};
+														setAttributes({
+															postExcerpt: { ...postExcerpt, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Url
+												</label>
+
+												<div className="relative">
 													<Button
-														className="!text-red-500 ml-2"
-														icon={linkOff}
+														className={linkPickerExcerpt ? "!bg-gray-400" : ""}
+														icon={link}
 														onClick={(ev) => {
-															var options = {
-																...postExcerpt.options,
-																customUrl: "",
-															};
-															setAttributes({
-																postExcerpt: {
-																	...postExcerpt,
-																	options: options,
-																},
-															});
+															setLinkPickerExcerpt((prev) => !prev);
 														}}></Button>
-												)}
-												{linkPickerExcerpt && (
-													<Popover position="bottom right">
-														<LinkControl
-															settings={[]}
-															value={postExcerpt.options.customUrl}
-															onChange={(newVal) => {
+													{postExcerpt.options.customUrl.length > 0 && (
+														<Button
+															className="!text-red-500 ml-2"
+															icon={linkOff}
+															onClick={(ev) => {
 																var options = {
 																	...postExcerpt.options,
-																	customUrl: newVal.url,
+																	customUrl: "",
 																};
-
 																setAttributes({
 																	postExcerpt: {
 																		...postExcerpt,
 																		options: options,
 																	},
 																});
-																//setLinkPickerpostExcerpt(false)
-															}}
-														/>
+															}}></Button>
+													)}
+													{linkPickerExcerpt && (
+														<Popover position="bottom right">
+															<LinkControl
+																settings={[]}
+																value={postExcerpt.options.customUrl}
+																onChange={(newVal) => {
+																	var options = {
+																		...postExcerpt.options,
+																		customUrl: newVal.url,
+																	};
 
-														<div className="p-2">
-															<span className="font-bold">Linked to:</span>{" "}
-															{postExcerpt.options.customUrl.length != 0
-																? postExcerpt.options.customUrl
-																: "No link"}{" "}
+																	setAttributes({
+																		postExcerpt: {
+																			...postExcerpt,
+																			options: options,
+																		},
+																	});
+																	//setLinkPickerpostExcerpt(false)
+																}}
+															/>
+
+															<div className="p-2">
+																<span className="font-bold">Linked to:</span>{" "}
+																{postExcerpt.options.customUrl.length != 0
+																	? postExcerpt.options.customUrl
+																	: "No link"}{" "}
+															</div>
+														</Popover>
+													)}
+												</div>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Attributes
+												</label>
+												<div
+													// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+													className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+													onClick={(ev) => {
+														var sdsd =
+															postExcerpt.options.linkAttr != undefined
+																? postExcerpt.options.linkAttr.concat({
+																		id: "",
+																		val: "",
+																  })
+																: [];
+
+														var options = {
+															...postExcerpt.options,
+															linkAttr: sdsd,
+														};
+														setAttributes({
+															postExcerpt: { ...postExcerpt, options: options },
+														});
+													}}>
+													Add
+												</div>
+											</PanelRow>
+
+											{postExcerpt.options.linkAttr != undefined &&
+												postExcerpt.options.linkAttr.map((x, i) => {
+													return (
+														<div className="my-2">
+															<PanelRow>
+																<InputControl
+																	placeholder="Name"
+																	className="mr-2"
+																	value={postExcerpt.options.linkAttr[i].id}
+																	onChange={(newVal) => {
+																		postExcerpt.options.linkAttr[i].id = newVal;
+
+																		var ssdsd =
+																			postExcerpt.options.linkAttr.concat([]);
+
+																		var options = {
+																			...postExcerpt.options,
+																			linkAttr: ssdsd,
+																		};
+																		setAttributes({
+																			postExcerpt: {
+																				...postExcerpt,
+																				options: options,
+																			},
+																		});
+																	}}
+																/>
+
+																<InputControl
+																	className="mr-2"
+																	placeholder="Value"
+																	value={x.val}
+																	onChange={(newVal) => {
+																		postExcerpt.options.linkAttr[i].val =
+																			newVal;
+																		var ssdsd =
+																			postExcerpt.options.linkAttr.concat([]);
+
+																		var options = {
+																			...postExcerpt.options,
+																			linkAttr: ssdsd,
+																		};
+																		setAttributes({
+																			postExcerpt: {
+																				...postExcerpt,
+																				options: options,
+																			},
+																		});
+																	}}
+																/>
+																<span
+																	className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
+																	onClick={(ev) => {
+																		postExcerpt.options.linkAttr.splice(i, 1);
+
+																		var ssdsd =
+																			postExcerpt.options.linkAttr.concat([]);
+
+																		var options = {
+																			...postExcerpt.options,
+																			linkAttr: ssdsd,
+																		};
+																		setAttributes({
+																			postExcerpt: {
+																				...postExcerpt,
+																				options: options,
+																			},
+																		});
+																	}}></span>
+															</PanelRow>
 														</div>
-													</Popover>
-												)}
-											</div>
-										</PanelRow>
+													);
+												})}
+										</div>
+									)}
 
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Custom Attributes
-											</label>
-											<div
-												className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
-												onClick={(ev) => {
-													var sdsd =
-														postExcerpt.options.linkAttr != undefined
-															? postExcerpt.options.linkAttr.concat({
-																	id: "",
-																	val: "",
-															  })
-															: [];
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Limit By
+										</label>
 
-													var options = {
-														...postExcerpt.options,
-														linkAttr: sdsd,
-													};
-													setAttributes({
-														postExcerpt: { ...postExcerpt, options: options },
-													});
-												}}>
-												Add
-											</div>
-										</PanelRow>
+										<PGDropdown
+											position="bottom right"
+											btnClass="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+											// variant="secondary"
+											options={limitByArgs}
+											// buttonTitle="Choose"
+											buttonTitle={
+												postExcerpt.options.limitBy == undefined
+													? "Choose"
+													: limitByArgs[postExcerpt.options.limitBy] ==
+													  undefined
+													? "Choose"
+													: limitByArgs[postExcerpt.options.limitBy].label
+											}
+											onChange={setLimitBy}
+											values={[]}></PGDropdown>
+									</PanelRow>
 
-										{postExcerpt.options.linkAttr != undefined &&
-											postExcerpt.options.linkAttr.map((x, i) => {
-												return (
-													<div className="my-2">
-														<PanelRow>
-															<InputControl
-																placeholder="Name"
-																className="mr-2"
-																value={postExcerpt.options.linkAttr[i].id}
-																onChange={(newVal) => {
-																	postExcerpt.options.linkAttr[i].id = newVal;
-
-																	var ssdsd =
-																		postExcerpt.options.linkAttr.concat([]);
-
-																	var options = {
-																		...postExcerpt.options,
-																		linkAttr: ssdsd,
-																	};
-																	setAttributes({
-																		postExcerpt: {
-																			...postExcerpt,
-																			options: options,
-																		},
-																	});
-																}}
-															/>
-
-															<InputControl
-																className="mr-2"
-																placeholder="Value"
-																value={x.val}
-																onChange={(newVal) => {
-																	postExcerpt.options.linkAttr[i].val = newVal;
-																	var ssdsd =
-																		postExcerpt.options.linkAttr.concat([]);
-
-																	var options = {
-																		...postExcerpt.options,
-																		linkAttr: ssdsd,
-																	};
-																	setAttributes({
-																		postExcerpt: {
-																			...postExcerpt,
-																			options: options,
-																		},
-																	});
-																}}
-															/>
-															<span
-																className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
-																onClick={(ev) => {
-																	postExcerpt.options.linkAttr.splice(i, 1);
-
-																	var ssdsd =
-																		postExcerpt.options.linkAttr.concat([]);
-
-																	var options = {
-																		...postExcerpt.options,
-																		linkAttr: ssdsd,
-																	};
-																	setAttributes({
-																		postExcerpt: {
-																			...postExcerpt,
-																			options: options,
-																		},
-																	});
-																}}></span>
-														</PanelRow>
-													</div>
-												);
-											})}
-									</div>
-								)}
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Limit By
-									</label>
-
-									<PGDropdown
-										position="bottom right"
-										btnClass="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
-										// variant="secondary"
-										options={limitByArgs}
-										// buttonTitle="Choose"
-										buttonTitle={
-											postExcerpt.options.limitBy == undefined
-												? "Choose"
-												: limitByArgs[postExcerpt.options.limitBy] == undefined
-												? "Choose"
-												: limitByArgs[postExcerpt.options.limitBy].label
-										}
-										onChange={setLimitBy}
-										values={[]}></PGDropdown>
-								</PanelRow>
-
-								{/* {postExcerpt.options.limitBy.length > 0 && (
+									{/* {postExcerpt.options.limitBy.length > 0 && (
 									<div className="bg-gray-500 my-3 text-white p-2">
 										{limitByArgs[postExcerpt.options.limitBy].label}
 									</div>
 								)} */}
 
-								{(postExcerpt.options.limitBy == "word" ||
-									postExcerpt.options.limitBy == "character") && (
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Limit Count
-										</label>
+									{(postExcerpt.options.limitBy == "word" ||
+										postExcerpt.options.limitBy == "character") && (
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Limit Count
+											</label>
 
-										<InputControl
-											value={postExcerpt.options.limitCount}
-											onChange={(newVal) => {
+											<InputControl
+												value={postExcerpt.options.limitCount}
+												onChange={(newVal) => {
+													var options = {
+														...postExcerpt.options,
+														limitCount: newVal,
+													};
+													setAttributes({
+														postExcerpt: { ...postExcerpt, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									)}
+
+									<PanelRow className="my-3">
+										<label>Excerpt Source</label>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												postExcerpt.options.excerptSource.length == 0
+													? "Choose"
+													: postExcerpt.options.excerptSource
+											}
+											options={excerptSourceArgs}
+											onChange={(option, index) => {
 												var options = {
 													...postExcerpt.options,
-													limitCount: newVal,
+													excerptSource: option.value,
 												};
 												setAttributes({
 													postExcerpt: { ...postExcerpt, options: options },
 												});
 											}}
-										/>
+											values=""></PGDropdown>
 									</PanelRow>
-								)}
 
-								<PanelRow className="my-3">
-									<label>Excerpt Source</label>
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											postExcerpt.options.excerptSource.length == 0
-												? "Choose"
-												: postExcerpt.options.excerptSource
+									{postExcerpt.options.excerptSource == "excerpt" &&
+										currentPostExcerpt.length == 0 && (
+											<div className="text-red-500">Post Excerpt is empty.</div>
+										)}
+
+									{/* {postExcerpt.options.excerptSource == 'content' && currentPostContent.length == 0 && (
+                    <div className='text-red-500'>Post Content is empty.</div>
+                  )} */}
+
+									{postExcerpt.options.excerptSource == "meta" && (
+										<div>
+											<PanelRow className="my-4">
+												<label for="" className="font-medium text-slate-900 ">
+													Meta Field
+												</label>
+												<SelectControl
+													label=""
+													value={postExcerpt.options.excerptSourceMeta}
+													options={[
+														{ label: "Custom", value: "" },
+														{
+															label: "Yoast meta",
+															value: "_yoast_wpseo_metadesc",
+														},
+														{
+															label: "Rank Math meta",
+															value: "rank_math_description",
+														},
+														{
+															label: "AIO SEO meta",
+															value: "_aioseo_og_description",
+														},
+														{
+															label: "SEOPress meta",
+															value: "_seopress_titles_desc",
+														},
+														{
+															label: "WP Meta SEO meta",
+															value: "_metaseo_metadesc",
+														},
+														{
+															label: "The SEO Framework meta",
+															value: "_genesis_description",
+														},
+														{
+															label: "SEO SIMPLE PACK meta",
+															value: "ssp_meta_description",
+														},
+													]}
+													onChange={(newVal) => {
+														var options = {
+															...postExcerpt.options,
+															excerptSourceMeta: newVal,
+														};
+														setAttributes({
+															postExcerpt: { ...postExcerpt, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Meta Key
+												</label>
+												<InputControl
+													value={postExcerpt.options.excerptSourceMeta}
+													onChange={(newVal) => {
+														var options = {
+															...postExcerpt.options,
+															excerptSourceMeta: newVal,
+														};
+														setAttributes({
+															postExcerpt: { ...postExcerpt, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+										</div>
+									)}
+
+									<ToggleControl
+										className="my-4"
+										label="Remove Blocks?"
+										help={
+											postExcerpt.options.removeBlocks
+												? "Blocks will be removed"
+												: "Blocks may output with excerpt."
 										}
-										options={excerptSourceArgs}
-										onChange={(option, index) => {
+										checked={postExcerpt.options.removeBlocks ? true : false}
+										onChange={(e) => {
 											var options = {
 												...postExcerpt.options,
-												excerptSource: option.value,
+												removeBlocks: postExcerpt.options.removeBlocks
+													? false
+													: true,
 											};
 											setAttributes({
 												postExcerpt: { ...postExcerpt, options: options },
 											});
 										}}
-										values=""></PGDropdown>
-								</PanelRow>
+									/>
 
-								{postExcerpt.options.excerptSource == "excerpt" &&
-									currentPostExcerpt.length == 0 && (
-										<div className="text-red-500">Post Excerpt is empty.</div>
+									<ToggleControl
+										className="my-4"
+										label="Remove Shortcodes?"
+										help={
+											postExcerpt.options.removeShortcodes
+												? "Shortcodes will be removed"
+												: "Shortcodes may output with excerpt."
+										}
+										checked={
+											postExcerpt.options.removeShortcodes ? true : false
+										}
+										onChange={(e) => {
+											var options = {
+												...postExcerpt.options,
+												removeShortcodes: postExcerpt.options.removeShortcodes
+													? false
+													: true,
+											};
+											setAttributes({
+												postExcerpt: { ...postExcerpt, options: options },
+											});
+										}}
+									/>
+
+									<ToggleControl
+										className="my-4"
+										label="Keep HTML?"
+										help={
+											postExcerpt.options.keepHtml
+												? "HTML may output with excerpt."
+												: "HTML will be removed"
+										}
+										checked={postExcerpt.options.keepHtml ? true : false}
+										onChange={(e) => {
+											var options = {
+												...postExcerpt.options,
+												keepHtml: postExcerpt.options.keepHtml ? false : true,
+											};
+											setAttributes({
+												postExcerpt: { ...postExcerpt, options: options },
+											});
+										}}
+									/>
+
+									{postExcerpt.options.keepHtml && (
+										<span className="bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white">
+											<a
+												target="_blank"
+												href={
+													"https://pickplugins.com/post-grid/?utm_source=search&utm_term=blockaccordion&utm_campaign=pluginPostGrid&utm_medium=search"
+												}>
+												<span className="underline">Keep HTML</span> Only
+												available in Premium
+											</a>
+										</span>
 									)}
 
-								{/* {postExcerpt.options.excerptSource == 'content' && currentPostContent.length == 0 && (
-                    <div className='text-red-500'>Post Content is empty.</div>
-                  )} */}
+									<ToggleControl
+										className="my-4"
+										label="Enable wpautop()?"
+										help={
+											postExcerpt.options.autoP
+												? "wpautop function will be applied"
+												: "wpautop function will not be applied."
+										}
+										checked={postExcerpt.options.autoP ? true : false}
+										onChange={(e) => {
+											var options = {
+												...postExcerpt.options,
+												autoP: postExcerpt.options.autoP ? false : true,
+											};
+											setAttributes({
+												postExcerpt: { ...postExcerpt, options: options },
+											});
+										}}
+									/>
 
-								{postExcerpt.options.excerptSource == "meta" && (
-									<div>
-										<PanelRow className="my-4">
-											<label for="" className="font-medium text-slate-900 ">
-												Meta Field
-											</label>
-											<SelectControl
-												label=""
-												value={postExcerpt.options.excerptSourceMeta}
-												options={[
-													{ label: "Custom", value: "" },
-													{
-														label: "Yoast meta",
-														value: "_yoast_wpseo_metadesc",
-													},
-													{
-														label: "Rank Math meta",
-														value: "rank_math_description",
-													},
-													{
-														label: "AIO SEO meta",
-														value: "_aioseo_og_description",
-													},
-													{
-														label: "SEOPress meta",
-														value: "_seopress_titles_desc",
-													},
-													{
-														label: "WP Meta SEO meta",
-														value: "_metaseo_metadesc",
-													},
-													{
-														label: "The SEO Framework meta",
-														value: "_genesis_description",
-													},
-													{
-														label: "SEO SIMPLE PACK meta",
-														value: "ssp_meta_description",
-													},
-												]}
-												onChange={(newVal) => {
-													var options = {
-														...postExcerpt.options,
-														excerptSourceMeta: newVal,
-													};
-													setAttributes({
-														postExcerpt: { ...postExcerpt, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Custom Meta Key
-											</label>
-											<InputControl
-												value={postExcerpt.options.excerptSourceMeta}
-												onChange={(newVal) => {
-													var options = {
-														...postExcerpt.options,
-														excerptSourceMeta: newVal,
-													};
-													setAttributes({
-														postExcerpt: { ...postExcerpt, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-									</div>
-								)}
-
-								<ToggleControl
-									className="my-4"
-									label="Remove Blocks?"
-									help={
-										postExcerpt.options.removeBlocks
-											? "Blocks will be removed"
-											: "Blocks may output with excerpt."
-									}
-									checked={postExcerpt.options.removeBlocks ? true : false}
-									onChange={(e) => {
-										var options = {
-											...postExcerpt.options,
-											removeBlocks: postExcerpt.options.removeBlocks
-												? false
-												: true,
-										};
-										setAttributes({
-											postExcerpt: { ...postExcerpt, options: options },
-										});
-									}}
-								/>
-
-								<ToggleControl
-									className="my-4"
-									label="Remove Shortcodes?"
-									help={
-										postExcerpt.options.removeShortcodes
-											? "Shortcodes will be removed"
-											: "Shortcodes may output with excerpt."
-									}
-									checked={postExcerpt.options.removeShortcodes ? true : false}
-									onChange={(e) => {
-										var options = {
-											...postExcerpt.options,
-											removeShortcodes: postExcerpt.options.removeShortcodes
-												? false
-												: true,
-										};
-										setAttributes({
-											postExcerpt: { ...postExcerpt, options: options },
-										});
-									}}
-								/>
-
-								<ToggleControl
-									className="my-4"
-									label="Keep HTML?"
-									help={
-										postExcerpt.options.keepHtml
-											? "HTML may output with excerpt."
-											: "HTML will be removed"
-									}
-									checked={postExcerpt.options.keepHtml ? true : false}
-									onChange={(e) => {
-										var options = {
-											...postExcerpt.options,
-											keepHtml: postExcerpt.options.keepHtml ? false : true,
-										};
-										setAttributes({
-											postExcerpt: { ...postExcerpt, options: options },
-										});
-									}}
-								/>
-
-								{postExcerpt.options.keepHtml && (
-									<span className="bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white">
-										<a
-											target="_blank"
-											href={
-												"https://pickplugins.com/post-grid/?utm_source=search&utm_term=blockaccordion&utm_campaign=pluginPostGrid&utm_medium=search"
-											}>
-											<span className="underline">Keep HTML</span> Only
-											available in Premium
-										</a>
-									</span>
-								)}
-
-								<ToggleControl
-									className="my-4"
-									label="Enable wpautop()?"
-									help={
-										postExcerpt.options.autoP
-											? "wpautop function will be applied"
-											: "wpautop function will not be applied."
-									}
-									checked={postExcerpt.options.autoP ? true : false}
-									onChange={(e) => {
-										var options = {
-											...postExcerpt.options,
-											autoP: postExcerpt.options.autoP ? false : true,
-										};
-										setAttributes({
-											postExcerpt: { ...postExcerpt, options: options },
-										});
-									}}
-								/>
-
-								{/* <ToggleControl className='my-4'
+									{/* <ToggleControl className='my-4'
                     label="Remove Embeds?"
                     help={postExcerpt.options.removeEmbeds ? 'Embeded will be removed' : 'Embeded may output with excerpt.'}
                     checked={postExcerpt.options.removeEmbeds ? true : false}
@@ -1731,375 +1838,387 @@ registerBlockType(metadata, {
                     }}
                   /> */}
 
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={postExcerpt.options.class}
-									onChange={(newVal) => {
-										var options = { ...postExcerpt.options, class: newVal };
-										setAttributes({
-											postExcerpt: {
-												styles: postExcerpt.styles,
-												options: options,
-											},
-										});
-									}}
-								/>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={postExcerpt}
-									onChange={onChangeStylePostExcerpt}
-									onAdd={onAddStylePostExcerpt}
-									onRemove={onRemoveStylePostExcerpt}
-									onBulkAdd={onBulkAddPostExcerpt}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={postExcerpt}
-									onChange={onPickCssLibraryPostExcerpt}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Read More"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<ToggleControl
-									label="Enable Read more?"
-									help={
-										readMore.options.enable
-											? "Read more enabled"
-											: "Read more disabled."
-									}
-									checked={readMore.options.enable ? true : false}
-									onChange={(e) => {
-										var options = {
-											...readMore.options,
-											enable: readMore.options.enable ? false : true,
-										};
-										setAttributes({
-											readMore: { ...readMore, options: options },
-										});
-									}}
-								/>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Read More Text
-									</label>
-
-									<InputControl
-										value={readMore.options.text}
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={postExcerpt.options.class}
 										onChange={(newVal) => {
-											var options = { ...readMore.options, text: newVal };
+											var options = { ...postExcerpt.options, class: newVal };
 											setAttributes({
-												readMore: { ...readMore, options: options },
+												postExcerpt: {
+													styles: postExcerpt.styles,
+													options: options,
+												},
 											});
 										}}
 									/>
-								</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={postExcerpt}
+										onChange={onChangeStylePostExcerpt}
+										onAdd={onAddStylePostExcerpt}
+										onRemove={onRemoveStylePostExcerpt}
+										onBulkAdd={onBulkAddPostExcerpt}
+										onReset={onResetPostExcerpt}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={postExcerpt}
+										onChange={onPickCssLibraryPostExcerpt}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-								<div className="my-4">
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Read More"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
 									<ToggleControl
-										label="Linked with post?"
+										label="Enable Read more?"
 										help={
-											readMore.options.isLink
-												? "Linked with post URL"
-												: "Not linked to post URL."
+											readMore.options.enable
+												? "Read more enabled"
+												: "Read more disabled."
 										}
-										checked={readMore.options.isLink ? true : false}
+										checked={readMore.options.enable ? true : false}
 										onChange={(e) => {
 											var options = {
 												...readMore.options,
-												isLink: readMore.options.isLink ? false : true,
+												enable: readMore.options.enable ? false : true,
 											};
 											setAttributes({
 												readMore: { ...readMore, options: options },
 											});
 										}}
 									/>
-								</div>
 
-								{readMore.options.isLink && (
-									<div>
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Link Target
-											</label>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Read More Text
+										</label>
 
-											<SelectControl
-												label=""
-												value={readMore.options.linkTarget}
-												options={[
-													{ label: "_self", value: "_self" },
-													{ label: "_blank", value: "_blank" },
-													{ label: "_parent", value: "_parent" },
-													{ label: "_top", value: "_top" },
-												]}
-												onChange={(newVal) => {
-													var options = {
-														...readMore.options,
-														linkTarget: newVal,
-													};
-													setAttributes({
-														readMore: { ...readMore, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
+										<InputControl
+											value={readMore.options.text}
+											onChange={(newVal) => {
+												var options = { ...readMore.options, text: newVal };
+												setAttributes({
+													readMore: { ...readMore, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
 
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Custom Url
-											</label>
+									<div className="my-4">
+										<ToggleControl
+											label="Linked with post?"
+											help={
+												readMore.options.isLink
+													? "Linked with post URL"
+													: "Not linked to post URL."
+											}
+											checked={readMore.options.isLink ? true : false}
+											onChange={(e) => {
+												var options = {
+													...readMore.options,
+													isLink: readMore.options.isLink ? false : true,
+												};
+												setAttributes({
+													readMore: { ...readMore, options: options },
+												});
+											}}
+										/>
+									</div>
 
-											<div className="relative">
-												<Button
-													className={linkPickerReadmore ? "!bg-gray-400" : ""}
-													icon={link}
-													onClick={(ev) => {
-														setLinkPickerReadmore((prev) => !prev);
-													}}></Button>
-												{readMore.options.customUrl.length > 0 && (
+									{readMore.options.isLink && (
+										<div>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Link Target
+												</label>
+
+												<SelectControl
+													label=""
+													value={readMore.options.linkTarget}
+													options={[
+														{ label: "_self", value: "_self" },
+														{ label: "_blank", value: "_blank" },
+														{ label: "_parent", value: "_parent" },
+														{ label: "_top", value: "_top" },
+													]}
+													onChange={(newVal) => {
+														var options = {
+															...readMore.options,
+															linkTarget: newVal,
+														};
+														setAttributes({
+															readMore: { ...readMore, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Url
+												</label>
+
+												<div className="relative">
 													<Button
-														className="!text-red-500 ml-2"
-														icon={linkOff}
+														className={linkPickerReadmore ? "!bg-gray-400" : ""}
+														icon={link}
 														onClick={(ev) => {
-															var options = {
-																...readMore.options,
-																customUrl: "",
-															};
-															setAttributes({
-																readMore: { ...readMore, options: options },
-															});
+															setLinkPickerReadmore((prev) => !prev);
 														}}></Button>
-												)}
-												{linkPickerReadmore && (
-													<Popover position="bottom right">
-														<LinkControl
-															settings={[]}
-															value={readMore.options.customUrl}
-															onChange={(newVal) => {
+													{readMore.options.customUrl.length > 0 && (
+														<Button
+															className="!text-red-500 ml-2"
+															icon={linkOff}
+															onClick={(ev) => {
 																var options = {
 																	...readMore.options,
-																	customUrl: newVal.url,
+																	customUrl: "",
 																};
-
 																setAttributes({
 																	readMore: { ...readMore, options: options },
 																});
-																//setLinkPickerReadmore(false)
-															}}
-														/>
+															}}></Button>
+													)}
+													{linkPickerReadmore && (
+														<Popover position="bottom right">
+															<LinkControl
+																settings={[]}
+																value={readMore.options.customUrl}
+																onChange={(newVal) => {
+																	var options = {
+																		...readMore.options,
+																		customUrl: newVal.url,
+																	};
 
-														<div className="p-2">
-															<span className="font-bold">Linked to:</span>{" "}
-															{readMore.options.customUrl.length != 0
-																? readMore.options.customUrl
-																: "No link"}{" "}
+																	setAttributes({
+																		readMore: { ...readMore, options: options },
+																	});
+																	//setLinkPickerReadmore(false)
+																}}
+															/>
+
+															<div className="p-2">
+																<span className="font-bold">Linked to:</span>{" "}
+																{readMore.options.customUrl.length != 0
+																	? readMore.options.customUrl
+																	: "No link"}{" "}
+															</div>
+														</Popover>
+													)}
+												</div>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Attributes
+												</label>
+												<div
+													// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+													className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+													onClick={(ev) => {
+														var sdsd = readMore.options.linkAttr.concat({
+															id: "",
+															val: "",
+														});
+
+														var options = {
+															...readMore.options,
+															linkAttr: sdsd,
+														};
+														setAttributes({
+															readMore: { ...readMore, options: options },
+														});
+													}}>
+													Add
+												</div>
+											</PanelRow>
+
+											{readMore.options.linkAttr != undefined &&
+												readMore.options.linkAttr.map((x, i) => {
+													return (
+														<div className="my-2">
+															<PanelRow>
+																<InputControl
+																	placeholder="Name"
+																	className="mr-2"
+																	value={readMore.options.linkAttr[i].id}
+																	onChange={(newVal) => {
+																		readMore.options.linkAttr[i].id = newVal;
+
+																		var ssdsd =
+																			readMore.options.linkAttr.concat([]);
+
+																		var options = {
+																			...readMore.options,
+																			linkAttr: ssdsd,
+																		};
+																		setAttributes({
+																			readMore: {
+																				...readMore,
+																				options: options,
+																			},
+																		});
+																	}}
+																/>
+
+																<InputControl
+																	className="mr-2"
+																	placeholder="Value"
+																	value={x.val}
+																	onChange={(newVal) => {
+																		readMore.options.linkAttr[i].val = newVal;
+																		var ssdsd =
+																			readMore.options.linkAttr.concat([]);
+
+																		var options = {
+																			...readMore.options,
+																			linkAttr: ssdsd,
+																		};
+																		setAttributes({
+																			readMore: {
+																				...readMore,
+																				options: options,
+																			},
+																		});
+																	}}
+																/>
+																<span
+																	className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
+																	onClick={(ev) => {
+																		readMore.options.linkAttr.splice(i, 1);
+
+																		var ssdsd =
+																			readMore.options.linkAttr.concat([]);
+
+																		var options = {
+																			...readMore.options,
+																			linkAttr: ssdsd,
+																		};
+																		setAttributes({
+																			readMore: {
+																				...readMore,
+																				options: options,
+																			},
+																		});
+																	}}></span>
+															</PanelRow>
 														</div>
-													</Popover>
-												)}
-											</div>
-										</PanelRow>
+													);
+												})}
+										</div>
+									)}
 
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Custom Attributes
-											</label>
-											<div
-												className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
-												onClick={(ev) => {
-													var sdsd = readMore.options.linkAttr.concat({
-														id: "",
-														val: "",
-													});
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={readMore.options.class}
+										onChange={(newVal) => {
+											var options = { ...readMore.options, class: newVal };
+											setAttributes({
+												readMore: { styles: readMore.styles, options: options },
+											});
+										}}
+									/>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={readMore}
+										onChange={onChangeStyleReadmore}
+										onAdd={onAddStyleReadmore}
+										onRemove={onRemoveStyleReadmore}
+										onBulkAdd={onBulkAddReadmore}
+										onReset={onResetReadMore}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={readMore}
+										onChange={onPickCssLibraryReadmore}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-													var options = { ...readMore.options, linkAttr: sdsd };
-													setAttributes({
-														readMore: { ...readMore, options: options },
-													});
-												}}>
-												Add
-											</div>
-										</PanelRow>
-
-										{readMore.options.linkAttr != undefined &&
-											readMore.options.linkAttr.map((x, i) => {
-												return (
-													<div className="my-2">
-														<PanelRow>
-															<InputControl
-																placeholder="Name"
-																className="mr-2"
-																value={readMore.options.linkAttr[i].id}
-																onChange={(newVal) => {
-																	readMore.options.linkAttr[i].id = newVal;
-
-																	var ssdsd = readMore.options.linkAttr.concat(
-																		[]
-																	);
-
-																	var options = {
-																		...readMore.options,
-																		linkAttr: ssdsd,
-																	};
-																	setAttributes({
-																		readMore: { ...readMore, options: options },
-																	});
-																}}
-															/>
-
-															<InputControl
-																className="mr-2"
-																placeholder="Value"
-																value={x.val}
-																onChange={(newVal) => {
-																	readMore.options.linkAttr[i].val = newVal;
-																	var ssdsd = readMore.options.linkAttr.concat(
-																		[]
-																	);
-
-																	var options = {
-																		...readMore.options,
-																		linkAttr: ssdsd,
-																	};
-																	setAttributes({
-																		readMore: { ...readMore, options: options },
-																	});
-																}}
-															/>
-															<span
-																className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
-																onClick={(ev) => {
-																	readMore.options.linkAttr.splice(i, 1);
-
-																	var ssdsd = readMore.options.linkAttr.concat(
-																		[]
-																	);
-
-																	var options = {
-																		...readMore.options,
-																		linkAttr: ssdsd,
-																	};
-																	setAttributes({
-																		readMore: { ...readMore, options: options },
-																	});
-																}}></span>
-														</PanelRow>
-													</div>
-												);
-											})}
-									</div>
-								)}
-
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={readMore.options.class}
-									onChange={(newVal) => {
-										var options = { ...readMore.options, class: newVal };
-										setAttributes({
-											readMore: { styles: readMore.styles, options: options },
-										});
-									}}
-								/>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={readMore}
-									onChange={onChangeStyleReadmore}
-									onAdd={onAddStyleReadmore}
-									onRemove={onRemoveStyleReadmore}
-									onBulkAdd={onBulkAddReadmore}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={readMore}
-									onChange={onPickCssLibraryReadmore}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Prefix"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="Prefix"
-									placeholder="Add Class"
-									value={prefix.options.text}
-									onChange={(newVal) => {
-										var options = { ...prefix.options, text: newVal };
-										setAttributes({
-											prefix: { styles: prefix.styles, options: options },
-										});
-									}}
-								/>
-								{/* <PanelRow>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Prefix"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="Prefix"
+										placeholder="Add Class"
+										value={prefix.options.text}
+										onChange={(newVal) => {
+											var options = { ...prefix.options, text: newVal };
+											setAttributes({
+												prefix: { styles: prefix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 									<label for=""  className="font-medium text-slate-900 " >Prefix</label>
 
 									<InputControl
@@ -2112,69 +2231,70 @@ registerBlockType(metadata, {
 										}}
 									/>
 								</PanelRow> */}
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={prefix}
-									onChange={onChangeStylePrefix}
-									onAdd={onAddStylePrefix}
-									onRemove={onRemoveStylePrefix}
-									onBulkAdd={onBulkAddPrefix}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={prefix}
-									onChange={onPickCssLibraryPrefix}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={prefix}
+										onChange={onChangeStylePrefix}
+										onAdd={onAddStylePrefix}
+										onRemove={onRemoveStylePrefix}
+										onBulkAdd={onBulkAddPrefix}
+										onReset={onResetPrefix}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={prefix}
+										onChange={onPickCssLibraryPrefix}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Postfix"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="Postfix"
-									placeholder="Add Class"
-									value={postfix.options.text}
-									onChange={(newVal) => {
-										var options = { ...postfix.options, text: newVal };
-										setAttributes({
-											postfix: { styles: postfix.styles, options: options },
-										});
-									}}
-								/>
-								{/* <PanelRow>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Postfix"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="Postfix"
+										placeholder="Add Class"
+										value={postfix.options.text}
+										onChange={(newVal) => {
+											var options = { ...postfix.options, text: newVal };
+											setAttributes({
+												postfix: { styles: postfix.styles, options: options },
+											});
+										}}
+									/>
+									{/* <PanelRow>
 									<label for=""  className="font-medium text-slate-900 " >Postfix</label>
 									<InputControl
 										value={postfix.options.text}
@@ -2186,46 +2306,48 @@ registerBlockType(metadata, {
 										}}
 									/>
 								</PanelRow> */}
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={postfix}
-									onChange={onChangeStylePostfix}
-									onAdd={onAddStylePostfix}
-									onRemove={onRemoveStylePostfix}
-									onBulkAdd={onBulkAddPostfix}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={postfix}
-									onChange={onPickCssLibraryPostfix}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"post-excerpt"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={postfix}
+										onChange={onChangeStylePostfix}
+										onAdd={onAddStylePostfix}
+										onRemove={onRemoveStylePostfix}
+										onBulkAdd={onBulkAddPostfix}
+										onReset={onResetPostfix}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={postfix}
+										onChange={onPickCssLibraryPostfix}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"post-excerpt"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
 
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockPostExcerpt",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockPostExcerpt",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 					</div>
 				</InspectorControls>
 

@@ -242,7 +242,7 @@ function Html(props) {
       </div>
 
 
-      <div className='my-2 flex justify-between items-center'>
+      <div className='my-2 flex justify-between items-center pg-setting-css-components'>
 
 
         <label for="">Style</label>
@@ -260,7 +260,7 @@ function Html(props) {
 
             </Button>
           )}
-          renderContent={() => <div className='w-32'>
+          renderContent={() => <div className='w-32 pg-font'>
 
             {Object.entries(styleArgs).map((arg) => {
 
@@ -308,7 +308,7 @@ function Html(props) {
       </div>
       <div className='my-2'>
         <label for="">Thickness</label>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center pg-setting-css-components'>
 
 
           <InputControl
@@ -346,7 +346,7 @@ function Html(props) {
 
                 </Button>
               )}
-              renderContent={() => <div className='w-32'>
+              renderContent={() => <div className='w-32 pg-font'>
 
                 {Object.entries(unitArgs).map((y) => {
 

@@ -5,23 +5,15 @@
   "title": "Post Query - Pagination",
   "textdomain": "post-grid",
   "category": "post-grid",
-  "parent": ["post-grid/post-grid"],
-  "usesContext": [
-    "postId",
-    "loopIndex",
-    "postType",
-    "queryId",
-    "post-grid/postGridId",
-		"post-grid/pagination",
-		"post-grid/paginationItem",
-		"post-grid/paginationItemActive"
+  "parent": [
+    "post-grid/post-grid"
   ],
-  "providesContext": {
-    "queryId": "queryId",
-    "loopIndex": "loopIndex",
-    "query": "query",
-    "displayLayout": "displayLayout"
-  },
+  "usesContext": [
+    "post-grid/postGridId",
+    "post-grid/pagination",
+    "post-grid/paginationItem",
+    "post-grid/paginationItemActive"
+  ],
   "supports": {
     "align": [
       "left",
@@ -37,8 +29,8 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "pagination",
-          "type": "",
+          "class": "pagination pg-post-query-pagination",
+          "type": "normal",
           "maxPageNum": "5",
           "prevText": "Previous",
           "nextText": "Next",
@@ -51,23 +43,7 @@
             "iconSrc": ""
           }
         },
-        "styles": {
-          "margin": {
-            "Desktop": "20px 0px 20px 0px"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "justifyContent": {
-            "Desktop": "center"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "gap": {
-            "Desktop": "1em"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationItem": {
@@ -76,23 +52,7 @@
         "options": {
           "class": "page-numbers "
         },
-        "styles": {
-          "color": {
-            "Desktop": "#ffffff"
-          },
-          "fontSize": {
-            "Desktop": "16px"
-          },
-          "padding": {
-            "Desktop": "5px 15px 5px 15px"
-          },
-          "backgroundColor": {
-            "Desktop": "#2445ffab"
-          },
-          "borderRadius": {
-            "Desktop": "5px 5px 5px 5px"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationItemActive": {
@@ -101,11 +61,7 @@
         "options": {
           "class": "page-numbers "
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#3223cb"
-          }
-        }
+        "styles": {}
       }
     },
     "blockId": {

@@ -59,15 +59,11 @@ import {
 	more,
 	close,
 	brush,
-	mediaAndText
+	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -156,7 +152,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -274,15 +269,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockId: blockIdX });
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function onChangeStyleHeader(sudoScource, newVal, attr) {
 			var path = [sudoScource, attr, breakPointX];
@@ -866,7 +852,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddHeader(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, header);
 			obj[sudoScource] = cssObj;
 
@@ -896,7 +881,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 		function onBulkAddHeaderLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, headerLabel);
 			obj[sudoScource] = cssObj;
 
@@ -929,7 +913,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 		function onBulkAddLabelIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, labelIcon);
 			obj[sudoScource] = cssObj;
 
@@ -959,7 +942,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 		function onBulkAddLabelCounter(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, labelCounter);
 			obj[sudoScource] = cssObj;
 
@@ -992,7 +974,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 		function onBulkAddContent(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, content);
 			obj[sudoScource] = cssObj;
 
@@ -1022,7 +1003,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -1211,15 +1191,15 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div
-						className="bg-red-500 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 text-center text-white rounded flex justify-between items-center"
-						onClick={(ev) => {
-							removeChild();
-						}}>
-						<span>Remove Item</span>
-						<Icon fill="white" icon={close} />
-					</div>
-					<div className="px-3">
+					<div className="pg-setting-input-text">
+						<div
+							className="bg-red-500 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 text-center text-white rounded flex justify-between items-center"
+							onClick={(ev) => {
+								removeChild();
+							}}>
+							<span>Remove Item</span>
+							<Icon fill="white" icon={close} />
+						</div>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Header"
@@ -1354,6 +1334,23 @@ registerBlockType(metadata, {
 									},
 								]}>
 								<PGtab name="options">
+									<label for="" className="font-medium text-slate-900 ">
+										Header Label Text
+									</label>
+									<div className="border border-gray-600 p-2 min-h-[75px] resize-y rounded-[6px]  ">
+										<RichText
+											tagName={"span"}
+											value={headerLabel.options.text}
+											allowedFormats={["core/bold", "core/italic", "core/link"]}
+											onChange={(newVal) => {
+												var options = { ...headerLabel.options, text: newVal };
+												setAttributes({
+													headerLabel: { ...headerLabel, options: options },
+												});
+											}}
+											placeholder={__("Start Writing...")}
+										/>
+									</div>
 									<PanelRow>
 										<label for="" className="font-medium text-slate-900 ">
 											Wrapper Tag

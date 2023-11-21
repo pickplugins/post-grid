@@ -40,7 +40,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "pg-masonry-wrap-item"
+          "class": "pg-flex-wrap-item"
         },
         "styles": {}
       }

@@ -37,7 +37,7 @@
       "default": {
         "options": {
           "tag": "ul",
-          "class": ""
+          "class": "pg-menu"
         },
         "styles": {
           "display": {
@@ -50,12 +50,43 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "",
+          "class": "pg-sub-menu",
           "type": ""
         },
         "styles": {
           "backgroundColor": {
             "Desktop": ""
+          }
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-menu-link",
+          "text": "Label",
+          "url": ""
+        },
+        "styles": {
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-menu-icon"
+        },
+        "styles": {
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 0px"
           }
         }
       }

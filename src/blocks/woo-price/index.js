@@ -63,15 +63,10 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
-import PGcssDisplay from "../../components/css-display";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
@@ -132,7 +127,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 		var defaultProductData = {
 			ID: 1409,
@@ -216,15 +210,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var currencyX = attributes.currency;
 				var prefixX = attributes.prefix;
@@ -803,18 +795,17 @@ registerBlockType(metadata, {
 		}
 
 		function onChangeStylePostfix(sudoScource, newVal, attr) {
-			var path = sudoScource + "." + attr + "." + breakPointX;
+			var path = [sudoScource, attr, breakPointX];
 			let obj = Object.assign({}, postfix);
-			const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
-			setAttributes({ postfix: updatedObj });
-			var sudoScourceX = { ...updatedObj[sudoScource] };
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ postfix: object });
 
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
 				postfixSelector
 			);
-
-			sudoScourceX[attr][breakPointX] = newVal;
+			var cssPropty = myStore.cssAttrParse(attr);
 
 			let itemsX = Object.assign({}, blockCssY.items);
 
@@ -822,13 +813,10 @@ registerBlockType(metadata, {
 				itemsX[elementSelector] = {};
 			}
 
-			Object.entries(sudoScourceX).map((args) => {
-				var argAttr = myStore.cssAttrParse(args[0]);
-				var argAttrVal = args[1];
-				blockCssY.items[elementSelector][argAttr] = argAttrVal;
-			});
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
-			setAttributes({ blockCssY: { items: blockCssY.items } });
+			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
 		function onRemoveStylePostfix(sudoScource, key) {
@@ -880,6 +868,386 @@ registerBlockType(metadata, {
 			);
 		};
 
+		// add bulk style start
+
+		function onBulkAddWrapper(sudoScource, cssObj) {
+			let obj = Object.assign({}, wrapper);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ wrapper: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddPrefix(sudoScource, cssObj) {
+			let obj = Object.assign({}, prefix);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ prefix: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, prefixSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddPostfix(sudoScource, cssObj) {
+			let obj = Object.assign({}, postfix);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ postfix: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, postfixSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddCurrency(sudoScource, cssObj) {
+			let obj = Object.assign({}, currency);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ currency: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, currencySelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddRegular(sudoScource, cssObj) {
+			let obj = Object.assign({}, regular);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ regular: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, regularSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddDiscounted(sudoScource, cssObj) {
+			let obj = Object.assign({}, discounted);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ discounted: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				discountedSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onBulkAddIcon(sudoScource, cssObj) {
+			let obj = Object.assign({}, icon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ icon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		// add bulk style end
+
+		// reset style start
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+
+		function onResetPrefix(sudoScources) {
+			let obj = Object.assign({}, prefix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						prefixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ prefix: obj });
+		}
+
+		function onResetCurrency(sudoScources) {
+			let obj = Object.assign({}, currency);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						currencySelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ currency: obj });
+		}
+		function onResetDiscounted(sudoScources) {
+			let obj = Object.assign({}, discounted);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						discountedSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ discounted: obj });
+		}
+		function onResetRegular(sudoScources) {
+			let obj = Object.assign({}, regular);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						regularSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ regular: obj });
+		}
+
+		function onResetPostfix(sudoScources) {
+			let obj = Object.assign({}, postfix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						postfixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ postfix: obj });
+		}
+
+		function onResetIcon(sudoScources) {
+			let obj = Object.assign({}, icon);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						iconSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ icon: obj });
+		}
+
+		// reset style end
+
 		const [iconHtml, setIconHtml] = useState("");
 
 		useEffect(() => {
@@ -927,15 +1295,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
 			ev.preventDefault();
@@ -958,7 +1317,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -1049,6 +1408,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleWrapper}
 										onAdd={onAddStyleWrapper}
 										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1097,6 +1458,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleRegular}
 										onAdd={onAddStyleRegular}
 										onRemove={onRemoveStyleRegular}
+										onBulkAdd={onBulkAddRegular}
+										onReset={onResetRegular}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1146,6 +1509,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleDiscounted}
 											onAdd={onAddStyleDiscounted}
 											onRemove={onRemoveStyleDiscounted}
+											onBulkAdd={onBulkAddDiscounted}
+											onReset={onResetDiscounted}
 										/>
 									</PGtab>
 									<PGtab name="css"></PGtab>
@@ -1189,6 +1554,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleCurrency}
 										onAdd={onAddStyleCurrency}
 										onRemove={onRemoveStyleCurrency}
+										onBulkAdd={onBulkAddCurrency}
+										onReset={onResetCurrency}
 									/>
 								</PGtab>
 								<PGtab name="css"></PGtab>
@@ -1267,6 +1634,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleIcon}
 										onAdd={onAddStyleIcon}
 										onRemove={onRemoveStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+										onReset={onResetIcon}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1328,6 +1697,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStylePrefix}
 										onAdd={onAddStylePrefix}
 										onRemove={onRemoveStylePrefix}
+										onBulkAdd={onBulkAddPrefix}
+										onReset={onResetPrefix}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1389,6 +1760,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStylePostfix}
 										onAdd={onAddStylePostfix}
 										onRemove={onRemoveStylePostfix}
+										onBulkAdd={onBulkAddPostfix}
+										onReset={onResetPostfix}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1483,7 +1856,6 @@ registerBlockType(metadata, {
 									{productData.type == "variable" && (
 										<>
 											<span className="regular">
-												{" "}
 												<span
 													className="currency"
 													dangerouslySetInnerHTML={{
@@ -1492,12 +1864,8 @@ registerBlockType(metadata, {
 												/>
 												{productData.min_price}
 											</span>
+											<span className="regular">{separator.options.text}</span>
 											<span className="regular">
-												{" "}
-												{separator.options.text}{" "}
-											</span>
-											<span className="regular">
-												{" "}
 												<span
 													className="currency"
 													dangerouslySetInnerHTML={{

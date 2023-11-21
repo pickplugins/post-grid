@@ -47,7 +47,7 @@ import {
 	close,
 	menu,
 	brush,
-	mediaAndText
+	mediaAndText,
 } from "@wordpress/icons";
 
 import { applyFilters } from "@wordpress/hooks";
@@ -64,13 +64,13 @@ const { RawHTML } = wp.element;
 import { store } from "../../store";
 
 import IconToggle from "../../components/icon-toggle";
-import BreakpointToggle from "../../components/breakpoint-toggle";
+
 import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
-import Typography from "../../components/typography";
+
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import PGcssDisplay from "../../components/css-display";
+
 import PGIconPicker from "../../components/icon-picker";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -234,8 +234,7 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
@@ -996,12 +995,6 @@ registerBlockType(metadata, {
 		let isProFeature = applyFilters("isProFeature", true);
 
 		function addMedia(option, index) {
-			//var isExist = elements.items.find(x => x.label === option.label);s
-
-			//if (isExist == undefined) {
-
-			//}
-
 			var elementsX = elements.items.push(option);
 			setAttributes({ elements: { ...elements, items: elements.items } });
 		}
@@ -1283,7 +1276,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -1314,7 +1306,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItems(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, elements);
 			obj[sudoScource] = cssObj;
 
@@ -1345,7 +1336,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -1376,7 +1366,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, label);
 			obj[sudoScource] = cssObj;
 
@@ -1407,7 +1396,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddSeperator(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, separator);
 			obj[sudoScource] = cssObj;
 
@@ -1456,7 +1444,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"

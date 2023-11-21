@@ -67,12 +67,8 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 import PGIconPicker from "../../components/icon-picker";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -150,7 +146,6 @@ registerBlockType(metadata, {
 
 		let isProFeature = applyFilters("isProFeature", true);
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [iconPickerIndex, setIconPickerIndex] = useState(99);
@@ -219,6 +214,19 @@ registerBlockType(metadata, {
 			}, 1000);
 		}, [blockId]);
 
+		useEffect(() => {
+			var tabsX = [...tabs];
+
+			
+			childBlocks.map((item, index) => {
+				tabsX[index].uid = item.clientId;
+				// console.log(item);
+			});
+
+			// console.log(tabsX);
+			setAttributes({ tabs: tabsX });
+		}, [childBlocks]);
+
 		function bulkCssGenerate(cssObj) {
 			var stylesObj = {};
 
@@ -243,19 +251,9 @@ registerBlockType(metadata, {
 
 			var cssItems = { ...blockCssY.items };
 			var cssItemsX = { ...cssItems, ...stylesObj };
-			//console.log(cssItemsX);
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
@@ -264,15 +262,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var itemsX = attributes.items;
 				var navsWrapX = attributes.navsWrap;
 				var navItemX = attributes.navItem;
@@ -961,7 +957,6 @@ registerBlockType(metadata, {
 		// add bulk style start
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -992,7 +987,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddNavsWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, navsWrap);
 			obj[sudoScource] = cssObj;
 
@@ -1023,7 +1017,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddNavItem(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, navItem);
 			obj[sudoScource] = cssObj;
 
@@ -1054,7 +1047,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddActiveNavItem(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, activeNavItem);
 			obj[sudoScource] = cssObj;
 
@@ -1088,7 +1080,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddNavLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, navLabel);
 			obj[sudoScource] = cssObj;
 
@@ -1119,7 +1110,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPanelWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, panelWrap);
 			obj[sudoScource] = cssObj;
 
@@ -1150,7 +1140,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -1424,14 +1413,15 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div
-						className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
-						onClick={(ev) => {
-							addNewTab();
-						}}>
-						Add Item
-					</div>
-					<div className="">
+					<div className="pg-setting-input-text">
+						<div
+							className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 mx-3"
+							// className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
+							onClick={(ev) => {
+								addNewTab();
+							}}>
+							Add Item
+						</div>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"

@@ -47,7 +47,10 @@ class PGDropdownSudoSelector extends Component {
 						onClick={(ev) => {
 							setPickerOpen((prev) => !prev);
 						}}>
-						<Button variant={variant}>
+						<Button
+							className=" flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+							// variant={variant}
+						>
 							{optionsX[value] != undefined
 								? optionsX[value].label
 								: buttonTitle}
@@ -56,9 +59,9 @@ class PGDropdownSudoSelector extends Component {
 
 					{pickerOpen && (
 						<Popover position={position}>
-							<div className="p-2 w-60	">
+							<div className="p-2 w-60 pg-font pg-setting-input-text	">
 								<InputControl
-									autocomplete="off"
+									autoComplete="off"
 									className="p-3 w-full"
 									placeholder="Search Options"
 									value={keyword}
@@ -371,3 +374,4 @@ class PGDropdownSudoSelector extends Component {
 }
 
 export default PGDropdownSudoSelector;
+

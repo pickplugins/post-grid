@@ -63,15 +63,9 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
-import PGcssDisplay from "../../components/css-display";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
@@ -121,7 +115,7 @@ registerBlockType(metadata, {
 		var iconsWrap = attributes.iconsWrap;
 		var iconsIdle = attributes.iconsIdle;
 		var iconsFilled = attributes.iconsFilled;
-		var summury = attributes.summury;
+		var summary = attributes.summary;
 
 		var prefix = attributes.prefix;
 		var postfix = attributes.postfix;
@@ -131,7 +125,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
@@ -218,17 +211,15 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
-				var summuryX = attributes.summury;
+				var summaryX = attributes.summary;
 				var prefixX = attributes.prefix;
 				var postfixX = attributes.postfix;
 				var iconsWrapX = attributes.iconsWrap;
@@ -268,10 +259,10 @@ registerBlockType(metadata, {
 					blockCssObj[prefixSelector] = prefixY;
 				}
 
-				if (summuryX != undefined) {
-					var summuryY = { ...summuryX, options: summury.options };
-					setAttributes({ summury: summuryY });
-					blockCssObj[summurySelector] = summuryY;
+				if (summaryX != undefined) {
+					var summaryY = { ...summaryX, options: summary.options };
+					setAttributes({ summary: summaryY });
+					blockCssObj[summarySelector] = summaryY;
 				}
 
 				if (wrapperX != undefined) {
@@ -604,18 +595,17 @@ registerBlockType(metadata, {
 		}
 
 		function onChangeStylePostfix(sudoScource, newVal, attr) {
-			var path = sudoScource + "." + attr + "." + breakPointX;
+			var path = [sudoScource, attr, breakPointX];
 			let obj = Object.assign({}, postfix);
-			const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
-			setAttributes({ postfix: updatedObj });
-			var sudoScourceX = { ...updatedObj[sudoScource] };
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ postfix: object });
 
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
 				postfixSelector
 			);
-
-			sudoScourceX[attr][breakPointX] = newVal;
+			var cssPropty = myStore.cssAttrParse(attr);
 
 			let itemsX = Object.assign({}, blockCssY.items);
 
@@ -623,13 +613,10 @@ registerBlockType(metadata, {
 				itemsX[elementSelector] = {};
 			}
 
-			Object.entries(sudoScourceX).map((args) => {
-				var argAttr = myStore.cssAttrParse(args[0]);
-				var argAttrVal = args[1];
-				blockCssY.items[elementSelector][argAttr] = argAttrVal;
-			});
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
-			setAttributes({ blockCssY: { items: blockCssY.items } });
+			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
 		function onRemoveStylePostfix(sudoScource, key) {
@@ -770,16 +757,16 @@ registerBlockType(metadata, {
 		}
 
 		/////
-		function onChangeStyleSummury(sudoScource, newVal, attr) {
+		function onChangeStyleSummary(sudoScource, newVal, attr) {
 			var path = [sudoScource, attr, breakPointX];
-			let obj = Object.assign({}, summury);
+			let obj = Object.assign({}, summary);
 			const object = myStore.updatePropertyDeep(obj, path, newVal);
 
-			setAttributes({ summury: object });
+			setAttributes({ summary: object });
 
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
-				summurySelector
+				summarySelector
 			);
 			var cssPropty = myStore.cssAttrParse(attr);
 
@@ -795,17 +782,17 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
-		function onRemoveStyleSummury(sudoScource, key) {
-			var object = myStore.deletePropertyDeep(summury, [
+		function onRemoveStyleSummary(sudoScource, key) {
+			var object = myStore.deletePropertyDeep(summary, [
 				sudoScource,
 				key,
 				breakPointX,
 			]);
-			setAttributes({ summury: object });
+			setAttributes({ summary: object });
 
 			var elementSelector = myStore.getElementSelector(
 				sudoScource,
-				summurySelector
+				summarySelector
 			);
 			var cssPropty = myStore.cssAttrParse(key);
 			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
@@ -816,11 +803,385 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssObject } });
 		}
 
-		function onAddStyleSummury(sudoScource, key) {
+		function onAddStyleSummary(sudoScource, key) {
 			var path = [sudoScource, key, breakPointX];
-			let obj = Object.assign({}, summury);
+			let obj = Object.assign({}, summary);
 			const object = myStore.addPropertyDeep(obj, path, "");
-			setAttributes({ summury: object });
+			setAttributes({ summary: object });
+		}
+
+		function onBulkAddWrapper(sudoScource, cssObj) {
+			let obj = Object.assign({}, wrapper);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ wrapper: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+
+		function onBulkAddSummary(sudoScource, cssObj) {
+			let obj = Object.assign({}, summary);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ summary: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, summarySelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetSummary(sudoScources) {
+			let obj = Object.assign({}, summary);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						summarySelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ summary: obj });
+		}
+
+		function onBulkAddPrefix(sudoScource, cssObj) {
+			let obj = Object.assign({}, prefix);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ prefix: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, prefixSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetPrefix(sudoScources) {
+			let obj = Object.assign({}, prefix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						prefixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ prefix: obj });
+		}
+
+		function onBulkAddPostfix(sudoScource, cssObj) {
+			let obj = Object.assign({}, postfix);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ postfix: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, postfixSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetPostfix(sudoScources) {
+			let obj = Object.assign({}, postfix);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						postfixSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ postfix: obj });
+		}
+
+		function onBulkAddIconsWrap(sudoScource, cssObj) {
+			let obj = Object.assign({}, iconsWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ iconsWrap: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconsWrapSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetIconsWrap(sudoScources) {
+			let obj = Object.assign({}, iconsWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						iconsWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ iconsWrap: obj });
+		}
+
+		function onBulkAddIconsIdle(sudoScource, cssObj) {
+			let obj = Object.assign({}, iconsIdle);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ iconsIdle: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconsIdleSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetIconsIdle(sudoScources) {
+			let obj = Object.assign({}, iconsIdle);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						iconsIdleSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ iconsIdle: obj });
+		}
+
+		function onBulkAddIconsFilled(sudoScource, cssObj) {
+			let obj = Object.assign({}, iconsFilled);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ iconsFilled: obj });
+
+			var selector = myStore.getElementSelector(
+				sudoScource,
+				iconsFilledSelector
+			);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetIconsFilled(sudoScources) {
+			let obj = Object.assign({}, iconsFilled);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						iconsFilledSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ iconsFilled: obj });
 		}
 
 		String.prototype.strtr = function (dic) {
@@ -869,7 +1230,7 @@ registerBlockType(metadata, {
 		const iconsWrapSelector = blockClass + " .icons-wrap";
 		const iconsFilledSelector = blockClass + " .icons-filled";
 		const iconsIdleSelector = blockClass + " .icons-idle";
-		const summurySelector = blockClass + " .summury";
+		const summarySelector = blockClass + " .summary";
 
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
@@ -885,7 +1246,7 @@ registerBlockType(metadata, {
 			blockCssObj[iconsWrapSelector] = iconsWrap;
 			blockCssObj[iconsFilledSelector] = iconsFilled;
 			blockCssObj[iconsIdleSelector] = iconsIdle;
-			blockCssObj[summurySelector] = summury;
+			blockCssObj[summarySelector] = summary;
 			blockCssObj[prefixSelector] = prefix;
 			blockCssObj[postfixSelector] = postfix;
 
@@ -911,14 +1272,6 @@ registerBlockType(metadata, {
 			var text = myStore.parseCustomTags(postfix.options.text, customTags);
 			setpostfixText(text);
 		}, [postfix.options.text]);
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
@@ -947,7 +1300,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -1038,6 +1391,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStyleWrapper}
 										onAdd={onAddStyleWrapper}
 										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1103,6 +1458,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleIconsWrap}
 											onAdd={onAddStyleIconsWrap}
 											onRemove={onRemoveStyleIconsWrap}
+											onBulkAdd={onBulkAddIconsWrap}
+											onReset={onResetIconsWrap}
 										/>
 									</PGtab>
 									<PGtab name="css">
@@ -1151,6 +1508,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleIconsIdle}
 											onAdd={onAddStyleIconsIdle}
 											onRemove={onRemoveStyleIconsIdle}
+											onBulkAdd={onBulkAddIconsIdle}
+											onReset={onResetIconsIdle}
 										/>
 									</PGtab>
 									<PGtab name="css"></PGtab>
@@ -1193,6 +1552,8 @@ registerBlockType(metadata, {
 											onChange={onChangeStyleIconsFilled}
 											onAdd={onAddStyleIconsFilled}
 											onRemove={onRemoveStyleIconsFilled}
+											onBulkAdd={onBulkAddIconsFilled}
+											onReset={onResetIconsFilled}
 										/>
 									</PGtab>
 									<PGtab name="css"></PGtab>
@@ -1202,7 +1563,7 @@ registerBlockType(metadata, {
 
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Summury"
+							title="Summary"
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
@@ -1231,8 +1592,8 @@ registerBlockType(metadata, {
 								]}>
 								<PGtab name="options">
 									<RadioControl
-										label="Summury Type"
-										selected={summury.options.type}
+										label="Summary Type"
+										selected={summary.options.type}
 										options={[
 											{ label: "None", value: "" },
 											{
@@ -1250,28 +1611,28 @@ registerBlockType(metadata, {
 											},
 										]}
 										onChange={(value) => {
-											var options = { ...summury.options, type: value };
+											var options = { ...summary.options, type: value };
 											setAttributes({
-												summury: { ...summury, options: options },
+												summary: { ...summary, options: options },
 											});
 										}}
 									/>
 
 									<div className="my-3">
 										<label for="" className="font-medium text-slate-900 ">
-											Custom Summury{" "}
+											Custom Summary{" "}
 										</label>
 
 										<InputControl
-											value={summury.options.typeCustom}
+											value={summary.options.typeCustom}
 											placeholder="{average_rating} out of 5.00"
 											onChange={(newVal) => {
 												var options = {
-													...summury.options,
+													...summary.options,
 													typeCustom: newVal,
 												};
 												setAttributes({
-													summury: { ...summury, options: options },
+													summary: { ...summary, options: options },
 												});
 											}}
 										/>
@@ -1296,10 +1657,12 @@ registerBlockType(metadata, {
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
-										obj={summury}
-										onChange={onChangeStyleSummury}
-										onAdd={onAddStyleSummury}
-										onRemove={onRemoveStyleSummury}
+										obj={summary}
+										onChange={onChangeStyleSummary}
+										onAdd={onAddStyleSummary}
+										onRemove={onRemoveStyleSummary}
+										onBulkAdd={onBulkAddSummary}
+										onReset={onResetSummary}
 									/>
 								</PGtab>
 								<PGtab name="css"></PGtab>
@@ -1355,6 +1718,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStylePrefix}
 										onAdd={onAddStylePrefix}
 										onRemove={onRemoveStylePrefix}
+										onBulkAdd={onBulkAddPrefix}
+										onReset={onResetPrefix}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1416,6 +1781,8 @@ registerBlockType(metadata, {
 										onChange={onChangeStylePostfix}
 										onAdd={onAddStylePostfix}
 										onRemove={onRemoveStylePostfix}
+										onBulkAdd={onBulkAddPostfix}
+										onReset={onResetPostfix}
 									/>
 								</PGtab>
 								<PGtab name="css">
@@ -1504,12 +1871,12 @@ registerBlockType(metadata, {
 							</div>
 						</div>
 
-						<div class="summury">
-							{summury.options.typeCustom.length == 0 && (
-								<>{replaceAll(summury.options.type, ratingMap)}</>
+						<div class="summary">
+							{summary.options.typeCustom.length == 0 && (
+								<>{replaceAll(summary.options.type, ratingMap)}</>
 							)}
-							{summury.options.typeCustom.length > 0 && (
-								<>{replaceAll(summury.options.typeCustom, ratingMap)}</>
+							{summary.options.typeCustom.length > 0 && (
+								<>{replaceAll(summary.options.typeCustom, ratingMap)}</>
 							)}
 						</div>
 

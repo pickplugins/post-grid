@@ -44,7 +44,7 @@ function Html(props) {
 
   return (
 
-    <div className='flex mt-4'>
+    <div className='flex mt-4 items-center gap-[4px] pg-setting-css-components'>
 
 
       <InputControl
@@ -92,7 +92,7 @@ function Html(props) {
 
             </Button>
           )}
-          renderContent={() => <div className='w-32'>
+          renderContent={() => <div className='w-32 pg-font'>
 
             {Object.entries(unitArgs).map((y) => {
 

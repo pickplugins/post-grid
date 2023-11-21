@@ -327,15 +327,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var elementsX = attributes.elements;
 				var itemX = attributes.item;
@@ -399,10 +397,6 @@ registerBlockType(metadata, {
 
 		function setUserField(option, index) {
 			//var isExist = elements.items.find(x => x.label === option.label);
-
-			//if (isExist == undefined) {
-
-			//}
 
 			var elementsX = elements.items.push(option);
 			setAttributes({ elements: { items: elements.items } });
@@ -510,7 +504,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -618,7 +611,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddThumb(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, thumb);
 			obj[sudoScource] = cssObj;
 
@@ -726,7 +718,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItem(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, item);
 			obj[sudoScource] = cssObj;
 
@@ -759,391 +750,399 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
-						<div className="px-3">
-							<PanelRow>
-								<label for="" className="font-medium text-slate-900 ">
-									Object Type
-								</label>
-								<PGDropdown
-									position="bottom right"
-									variant="secondary"
-									options={objectTypes}
-									buttonTitle={
-										objectTypes[object.options.type] == undefined
-											? "Choose"
-											: objectTypes[object.options.type].label
-									}
-									onChange={(option) => {
-										var options = { ...object.options, type: option.value };
-										setAttributes({
-											object: { styles: object.styles, options: options },
-										});
-									}}
-									values=""></PGDropdown>
-							</PanelRow>
-
-							<PanelRow>
-								<label for="" className="font-medium text-slate-900 ">
-									Slug
-								</label>
-
-								<InputControl
-									value={object.options.slug}
-									onChange={(newVal) => {
-										var options = { ...object.options, slug: newVal };
-										setAttributes({ object: { ...object, options: options } });
-									}}
-								/>
-							</PanelRow>
-
-							<div className="my-3">
-								{object.options.type == "plugin" && (
-									<>
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Add Fields
-											</label>
-											<PGDropdown
-												position="bottom right"
-												variant="secondary"
-												options={pluginFields}
-												buttonTitle="Choose"
-												onChange={setUserField}
-												values=""></PGDropdown>
-										</PanelRow>
-									</>
-								)}
-
-								{object.options.type == "theme" && (
-									<>
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Add Fields
-											</label>
-											<PGDropdown
-												position="bottom right"
-												variant="secondary"
-												options={themeFields}
-												buttonTitle="Choose"
-												onChange={setUserField}
-												values=""></PGDropdown>
-										</PanelRow>
-									</>
-								)}
-							</div>
-						</div>
-
-						<ReactSortable
-							list={elements.items}
-							setList={(item) => {
-								setAttributes({ elements: { items: item } });
-							}}>
-							{elements.items.map((item, index) => (
-								<div key={item.id} className="">
-									<PanelBody
-										title={
-											<RemoveQueryPram
-												title={
-													allFields[item.id] == undefined
-														? ""
-														: allFields[item.id].label
-												}
-												index={index}
-											/>
+					<div className="pg-setting-input-text">
+						<div className="">
+							<div className="px-3">
+								<PanelRow>
+									<label for="" className="font-medium text-slate-900 ">
+										Object Type
+									</label>
+									<PGDropdown
+										position="bottom right"
+										variant="secondary"
+										options={objectTypes}
+										buttonTitle={
+											objectTypes[object.options.type] == undefined
+												? "Choose"
+												: objectTypes[object.options.type].label
 										}
-										initialOpen={false}>
-										<Button
-											onClick={(ev) => {
-												ev.preventDefault();
-												ev.stopPropagation();
-												var elementsX = elements.items.splice(index, 1);
-												setAttributes({ elements: { items: elements.items } });
-											}}>
-											<Icon icon={close} />
-										</Button>
+										onChange={(option) => {
+											var options = { ...object.options, type: option.value };
+											setAttributes({
+												object: { styles: object.styles, options: options },
+											});
+										}}
+										values=""></PGDropdown>
+								</PanelRow>
 
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Prefix
-											</label>
-											<InputControl
-												value={item.prefix}
-												onChange={(newVal) => {
-													elements.items[index].prefix = newVal;
+								<PanelRow>
+									<label for="" className="font-medium text-slate-900 ">
+										Slug
+									</label>
+
+									<InputControl
+										value={object.options.slug}
+										onChange={(newVal) => {
+											var options = { ...object.options, slug: newVal };
+											setAttributes({
+												object: { ...object, options: options },
+											});
+										}}
+									/>
+								</PanelRow>
+
+								<div className="my-3">
+									{object.options.type == "plugin" && (
+										<>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Add Fields
+												</label>
+												<PGDropdown
+													position="bottom right"
+													variant="secondary"
+													options={pluginFields}
+													buttonTitle="Choose"
+													onChange={setUserField}
+													values=""></PGDropdown>
+											</PanelRow>
+										</>
+									)}
+
+									{object.options.type == "theme" && (
+										<>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Add Fields
+												</label>
+												<PGDropdown
+													position="bottom right"
+													variant="secondary"
+													options={themeFields}
+													buttonTitle="Choose"
+													onChange={setUserField}
+													values=""></PGDropdown>
+											</PanelRow>
+										</>
+									)}
+								</div>
+							</div>
+
+							<ReactSortable
+								list={elements.items}
+								setList={(item) => {
+									setAttributes({ elements: { items: item } });
+								}}>
+								{elements.items.map((item, index) => (
+									<div key={item.id} className="">
+										<PanelBody
+											title={
+												<RemoveQueryPram
+													title={
+														allFields[item.id] == undefined
+															? ""
+															: allFields[item.id].label
+													}
+													index={index}
+												/>
+											}
+											initialOpen={false}>
+											<Button
+												onClick={(ev) => {
+													ev.preventDefault();
+													ev.stopPropagation();
+													var elementsX = elements.items.splice(index, 1);
 													setAttributes({
 														elements: { items: elements.items },
 													});
-												}}
-											/>
-										</PanelRow>
+												}}>
+												<Icon icon={close} />
+											</Button>
 
-										{(item.id == "homepage" ||
-											item.id == "download_link" ||
-											item.id == "preview_url" ||
-											item.id == "contributors") && (
-											<>
-												<PanelRow>
-													<label for="" className="font-medium text-slate-900 ">
-														linkText
-													</label>
-													<InputControl
-														value={item.linkText}
-														onChange={(newVal) => {
-															elements.items[index].linkText = newVal;
-															setAttributes({
-																elements: { items: elements.items },
-															});
-														}}
-													/>
-												</PanelRow>
-
-												<ToggleControl
-													className="my-3"
-													label="Is Linked?"
-													help={
-														elements.items[index].isLinked
-															? "Link Enabled"
-															: "Link Disabled"
-													}
-													checked={
-														elements.items[index].isLinked ? true : false
-													}
-													onChange={(e) => {
-														elements.items[index].isLinked = elements.items[
-															index
-														].isLinked
-															? false
-															: true;
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Prefix
+												</label>
+												<InputControl
+													value={item.prefix}
+													onChange={(newVal) => {
+														elements.items[index].prefix = newVal;
 														setAttributes({
 															elements: { items: elements.items },
 														});
 													}}
 												/>
-											</>
-										)}
-									</PanelBody>
-								</div>
-							))}
-						</ReactSortable>
-					</div>
+											</PanelRow>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="styles"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
-										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
-										});
-									}}
-								/>
+											{(item.id == "homepage" ||
+												item.id == "download_link" ||
+												item.id == "preview_url" ||
+												item.id == "contributors") && (
+												<>
+													<PanelRow>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															linkText
+														</label>
+														<InputControl
+															value={item.linkText}
+															onChange={(newVal) => {
+																elements.items[index].linkText = newVal;
+																setAttributes({
+																	elements: { items: elements.items },
+																});
+															}}
+														/>
+													</PanelRow>
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
+													<ToggleControl
+														className="my-3"
+														label="Is Linked?"
+														help={
+															elements.items[index].isLinked
+																? "Link Enabled"
+																: "Link Disabled"
+														}
+														checked={
+															elements.items[index].isLinked ? true : false
+														}
+														onChange={(e) => {
+															elements.items[index].isLinked = elements.items[
+																index
+															].isLinked
+																? false
+																: true;
+															setAttributes({
+																elements: { items: elements.items },
+															});
+														}}
+													/>
+												</>
+											)}
+										</PanelBody>
+									</div>
+								))}
+							</ReactSortable>
+						</div>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
 										onChange={(newVal) => {
-											setAttributes({
-												blockId: newVal,
-											});
-										}}
-									/>
-								</PanelRow>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Tag
-									</label>
-									<SelectControl
-										label=""
-										value={wrapper.options.tag}
-										options={[
-											{ label: "Choose", value: "" },
-											{ label: "H1", value: "h1" },
-											{ label: "H2", value: "h2" },
-											{ label: "H3", value: "h3" },
-											{ label: "H4", value: "h4" },
-											{ label: "H5", value: "h5" },
-											{ label: "H6", value: "h6" },
-											{ label: "SPAN", value: "span" },
-											{ label: "DIV", value: "div" },
-											{ label: "P", value: "p" },
-											{ label: "ul", value: "ul" },
-											{ label: "ol", value: "ol" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...wrapper.options, tag: newVal };
+											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
 												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									blockId={blockId}
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-									onReset={onResetWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Thumb"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="styles"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options"></PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									blockId={blockId}
-									obj={thumb}
-									onChange={onChangeStyleThumb}
-									onAdd={onAddStyleThumb}
-									onRemove={onRemoveStyleThumb}
-									onBulkAdd={onBulkAddThumb}
-									onReset={onResetThumb}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="item"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="styles"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										item Tag
-									</label>
-									<SelectControl
-										label=""
-										value={item.options.tag}
-										options={[
-											{ label: "No item", value: "" },
-											{ label: "H1", value: "h1" },
-											{ label: "H2", value: "h2" },
-											{ label: "H3", value: "h3" },
-											{ label: "H4", value: "h4" },
-											{ label: "H5", value: "h5" },
-											{ label: "H6", value: "h6" },
-											{ label: "SPAN", value: "span" },
-											{ label: "DIV", value: "div" },
-											{ label: "P", value: "p" },
-											{ label: "ul", value: "ul" },
-											{ label: "li", value: "li" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...item.options, tag: newVal };
-											setAttributes({
-												item: { styles: item.styles, options: options },
-											});
-										}}
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
+										<SelectControl
+											label=""
+											value={wrapper.options.tag}
+											options={[
+												{ label: "Choose", value: "" },
+												{ label: "H1", value: "h1" },
+												{ label: "H2", value: "h2" },
+												{ label: "H3", value: "h3" },
+												{ label: "H4", value: "h4" },
+												{ label: "H5", value: "h5" },
+												{ label: "H6", value: "h6" },
+												{ label: "SPAN", value: "span" },
+												{ label: "DIV", value: "div" },
+												{ label: "P", value: "p" },
+												{ label: "ul", value: "ul" },
+												{ label: "ol", value: "ol" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, tag: newVal };
+												setAttributes({
+													wrapper: { styles: wrapper.styles, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										blockId={blockId}
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									blockId={blockId}
-									obj={item}
-									onChange={onChangeStyleItem}
-									onAdd={onAddStyleItem}
-									onRemove={onRemoveStyleItem}
-									onBulkAdd={onBulkAddItem}
-									onReset={onResetItem}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"wordpress-org"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Thumb"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options"></PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										blockId={blockId}
+										obj={thumb}
+										onChange={onChangeStyleThumb}
+										onAdd={onAddStyleThumb}
+										onRemove={onRemoveStyleThumb}
+										onBulkAdd={onBulkAddThumb}
+										onReset={onResetThumb}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="item"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											item Tag
+										</label>
+										<SelectControl
+											label=""
+											value={item.options.tag}
+											options={[
+												{ label: "No item", value: "" },
+												{ label: "H1", value: "h1" },
+												{ label: "H2", value: "h2" },
+												{ label: "H3", value: "h3" },
+												{ label: "H4", value: "h4" },
+												{ label: "H5", value: "h5" },
+												{ label: "H6", value: "h6" },
+												{ label: "SPAN", value: "span" },
+												{ label: "DIV", value: "div" },
+												{ label: "P", value: "p" },
+												{ label: "ul", value: "ul" },
+												{ label: "li", value: "li" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...item.options, tag: newVal };
+												setAttributes({
+													item: { styles: item.styles, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										blockId={blockId}
+										obj={item}
+										onChange={onChangeStyleItem}
+										onAdd={onAddStyleItem}
+										onRemove={onRemoveStyleItem}
+										onBulkAdd={onBulkAddItem}
+										onReset={onResetItem}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"wordpress-org"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
+					</div>
 				</InspectorControls>
 
 				{loading && (

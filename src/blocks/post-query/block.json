@@ -9,20 +9,10 @@
     "post-grid/post-grid"
   ],
   "usesContext": [
-    "postId",
-    "loopIndex",
-    "postType",
-    "queryId",
     "post-grid/queryArgs",
     "post-grid/layout",
     "post-grid/postGridId"
   ],
-  "providesContext": {
-    "queryId": "queryId",
-    "loopIndex": "loopIndex",
-    "query": "query",
-    "displayLayout": "displayLayout"
-  },
   "supports": {
     "align": [
       "left",
@@ -34,38 +24,6 @@
     "html": false
   },
   "attributes": {
-    "wrapper": {
-      "type": "object",
-      "default": {
-        "options": {
-          "tag": "div",
-          "class": ""
-        },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          }
-        }
-      }
-    },
-    "itemsWrap": {
-      "type": "object",
-      "default": {
-        "options": {
-          "class": "items-loop"
-        },
-        "styles": {}
-      }
-    },
-    "itemWrap": {
-      "type": "object",
-      "default": {
-        "options": {
-          "class": "item"
-        },
-        "styles": {}
-      }
-    },
     "noPostsWrap": {
       "type": "object",
       "default": {
@@ -82,15 +40,6 @@
           "class": "spinner"
         },
         "styles": {}
-      }
-    },
-    "layout": {
-      "type": "object",
-      "default": {
-        "id": "",
-        "srcServer": "library",
-        "data": [],
-        "rawData": ""
       }
     },
     "queryArgs": {

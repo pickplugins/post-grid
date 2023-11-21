@@ -61,13 +61,8 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import PGcssTextAlign from "../../components/css-text-align";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -127,7 +122,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -180,15 +174,6 @@ registerBlockType(metadata, {
 			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
@@ -250,7 +235,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -334,7 +318,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, label);
 			obj[sudoScource] = cssObj;
 
@@ -418,7 +401,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddAddItem(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, addItem);
 			obj[sudoScource] = cssObj;
 
@@ -502,7 +484,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddInput(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, file);
 			obj[sudoScource] = cssObj;
 
@@ -586,7 +567,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddLabelWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, labelWrap);
 			obj[sudoScource] = cssObj;
 
@@ -670,7 +650,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddInputWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, inputWrap);
 			obj[sudoScource] = cssObj;
 
@@ -754,7 +733,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddErrorWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, errorWrap);
 			obj[sudoScource] = cssObj;
 
@@ -795,7 +773,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-3" initialOpen={false}>
+					<div className="px-3 pg-setting-input-text" initialOpen={false}>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"

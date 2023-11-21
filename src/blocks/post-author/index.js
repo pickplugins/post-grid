@@ -64,14 +64,11 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
-import Typography from "../../components/typography";
+
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import PGcssDisplay from "../../components/css-display";
+
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
@@ -214,10 +211,6 @@ registerBlockType(metadata, {
 		function setUserField(option, index) {
 			//var isExist = elements.items.find(x => x.label === option.label);
 
-			//if (isExist == undefined) {
-
-			//}
-
 			var elementsX = elements.items.push(option);
 			setAttributes({ elements: { items: elements.items } });
 		}
@@ -320,15 +313,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var elementsX = attributes.elements;
 				var avatarX = attributes.avatar;
@@ -388,15 +379,6 @@ registerBlockType(metadata, {
 				}
 			}
 		}
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function onChangeStyleWrapper(sudoScource, newVal, attr) {
 			var path = [sudoScource, attr, breakPointX];
@@ -611,7 +593,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -642,7 +623,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddAvatar(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, avatar);
 			obj[sudoScource] = cssObj;
 
@@ -673,7 +653,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddName(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, name);
 			obj[sudoScource] = cssObj;
 
@@ -704,7 +683,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddDescription(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, description);
 			obj[sudoScource] = cssObj;
 
@@ -737,6 +715,95 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+		function onResetAvatar(sudoScources) {
+			let obj = Object.assign({}, avatar);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						avatarSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ avatar: obj });
+		}
+		function onResetDescription(sudoScources) {
+			let obj = Object.assign({}, description);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						descriptionSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ description: obj });
+		}
+		function onResetName(sudoScources) {
+			let obj = Object.assign({}, name);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						nameSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ name: obj });
+		}
+
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
@@ -767,7 +834,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -854,6 +921,7 @@ registerBlockType(metadata, {
 										onAdd={onAddStyleWrapper}
 										onBulkAdd={onBulkAddWrapper}
 										onRemove={onRemoveStyleWrapper}
+										onReset={onResetWrapper}
 									/>
 								</PGtab>
 							</PGtabs>
@@ -969,6 +1037,7 @@ registerBlockType(metadata, {
 											onAdd={onAddStyleAvatar}
 											onBulkAdd={onBulkAddAvatar}
 											onRemove={onRemoveStyleAvatar}
+											onReset={onResetAvatar}
 										/>
 									</PGtab>
 								</PGtabs>
@@ -1164,6 +1233,7 @@ registerBlockType(metadata, {
 											onAdd={onAddStyleName}
 											onBulkAdd={onBulkAddName}
 											onRemove={onRemoveStyleName}
+											onReset={onResetName}
 										/>
 									</PGtab>
 								</PGtabs>
@@ -1221,6 +1291,7 @@ registerBlockType(metadata, {
 											onAdd={onAddStyleDescription}
 											onBulkAdd={onBulkAddDescription}
 											onRemove={onRemoveStyleDescription}
+											onReset={onResetDescription}
 										/>
 									</PGtab>
 								</PGtabs>

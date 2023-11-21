@@ -480,7 +480,7 @@ var selectors = {
 		Object.entries(obj).map((args) => {
 			var sudoSrc = args[0];
 			var sudoArgs = args[1];
-			if (sudoSrc != "options" && sudoArgs != null) {
+			if (sudoSrc != "options" && sudoArgs != null ) {
 				var selector = selectors.getElementSelector(
 					state,
 					sudoSrc,

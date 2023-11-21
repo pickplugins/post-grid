@@ -57,11 +57,14 @@ class PGBlockPostQuery
 
         global $postGridCssY;
         global $postGridScriptData;
+        global $PGPostQuery;
+        global $PGBlockPostQuery;
 
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
+        $postGridId = isset($block->context['post-grid/postGridId']) ? $block->context['post-grid/postGridId'] : '';
 
 
 
@@ -96,54 +99,16 @@ class PGBlockPostQuery
 
 
 
-        $layout = isset($attributes['layout']) ? $attributes['layout'] : [];
         $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
 
-        $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : ['items' => []];
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
-        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
-
-        $itemCssArr = [];
-        if (!empty($gridOptionsItemCss)) {
-            foreach ($gridOptionsItemCss as $device => $args) {
-
-                foreach ($args as $index => $items) {
-                    foreach ($items as $attr => $val) {
-                        $nth = $index + 1;
-
-                        $itemCssArr[".$blockId .item:nth-child($nth)"][$attr][$device] = $val;
-                    }
-                }
-            }
-        }
-
-        $postGridCssY[] = array_merge($blockCssY['items'], $itemCssArr);
+        $parsed_block =  isset($block->parsed_block) ? $block->parsed_block : [];
+        $innerBlocks =  isset($parsed_block['innerBlocks']) ? $parsed_block['innerBlocks'] : [];
 
 
 
-
-        $postGridScriptData[$blockId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
-        $postGridScriptData[$blockId]['layout']['id'] = isset($layout['id']) ? $layout['id'] : '';
-        $postGridScriptData[$blockId]['layout']['rawData'] = isset($layout['rawData']) ? $layout['rawData'] : '';
-        $postGridScriptData[$blockId]['pagination']['type'] = $paginationType;
-
-        $layout_id = isset($layout['id']) ? $layout['id'] : '';
-        $layout_id = apply_filters('pgb_post_grid_post_layout_id', $layout_id);
-
-
-        $rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
-        $rawData = !empty($layout['rawData']) ? $layout['rawData'] : $rawData;
-
-
-        $srcServer = !empty($layout['srcServer']) ? $layout['srcServer'] : 'library';
-
-
-        if ($srcServer == 'saved') {
-            $postData = get_post($layout_id);
-            $rawDatabyId = isset($postData->post_content) ? $postData->post_content : '';
-            $rawData = !empty($rawDatabyId) ? $rawDatabyId : $rawData;
-        }
+        $postGridScriptData[$postGridId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
+        $postGridScriptData[$postGridId]['layout']['rawData'] = serialize_blocks($innerBlocks);
 
 
 
@@ -163,14 +128,20 @@ class PGBlockPostQuery
         $responses = [];
 
 
-        $post_grid_wp_query = new WP_Query($query_args);
+        $PGPostQuery = new WP_Query($query_args);
 
 
-        $parsed_block =  isset($block->parsed_block) ? $block->parsed_block : [];
 
-        // var_dump($parsed_block);
+        $blockArgs = [
+            'blockId' =>    $blockId,
+            'pagination' => [
+                'page' => $paged,
+            ],
+            'noPosts' => false
+        ];
 
-        $innerBlocks =  isset($parsed_block['innerBlocks']) ? $parsed_block['innerBlocks'] : [];
+
+
 
 
         ob_start();
@@ -179,15 +150,16 @@ class PGBlockPostQuery
 
 
 
+        <div class="loop-loading"></div>
 
-        <div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>">
+        <div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
             <?php
 
 
-            if ($post_grid_wp_query->have_posts()) :
+            if ($PGPostQuery->have_posts()) :
 
-                while ($post_grid_wp_query->have_posts()) :
-                    $post_grid_wp_query->the_post();
+                while ($PGPostQuery->have_posts()) :
+                    $PGPostQuery->the_post();
 
                     $post_id = get_the_id();
                     $blocks = $innerBlocks;
@@ -216,10 +188,6 @@ class PGBlockPostQuery
                 wp_reset_query();
                 wp_reset_postdata();
             endif;
-
-
-
-
 
 
             if (!empty($responses['posts'])) {

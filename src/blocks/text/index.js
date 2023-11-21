@@ -60,13 +60,8 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import PGcssTextAlign from "../../components/css-text-align";
 import PGDropdown from "../../components/dropdown";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -121,7 +116,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -184,15 +178,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var textX = attributes.text;
 
 				var blockCssY = attributes.blockCssY;
@@ -325,7 +317,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddText(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, text);
 			obj[sudoScource] = cssObj;
 
@@ -355,6 +346,29 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
+		function onResetText(sudoScources) {
+			let obj = Object.assign({}, text);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						textSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ text: obj });
+		}
+
 		const blockProps = useBlockProps({
 			className: ` ${blockId} ${text.options.class}`,
 		});
@@ -362,7 +376,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Text"
@@ -514,6 +528,7 @@ registerBlockType(metadata, {
 										onAdd={onAddStyleText}
 										onRemove={onRemoveStyleText}
 										onBulkAdd={onBulkAddText}
+										onReset={onResetText}
 									/>
 								</PGtab>
 								<PGtab name="css">

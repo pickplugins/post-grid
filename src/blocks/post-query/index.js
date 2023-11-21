@@ -1,4 +1,8 @@
-import { registerBlockType } from "@wordpress/blocks";
+import {
+	registerBlockType,
+	serializeRawBlock,
+	serialize,
+} from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
 import { useSelect, select, useDispatch, dispatch } from "@wordpress/data";
 
@@ -74,13 +78,8 @@ const { RawHTML } = wp.element;
 import { store } from "../../store";
 import { __experimentalScrollable as Scrollable } from "@wordpress/components";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import variations from "./variations";
 
 import queryPresets from "./query-presets";
 import queryPrams from "./queryprams";
@@ -102,9 +101,6 @@ var myStore = wp.data.select("postgrid-shop");
 // })
 
 registerBlockType(metadata, {
-	
-	
-
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -120,7 +116,6 @@ registerBlockType(metadata, {
 		),
 	},
 
-
 	edit: function (props) {
 		var attributes = props.attributes;
 		var setAttributes = props.setAttributes;
@@ -134,24 +129,26 @@ registerBlockType(metadata, {
 			: "pg" + clientId.split("-").pop();
 		var blockClass = "." + blockIdX;
 
-		var wrapper = attributes.wrapper;
-
 		var noPostsWrap = attributes.noPostsWrap;
 		var spinnerWrap = attributes.spinnerWrap;
 
-		var layout = attributes.layout;
 		var queryArgs = attributes.queryArgs;
 
 		var blockCssY = attributes.blockCssY;
 
+		var parentQueryArgs =
+			context["post-grid/queryArgs"] == undefined
+				? null
+				: context["post-grid/queryArgs"];
+		var parentLayout =
+			context["post-grid/layout"] == undefined
+				? null
+				: context["post-grid/layout"];
+		var postGridId =
+			context["post-grid/postGridId"] == undefined
+				? null
+				: context["post-grid/postGridId"];
 
-		var parentQueryArgs = context["post-grid/queryArgs"] == undefined ? null : context["post-grid/queryArgs"];
-		var parentLayout = context["post-grid/layout"] == undefined ? null : context["post-grid/layout"];
-		var postGridId = context["post-grid/postGridId"] == undefined ? null : context["post-grid/postGridId"];
-
-
-
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 		let isProFeature = applyFilters("isProFeature", true);
 
@@ -169,21 +166,23 @@ registerBlockType(metadata, {
 		}, [clientDataX]);
 
 		useEffect(() => {
-			if (parentQueryArgs != null) {
+			if (parentQueryArgs != null && queryArgs.items.length == 0) {
 				setAttributes({ queryArgs: parentQueryArgs });
 			}
 		}, [parentQueryArgs]);
 
 		useEffect(() => {
-			if (parentLayout != null) {
-				setAttributes({ layout: parentLayout });
+			if (
+				parentLayout.rawData != undefined &&
+				parentLayout.rawData.length > 0
+			) {
+				console.log(parentLayout);
+
+				//setAttributes({ layout: parentLayout });
 			}
 		}, [parentLayout]);
 
-
-
 		const { replaceInnerBlocks } = useDispatch(blockEditorStore);
-
 
 		const TEMPLATE = [
 			["post-grid/post-featured-image"],
@@ -191,13 +190,14 @@ registerBlockType(metadata, {
 			["post-grid/post-excerpt"],
 		];
 
-		var oldLayout = (parentLayout.rawData.length != 0) ? parse(parentLayout.rawData) : [];
+		var oldLayout =
+			parentLayout.rawData.length != 0 ? parse(parentLayout.rawData) : [];
 
 		var oldTemplate = ObjectToArr(oldLayout);
-		// console.log(oldTemplate);
 
-
-		var [TEMPLATEX, setTEMPLATEX] = useState((oldTemplate.length > 0) ? oldTemplate : TEMPLATE); // Using the hook.
+		var [TEMPLATEX, setTEMPLATEX] = useState(
+			oldTemplate.length > 0 ? oldTemplate : TEMPLATE
+		); // Using the hook.
 
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
@@ -281,7 +281,7 @@ registerBlockType(metadata, {
 			apiFetch({
 				path: "/post-grid/v2/get_posts",
 				method: "POST",
-				data: { queryArgs: arg, rawData: layout.rawData },
+				data: { queryArgs: arg, rawData: serialize(blocks) },
 			}).then((res) => {
 				setIsBusy(false);
 
@@ -295,58 +295,37 @@ registerBlockType(metadata, {
 				.filter((line) => line.trim() !== "")
 				.join("\n");
 
-
 		function ObjectToArr(obj, arr = []) {
-
-			obj.map(item => {
+			obj.map((item) => {
 				var blockName = item.blockName;
 				var attrs = item.attrs;
 				var innerBlocks = item.innerBlocks;
 				var blockData = [blockName, attrs];
 
-
 				if (innerBlocks.length > 0) {
 					var inner = ObjectToArr(innerBlocks, []);
 					var blockData = [blockName, attrs, inner];
-
 				}
-
 
 				arr.push(blockData);
 
 				//return { blockName, attrs }
-
-			})
-
-			// console.log(arr);
-
+			});
 
 			return arr;
-
 		}
-
 
 		function selectLayout(id, postContent) {
 			var str = removeEmptyLines(postContent);
 			var someText = str.replace(/(\r\n|\n|\r)/gm, "");
 
-			console.log(someText);
-
 			var srcServer = layoutData.source;
+			var blocks = parse(postContent);
 
 			if (srcServer == "library") {
-				var blocks = parse(someText);
-
-
 				var arrs = ObjectToArr(blocks);
 
-
-				replaceInnerBlocks(
-					clientId,
-					createBlocksFromInnerBlocksTemplate(arrs)
-				);
-
-
+				replaceInnerBlocks(clientId, createBlocksFromInnerBlocksTemplate(arrs));
 
 				var allStyle = {};
 
@@ -404,8 +383,6 @@ registerBlockType(metadata, {
 			// });
 
 			//setBlocksX(gutblock)
-
-			// setAttributes({ layout: { id: id, data: blocks, rawData: post_content } })
 		}
 
 		function flatObject(block, flatObj, flatObjCss) {
@@ -457,7 +434,6 @@ registerBlockType(metadata, {
 		}
 
 		useEffect(() => {
-
 			fetchPosts();
 		}, [queryArgs]);
 
@@ -501,8 +477,6 @@ registerBlockType(metadata, {
 			}, 2000);
 		}
 
-
-
 		function fetchLayouts() {
 			setLayoutLoading(true);
 
@@ -525,11 +499,11 @@ registerBlockType(metadata, {
 			} else {
 				fetch(
 					"https://getpostgrid.com/wp-json/postlayout/v2/get_post_layouts?category=" +
-					queryLayouts.category +
-					"&page=" +
-					queryLayouts.page +
-					"&keyword=" +
-					queryLayouts.keyword,
+						queryLayouts.category +
+						"&page=" +
+						queryLayouts.page +
+						"&keyword=" +
+						queryLayouts.keyword,
 					{
 						method: "GET",
 						headers: {
@@ -1317,63 +1291,63 @@ registerBlockType(metadata, {
 													x.id == "hour" ||
 													x.id == "minute" ||
 													x.id == "second") && (
-														<div>
-															<InputControl
-																label="Value"
-																placeholder=""
-																onChange={(newVal) => {
-																	var items = [...queryArgs.items];
-																	var item = { ...queryArgs.items[index] };
+													<div>
+														<InputControl
+															label="Value"
+															placeholder=""
+															onChange={(newVal) => {
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
 
-																	//clearTimeout(debounce);
-																	//debounce = setTimeout(() => {
+																//clearTimeout(debounce);
+																//debounce = setTimeout(() => {
 
-																	//queryArgsX.items[index].val[j].value = newVal;
-																	item.val[j].value = newVal;
-																	items[index] = item;
+																//queryArgsX.items[index].val[j].value = newVal;
+																item.val[j].value = newVal;
+																items[index] = item;
 
-																	// setAttributes({
-																	// 	queryArgs: { items: queryArgsX.items },
-																	// });
+																// setAttributes({
+																// 	queryArgs: { items: queryArgsX.items },
+																// });
 
-																	setAttributes({
-																		queryArgs: { ...queryArgs, items: items },
-																	});
+																setAttributes({
+																	queryArgs: { ...queryArgs, items: items },
+																});
 
-																	//}, 1000);
-																}}
-															/>
+																//}, 1000);
+															}}
+														/>
 
-															<SelectControl
-																style={{ margin: 0 }}
-																label="compare "
-																options={[
-																	{ label: "=", value: "=" },
-																	{ label: "!=", value: "!=" },
-																	{ label: ">", value: ">" },
-																	{ label: ">=", value: ">=" },
-																	{ label: "<", value: "<" },
-																	{ label: "<=", value: "<=" },
-																	{ label: "IN", value: "IN" },
-																	{ label: "NOT IN", value: "NOT IN" },
-																	{ label: "EXISTS", value: "EXISTS" },
-																	{ label: "NOT EXISTS", value: "NOT EXISTS" },
-																	{ label: "BETWEEN", value: "BETWEEN" },
-																	{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
-																]}
-																onChange={(newVal) => {
-																	var items = [...queryArgs.items];
-																	var item = { ...queryArgs.items[index] };
+														<SelectControl
+															style={{ margin: 0 }}
+															label="compare "
+															options={[
+																{ label: "=", value: "=" },
+																{ label: "!=", value: "!=" },
+																{ label: ">", value: ">" },
+																{ label: ">=", value: ">=" },
+																{ label: "<", value: "<" },
+																{ label: "<=", value: "<=" },
+																{ label: "IN", value: "IN" },
+																{ label: "NOT IN", value: "NOT IN" },
+																{ label: "EXISTS", value: "EXISTS" },
+																{ label: "NOT EXISTS", value: "NOT EXISTS" },
+																{ label: "BETWEEN", value: "BETWEEN" },
+																{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
+															]}
+															onChange={(newVal) => {
+																var items = [...queryArgs.items];
+																var item = { ...queryArgs.items[index] };
 
-																	item.val[j].compare = newVal;
+																item.val[j].compare = newVal;
 
-																	setAttributes({
-																		queryArgs: { ...queryArgs, items: items },
-																	});
-																}}
-															/>
-														</div>
-													)}
+																setAttributes({
+																	queryArgs: { ...queryArgs, items: items },
+																});
+															}}
+														/>
+													</div>
+												)}
 											</PanelBody>
 										</div>
 									);
@@ -1634,18 +1608,18 @@ registerBlockType(metadata, {
 							item.id == "offset" ||
 							item.id == "postsPerArchivePage" ||
 							item.id == "perm") && (
-								<div>
-									<InputControl
-										value={item.val}
-										onChange={(newVal) => {
-											//clearTimeout(debounce);
-											//debounce = setTimeout(() => {
-											updateQueryPram(newVal, index);
-											//}, 1000);
-										}}
-									/>
-								</div>
-							)}
+							<div>
+								<InputControl
+									value={item.val}
+									onChange={(newVal) => {
+										//clearTimeout(debounce);
+										//debounce = setTimeout(() => {
+										updateQueryPram(newVal, index);
+										//}, 1000);
+									}}
+								/>
+							</div>
+						)}
 						{item.id == "metaCompare" && (
 							<div>
 								<SelectControl
@@ -1701,14 +1675,14 @@ registerBlockType(metadata, {
 							item.id == "categoryNotIn" ||
 							item.id == "categoryIn" ||
 							item.id == "categoryAnd") && (
-								<div>
-									<InputControl
-										value={item.val}
-										placeholder="Comma separated"
-										onChange={(newVal) => updateQueryPram(newVal, index)}
-									/>
-								</div>
-							)}
+							<div>
+								<InputControl
+									value={item.val}
+									placeholder="Comma separated"
+									onChange={(newVal) => updateQueryPram(newVal, index)}
+								/>
+							</div>
+						)}
 
 						{item.id == "commentCount" && (
 							<div>
@@ -1766,19 +1740,19 @@ registerBlockType(metadata, {
 							item.id == "hasPassword" ||
 							item.id == "updatePostMetaCache" ||
 							item.id == "updatePostTermCache") && (
-								<div>
-									<SelectControl
-										style={{ margin: 0 }}
-										label=""
-										value={item.val}
-										options={[
-											{ label: "True", value: true },
-											{ label: "False", value: false },
-										]}
-										onChange={(newVal) => updateQueryPram(newVal, index)}
-									/>
-								</div>
-							)}
+							<div>
+								<SelectControl
+									style={{ margin: 0 }}
+									label=""
+									value={item.val}
+									options={[
+										{ label: "True", value: true },
+										{ label: "False", value: false },
+									]}
+									onChange={(newVal) => updateQueryPram(newVal, index)}
+								/>
+							</div>
+						)}
 
 						{item.id == "ignoreStickyPosts" && (
 							<div>
@@ -1906,233 +1880,227 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody title="Layouts" initialOpen={false}>
-						<div className="text-white cursor-pointer">
-							<div
-								className={
-									layoutData.source == "library"
-										? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
-										: "bg-blue-300 text-[14px] font-bold inline-block px-3 py-2 w-1/2"
-								}
-								onClick={(_ev) => {
-									setLayoutData({ source: "library" });
-									setQueryLayouts({ keyword: "", page: 1, category: "" });
-								}}>
-								Library
-							</div>
-							<div
-								className={
-									layoutData.source == "saved"
-										? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
-										: "bg-blue-300 inline-block px-3 py-2 w-1/2 text-[14px] font-bold"
-								}
-								onClick={(_ev) => {
-									setLayoutData({ source: "saved" });
-									setQueryLayouts({ keyword: "", page: 1, category: "" });
-								}}>
-								Saved
-							</div>
-						</div>
-
-						<PanelRow>
-							<InputControl
-								value={queryLayouts.keyword}
-								type="text"
-								placeholder="Search Layouts..."
-								onChange={(newVal) => {
-									//clearTimeout(debounce);
-									//debounce = setTimeout(() => {
-									setQueryLayouts({
-										keyword: newVal,
-										page: queryLayouts.page,
-										category: queryLayouts.category,
-									});
-									//}, 1000);
-
-									//fetchLayouts();
-								}}
-							/>
-							<SelectControl
-								className="w-full"
-								style={{ margin: 0 }}
-								label=""
-								value={queryLayouts.category}
-								options={layoutCats}
-								onChange={(newVal) => {
-									setQueryLayouts({
-										keyword: queryLayouts.keyword,
-										page: queryLayouts.page,
-										category: newVal,
-									});
-									//fetchLayouts();
-								}}
-							/>
-						</PanelRow>
-
-						{layoutData.source == "saved" && (
-							<div className="flex gap-2	">
-								<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
-									<a
-										className=" "
-										target="_blank"
-										href={
-											clientData.siteAdminurl +
-											"edit.php?post_type=post_grid_template"
-										}>
-										All Layouts
-									</a>
+					<div className="pg-setting-input-text">
+						<PanelBody title="Layouts" initialOpen={false}>
+							<div className="text-white cursor-pointer">
+								<div
+									className={
+										layoutData.source == "library"
+											? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
+											: "bg-blue-300 text-[14px] font-bold inline-block px-3 py-2 w-1/2"
+									}
+									onClick={(_ev) => {
+										setLayoutData({ source: "library" });
+										setQueryLayouts({ keyword: "", page: 1, category: "" });
+									}}>
+									Library
 								</div>
-
-								<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
-									<a
-										className=""
-										target="_blank"
-										href={
-											clientData.siteAdminurl +
-											"post-new.php?post_type=post_grid_template"
-										}>
-										Create Layout
-									</a>
+								<div
+									className={
+										layoutData.source == "saved"
+											? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
+											: "bg-blue-300 inline-block px-3 py-2 w-1/2 text-[14px] font-bold"
+									}
+									onClick={(_ev) => {
+										setLayoutData({ source: "saved" });
+										setQueryLayouts({ keyword: "", page: 1, category: "" });
+									}}>
+									Saved
 								</div>
 							</div>
-						)}
 
-						{layoutLoading == true && (
-							<div className="text-center">
-								<Spinner />
-							</div>
-						)}
+							<PanelRow>
+								<InputControl
+									value={queryLayouts.keyword}
+									type="text"
+									placeholder="Search Layouts..."
+									onChange={(newVal) => {
+										//clearTimeout(debounce);
+										//debounce = setTimeout(() => {
+										setQueryLayouts({
+											keyword: newVal,
+											page: queryLayouts.page,
+											category: queryLayouts.category,
+										});
+										//}, 1000);
 
-						{layoutLoading == false &&
-							layoutList.items.length > 0 &&
-							layoutList.items.map((x) => {
-								return (
-									<div className="my-4 border bg-gray-200 ">
-										<div
-											className="relative cursor-pointer"
-											onClick={(_ev) => {
-												if (x.is_pro == true) {
-													alert("Sorry this is only available in premium");
-													return;
-												}
+										//fetchLayouts();
+									}}
+								/>
+								<SelectControl
+									className="w-full"
+									style={{ margin: 0 }}
+									label=""
+									value={queryLayouts.category}
+									options={layoutCats}
+									onChange={(newVal) => {
+										setQueryLayouts({
+											keyword: queryLayouts.keyword,
+											page: queryLayouts.page,
+											category: newVal,
+										});
+										//fetchLayouts();
+									}}
+								/>
+							</PanelRow>
 
-												selectLayout(x.post_id, x.post_content);
-											}}>
-											{layout.id == x.post_id && (
-												<span className="absolute bg-amber-500 text-white px-2 py-1 top-0 right-0">
-													<span class="dashicons dashicons-saved"></span>{" "}
-													Selected
-												</span>
-											)}
+							{layoutData.source == "saved" && (
+								<div className="flex gap-2	">
+									<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
+										<a
+											className=" "
+											target="_blank"
+											href={
+												clientData.siteAdminurl +
+												"edit.php?post_type=post_grid_template"
+											}>
+											All Layouts
+										</a>
+									</div>
 
-											<img className="w-full" src={x.thumb_url} />
+									<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
+										<a
+											className=""
+											target="_blank"
+											href={
+												clientData.siteAdminurl +
+												"post-new.php?post_type=post_grid_template"
+											}>
+											Create Layout
+										</a>
+									</div>
+								</div>
+							)}
 
-											<div className="text-[14px] p-1 bg-gray-500 text-white bg-opacity-80 text-bold  text-center">
-												{x.post_title}
+							{layoutLoading == true && (
+								<div className="text-center">
+									<Spinner />
+								</div>
+							)}
+
+							{layoutLoading == false &&
+								layoutList.items.length > 0 &&
+								layoutList.items.map((x) => {
+									return (
+										<div className="my-4 border bg-gray-200 ">
+											<div
+												className="relative cursor-pointer"
+												onClick={(_ev) => {
+													if (x.is_pro == true) {
+														alert("Sorry this is only available in premium");
+														return;
+													}
+
+													selectLayout(x.post_id, x.post_content);
+												}}>
+												<img className="w-full" src={x.thumb_url} />
+
+												<div className="text-[14px] p-1 bg-gray-500 text-white bg-opacity-80 text-bold  text-center">
+													{x.post_title}
+												</div>
 											</div>
-										</div>
 
-										<div className="py-3 flex justify-items-stretch">
-											{layoutData.source != "library" && (
+											<div className="py-3 flex justify-items-stretch">
+												{layoutData.source != "library" && (
+													<span className="mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer">
+														{" "}
+														<a
+															target="_blank"
+															href={
+																clientData.siteAdminurl +
+																"post.php?post=" +
+																x.post_id +
+																"&action=edit"
+															}>
+															Edit
+														</a>{" "}
+													</span>
+												)}
+
 												<span className="mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer">
-													{" "}
-													<a
-														target="_blank"
-														href={
-															clientData.siteAdminurl +
-															"post.php?post=" +
-															x.post_id +
-															"&action=edit"
-														}>
-														Edit
-													</a>{" "}
+													#{x.post_id}
 												</span>
-											)}
 
-											<span className="mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer">
-												#{x.post_id}
-											</span>
-
-											{layoutData.source == "library" && (
-												<>
-													<div
-														className="mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer"
-														onClick={(ev) => {
-															if (isProFeature == false) {
-																if (!importLayoutOpen.isOpen) {
-																	setlayoutImporting(true);
-																	importLayout(x);
+												{layoutData.source == "library" && (
+													<>
+														<div
+															className="mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer"
+															onClick={(ev) => {
+																if (isProFeature == false) {
+																	if (!importLayoutOpen.isOpen) {
+																		setlayoutImporting(true);
+																		importLayout(x);
+																	}
 																}
-															}
-															setimportLayoutOpen({
-																id: x.post_id,
-																isOpen: !importLayoutOpen.isOpen,
-															});
-														}}>
-														<span class="dashicons dashicons-download"></span>{" "}
-														Import
-													</div>
-													{importLayoutOpen.id == x.post_id &&
-														importLayoutOpen.isOpen && (
-															<Popover position="bottom left p-2 ">
-																{isProFeature == true && (
-																	<div className="w-48 bg-amber-100 px-3 py-2">
-																		<p className="">
-																			{" "}
-																			<span className="underline">
-																				Importing Layouts
-																			</span>{" "}
-																			Only available in Premium
-																		</p>
-																		<p className="">
-																			After import the layout you can customize
-																			and make your own.
-																		</p>
-																	</div>
-																)}
-
-																{isProFeature == false && (
-																	<div className="w-48 bg-sky-300 px-3 py-2">
-																		{layoutImporting && (
-																			<span>
-																				<Spinner /> Importing
-																			</span>
-																		)}
-
-																		{!layoutImporting && (
+																setimportLayoutOpen({
+																	id: x.post_id,
+																	isOpen: !importLayoutOpen.isOpen,
+																});
+															}}>
+															<span class="dashicons dashicons-download"></span>{" "}
+															Import
+														</div>
+														{importLayoutOpen.id == x.post_id &&
+															importLayoutOpen.isOpen && (
+																<Popover position="bottom left p-2 ">
+																	{isProFeature == true && (
+																		<div className="w-48 bg-amber-100 px-3 py-2">
 																			<p className="">
-																				Layout imported and saved under{" "}
-																				<a
-																					target="_blank"
-																					className="font-bold underline "
-																					href={
-																						clientData.siteAdminurl +
-																						"edit.php?post_type=post_grid_template"
-																					}>
-																					Saved Templates
-																				</a>
+																				{" "}
+																				<span className="underline">
+																					Importing Layouts
+																				</span>{" "}
+																				Only available in Premium
 																			</p>
-																		)}
-																	</div>
-																)}
-															</Popover>
-														)}
-												</>
-											)}
+																			<p className="">
+																				After import the layout you can
+																				customize and make your own.
+																			</p>
+																		</div>
+																	)}
 
-											{x.is_pro == true && (
-												<span className=" bg-amber-500 text-white px-3 rounded-sm py-1">
-													Pro
-												</span>
-											)}
+																	{isProFeature == false && (
+																		<div className="w-48 bg-sky-300 px-3 py-2">
+																			{layoutImporting && (
+																				<span>
+																					<Spinner /> Importing
+																				</span>
+																			)}
 
-											{x.is_pro == false && (
-												<span className=" bg-lime-600 text-white px-3 rounded-sm py-1">
-													Free
-												</span>
-											)}
+																			{!layoutImporting && (
+																				<p className="">
+																					Layout imported and saved under{" "}
+																					<a
+																						target="_blank"
+																						className="font-bold underline "
+																						href={
+																							clientData.siteAdminurl +
+																							"edit.php?post_type=post_grid_template"
+																						}>
+																						Saved Templates
+																					</a>
+																				</p>
+																			)}
+																		</div>
+																	)}
+																</Popover>
+															)}
+													</>
+												)}
 
-											{/* {x.sale_price > 0 &&
+												{x.is_pro == true && (
+													<span className=" bg-amber-500 text-white px-3 rounded-sm py-1">
+														Pro
+													</span>
+												)}
+
+												{x.is_pro == false && (
+													<span className=" bg-lime-600 text-white px-3 rounded-sm py-1">
+														Free
+													</span>
+												)}
+
+												{/* {x.sale_price > 0 &&
                           (
                             <span className='mx-2 hidden' >Price:
                               <del className='ml-2' >{x.price} </del>-<span className='' >{x.sale_price}USD </span>
@@ -2147,73 +2115,73 @@ registerBlockType(metadata, {
                           )
                         } */}
 
-											{/* 
+												{/* 
                         <span title='Buy To Download' className={['text-white px-3 py-1 mx-2', x.is_pro ? ' bg-amber-400' : ' bg-blue-600'].join('')}>
                           {x.is_pro ? 'Buy Now' : 'Free'}
                         </span> */}
+											</div>
 										</div>
-									</div>
-								);
+									);
+								})}
+
+							<div
+								className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center"
+								onClick={(_ev) => {
+									var page = queryLayouts.page + 1;
+
+									setQueryLayouts({
+										keyword: queryLayouts.keyword,
+										page: page,
+										category: queryLayouts.category,
+									});
+								}}>
+								{layoutLoading.loading == true && (
+									<span className="text-center">
+										<Spinner />
+									</span>
+								)}
+								Load More
+							</div>
+						</PanelBody>
+
+						<PanelBody title="Query Post" initialOpen={false}>
+							<PanelRow className="my-3 flex gap-2">
+								<PGDropdown
+									position="bottom right"
+									btnClass="py-2"
+									variant="secondary"
+									options={queryPresets}
+									buttonTitle="Query Presets"
+									onChange={addQueryPreset}
+									values={""}></PGDropdown>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									options={queryPrams}
+									buttonTitle="Add Query Params"
+									onChange={addQueryPram}
+									values=""></PGDropdown>
+							</PanelRow>
+
+							{queryArgs.items.map((item, index) => {
+								return generateQueryArgOptions(item, index);
 							})}
+						</PanelBody>
 
-						<div
-							className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center"
-							onClick={(_ev) => {
-								var page = queryLayouts.page + 1;
-
-								setQueryLayouts({
-									keyword: queryLayouts.keyword,
-									page: page,
-									category: queryLayouts.category,
-								});
-							}}>
-							{layoutLoading.loading == true && (
-								<span className="text-center">
-									<Spinner />
-								</span>
-							)}
-							Load More
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockText",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
 						</div>
-					</PanelBody>
-
-					<PanelBody title="Query Post" initialOpen={false}>
-						<PanelRow className="my-3">
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={queryPresets}
-								buttonTitle="Query Presets"
-								onChange={addQueryPreset}
-								values={""}></PGDropdown>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={queryPrams}
-								buttonTitle="Add Query Params"
-								onChange={addQueryPram}
-								values=""></PGDropdown>
-						</PanelRow>
-
-						{queryArgs.items.map((item, index) => {
-							return generateQueryArgOptions(item, index);
-						})}
-					</PanelBody>
-
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockText",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
 					</div>
 				</InspectorControls>
 
 				<>
-
-
 					{isBusy == false && posts == null && (
 						<div {...blockProps}>
 							<div className={noPostsWrap.options.class}>No Post found</div>
@@ -2224,13 +2192,12 @@ registerBlockType(metadata, {
 						<div {...blockProps}>
 							<div className={spinnerWrap.options.class}>
 								<Spinner />
-							</div>						</div>
-
+							</div>{" "}
+						</div>
 					)}
 
 					{isBusy == false && posts != null && posts.length > 0 && (
 						<div {...blockProps}>
-
 							{posts.map((post) => {
 								return (
 									<>

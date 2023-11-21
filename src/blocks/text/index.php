@@ -102,14 +102,14 @@ class PGBlockPostText
 
 
 
-    if (!empty($wrapperTag)):
-      ?>
-                  <<?php echo esc_attr($wrapperTag); ?> class="
-                    <?php echo esc_attr($blockId); ?>
-                    <?php echo esc_attr($textClass); ?>">
-                    <?php echo $content; ?>
-                  </<?php echo esc_attr($wrapperTag); ?>>
-                  <?php
+    if (!empty($wrapperTag)) :
+?>
+      <<?php echo esc_attr($wrapperTag); ?> class="
+        <?php echo esc_attr($blockId); ?>
+        <?php echo esc_attr($textClass); ?>">
+        <?php echo $content; ?>
+      </<?php echo esc_attr($wrapperTag); ?>>
+    <?php
 
     endif;
 
@@ -125,7 +125,7 @@ class PGBlockPostText
 
 
 
-            <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

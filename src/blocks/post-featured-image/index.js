@@ -64,14 +64,10 @@ import {
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 
-import IconToggle from "../../components/icon-toggle";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
+
 import PGDropdown from "../../components/dropdown";
-import PGtoggle from "../../components/toggle";
-import colorsPresets from "../../colors-presets";
-import PGcssDisplay from "../../components/css-display";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import MyImage from "./placeholder.jpg";
@@ -131,7 +127,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
@@ -304,15 +299,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var featuredImageX = attributes.featuredImage;
 				var blockCssYX = attributes.blockCssY;
@@ -325,7 +318,7 @@ registerBlockType(metadata, {
 						options: featuredImage.options,
 					};
 					setAttributes({ featuredImage: featuredImageY });
-					blockCssObj[featuredImageSelector] = featuredImageY;
+					blockCssObj[imgSelector] = featuredImageY;
 				}
 
 				if (wrapperX != undefined) {
@@ -397,15 +390,6 @@ registerBlockType(metadata, {
 		}
 
 		var imgSelector = blockClass + " img";
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
@@ -638,7 +622,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -669,16 +652,12 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddFeaturedImage(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, featuredImage);
 			obj[sudoScource] = cssObj;
 
 			setAttributes({ featuredImage: obj });
 
-			var selector = myStore.getElementSelector(
-				sudoScource,
-				featuredImageSelector
-			);
+			var selector = myStore.getElementSelector(sudoScource, imgSelector);
 			var stylesObj = {};
 
 			Object.entries(cssObj).map((args) => {
@@ -700,6 +679,51 @@ registerBlockType(metadata, {
 			var cssItemsX = { ...cssItems, ...stylesObj };
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+		function onResetFeaturedImage(sudoScources) {
+			let obj = Object.assign({}, featuredImage);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						imgSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ featuredImage: obj });
 		}
 
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
@@ -737,321 +761,394 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
-										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
-										});
-									}}
-								/>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
+					<div className="pg-setting-input-text">
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
 										onChange={(newVal) => {
-											setAttributes({
-												blockId: newVal,
-											});
-										}}
-									/>
-								</PanelRow>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Tag
-									</label>
-									<SelectControl
-										label=""
-										value={wrapper.options.tag}
-										options={[
-											{ label: "Choose", value: "" },
-											{ label: "H1", value: "h1" },
-											{ label: "H2", value: "h2" },
-											{ label: "H3", value: "h3" },
-											{ label: "H4", value: "h4" },
-											{ label: "H5", value: "h5" },
-											{ label: "H6", value: "h6" },
-											{ label: "span", value: "span" },
-											{ label: "div", value: "div" },
-											{ label: "P", value: "p" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...wrapper.options, tag: newVal };
+											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
 												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
 
-								{wrapper.options.tag.length > 0 && (
 									<PanelRow>
 										<label for="" className="font-medium text-slate-900 ">
-											Image as Background
+											CSS ID
 										</label>
-										<SelectControl
-											label=""
-											value={wrapper.options.useAsBackground}
-											options={[
-												{ label: "No", value: "no" },
-												{ label: "Yes", value: "yes" },
-											]}
+										<InputControl
+											value={blockId}
 											onChange={(newVal) => {
-												var options = {
-													...wrapper.options,
-													useAsBackground: newVal,
-												};
-												var styles = { ...wrapper.styles, backgroundImage: {} };
-
-												if (newVal == "no") {
-													setAttributes({
-														wrapper: {
-															...wrapper,
-															options: options,
-															styles: styles,
-														},
-													});
-
-													var itemsX = { ...blockCssY.items };
-													itemsX[wrapperSelector] = {
-														...blockCssY.items[wrapperSelector],
-														"background-image": {},
-													};
-
-													setAttributes({ blockCssY: { items: itemsX } });
-												}
-
-												if (newVal == "yes") {
-													var newValuesObj = {};
-
-													if (
-														wrapper.styles.backgroundImage == undefined ||
-														Object.keys(wrapper.styles.backgroundImage)
-															.length == 0
-													) {
-														newValuesObj[breakPointX] =
-															'url("' + (postImage == null)
-																? MyImage
-																: postImage.guid.rendered + '")';
-													} else {
-														newValuesObj = wrapper.styles.backgroundImage;
-														newValuesObj[breakPointX] =
-															'url("' + (postImage == null)
-																? MyImage
-																: postImage.guid.rendered + '")';
-													}
-
-													var styles = {
-														...wrapper.styles,
-														backgroundImage: newValuesObj,
-													};
-													setAttributes({
-														wrapper: {
-															...wrapper,
-															styles: styles,
-															options: options,
-														},
-													});
-
-													var itemsX = { ...blockCssY.items };
-													itemsX[wrapperSelector] = {
-														...blockCssY.items[wrapperSelector],
-														"background-image": newValuesObj,
-													};
-
-													//setAttributes({ blockCssY: { items: itemsX } });
-												}
+												setAttributes({
+													blockId: newVal,
+												});
 											}}
 										/>
 									</PanelRow>
-								)}
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-									onRemove={onRemoveStyleWrapper}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={wrapper}
-									onChange={onPickCssLibraryWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
+										<SelectControl
+											label=""
+											value={wrapper.options.tag}
+											options={[
+												{ label: "Choose", value: "" },
+												{ label: "H1", value: "h1" },
+												{ label: "H2", value: "h2" },
+												{ label: "H3", value: "h3" },
+												{ label: "H4", value: "h4" },
+												{ label: "H5", value: "h5" },
+												{ label: "H6", value: "h6" },
+												{ label: "span", value: "span" },
+												{ label: "div", value: "div" },
+												{ label: "P", value: "p" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, tag: newVal };
+												setAttributes({
+													wrapper: { styles: wrapper.styles, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Featured Image"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<div className="mb-4">
-									<label
-										for=""
-										className="font-medium text-slate-900 block pb-2 ">
-										Thumbnail Size
-									</label>
-									<PGDropdown
-										position="bottom right"
-										// btnClass="w-full block text-center "
-										btnClass="flex w-full gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
-										// variant="secondary"
-										options={imageSizes}
-										// buttonTitle="Choose"
-										buttonTitle={
-											featuredImage.options.size == undefined
-												? "Choose"
-												: imageSizes[featuredImage.options.size[breakPointX]] ==
-												  undefined
-												? "Choose"
-												: imageSizes[featuredImage.options.size[breakPointX]]
-														.label
-										}
-										onChange={setFeaturedImageSize}
-										values={
-											featuredImage.options.size[breakPointX]
-										}></PGDropdown>
-								</div>
+									{wrapper.options.tag.length > 0 && (
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Image as Background
+											</label>
+											<SelectControl
+												label=""
+												value={wrapper.options.useAsBackground}
+												options={[
+													{ label: "No", value: "no" },
+													{ label: "Yes", value: "yes" },
+												]}
+												onChange={(newVal) => {
+													var options = {
+														...wrapper.options,
+														useAsBackground: newVal,
+													};
+													var styles = {
+														...wrapper.styles,
+														backgroundImage: {},
+													};
 
-								{/* {featuredImage.options.size[breakPointX] != undefined && (
+													if (newVal == "no") {
+														setAttributes({
+															wrapper: {
+																...wrapper,
+																options: options,
+																styles: styles,
+															},
+														});
+
+														var itemsX = { ...blockCssY.items };
+														itemsX[wrapperSelector] = {
+															...blockCssY.items[wrapperSelector],
+															"background-image": {},
+														};
+
+														setAttributes({ blockCssY: { items: itemsX } });
+													}
+
+													if (newVal == "yes") {
+														var newValuesObj = {};
+
+														if (
+															wrapper.styles.backgroundImage == undefined ||
+															Object.keys(wrapper.styles.backgroundImage)
+																.length == 0
+														) {
+															newValuesObj[breakPointX] =
+																'url("' + (postImage == null)
+																	? MyImage
+																	: postImage.guid.rendered + '")';
+														} else {
+															newValuesObj = wrapper.styles.backgroundImage;
+															newValuesObj[breakPointX] =
+																'url("' + (postImage == null)
+																	? MyImage
+																	: postImage.guid.rendered + '")';
+														}
+
+														var styles = {
+															...wrapper.styles,
+															backgroundImage: newValuesObj,
+														};
+														setAttributes({
+															wrapper: {
+																...wrapper,
+																styles: styles,
+																options: options,
+															},
+														});
+
+														var itemsX = { ...blockCssY.items };
+														itemsX[wrapperSelector] = {
+															...blockCssY.items[wrapperSelector],
+															"background-image": newValuesObj,
+														};
+
+														//setAttributes({ blockCssY: { items: itemsX } });
+													}
+												}}
+											/>
+										</PanelRow>
+									)}
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onRemove={onRemoveStyleWrapper}
+										onReset={onResetWrapper}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={wrapper}
+										onChange={onPickCssLibraryWrapper}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Featured Image"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<div className="mb-4">
+										<label
+											for=""
+											className="font-medium text-slate-900 block pb-2 ">
+											Thumbnail Size
+										</label>
+										<PGDropdown
+											position="bottom right"
+											// btnClass="w-full block text-center "
+											btnClass="flex w-full gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+											// variant="secondary"
+											options={imageSizes}
+											// buttonTitle="Choose"
+											buttonTitle={
+												featuredImage.options.size == undefined
+													? "Choose"
+													: imageSizes[
+															featuredImage.options.size[breakPointX]
+													  ] == undefined
+													? "Choose"
+													: imageSizes[featuredImage.options.size[breakPointX]]
+															.label
+											}
+											onChange={setFeaturedImageSize}
+											values={
+												featuredImage.options.size[breakPointX]
+											}></PGDropdown>
+									</div>
+
+									{/* {featuredImage.options.size[breakPointX] != undefined && (
 									<div className="bg-gray-400 text-white px-3 py-2 my-3">
 										{" "}
 										{featuredImage.options.size[breakPointX]}
 									</div>
 								)} */}
 
-								<PanelRow className="my-3">
-									<label>Link To</label>
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											featuredImage.options.linkTo.length == 0
-												? "Choose"
-												: linkToArgs[featuredImage.options.linkTo].label
-										}
-										options={linkToArgs}
-										onChange={(option, index) => {
-											var options = {
-												...featuredImage.options,
-												linkTo: option.value,
-											};
-											setAttributes({
-												featuredImage: { ...featuredImage, options: options },
-											});
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-
-								{featuredImage.options.linkTo == "customField" && (
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Custom Field Key
-										</label>
-										<InputControl
-											className="mr-2"
-											value={featuredImage.options.linkToMetaKey}
-											onChange={(newVal) => {
+									<PanelRow className="my-3">
+										<label>Link To</label>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												featuredImage.options.linkTo.length == 0
+													? "Choose"
+													: linkToArgs[featuredImage.options.linkTo].label
+											}
+											options={linkToArgs}
+											onChange={(option, index) => {
 												var options = {
 													...featuredImage.options,
-													linkToMetaKey: newVal,
+													linkTo: option.value,
 												};
 												setAttributes({
 													featuredImage: { ...featuredImage, options: options },
 												});
 											}}
-										/>
+											values=""></PGDropdown>
 									</PanelRow>
-								)}
 
-								{featuredImage.options.linkTo == "customUrl" && (
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Custom URL
-										</label>
+									{featuredImage.options.linkTo == "customField" && (
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom Field Key
+											</label>
+											<InputControl
+												className="mr-2"
+												value={featuredImage.options.linkToMetaKey}
+												onChange={(newVal) => {
+													var options = {
+														...featuredImage.options,
+														linkToMetaKey: newVal,
+													};
+													setAttributes({
+														featuredImage: {
+															...featuredImage,
+															options: options,
+														},
+													});
+												}}
+											/>
+										</PanelRow>
+									)}
 
-										<div className="relative">
-											<Button
-												className={linkPickerPosttitle ? "!bg-gray-400" : ""}
-												icon={link}
-												onClick={(ev) => {
-													setLinkPickerPosttitle((prev) => !prev);
-												}}></Button>
-											{featuredImage.options.customUrl.length > 0 && (
+									{featuredImage.options.linkTo == "customUrl" && (
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Custom URL
+											</label>
+
+											<div className="relative">
 												<Button
-													className="!text-red-500 ml-2"
-													icon={linkOff}
+													className={linkPickerPosttitle ? "!bg-gray-400" : ""}
+													icon={link}
 													onClick={(ev) => {
+														setLinkPickerPosttitle((prev) => !prev);
+													}}></Button>
+												{featuredImage.options.customUrl.length > 0 && (
+													<Button
+														className="!text-red-500 ml-2"
+														icon={linkOff}
+														onClick={(ev) => {
+															var options = {
+																...featuredImage.options,
+																customUrl: "",
+															};
+															setAttributes({
+																featuredImage: {
+																	...featuredImage,
+																	options: options,
+																},
+															});
+															setLinkPickerPosttitle(false);
+														}}></Button>
+												)}
+												{linkPickerPosttitle && (
+													<Popover position="bottom right">
+														<LinkControl
+															settings={[]}
+															value={featuredImage.options.customUrl}
+															onChange={(newVal) => {
+																var options = {
+																	...featuredImage.options,
+																	customUrl: newVal.url,
+																};
+
+																setAttributes({
+																	featuredImage: {
+																		...featuredImage,
+																		options: options,
+																	},
+																});
+															}}
+														/>
+
+														<div className="p-2">
+															<span className="font-bold">Linked to:</span>{" "}
+															{featuredImage.options.customUrl.length != 0
+																? featuredImage.options.customUrl
+																: "No link"}{" "}
+														</div>
+													</Popover>
+												)}
+											</div>
+										</PanelRow>
+									)}
+
+									{featuredImage.options.linkTo.length > 0 && (
+										<div>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Link Target
+												</label>
+
+												<SelectControl
+													label=""
+													value={featuredImage.options.linkTarget}
+													options={[
+														{ label: "Choose...", value: "" },
+
+														{ label: "_self", value: "_self" },
+														{ label: "_blank", value: "_blank" },
+														{ label: "_parent", value: "_parent" },
+														{ label: "_top", value: "_top" },
+													]}
+													onChange={(newVal) => {
 														var options = {
 															...featuredImage.options,
-															customUrl: "",
+															linkTarget: newVal,
 														};
 														setAttributes({
 															featuredImage: {
@@ -1059,20 +1156,58 @@ registerBlockType(metadata, {
 																options: options,
 															},
 														});
-														setLinkPickerPosttitle(false);
-													}}></Button>
-											)}
-											{linkPickerPosttitle && (
-												<Popover position="bottom right">
-													<LinkControl
-														settings={[]}
-														value={featuredImage.options.customUrl}
+													}}
+												/>
+											</PanelRow>
+										</div>
+									)}
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Custom Attributes
+										</label>
+										<div
+											// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+											className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
+											onClick={(ev) => {
+												var sdsd = featuredImage.options.linkAttr.concat({
+													id: "",
+													val: "",
+												});
+
+												var options = {
+													...featuredImage.options,
+													linkAttr: sdsd,
+												};
+												setAttributes({
+													featuredImage: { ...featuredImage, options: options },
+												});
+
+												linkAttrObj();
+											}}>
+											Add
+										</div>
+									</PanelRow>
+
+									{featuredImage.options.linkAttr.map((x, i) => {
+										return (
+											<div className="my-2">
+												<PanelRow>
+													<InputControl
+														placeholder="Name"
+														className="mr-2"
+														value={featuredImage.options.linkAttr[i].id}
 														onChange={(newVal) => {
+															featuredImage.options.linkAttr[i].id = newVal;
+
+															var ssdsd = featuredImage.options.linkAttr.concat(
+																[]
+															);
+
 															var options = {
 																...featuredImage.options,
-																customUrl: newVal.url,
+																linkAttr: ssdsd,
 															};
-
 															setAttributes({
 																featuredImage: {
 																	...featuredImage,
@@ -1082,97 +1217,141 @@ registerBlockType(metadata, {
 														}}
 													/>
 
-													<div className="p-2">
-														<span className="font-bold">Linked to:</span>{" "}
-														{featuredImage.options.customUrl.length != 0
-															? featuredImage.options.customUrl
-															: "No link"}{" "}
-													</div>
-												</Popover>
-											)}
-										</div>
+													<InputControl
+														className="mr-2"
+														placeholder="Value"
+														value={x.val}
+														onChange={(newVal) => {
+															featuredImage.options.linkAttr[i].val = newVal;
+															var ssdsd = featuredImage.options.linkAttr.concat(
+																[]
+															);
+
+															var options = {
+																...featuredImage.options,
+																linkAttr: ssdsd,
+															};
+															setAttributes({
+																featuredImage: {
+																	...featuredImage,
+																	options: options,
+																},
+															});
+														}}
+													/>
+													<span
+														className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
+														onClick={(ev) => {
+															featuredImage.options.linkAttr.splice(i, 1);
+
+															var ssdsd = featuredImage.options.linkAttr.concat(
+																[]
+															);
+
+															var options = {
+																...featuredImage.options,
+																linkAttr: ssdsd,
+															};
+															setAttributes({
+																featuredImage: {
+																	...featuredImage,
+																	options: options,
+																},
+															});
+														}}></span>
+												</PanelRow>
+											</div>
+										);
+									})}
+
+									<PanelRow className="my-3">
+										<label>Alt Text Source</label>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												featuredImage.options.altTextSrc.length == 0
+													? "Choose"
+													: altTextSrcArgs[featuredImage.options.altTextSrc]
+															.label
+											}
+											options={altTextSrcArgs}
+											onChange={(option, index) => {
+												var options = {
+													...featuredImage.options,
+													altTextSrc: option.value,
+												};
+												setAttributes({
+													featuredImage: { ...featuredImage, options: options },
+												});
+											}}
+											values=""></PGDropdown>
 									</PanelRow>
-								)}
 
-								{featuredImage.options.linkTo.length > 0 && (
-									<div>
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Link Target
-											</label>
-
-											<SelectControl
-												label=""
-												value={featuredImage.options.linkTarget}
-												options={[
-													{ label: "Choose...", value: "" },
-
-													{ label: "_self", value: "_self" },
-													{ label: "_blank", value: "_blank" },
-													{ label: "_parent", value: "_parent" },
-													{ label: "_top", value: "_top" },
-												]}
-												onChange={(newVal) => {
-													var options = {
-														...featuredImage.options,
-														linkTarget: newVal,
-													};
-													setAttributes({
-														featuredImage: {
-															...featuredImage,
-															options: options,
+									{featuredImage.options.altTextSrc == "customField" && (
+										<div>
+											<PanelRow className="my-3">
+												<label>Custom Field</label>
+												<PGDropdown
+													position="bottom right"
+													variant="secondary"
+													buttonTitle={"Choose"}
+													options={[
+														{ label: "Custom", value: "" },
+														{
+															label: "Yoast meta",
+															value: "_yoast_wpseo_metadesc",
 														},
-													});
-												}}
-											/>
-										</PanelRow>
-									</div>
-								)}
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Custom Attributes
-									</label>
-									<div
-										className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
-										onClick={(ev) => {
-											var sdsd = featuredImage.options.linkAttr.concat({
-												id: "",
-												val: "",
-											});
-
-											var options = {
-												...featuredImage.options,
-												linkAttr: sdsd,
-											};
-											setAttributes({
-												featuredImage: { ...featuredImage, options: options },
-											});
-
-											linkAttrObj();
-										}}>
-										Add
-									</div>
-								</PanelRow>
-
-								{featuredImage.options.linkAttr.map((x, i) => {
-									return (
-										<div className="my-2">
+														{
+															label: "Rank Math meta",
+															value: "rank_math_description",
+														},
+														{
+															label: "AIO SEO meta",
+															value: "_aioseo_og_description",
+														},
+														{
+															label: "SEOPress meta",
+															value: "_seopress_titles_desc",
+														},
+														{
+															label: "WP Meta SEO meta",
+															value: "_metaseo_metadesc",
+														},
+														{
+															label: "The SEO Framework meta",
+															value: "_genesis_description",
+														},
+														{
+															label: "SEO SIMPLE PACK meta",
+															value: "ssp_meta_description",
+														},
+													]}
+													onChange={(option, index) => {
+														var options = {
+															...featuredImage.options,
+															altTextMetaKey: option.value,
+														};
+														setAttributes({
+															featuredImage: {
+																...featuredImage,
+																options: options,
+															},
+														});
+													}}
+													values=""></PGDropdown>
+											</PanelRow>
 											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Field Key
+												</label>
 												<InputControl
-													placeholder="Name"
 													className="mr-2"
-													value={featuredImage.options.linkAttr[i].id}
+													value={featuredImage.options.altTextMetaKey}
 													onChange={(newVal) => {
-														featuredImage.options.linkAttr[i].id = newVal;
-
-														var ssdsd = featuredImage.options.linkAttr.concat(
-															[]
-														);
-
 														var options = {
 															...featuredImage.options,
-															linkAttr: ssdsd,
+															altTextMetaKey: newVal,
 														};
 														setAttributes({
 															featuredImage: {
@@ -1182,141 +1361,22 @@ registerBlockType(metadata, {
 														});
 													}}
 												/>
-
-												<InputControl
-													className="mr-2"
-													placeholder="Value"
-													value={x.val}
-													onChange={(newVal) => {
-														featuredImage.options.linkAttr[i].val = newVal;
-														var ssdsd = featuredImage.options.linkAttr.concat(
-															[]
-														);
-
-														var options = {
-															...featuredImage.options,
-															linkAttr: ssdsd,
-														};
-														setAttributes({
-															featuredImage: {
-																...featuredImage,
-																options: options,
-															},
-														});
-													}}
-												/>
-												<span
-													className="text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close"
-													onClick={(ev) => {
-														featuredImage.options.linkAttr.splice(i, 1);
-
-														var ssdsd = featuredImage.options.linkAttr.concat(
-															[]
-														);
-
-														var options = {
-															...featuredImage.options,
-															linkAttr: ssdsd,
-														};
-														setAttributes({
-															featuredImage: {
-																...featuredImage,
-																options: options,
-															},
-														});
-													}}></span>
 											</PanelRow>
 										</div>
-									);
-								})}
+									)}
 
-								<PanelRow className="my-3">
-									<label>Alt Text Source</label>
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											featuredImage.options.altTextSrc.length == 0
-												? "Choose"
-												: altTextSrcArgs[featuredImage.options.altTextSrc].label
-										}
-										options={altTextSrcArgs}
-										onChange={(option, index) => {
-											var options = {
-												...featuredImage.options,
-												altTextSrc: option.value,
-											};
-											setAttributes({
-												featuredImage: { ...featuredImage, options: options },
-											});
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-
-								{featuredImage.options.altTextSrc == "customField" && (
-									<div>
-										<PanelRow className="my-3">
-											<label>Custom Field</label>
-											<PGDropdown
-												position="bottom right"
-												variant="secondary"
-												buttonTitle={"Choose"}
-												options={[
-													{ label: "Custom", value: "" },
-													{
-														label: "Yoast meta",
-														value: "_yoast_wpseo_metadesc",
-													},
-													{
-														label: "Rank Math meta",
-														value: "rank_math_description",
-													},
-													{
-														label: "AIO SEO meta",
-														value: "_aioseo_og_description",
-													},
-													{
-														label: "SEOPress meta",
-														value: "_seopress_titles_desc",
-													},
-													{
-														label: "WP Meta SEO meta",
-														value: "_metaseo_metadesc",
-													},
-													{
-														label: "The SEO Framework meta",
-														value: "_genesis_description",
-													},
-													{
-														label: "SEO SIMPLE PACK meta",
-														value: "ssp_meta_description",
-													},
-												]}
-												onChange={(option, index) => {
-													var options = {
-														...featuredImage.options,
-														altTextMetaKey: option.value,
-													};
-													setAttributes({
-														featuredImage: {
-															...featuredImage,
-															options: options,
-														},
-													});
-												}}
-												values=""></PGDropdown>
-										</PanelRow>
+									{featuredImage.options.altTextSrc == "custom" && (
 										<PanelRow>
 											<label for="" className="font-medium text-slate-900 ">
-												Custom Field Key
+												Custom Alt Text
 											</label>
 											<InputControl
 												className="mr-2"
-												value={featuredImage.options.altTextMetaKey}
+												value={featuredImage.options.altTextCustom}
 												onChange={(newVal) => {
 													var options = {
 														...featuredImage.options,
-														altTextMetaKey: newVal,
+														altTextCustom: newVal,
 													};
 													setAttributes({
 														featuredImage: {
@@ -1327,119 +1387,122 @@ registerBlockType(metadata, {
 												}}
 											/>
 										</PanelRow>
-									</div>
-								)}
+									)}
 
-								{featuredImage.options.altTextSrc == "custom" && (
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Custom Alt Text
-										</label>
-										<InputControl
-											className="mr-2"
-											value={featuredImage.options.altTextCustom}
-											onChange={(newVal) => {
+									<PanelRow className="my-3">
+										<label>Title Text Source</label>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												featuredImage.options.titleTextSrc == undefined ||
+												featuredImage.options.titleTextSrc.length == 0
+													? "Choose"
+													: altTextSrcArgs[featuredImage.options.titleTextSrc]
+															.label
+											}
+											options={altTextSrcArgs}
+											onChange={(option, index) => {
 												var options = {
 													...featuredImage.options,
-													altTextCustom: newVal,
+													titleTextSrc: option.value,
 												};
 												setAttributes({
 													featuredImage: { ...featuredImage, options: options },
 												});
 											}}
-										/>
+											values=""></PGDropdown>
 									</PanelRow>
-								)}
 
-								<PanelRow className="my-3">
-									<label>Title Text Source</label>
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											featuredImage.options.titleTextSrc == undefined ||
-											featuredImage.options.titleTextSrc.length == 0
-												? "Choose"
-												: altTextSrcArgs[featuredImage.options.titleTextSrc]
-														.label
-										}
-										options={altTextSrcArgs}
-										onChange={(option, index) => {
-											var options = {
-												...featuredImage.options,
-												titleTextSrc: option.value,
-											};
-											setAttributes({
-												featuredImage: { ...featuredImage, options: options },
-											});
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-
-								{featuredImage.options.titleTextSrc == "customField" && (
-									<div>
-										<PanelRow className="my-3">
-											<label>Custom Field</label>
-											<PGDropdown
-												position="bottom right"
-												variant="secondary"
-												buttonTitle={"Choose"}
-												options={[
-													{ label: "Custom", value: "" },
-													{
-														label: "Yoast meta",
-														value: "_yoast_wpseo_metadesc",
-													},
-													{
-														label: "Rank Math meta",
-														value: "rank_math_description",
-													},
-													{
-														label: "AIO SEO meta",
-														value: "_aioseo_og_description",
-													},
-													{
-														label: "SEOPress meta",
-														value: "_seopress_titles_desc",
-													},
-													{
-														label: "WP Meta SEO meta",
-														value: "_metaseo_metadesc",
-													},
-													{
-														label: "The SEO Framework meta",
-														value: "_genesis_description",
-													},
-													{
-														label: "SEO SIMPLE PACK meta",
-														value: "ssp_meta_description",
-													},
-												]}
-												onChange={(option, index) => {
-													var options = {
-														...featuredImage.options,
-														titleTextMetaKey: option.value,
-													};
-													setAttributes({
-														featuredImage: {
-															...featuredImage,
-															options: options,
+									{featuredImage.options.titleTextSrc == "customField" && (
+										<div>
+											<PanelRow className="my-3">
+												<label>Custom Field</label>
+												<PGDropdown
+													position="bottom right"
+													variant="secondary"
+													buttonTitle={"Choose"}
+													options={[
+														{ label: "Custom", value: "" },
+														{
+															label: "Yoast meta",
+															value: "_yoast_wpseo_metadesc",
 														},
-													});
-												}}
-												values=""></PGDropdown>
-										</PanelRow>
+														{
+															label: "Rank Math meta",
+															value: "rank_math_description",
+														},
+														{
+															label: "AIO SEO meta",
+															value: "_aioseo_og_description",
+														},
+														{
+															label: "SEOPress meta",
+															value: "_seopress_titles_desc",
+														},
+														{
+															label: "WP Meta SEO meta",
+															value: "_metaseo_metadesc",
+														},
+														{
+															label: "The SEO Framework meta",
+															value: "_genesis_description",
+														},
+														{
+															label: "SEO SIMPLE PACK meta",
+															value: "ssp_meta_description",
+														},
+													]}
+													onChange={(option, index) => {
+														var options = {
+															...featuredImage.options,
+															titleTextMetaKey: option.value,
+														};
+														setAttributes({
+															featuredImage: {
+																...featuredImage,
+																options: options,
+															},
+														});
+													}}
+													values=""></PGDropdown>
+											</PanelRow>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Custom Field Key
+												</label>
+												<InputControl
+													className="mr-2"
+													value={featuredImage.options.titleTextMetaKey}
+													onChange={(newVal) => {
+														var options = {
+															...featuredImage.options,
+															titleTextMetaKey: newVal,
+														};
+														setAttributes({
+															featuredImage: {
+																...featuredImage,
+																options: options,
+															},
+														});
+													}}
+												/>
+											</PanelRow>
+										</div>
+									)}
+
+									{featuredImage.options.titleTextSrc == "custom" && (
 										<PanelRow>
 											<label for="" className="font-medium text-slate-900 ">
-												Custom Field Key
+												Custom Title Text
 											</label>
 											<InputControl
 												className="mr-2"
-												value={featuredImage.options.titleTextMetaKey}
+												value={featuredImage.options.titleTextCustom}
 												onChange={(newVal) => {
 													var options = {
 														...featuredImage.options,
-														titleTextMetaKey: newVal,
+														titleTextCustom: newVal,
 													};
 													setAttributes({
 														featuredImage: {
@@ -1450,70 +1513,50 @@ registerBlockType(metadata, {
 												}}
 											/>
 										</PanelRow>
-									</div>
-								)}
+									)}
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={featuredImage}
+										onChange={onChangeStyleImage}
+										onAdd={onAddStyleImage}
+										onBulkAdd={onBulkAddFeaturedImage}
+										onRemove={onRemoveStyleImage}
+										onReset={onResetFeaturedImage}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={featuredImage}
+										onChange={onPickCssLibraryImage}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-								{featuredImage.options.titleTextSrc == "custom" && (
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Custom Title Text
-										</label>
-										<InputControl
-											className="mr-2"
-											value={featuredImage.options.titleTextCustom}
-											onChange={(newVal) => {
-												var options = {
-													...featuredImage.options,
-													titleTextCustom: newVal,
-												};
-												setAttributes({
-													featuredImage: { ...featuredImage, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-								)}
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={featuredImage}
-									onChange={onChangeStyleImage}
-									onAdd={onAddStyleImage}
-									onBulkAdd={onBulkAddFeaturedImage}
-									onRemove={onRemoveStyleImage}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={featuredImage}
-									onChange={onPickCssLibraryImage}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"post-featured-image"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"post-featured-image"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<div className="px-3">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockPostTitle",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						<div className="px-3">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockPostTitle",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 					</div>
 				</InspectorControls>
 

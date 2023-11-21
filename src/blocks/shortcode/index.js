@@ -67,9 +67,6 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -128,7 +125,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [metaValue, setMetaValue] = useState(null);
@@ -257,13 +253,6 @@ registerBlockType(metadata, {
 
 		// var breakPointList = [];
 
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
 
@@ -288,15 +277,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var shortcodeClassicX = attributes.shortcodeClassic;
 				var shortcodeX = attributes.shortcode;
@@ -393,7 +380,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -452,310 +438,320 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Shortcode Key"
-						initialOpen={true}>
-						<label className="mb-3">Choose Shortcode </label>
-						<PGDropdown
-							position="bottom right"
-							variant="secondary"
-							options={shortcodes}
-							buttonTitle="Choose"
-							onChange={(option, index) => {
-								var options = {
-									...shortcode.options,
-									id: option.id,
-									key: option.value,
-									prams: option.args,
-								};
-								setAttributes({
-									shortcode: { ...shortcode, options: options },
-								});
-							}}
-							values=""
-							value={shortcode.options.key}></PGDropdown>
-
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Shortcode Key
-							</label>
-
-							<InputControl
-								placeholder="Shortcode key"
-								value={shortcode.options.key}
-								onChange={(newVal) => {
-									let result = newVal.includes("[");
-
-									if (result) {
-										var shortcodeStr = newVal.replace("[", "");
-										shortcodeStr = shortcodeStr.replace("]", "");
-
-										var shortcodeArr = shortcodeStr.split(" ");
-										var shortcodeKey = shortcodeArr[0];
-
-										newVal = shortcodeKey;
-
-										shortcodeArr.shift();
-
-										var attsGroups = [];
-										var options = { ...shortcode.options };
-
-										shortcodeArr.map((x) => {
-											var shortcodePrams = {};
-											var attrArr = x.split("=");
-
-											shortcodePrams.id =
-												attrArr[0] == undefined ? "" : attrArr[0];
-											shortcodePrams.label =
-												attrArr[0] == undefined ? "" : attrArr[0];
-											shortcodePrams.val =
-												attrArr[1] == undefined
-													? ""
-													: attrArr[1].replaceAll('"', "");
-
-											options.prams.push(shortcodePrams);
-										});
-
-										setAttributes({
-											shortcode: { ...shortcode, options: options },
-										});
-									}
-
-									var options = { ...shortcode.options, key: newVal };
+					<div className="pg-setting-input-text">
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Shortcode Key"
+							initialOpen={true}>
+							<label className="mb-3">Choose Shortcode </label>
+							<PGDropdown
+								position="bottom right"
+								variant="secondary"
+								options={shortcodes}
+								buttonTitle="Choose"
+								onChange={(option, index) => {
+									var options = {
+										...shortcode.options,
+										id: option.id,
+										key: option.value,
+										prams: option.args,
+									};
 									setAttributes({
 										shortcode: { ...shortcode, options: options },
 									});
 								}}
-							/>
-						</PanelRow>
+								values=""
+								value={shortcode.options.key}></PGDropdown>
 
-						<p>
-							You can paste the shortcode, please use following format when
-							pasting
-						</p>
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Shortcode Key
+								</label>
 
-						<code>[shortcode attr1="value1" attr2="value2"]</code>
-
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Parameters
-							</label>
-							<Button
-								className={linkPickerText ? "!bg-gray-400" : ""}
-								icon={plus}
-								onClick={(ev) => {
-									setLinkPickerText((prev) => !prev);
-								}}>
-								Add
-							</Button>
-
-							{linkPickerText && (
-								<Popover position="bottom right ">
-									<div className="p-3 w-60">
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												ID
-											</label>
-
-											<InputControl
-												value={shortcodePrams.id}
-												onChange={(newVal) => {
-													setShortcodePrams({ ...shortcodePrams, id: newVal });
-												}}
-											/>
-										</PanelRow>
-
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Label
-											</label>
-
-											<InputControl
-												value={shortcodePrams.label}
-												onChange={(newVal) => {
-													setShortcodePrams({
-														...shortcodePrams,
-														label: newVal,
-													});
-												}}
-											/>
-										</PanelRow>
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Value
-											</label>
-
-											<InputControl
-												value={shortcodePrams.val}
-												onChange={(newVal) => {
-													setShortcodePrams({ ...shortcodePrams, val: newVal });
-												}}
-											/>
-										</PanelRow>
-
-										<Button
-											variant="secondary"
-											onClick={(ev) => {
-												var options = { ...shortcode.options };
-												options.prams.push(shortcodePrams);
-
-												setAttributes({
-													shortcode: { ...shortcode, options: options },
-												});
-
-												// shortcodePrams.id = '';
-												// shortcodePrams.label = '';
-												// shortcodePrams.val = '';
-											}}>
-											Add Parameter
-										</Button>
-									</div>
-								</Popover>
-							)}
-						</PanelRow>
-
-						<div className="">
-							{shortcode.options.prams != undefined &&
-								shortcode.options.prams.map((arg, index) => {
-									return (
-										<div className="my-2 bg-gray-300">
-											<div className="bg-gray-500 px-3 text-white">
-												<PanelRow>
-													<label for="" className="font-medium text-slate-900 ">
-														{arg.label} ({arg.id})
-													</label>
-
-													<span
-														class="cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1"
-														onClick={(ev) => {
-															var options = { ...shortcode.options };
-
-															options.prams.splice(index, 1);
-
-															setAttributes({
-																shortcode: { ...shortcode, options: options },
-															});
-														}}>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															viewBox="0 0 24 24"
-															width="24"
-															height="24"
-															aria-hidden="true"
-															focusable="false">
-															<path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"></path>
-														</svg>
-													</span>
-												</PanelRow>
-											</div>
-											<div className="px-3 py-2">
-												<InputControl
-													value={arg.val}
-													onChange={(newVal) => {
-														var options = { ...shortcode.options };
-														options.prams[index].val = newVal;
-														setAttributes({
-															shortcode: { ...shortcode, options: options },
-														});
-													}}
-												/>
-											</div>
-										</div>
-									);
-								})}
-						</div>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
+								<InputControl
+									placeholder="Shortcode key"
+									value={shortcode.options.key}
 									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
+										let result = newVal.includes("[");
+
+										if (result) {
+											var shortcodeStr = newVal.replace("[", "");
+											shortcodeStr = shortcodeStr.replace("]", "");
+
+											var shortcodeArr = shortcodeStr.split(" ");
+											var shortcodeKey = shortcodeArr[0];
+
+											newVal = shortcodeKey;
+
+											shortcodeArr.shift();
+
+											var attsGroups = [];
+											var options = { ...shortcode.options };
+
+											shortcodeArr.map((x) => {
+												var shortcodePrams = {};
+												var attrArr = x.split("=");
+
+												shortcodePrams.id =
+													attrArr[0] == undefined ? "" : attrArr[0];
+												shortcodePrams.label =
+													attrArr[0] == undefined ? "" : attrArr[0];
+												shortcodePrams.val =
+													attrArr[1] == undefined
+														? ""
+														: attrArr[1].replaceAll('"', "");
+
+												options.prams.push(shortcodePrams);
+											});
+
+											setAttributes({
+												shortcode: { ...shortcode, options: options },
+											});
+										}
+
+										var options = { ...shortcode.options, key: newVal };
 										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
+											shortcode: { ...shortcode, options: options },
 										});
 									}}
 								/>
+							</PanelRow>
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
-										onChange={(newVal) => {
-											setAttributes({
-												blockId: newVal,
-											});
-										}}
-									/>
-								</PanelRow>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Class
-									</label>
+							<p>
+								You can paste the shortcode, please use following format when
+								pasting
+							</p>
 
-									<InputControl
+							<code>[shortcode attr1="value1" attr2="value2"]</code>
+
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Parameters
+								</label>
+								<Button
+									className={linkPickerText ? "!bg-gray-400" : ""}
+									icon={plus}
+									onClick={(ev) => {
+										setLinkPickerText((prev) => !prev);
+									}}>
+									Add
+								</Button>
+
+								{linkPickerText && (
+									<Popover position="bottom right ">
+										<div className="p-3 w-60">
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													ID
+												</label>
+
+												<InputControl
+													value={shortcodePrams.id}
+													onChange={(newVal) => {
+														setShortcodePrams({
+															...shortcodePrams,
+															id: newVal,
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Label
+												</label>
+
+												<InputControl
+													value={shortcodePrams.label}
+													onChange={(newVal) => {
+														setShortcodePrams({
+															...shortcodePrams,
+															label: newVal,
+														});
+													}}
+												/>
+											</PanelRow>
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Value
+												</label>
+
+												<InputControl
+													value={shortcodePrams.val}
+													onChange={(newVal) => {
+														setShortcodePrams({
+															...shortcodePrams,
+															val: newVal,
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<Button
+												variant="secondary"
+												onClick={(ev) => {
+													var options = { ...shortcode.options };
+													options.prams.push(shortcodePrams);
+
+													setAttributes({
+														shortcode: { ...shortcode, options: options },
+													});
+
+													// shortcodePrams.id = '';
+													// shortcodePrams.label = '';
+													// shortcodePrams.val = '';
+												}}>
+												Add Parameter
+											</Button>
+										</div>
+									</Popover>
+								)}
+							</PanelRow>
+
+							<div className="">
+								{shortcode.options.prams != undefined &&
+									shortcode.options.prams.map((arg, index) => {
+										return (
+											<div className="my-2 bg-gray-300">
+												<div className="bg-gray-500 px-3 text-white">
+													<PanelRow>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															{arg.label} ({arg.id})
+														</label>
+
+														<span
+															class="cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1"
+															onClick={(ev) => {
+																var options = { ...shortcode.options };
+
+																options.prams.splice(index, 1);
+
+																setAttributes({
+																	shortcode: { ...shortcode, options: options },
+																});
+															}}>
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																viewBox="0 0 24 24"
+																width="24"
+																height="24"
+																aria-hidden="true"
+																focusable="false">
+																<path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"></path>
+															</svg>
+														</span>
+													</PanelRow>
+												</div>
+												<div className="px-3 py-2">
+													<InputControl
+														value={arg.val}
+														onChange={(newVal) => {
+															var options = { ...shortcode.options };
+															options.prams[index].val = newVal;
+															setAttributes({
+																shortcode: { ...shortcode, options: options },
+															});
+														}}
+													/>
+												</div>
+											</div>
+										);
+									})}
+							</div>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
 										value={wrapper.options.class}
 										onChange={(newVal) => {
 											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
-												wrapper: { ...wrapper, options: options },
+												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-									onRemove={onRemoveStyleWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"shortcode"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Class
+										</label>
+
+										<InputControl
+											value={wrapper.options.class}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, class: newVal };
+												setAttributes({
+													wrapper: { ...wrapper, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onRemove={onRemoveStyleWrapper}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"shortcode"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
+					</div>
 				</InspectorControls>
 
 				<>

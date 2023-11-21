@@ -25,7 +25,7 @@ function Html(props) {
 
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center pg-setting-css-components">
 
 
       <Dropdown
@@ -44,7 +44,7 @@ function Html(props) {
 
           </Button>
         )}
-        renderContent={() => <div className='w-32'>
+        renderContent={() => <div className='w-32 pg-font'>
 
           {Object.entries(args).map((args) => {
 

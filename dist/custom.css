@@ -20,13 +20,22 @@
 	font-weight: 500;
 	font-size: 13px;
 }
+.pg-setting-input-text .components-textarea-control__input {
+	min-height: 75px !important;
+	resize: vertical;
+	border-radius: 6px !important;
+	padding: 4px;
+	font-family: "Poppins" !important;
+	font-weight: 500;
+	font-size: 13px;
+}
 .pg-setting-input-text .components-input-control__input {
 	padding: 1px;
 	font-family: "Poppins" !important;
 	font-weight: 500;
 	font-size: 13px;
 }
-.pg-setting-select .components-select-control__input {
+.pg-setting-input-text .components-select-control__input {
 	font-family: "Poppins" !important;
 	font-weight: 500;
 	font-size: 13px;
@@ -34,6 +43,7 @@
 }
 .pg-font {
 	font-family: "Poppins" !important;
+	/* background-color: red; */
 }
 .pg-setting-input-text .components-panel__body {
 	font-family: "Poppins" !important;
@@ -54,4 +64,52 @@
 	font-family: "Poppins" !important;
 	/* font-weight: 500; */
 	/* font-size: 13px; */
+}
+/* .pg-setting-css-components .components-button {
+	font-family: "Poppins" !important;
+	
+	display: flex;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	gap: 0.5rem;
+	justify-content: center;
+	border-radius: 0.25rem;
+	font-weight: 500;
+	letter-spacing: 0.025em;
+	color: #ffffff;
+	text-transform: capitalize;
+	background-color: #1f2937;
+	cursor: pointer;
+}
+
+.pg-setting-css-components .components-button:hover {
+	color: #ffffff;
+	background-color: #374151;
+} */
+
+.custom-scrollbar {
+	max-height: 300px;
+	height: auto;
+	overflow-y: scroll;
+	scrollbar-width: thin;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background-color: #1f2937;
+	border-radius: 10px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+	background-color: #e5e7eb;
 }

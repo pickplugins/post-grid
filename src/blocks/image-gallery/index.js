@@ -68,12 +68,9 @@ import { store } from "../../store";
 import { __experimentalScrollable as Scrollable } from "@wordpress/components";
 import { createBlock } from "@wordpress/blocks";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import variations from "./variations";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -152,7 +149,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 		let isProFeature = applyFilters("isProFeature", true);
 
@@ -198,15 +194,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var lightboxX = attributes.lightbox;
 				var blockCssYX = attributes.blockCssY;
@@ -303,7 +297,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -332,7 +325,6 @@ registerBlockType(metadata, {
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
-
 
 		function onChangeStyleItem(sudoScource, newVal, attr) {
 			var path = [sudoScource, attr, breakPointX];
@@ -388,7 +380,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItem(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, item);
 			obj[sudoScource] = cssObj;
 
@@ -417,8 +408,6 @@ registerBlockType(metadata, {
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
-
-
 
 		const ALLOWED_BLOCKS = ["post-grid/image-gallery-item"];
 
@@ -454,185 +443,189 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div
-						className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
-						onClick={(ev) => {
-							addChild();
-						}}>
-						Add Item
-					</div>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
+					<div className="pg-setting-input-text">
+						<div
+							className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 mx-3"
+							// className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
+							onClick={(ev) => {
+								addChild();
+							}}>
+							Add Item
+						</div>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
+
+										<SelectControl
+											label=""
+											value={wrapper.options.tag}
+											options={[
+												{ label: "Choose", value: "" },
+												{ label: "H1", value: "h1" },
+												{ label: "H2", value: "h2" },
+												{ label: "H3", value: "h3" },
+												{ label: "H4", value: "h4" },
+												{ label: "H5", value: "h5" },
+												{ label: "H6", value: "h6" },
+												{ label: "SPAN", value: "span" },
+												{ label: "DIV", value: "div" },
+												{ label: "P", value: "p" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, tag: newVal };
+												setAttributes({
+													wrapper: { ...wrapper, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Item"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options"></PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={item}
+										onChange={onChangeStyleItem}
+										onAdd={onAddStyleItem}
+										onRemove={onRemoveStyleItem}
+										onBulkAdd={onBulkAddItem}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Lightbox"
+							initialOpen={false}>
+							<PanelRow>
+								<ToggleControl
+									label="Enable?"
+									help={
+										lightboxEnable ? "Lightbox Enabled" : "Lightbox Disabled."
+									}
+									checked={lightboxEnable ? true : false}
+									onChange={(e) => {
+										var options = {
+											...lightbox.options,
+											enable: lightboxEnable ? false : true,
+										};
 										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
+											lightbox: { ...lightbox, options: options },
 										});
 									}}
 								/>
+							</PanelRow>
+						</PanelBody>
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
-										onChange={(newVal) => {
-											setAttributes({
-												blockId: newVal,
-											});
-										}}
-									/>
-								</PanelRow>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Tag
-									</label>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"image-gallery"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
 
-									<SelectControl
-										label=""
-										value={wrapper.options.tag}
-										options={[
-											{ label: "Choose", value: "" },
-											{ label: "H1", value: "h1" },
-											{ label: "H2", value: "h2" },
-											{ label: "H3", value: "h3" },
-											{ label: "H4", value: "h4" },
-											{ label: "H5", value: "h5" },
-											{ label: "H6", value: "h6" },
-											{ label: "SPAN", value: "span" },
-											{ label: "DIV", value: "div" },
-											{ label: "P", value: "p" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...wrapper.options, tag: newVal };
-											setAttributes({
-												wrapper: { ...wrapper, options: options },
-											});
-										}}
-									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Item"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options"></PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={item}
-									onChange={onChangeStyleItem}
-									onAdd={onAddStyleItem}
-									onRemove={onRemoveStyleItem}
-									onBulkAdd={onBulkAddItem}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Lightbox"
-						initialOpen={false}>
-						<PanelRow>
-							<ToggleControl
-								label="Enable?"
-								help={
-									lightboxEnable ? "Lightbox Enabled" : "Lightbox Disabled."
-								}
-								checked={lightboxEnable ? true : false}
-								onChange={(e) => {
-									var options = {
-										...lightbox.options,
-										enable: lightboxEnable ? false : true,
-									};
-									setAttributes({
-										lightbox: { ...lightbox, options: options },
-									});
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockText",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
 								}}
 							/>
-						</PanelRow>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"image-gallery"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockText",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						</div>
 					</div>
 				</InspectorControls>
 

@@ -60,12 +60,8 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -126,7 +122,7 @@ registerBlockType(metadata, {
 		var blockClass = "." + blockIdX;
 
 		var wrapper = attributes.wrapper;
-		var link = attributes.link;
+		var linkX = attributes.link;
 		var icon = attributes.icon;
 		var subMenuWrap = attributes.subMenuWrap;
 
@@ -135,12 +131,25 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		// Wrapper CSS Class Selectors
 		var wrapperSelector = blockClass;
-		var subMenuWrapSelector = blockClass + " .subMenu";
+		var subMenuWrapSelector = blockClass + " .pg-sub-menu";
+		const iconSelector = blockClass + " .pg-menu-icon";
+		const linkSelector = blockClass + " .pg-menu-link";
+
+		const [iconHtml, setIconHtml] = useState("");
+
+		const [linkPickerMenu, setLinkPickerMenu] = useState(false);
+
+		useEffect(() => {
+			var iconSrc = icon.options.iconSrc;
+
+			var iconHtml = `<span class="${iconSrc}"></span>`;
+
+			setIconHtml(iconHtml);
+		}, [icon]);
 
 		useEffect(() => {
 			var blockIdX = "pg" + clientId.split("-").pop();
@@ -153,6 +162,8 @@ registerBlockType(metadata, {
 
 			blockCssObj[wrapperSelector] = wrapper;
 			blockCssObj[subMenuWrapSelector] = subMenuWrap;
+			blockCssObj[iconSelector] = icon;
+			blockCssObj[linkSelector] = linkX;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
@@ -170,9 +181,6 @@ registerBlockType(metadata, {
 				if (sudoSrc != "options") {
 					var selector = myStore.getElementSelector(sudoSrc, wrapperSelector);
 
-					//console.log(selector);
-					//console.log(sudoArgs);
-
 					Object.entries(args[1]).map((x) => {
 						var attr = x[0];
 						var cssPropty = myStore.cssAttrParse(attr);
@@ -188,35 +196,27 @@ registerBlockType(metadata, {
 						stylesObj[selector][cssPropty] = x[1];
 					});
 				}
-
-				//console.log(stylesObj);
 			});
 
 			var cssItems = { ...blockCssY.items };
 			var cssItemsX = { ...cssItems, ...stylesObj };
-			//console.log(cssItemsX);
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
 		useEffect(() => {
-			//console.log(wrapper);
-
-			///myStore.generateBlockCss(blockCssY.items, blockId);
-
 			var elementCss = generateElementSudoCss(wrapper);
-
-			//console.log(elementCss);
 		}, [wrapper]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
+		function onChangeIcon(arg) {
+			var options = {
+				...icon.options,
+				srcType: arg.srcType,
+				library: arg.library,
+				iconSrc: arg.iconSrc,
+			};
+			setAttributes({ icon: { ...icon, options: options } });
+		}
 
 		function onChangeStyleWrapper(sudoScource, newVal, attr) {
 			var path = [sudoScource, attr, breakPointX];
@@ -272,7 +272,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -358,7 +357,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddSubMenuWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, subMenuWrap);
 			obj[sudoScource] = cssObj;
 
@@ -391,6 +389,243 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
+		function onChangeStyleIcon(sudoScource, newVal, attr) {
+			var path = [sudoScource, attr, breakPointX];
+			let obj = Object.assign({}, icon);
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ icon: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				iconSelector
+			);
+			var cssPropty = myStore.cssAttrParse(attr);
+
+			let itemsX = Object.assign({}, blockCssY.items);
+
+			if (itemsX[elementSelector] == undefined) {
+				itemsX[elementSelector] = {};
+			}
+
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
+
+		function onRemoveStyleIcon(sudoScource, key) {
+			var object = myStore.deletePropertyDeep(icon, [
+				sudoScource,
+				key,
+				breakPointX,
+			]);
+			setAttributes({ icon: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				iconSelector
+			);
+			var cssPropty = myStore.cssAttrParse(key);
+			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+				elementSelector,
+				cssPropty,
+				breakPointX,
+			]);
+			setAttributes({ blockCssY: { items: cssObject } });
+		}
+
+		function onAddStyleIcon(sudoScource, key) {
+			var path = [sudoScource, key, breakPointX];
+			let obj = Object.assign({}, icon);
+			const object = myStore.addPropertyDeep(obj, path, "");
+			setAttributes({ icon: object });
+		}
+
+		function onBulkAddIcon(sudoScource, cssObj) {
+			let obj = Object.assign({}, icon);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ icon: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, iconSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onPickCssLibraryIcon(args) {
+			Object.entries(args).map((x) => {
+				var sudoScource = x[0];
+				var sudoScourceArgs = x[1];
+				icon[sudoScource] = sudoScourceArgs;
+			});
+
+			var iconX = Object.assign({}, icon);
+			setAttributes({ icon: iconX });
+
+			var styleObj = {};
+
+			Object.entries(args).map((x) => {
+				var sudoScource = x[0];
+				var sudoScourceArgs = x[1];
+				var elementSelector = myStore.getElementSelector(
+					sudoScource,
+					iconSelector
+				);
+
+				var sudoObj = {};
+				Object.entries(sudoScourceArgs).map((y) => {
+					var cssPropty = y[0];
+					var cssProptyVal = y[1];
+					var cssProptyKey = myStore.cssAttrParse(cssPropty);
+					sudoObj[cssProptyKey] = cssProptyVal;
+				});
+
+				styleObj[elementSelector] = sudoObj;
+			});
+
+			var cssItems = Object.assign(blockCssY.items, styleObj);
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
+
+		// function onChangeStyleIcon(sudoScource, newVal, attr) {
+		// 	var path = [sudoScource, attr, breakPointX];
+		// 	let obj = Object.assign({}, icon);
+		// 	const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+		// 	setAttributes({ icon: object });
+
+		// 	var elementSelector = myStore.getElementSelector(
+		// 		sudoScource,
+		// 		iconSelector
+		// 	);
+		// 	var cssPropty = myStore.cssAttrParse(attr);
+
+		// 	let itemsX = Object.assign({}, blockCssY.items);
+
+		// 	if (itemsX[elementSelector] == undefined) {
+		// 		itemsX[elementSelector] = {};
+		// 	}
+
+		// 	var cssPath = [elementSelector, cssPropty, breakPointX];
+		// 	const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+		// 	setAttributes({ blockCssY: { items: cssItems } });
+		// }
+
+		// function onRemoveStyleIcon(sudoScource, key) {
+		// 	var object = myStore.deletePropertyDeep(icon, [
+		// 		sudoScource,
+		// 		key,
+		// 		breakPointX,
+		// 	]);
+		// 	setAttributes({ icon: object });
+
+		// 	var elementSelector = myStore.getElementSelector(
+		// 		sudoScource,
+		// 		iconSelector
+		// 	);
+		// 	var cssPropty = myStore.cssAttrParse(key);
+		// 	var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+		// 		elementSelector,
+		// 		cssPropty,
+		// 		breakPointX,
+		// 	]);
+		// 	setAttributes({ blockCssY: { items: cssObject } });
+		// }
+
+		// function onAddStyleIcon(sudoScource, key) {
+		// 	var path = [sudoScource, key, breakPointX];
+		// 	let obj = Object.assign({}, icon);
+		// 	const object = myStore.addPropertyDeep(obj, path, "");
+		// 	setAttributes({ icon: object });
+		// }
+
+		// function onBulkAddIcon(sudoScource, cssObj) {
+		//
+		// 	let obj = Object.assign({}, icon);
+		// 	obj[sudoScource] = cssObj;
+
+		// 	setAttributes({ icon: obj });
+
+		// 	var selector = myStore.getElementSelector(sudoScource, iconSelector);
+		// 	var stylesObj = {};
+
+		// 	Object.entries(cssObj).map((args) => {
+		// 		var attr = args[0];
+		// 		var cssPropty = myStore.cssAttrParse(attr);
+
+		// 		if (stylesObj[selector] == undefined) {
+		// 			stylesObj[selector] = {};
+		// 		}
+
+		// 		if (stylesObj[selector][cssPropty] == undefined) {
+		// 			stylesObj[selector][cssPropty] = {};
+		// 		}
+
+		// 		stylesObj[selector][cssPropty] = args[1];
+		// 	});
+
+		// 	var cssItems = { ...blockCssY.items };
+		// 	var cssItemsX = { ...cssItems, ...stylesObj };
+
+		// 	setAttributes({ blockCssY: { items: cssItemsX } });
+		// }
+
+		// function onPickCssLibraryIcon(args) {
+		// 	Object.entries(args).map((x) => {
+		// 		var sudoScource = x[0];
+		// 		var sudoScourceArgs = x[1];
+		// 		icon[sudoScource] = sudoScourceArgs;
+		// 	});
+
+		// 	var iconX = Object.assign({}, icon);
+		// 	setAttributes({ icon: iconX });
+
+		// 	var styleObj = {};
+
+		// 	Object.entries(args).map((x) => {
+		// 		var sudoScource = x[0];
+		// 		var sudoScourceArgs = x[1];
+		// 		var elementSelector = myStore.getElementSelector(
+		// 			sudoScource,
+		// 			iconSelector
+		// 		);
+
+		// 		var sudoObj = {};
+		// 		Object.entries(sudoScourceArgs).map((y) => {
+		// 			var cssPropty = y[0];
+		// 			var cssProptyVal = y[1];
+		// 			var cssProptyKey = myStore.cssAttrParse(cssPropty);
+		// 			sudoObj[cssProptyKey] = cssProptyVal;
+		// 		});
+
+		// 		styleObj[elementSelector] = sudoObj;
+		// 	});
+
+		// 	var cssItems = Object.assign(blockCssY.items, styleObj);
+		// 	setAttributes({ blockCssY: { items: cssItems } });
+		// }
+
 		useEffect(() => {
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
@@ -412,6 +647,9 @@ registerBlockType(metadata, {
 			"post-grid/flex-wrap",
 			"post-grid/grid-wrap",
 			"post-grid/image",
+			"post-grid/list-nested",
+			"post-grid/layers",
+			"core/paragraph",
 		];
 
 		const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -425,7 +663,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls className="">
-					<div className="px-3">
+					<div className="pg-setting-input-text">
 						<div className="p-3">
 							<PanelRow className="mb-4">
 								<label for="" className="font-medium text-slate-900 ">
@@ -433,27 +671,90 @@ registerBlockType(metadata, {
 								</label>
 								<InputControl
 									className="mr-2"
-									value={link.options.text}
+									value={linkX.options.text}
 									onChange={(newVal) => {
-										var options = { ...link.options, text: newVal };
-										setAttributes({ link: { ...link, options: options } });
+										var options = { ...linkX.options, text: newVal };
+										setAttributes({ linkX: { ...linkX, options: options } });
 									}}
 								/>
 							</PanelRow>
 
 							<PanelRow className="mb-4">
+								<label for="" className="font-medium text-slate-900  pg-font  ">
+									Custom Url
+								</label>
+
+								<div className="relative">
+									<Button
+										className={linkPickerMenu ? "!bg-gray-400" : ""}
+										icon={link}
+										onClick={(ev) => {
+											setLinkPickerMenu((prev) => !prev);
+										}}></Button>
+									{linkX.options.url.length > 0 && (
+										<Button
+											className="!text-red-500 ml-2"
+											icon={linkOff}
+											onClick={(ev) => {
+												var options = {
+													...linkX.options,
+													url: "",
+												};
+												setAttributes({
+													link: {
+														...linkX,
+														options: options,
+													},
+												});
+												setLinkPickerMenu(false);
+												console.log("first");
+											}}></Button>
+									)}
+									{linkPickerMenu && (
+										<Popover position="bottom right">
+											<LinkControl
+												settings={[]}
+												value={linkX.options.url}
+												onChange={(newVal) => {
+													console.log(newVal);
+													var options = {
+														...linkX.options,
+														url: newVal.url,
+													};
+
+													setAttributes({
+														link: {
+															...linkX,
+															options: options,
+														},
+													});
+												}}
+											/>
+
+											<div className="p-2">
+												<span className="font-bold">Linked to:</span>{" "}
+												{linkX.options.url.length != 0
+													? linkX.options.url
+													: "No link"}{" "}
+											</div>
+										</Popover>
+									)}
+								</div>
+							</PanelRow>
+
+							{/* <PanelRow className="mb-4">
 								<label for="" className="font-medium text-slate-900 ">
 									Menu URL
 								</label>
 								<InputControl
 									className="mr-2"
-									value={link.options.url}
+									value={linkX.options.url}
 									onChange={(newVal) => {
-										var options = { ...link.options, url: newVal };
+										var options = { ...linkX.options, url: newVal };
 										setAttributes({ link: { ...link, options: options } });
 									}}
 								/>
-							</PanelRow>
+							</PanelRow> */}
 
 							<ToggleControl
 								label="Menu Active?"
@@ -538,6 +839,95 @@ registerBlockType(metadata, {
 
 						<PanelBody
 							className="font-medium text-slate-900 "
+							title="Icon"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
+
+										<PGIconPicker
+											library={icon.options.library}
+											srcType={icon.options.srcType}
+											iconSrc={icon.options.iconSrc}
+											onChange={onChangeIcon}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Icon position
+										</label>
+
+										<SelectControl
+											label=""
+											value={icon.options.position}
+											options={[
+												{ label: "Choose Position", value: "" },
+
+												{ label: "Before Label", value: "beforeLabel" },
+												{ label: "After Label", value: "afterLabel" },
+												// { label: "Before Prefix", value: "beforePrefix" },
+												// { label: "After Prefix", value: "afterPrefix" },
+												// { label: "Before Postfix", value: "beforePostfix" },
+												// { label: "After Postfix", value: "afterPostfix" },
+												{ label: "Before Link", value: "beforeLink" },
+												{ label: "After Link", value: "afterLink" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...icon.options, position: newVal };
+												setAttributes({ icon: { ...icon, options: options } });
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={icon}
+										onChange={onChangeStyleIcon}
+										onAdd={onAddStyleIcon}
+										onRemove={onRemoveStyleIcon}
+										onBulkAdd={onBulkAddIcon}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={icon}
+										onChange={onPickCssLibraryIcon}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
 							title="Sub MenuWrap"
 							initialOpen={false}>
 							<PGtabs
@@ -586,12 +976,40 @@ registerBlockType(metadata, {
 				</InspectorControls>
 
 				<li {...innerBlocksProps}>
-					{link.options.text.length > 0 && (
-						<a className="menuLink" href={link.options.url}>
-							{link.options.text}
-						</a>
+					{linkX.options.text.length > 0 && (
+						<>
+							{icon.options.position == "beforeLink" && (
+								<span
+									className={icon.options.class}
+									dangerouslySetInnerHTML={{ __html: iconHtml }}
+								/>
+							)}
+							<a className={linkX.options.class} href={linkX.options.url}>
+								{icon.options.position == "beforeLabel" && (
+									<span
+										className={icon.options.class}
+										dangerouslySetInnerHTML={{ __html: iconHtml }}
+									/>
+								)}
+								{linkX.options.text}
+								{icon.options.position == "afterLabel" && (
+									<span
+										className={icon.options.class}
+										dangerouslySetInnerHTML={{ __html: iconHtml }}
+									/>
+								)}
+							</a>
+							{icon.options.position == "afterLink" && (
+								<span
+									className={icon.options.class}
+									dangerouslySetInnerHTML={{ __html: iconHtml }}
+								/>
+							)}
+						</>
 					)}
-					<ul className="subMenu">{innerBlocksProps.children}</ul>
+					<ul className={subMenuWrap.options.class}>
+						{innerBlocksProps.children}
+					</ul>
 				</li>
 			</>
 		);
@@ -611,3 +1029,4 @@ registerBlockType(metadata, {
 		return <InnerBlocks.Content />;
 	},
 });
+

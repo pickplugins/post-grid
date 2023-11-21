@@ -64,15 +64,11 @@ import { store } from "../../store";
 
 import variations from "./variations";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
-import PGcssDisplay from "../../components/css-display";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
@@ -137,7 +133,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		// Wrapper CSS Class Selectors
@@ -193,15 +188,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var progressDataX = attributes.progressData;
 				var progressInfoX = attributes.progressInfo;
@@ -796,7 +789,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -827,7 +819,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddProgressLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, progressLabel);
 			obj[sudoScource] = cssObj;
 
@@ -861,7 +852,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddProgressCount(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, progressCount);
 			obj[sudoScource] = cssObj;
 
@@ -895,7 +885,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddProgressBar(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, progressBar);
 			obj[sudoScource] = cssObj;
 
@@ -929,7 +918,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddProgressFill(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, progressFill);
 			obj[sudoScource] = cssObj;
 
@@ -963,7 +951,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddCircleOverlay(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, circleOverlay);
 			obj[sudoScource] = cssObj;
 
@@ -997,7 +984,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddCircleMask(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, circleMask);
 			obj[sudoScource] = cssObj;
 
@@ -1031,7 +1017,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -1062,7 +1047,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddProgressInfo(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, progressInfo);
 			obj[sudoScource] = cssObj;
 
@@ -1126,15 +1110,6 @@ registerBlockType(metadata, {
 			setIconHtml(iconHtml);
 		}, [icon]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
@@ -1150,7 +1125,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<div className="p-3">
 							<PanelRow className="my-3">
 								<label for="" className="font-medium text-slate-900 ">

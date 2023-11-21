@@ -26,7 +26,7 @@
       "default": {
         "options": {
           "tag": "li",
-          "class": "flex-item-wrap pg-menu-wrap-item",
+          "class": "pg-menu-wrap-item",
           "isActive": false
         },
         "styles": {
@@ -40,8 +40,8 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "",
-          "text": "",
+          "class": "pg-menu-link",
+          "text": "Label",
           "url": ""
         },
         "styles": {
@@ -55,7 +55,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "",
+          "class": "pg-sub-menu",
           "type": ""
         },
         "styles": {
@@ -74,12 +74,9 @@
           "srcType": "class",
           "iconSrc": "fas fa-check-circle",
           "position": "beforeText",
-          "class": "link-icon"
+          "class": "pg-menu-icon"
         },
         "styles": {
-          "color": {
-            "Desktop": ""
-          }
         }
       }
     },

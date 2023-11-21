@@ -61,15 +61,11 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
-import PGcssDisplay from "../../components/css-display";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import PGtabs from "../../components/tabs";
@@ -134,7 +130,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
@@ -279,8 +274,7 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
@@ -685,7 +679,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -716,7 +709,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddArchiveTitle(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, archiveTitle);
 			obj[sudoScource] = cssObj;
 
@@ -750,7 +742,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -781,7 +772,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPrefix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, prefix);
 			obj[sudoScource] = cssObj;
 
@@ -812,7 +802,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostfix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, postfix);
 			obj[sudoScource] = cssObj;
 
@@ -879,15 +868,6 @@ registerBlockType(metadata, {
 			"link",
 			postId
 		);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
@@ -1026,7 +1006,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -1168,7 +1148,13 @@ registerBlockType(metadata, {
 											position="bottom right"
 											variant="secondary"
 											options={archiveTypes}
-											buttonTitle="Choose"
+											// buttonTitle="Choose"
+											buttonTitle={
+												archiveTypes[archiveTitle.options.archiveType] !=
+												undefined
+													? archiveTypes[archiveTitle.options.archiveType].label
+													: "Choose"
+											}
 											onChange={(option, index) => {
 												var options = {
 													...archiveTitle.options,
@@ -1180,10 +1166,6 @@ registerBlockType(metadata, {
 											}}
 											values={""}></PGDropdown>
 									</PanelRow>
-
-									<div className="bg-gray-500 text-white p-3 py-2">
-										{archiveTypes[archiveTitle.options.archiveType].label}
-									</div>
 
 									<PanelRow className="mb-4">
 										<label for="" className="font-medium text-slate-900 ">
@@ -1434,7 +1416,8 @@ registerBlockType(metadata, {
 													Custom Attributes
 												</label>
 												<div
-													className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+													// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+													className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
 													onClick={(ev) => {
 														var sdsd = archiveTitle.options.linkAttr.concat({
 															id: "",

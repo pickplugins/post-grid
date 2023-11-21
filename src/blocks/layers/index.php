@@ -123,21 +123,14 @@ class PGBlockLayers
 
 
     if ($wrapperTag == 'a') { ?>
-            <a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-              target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>"
-              href="<?php echo esc_url_raw($linkUrl); ?>">
-              <?php echo $content ?>
-            </a>
-            <?php
+      <a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
+        <?php echo $content ?>
+      </a>
+    <?php
 
     } else { ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
-              <?php echo esc_attr($wrapperClass); ?>
-              <?php echo esc_attr($blockId); ?>
-              <?php echo esc_attr($blockAlign); ?>">
-              <?php echo $content ?>
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+      <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"> <?php echo $content ?> </<?php echo esc_attr($wrapperTag); ?>>
+<?php
     }
 
     return ob_get_clean();

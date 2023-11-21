@@ -4,7 +4,7 @@ Donate link: https://www.pickplugins.com/post-grid
 Tags: post grid, post grid block, block, custom post grid, post type grid, grid display, grid layout, post list, masonry grid
 Requires at least: 5.0.0
 Tested up to: 6.3
-Stable tag: 2.2.63
+Stable tag: 2.2.64
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -384,12 +384,16 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 = 2.2.64 =
 
-- 2023-10-25 - fix - block duplicate issue fixed.
-- 2023-10-25 - fix - image light-box issue fixed.
-- 2023-10-25 - added - block variation added.
-- 2023-10-25 - added - Masonry block added.
-- 2023-10-25 - added - CSS class picker added.
-- 2023-10-25 - update - Accordion Item Block - copy style feature update.
+- 2023-11-16 - fix - block duplicate issue fixed.
+- 2023-11-16 - fix - image light-box issue fixed.
+- 2023-11-16 - fix - Flex Wrap block - flex-wrap issue fixed.
+- 2023-11-16 - added - block variation added.
+- 2023-11-16 - added - Masonry block added.
+- 2023-11-16 - added - Post Query block added.
+- 2023-11-16 - added - Post Query Pagination block added.
+- 2023-11-16 - added - CSS class picker added.
+- 2023-11-16 - added - Add item button on Flex Wrap, Grid Wrap, Image Gallery block.
+- 2023-11-16 - update - Accordion Item Block - copy style feature update.
 
 = 2.2.63 =
 

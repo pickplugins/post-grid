@@ -110,7 +110,7 @@
         }
       }
     },
-    "summury": {
+    "summary": {
       "type": "object",
       "default": {
         "options": {

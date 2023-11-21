@@ -60,12 +60,9 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import PGIconPicker from "../../components/icon-picker";
 
 import PGtabs from "../../components/tabs";
@@ -283,7 +280,6 @@ registerBlockType("post-grid/accordion", {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -303,15 +299,6 @@ registerBlockType("post-grid/accordion", {
 
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [clientId]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		const [iconHtml, setIconHtml] = useState("");
 
@@ -728,7 +715,6 @@ registerBlockType("post-grid/accordion", {
 		}
 
 		function onBulkAddHeader(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, header);
 			obj[sudoScource] = cssObj;
 
@@ -759,7 +745,6 @@ registerBlockType("post-grid/accordion", {
 		}
 
 		function onBulkAddHeaderLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, headerActive);
 			obj[sudoScource] = cssObj;
 
@@ -793,7 +778,6 @@ registerBlockType("post-grid/accordion", {
 		}
 
 		function onBulkAddLabelContent(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, content);
 			obj[sudoScource] = cssObj;
 
@@ -824,7 +808,6 @@ registerBlockType("post-grid/accordion", {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -861,7 +844,10 @@ registerBlockType("post-grid/accordion", {
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-2" title="header" initialOpen={false}>
+					<div
+						className="px-2 pg-setting-input-text"
+						title="header"
+						initialOpen={false}>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Header"

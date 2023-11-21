@@ -70,12 +70,9 @@ const { RawHTML } = wp.element;
 import { store } from "../../store";
 import { __experimentalScrollable as Scrollable } from "@wordpress/components";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import variations from "./variations";
 import PGDropdown from "../../components/dropdown";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
@@ -160,10 +157,10 @@ registerBlockType(metadata, {
 		var onSubmit = attributes.onSubmit;
 		var onProcess = attributes.onProcess;
 		var afterSubmit = attributes.afterSubmit;
+		var errorWrap = attributes.errorWrap;
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 		let isProFeature = applyFilters("isProFeature", true);
 
@@ -178,6 +175,7 @@ registerBlockType(metadata, {
 		// Wrapper CSS Class Selectors
 		var wrapperSelector = blockClass;
 		var formSelector = blockClass + " form";
+		var errorWrapSelector = blockClass + " .error-wrap";
 
 		const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
@@ -283,6 +281,7 @@ registerBlockType(metadata, {
 
 			blockCssObj[wrapperSelector] = wrapper;
 			blockCssObj[formSelector] = form;
+			blockCssObj[errorWrapSelector] = errorWrap;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
@@ -615,15 +614,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var formX = attributes.form;
 
@@ -771,15 +768,6 @@ registerBlockType(metadata, {
 			);
 		};
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		function onChangeStyleWrapper(sudoScource, newVal, attr) {
 			var path = [sudoScource, attr, breakPointX];
 			let obj = Object.assign({}, wrapper);
@@ -834,7 +822,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -918,13 +905,95 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddForm(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, form);
 			obj[sudoScource] = cssObj;
 
 			setAttributes({ form: obj });
 
 			var selector = myStore.getElementSelector(sudoScource, formSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onChangeStyleErrorWrap(sudoScource, newVal, attr) {
+			var path = [sudoScource, attr, breakPointX];
+			let obj = Object.assign({}, errorWrap);
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+			setAttributes({ errorWrap: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				errorWrapSelector
+			);
+			var cssPropty = myStore.cssAttrParse(attr);
+
+			let itemsX = Object.assign({}, blockCssY.items);
+
+			if (itemsX[elementSelector] == undefined) {
+				itemsX[elementSelector] = {};
+			}
+
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
+
+		function onRemoveStyleErrorWrap(sudoScource, key) {
+			var object = myStore.deletePropertyDeep(errorWrap, [
+				sudoScource,
+				key,
+				breakPointX,
+			]);
+			setAttributes({ errorWrap: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				errorWrapSelector
+			);
+			var cssPropty = myStore.cssAttrParse(key);
+			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+				elementSelector,
+				cssPropty,
+				breakPointX,
+			]);
+			setAttributes({ blockCssY: { items: cssObject } });
+		}
+
+		function onAddStyleErrorWrap(sudoScource, key) {
+			var path = [sudoScource, key, breakPointX];
+			let obj = Object.assign({}, errorWrap);
+			const object = myStore.addPropertyDeep(obj, path, "");
+			setAttributes({ errorWrap: object });
+		}
+
+		function onBulkAddErrorWrap(sudoScource, cssObj) {
+			let obj = Object.assign({}, errorWrap);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ errorWrap: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, errorWrapSelector);
 			var stylesObj = {};
 
 			Object.entries(cssObj).map((args) => {
@@ -967,209 +1036,214 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="p-3">
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Choose Form Type
-							</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								buttonTitle={
-									formTypeArgs[
-										form.options == undefined ? form.type : form.options.type
-									] == undefined
-										? "Form Type"
-										: formTypeArgs[
-												form.options == undefined
-													? form.type
-													: form.options.type
-										  ].label
-								}
-								options={formTypeArgs}
-								onChange={(option, index) => {
-									//setAttributes({ form: { ...form, type: index } });
+					<div className="pg-setting-input-text">
+						<div className="p-3">
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Choose Form Type
+								</label>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={
+										formTypeArgs[
+											form.options == undefined ? form.type : form.options.type
+										] == undefined
+											? "Form Type"
+											: formTypeArgs[
+													form.options == undefined
+														? form.type
+														: form.options.type
+											  ].label
+									}
+									options={formTypeArgs}
+									onChange={(option, index) => {
+										//setAttributes({ form: { ...form, type: index } });
 
-									var options = { ...form.options, type: index };
-									setAttributes({ form: { ...form, options: options } });
+										var options = { ...form.options, type: index };
+										setAttributes({ form: { ...form, options: options } });
 
-									//console.log(wp.data.select(blockEditorStore).getBlocks(clientId));
-								}}
-								values=""></PGDropdown>
-						</PanelRow>
-					</div>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
-										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
-										});
+										//console.log(wp.data.select(blockEditorStore).getBlocks(clientId));
 									}}
-								/>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
-										onChange={(newVal) => {
-											setAttributes({
-												blockId: newVal,
-											});
-										}}
-									/>
-								</PanelRow>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Tag
-									</label>
-
-									<SelectControl
-										label=""
-										value={wrapper.options.tag}
-										options={[
-											{ label: "Choose", value: "" },
-											{ label: "H1", value: "h1" },
-											{ label: "H2", value: "h2" },
-											{ label: "H3", value: "h3" },
-											{ label: "H4", value: "h4" },
-											{ label: "H5", value: "h5" },
-											{ label: "H6", value: "h6" },
-											{ label: "SPAN", value: "span" },
-											{ label: "DIV", value: "div" },
-											{ label: "P", value: "p" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...wrapper.options, tag: newVal };
-											setAttributes({
-												wrapper: { ...wrapper, options: options },
-											});
-										}}
-									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Form Wrap"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="styles"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={form.options.class}
-									onChange={(newVal) => {
-										var options = { ...form.options, class: newVal };
-										setAttributes({
-											form: { styles: form.styles, options: options },
-										});
-									}}
-								/>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={form}
-									onChange={onChangeStyleForm}
-									onAdd={onAddStyleForm}
-									onRemove={onRemoveStyleForm}
-									onBulkAdd={onBulkAddForm}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Visiblity"
-						initialOpen={false}>
-						<div
-							className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
-							onClick={(ev) => {
-								var visibleX = { ...visible };
-
-								var index = Object.entries(visibleX).length;
-
-								visibleX[index] = { logic: "OR", title: "", args: [] };
-
-								setAttributes({ visible: visibleX });
-							}}>
-							Add Group
+									values=""></PGDropdown>
+							</PanelRow>
 						</div>
 
-						<div class="my-4">
-							{Object.entries(visible).map((group, groupIndex) => {
-								var groupId = group[0];
-								var groupData = group[1];
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
 
-								return (
-									<PanelBody
-										title={
-											<RemoveVisibleGroup title={groupIndex} index={groupId} />
-										}
-										initialOpen={false}>
-										<PanelRow className="my-3">
-											{/* <label>Logic?</label>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
+
+										<SelectControl
+											label=""
+											value={wrapper.options.tag}
+											options={[
+												{ label: "Choose", value: "" },
+												{ label: "H1", value: "h1" },
+												{ label: "H2", value: "h2" },
+												{ label: "H3", value: "h3" },
+												{ label: "H4", value: "h4" },
+												{ label: "H5", value: "h5" },
+												{ label: "H6", value: "h6" },
+												{ label: "SPAN", value: "span" },
+												{ label: "DIV", value: "div" },
+												{ label: "P", value: "p" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, tag: newVal };
+												setAttributes({
+													wrapper: { ...wrapper, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Form Wrap"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={form.options.class}
+										onChange={(newVal) => {
+											var options = { ...form.options, class: newVal };
+											setAttributes({
+												form: { styles: form.styles, options: options },
+											});
+										}}
+									/>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={form}
+										onChange={onChangeStyleForm}
+										onAdd={onAddStyleForm}
+										onRemove={onRemoveStyleForm}
+										onBulkAdd={onBulkAddForm}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Visibility"
+							initialOpen={false}>
+							<div
+								// className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
+								className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700"
+								onClick={(ev) => {
+									var visibleX = { ...visible };
+
+									var index = Object.entries(visibleX).length;
+
+									visibleX[index] = { logic: "OR", title: "", args: [] };
+
+									setAttributes({ visible: visibleX });
+								}}>
+								Add Group
+							</div>
+
+							<div class="my-4">
+								{Object.entries(visible).map((group, groupIndex) => {
+									var groupId = group[0];
+									var groupData = group[1];
+
+									return (
+										<PanelBody
+											title={
+												<RemoveVisibleGroup
+													title={groupIndex}
+													index={groupId}
+												/>
+											}
+											initialOpen={false}>
+											<PanelRow className="my-3">
+												{/* <label>Logic?</label>
                       <PGDropdown position="bottom right" variant="secondary" buttonTitle={(groupData['logic'] == undefined) ? 'Choose' : groupData['logic']} options={[
                         { label: 'OR', value: 'OR' },
                         { label: 'AND', value: 'AND' }
@@ -1180,2275 +1254,2382 @@ registerBlockType(metadata, {
                           setAttributes({ visible: visibleX });
                         }} values=""></PGDropdown> */}
 
-											<PGDropdown
-												position="bottom right"
-												variant="secondary"
-												buttonTitle={"Add Condition"}
-												options={visibleArgs}
-												onChange={(option, index) => {
-													var visibleX = { ...visible };
+												<PGDropdown
+													position="bottom right"
+													variant="secondary"
+													buttonTitle={"Add Condition"}
+													options={visibleArgs}
+													onChange={(option, index) => {
+														var visibleX = { ...visible };
 
-													visibleX[groupId]["args"].push(option.args);
-													setAttributes({ visible: visibleX });
-												}}
-												values=""></PGDropdown>
-										</PanelRow>
+														visibleX[groupId]["args"].push(option.args);
+														setAttributes({ visible: visibleX });
+													}}
+													values=""></PGDropdown>
+											</PanelRow>
 
-										{visible[groupId]["args"] != undefined &&
-											visible[groupId]["args"].map((item, index) => {
-												var id = item.id;
+											{visible[groupId]["args"] != undefined &&
+												visible[groupId]["args"].map((item, index) => {
+													var id = item.id;
 
-												//console.log(item);
+													//console.log(item);
 
-												return (
-													<>
-														<PanelBody
-															title={
-																<RemoveVisibleArg
-																	title={
-																		visibleArgs[id] == undefined
-																			? id
-																			: visibleArgs[id].label
-																	}
-																	index={id}
-																	groupId={groupId}
-																/>
-															}
-															initialOpen={false}>
-															{id == "userLogged" && (
-																<div>
-																	No Option available for this condition.
-																</div>
-															)}
-
-															{id == "userNotLogged" && (
-																<div>
-																	No Option available for this condition.
-																</div>
-															)}
-
-															{id == "userRoles" && (
-																<div>
-																	<PGDropdown
-																		position="bottom right"
-																		variant="secondary"
-																		buttonTitle={"Add Role"}
-																		options={userRoles}
-																		onChange={(option, i) => {
-																			var visibleX = { ...visible };
-
-																			var roles = item.roles;
-																			roles.push(option.value);
-																			visibleX[groupId]["args"][index].roles =
-																				roles;
-																			setAttributes({ visible: visibleX });
-																		}}
-																		value={item.roles}></PGDropdown>
-
+													return (
+														<>
+															<PanelBody
+																title={
+																	<RemoveVisibleArg
+																		title={
+																			visibleArgs[id] == undefined
+																				? id
+																				: visibleArgs[id].label
+																		}
+																		index={id}
+																		groupId={groupId}
+																	/>
+																}
+																initialOpen={false}>
+																{id == "userLogged" && (
 																	<div>
-																		{Object.entries(item.roles).map((x, k) => {
-																			var roleId = x[1];
+																		No Option available for this condition.
+																	</div>
+																)}
 
-																			return (
+																{id == "userNotLogged" && (
+																	<div>
+																		No Option available for this condition.
+																	</div>
+																)}
+
+																{id == "userRoles" && (
+																	<div>
+																		<PGDropdown
+																			position="bottom right"
+																			variant="secondary"
+																			buttonTitle={"Add Role"}
+																			options={userRoles}
+																			onChange={(option, i) => {
+																				var visibleX = { ...visible };
+
+																				var roles = item.roles;
+																				roles.push(option.value);
+																				visibleX[groupId]["args"][index].roles =
+																					roles;
+																				setAttributes({ visible: visibleX });
+																			}}
+																			value={item.roles}></PGDropdown>
+
+																		<div>
+																			{Object.entries(item.roles).map(
+																				(x, k) => {
+																					var roleId = x[1];
+
+																					return (
+																						<PanelRow className="mb-4">
+																							<div>{roleId}</div>
+
+																							<span
+																								className="bg-red-500 p-1 cursor-pointer"
+																								onClick={(ev) => {
+																									var visibleX = { ...visible };
+
+																									//var roles = item.roles;
+																									//roles.push(option.value);
+																									visibleX[groupId]["args"][
+																										index
+																									].roles.splice(k, 1);
+																									setAttributes({
+																										visible: visibleX,
+																									});
+																								}}>
+																								<Icon
+																									fill="#fff"
+																									icon={close}
+																								/>
+																							</span>
+																						</PanelRow>
+																					);
+																				}
+																			)}
+																		</div>
+																	</div>
+																)}
+
+																{id == "userCapabilities" && (
+																	<div>
+																		No Option available for this condition.
+																	</div>
+																)}
+
+																{(id == "isYears" || id == "isMinutes") && (
+																	<>
+																		<PanelRow className="mb-4">
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				From
+																			</label>
+																			<InputControl
+																				className="mr-2"
+																				value={item.from}
+																				onChange={(newVal) => {
+																					var visibleX = { ...visible };
+																					visibleX[groupId]["args"][index][
+																						"from"
+																					] = newVal;
+																					setAttributes({ visible: visibleX });
+																				}}
+																			/>
+																		</PanelRow>
+
+																		{item.compare == "between" && (
+																			<>
+																				<p>
+																					{" "}
+																					Please use comma separate values{" "}
+																				</p>
+																				<code>Ex: 2022,2023</code>
+																			</>
+																		)}
+
+																		{item.compare == "exist" && (
+																			<>
+																				<p>
+																					{" "}
+																					Please use comma separate values{" "}
+																				</p>
+																				<code>Ex: 2022,2023,2025</code>
+																			</>
+																		)}
+
+																		<PanelRow>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				Compare
+																			</label>
+																			<SelectControl
+																				label=""
+																				value={item.compare}
+																				options={[
+																					{ label: "=", value: "=" },
+																					{ label: "!=", value: "!=" },
+																					{ label: ">", value: ">" },
+																					{ label: "<", value: "<" },
+																					{ label: ">=", value: ">=" },
+																					{ label: "<=", value: "<=" },
+																					{
+																						label: "between",
+																						value: "between",
+																					},
+																					{ label: "exist", value: "exist" },
+																				]}
+																				onChange={(newVal) => {
+																					var visibleX = { ...visible };
+																					visibleX[groupId]["args"][index][
+																						"compare"
+																					] = newVal;
+																					setAttributes({ visible: visibleX });
+																				}}
+																			/>
+																		</PanelRow>
+																	</>
+																)}
+
+																{id == "isMonths" && (
+																	<>
+																		<PanelRow>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				Compare
+																			</label>
+																			<SelectControl
+																				label=""
+																				value={item.compare}
+																				options={[
+																					{ label: "=", value: "=" },
+																					{ label: "!=", value: "!=" },
+																					{ label: ">", value: ">" },
+																					{ label: "<", value: "<" },
+																					{ label: ">=", value: ">=" },
+																					{ label: "<=", value: "<=" },
+																					{
+																						label: "between",
+																						value: "between",
+																					},
+																					{ label: "exist", value: "exist" },
+																				]}
+																				onChange={(newVal) => {
+																					var visibleX = { ...visible };
+																					visibleX[groupId]["args"][index][
+																						"compare"
+																					] = newVal;
+																					setAttributes({ visible: visibleX });
+																				}}
+																			/>
+																		</PanelRow>
+
+																		{(item.compare == "=" ||
+																			item.compare == "!=" ||
+																			item.compare == ">" ||
+																			item.compare == "<" ||
+																			item.compare == ">=" ||
+																			item.compare == "<=") && (
+																			<>
 																				<PanelRow className="mb-4">
-																					<div>{roleId}</div>
-
-																					<span
-																						className="bg-red-500 p-1 cursor-pointer"
-																						onClick={(ev) => {
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={
+																							item.value.length == 0
+																								? "Choose Month"
+																								: monthsNum[item.value].label
+																						}
+																						options={monthsNum}
+																						onChange={(option, optionIndex) => {
 																							var visibleX = { ...visible };
-
-																							//var roles = item.roles;
-																							//roles.push(option.value);
-																							visibleX[groupId]["args"][
-																								index
-																							].roles.splice(k, 1);
+																							visibleX[groupId]["args"][index][
+																								"value"
+																							] = option.value;
 																							setAttributes({
 																								visible: visibleX,
 																							});
-																						}}>
-																						<Icon fill="#fff" icon={close} />
-																					</span>
+																						}}
+																						value={item.value}></PGDropdown>
 																				</PanelRow>
-																			);
-																		})}
+																			</>
+																		)}
+
+																		{(item.compare == "between" ||
+																			item.compare == "exist") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={"Choose Month"}
+																						options={monthsNum}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+
+																							visibleX[groupId]["args"][index][
+																								"values"
+																							].push(option.value);
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.values}></PGDropdown>
+																				</PanelRow>
+
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>
+																									{monthsNum[x].label}
+																								</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = {
+																											...visible,
+																										};
+																										item.values.splice(i, 1);
+
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
+																	</>
+																)}
+
+																{id == "weekDays" && (
+																	<>
+																		<PanelRow>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				Compare
+																			</label>
+																			<SelectControl
+																				label=""
+																				value={item.compare}
+																				options={[
+																					{ label: "=", value: "=" },
+																					{ label: "!=", value: "!=" },
+																					{ label: ">", value: ">" },
+																					{ label: "<", value: "<" },
+																					{ label: ">=", value: ">=" },
+																					{ label: "<=", value: "<=" },
+																					{
+																						label: "between",
+																						value: "between",
+																					},
+																					{ label: "exist", value: "exist" },
+																				]}
+																				onChange={(newVal) => {
+																					var visibleX = { ...visible };
+																					visibleX[groupId]["args"][index][
+																						"compare"
+																					] = newVal;
+																					setAttributes({ visible: visibleX });
+																				}}
+																			/>
+																		</PanelRow>
+
+																		{(item.compare == "=" ||
+																			item.compare == "!=" ||
+																			item.compare == ">" ||
+																			item.compare == "<" ||
+																			item.compare == ">=" ||
+																			item.compare == "<=") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={
+																							item.value.length == 0
+																								? "Choose Day"
+																								: weekDayNumn[item.value].label
+																						}
+																						options={weekDayNumn}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+																							visibleX[groupId]["args"][index][
+																								"value"
+																							] = option.value;
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.value}></PGDropdown>
+																				</PanelRow>
+																			</>
+																		)}
+
+																		{(item.compare == "between" ||
+																			item.compare == "exist") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={"Choose Days"}
+																						options={weekDayNumn}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+
+																							visibleX[groupId]["args"][index][
+																								"values"
+																							].push(option.value);
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.values}></PGDropdown>
+																				</PanelRow>
+
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>
+																									{weekDayNumn[x].label}
+																								</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = {
+																											...visible,
+																										};
+																										item.values.splice(i, 1);
+
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
+																	</>
+																)}
+
+																{id == "isHours" && (
+																	<>
+																		<PanelRow>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				Compare
+																			</label>
+																			<SelectControl
+																				label=""
+																				value={item.compare}
+																				options={[
+																					{ label: "=", value: "=" },
+																					{ label: "!=", value: "!=" },
+																					{ label: ">", value: ">" },
+																					{ label: "<", value: "<" },
+																					{ label: ">=", value: ">=" },
+																					{ label: "<=", value: "<=" },
+																					{
+																						label: "between",
+																						value: "between",
+																					},
+																					{ label: "exist", value: "exist" },
+																				]}
+																				onChange={(newVal) => {
+																					var visibleX = { ...visible };
+																					visibleX[groupId]["args"][index][
+																						"compare"
+																					] = newVal;
+																					setAttributes({ visible: visibleX });
+																				}}
+																			/>
+																		</PanelRow>
+
+																		{(item.compare == "=" ||
+																			item.compare == "!=" ||
+																			item.compare == ">" ||
+																			item.compare == "<" ||
+																			item.compare == ">=" ||
+																			item.compare == "<=") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={
+																							item.value.length == 0
+																								? "Choose Hours"
+																								: hoursNum[item.value].label
+																						}
+																						options={hoursNum}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+																							visibleX[groupId]["args"][index][
+																								"value"
+																							] = option.value;
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.value}></PGDropdown>
+																				</PanelRow>
+																			</>
+																		)}
+
+																		{(item.compare == "between" ||
+																			item.compare == "exist") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+																					<PGDropdown
+																						position="bottom right"
+																						variant="secondary"
+																						buttonTitle={"Choose Month"}
+																						options={hoursNum}
+																						onChange={(option, optionIndex) => {
+																							var visibleX = { ...visible };
+
+																							visibleX[groupId]["args"][index][
+																								"values"
+																							].push(option.value);
+																							setAttributes({
+																								visible: visibleX,
+																							});
+																						}}
+																						value={item.values}></PGDropdown>
+																				</PanelRow>
+
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>{hoursNum[x].label}</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = {
+																											...visible,
+																										};
+																										item.values.splice(i, 1);
+
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
+																	</>
+																)}
+
+																{id == "isDate" && (
+																	<>
+																		<PanelRow>
+																			<label
+																				for=""
+																				className="font-medium text-slate-900 ">
+																				Compare
+																			</label>
+																			<SelectControl
+																				label=""
+																				value={item.compare}
+																				options={[
+																					{ label: "=", value: "=" },
+																					{ label: "!=", value: "!=" },
+																					{ label: ">", value: ">" },
+																					{ label: "<", value: "<" },
+																					{ label: ">=", value: ">=" },
+																					{ label: "<=", value: "<=" },
+																					{
+																						label: "between",
+																						value: "between",
+																					},
+																					{ label: "exist", value: "exist" },
+																				]}
+																				onChange={(newVal) => {
+																					var visibleX = { ...visible };
+																					visibleX[groupId]["args"][index][
+																						"compare"
+																					] = newVal;
+																					setAttributes({ visible: visibleX });
+																				}}
+																			/>
+																		</PanelRow>
+
+																		{(item.compare == "=" ||
+																			item.compare == "!=" ||
+																			item.compare == ">" ||
+																			item.compare == "<" ||
+																			item.compare == ">=" ||
+																			item.compare == "<=") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+
+																					<Button
+																						className={
+																							enableDatePicker
+																								? "!bg-gray-400"
+																								: ""
+																						}
+																						onClick={(ev) => {
+																							setenableDatePicker(
+																								(prev) => !prev
+																							);
+																						}}>
+																						{item.value.length == 0
+																							? "Choose Date"
+																							: item.value}
+																					</Button>
+																				</PanelRow>
+
+																				{enableDatePicker && (
+																					<Popover position="bottom left ">
+																						<div className="p-4">
+																							<DatePicker
+																								onChange={(newDate) => {
+																									const dateFull = new Date(
+																										newDate
+																									);
+																									let day = dateFull.getDate();
+																									let month =
+																										dateFull.getMonth() + 1;
+																									let year =
+																										dateFull.getFullYear();
+
+																									var dateStr =
+																										year +
+																										"-" +
+																										month +
+																										"-" +
+																										day;
+
+																									var visibleX = { ...visible };
+
+																									visibleX[groupId]["args"][
+																										index
+																									]["value"] = dateStr;
+																									setAttributes({
+																										visible: visibleX,
+																									});
+																								}}
+																								is12Hour={true}
+																							/>
+																						</div>
+																					</Popover>
+																				)}
+																			</>
+																		)}
+
+																		{(item.compare == "between" ||
+																			item.compare == "exist") && (
+																			<>
+																				<PanelRow className="mb-4">
+																					<label
+																						for=""
+																						className="font-medium text-slate-900 ">
+																						Values
+																					</label>
+
+																					<Button
+																						className={
+																							enableDatePicker
+																								? "!bg-gray-400"
+																								: ""
+																						}
+																						onClick={(ev) => {
+																							setenableDatePicker(
+																								(prev) => !prev
+																							);
+																						}}>
+																						Choose Date
+																					</Button>
+																				</PanelRow>
+
+																				{enableDatePicker && (
+																					<Popover position="bottom left ">
+																						<div className="p-4">
+																							<DatePicker
+																								onChange={(newDate) => {
+																									const dateFull = new Date(
+																										newDate
+																									);
+																									let day = dateFull.getDate();
+																									let month =
+																										dateFull.getMonth() + 1;
+																									let year =
+																										dateFull.getFullYear();
+
+																									var dateStr =
+																										year +
+																										"-" +
+																										month +
+																										"-" +
+																										day;
+
+																									var visibleX = { ...visible };
+
+																									visibleX[groupId]["args"][
+																										index
+																									]["values"].push(dateStr);
+																									setAttributes({
+																										visible: visibleX,
+																									});
+																								}}
+																								is12Hour={true}
+																							/>
+																						</div>
+																					</Popover>
+																				)}
+
+																				<div>
+																					{item.values.map((x, i) => {
+																						return (
+																							<div className="flex justify-between my-1">
+																								<span>{x}</span>
+																								<span
+																									className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																									onClick={(ev) => {
+																										var visibleX = {
+																											...visible,
+																										};
+																										item.values.splice(i, 1);
+
+																										visibleX[groupId]["args"][
+																											index
+																										]["values"] = item.values;
+																										setAttributes({
+																											visible: visibleX,
+																										});
+																									}}>
+																									<Icon
+																										fill="#fff"
+																										icon={close}
+																									/>
+																								</span>
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
+																	</>
+																)}
+
+																{id == "submitCount" && (
+																	<div>
+																		No Option available for this condition.
 																	</div>
-																</div>
-															)}
-
-															{id == "userCapabilities" && (
-																<div>
-																	No Option available for this condition.
-																</div>
-															)}
-
-															{(id == "isYears" || id == "isMinutes") && (
-																<>
-																	<PanelRow className="mb-4">
-																		<label
-																			for=""
-																			className="font-medium text-slate-900 ">
-																			From
-																		</label>
-																		<InputControl
-																			className="mr-2"
-																			value={item.from}
-																			onChange={(newVal) => {
-																				var visibleX = { ...visible };
-																				visibleX[groupId]["args"][index][
-																					"from"
-																				] = newVal;
-																				setAttributes({ visible: visibleX });
-																			}}
-																		/>
-																	</PanelRow>
-
-																	{item.compare == "between" && (
-																		<>
-																			<p> Please use comma separate values </p>
-																			<code>Ex: 2022,2023</code>
-																		</>
-																	)}
-
-																	{item.compare == "exist" && (
-																		<>
-																			<p> Please use comma separate values </p>
-																			<code>Ex: 2022,2023,2025</code>
-																		</>
-																	)}
-
-																	<PanelRow>
-																		<label
-																			for=""
-																			className="font-medium text-slate-900 ">
-																			Compare
-																		</label>
-																		<SelectControl
-																			label=""
-																			value={item.compare}
-																			options={[
-																				{ label: "=", value: "=" },
-																				{ label: "!=", value: "!=" },
-																				{ label: ">", value: ">" },
-																				{ label: "<", value: "<" },
-																				{ label: ">=", value: ">=" },
-																				{ label: "<=", value: "<=" },
-																				{ label: "between", value: "between" },
-																				{ label: "exist", value: "exist" },
-																			]}
-																			onChange={(newVal) => {
-																				var visibleX = { ...visible };
-																				visibleX[groupId]["args"][index][
-																					"compare"
-																				] = newVal;
-																				setAttributes({ visible: visibleX });
-																			}}
-																		/>
-																	</PanelRow>
-																</>
-															)}
-
-															{id == "isMonths" && (
-																<>
-																	<PanelRow>
-																		<label
-																			for=""
-																			className="font-medium text-slate-900 ">
-																			Compare
-																		</label>
-																		<SelectControl
-																			label=""
-																			value={item.compare}
-																			options={[
-																				{ label: "=", value: "=" },
-																				{ label: "!=", value: "!=" },
-																				{ label: ">", value: ">" },
-																				{ label: "<", value: "<" },
-																				{ label: ">=", value: ">=" },
-																				{ label: "<=", value: "<=" },
-																				{ label: "between", value: "between" },
-																				{ label: "exist", value: "exist" },
-																			]}
-																			onChange={(newVal) => {
-																				var visibleX = { ...visible };
-																				visibleX[groupId]["args"][index][
-																					"compare"
-																				] = newVal;
-																				setAttributes({ visible: visibleX });
-																			}}
-																		/>
-																	</PanelRow>
-
-																	{(item.compare == "=" ||
-																		item.compare == "!=" ||
-																		item.compare == ">" ||
-																		item.compare == "<" ||
-																		item.compare == ">=" ||
-																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={
-																						item.value.length == 0
-																							? "Choose Month"
-																							: monthsNum[item.value].label
-																					}
-																					options={monthsNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-																						visibleX[groupId]["args"][index][
-																							"value"
-																						] = option.value;
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.value}></PGDropdown>
-																			</PanelRow>
-																		</>
-																	)}
-
-																	{(item.compare == "between" ||
-																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={"Choose Month"}
-																					options={monthsNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-
-																						visibleX[groupId]["args"][index][
-																							"values"
-																						].push(option.value);
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.values}></PGDropdown>
-																			</PanelRow>
-
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>{monthsNum[x].label}</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
-																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
-
-																									visibleX[groupId]["args"][
-																										index
-																									]["values"] = item.values;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
-																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
-																</>
-															)}
-
-															{id == "weekDays" && (
-																<>
-																	<PanelRow>
-																		<label
-																			for=""
-																			className="font-medium text-slate-900 ">
-																			Compare
-																		</label>
-																		<SelectControl
-																			label=""
-																			value={item.compare}
-																			options={[
-																				{ label: "=", value: "=" },
-																				{ label: "!=", value: "!=" },
-																				{ label: ">", value: ">" },
-																				{ label: "<", value: "<" },
-																				{ label: ">=", value: ">=" },
-																				{ label: "<=", value: "<=" },
-																				{ label: "between", value: "between" },
-																				{ label: "exist", value: "exist" },
-																			]}
-																			onChange={(newVal) => {
-																				var visibleX = { ...visible };
-																				visibleX[groupId]["args"][index][
-																					"compare"
-																				] = newVal;
-																				setAttributes({ visible: visibleX });
-																			}}
-																		/>
-																	</PanelRow>
-
-																	{(item.compare == "=" ||
-																		item.compare == "!=" ||
-																		item.compare == ">" ||
-																		item.compare == "<" ||
-																		item.compare == ">=" ||
-																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={
-																						item.value.length == 0
-																							? "Choose Day"
-																							: weekDayNumn[item.value].label
-																					}
-																					options={weekDayNumn}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-																						visibleX[groupId]["args"][index][
-																							"value"
-																						] = option.value;
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.value}></PGDropdown>
-																			</PanelRow>
-																		</>
-																	)}
-
-																	{(item.compare == "between" ||
-																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={"Choose Days"}
-																					options={weekDayNumn}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-
-																						visibleX[groupId]["args"][index][
-																							"values"
-																						].push(option.value);
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.values}></PGDropdown>
-																			</PanelRow>
-
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>
-																								{weekDayNumn[x].label}
-																							</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
-																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
-
-																									visibleX[groupId]["args"][
-																										index
-																									]["values"] = item.values;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
-																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
-																</>
-															)}
-
-															{id == "isHours" && (
-																<>
-																	<PanelRow>
-																		<label
-																			for=""
-																			className="font-medium text-slate-900 ">
-																			Compare
-																		</label>
-																		<SelectControl
-																			label=""
-																			value={item.compare}
-																			options={[
-																				{ label: "=", value: "=" },
-																				{ label: "!=", value: "!=" },
-																				{ label: ">", value: ">" },
-																				{ label: "<", value: "<" },
-																				{ label: ">=", value: ">=" },
-																				{ label: "<=", value: "<=" },
-																				{ label: "between", value: "between" },
-																				{ label: "exist", value: "exist" },
-																			]}
-																			onChange={(newVal) => {
-																				var visibleX = { ...visible };
-																				visibleX[groupId]["args"][index][
-																					"compare"
-																				] = newVal;
-																				setAttributes({ visible: visibleX });
-																			}}
-																		/>
-																	</PanelRow>
-
-																	{(item.compare == "=" ||
-																		item.compare == "!=" ||
-																		item.compare == ">" ||
-																		item.compare == "<" ||
-																		item.compare == ">=" ||
-																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={
-																						item.value.length == 0
-																							? "Choose Hours"
-																							: hoursNum[item.value].label
-																					}
-																					options={hoursNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-																						visibleX[groupId]["args"][index][
-																							"value"
-																						] = option.value;
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.value}></PGDropdown>
-																			</PanelRow>
-																		</>
-																	)}
-
-																	{(item.compare == "between" ||
-																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-																				<PGDropdown
-																					position="bottom right"
-																					variant="secondary"
-																					buttonTitle={"Choose Month"}
-																					options={hoursNum}
-																					onChange={(option, optionIndex) => {
-																						var visibleX = { ...visible };
-
-																						visibleX[groupId]["args"][index][
-																							"values"
-																						].push(option.value);
-																						setAttributes({
-																							visible: visibleX,
-																						});
-																					}}
-																					value={item.values}></PGDropdown>
-																			</PanelRow>
-
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>{hoursNum[x].label}</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
-																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
-
-																									visibleX[groupId]["args"][
-																										index
-																									]["values"] = item.values;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
-																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
-																</>
-															)}
-
-															{id == "isDate" && (
-																<>
-																	<PanelRow>
-																		<label
-																			for=""
-																			className="font-medium text-slate-900 ">
-																			Compare
-																		</label>
-																		<SelectControl
-																			label=""
-																			value={item.compare}
-																			options={[
-																				{ label: "=", value: "=" },
-																				{ label: "!=", value: "!=" },
-																				{ label: ">", value: ">" },
-																				{ label: "<", value: "<" },
-																				{ label: ">=", value: ">=" },
-																				{ label: "<=", value: "<=" },
-																				{ label: "between", value: "between" },
-																				{ label: "exist", value: "exist" },
-																			]}
-																			onChange={(newVal) => {
-																				var visibleX = { ...visible };
-																				visibleX[groupId]["args"][index][
-																					"compare"
-																				] = newVal;
-																				setAttributes({ visible: visibleX });
-																			}}
-																		/>
-																	</PanelRow>
-
-																	{(item.compare == "=" ||
-																		item.compare == "!=" ||
-																		item.compare == ">" ||
-																		item.compare == "<" ||
-																		item.compare == ">=" ||
-																		item.compare == "<=") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-
-																				<Button
-																					className={
-																						enableDatePicker
-																							? "!bg-gray-400"
-																							: ""
-																					}
-																					onClick={(ev) => {
-																						setenableDatePicker(
-																							(prev) => !prev
-																						);
-																					}}>
-																					{item.value.length == 0
-																						? "Choose Date"
-																						: item.value}
-																				</Button>
-																			</PanelRow>
-
-																			{enableDatePicker && (
-																				<Popover position="bottom left ">
-																					<div className="p-4">
-																						<DatePicker
-																							onChange={(newDate) => {
-																								const dateFull = new Date(
-																									newDate
-																								);
-																								let day = dateFull.getDate();
-																								let month =
-																									dateFull.getMonth() + 1;
-																								let year =
-																									dateFull.getFullYear();
-
-																								var dateStr =
-																									year +
-																									"-" +
-																									month +
-																									"-" +
-																									day;
-
-																								var visibleX = { ...visible };
-
-																								visibleX[groupId]["args"][
-																									index
-																								]["value"] = dateStr;
-																								setAttributes({
-																									visible: visibleX,
-																								});
-																							}}
-																							is12Hour={true}
-																						/>
-																					</div>
-																				</Popover>
-																			)}
-																		</>
-																	)}
-
-																	{(item.compare == "between" ||
-																		item.compare == "exist") && (
-																		<>
-																			<PanelRow className="mb-4">
-																				<label
-																					for=""
-																					className="font-medium text-slate-900 ">
-																					Values
-																				</label>
-
-																				<Button
-																					className={
-																						enableDatePicker
-																							? "!bg-gray-400"
-																							: ""
-																					}
-																					onClick={(ev) => {
-																						setenableDatePicker(
-																							(prev) => !prev
-																						);
-																					}}>
-																					Choose Date
-																				</Button>
-																			</PanelRow>
-
-																			{enableDatePicker && (
-																				<Popover position="bottom left ">
-																					<div className="p-4">
-																						<DatePicker
-																							onChange={(newDate) => {
-																								const dateFull = new Date(
-																									newDate
-																								);
-																								let day = dateFull.getDate();
-																								let month =
-																									dateFull.getMonth() + 1;
-																								let year =
-																									dateFull.getFullYear();
-
-																								var dateStr =
-																									year +
-																									"-" +
-																									month +
-																									"-" +
-																									day;
-
-																								var visibleX = { ...visible };
-
-																								visibleX[groupId]["args"][
-																									index
-																								]["values"].push(dateStr);
-																								setAttributes({
-																									visible: visibleX,
-																								});
-																							}}
-																							is12Hour={true}
-																						/>
-																					</div>
-																				</Popover>
-																			)}
-
-																			<div>
-																				{item.values.map((x, i) => {
-																					return (
-																						<div className="flex justify-between my-1">
-																							<span>{x}</span>
-																							<span
-																								className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																								onClick={(ev) => {
-																									var visibleX = { ...visible };
-																									item.values.splice(i, 1);
-
-																									visibleX[groupId]["args"][
-																										index
-																									]["values"] = item.values;
-																									setAttributes({
-																										visible: visibleX,
-																									});
-																								}}>
-																								<Icon
-																									fill="#fff"
-																									icon={close}
-																								/>
-																							</span>
-																						</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																	)}
-																</>
-															)}
-
-															{id == "submitCount" && (
-																<div>
-																	No Option available for this condition.
-																</div>
-															)}
-														</PanelBody>
-													</>
-												);
-											})}
-									</PanelBody>
-								);
-							})}
-						</div>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="On Submit"
-						initialOpen={false}>
-						<PanelRow className="my-3">
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								buttonTitle={"Add Action"}
-								options={onSubmitArgs}
-								onChange={(option, index) => {
-									var onSubmitX = { ...onSubmit };
-									var index = Object.entries(onSubmitX).length;
-									onSubmitX[index] = option.args;
-
-									setAttributes({ onSubmit: onSubmitX });
-								}}
-								values=""></PGDropdown>
-						</PanelRow>
-						<div class="my-4">
-							{Object.entries(onSubmit).map((group) => {
-								var groupIndex = group[0];
-								var groupData = group[1];
-								var id = groupData.id;
-
-								return (
-									<PanelBody
-										title={
-											<RemoveOnSubmitArg
-												title={
-													onSubmitArgs[id] == undefined
-														? id
-														: onSubmitArgs[id].label
-												}
-												index={groupIndex}
-											/>
-										}
-										initialOpen={false}>
-										<>
-											{id == "validation" && (
-												<div>No Option available for this condition.</div>
-											)}
-
-											{id == "submitConfirm" && (
-												<div>No Option available for this condition.</div>
-											)}
-										</>
-									</PanelBody>
-								);
-							})}
-						</div>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="On Process"
-						initialOpen={false}>
-						<PanelRow className="my-3">
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								buttonTitle={"Add Action"}
-								options={onProcessArgs}
-								onChange={(option, index) => {
-									var onProcessX = { ...onProcess };
-									var index = Object.entries(onProcessX).length;
-									onProcessX[index] = option.args;
-
-									setAttributes({ onProcess: onProcessX });
-								}}
-								values=""></PGDropdown>
-						</PanelRow>
-						<div class="my-4">
-							{Object.entries(onProcess).map((group) => {
-								var groupIndex = group[0];
-								var groupData = group[1];
-								var id = groupData.id;
-
-								return (
-									<PanelBody
-										title={
-											<RemoveonProcessArg
-												title={
-													onProcessArgs[id] == undefined
-														? id
-														: onProcessArgs[id].label
-												}
-												index={groupIndex}
-											/>
-										}
-										initialOpen={false}>
-										<>
-											{id == "sendMail" && (
-												<>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Subject
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.subject}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["subject"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail To
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.mailTo}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["mailTo"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															BCC
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.bcc}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["bcc"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<div className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Email Footer
-														</label>
-														<TextareaControl
-															value={groupData.footer}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["footer"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</div>
-
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Success Message
-															</label>
-															<TextareaControl
-																value={groupData.successMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Error Message
-															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
+																)}
+															</PanelBody>
 														</>
-													)}
-												</>
-											)}
+													);
+												})}
+										</PanelBody>
+									);
+								})}
+							</div>
+						</PanelBody>
 
-											{id == "emailBcc" && (
-												<>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail To
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.mailTo}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["mailTo"] = newVal;
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="On Submit"
+							initialOpen={false}>
+							<PanelRow className="my-3">
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={"Add Action"}
+									options={onSubmitArgs}
+									onChange={(option, index) => {
+										var onSubmitX = { ...onSubmit };
+										var index = Object.entries(onSubmitX).length;
+										onSubmitX[index] = option.args;
 
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
+										setAttributes({ onSubmit: onSubmitX });
+									}}
+									values=""></PGDropdown>
+							</PanelRow>
+							<div class="my-4">
+								{Object.entries(onSubmit).map((group) => {
+									var groupIndex = group[0];
+									var groupData = group[1];
+									var id = groupData.id;
 
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail from
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.fromEmail}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["fromEmail"] = newVal;
+									return (
+										<PanelBody
+											title={
+												<RemoveOnSubmitArg
+													title={
+														onSubmitArgs[id] == undefined
+															? id
+															: onSubmitArgs[id].label
+													}
+													index={groupIndex}
+												/>
+											}
+											initialOpen={false}>
+											<>
+												{id == "validation" && (
+													<div>No Option available for this condition.</div>
+												)}
 
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail From Name
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.fromName}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["fromName"] = newVal;
+												{id == "submitConfirm" && (
+													<div>No Option available for this condition.</div>
+												)}
+											</>
+										</PanelBody>
+									);
+								})}
+							</div>
+						</PanelBody>
 
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Reply To Email
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.replyTo}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["replyTo"] = newVal;
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="On Process"
+							initialOpen={false}>
+							<PanelRow className="my-3">
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={"Add Action"}
+									options={onProcessArgs}
+									onChange={(option, index) => {
+										var onProcessX = { ...onProcess };
+										var index = Object.entries(onProcessX).length;
+										onProcessX[index] = option.args;
 
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Reply To Name
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.replyToName}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["replyToName"] = newVal;
+										setAttributes({ onProcess: onProcessX });
+									}}
+									values=""></PGDropdown>
+							</PanelRow>
+							<div class="my-4">
+								{Object.entries(onProcess).map((group) => {
+									var groupIndex = group[0];
+									var groupData = group[1];
+									var id = groupData.id;
 
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<div className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Email Footer
-														</label>
-														<TextareaControl
-															value={groupData.footer}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["footer"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</div>
-
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
+									return (
+										<PanelBody
+											title={
+												<RemoveonProcessArg
+													title={
+														onProcessArgs[id] == undefined
+															? id
+															: onProcessArgs[id].label
+													}
+													index={groupIndex}
+												/>
+											}
+											initialOpen={false}>
+											<>
+												{id == "sendMail" && (
+													<>
+														<PanelRow className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Success Message
+																Subject
 															</label>
-															<TextareaControl
-																value={groupData.successMessage}
+															<InputControl
+																className="mr-2"
+																value={groupData.subject}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["subject"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
+														</PanelRow>
 
+														<PanelRow className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Error Message
+																Mail To
 															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
+															<InputControl
+																className="mr-2"
+																value={groupData.mailTo}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["mailTo"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-														</>
-													)}
-												</>
-											)}
+														</PanelRow>
 
-											{id == "emailCopyUser" && (
-												<>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail from
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.fromEmail}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["fromEmail"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail From Name
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.fromName}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["fromName"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Reply To Email
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.replyTo}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["replyTo"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Reply To Name
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.replyToName}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["replyToName"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<div className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Email Footer
-														</label>
-														<TextareaControl
-															value={groupData.footer}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["footer"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</div>
-
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
+														<PanelRow className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Success Message
+																BCC
 															</label>
-															<TextareaControl
-																value={groupData.successMessage}
+															<InputControl
+																className="mr-2"
+																value={groupData.bcc}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["bcc"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
+														</PanelRow>
 
+														<div className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Error Message
+																Email Footer
 															</label>
 															<TextareaControl
-																value={groupData.errorMessage}
+																value={groupData.footer}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["footer"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-														</>
-													)}
-												</>
-											)}
+														</div>
 
-											{id == "createEntry" && (
-												<>
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Success Message
-															</label>
-															<TextareaControl
-																value={groupData.successMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Error Message
-															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-														</>
-													)}
-												</>
-											)}
-
-											{id == "autoReply" && (
-												<>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail from
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.fromEmail}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["fromEmail"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Mail From Name
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.fromName}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["fromName"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Reply To Email
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.replyTo}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["replyTo"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Reply To Name
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.replyToName}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["replyToName"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Message
-														</label>
-														<TextareaControl
-															value={groupData.message}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["message"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<div className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Email Footer
-														</label>
-														<TextareaControl
-															value={groupData.footer}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["footer"] = newVal;
-
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</div>
-
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-
-													{groupData.showOnResponse && (
-														<>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Success Message
-															</label>
-															<TextareaControl
-																value={groupData.successMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Error Message
-															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-														</>
-													)}
-												</>
-											)}
-
-											{id == "loggedInUser" && (
-												<>
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-
-													{groupData.showOnResponse && (
-														<>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Success Message
-															</label>
-															<TextareaControl
-																value={groupData.successMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Error Message
-															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-														</>
-													)}
-												</>
-											)}
-
-											{id == "registerUser" && (
-												<>
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-
-													{groupData.showOnResponse && (
-														<>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Success Message
-															</label>
-															<TextareaControl
-																value={groupData.successMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Error Message
-															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-														</>
-													)}
-												</>
-											)}
-
-											{id == "postSubmit" && (
-												<>
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Post Type
-														</label>
-														<SelectControl
-															label=""
-															value={groupData.postType}
-															options={postTypes}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["postType"] = newVal;
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Post Status
-														</label>
-														<SelectControl
-															label=""
-															value={groupData.postStatus}
-															options={postStatuses}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["postStatus"] = newVal;
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Comment Status
-														</label>
-														<SelectControl
-															label=""
-															value={groupData.commentStatus}
-															options={[
-																{ label: "Open", value: "open" },
-																{ label: "Closed", value: "closed" },
-															]}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["commentStatus"] =
-																	newVal;
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Ping Status
-														</label>
-														<SelectControl
-															label=""
-															value={groupData.pingStatus}
-															options={[
-																{ label: "Open", value: "open" },
-																{ label: "Closed", value: "closed" },
-															]}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["pingStatus"] = newVal;
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<ToggleControl
-														label="Create Author by Email?"
-														help={
-															groupData.authorByEmail ? "Enabled" : "Disabled."
-														}
-														checked={groupData.authorByEmail ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["authorByEmail"] =
-																groupData.authorByEmail ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Success Message
-															</label>
-															<TextareaControl
-																value={groupData.successMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Error Message
-															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
-																onChange={(newVal) => {
-																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
-
-																	setAttributes({ onProcess: onProcessX });
-																}}
-															/>
-														</>
-													)}
-												</>
-											)}
-
-											{id == "commentSubmit" && (
-												<>
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Status
-														</label>
-														<SelectControl
-															label=""
-															value={groupData.status}
-															options={[
-																{ label: "Approve", value: "1" },
-																{ label: "Hold", value: "0" },
-																{ label: "Spam", value: "spam" },
-																{ label: "Trash", value: "trash" },
-															]}
-															onChange={(newVal) => {
-																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["status"] = newVal;
-																setAttributes({ onProcess: onProcessX });
-															}}
-														/>
-													</PanelRow>
-
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Type
-														</label>
-														<InputControl
-															className="mr-2"
-															value={
-																groupData.type == undefined ||
-																groupData.type.length == 0
-																	? "comment"
-																	: groupData.type
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
 															}
-															onChange={(newVal) => {
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
 																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["type"] = newVal;
-
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
 																setAttributes({ onProcess: onProcessX });
 															}}
 														/>
-													</PanelRow>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
 
-													<ToggleControl
-														label="Login Required?"
-														help={
-															groupData.loginRequired ? "Enabled" : "Disabled."
-														}
-														checked={groupData.loginRequired ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["loginRequired"] =
-																groupData.loginRequired ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
 
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "emailBcc" && (
+													<>
+														<PanelRow className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Success Message
+																Mail To
 															</label>
-															<TextareaControl
-																value={groupData.successMessage}
+															<InputControl
+																className="mr-2"
+																value={groupData.mailTo}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
+																	onProcessX[groupIndex]["mailTo"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Mail from
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.fromEmail}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["fromEmail"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Mail From Name
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.fromName}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["fromName"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Reply To Email
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.replyTo}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["replyTo"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Reply To Name
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.replyToName}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["replyToName"] =
 																		newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-
+														</PanelRow>
+														<div className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Error Message
+																Email Footer
 															</label>
 															<TextareaControl
-																value={groupData.errorMessage}
+																value={groupData.footer}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["footer"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-														</>
-													)}
-												</>
-											)}
-											{id == "termSubmit" && (
-												<>
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Taxonomy
-														</label>
-														<InputControl
-															className="mr-2"
-															value={groupData.taxonomy}
-															onChange={(newVal) => {
+														</div>
+
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
 																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["taxonomy"] = newVal;
-
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
 																setAttributes({ onProcess: onProcessX });
 															}}
 														/>
-													</PanelRow>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
 
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "emailCopyUser" && (
+													<>
+														<PanelRow className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Success Message
+																Mail from
 															</label>
-															<TextareaControl
-																value={groupData.successMessage}
+															<InputControl
+																className="mr-2"
+																value={groupData.fromEmail}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
+																	onProcessX[groupIndex]["fromEmail"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Mail From Name
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.fromName}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["fromName"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Reply To Email
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.replyTo}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["replyTo"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Reply To Name
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.replyToName}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["replyToName"] =
 																		newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-
+														</PanelRow>
+														<div className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Error Message
+																Email Footer
 															</label>
 															<TextareaControl
-																value={groupData.errorMessage}
+																value={groupData.footer}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["footer"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-														</>
-													)}
-												</>
-											)}
+														</div>
 
-											{id == "fluentcrmAddContact" && (
-												<>
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Fluent-CRM Lists
-														</label>
-														<PGDropdown
-															position="bottom right"
-															variant="secondary"
-															buttonTitle={"Choose"}
-															options={fluentcrmLists}
-															onChange={(option, index) => {
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
 																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["lists"].push({
-																	slug: option.slug,
-																	id: option.id,
-																});
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
 																setAttributes({ onProcess: onProcessX });
 															}}
-															values=""></PGDropdown>
-													</PanelRow>
+														/>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
 
-													{Object.entries(onProcess[groupIndex]["lists"]).map(
-														(x, i) => {
-															var listIndex = x[0];
-															var listData = x[1];
-															var slug = x[1].slug;
-															return (
-																<div className="border my-3 flex items-center">
-																	<span
-																		className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
-																		onClick={(ev) => {
-																			var onProcessX = { ...onProcess };
-																			delete onProcessX[groupIndex][
-																				"lists"
-																			].splice(i, 1);
-																			setAttributes({ onProcess: onProcessX });
-																		}}>
-																		<Icon icon={close} />
-																	</span>
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
 
-																	<span>
-																		{fluentcrmLists == null
-																			? ""
-																			: fluentcrmLists[slug].label}
-																	</span>
-																</div>
-															);
-														}
-													)}
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
 
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Fluent-CRM Tags
-														</label>
-														<PGDropdown
-															position="bottom right"
-															variant="secondary"
-															buttonTitle={"Choose"}
-															options={fluentcrmTags}
-															onChange={(option, index) => {
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "createEntry" && (
+													<>
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
 																var onProcessX = { ...onProcess };
-																onProcessX[groupIndex]["tags"].push({
-																	slug: option.slug,
-																	id: option.id,
-																});
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
 																setAttributes({ onProcess: onProcessX });
 															}}
-															values=""></PGDropdown>
-													</PanelRow>
+														/>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
 
-													{Object.entries(onProcess[groupIndex]["tags"]).map(
-														(x, i) => {
-															var listIndex = x[0];
-															var listData = x[1];
-															var slug = x[1].slug;
-															return (
-																<div className="border my-3 flex items-center">
-																	<span
-																		className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
-																		onClick={(ev) => {
-																			var onProcessX = { ...onProcess };
-																			delete onProcessX[groupIndex][
-																				"tags"
-																			].splice(i, 1);
-																			setAttributes({ onProcess: onProcessX });
-																		}}>
-																		<Icon icon={close} />
-																	</span>
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
 
-																	<span>
-																		{fluentcrmTags == null
-																			? ""
-																			: fluentcrmTags[slug].label}
-																	</span>
-																</div>
-															);
-														}
-													)}
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
 
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "autoReply" && (
+													<>
+														<PanelRow className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Success Message
+																Mail from
 															</label>
-															<TextareaControl
-																value={groupData.successMessage}
+															<InputControl
+																className="mr-2"
+																value={groupData.fromEmail}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
+																	onProcessX[groupIndex]["fromEmail"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Mail From Name
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.fromName}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["fromName"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Reply To Email
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.replyTo}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["replyTo"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Reply To Name
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.replyToName}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["replyToName"] =
 																		newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
+														</PanelRow>
 
+														<PanelRow className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Error Message
+																Message
 															</label>
 															<TextareaControl
-																value={groupData.errorMessage}
+																value={groupData.message}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["message"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-														</>
-													)}
-												</>
-											)}
+														</PanelRow>
 
-											{id == "newsletterSubmit" && (
-												<>
-													<ToggleControl
-														label="Show On Response?"
-														help={
-															groupData.showOnResponse ? "Enabled" : "Disabled."
-														}
-														checked={groupData.showOnResponse ? true : false}
-														onChange={(e) => {
-															var onProcessX = { ...onProcess };
-															onProcessX[groupIndex]["showOnResponse"] =
-																groupData.showOnResponse ? false : true;
-															setAttributes({ onProcess: onProcessX });
-														}}
-													/>
-													{groupData.showOnResponse && (
-														<>
+														<div className="mb-4">
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Success Message
+																Email Footer
 															</label>
 															<TextareaControl
-																value={groupData.successMessage}
+																value={groupData.footer}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["successMessage"] =
-																		newVal;
+																	onProcessX[groupIndex]["footer"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
+														</div>
 
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "loggedInUser" && (
+													<>
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "registerUser" && (
+													<>
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "postSubmit" && (
+													<>
+														<PanelRow>
 															<label
 																for=""
 																className="font-medium text-slate-900 ">
-																Error Message
+																Post Type
 															</label>
-															<TextareaControl
-																value={groupData.errorMessage}
+															<SelectControl
+																label=""
+																value={groupData.postType}
+																options={postTypes}
 																onChange={(newVal) => {
 																	var onProcessX = { ...onProcess };
-																	onProcessX[groupIndex]["errorMessage"] =
+																	onProcessX[groupIndex]["postType"] = newVal;
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Post Status
+															</label>
+															<SelectControl
+																label=""
+																value={groupData.postStatus}
+																options={postStatuses}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["postStatus"] = newVal;
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Comment Status
+															</label>
+															<SelectControl
+																label=""
+																value={groupData.commentStatus}
+																options={[
+																	{ label: "Open", value: "open" },
+																	{ label: "Closed", value: "closed" },
+																]}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["commentStatus"] =
 																		newVal;
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Ping Status
+															</label>
+															<SelectControl
+																label=""
+																value={groupData.pingStatus}
+																options={[
+																	{ label: "Open", value: "open" },
+																	{ label: "Closed", value: "closed" },
+																]}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["pingStatus"] = newVal;
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+
+														<ToggleControl
+															label="Create Author by Email?"
+															help={
+																groupData.authorByEmail
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.authorByEmail ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["authorByEmail"] =
+																	groupData.authorByEmail ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "commentSubmit" && (
+													<>
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Status
+															</label>
+															<SelectControl
+																label=""
+																value={groupData.status}
+																options={[
+																	{ label: "Approve", value: "1" },
+																	{ label: "Hold", value: "0" },
+																	{ label: "Spam", value: "spam" },
+																	{ label: "Trash", value: "trash" },
+																]}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["status"] = newVal;
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Type
+															</label>
+															<InputControl
+																className="mr-2"
+																value={
+																	groupData.type == undefined ||
+																	groupData.type.length == 0
+																		? "comment"
+																		: groupData.type
+																}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["type"] = newVal;
 
 																	setAttributes({ onProcess: onProcessX });
 																}}
 															/>
-														</>
-													)}
-												</>
-											)}
-										</>
-									</PanelBody>
-								);
-							})}
-						</div>
-					</PanelBody>
+														</PanelRow>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="After Submit"
-						initialOpen={false}>
-						<PanelRow className="my-3">
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								buttonTitle={"Add Action"}
-								options={afterSubmitArgs}
-								onChange={(option, index) => {
-									var afterSubmitX = { ...afterSubmit };
-									var index = Object.entries(afterSubmitX).length;
-									afterSubmitX[index] = option.args;
+														<ToggleControl
+															label="Login Required?"
+															help={
+																groupData.loginRequired
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.loginRequired ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["loginRequired"] =
+																	groupData.loginRequired ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
 
-									setAttributes({ afterSubmit: afterSubmitX });
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+												{id == "termSubmit" && (
+													<>
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Taxonomy
+															</label>
+															<InputControl
+																className="mr-2"
+																value={groupData.taxonomy}
+																onChange={(newVal) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["taxonomy"] = newVal;
+
+																	setAttributes({ onProcess: onProcessX });
+																}}
+															/>
+														</PanelRow>
+
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "fluentcrmAddContact" && (
+													<>
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Fluent-CRM Lists
+															</label>
+															<PGDropdown
+																position="bottom right"
+																variant="secondary"
+																buttonTitle={"Choose"}
+																options={fluentcrmLists}
+																onChange={(option, index) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["lists"].push({
+																		slug: option.slug,
+																		id: option.id,
+																	});
+																	setAttributes({ onProcess: onProcessX });
+																}}
+																values=""></PGDropdown>
+														</PanelRow>
+
+														{Object.entries(onProcess[groupIndex]["lists"]).map(
+															(x, i) => {
+																var listIndex = x[0];
+																var listData = x[1];
+																var slug = x[1].slug;
+																return (
+																	<div className="border my-3 flex items-center">
+																		<span
+																			className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
+																			onClick={(ev) => {
+																				var onProcessX = { ...onProcess };
+																				delete onProcessX[groupIndex][
+																					"lists"
+																				].splice(i, 1);
+																				setAttributes({
+																					onProcess: onProcessX,
+																				});
+																			}}>
+																			<Icon icon={close} />
+																		</span>
+
+																		<span>
+																			{fluentcrmLists == null
+																				? ""
+																				: fluentcrmLists[slug].label}
+																		</span>
+																	</div>
+																);
+															}
+														)}
+
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Fluent-CRM Tags
+															</label>
+															<PGDropdown
+																position="bottom right"
+																variant="secondary"
+																buttonTitle={"Choose"}
+																options={fluentcrmTags}
+																onChange={(option, index) => {
+																	var onProcessX = { ...onProcess };
+																	onProcessX[groupIndex]["tags"].push({
+																		slug: option.slug,
+																		id: option.id,
+																	});
+																	setAttributes({ onProcess: onProcessX });
+																}}
+																values=""></PGDropdown>
+														</PanelRow>
+
+														{Object.entries(onProcess[groupIndex]["tags"]).map(
+															(x, i) => {
+																var listIndex = x[0];
+																var listData = x[1];
+																var slug = x[1].slug;
+																return (
+																	<div className="border my-3 flex items-center">
+																		<span
+																			className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
+																			onClick={(ev) => {
+																				var onProcessX = { ...onProcess };
+																				delete onProcessX[groupIndex][
+																					"tags"
+																				].splice(i, 1);
+																				setAttributes({
+																					onProcess: onProcessX,
+																				});
+																			}}>
+																			<Icon icon={close} />
+																		</span>
+
+																		<span>
+																			{fluentcrmTags == null
+																				? ""
+																				: fluentcrmTags[slug].label}
+																		</span>
+																	</div>
+																);
+															}
+														)}
+
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+
+												{id == "newsletterSubmit" && (
+													<>
+														<ToggleControl
+															label="Show On Response?"
+															help={
+																groupData.showOnResponse
+																	? "Enabled"
+																	: "Disabled."
+															}
+															checked={groupData.showOnResponse ? true : false}
+															onChange={(e) => {
+																var onProcessX = { ...onProcess };
+																onProcessX[groupIndex]["showOnResponse"] =
+																	groupData.showOnResponse ? false : true;
+																setAttributes({ onProcess: onProcessX });
+															}}
+														/>
+														{groupData.showOnResponse && (
+															<>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Success Message
+																</label>
+																<TextareaControl
+																	value={groupData.successMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["successMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Error Message
+																</label>
+																<TextareaControl
+																	value={groupData.errorMessage}
+																	onChange={(newVal) => {
+																		var onProcessX = { ...onProcess };
+																		onProcessX[groupIndex]["errorMessage"] =
+																			newVal;
+
+																		setAttributes({ onProcess: onProcessX });
+																	}}
+																/>
+															</>
+														)}
+													</>
+												)}
+											</>
+										</PanelBody>
+									);
+								})}
+							</div>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="After Submit"
+							initialOpen={false}>
+							<PanelRow className="my-3">
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={"Add Action"}
+									options={afterSubmitArgs}
+									onChange={(option, index) => {
+										var afterSubmitX = { ...afterSubmit };
+										var index = Object.entries(afterSubmitX).length;
+										afterSubmitX[index] = option.args;
+
+										setAttributes({ afterSubmit: afterSubmitX });
+									}}
+									values=""></PGDropdown>
+							</PanelRow>
+							<div class="my-4">
+								{Object.entries(afterSubmit).map((group) => {
+									var groupIndex = group[0];
+									var groupData = group[1];
+									var id = groupData.id;
+
+									return (
+										<PanelBody
+											title={
+												<RemoveAfterSubmitArg
+													title={
+														afterSubmitArgs[id] == undefined
+															? id
+															: afterSubmitArgs[id].label
+													}
+													index={groupIndex}
+												/>
+											}
+											initialOpen={false}>
+											<>
+												{id == "showResponse" && <>Show response messages.</>}
+
+												{id == "loggedOut" && (
+													<>
+														<div className="mb-4">Logged out current user</div>
+													</>
+												)}
+
+												{id == "redirectToURL" && (
+													<>
+														<div className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Redirect URL
+															</label>
+															<TextareaControl
+																value={groupData.url}
+																onChange={(newVal) => {
+																	var afterSubmitX = { ...afterSubmit };
+																	afterSubmitX[groupIndex]["url"] = newVal;
+																	setAttributes({ afterSubmit: afterSubmitX });
+																}}
+															/>
+														</div>
+													</>
+												)}
+
+												{id == "refreshPage" && (
+													<>
+														<div className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Delay
+															</label>
+
+															<InputControl
+																className="mr-2"
+																type="number"
+																value={groupData.delay}
+																onChange={(newVal) => {
+																	var afterSubmitX = { ...afterSubmit };
+																	afterSubmitX[groupIndex]["delay"] = newVal;
+
+																	setAttributes({ afterSubmit: afterSubmitX });
+																}}
+															/>
+														</div>
+													</>
+												)}
+
+												{id == "delay" && (
+													<>
+														<PanelRow className="mb-4">
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Delay
+															</label>
+
+															<InputControl
+																className="mr-2"
+																type="number"
+																value={groupData.time}
+																onChange={(newVal) => {
+																	var afterSubmitX = { ...afterSubmit };
+																	afterSubmitX[groupIndex]["time"] = newVal;
+
+																	setAttributes({ afterSubmit: afterSubmitX });
+																}}
+															/>
+														</PanelRow>
+													</>
+												)}
+											</>
+										</PanelBody>
+									);
+								})}
+							</div>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Error Wrap"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options"></PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={errorWrap}
+										onChange={onChangeStyleErrorWrap}
+										onAdd={onAddStyleErrorWrap}
+										onRemove={onRemoveStyleErrorWrap}
+										onBulkAdd={onBulkAddErrorWrap}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"form-wrap"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
+
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockText",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
 								}}
-								values=""></PGDropdown>
-						</PanelRow>
-						<div class="my-4">
-							{Object.entries(afterSubmit).map((group) => {
-								var groupIndex = group[0];
-								var groupData = group[1];
-								var id = groupData.id;
-
-								return (
-									<PanelBody
-										title={
-											<RemoveAfterSubmitArg
-												title={
-													afterSubmitArgs[id] == undefined
-														? id
-														: afterSubmitArgs[id].label
-												}
-												index={groupIndex}
-											/>
-										}
-										initialOpen={false}>
-										<>
-											{id == "showResponse" && <>Show response messages.</>}
-
-											{id == "loggedOut" && (
-												<>
-													<div className="mb-4">Logged out current user</div>
-												</>
-											)}
-
-											{id == "redirectToURL" && (
-												<>
-													<div className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Redirect URL
-														</label>
-														<TextareaControl
-															value={groupData.url}
-															onChange={(newVal) => {
-																var afterSubmitX = { ...afterSubmit };
-																afterSubmitX[groupIndex]["url"] = newVal;
-																setAttributes({ afterSubmit: afterSubmitX });
-															}}
-														/>
-													</div>
-												</>
-											)}
-
-											{id == "refreshPage" && (
-												<>
-													<div className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Delay
-														</label>
-
-														<InputControl
-															className="mr-2"
-															type="number"
-															value={groupData.delay}
-															onChange={(newVal) => {
-																var afterSubmitX = { ...afterSubmit };
-																afterSubmitX[groupIndex]["delay"] = newVal;
-
-																setAttributes({ afterSubmit: afterSubmitX });
-															}}
-														/>
-													</div>
-												</>
-											)}
-
-											{id == "delay" && (
-												<>
-													<PanelRow className="mb-4">
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Delay
-														</label>
-
-														<InputControl
-															className="mr-2"
-															type="number"
-															value={groupData.time}
-															onChange={(newVal) => {
-																var afterSubmitX = { ...afterSubmit };
-																afterSubmitX[groupIndex]["time"] = newVal;
-
-																setAttributes({ afterSubmit: afterSubmitX });
-															}}
-														/>
-													</PanelRow>
-												</>
-											)}
-										</>
-									</PanelBody>
-								);
-							})}
+							/>
 						</div>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"form-wrap"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockText",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
 					</div>
 				</InspectorControls>
 

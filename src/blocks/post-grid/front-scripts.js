@@ -190,6 +190,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     var paginationAjax = document.querySelector('.pagination.ajax');
 
+    console.log(paginationAjax);
+
+
     if (paginationAjax != null) {
         new MutationObserver(function (mutationsList, observer) {
             for (const mutation of mutationsList) {
@@ -265,8 +268,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 };
 
+                console.log(queryArgsX);
 
-                loopLoadingWrap.innerHTML = loadingIcon + loadingText;
+
+
+                if (loopLoadingWrap != null) {
+                    loopLoadingWrap.innerHTML = loadingIcon + loadingText;
+                }
 
 
                 fetch(post_grid_vars['siteUrl'] + "/wp-json/post-grid/v2/get_posts", {
@@ -274,8 +282,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     body: JSON.stringify(data),
                     headers: {
                         "Content-Type": "application/json;charset=utf-8",
-
-
                     },
                 })
                     .then((response) => {
@@ -354,7 +360,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (disabled == 'disabled') return;
 
         var loadMorewrapparent = loadMorewrap.closest('div[blockArgs]');
-        var blockargs = loadMorewrapparent.getAttribute("blockargs")
+        var blockargs = loadMorewrapparent.getAttribute("blockargs");
+
+
 
         // const blockargs = loadMorewrap.getAttribute('blockargs');
         var blockargsObj = (blockargs != null) ? JSON.parse(blockargs) : {};
@@ -363,6 +371,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         var queryArgs = post_grid_vars[blockId].queryArgs;
         var rawData = post_grid_vars[blockId].layout.rawData;
+
+        console.log(rawData);
+        console.log("#######");
+
 
         var pagination = blockargsObj.pagination;
         var loadMoreText = pagination.loadMoreText;
@@ -418,6 +430,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                             var posts = (dataX['posts'] != undefined) ? dataX['posts'] : [];
                             var noPosts = (dataX['noPosts'] != undefined) ? dataX['noPosts'] : false;
+
+                            console.log('noPosts', noPosts);
+
 
                             if (!noPosts) {
                                 var html = '';

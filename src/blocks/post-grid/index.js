@@ -70,36 +70,18 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import Typography from "../../components/typography";
-import IconToggle from "../../components/icon-toggle";
-import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
 
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 import PGStyles from "../../components/styles";
-import PGcssTextAlign from "../../components/css-text-align";
-import PGcssDisplay from "../../components/css-display";
 import PGTutorials from "../../components/tutorials";
 
-import PGcssPadding from "../../components/css-padding";
-import PGcssOutline from "../../components/css-outline";
-import PGcssBorder from "../../components/css-border";
-import PGcssBoxShadow from "../../components/css-box-shadow";
-import PGinputSelect from "../../components/input-select";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
-import variations from "./variations";
 
 import breakPoints from "../../breakpoints";
-import queryPresets from "./query-presets";
-import gridLayouts from "./grid-layouts";
-import queryPrams from "./queryprams";
-import columnPresets from "./column-presets";
 
 import tutorialsLinks from "./tutorials-links";
-
-import colorsPresets from "../../colors-presets";
-//import anime from 'animejs/lib/anime.es.js';
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -143,19 +125,13 @@ registerBlockType(metadata, {
 
 		var lazyLoad = attributes.lazyLoad;
 		var container = attributes.container;
-		var pagination = attributes.pagination;
-		var paginationItem = attributes.paginationItem;
-		var paginationItemActive = attributes.paginationItemActive;
 
-		var search = attributes.search;
 		var itemsWrap = attributes.itemsWrap;
 		var itemWrap = attributes.itemWrap;
 		var noPostsWrap = attributes.noPostsWrap;
 		var spinnerWrap = attributes.spinnerWrap;
 
 		var grid = attributes.grid;
-		var layout = attributes.layout;
-		var queryArgs = attributes.queryArgs;
 		var blockCssY = attributes.blockCssY;
 
 		var blockId = attributes.blockId;
@@ -185,13 +161,8 @@ registerBlockType(metadata, {
 		const itemWrapSelector = blockClass + " .item";
 
 		const noPostsSelector = blockClass + " .no-posts";
-		const searchWrapSelector = blockClass + " .search";
 		const lazyloadWrapSelector = blockClass + " .lazyLoad";
 		const spinnerSelector = blockClass + " .spinner";
-		const paginationSelector = blockClass + " .pagination";
-		const paginationItemSelector = blockClass + " .pagination .page-numbers";
-		const paginationItemActiveSelector =
-			blockClass + " .pagination .page-numbers.current";
 
 		var [debounce, setDebounce] = useState(null); // Using the hook.
 		const [breakPointX, setBreakPointX] = useState(
@@ -214,8 +185,6 @@ registerBlockType(metadata, {
 			setClientData(myStore != null ? myStore.getclientdata() : "");
 		}, [clientDataX]);
 
-
-
 		//const ALLOWED_BLOCKS = ["post-grid/post-query"];
 
 		const MY_TEMPLATE = [
@@ -236,59 +205,24 @@ registerBlockType(metadata, {
 
 			var blocks = content.length > 0 ? parse(content) : "";
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var lazyLoadX = attributes.lazyLoad;
-				var searchX = attributes.search;
 				var containerX = attributes.container;
 				var itemsWrapX = attributes.itemsWrap;
 				var itemWrapX = attributes.itemWrap;
 				var noPostsWrapX = attributes.noPostsWrap;
 				var spinnerWrapX = attributes.spinnerWrap;
 				var gridX = attributes.grid;
-				var paginationX = attributes.pagination;
-				var paginationItemX = attributes.paginationItem;
-				var paginationItemActiveX = attributes.paginationItemActive;
-				var layoutX = attributes.layout;
+
 				var blockCssYX = attributes.blockCssY;
 
 				var blockCssObj = {};
-
-				if (layoutX != undefined) {
-					var layoutY = { ...layoutX, options: layout.options };
-					setAttributes({ layout: layoutY });
-					blockCssObj[layoutSelector] = layoutY;
-				}
-
-				if (paginationItemActiveX != undefined) {
-					var paginationItemActiveY = {
-						...paginationItemActiveX,
-						options: paginationItemActive.options,
-					};
-					setAttributes({ paginationItemActive: paginationItemActiveY });
-					blockCssObj[paginationItemActiveSelector] = paginationItemActiveY;
-				}
-
-				if (paginationItemX != undefined) {
-					var paginationItemY = {
-						...paginationItemX,
-						options: paginationItem.options,
-					};
-					setAttributes({ paginationItem: paginationItemY });
-					blockCssObj[paginationItemSelector] = paginationItemY;
-				}
-
-				if (paginationX != undefined) {
-					var paginationY = { ...paginationX, options: pagination.options };
-					setAttributes({ pagination: paginationY });
-					blockCssObj[paginationSelector] = paginationY;
-				}
 
 				if (gridX != undefined) {
 					var gridY = { ...gridX, options: grid.options };
@@ -324,12 +258,6 @@ registerBlockType(metadata, {
 					var containerY = { ...containerX, options: container.options };
 					setAttributes({ container: containerY });
 					blockCssObj[containerSelector] = containerY;
-				}
-
-				if (searchX != undefined) {
-					var searchY = { ...searchX, options: search.options };
-					setAttributes({ search: searchY });
-					blockCssObj[searchSelector] = searchY;
 				}
 
 				if (lazyLoadX != undefined) {
@@ -586,11 +514,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockId: blockIdX });
 
 			myStore.generateBlockCss(blockCssY.items, blockId);
-
-			if (pagination.options.type.length == 0) {
-				//var paginationOptons = { ...pagination.options, type: 'normal' }
-				//setAttributes({ pagination: { ...pagination, options: paginationOptons } });
-			}
 		}, [clientId]);
 
 		useEffect(() => {
@@ -600,12 +523,8 @@ registerBlockType(metadata, {
 			blockCssObj[itemsWrapSelector] = itemsWrap;
 			blockCssObj[itemWrapSelector] = itemWrap;
 			blockCssObj[noPostsSelector] = noPostsWrap;
-			blockCssObj[searchWrapSelector] = search;
 			blockCssObj[lazyloadWrapSelector] = lazyLoad;
 			blockCssObj[spinnerSelector] = spinnerWrap;
-			blockCssObj[paginationSelector] = pagination;
-			blockCssObj[paginationItemSelector] = paginationItem;
-			blockCssObj[paginationItemActiveSelector] = paginationItemActive;
 
 			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
 
@@ -691,8 +610,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: asdsd } });
 		}, [grid]);
 
-
-
 		var breakPointList = [{ label: "Select..", icon: "", value: "" }];
 
 		for (var x in breakPoints) {
@@ -703,8 +620,6 @@ registerBlockType(metadata, {
 				value: item.id,
 			});
 		}
-
-
 
 		var postTypes = [];
 
@@ -722,503 +637,377 @@ registerBlockType(metadata, {
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		return (
 			<>
 				<InspectorControls>
+					<div className="pg-setting-input-text">
+						<PanelBody title="Container" initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: styles,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<label for="">CSS Class</label>
 
-
-
-
-					<PanelBody title="Container" initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: styles,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<label for="">CSS Class</label>
-
-								<PGcssClassPicker
-									tags={customTags}
-									placeholder="Add Class"
-									value={container.options.class}
-									onChange={(newVal) => {
-										var options = { ...container.options, class: newVal };
-										setAttributes({
-											container: { styles: container.styles, options: options },
-										});
-									}}
-								/>
-
-								<PanelRow>
-									<label for="">CSS ID</label>
-									<InputControl
-										value={blockId}
+									<PGcssClassPicker
+										tags={customTags}
+										placeholder="Add Class"
+										value={container.options.class}
 										onChange={(newVal) => {
+											var options = { ...container.options, class: newVal };
 											setAttributes({
-												blockId: newVal,
+												container: {
+													styles: container.styles,
+													options: options,
+												},
 											});
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={container}
-									onChange={onChangeStyleContainer}
-									onAdd={onAddStyleContainer}
-									onRemove={onRemoveStyleContainer}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody title="Grid Wrap" initialOpen={false}>
-						<PGStyles
-							obj={itemsWrap}
-							onChange={onChangeStyleItemsWrap}
-							onAdd={onAddStyleItemsWrap}
-							onRemove={onRemoveStyleItemsWrap}
-						/>
-					</PanelBody>
+									<PanelRow>
+										<label for="">CSS ID</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={container}
+										onChange={onChangeStyleContainer}
+										onAdd={onAddStyleContainer}
+										onRemove={onRemoveStyleContainer}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-					<PanelBody title="Grid Item Wrap" initialOpen={false}>
-						<PGStyles
-							obj={itemWrap}
-							onChange={onChangeStyleItemWrap}
-							onAdd={onAddStyleItemWrap}
-							onRemove={onRemoveStyleItemWrap}
-						/>
-					</PanelBody>
+						<PanelBody title="Grid Wrap" initialOpen={false}>
+							<PGStyles
+								obj={itemsWrap}
+								onChange={onChangeStyleItemsWrap}
+								onAdd={onAddStyleItemsWrap}
+								onRemove={onRemoveStyleItemsWrap}
+							/>
+						</PanelBody>
 
-					<PanelBody title="N'th Item CSS" initialOpen={false}>
-						<div>
-							<PanelRow>
-								<Button
-									className="my-3"
-									variant="secondary"
-									disabled={isProFeature}
-									onClick={(_newVal) => {
-										if (grid.options.itemCss[breakPointX] != undefined) {
-											var ssd = grid.options.itemCss[breakPointX].concat({
-												"grid-column-start": "",
-												"grid-column-end": "",
-												"grid-row-start": "",
-												"grid-row-end": "",
-											});
-										} else {
-											grid.options.itemCss[breakPointX] = [];
-											var ssd = grid.options.itemCss[breakPointX].concat({
-												"grid-column-start": "",
-												"grid-column-end": "",
-												"grid-row-start": "",
-												"grid-row-end": "",
-											});
-										}
+						<PanelBody title="Grid Item Wrap" initialOpen={false}>
+							<PGStyles
+								obj={itemWrap}
+								onChange={onChangeStyleItemWrap}
+								onAdd={onAddStyleItemWrap}
+								onRemove={onRemoveStyleItemWrap}
+							/>
+						</PanelBody>
 
-										var newValuesObj = {};
-										if (Object.keys(grid.options.itemCss).length == 0) {
-											newValuesObj[breakPointX] = ssd;
-										} else {
-											newValuesObj = grid.options.itemCss;
-											newValuesObj[breakPointX] = ssd;
-										}
+						<PanelBody title="N'th Item CSS" initialOpen={false}>
+							<div>
+								<PanelRow>
+									<Button
+										className="my-3"
+										variant="secondary"
+										disabled={isProFeature}
+										onClick={(_newVal) => {
+											if (grid.options.itemCss[breakPointX] != undefined) {
+												var ssd = grid.options.itemCss[breakPointX].concat({
+													"grid-column-start": "",
+													"grid-column-end": "",
+													"grid-row-start": "",
+													"grid-row-end": "",
+												});
+											} else {
+												grid.options.itemCss[breakPointX] = [];
+												var ssd = grid.options.itemCss[breakPointX].concat({
+													"grid-column-start": "",
+													"grid-column-end": "",
+													"grid-row-start": "",
+													"grid-row-end": "",
+												});
+											}
 
-										var options = { ...grid.options, itemCss: newValuesObj };
-										setAttributes({ grid: { ...grid, options: options } });
-									}}>
-									Add
-								</Button>
+											var newValuesObj = {};
+											if (Object.keys(grid.options.itemCss).length == 0) {
+												newValuesObj[breakPointX] = ssd;
+											} else {
+												newValuesObj = grid.options.itemCss;
+												newValuesObj[breakPointX] = ssd;
+											}
 
-								{isProFeature && (
-									<span className="bg-amber-400 mx-2 rounded-sm py-1 px-3  text-white hover:text-white">
-										<a
-											target="_blank"
-											href={
-												"https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS"
-											}>
-											Pro
-										</a>
-									</span>
-								)}
-							</PanelRow>
+											var options = { ...grid.options, itemCss: newValuesObj };
+											setAttributes({ grid: { ...grid, options: options } });
+										}}>
+										Add
+									</Button>
 
-							{grid.options.itemCss[breakPointX] != undefined &&
-								grid.options.itemCss[breakPointX].map((x, i) => {
-									return (
-										<PanelBody title={i + 1 + "'th Item"} initialOpen={false}>
-											<Button
-												icon="no-alt"
-												variant="secondary"
-												onClick={(_ev) => {
-													grid.options.itemCss[breakPointX].splice(i, 1);
-
-													var options = {
-														...grid.options,
-														itemCss: grid.options.itemCss,
-													};
-													setAttributes({
-														grid: { ...grid, options: options },
-													});
-												}}>
-												Delete
-											</Button>
-
-											<PanelRow>
-												<label for="">grid-column-start</label>
-												<InputControl
-													value={x["grid-column-start"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-column-start"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-
-											<PanelRow>
-												<label for="">grid-column-end</label>
-												<InputControl
-													value={x["grid-column-end"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-column-end"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-
-											<PanelRow>
-												<label for="">grid-row-start</label>
-												<InputControl
-													value={x["grid-row-start"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-row-start"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-
-											<PanelRow>
-												<label for="">grid-row-end</label>
-												<InputControl
-													value={x["grid-row-end"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-row-end"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-										</PanelBody>
-									);
-								})}
-						</div>
-					</PanelBody>
-
-					{/* <PanelBody title="Grid Layouts" initialOpen={false}>
-						{gridLayouts.map((x, _i) => {
-							return (
-								<div
-									className="cursor-pointer relative hover:bg-blue-200 my-3"
-									onClick={(_ev) => {
-										if (x.isPro) {
-											//setAttributes({ grid: x.data })
-										} else {
-											setAttributes({ grid: x.data });
-										}
-									}}>
-									{x.isPro && (
-										<span className="bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white">
+									{isProFeature && (
+										<span className="bg-amber-400 mx-2 rounded-sm py-1 px-3  text-white hover:text-white">
 											<a
 												target="_blank"
 												href={
-													"https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
-													x.label
+													"https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS"
 												}>
 												Pro
 											</a>
 										</span>
 									)}
-									{x.icon != undefined && (
-										<div className="w-full grid-layout-prewview">{x.icon}</div>
-									)}
-									<div className="text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center">
-										{x.title}
-									</div>
-								</div>
-							);
-						})}
-					</PanelBody> */}
+								</PanelRow>
 
-					<PanelBody title="Lazy load" initialOpen={false}>
-						<PanelRow>
-							<label for="">Enable Lazy Load</label>
+								{grid.options.itemCss[breakPointX] != undefined &&
+									grid.options.itemCss[breakPointX].map((x, i) => {
+										return (
+											<PanelBody title={i + 1 + "'th Item"} initialOpen={false}>
+												<Button
+													icon="no-alt"
+													variant="secondary"
+													onClick={(_ev) => {
+														grid.options.itemCss[breakPointX].splice(i, 1);
 
-							<SelectControl
-								label=""
-								value={lazyLoad.options.enable}
-								options={[
-									{ label: "Yes", value: "yes" },
-									{ label: "No", value: "no" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...lazyLoad.options, enable: newVal };
-									setAttributes({
-										lazyLoad: { ...lazyLoad, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
+														var options = {
+															...grid.options,
+															itemCss: grid.options.itemCss,
+														};
+														setAttributes({
+															grid: { ...grid, options: options },
+														});
+													}}>
+													Delete
+												</Button>
 
-						<PanelRow>
-							<label for="">Lazy load Icon</label>
+												<PanelRow>
+													<label for="">grid-column-start</label>
+													<InputControl
+														value={x["grid-column-start"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-column-start"
+															] = newVal;
 
-							<PGIconPicker
-								library={
-									lazyLoad.options.icon != undefined
-										? lazyLoad.options.icon.library
-										: "fontAwesome"
-								}
-								srcType={
-									lazyLoad.options.icon != undefined
-										? lazyLoad.options.icon.srcType
-										: "class"
-								}
-								iconSrc={
-									lazyLoad.options.icon != undefined
-										? lazyLoad.options.icon.iconSrc
-										: ""
-								}
-								onChange={(arg) => {
-									var options = {
-										...lazyLoad.options,
-										icon: {
-											srcType: arg.srcType,
-											library: arg.library,
-											iconSrc: arg.iconSrc,
-										},
-									};
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
 
-									setAttributes({
-										lazyLoad: { ...lazyLoad, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
+												<PanelRow>
+													<label for="">grid-column-end</label>
+													<InputControl
+														value={x["grid-column-end"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-column-end"
+															] = newVal;
 
-						<PanelRow>
-							<label for="">Lazy Load Image</label>
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
 
-							<MediaUploadCheck>
-								<MediaUpload
-									onSelect={(media) => {
-										// media.id
+												<PanelRow>
+													<label for="">grid-row-start</label>
+													<InputControl
+														value={x["grid-row-start"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-row-start"
+															] = newVal;
 
-										var options = {
-											...lazyLoad.options,
-											srcUrl: media.url,
-											srcId: media.id,
-										};
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
+
+												<PanelRow>
+													<label for="">grid-row-end</label>
+													<InputControl
+														value={x["grid-row-end"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-row-end"
+															] = newVal;
+
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
+											</PanelBody>
+										);
+									})}
+							</div>
+						</PanelBody>
+
+						<PanelBody title="Lazy load" initialOpen={false}>
+							<PanelRow>
+								<label for="">Enable Lazy Load</label>
+
+								<SelectControl
+									label=""
+									value={lazyLoad.options.enable}
+									options={[
+										{ label: "Yes", value: "yes" },
+										{ label: "No", value: "no" },
+									]}
+									onChange={(newVal) => {
+										var options = { ...lazyLoad.options, enable: newVal };
 										setAttributes({
 											lazyLoad: { ...lazyLoad, options: options },
 										});
 									}}
-									onClose={() => { }}
-									allowedTypes={ALLOWED_MEDIA_TYPES}
-									value={lazyLoad.options.srcId}
-									render={({ open }) => (
-										<Button className="border" onClick={open}>
-											Open Media Library
-										</Button>
-									)}
 								/>
-							</MediaUploadCheck>
-						</PanelRow>
+							</PanelRow>
 
-						<img className="my-5" src={lazyLoad.options.srcUrl} alt="" />
-					</PanelBody>
+							<PanelRow>
+								<label for="">Lazy load Icon</label>
 
+								<PGIconPicker
+									library={
+										lazyLoad.options.icon != undefined
+											? lazyLoad.options.icon.library
+											: "fontAwesome"
+									}
+									srcType={
+										lazyLoad.options.icon != undefined
+											? lazyLoad.options.icon.srcType
+											: "class"
+									}
+									iconSrc={
+										lazyLoad.options.icon != undefined
+											? lazyLoad.options.icon.iconSrc
+											: ""
+									}
+									onChange={(arg) => {
+										var options = {
+											...lazyLoad.options,
+											icon: {
+												srcType: arg.srcType,
+												library: arg.library,
+												iconSrc: arg.iconSrc,
+											},
+										};
 
+										setAttributes({
+											lazyLoad: { ...lazyLoad, options: options },
+										});
+									}}
+								/>
+							</PanelRow>
 
+							<PanelRow>
+								<label for="">Lazy Load Image</label>
 
+								<MediaUploadCheck>
+									<MediaUpload
+										onSelect={(media) => {
+											// media.id
 
+											var options = {
+												...lazyLoad.options,
+												srcUrl: media.url,
+												srcId: media.id,
+											};
+											setAttributes({
+												lazyLoad: { ...lazyLoad, options: options },
+											});
+										}}
+										onClose={() => {}}
+										allowedTypes={ALLOWED_MEDIA_TYPES}
+										value={lazyLoad.options.srcId}
+										render={({ open }) => (
+											<Button className="border" onClick={open}>
+												Open Media Library
+											</Button>
+										)}
+									/>
+								</MediaUploadCheck>
+							</PanelRow>
 
+							<img className="my-5" src={lazyLoad.options.srcUrl} alt="" />
+						</PanelBody>
 
-					<PanelBody title="Block Variations" initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"post-grid"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
+						<PanelBody title="Block Variations" initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"post-grid"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
 
-					<PanelBody className="hidden" title="Search" initialOpen={false}>
-						<SelectControl
-							label="Enable"
-							value={search.enable}
-							options={[
-								{ label: "No", value: "no" },
-								{ label: "Yes", value: "yes" },
-							]}
-							onChange={(newVal) =>
-								setAttributes({ search: { ...search, enable: newVal } })
-							}
-						/>
+						<div className="px-3">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockPostGrid",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 
-						<SelectControl
-							label="Search action"
-							value={search.type}
-							options={[
-								{ label: "Ajax - On change form data", value: "ajax" },
-								{ label: "On form submit - GET method", value: "form_submit" },
-							]}
-							onChange={(newVal) =>
-								setAttributes({ search: { ...search, type: newVal } })
-							}
-						/>
-
-						<InputControl
-							label="Placeholder text"
-							value={search.placeholder}
-							onChange={(newVal) =>
-								setAttributes({ search: { ...search, placeholder: newVal } })
-							}
-						/>
-
-						<InputControl
-							label="Search icon"
-							value={search.icon}
-							onChange={(newVal) =>
-								setAttributes({ search: { ...search, icon: newVal } })
-							}
-						/>
-
-						<InputControl
-							label="Loading icon"
-							value={search.busyIcon}
-							onChange={(newVal) =>
-								setAttributes({ search: { ...search, busyIcon: newVal } })
-							}
-						/>
-					</PanelBody>
-
-					<div className="px-3">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockPostGrid",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						<PanelBody className="" title="Tutorials" initialOpen={false}>
+							<PGTutorials links={tutorialsLinks} />
+						</PanelBody>
 					</div>
-
-					<PanelBody className="" title="Tutorials" initialOpen={false}>
-						<PGTutorials links={tutorialsLinks} />
-					</PanelBody>
 				</InspectorControls>
 
-
-
 				<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
-
 
 				<div {...blockProps}>
 					{lazyLoad.options.enable == "yes" && isBusy && (
 						<div className={lazyLoad.options.class}></div>
 					)}
 
-					{search.enable == "yes" && (
-						<div className={search.options.class}>search form</div>
-					)}
-
-
 					{isBusy && (
 						<div className="text-center">
 							<Spinner />
 						</div>
 					)}
-
-
 				</div>
 			</>
 		);

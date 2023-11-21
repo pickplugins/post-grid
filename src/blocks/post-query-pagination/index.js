@@ -76,12 +76,9 @@ const { RawHTML } = wp.element;
 import { store } from "../../store";
 import { __experimentalScrollable as Scrollable } from "@wordpress/components";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import variations from "./variations";
 
 import paginationTypes from "./pagination-types";
@@ -137,18 +134,14 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		const [paginationItems, setPaginationItems] = useState([]); // Using the hook.
-
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 		let isProFeature = applyFilters("isProFeature", true);
 
 		var [isBusy, setIsBusy] = useState(false); // Using the hook.
 
-		const paginationSelector = blockClass + " .pagination";
-		const paginationItemSelector = blockClass + " .pagination .page-numbers";
-		const paginationItemActiveSelector =
-			blockClass + " .pagination .page-numbers.current";
+		const paginationSelector = blockClass;
+		const paginationItemSelector = blockClass + " .page-numbers";
+		const paginationItemActiveSelector = blockClass + ".page-numbers .current";
 
 		var parentPagination =
 			context["post-grid/pagination"] == undefined
@@ -177,19 +170,47 @@ registerBlockType(metadata, {
 		}, [clientId]);
 
 		useEffect(() => {
+			var blockCssObj = {};
+
+			blockCssObj[paginationSelector] = pagination;
+			blockCssObj[paginationItemSelector] = paginationItem;
+			blockCssObj[paginationItemActiveSelector] = paginationItemActive;
+
+			var blockCssRules = myStore.getBlockCssRules(blockCssObj);
+
+			var items = blockCssRules;
+			setAttributes({ blockCssY: { items: items } });
+		}, [blockId]);
+
+		useEffect(() => {
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
 		useEffect(() => {
-			//setAttributes({ pagination: parentPagination });
+			if (
+				parentPagination != null &&
+				Object.entries(pagination.styles).length == 0
+			) {
+				setAttributes({ pagination: parentPagination });
+			}
 		}, [parentPagination]);
 
 		useEffect(() => {
-			//setAttributes({ paginationItem: parentPagination });
+			if (
+				parentPaginationItem != null &&
+				Object.entries(paginationItem.styles).length == 0
+			) {
+				setAttributes({ paginationItem: parentPaginationItem });
+			}
 		}, [parentPaginationItem]);
 
 		useEffect(() => {
-			//setAttributes({ paginationItemActive: parentPagination });
+			if (
+				parentPaginationItemActive != null &&
+				Object.entries(paginationItemActive.styles).length == 0
+			) {
+				setAttributes({ paginationItemActive: parentPaginationItemActive });
+			}
 		}, [parentPaginationItemActive]);
 
 		function onPickCssLibraryPaginationItemActive(args) {
@@ -315,18 +336,43 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: cssItems } });
 		}
 
-		function onChangeStylePagination(sudoScource, newVal, attr) {
-			var path = [sudoScource, attr, breakPointX];
+		// function onChangeStylePagination(sudoScource, newVal, attr) {
+		// 	var path = [sudoScource, attr, breakPointX];
+		// 	let obj = Object.assign({}, pagination);
+		// 	const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+		// 	setAttributes({ pagination: object });
+
+		// 	var elementSelector = myStore.getElementSelector(
+		// 		sudoScource,
+		// 		paginationSelector
+		// 	);
+		// 	var cssPropty = myStore.cssAttrParse(attr);
+
+		// 	let itemsX = Object.assign({}, blockCssY.items);
+
+		// 	if (itemsX[elementSelector] == undefined) {
+		// 		itemsX[elementSelector] = {};
+		// 	}
+
+		// 	var cssPath = [elementSelector, cssPropty, breakPointX];
+		// 	const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+		// 	setAttributes({ blockCssY: { items: cssItems } });
+		// }
+
+		function onChangeStylePagination(sudoSource, newVal, attr) {
+			var path = [sudoSource, attr, breakPointX];
 			let obj = Object.assign({}, pagination);
 			const object = myStore.updatePropertyDeep(obj, path, newVal);
 
 			setAttributes({ pagination: object });
 
 			var elementSelector = myStore.getElementSelector(
-				sudoScource,
+				sudoSource,
 				paginationSelector
 			);
-			var cssPropty = myStore.cssAttrParse(attr);
+			var cssProperty = myStore.cssAttrParse(attr);
 
 			let itemsX = Object.assign({}, blockCssY.items);
 
@@ -334,7 +380,7 @@ registerBlockType(metadata, {
 				itemsX[elementSelector] = {};
 			}
 
-			var cssPath = [elementSelector, cssPropty, breakPointX];
+			var cssPath = [elementSelector, cssProperty, breakPointX];
 			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
 			setAttributes({ blockCssY: { items: cssItems } });
@@ -457,14 +503,14 @@ registerBlockType(metadata, {
 		}
 
 		const blockProps = useBlockProps({
-			className: ` ${blockId} pg-post-query-pagination items-loop`,
+			className: ` ${blockId} ${pagination.options.class}`,
 		});
 
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-3">
-						<div className="my-4">
+					<div className="pg-setting-input-text">
+						<div className="my-4 px-3">
 							<PanelRow className="mb-4">
 								<label for="">Pagination Type</label>
 								<PGDropdown
@@ -739,22 +785,22 @@ registerBlockType(metadata, {
 								</PGtab>
 							</PGtabs>
 						</PanelBody>
-					</div>
 
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockText",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockText",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 					</div>
 				</InspectorControls>
 
 				<>
-					<div className={pagination.options.class}>
+					<div {...blockProps}>
 						{pagination.options.type == "normal" && (
 							<>
 								<span className="page-numbers">Prev</span>

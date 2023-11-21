@@ -158,50 +158,50 @@ class PGBlockNumberCounter
         if (!empty($wrapperTag)):
 
             ?>
-                                                <<?php echo esc_attr($wrapperTag); ?> class="
-                                                    <?php echo esc_attr($wrapperClass); ?>
-                                                    <?php echo esc_attr($blockId); ?>
-                                                    <?php echo esc_attr($blockAlign); ?>" data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class=" PGBlockNumberCount 
+                <?php echo esc_attr($wrapperClass); ?>
+                <?php echo esc_attr($blockId); ?>
+                <?php echo esc_attr($blockAlign); ?>" data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
-                                                    <?php if ($iconPosition == 'beforePrefix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
+                <?php if ($iconPosition == 'beforePrefix'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                                                    <?php if ($prefixText): ?>
-                                                                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                                                                        <?php echo wp_kses_post($prefixText); ?>
-                                                                    </span>
-                                                    <?php endif; ?>
+                <?php if ($prefixText): ?>
+                                <span class="<?php echo esc_attr($prefixClass); ?>">
+                                    <?php echo wp_kses_post($prefixText); ?>
+                                </span>
+                <?php endif; ?>
 
-                                                    <?php if ($iconPosition == 'afterPrefix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
-
-
-
-                                                    <span class='number-count'>
-
-                                                        <?php echo wp_kses_post($start); ?>
-
-                                                    </span>
+                <?php if ($iconPosition == 'afterPrefix'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
 
-                                                    <?php if ($iconPosition == 'beforePostfix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
-                                                    <?php if ($postfixText): ?>
-                                                                    <span class="<?php echo $postfixClass; ?>">
-                                                                        <?php echo $postfixText; ?>
-                                                                    </span>
-                                                    <?php endif; ?>
 
-                                                    <?php if ($iconPosition == 'afterPostfix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
+                <span class='number-count'>
 
-                                                </<?php echo esc_attr($wrapperTag); ?>>
-                                                <?php
+                    <?php echo wp_kses_post($start); ?>
+
+                </span>
+
+
+                <?php if ($iconPosition == 'beforePostfix'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+                <?php if ($postfixText): ?>
+                                <span class="<?php echo $postfixClass; ?>">
+                                    <?php echo $postfixText; ?>
+                                </span>
+                <?php endif; ?>
+
+                <?php if ($iconPosition == 'afterPostfix'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+
+            </<?php echo esc_attr($wrapperTag); ?>>
+            <?php
 
         endif;
 

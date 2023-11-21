@@ -3194,217 +3194,218 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Layouts"
-						initialOpen={false}>
-						<div className="text-white cursor-pointer">
-							<div
-								className={
-									layoutData.source == "library"
-										? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
-										: "bg-blue-300 text-[14px] font-bold inline-block px-3 py-2 w-1/2"
-								}
-								onClick={(_ev) => {
-									setLayoutData({ source: "library" });
-								}}>
-								Library
+					<div className="pg-setting-input-text">
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Layouts"
+							initialOpen={false}>
+							<div className="text-white cursor-pointer">
+								<div
+									className={
+										layoutData.source == "library"
+											? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
+											: "bg-blue-300 text-[14px] font-bold inline-block px-3 py-2 w-1/2"
+									}
+									onClick={(_ev) => {
+										setLayoutData({ source: "library" });
+									}}>
+									Library
+								</div>
+								<div
+									className={
+										layoutData.source == "saved"
+											? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
+											: "bg-blue-300 inline-block px-3 py-2 w-1/2 text-[14px] font-bold"
+									}
+									onClick={(_ev) => {
+										setLayoutData({ source: "saved" });
+									}}>
+									Saved
+								</div>
 							</div>
-							<div
-								className={
-									layoutData.source == "saved"
-										? "bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold"
-										: "bg-blue-300 inline-block px-3 py-2 w-1/2 text-[14px] font-bold"
-								}
-								onClick={(_ev) => {
-									setLayoutData({ source: "saved" });
-								}}>
-								Saved
-							</div>
-						</div>
 
-						<PanelRow>
-							<InputControl
-								value={queryLayouts.keyword}
-								type="text"
-								placeholder="Search Layouts..."
-								onChange={(newVal) => {
-									clearTimeout(debounce);
-									debounce = setTimeout(() => {
+							<PanelRow>
+								<InputControl
+									value={queryLayouts.keyword}
+									type="text"
+									placeholder="Search Layouts..."
+									onChange={(newVal) => {
+										clearTimeout(debounce);
+										debounce = setTimeout(() => {
+											setQueryLayouts({
+												keyword: newVal,
+												page: queryLayouts.page,
+												category: queryLayouts.category,
+											});
+										}, 1000);
+
+										//fetchLayouts();
+									}}
+								/>
+								<SelectControl
+									className="w-full"
+									style={{ margin: 0 }}
+									label=""
+									value={queryLayouts.category}
+									options={layoutCats}
+									onChange={(newVal) => {
 										setQueryLayouts({
-											keyword: newVal,
+											keyword: queryLayouts.keyword,
 											page: queryLayouts.page,
-											category: queryLayouts.category,
+											category: newVal,
 										});
-									}, 1000);
+										//fetchLayouts();
+									}}
+								/>
+							</PanelRow>
 
-									//fetchLayouts();
-								}}
-							/>
-							<SelectControl
-								className="w-full"
-								style={{ margin: 0 }}
-								label=""
-								value={queryLayouts.category}
-								options={layoutCats}
-								onChange={(newVal) => {
-									setQueryLayouts({
-										keyword: queryLayouts.keyword,
-										page: queryLayouts.page,
-										category: newVal,
-									});
-									//fetchLayouts();
-								}}
-							/>
-						</PanelRow>
+							{layoutData.source == "saved" && (
+								<div className="flex gap-2	">
+									<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
+										<a
+											className=" "
+											target="_blank"
+											href={
+												clientData.siteAdminurl +
+												"edit.php?post_type=post_grid_template"
+											}>
+											All Layouts
+										</a>
+									</div>
 
-						{layoutData.source == "saved" && (
-							<div className="flex gap-2	">
-								<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
-									<a
-										className=" "
-										target="_blank"
-										href={
-											clientData.siteAdminurl +
-											"edit.php?post_type=post_grid_template"
-										}>
-										All Layouts
-									</a>
+									<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
+										<a
+											className=""
+											target="_blank"
+											href={
+												clientData.siteAdminurl +
+												"post-new.php?post_type=post_grid_template"
+											}>
+											Create Layout
+										</a>
+									</div>
 								</div>
+							)}
 
-								<div className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center ">
-									<a
-										className=""
-										target="_blank"
-										href={
-											clientData.siteAdminurl +
-											"post-new.php?post_type=post_grid_template"
-										}>
-										Create Layout
-									</a>
+							{layoutLoading == true && (
+								<div className="text-center">
+									<Spinner />
 								</div>
-							</div>
-						)}
+							)}
 
-						{layoutLoading == true && (
-							<div className="text-center">
-								<Spinner />
-							</div>
-						)}
+							{layoutLoading == false &&
+								layoutList.items.length > 0 &&
+								layoutList.items.map((x) => {
+									return (
+										<div className="my-4 border bg-gray-200 ">
+											<div
+												className="relative cursor-pointer"
+												onClick={(_ev) => {
+													selectLayout(x.post_id, x.post_content);
+												}}>
+												{layout.id == x.post_id && (
+													<span className="absolute bg-amber-500 text-white px-2 py-1 top-0 right-0">
+														<span class="dashicons dashicons-saved"></span>{" "}
+														Selected
+													</span>
+												)}
 
-						{layoutLoading == false &&
-							layoutList.items.length > 0 &&
-							layoutList.items.map((x) => {
-								return (
-									<div className="my-4 border bg-gray-200 ">
-										<div
-											className="relative cursor-pointer"
-											onClick={(_ev) => {
-												selectLayout(x.post_id, x.post_content);
-											}}>
-											{layout.id == x.post_id && (
-												<span className="absolute bg-amber-500 text-white px-2 py-1 top-0 right-0">
-													<span class="dashicons dashicons-saved"></span>{" "}
-													Selected
-												</span>
-											)}
+												<img className="w-full" src={x.thumb_url} />
 
-											<img className="w-full" src={x.thumb_url} />
-
-											<div className="text-[14px] p-1 bg-gray-500 text-white bg-opacity-80 text-bold  text-center">
-												{x.post_title}
+												<div className="text-[14px] p-1 bg-gray-500 text-white bg-opacity-80 text-bold  text-center">
+													{x.post_title}
+												</div>
 											</div>
-										</div>
 
-										<div className="py-3 flex justify-items-stretch">
-											{layoutData.source != "library" && (
+											<div className="py-3 flex justify-items-stretch">
+												{layoutData.source != "library" && (
+													<span className="mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer">
+														{" "}
+														<a
+															target="_blank"
+															href={
+																clientData.siteAdminurl +
+																"post.php?post=" +
+																x.post_id +
+																"&action=edit"
+															}>
+															Edit
+														</a>{" "}
+													</span>
+												)}
+
 												<span className="mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer">
-													{" "}
-													<a
-														target="_blank"
-														href={
-															clientData.siteAdminurl +
-															"post.php?post=" +
-															x.post_id +
-															"&action=edit"
-														}>
-														Edit
-													</a>{" "}
+													#{x.post_id}
 												</span>
-											)}
 
-											<span className="mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer">
-												#{x.post_id}
-											</span>
-
-											{layoutData.source == "library" && (
-												<>
-													<div
-														className="mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer"
-														onClick={(ev) => {
-															if (isProFeature == false) {
-																if (!importLayoutOpen.isOpen) {
-																	setlayoutImporting(true);
-																	importLayout(x);
+												{layoutData.source == "library" && (
+													<>
+														<div
+															className="mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer"
+															onClick={(ev) => {
+																if (isProFeature == false) {
+																	if (!importLayoutOpen.isOpen) {
+																		setlayoutImporting(true);
+																		importLayout(x);
+																	}
 																}
-															}
-															setimportLayoutOpen({
-																id: x.post_id,
-																isOpen: !importLayoutOpen.isOpen,
-															});
-														}}>
-														<span class="dashicons dashicons-download"></span>{" "}
-														Import
-													</div>
-													{importLayoutOpen.id == x.post_id &&
-														importLayoutOpen.isOpen && (
-															<Popover position="bottom left p-2 ">
-																{isProFeature == true && (
-																	<div className="w-48 bg-amber-100 px-3 py-2">
-																		<p className="">
-																			{" "}
-																			<span className="underline">
-																				Importing Layouts
-																			</span>{" "}
-																			Only available in Premium
-																		</p>
-																		<p className="">
-																			After import the layout you customize and
-																			make your own.
-																		</p>
-																	</div>
-																)}
-
-																{isProFeature == false && (
-																	<div className="w-48 bg-sky-300 px-3 py-2">
-																		{layoutImporting && (
-																			<span>
-																				<Spinner /> Importing
-																			</span>
-																		)}
-
-																		{!layoutImporting && (
+																setimportLayoutOpen({
+																	id: x.post_id,
+																	isOpen: !importLayoutOpen.isOpen,
+																});
+															}}>
+															<span class="dashicons dashicons-download"></span>{" "}
+															Import
+														</div>
+														{importLayoutOpen.id == x.post_id &&
+															importLayoutOpen.isOpen && (
+																<Popover position="bottom left p-2 ">
+																	{isProFeature == true && (
+																		<div className="w-48 bg-amber-100 px-3 py-2">
 																			<p className="">
-																				Layout imported and saved under{" "}
-																				<a
-																					target="_blank"
-																					className="font-bold underline "
-																					href={
-																						postGridData.siteAdminurl +
-																						"edit.php?post_type=post_grid_template"
-																					}>
-																					Saved Templates
-																				</a>
+																				{" "}
+																				<span className="underline">
+																					Importing Layouts
+																				</span>{" "}
+																				Only available in Premium
 																			</p>
-																		)}
-																	</div>
-																)}
-															</Popover>
-														)}
-												</>
-											)}
+																			<p className="">
+																				After import the layout you customize
+																				and make your own.
+																			</p>
+																		</div>
+																	)}
 
-											{/* {x.sale_price > 0 &&
+																	{isProFeature == false && (
+																		<div className="w-48 bg-sky-300 px-3 py-2">
+																			{layoutImporting && (
+																				<span>
+																					<Spinner /> Importing
+																				</span>
+																			)}
+
+																			{!layoutImporting && (
+																				<p className="">
+																					Layout imported and saved under{" "}
+																					<a
+																						target="_blank"
+																						className="font-bold underline "
+																						href={
+																							postGridData.siteAdminurl +
+																							"edit.php?post_type=post_grid_template"
+																						}>
+																						Saved Templates
+																					</a>
+																				</p>
+																			)}
+																		</div>
+																	)}
+																</Popover>
+															)}
+													</>
+												)}
+
+												{/* {x.sale_price > 0 &&
                           (
                             <span className='mx-2 hidden' >Price:
                               <del className='ml-2' >{x.price} </del>-<span className='' >{x.sale_price}USD </span>
@@ -3419,117 +3420,250 @@ registerBlockType(metadata, {
                           )
                         } */}
 
-											{/* 
+												{/* 
                         <span title='Buy To Download' className={['text-white px-3 py-1 mx-2', x.is_pro ? ' bg-amber-400' : ' bg-blue-600'].join('')}>
                           {x.is_pro ? 'Buy Now' : 'Free'}
                         </span> */}
+											</div>
 										</div>
-									</div>
-								);
+									);
+								})}
+
+							<div
+								className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center"
+								onClick={(_ev) => {
+									var page = queryLayouts.page + 1;
+
+									setQueryLayouts({
+										keyword: queryLayouts.keyword,
+										page: page,
+										category: queryLayouts.category,
+									});
+								}}>
+								{layoutLoading.loading == true && (
+									<span className="text-center">
+										<Spinner />
+									</span>
+								)}
+								Load More
+							</div>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Query Post"
+							initialOpen={false}>
+							<PanelRow className="my-3">
+								<label>Add Query Parameters</label>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									options={queryPrams}
+									buttonTitle="Choose"
+									onChange={addQueryPramX}
+									values=""></PGDropdown>
+							</PanelRow>
+
+							{queryArgs.items.map((item, index) => {
+								return generateQueryArgOptions(item, index);
 							})}
 
-						<div
-							className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center"
-							onClick={(_ev) => {
-								var page = queryLayouts.page + 1;
+							<PanelRow className="mb-4">
+								<label for="" className="font-medium text-slate-900 ">
+									Query Presets
+								</label>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									options={queryPresets}
+									buttonTitle="Choose"
+									onChange={addQueryPreset}
+									values={""}></PGDropdown>
+							</PanelRow>
+						</PanelBody>
 
-								setQueryLayouts({
-									keyword: queryLayouts.keyword,
-									page: page,
-									category: queryLayouts.category,
-								});
-							}}>
-							{layoutLoading.loading == true && (
-								<span className="text-center">
-									<Spinner />
-								</span>
-							)}
-							Load More
-						</div>
-					</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Grid Settings"
+							initialOpen={false}>
+							<PanelRow className="my-3">
+								<Button
+									onClick={(_ev) => {
+										var gridTemplateColumns = grid.styles.gridTemplateColumns;
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Query Post"
-						initialOpen={false}>
-						<PanelRow className="my-3">
-							<label>Add Query Parameters</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={queryPrams}
-								buttonTitle="Choose"
-								onChange={addQueryPramX}
-								values=""></PGDropdown>
-						</PanelRow>
+										if (
+											Object.keys(grid.styles.gridTemplateColumns).length == 0
+										) {
+											gridTemplateColumns[breakPointX] = [
+												{ val: 1, unit: "fr" },
+											];
+										} else {
+											var sds =
+												gridTemplateColumns[breakPointX] != undefined
+													? gridTemplateColumns[breakPointX].concat({
+															val: 1,
+															unit: "fr",
+													  })
+													: [{ val: 1, unit: "fr" }];
 
-						{queryArgs.items.map((item, index) => {
-							return generateQueryArgOptions(item, index);
-						})}
+											gridTemplateColumns[breakPointX] = sds;
+										}
 
-						<PanelRow className="mb-4">
-							<label for="" className="font-medium text-slate-900 ">
-								Query Presets
-							</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={queryPresets}
-								buttonTitle="Choose"
-								onChange={addQueryPreset}
-								values={""}></PGDropdown>
-						</PanelRow>
-					</PanelBody>
+										var styles = {
+											...grid.styles,
+											gridTemplateColumns: gridTemplateColumns,
+										};
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Grid Settings"
-						initialOpen={false}>
-						<PanelRow className="my-3">
-							<Button
-								onClick={(_ev) => {
-									var gridTemplateColumns = grid.styles.gridTemplateColumns;
+										setAttributes({ grid: { ...grid, styles: styles } });
+									}}
+									className="my-3 !bg-blue-600 !text-white">
+									Add Column
+								</Button>
+								<IconToggle
+									position="bottom"
+									variant="secondary"
+									iconList={breakPointList}
+									buttonTitle="Break Point Switch"
+									onChange={onChangeBreakPoint}
+									activeIcon={breakPoints[breakPointX].icon}
+									value={breakPointX}
+								/>
+							</PanelRow>
 
-									if (
-										Object.keys(grid.styles.gridTemplateColumns).length == 0
-									) {
-										gridTemplateColumns[breakPointX] = [{ val: 1, unit: "fr" }];
-									} else {
-										var sds =
-											gridTemplateColumns[breakPointX] != undefined
-												? gridTemplateColumns[breakPointX].concat({
-														val: 1,
-														unit: "fr",
-												  })
-												: [{ val: 1, unit: "fr" }];
+							{grid.styles.gridTemplateColumns[breakPointX] != undefined &&
+								grid.styles.gridTemplateColumns[breakPointX].map(
+									(item, index) => {
+										return (
+											<PanelRow>
+												<InputControl
+													value={item.val}
+													type="number"
+													onChange={(newVal) => {
+														var newValuesObj = {};
+														if (
+															Object.keys(grid.styles.gridTemplateColumns)
+																.length == 0
+														) {
+															newValuesObj[breakPointX] = {
+																val: newVal,
+																unit: "em",
+															};
+														} else {
+															var gridTemplateColumns =
+																grid.styles.gridTemplateColumns;
+															var sds = gridTemplateColumns[breakPointX].map(
+																(x, i) => {
+																	return index == i
+																		? { val: newVal, unit: x.unit }
+																		: x;
+																}
+															);
 
-										gridTemplateColumns[breakPointX] = sds;
+															newValuesObj[breakPointX] = sds;
+														}
+														var styles = {
+															...grid.styles,
+															gridTemplateColumns: newValuesObj,
+														};
+														setAttributes({
+															grid: { ...grid, styles: styles },
+														});
+													}}
+												/>
+												<SelectControl
+													className="mb-0"
+													value={item.unit}
+													options={[
+														{ label: "fr", value: "fr" },
+														{ label: "px", value: "px" },
+														{ label: "%", value: "%" },
+														{ label: "em", value: "em" },
+													]}
+													onChange={(newVal) => {
+														var newValuesObj = {};
+														if (
+															Object.keys(grid.styles.gridTemplateColumns)
+																.length == 0
+														) {
+															newValuesObj[breakPointX] = {
+																val: newVal,
+																unit: "em",
+															};
+														} else {
+															var gridTemplateColumns =
+																grid.styles.gridTemplateColumns;
+															var sds = gridTemplateColumns[breakPointX].map(
+																(x, i) => {
+																	return index == i
+																		? { val: x.val, unit: newVal }
+																		: x;
+																}
+															);
+
+															newValuesObj[breakPointX] = sds;
+														}
+
+														var styles = {
+															...grid.styles,
+															gridTemplateColumns: newValuesObj,
+														};
+														setAttributes({
+															grid: { ...grid, styles: styles },
+														});
+													}}
+												/>
+												<Button
+													icon="no-alt"
+													onClick={(_ev) => {
+														deleteGridColumn(index);
+													}}></Button>
+											</PanelRow>
+										);
 									}
+								)}
 
-									var styles = {
-										...grid.styles,
-										gridTemplateColumns: gridTemplateColumns,
-									};
+							<PanelRow className="my-3">
+								<Button
+									onClick={(_ev) => {
+										var gridTemplateRows = grid.styles.gridTemplateRows;
 
-									setAttributes({ grid: { ...grid, styles: styles } });
-								}}
-								className="my-3 !bg-blue-600 !text-white">
-								Add Column
-							</Button>
-							<IconToggle
-								position="bottom"
-								variant="secondary"
-								iconList={breakPointList}
-								buttonTitle="Break Point Switch"
-								onChange={onChangeBreakPoint}
-								activeIcon={breakPoints[breakPointX].icon}
-								value={breakPointX}
-							/>
-						</PanelRow>
+										if (Object.keys(grid.styles.gridTemplateRows).length == 0) {
+											gridTemplateRows[breakPointX] = [{ val: 1, unit: "fr" }];
+										} else {
+											var sds =
+												gridTemplateRows[breakPointX] != undefined
+													? gridTemplateRows[breakPointX].concat({
+															val: 1,
+															unit: "fr",
+													  })
+													: [{ val: 1, unit: "fr" }];
 
-						{grid.styles.gridTemplateColumns[breakPointX] != undefined &&
-							grid.styles.gridTemplateColumns[breakPointX].map(
-								(item, index) => {
+											gridTemplateRows[breakPointX] = sds;
+										}
+
+										var styles = {
+											...grid.styles,
+											gridTemplateRows: gridTemplateRows,
+										};
+										setAttributes({ grid: { ...grid, styles: styles } });
+									}}
+									className="my-3 !bg-blue-600 !text-white">
+									Add Row
+								</Button>
+
+								<IconToggle
+									position="bottom"
+									variant="secondary"
+									iconList={breakPointList}
+									buttonTitle="Break Point Switch"
+									onChange={onChangeBreakPoint}
+									activeIcon={breakPoints[breakPointX].icon}
+									value={breakPointX}
+								/>
+							</PanelRow>
+
+							{grid.styles.gridTemplateRows[breakPointX] != undefined &&
+								grid.styles.gridTemplateRows[breakPointX].map((item, index) => {
 									return (
 										<PanelRow>
 											<InputControl
@@ -3538,17 +3672,16 @@ registerBlockType(metadata, {
 												onChange={(newVal) => {
 													var newValuesObj = {};
 													if (
-														Object.keys(grid.styles.gridTemplateColumns)
-															.length == 0
+														Object.keys(grid.styles.gridTemplateRows).length ==
+														0
 													) {
 														newValuesObj[breakPointX] = {
 															val: newVal,
 															unit: "em",
 														};
 													} else {
-														var gridTemplateColumns =
-															grid.styles.gridTemplateColumns;
-														var sds = gridTemplateColumns[breakPointX].map(
+														var gridTemplateRows = grid.styles.gridTemplateRows;
+														var sds = gridTemplateRows[breakPointX].map(
 															(x, i) => {
 																return index == i
 																	? { val: newVal, unit: x.unit }
@@ -3560,7 +3693,7 @@ registerBlockType(metadata, {
 													}
 													var styles = {
 														...grid.styles,
-														gridTemplateColumns: newValuesObj,
+														gridTemplateRows: newValuesObj,
 													};
 													setAttributes({ grid: { ...grid, styles: styles } });
 												}}
@@ -3577,17 +3710,16 @@ registerBlockType(metadata, {
 												onChange={(newVal) => {
 													var newValuesObj = {};
 													if (
-														Object.keys(grid.styles.gridTemplateColumns)
-															.length == 0
+														Object.keys(grid.styles.gridTemplateRows).length ==
+														0
 													) {
 														newValuesObj[breakPointX] = {
 															val: newVal,
 															unit: "em",
 														};
 													} else {
-														var gridTemplateColumns =
-															grid.styles.gridTemplateColumns;
-														var sds = gridTemplateColumns[breakPointX].map(
+														var gridTemplateRows = grid.styles.gridTemplateRows;
+														var sds = gridTemplateRows[breakPointX].map(
 															(x, i) => {
 																return index == i
 																	? { val: x.val, unit: newVal }
@@ -3600,7 +3732,7 @@ registerBlockType(metadata, {
 
 													var styles = {
 														...grid.styles,
-														gridTemplateColumns: newValuesObj,
+														gridTemplateRows: newValuesObj,
 													};
 													setAttributes({ grid: { ...grid, styles: styles } });
 												}}
@@ -3608,881 +3740,721 @@ registerBlockType(metadata, {
 											<Button
 												icon="no-alt"
 												onClick={(_ev) => {
-													deleteGridColumn(index);
+													deleteGridRow(index);
 												}}></Button>
 										</PanelRow>
 									);
-								}
-							)}
-
-						<PanelRow className="my-3">
-							<Button
-								onClick={(_ev) => {
-									var gridTemplateRows = grid.styles.gridTemplateRows;
-
-									if (Object.keys(grid.styles.gridTemplateRows).length == 0) {
-										gridTemplateRows[breakPointX] = [{ val: 1, unit: "fr" }];
-									} else {
-										var sds =
-											gridTemplateRows[breakPointX] != undefined
-												? gridTemplateRows[breakPointX].concat({
-														val: 1,
-														unit: "fr",
-												  })
-												: [{ val: 1, unit: "fr" }];
-
-										gridTemplateRows[breakPointX] = sds;
-									}
-
-									var styles = {
-										...grid.styles,
-										gridTemplateRows: gridTemplateRows,
-									};
-									setAttributes({ grid: { ...grid, styles: styles } });
-								}}
-								className="my-3 !bg-blue-600 !text-white">
-								Add Row
-							</Button>
-
-							<IconToggle
-								position="bottom"
-								variant="secondary"
-								iconList={breakPointList}
-								buttonTitle="Break Point Switch"
-								onChange={onChangeBreakPoint}
-								activeIcon={breakPoints[breakPointX].icon}
-								value={breakPointX}
-							/>
-						</PanelRow>
-
-						{grid.styles.gridTemplateRows[breakPointX] != undefined &&
-							grid.styles.gridTemplateRows[breakPointX].map((item, index) => {
-								return (
-									<PanelRow>
-										<InputControl
-											value={item.val}
-											type="number"
-											onChange={(newVal) => {
-												var newValuesObj = {};
-												if (
-													Object.keys(grid.styles.gridTemplateRows).length == 0
-												) {
-													newValuesObj[breakPointX] = {
-														val: newVal,
-														unit: "em",
-													};
-												} else {
-													var gridTemplateRows = grid.styles.gridTemplateRows;
-													var sds = gridTemplateRows[breakPointX].map(
-														(x, i) => {
-															return index == i
-																? { val: newVal, unit: x.unit }
-																: x;
-														}
-													);
-
-													newValuesObj[breakPointX] = sds;
-												}
-												var styles = {
-													...grid.styles,
-													gridTemplateRows: newValuesObj,
-												};
-												setAttributes({ grid: { ...grid, styles: styles } });
-											}}
-										/>
-										<SelectControl
-											className="mb-0"
-											value={item.unit}
-											options={[
-												{ label: "fr", value: "fr" },
-												{ label: "px", value: "px" },
-												{ label: "%", value: "%" },
-												{ label: "em", value: "em" },
-											]}
-											onChange={(newVal) => {
-												var newValuesObj = {};
-												if (
-													Object.keys(grid.styles.gridTemplateRows).length == 0
-												) {
-													newValuesObj[breakPointX] = {
-														val: newVal,
-														unit: "em",
-													};
-												} else {
-													var gridTemplateRows = grid.styles.gridTemplateRows;
-													var sds = gridTemplateRows[breakPointX].map(
-														(x, i) => {
-															return index == i
-																? { val: x.val, unit: newVal }
-																: x;
-														}
-													);
-
-													newValuesObj[breakPointX] = sds;
-												}
-
-												var styles = {
-													...grid.styles,
-													gridTemplateRows: newValuesObj,
-												};
-												setAttributes({ grid: { ...grid, styles: styles } });
-											}}
-										/>
-										<Button
-											icon="no-alt"
-											onClick={(_ev) => {
-												deleteGridRow(index);
-											}}></Button>
-									</PanelRow>
-								);
-							})}
-
-						<PanelRow className="my-3">
-							<label>Column Gap</label>
-							<IconToggle
-								position="bottom"
-								variant="secondary"
-								iconList={breakPointList}
-								buttonTitle="Break Point Switch"
-								onChange={onChangeBreakPoint}
-								activeIcon={breakPoints[breakPointX].icon}
-								value={breakPointX}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<InputControl
-								value={
-									grid.styles.colGap[breakPointX] != undefined
-										? grid.styles.colGap[breakPointX].val
-										: 1
-								}
-								type="number"
-								onChange={(newVal) => {
-									var newValuesObj = {};
-									if (Object.keys(grid.styles.colGap).length == 0) {
-										newValuesObj[breakPointX] = { val: newVal, unit: "em" };
-									} else {
-										newValuesObj = grid.styles.colGap;
-										var unit =
-											newValuesObj[breakPointX] != undefined
-												? newValuesObj[breakPointX].unit
-												: "em";
-
-										newValuesObj[breakPointX] = { val: newVal, unit: unit };
-									}
-
-									var styles = { ...grid.styles, colGap: newValuesObj };
-									setAttributes({ grid: { ...grid, styles: styles } });
-								}}
-							/>
-							<SelectControl
-								className="mb-0"
-								value={
-									grid.styles.colGap[breakPointX] != undefined
-										? grid.styles.colGap[breakPointX].unit
-										: "em"
-								}
-								options={[
-									{ label: "fr", value: "fr" },
-									{ label: "px", value: "px" },
-									{ label: "%", value: "%" },
-									{ label: "em", value: "em" },
-								]}
-								onChange={(newVal) => {
-									var newValuesObj = {};
-									if (Object.keys(grid.styles.colGap).length == 0) {
-										newValuesObj[breakPointX] = { val: 1, unit: newVal };
-									} else {
-										var val =
-											newValuesObj[breakPointX] != undefined
-												? newValuesObj[breakPointX].val
-												: 1;
-
-										newValuesObj = grid.styles.colGap;
-										newValuesObj[breakPointX] = { val: val, unit: newVal };
-									}
-
-									var styles = { ...grid.styles, colGap: newValuesObj };
-									setAttributes({ grid: { ...grid, styles: styles } });
-								}}
-							/>
-						</PanelRow>
-
-						<PanelRow className="my-3">
-							<label>Row Gap</label>
-							<IconToggle
-								position="bottom"
-								variant="secondary"
-								iconList={breakPointList}
-								buttonTitle="Break Point Switch"
-								onChange={onChangeBreakPoint}
-								activeIcon={breakPoints[breakPointX].icon}
-								value={breakPointX}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<InputControl
-								value={
-									grid.styles.rowGap[breakPointX] != undefined
-										? grid.styles.rowGap[breakPointX].val
-										: 1
-								}
-								type="number"
-								onChange={(newVal) => {
-									var newValuesObj = {};
-									if (Object.keys(grid.styles.rowGap).length == 0) {
-										newValuesObj[breakPointX] = { val: newVal, unit: "em" };
-									} else {
-										var unit =
-											newValuesObj[breakPointX] != undefined
-												? newValuesObj[breakPointX].unit
-												: "em";
-
-										newValuesObj = grid.styles.rowGap;
-										newValuesObj[breakPointX] = { val: newVal, unit: unit };
-									}
-
-									var styles = { ...grid.styles, rowGap: newValuesObj };
-									setAttributes({ grid: { ...grid, styles: styles } });
-								}}
-							/>
-							<SelectControl
-								className="mb-0"
-								value={
-									grid.styles.rowGap[breakPointX] != undefined
-										? grid.styles.rowGap[breakPointX].unit
-										: "em"
-								}
-								options={[
-									{ label: "fr", value: "fr" },
-									{ label: "px", value: "px" },
-									{ label: "%", value: "%" },
-									{ label: "em", value: "em" },
-								]}
-								onChange={(newVal) => {
-									var newValuesObj = {};
-									if (Object.keys(grid.styles.rowGap).length == 0) {
-										newValuesObj[breakPointX] = { val: 1, unit: newVal };
-									} else {
-										var val =
-											newValuesObj[breakPointX] != undefined
-												? newValuesObj[breakPointX].val
-												: "em";
-
-										newValuesObj = grid.styles.rowGap;
-										newValuesObj[breakPointX] = { val: val, unit: newVal };
-									}
-
-									var styles = { ...grid.styles, rowGap: newValuesObj };
-									setAttributes({ grid: { ...grid, styles: styles } });
-								}}
-							/>
-						</PanelRow>
-
-						<div>
-							<PanelRow>
-								<label for="" className="font-medium text-slate-900 ">
-									N'th Item CSS
-								</label>
-								<Button
-									className="my-3"
-									variant="secondary"
-									onClick={(_newVal) => {
-										if (isProFeature) {
-											if (grid.options.itemCss[breakPointX] != undefined) {
-												var ssd = grid.options.itemCss[breakPointX].concat({
-													"grid-column-start": "",
-													"grid-column-end": "",
-													"grid-row-start": "",
-													"grid-row-end": "",
-												});
-											} else {
-												grid.options.itemCss[breakPointX] = [];
-												var ssd = grid.options.itemCss[breakPointX].concat({
-													"grid-column-start": "",
-													"grid-column-end": "",
-													"grid-row-start": "",
-													"grid-row-end": "",
-												});
-											}
-
-											var newValuesObj = {};
-											if (Object.keys(grid.options.itemCss).length == 0) {
-												newValuesObj[breakPointX] = ssd;
-											} else {
-												newValuesObj = grid.options.itemCss;
-												newValuesObj[breakPointX] = ssd;
-											}
-
-											var options = { ...grid.options, itemCss: newValuesObj };
-											setAttributes({ grid: { ...grid, options: options } });
-										}
-									}}>
-									Add
-									{isProFeature && (
-										<span className="bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white">
-											<a
-												target="_blank"
-												href={
-													"https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS"
-												}>
-												Pro
-											</a>
-										</span>
-									)}
-								</Button>
-							</PanelRow>
-
-							{grid.options.itemCss[breakPointX] != undefined &&
-								grid.options.itemCss[breakPointX].map((x, i) => {
-									return (
-										<PanelBody
-											className="font-medium text-slate-900 "
-											title={i + 1 + "'th Item"}
-											initialOpen={false}>
-											<Button
-												icon="no-alt"
-												variant="secondary"
-												onClick={(_ev) => {
-													grid.options.itemCss[breakPointX].splice(i, 1);
-
-													var options = {
-														...grid.options,
-														itemCss: grid.options.itemCss,
-													};
-													setAttributes({
-														grid: { ...grid, options: options },
-													});
-												}}>
-												Delete
-											</Button>
-
-											<PanelRow>
-												<label for="" className="font-medium text-slate-900 ">
-													grid-column-start
-												</label>
-												<InputControl
-													value={x["grid-column-start"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-column-start"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-
-											<PanelRow>
-												<label for="" className="font-medium text-slate-900 ">
-													grid-column-end
-												</label>
-												<InputControl
-													value={x["grid-column-end"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-column-end"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-
-											<PanelRow>
-												<label for="" className="font-medium text-slate-900 ">
-													grid-row-start
-												</label>
-												<InputControl
-													value={x["grid-row-start"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-row-start"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-
-											<PanelRow>
-												<label for="" className="font-medium text-slate-900 ">
-													grid-row-end
-												</label>
-												<InputControl
-													value={x["grid-row-end"]}
-													type="number"
-													onChange={(newVal) => {
-														grid.options.itemCss[breakPointX][i][
-															"grid-row-end"
-														] = newVal;
-
-														var options = {
-															...grid.options,
-															itemCss: grid.options.itemCss,
-														};
-														setAttributes({
-															grid: { ...grid, options: options },
-														});
-													}}
-												/>
-											</PanelRow>
-										</PanelBody>
-									);
 								})}
 
-							{gridLayouts.map((x, _i) => {
-								return (
-									<div
-										className="cursor-pointer relative hover:bg-blue-200 my-3"
-										onClick={(_ev) => {
-											if (x.isPro) {
-												if (isProFeature == false) {
-													setAttributes({ grid: x.data });
+							<PanelRow className="my-3">
+								<label>Column Gap</label>
+								<IconToggle
+									position="bottom"
+									variant="secondary"
+									iconList={breakPointList}
+									buttonTitle="Break Point Switch"
+									onChange={onChangeBreakPoint}
+									activeIcon={breakPoints[breakPointX].icon}
+									value={breakPointX}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<InputControl
+									value={
+										grid.styles.colGap[breakPointX] != undefined
+											? grid.styles.colGap[breakPointX].val
+											: 1
+									}
+									type="number"
+									onChange={(newVal) => {
+										var newValuesObj = {};
+										if (Object.keys(grid.styles.colGap).length == 0) {
+											newValuesObj[breakPointX] = { val: newVal, unit: "em" };
+										} else {
+											newValuesObj = grid.styles.colGap;
+											var unit =
+												newValuesObj[breakPointX] != undefined
+													? newValuesObj[breakPointX].unit
+													: "em";
+
+											newValuesObj[breakPointX] = { val: newVal, unit: unit };
+										}
+
+										var styles = { ...grid.styles, colGap: newValuesObj };
+										setAttributes({ grid: { ...grid, styles: styles } });
+									}}
+								/>
+								<SelectControl
+									className="mb-0"
+									value={
+										grid.styles.colGap[breakPointX] != undefined
+											? grid.styles.colGap[breakPointX].unit
+											: "em"
+									}
+									options={[
+										{ label: "fr", value: "fr" },
+										{ label: "px", value: "px" },
+										{ label: "%", value: "%" },
+										{ label: "em", value: "em" },
+									]}
+									onChange={(newVal) => {
+										var newValuesObj = {};
+										if (Object.keys(grid.styles.colGap).length == 0) {
+											newValuesObj[breakPointX] = { val: 1, unit: newVal };
+										} else {
+											var val =
+												newValuesObj[breakPointX] != undefined
+													? newValuesObj[breakPointX].val
+													: 1;
+
+											newValuesObj = grid.styles.colGap;
+											newValuesObj[breakPointX] = { val: val, unit: newVal };
+										}
+
+										var styles = { ...grid.styles, colGap: newValuesObj };
+										setAttributes({ grid: { ...grid, styles: styles } });
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow className="my-3">
+								<label>Row Gap</label>
+								<IconToggle
+									position="bottom"
+									variant="secondary"
+									iconList={breakPointList}
+									buttonTitle="Break Point Switch"
+									onChange={onChangeBreakPoint}
+									activeIcon={breakPoints[breakPointX].icon}
+									value={breakPointX}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<InputControl
+									value={
+										grid.styles.rowGap[breakPointX] != undefined
+											? grid.styles.rowGap[breakPointX].val
+											: 1
+									}
+									type="number"
+									onChange={(newVal) => {
+										var newValuesObj = {};
+										if (Object.keys(grid.styles.rowGap).length == 0) {
+											newValuesObj[breakPointX] = { val: newVal, unit: "em" };
+										} else {
+											var unit =
+												newValuesObj[breakPointX] != undefined
+													? newValuesObj[breakPointX].unit
+													: "em";
+
+											newValuesObj = grid.styles.rowGap;
+											newValuesObj[breakPointX] = { val: newVal, unit: unit };
+										}
+
+										var styles = { ...grid.styles, rowGap: newValuesObj };
+										setAttributes({ grid: { ...grid, styles: styles } });
+									}}
+								/>
+								<SelectControl
+									className="mb-0"
+									value={
+										grid.styles.rowGap[breakPointX] != undefined
+											? grid.styles.rowGap[breakPointX].unit
+											: "em"
+									}
+									options={[
+										{ label: "fr", value: "fr" },
+										{ label: "px", value: "px" },
+										{ label: "%", value: "%" },
+										{ label: "em", value: "em" },
+									]}
+									onChange={(newVal) => {
+										var newValuesObj = {};
+										if (Object.keys(grid.styles.rowGap).length == 0) {
+											newValuesObj[breakPointX] = { val: 1, unit: newVal };
+										} else {
+											var val =
+												newValuesObj[breakPointX] != undefined
+													? newValuesObj[breakPointX].val
+													: "em";
+
+											newValuesObj = grid.styles.rowGap;
+											newValuesObj[breakPointX] = { val: val, unit: newVal };
+										}
+
+										var styles = { ...grid.styles, rowGap: newValuesObj };
+										setAttributes({ grid: { ...grid, styles: styles } });
+									}}
+								/>
+							</PanelRow>
+
+							<div>
+								<PanelRow>
+									<label for="" className="font-medium text-slate-900 ">
+										N'th Item CSS
+									</label>
+									<Button
+										className="my-3"
+										variant="secondary"
+										onClick={(_newVal) => {
+											if (isProFeature) {
+												if (grid.options.itemCss[breakPointX] != undefined) {
+													var ssd = grid.options.itemCss[breakPointX].concat({
+														"grid-column-start": "",
+														"grid-column-end": "",
+														"grid-row-start": "",
+														"grid-row-end": "",
+													});
+												} else {
+													grid.options.itemCss[breakPointX] = [];
+													var ssd = grid.options.itemCss[breakPointX].concat({
+														"grid-column-start": "",
+														"grid-column-end": "",
+														"grid-row-start": "",
+														"grid-row-end": "",
+													});
 												}
-											} else {
-												setAttributes({ grid: x.data });
+
+												var newValuesObj = {};
+												if (Object.keys(grid.options.itemCss).length == 0) {
+													newValuesObj[breakPointX] = ssd;
+												} else {
+													newValuesObj = grid.options.itemCss;
+													newValuesObj[breakPointX] = ssd;
+												}
+
+												var options = {
+													...grid.options,
+													itemCss: newValuesObj,
+												};
+												setAttributes({ grid: { ...grid, options: options } });
 											}
 										}}>
-										{x.isPro && isProFeature == false && (
-											<span className="bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white">
+										Add
+										{isProFeature && (
+											<span className="bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white">
 												<a
 													target="_blank"
 													href={
-														"https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
-														x.label
+														"https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS"
 													}>
 													Pro
 												</a>
 											</span>
 										)}
-										{x.icon != undefined && (
-											<div className="w-full grid-layout-prewview">
-												{x.icon}
-											</div>
-										)}
-										<div className="text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center">
-											{x.title}
-										</div>
-									</div>
-								);
-							})}
-						</div>
-					</PanelBody>
+									</Button>
+								</PanelRow>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Container"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="styles"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "styles",
-									title: "Styles",
-									icon: pencil,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: cloud,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="styles">
-								<PGStyles
-									obj={container}
-									onChange={onChangeStyleContainer}
-									onAdd={onAddStyleContainer}
-									onRemove={onRemoveStyleContainer}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={container}
-									onChange={onPickCssLibraryContainer}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+								{grid.options.itemCss[breakPointX] != undefined &&
+									grid.options.itemCss[breakPointX].map((x, i) => {
+										return (
+											<PanelBody
+												className="font-medium text-slate-900 "
+												title={i + 1 + "'th Item"}
+												initialOpen={false}>
+												<Button
+													icon="no-alt"
+													variant="secondary"
+													onClick={(_ev) => {
+														grid.options.itemCss[breakPointX].splice(i, 1);
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Items Wrap"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="styles"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "styles",
-									title: "Styles",
-									icon: pencil,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: cloud,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="styles">
-								<PGStyles
-									obj={itemsWrap}
-									onChange={onChangeStyleItemsWrap}
-									onAdd={onAddStyleItemsWrap}
-									onRemove={onRemoveStyleItemsWrap}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={itemsWrap}
-									onChange={onPickCssLibraryItemsWrap}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+														var options = {
+															...grid.options,
+															itemCss: grid.options.itemCss,
+														};
+														setAttributes({
+															grid: { ...grid, options: options },
+														});
+													}}>
+													Delete
+												</Button>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Loop Item"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="styles"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "styles",
-									title: "Styles",
-									icon: pencil,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: cloud,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="styles">
-								<PGStyles
-									obj={itemWrap}
-									onChange={onChangeStyleItemWrap}
-									onAdd={onAddStyleItemWrap}
-									onRemove={onRemoveStyleItemWrap}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={itemWrap}
-									onChange={onPickCssLibraryItemWrap}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+												<PanelRow>
+													<label for="" className="font-medium text-slate-900 ">
+														grid-column-start
+													</label>
+													<InputControl
+														value={x["grid-column-start"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-column-start"
+															] = newVal;
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Filterable"
-						initialOpen={false}>
-						<div>
-							<Button
-								variant="secondary"
-								className="mb-2"
-								onClick={(ev) => {
-									var filters = filterable.options.filters.concat({
-										groupTitle: "",
-										type: "",
-										logic: "",
-										showPostCount: "",
-										items: [],
-									});
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
 
-									var options = { ...filterable.options, filters: filters };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}>
-								Add Filter Group
-							</Button>
+												<PanelRow>
+													<label for="" className="font-medium text-slate-900 ">
+														grid-column-end
+													</label>
+													<InputControl
+														value={x["grid-column-end"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-column-end"
+															] = newVal;
 
-							{filterable.options.filters.map((x, i) => {
-								return (
-									<PanelBody
-										title={x.groupTitle ? x.groupTitle : "Filter Group " + i}
-										initialOpen={false}>
-										<span
-											onClick={(ev) => {
-												filterable.options.filters.splice(i, 1);
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
 
-												var options = {
-													...filterable.options,
-													filters: filterable.options.filters,
-												};
-												setAttributes({
-													filterable: { ...filterable, options: options },
-												});
-											}}
-											className="cursor-pointer px-3 py-1 inline-block text-white bg-red-600 text-sm mb-2">
-											<span className="dashicon dashicons dashicons-no-alt"></span>{" "}
-											Delete Group
-										</span>
+												<PanelRow>
+													<label for="" className="font-medium text-slate-900 ">
+														grid-row-start
+													</label>
+													<InputControl
+														value={x["grid-row-start"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-row-start"
+															] = newVal;
 
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Group Title
-											</label>
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
 
-											<InputControl
-												value={x.groupTitle}
-												onChange={(newVal) => {
-													filterable.options.filters[i].groupTitle = newVal;
+												<PanelRow>
+													<label for="" className="font-medium text-slate-900 ">
+														grid-row-end
+													</label>
+													<InputControl
+														value={x["grid-row-end"]}
+														type="number"
+														onChange={(newVal) => {
+															grid.options.itemCss[breakPointX][i][
+																"grid-row-end"
+															] = newVal;
 
-													var options = {
-														...filterable.options,
-														filters: filterable.options.filters,
-													};
-													setAttributes({
-														filterable: { ...filterable, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
+															var options = {
+																...grid.options,
+																itemCss: grid.options.itemCss,
+															};
+															setAttributes({
+																grid: { ...grid, options: options },
+															});
+														}}
+													/>
+												</PanelRow>
+											</PanelBody>
+										);
+									})}
 
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Group Type
-											</label>
-
-											<SelectControl
-												value={x.type}
-												options={[
-													{ value: "inline", label: "Inline" },
-													{ value: "dropdown", label: "Dropdown" },
-													{ value: "radio", label: "Radio" },
-													{ value: "checkbox", label: "Checkbox" },
-												]}
-												onChange={(newVal) => {
-													filterable.options.filters[i].type = newVal;
-
-													var options = {
-														...filterable.options,
-														filters: filterable.options.filters,
-													};
-													setAttributes({
-														filterable: { ...filterable, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Data Logic
-											</label>
-
-											<SelectControl
-												value={x.logic}
-												options={[
-													{ value: "or", label: "OR" },
-													{ value: "and", label: "AND" },
-												]}
-												onChange={(newVal) => {
-													filterable.options.filters[i].logic = newVal;
-
-													var options = {
-														...filterable.options,
-														filters: filterable.options.filters,
-													};
-													setAttributes({
-														filterable: { ...filterable, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-
-										<PanelRow>
-											<label for="" className="font-medium text-slate-900 ">
-												Show Post Count
-											</label>
-
-											<SelectControl
-												value={x.showPostCount}
-												options={[
-													{ value: "no", label: "No" },
-													{ value: "yes", label: "Yes" },
-												]}
-												onChange={(newVal) => {
-													filterable.options.filters[i].showPostCount = newVal;
-
-													var options = {
-														...filterable.options,
-														filters: filterable.options.filters,
-													};
-													setAttributes({
-														filterable: { ...filterable, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-
-										<label
-											for=""
-											className="font-medium text-slate-900 "
-											className="my-3 font-bold">
-											Search Terms
-										</label>
-
-										<p>
-											To add custom filter please use following format and hit
-											Enter
-										</p>
-										<code>Filter Name|filter-slug|15</code>
-										<InputControl
-											className="my-3"
-											placeholder="Search Categories or terms"
-											value=""
-											onKeyPress={(ev) => {
-												if (ev.key === "Enter") {
-													var filterParts = ev.target.value.split("|");
-
-													var ss = filterable.options.filters[i].items.concat({
-														id: 0,
-														slug: filterParts[1],
-														title: filterParts[0],
-														count: filterParts[2],
-													});
-													filterable.options.filters[i].items = ss;
-
-													var options = {
-														...filterable.options,
-														filters: filterable.options.filters,
-													};
-													setAttributes({
-														filterable: { ...filterable, options: options },
-													});
+								{gridLayouts.map((x, _i) => {
+									return (
+										<div
+											className="cursor-pointer relative hover:bg-blue-200 my-3"
+											onClick={(_ev) => {
+												if (x.isPro) {
+													if (isProFeature == false) {
+														setAttributes({ grid: x.data });
+													}
+												} else {
+													setAttributes({ grid: x.data });
 												}
-											}}
-											onChange={(newVal) => {
-												fetchPostTypeTerms(newVal);
-											}}
-										/>
-
-										{x.items.length == 0 && (
-											<div className="my-1">No terms added.</div>
-										)}
-
-										{x.items.map((y, j) => {
-											return (
-												<div className="py-2 my-1 border-b border-gray-400 flex justify-between">
-													<div>{y.title}</div>
-
-													<div>
-														<span
-															onClick={(ev) => {
-																var options = {
-																	...activeFilter.options,
-																	slug:
-																		activeFilter.options.slug == y.slug
-																			? ""
-																			: y.slug,
-																};
-																setAttributes({
-																	activeFilter: {
-																		...activeFilter,
-																		options: options,
-																	},
-																});
-															}}
-															className={[
-																activeFilter.options.slug == y.slug
-																	? "bg-blue-600 cursor-pointer p-1   text-white  text-sm"
-																	: "bg-gray-400 cursor-pointer p-1   text-white  text-sm",
-															]}>
-															<span class="dashicons dashicons-yes-alt"></span>
-														</span>
-
-														<span
-															onClick={(ev) => {
-																filterable.options.filters[i].items.splice(
-																	j,
-																	1
-																);
-
-																var options = {
-																	...filterable.options,
-																	filters: filterable.options.filters,
-																};
-																setAttributes({
-																	filterable: {
-																		...filterable,
-																		options: options,
-																	},
-																});
-															}}
-															className="cursor-pointer p-1   text-white bg-red-600 text-sm">
-															<span className="dashicon dashicons dashicons-no-alt"></span>
-														</span>
-													</div>
+											}}>
+											{x.isPro && isProFeature == false && (
+												<span className="bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white">
+													<a
+														target="_blank"
+														href={
+															"https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
+															x.label
+														}>
+														Pro
+													</a>
+												</span>
+											)}
+											{x.icon != undefined && (
+												<div className="w-full grid-layout-prewview">
+													{x.icon}
 												</div>
-											);
-										})}
+											)}
+											<div className="text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center">
+												{x.title}
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						</PanelBody>
 
-										{/* {filterablTerms.length == 0 && (
-                          <div className='bg-gray-200 p-2 mt-2'>No Terms Found</div>
-                        )} */}
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Container"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "styles",
+										title: "Styles",
+										icon: pencil,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: cloud,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="styles">
+									<PGStyles
+										obj={container}
+										onChange={onChangeStyleContainer}
+										onAdd={onAddStyleContainer}
+										onRemove={onRemoveStyleContainer}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={container}
+										onChange={onPickCssLibraryContainer}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-										{filterablTerms.length > 0 && (
-											<div className="bg-gray-200 p-2 mt-2">
-												{filterablTerms.map((x) => {
-													return (
-														<div
-															title="Click Add terms"
-															className="border-b border-gray-400 my-2 pb-1 cursor-pointer"
-															onClick={(ev) => {
-																if (x.slug) {
-																	var ss = filterable.options.filters[
-																		i
-																	].items.concat({
-																		id: x.term_id,
-																		slug: x.slug,
-																		title: x.name,
-																		count: x.count,
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Items Wrap"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "styles",
+										title: "Styles",
+										icon: pencil,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: cloud,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="styles">
+									<PGStyles
+										obj={itemsWrap}
+										onChange={onChangeStyleItemsWrap}
+										onAdd={onAddStyleItemsWrap}
+										onRemove={onRemoveStyleItemsWrap}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={itemsWrap}
+										onChange={onPickCssLibraryItemsWrap}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Loop Item"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="styles"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "styles",
+										title: "Styles",
+										icon: pencil,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: cloud,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="styles">
+									<PGStyles
+										obj={itemWrap}
+										onChange={onChangeStyleItemWrap}
+										onAdd={onAddStyleItemWrap}
+										onRemove={onRemoveStyleItemWrap}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={itemWrap}
+										onChange={onPickCssLibraryItemWrap}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Filterable"
+							initialOpen={false}>
+							<div>
+								<Button
+									variant="secondary"
+									className="mb-2"
+									onClick={(ev) => {
+										var filters = filterable.options.filters.concat({
+											groupTitle: "",
+											type: "",
+											logic: "",
+											showPostCount: "",
+											items: [],
+										});
+
+										var options = { ...filterable.options, filters: filters };
+										setAttributes({
+											filterable: { ...filterable, options: options },
+										});
+									}}>
+									Add Filter Group
+								</Button>
+
+								{filterable.options.filters.map((x, i) => {
+									return (
+										<PanelBody
+											title={x.groupTitle ? x.groupTitle : "Filter Group " + i}
+											initialOpen={false}>
+											<span
+												onClick={(ev) => {
+													filterable.options.filters.splice(i, 1);
+
+													var options = {
+														...filterable.options,
+														filters: filterable.options.filters,
+													};
+													setAttributes({
+														filterable: { ...filterable, options: options },
+													});
+												}}
+												className="cursor-pointer px-3 py-1 inline-block text-white bg-red-600 text-sm mb-2">
+												<span className="dashicon dashicons dashicons-no-alt"></span>{" "}
+												Delete Group
+											</span>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Group Title
+												</label>
+
+												<InputControl
+													value={x.groupTitle}
+													onChange={(newVal) => {
+														filterable.options.filters[i].groupTitle = newVal;
+
+														var options = {
+															...filterable.options,
+															filters: filterable.options.filters,
+														};
+														setAttributes({
+															filterable: { ...filterable, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Group Type
+												</label>
+
+												<SelectControl
+													value={x.type}
+													options={[
+														{ value: "inline", label: "Inline" },
+														{ value: "dropdown", label: "Dropdown" },
+														{ value: "radio", label: "Radio" },
+														{ value: "checkbox", label: "Checkbox" },
+													]}
+													onChange={(newVal) => {
+														filterable.options.filters[i].type = newVal;
+
+														var options = {
+															...filterable.options,
+															filters: filterable.options.filters,
+														};
+														setAttributes({
+															filterable: { ...filterable, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Data Logic
+												</label>
+
+												<SelectControl
+													value={x.logic}
+													options={[
+														{ value: "or", label: "OR" },
+														{ value: "and", label: "AND" },
+													]}
+													onChange={(newVal) => {
+														filterable.options.filters[i].logic = newVal;
+
+														var options = {
+															...filterable.options,
+															filters: filterable.options.filters,
+														};
+														setAttributes({
+															filterable: { ...filterable, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<PanelRow>
+												<label for="" className="font-medium text-slate-900 ">
+													Show Post Count
+												</label>
+
+												<SelectControl
+													value={x.showPostCount}
+													options={[
+														{ value: "no", label: "No" },
+														{ value: "yes", label: "Yes" },
+													]}
+													onChange={(newVal) => {
+														filterable.options.filters[i].showPostCount =
+															newVal;
+
+														var options = {
+															...filterable.options,
+															filters: filterable.options.filters,
+														};
+														setAttributes({
+															filterable: { ...filterable, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+
+											<label
+												for=""
+												className="font-medium text-slate-900 my-3 font-bold">
+												Search Terms
+											</label>
+
+											<p>
+												To add custom filter please use following format and hit
+												Enter
+											</p>
+											<code>Filter Name|filter-slug|15</code>
+											<InputControl
+												className="my-3"
+												placeholder="Search Categories or terms"
+												value=""
+												onKeyPress={(ev) => {
+													if (ev.key === "Enter") {
+														var filterParts = ev.target.value.split("|");
+
+														var ss = filterable.options.filters[i].items.concat(
+															{
+																id: 0,
+																slug: filterParts[1],
+																title: filterParts[0],
+																count: filterParts[2],
+															}
+														);
+														filterable.options.filters[i].items = ss;
+
+														var options = {
+															...filterable.options,
+															filters: filterable.options.filters,
+														};
+														setAttributes({
+															filterable: { ...filterable, options: options },
+														});
+													}
+												}}
+												onChange={(newVal) => {
+													fetchPostTypeTerms(newVal);
+												}}
+											/>
+
+											{x.items.length == 0 && (
+												<div className="my-1">No terms added.</div>
+											)}
+
+											{x.items.map((y, j) => {
+												return (
+													<div className="py-2 my-1 border-b border-gray-400 flex justify-between">
+														<div>{y.title}</div>
+
+														<div>
+															<span
+																onClick={(ev) => {
+																	var options = {
+																		...activeFilter.options,
+																		slug:
+																			activeFilter.options.slug == y.slug
+																				? ""
+																				: y.slug,
+																	};
+																	setAttributes({
+																		activeFilter: {
+																			...activeFilter,
+																			options: options,
+																		},
 																	});
-																	filterable.options.filters[i].items = ss;
+																}}
+																className={[
+																	activeFilter.options.slug == y.slug
+																		? "bg-blue-600 cursor-pointer p-1   text-white  text-sm"
+																		: "bg-gray-400 cursor-pointer p-1   text-white  text-sm",
+																]}>
+																<span class="dashicons dashicons-yes-alt"></span>
+															</span>
+
+															<span
+																onClick={(ev) => {
+																	filterable.options.filters[i].items.splice(
+																		j,
+																		1
+																	);
 
 																	var options = {
 																		...filterable.options,
@@ -4494,872 +4466,925 @@ registerBlockType(metadata, {
 																			options: options,
 																		},
 																	});
-																}
-															}}>
-															{x.name} ({x.count})
+																}}
+																className="cursor-pointer p-1   text-white bg-red-600 text-sm">
+																<span className="dashicon dashicons dashicons-no-alt"></span>
+															</span>
 														</div>
-													);
-												})}
-											</div>
-										)}
-									</PanelBody>
-								);
-							})}
-						</div>
+													</div>
+												);
+											})}
 
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Enable Multifilter{" "}
-							</label>
+											{/* {filterablTerms.length == 0 && (
+                          <div className='bg-gray-200 p-2 mt-2'>No Terms Found</div>
+                        )} */}
 
-							<SelectControl
-								label=""
-								value={filterable.options.multifilter}
-								options={[
-									{ label: "True", value: true },
-									{ label: "False", value: false },
-								]}
-								onChange={(newVal) => {
-									var options = { ...filterable.options, multifilter: newVal };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
+											{filterablTerms.length > 0 && (
+												<div className="bg-gray-200 p-2 mt-2">
+													{filterablTerms.map((x) => {
+														return (
+															<div
+																title="Click Add terms"
+																className="border-b border-gray-400 my-2 pb-1 cursor-pointer"
+																onClick={(ev) => {
+																	if (x.slug) {
+																		var ss = filterable.options.filters[
+																			i
+																		].items.concat({
+																			id: x.term_id,
+																			slug: x.slug,
+																			title: x.name,
+																			count: x.count,
+																		});
+																		filterable.options.filters[i].items = ss;
 
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Enable Filter Toggle{" "}
-							</label>
-
-							<SelectControl
-								label=""
-								value={filterable.options.filterToggle}
-								options={[
-									{ label: "Yes", value: "yes" },
-									{ label: "no", value: "no" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...filterable.options, filterToggle: newVal };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
-
-						{filterable.options.multifilter && (
-							<>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Logic Within Group{" "}
-									</label>
-
-									<SelectControl
-										label=""
-										value={filterable.options.logicWithinGroup}
-										options={[
-											{ label: "OR", value: "or" },
-											{ label: "AND", value: "and" },
-										]}
-										onChange={(newVal) => {
-											var options = {
-												...filterable.options,
-												logicWithinGroup: newVal,
-											};
-											setAttributes({
-												filterable: { ...filterable, options: options },
-											});
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Logic Between Groups{" "}
-									</label>
-
-									<SelectControl
-										label=""
-										value={filterable.options.logicBetweenGroups}
-										options={[
-											{ label: "OR", value: "or" },
-											{ label: "AND", value: "and" },
-										]}
-										onChange={(newVal) => {
-											var options = {
-												...filterable.options,
-												logicBetweenGroups: newVal,
-											};
-											setAttributes({
-												filterable: { ...filterable, options: options },
-											});
-										}}
-									/>
-								</PanelRow>
-							</>
-						)}
-
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Show Sort Filter{" "}
-							</label>
-
-							<SelectControl
-								label=""
-								value={filterable.options.showSort}
-								options={[
-									{ label: "No", value: "no" },
-									{ label: "Yes", value: "yes" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...filterable.options, showSort: newVal };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
-
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Show Random Filter{" "}
-							</label>
-
-							<SelectControl
-								label=""
-								value={filterable.options.showRandom}
-								options={[
-									{ label: "No", value: "no" },
-									{ label: "Yes", value: "yes" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...filterable.options, showRandom: newVal };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
-
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Show Clear Filter{" "}
-							</label>
-
-							<SelectControl
-								label=""
-								value={filterable.options.showClear}
-								options={[
-									{ label: "No", value: "no" },
-									{ label: "Yes", value: "yes" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...filterable.options, showClear: newVal };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
-
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Show All Filter{" "}
-							</label>
-
-							<SelectControl
-								label=""
-								value={filterable.options.showAll}
-								options={[
-									{ label: "No", value: "no" },
-									{ label: "Yes", value: "yes" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...filterable.options, showAll: newVal };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
-
-						<PanelRow>
-							<label>Items Per Page</label>
-							<InputControl
-								type="number"
-								value={
-									filterable.options.perPage != undefined
-										? filterable.options.perPage
-										: 6
-								}
-								onChange={(newVal) => {
-									var options = { ...filterable.options, perPage: newVal };
-									setAttributes({
-										filterable: { ...filterable, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Filter"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="styles"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "styles",
-										title: "Styles",
-										icon: pencil,
-										className: "tab-style",
-									},
-									{
-										name: "css",
-										title: "CSS Library",
-										icon: cloud,
-										className: "tab-css",
-									},
-								]}>
-								<PGtab name="styles">
-									<PGStyles
-										obj={filterable}
-										onChange={onChangeStyleFilterable}
-										onAdd={onAddStyleFilterable}
-										onRemove={onRemoveStyleFilterable}
-									/>
-								</PGtab>
-								<PGtab name="css">
-									<PGCssLibrary
-										blockId={blockId}
-										obj={filterable}
-										onChange={onPickCssLibraryFilterable}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Active Filter"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="styles"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "styles",
-										title: "Styles",
-										icon: pencil,
-										className: "tab-style",
-									},
-									{
-										name: "css",
-										title: "CSS Library",
-										icon: cloud,
-										className: "tab-css",
-									},
-								]}>
-								<PGtab name="styles">
-									<PGStyles
-										obj={activeFilter}
-										onChange={onChangeStyleActiveFilter}
-										onAdd={onAddStyleActiveFilter}
-										onRemove={onRemoveStyleActiveFilter}
-									/>
-								</PGtab>
-								<PGtab name="css">
-									<PGCssLibrary
-										blockId={blockId}
-										obj={activeFilter}
-										onChange={onPickCssLibraryActiveFilter}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Filter Group"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="styles"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "styles",
-										title: "Styles",
-										icon: pencil,
-										className: "tab-style",
-									},
-									{
-										name: "css",
-										title: "CSS Library",
-										icon: cloud,
-										className: "tab-css",
-									},
-								]}>
-								<PGtab name="styles">
-									<PGStyles
-										obj={filterGroup}
-										onChange={onChangeStyleFilterGroup}
-										onAdd={onAddStyleFilterGroup}
-										onRemove={onRemoveStyleFilterGroup}
-									/>
-								</PGtab>
-								<PGtab name="css">
-									<PGCssLibrary
-										blockId={blockId}
-										obj={filterGroup}
-										onChange={onPickCssLibraryFilterGroup}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Filter Group Wrap"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="styles"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "styles",
-										title: "Styles",
-										icon: pencil,
-										className: "tab-style",
-									},
-									{
-										name: "css",
-										title: "CSS Library",
-										icon: cloud,
-										className: "tab-css",
-									},
-								]}>
-								<PGtab name="styles">
-									<PGStyles
-										obj={filterGroupWrap}
-										onChange={onChangeStyleFilterGroupWrap}
-										onAdd={onAddStyleFilterGroupWrap}
-										onRemove={onRemoveStyleFilterGroupWrap}
-									/>
-								</PGtab>
-								<PGtab name="css">
-									<PGCssLibrary
-										blockId={blockId}
-										obj={filterGroup}
-										onChange={onPickCssLibraryFilterGroupWrap}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Pagination"
-						initialOpen={false}>
-						<PanelRow className="mb-4">
-							<label for="" className="font-medium text-slate-900 ">
-								Pagination Type
-							</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={paginationTypes}
-								buttonTitle="Choose"
-								onChange={(arg, index) => {
-									var options = { ...pagination.options, type: arg.value };
-									setAttributes({
-										pagination: { ...pagination, options: options },
-									});
-								}}
-								values={""}></PGDropdown>
-						</PanelRow>
-
-						{pagination.options.type.length != 0 && (
-							<div className="bg-gray-500 text-white px-3 py-2 my-5">
-								{paginationTypes[pagination.options.type] != undefined
-									? paginationTypes[pagination.options.type].label
-									: ""}
+																		var options = {
+																			...filterable.options,
+																			filters: filterable.options.filters,
+																		};
+																		setAttributes({
+																			filterable: {
+																				...filterable,
+																				options: options,
+																			},
+																		});
+																	}
+																}}>
+																{x.name} ({x.count})
+															</div>
+														);
+													})}
+												</div>
+											)}
+										</PanelBody>
+									);
+								})}
 							</div>
-						)}
 
-						{(pagination.options.type == "normal" ||
-							pagination.options.type == "ajax") && (
-							<>
+							<PanelRow>
 								<label for="" className="font-medium text-slate-900 ">
-									Max Number of Pagination
-								</label>
-								<InputControl
-									value={pagination.options.maxPageNum}
-									onChange={(newVal) => {
-										var options = { ...pagination.options, maxPageNum: newVal };
-										setAttributes({
-											pagination: { ...pagination, options: options },
-										});
-									}}
-								/>
-							</>
-						)}
-
-						{(pagination.options.type == "normal" ||
-							pagination.options.type == "ajax" ||
-							pagination.options.type == "next_previous") && (
-							<>
-								<label for="" className="font-medium text-slate-900 ">
-									Previous Text
-								</label>
-								<InputControl
-									value={pagination.options.prevText}
-									onChange={(newVal) => {
-										var options = { ...pagination.options, prevText: newVal };
-										setAttributes({
-											pagination: { ...pagination, options: options },
-										});
-									}}
-								/>
-
-								<label for="" className="font-medium text-slate-900 ">
-									Next Text
-								</label>
-								<InputControl
-									value={pagination.options.nextText}
-									onChange={(newVal) => {
-										var options = { ...pagination.options, nextText: newVal };
-										setAttributes({
-											pagination: { ...pagination, options: options },
-										});
-									}}
-								/>
-							</>
-						)}
-
-						{(pagination.options.type == "loadmore" ||
-							pagination.options.type == "infinite") && (
-							<>
-								<label for="" className="font-medium text-slate-900 ">
-									Load More Text
+									Enable Multifilter{" "}
 								</label>
 
-								<InputControl
-									value={pagination.options.loadMoreText}
+								<SelectControl
+									label=""
+									value={filterable.options.multifilter}
+									options={[
+										{ label: "True", value: true },
+										{ label: "False", value: false },
+									]}
 									onChange={(newVal) => {
 										var options = {
-											...pagination.options,
-											loadMoreText: newVal,
+											...filterable.options,
+											multifilter: newVal,
 										};
 										setAttributes({
-											pagination: { ...pagination, options: options },
+											filterable: { ...filterable, options: options },
 										});
 									}}
 								/>
+							</PanelRow>
 
+							<PanelRow>
 								<label for="" className="font-medium text-slate-900 ">
-									No Posts Text
+									Enable Filter Toggle{" "}
 								</label>
 
-								<InputControl
-									value={pagination.options.noMorePosts}
+								<SelectControl
+									label=""
+									value={filterable.options.filterToggle}
+									options={[
+										{ label: "Yes", value: "yes" },
+										{ label: "no", value: "no" },
+									]}
 									onChange={(newVal) => {
 										var options = {
-											...pagination.options,
-											noMorePosts: newVal,
+											...filterable.options,
+											filterToggle: newVal,
 										};
 										setAttributes({
-											pagination: { ...pagination, options: options },
+											filterable: { ...filterable, options: options },
 										});
 									}}
 								/>
+							</PanelRow>
 
+							{filterable.options.multifilter && (
+								<>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Logic Within Group{" "}
+										</label>
+
+										<SelectControl
+											label=""
+											value={filterable.options.logicWithinGroup}
+											options={[
+												{ label: "OR", value: "or" },
+												{ label: "AND", value: "and" },
+											]}
+											onChange={(newVal) => {
+												var options = {
+													...filterable.options,
+													logicWithinGroup: newVal,
+												};
+												setAttributes({
+													filterable: { ...filterable, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Logic Between Groups{" "}
+										</label>
+
+										<SelectControl
+											label=""
+											value={filterable.options.logicBetweenGroups}
+											options={[
+												{ label: "OR", value: "or" },
+												{ label: "AND", value: "and" },
+											]}
+											onChange={(newVal) => {
+												var options = {
+													...filterable.options,
+													logicBetweenGroups: newVal,
+												};
+												setAttributes({
+													filterable: { ...filterable, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</>
+							)}
+
+							<PanelRow>
 								<label for="" className="font-medium text-slate-900 ">
-									Loading Text
+									Show Sort Filter{" "}
 								</label>
 
-								<InputControl
-									value={pagination.options.loadingText}
+								<SelectControl
+									label=""
+									value={filterable.options.showSort}
+									options={[
+										{ label: "No", value: "no" },
+										{ label: "Yes", value: "yes" },
+									]}
 									onChange={(newVal) => {
-										var options = {
-											...pagination.options,
-											loadingText: newVal,
-										};
+										var options = { ...filterable.options, showSort: newVal };
+										setAttributes({
+											filterable: { ...filterable, options: options },
+										});
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Show Random Filter{" "}
+								</label>
+
+								<SelectControl
+									label=""
+									value={filterable.options.showRandom}
+									options={[
+										{ label: "No", value: "no" },
+										{ label: "Yes", value: "yes" },
+									]}
+									onChange={(newVal) => {
+										var options = { ...filterable.options, showRandom: newVal };
+										setAttributes({
+											filterable: { ...filterable, options: options },
+										});
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Show Clear Filter{" "}
+								</label>
+
+								<SelectControl
+									label=""
+									value={filterable.options.showClear}
+									options={[
+										{ label: "No", value: "no" },
+										{ label: "Yes", value: "yes" },
+									]}
+									onChange={(newVal) => {
+										var options = { ...filterable.options, showClear: newVal };
+										setAttributes({
+											filterable: { ...filterable, options: options },
+										});
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Show All Filter{" "}
+								</label>
+
+								<SelectControl
+									label=""
+									value={filterable.options.showAll}
+									options={[
+										{ label: "No", value: "no" },
+										{ label: "Yes", value: "yes" },
+									]}
+									onChange={(newVal) => {
+										var options = { ...filterable.options, showAll: newVal };
+										setAttributes({
+											filterable: { ...filterable, options: options },
+										});
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow>
+								<label>Items Per Page</label>
+								<InputControl
+									type="number"
+									value={
+										filterable.options.perPage != undefined
+											? filterable.options.perPage
+											: 6
+									}
+									onChange={(newVal) => {
+										var options = { ...filterable.options, perPage: newVal };
+										setAttributes({
+											filterable: { ...filterable, options: options },
+										});
+									}}
+								/>
+							</PanelRow>
+
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Filter"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="styles"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "styles",
+											title: "Styles",
+											icon: pencil,
+											className: "tab-style",
+										},
+										{
+											name: "css",
+											title: "CSS Library",
+											icon: cloud,
+											className: "tab-css",
+										},
+									]}>
+									<PGtab name="styles">
+										<PGStyles
+											obj={filterable}
+											onChange={onChangeStyleFilterable}
+											onAdd={onAddStyleFilterable}
+											onRemove={onRemoveStyleFilterable}
+										/>
+									</PGtab>
+									<PGtab name="css">
+										<PGCssLibrary
+											blockId={blockId}
+											obj={filterable}
+											onChange={onPickCssLibraryFilterable}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Active Filter"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="styles"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "styles",
+											title: "Styles",
+											icon: pencil,
+											className: "tab-style",
+										},
+										{
+											name: "css",
+											title: "CSS Library",
+											icon: cloud,
+											className: "tab-css",
+										},
+									]}>
+									<PGtab name="styles">
+										<PGStyles
+											obj={activeFilter}
+											onChange={onChangeStyleActiveFilter}
+											onAdd={onAddStyleActiveFilter}
+											onRemove={onRemoveStyleActiveFilter}
+										/>
+									</PGtab>
+									<PGtab name="css">
+										<PGCssLibrary
+											blockId={blockId}
+											obj={activeFilter}
+											onChange={onPickCssLibraryActiveFilter}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Filter Group"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="styles"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "styles",
+											title: "Styles",
+											icon: pencil,
+											className: "tab-style",
+										},
+										{
+											name: "css",
+											title: "CSS Library",
+											icon: cloud,
+											className: "tab-css",
+										},
+									]}>
+									<PGtab name="styles">
+										<PGStyles
+											obj={filterGroup}
+											onChange={onChangeStyleFilterGroup}
+											onAdd={onAddStyleFilterGroup}
+											onRemove={onRemoveStyleFilterGroup}
+										/>
+									</PGtab>
+									<PGtab name="css">
+										<PGCssLibrary
+											blockId={blockId}
+											obj={filterGroup}
+											onChange={onPickCssLibraryFilterGroup}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Filter Group Wrap"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="styles"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "styles",
+											title: "Styles",
+											icon: pencil,
+											className: "tab-style",
+										},
+										{
+											name: "css",
+											title: "CSS Library",
+											icon: cloud,
+											className: "tab-css",
+										},
+									]}>
+									<PGtab name="styles">
+										<PGStyles
+											obj={filterGroupWrap}
+											onChange={onChangeStyleFilterGroupWrap}
+											onAdd={onAddStyleFilterGroupWrap}
+											onRemove={onRemoveStyleFilterGroupWrap}
+										/>
+									</PGtab>
+									<PGtab name="css">
+										<PGCssLibrary
+											blockId={blockId}
+											obj={filterGroup}
+											onChange={onPickCssLibraryFilterGroupWrap}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Pagination"
+							initialOpen={false}>
+							<PanelRow className="mb-4">
+								<label for="" className="font-medium text-slate-900 ">
+									Pagination Type
+								</label>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									options={paginationTypes}
+									buttonTitle="Choose"
+									onChange={(arg, index) => {
+										var options = { ...pagination.options, type: arg.value };
 										setAttributes({
 											pagination: { ...pagination, options: options },
 										});
 									}}
-								/>
+									values={""}></PGDropdown>
+							</PanelRow>
 
-								<PanelRow>
+							{pagination.options.type.length != 0 && (
+								<div className="bg-gray-500 text-white px-3 py-2 my-5">
+									{paginationTypes[pagination.options.type] != undefined
+										? paginationTypes[pagination.options.type].label
+										: ""}
+								</div>
+							)}
+
+							{(pagination.options.type == "normal" ||
+								pagination.options.type == "ajax") && (
+								<>
 									<label for="" className="font-medium text-slate-900 ">
-										Loading Icon
+										Max Number of Pagination
 									</label>
-
-									<PGIconPicker
-										library={pagination.options.loadingIcon.library}
-										srcType={pagination.options.loadingIcon.srcType}
-										iconSrc={pagination.options.loadingIcon.iconSrc}
-										onChange={(arg) => {
+									<InputControl
+										value={pagination.options.maxPageNum}
+										onChange={(newVal) => {
 											var options = {
 												...pagination.options,
-												loadingIcon: {
-													srcType: arg.srcType,
-													library: arg.library,
-													iconSrc: arg.iconSrc,
-												},
+												maxPageNum: newVal,
 											};
-
 											setAttributes({
 												pagination: { ...pagination, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-							</>
-						)}
+								</>
+							)}
 
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Pagination Wrapper"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="styles"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "styles",
-										title: "Styles",
-										icon: pencil,
-										className: "tab-style",
-									},
-									{
-										name: "css",
-										title: "CSS Library",
-										icon: cloud,
-										className: "tab-css",
-									},
-								]}>
-								<PGtab name="styles">
-									<PGStyles
-										obj={pagination}
-										onChange={onChangeStylePagination}
-										onAdd={onAddStylePagination}
-										onRemove={onRemoveStylePagination}
+							{(pagination.options.type == "normal" ||
+								pagination.options.type == "ajax" ||
+								pagination.options.type == "next_previous") && (
+								<>
+									<label for="" className="font-medium text-slate-900 ">
+										Previous Text
+									</label>
+									<InputControl
+										value={pagination.options.prevText}
+										onChange={(newVal) => {
+											var options = { ...pagination.options, prevText: newVal };
+											setAttributes({
+												pagination: { ...pagination, options: options },
+											});
+										}}
 									/>
-								</PGtab>
-								<PGtab name="css">
-									<PGCssLibrary
-										blockId={blockId}
-										obj={pagination}
-										onChange={onPickCssLibraryPagination}
+
+									<label for="" className="font-medium text-slate-900 ">
+										Next Text
+									</label>
+									<InputControl
+										value={pagination.options.nextText}
+										onChange={(newVal) => {
+											var options = { ...pagination.options, nextText: newVal };
+											setAttributes({
+												pagination: { ...pagination, options: options },
+											});
+										}}
 									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
+								</>
+							)}
 
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Pagination Items"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="styles"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "styles",
-										title: "Styles",
-										icon: pencil,
-										className: "tab-style",
-									},
-									{
-										name: "css",
-										title: "CSS Library",
-										icon: cloud,
-										className: "tab-css",
-									},
-								]}>
-								<PGtab name="styles">
-									<PGStyles
-										obj={paginationItem}
-										onChange={onChangeStylePaginationItem}
-										onAdd={onAddStylePaginationItem}
-										onRemove={onRemoveStylePaginationItem}
+							{(pagination.options.type == "loadmore" ||
+								pagination.options.type == "infinite") && (
+								<>
+									<label for="" className="font-medium text-slate-900 ">
+										Load More Text
+									</label>
+
+									<InputControl
+										value={pagination.options.loadMoreText}
+										onChange={(newVal) => {
+											var options = {
+												...pagination.options,
+												loadMoreText: newVal,
+											};
+											setAttributes({
+												pagination: { ...pagination, options: options },
+											});
+										}}
 									/>
-								</PGtab>
-								<PGtab name="css">
-									<PGCssLibrary
-										blockId={blockId}
-										obj={paginationItem}
-										onChange={onPickCssLibraryPaginationItem}
+
+									<label for="" className="font-medium text-slate-900 ">
+										No Posts Text
+									</label>
+
+									<InputControl
+										value={pagination.options.noMorePosts}
+										onChange={(newVal) => {
+											var options = {
+												...pagination.options,
+												noMorePosts: newVal,
+											};
+											setAttributes({
+												pagination: { ...pagination, options: options },
+											});
+										}}
 									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
 
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Pagination Item Active"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="styles"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "styles",
-										title: "Styles",
-										icon: pencil,
-										className: "tab-style",
-									},
-									{
-										name: "css",
-										title: "CSS Library",
-										icon: cloud,
-										className: "tab-css",
-									},
-								]}>
-								<PGtab name="styles">
-									<PGStyles
-										obj={paginationItemActive}
-										onChange={onChangeStylePaginationItemActive}
-										onAdd={onAddStylePaginationItemActive}
-										onRemove={onRemoveStylePaginationItemActive}
+									<label for="" className="font-medium text-slate-900 ">
+										Loading Text
+									</label>
+
+									<InputControl
+										value={pagination.options.loadingText}
+										onChange={(newVal) => {
+											var options = {
+												...pagination.options,
+												loadingText: newVal,
+											};
+											setAttributes({
+												pagination: { ...pagination, options: options },
+											});
+										}}
 									/>
-								</PGtab>
-								<PGtab name="css">
-									<PGCssLibrary
-										blockId={blockId}
-										obj={paginationItemActive}
-										onChange={onPickCssLibraryPaginationItemActive}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Lazy load"
-						initialOpen={false}>
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Enable Lazyload{" "}
-							</label>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Loading Icon
+										</label>
 
-							<SelectControl
-								value={lazyLoad.options.enable}
-								options={[
-									{ label: "Yes", value: "yes" },
-									{ label: "No", value: "no" },
-								]}
-								onChange={(newVal) => {
-									var options = { ...lazyLoad.options, enable: newVal };
-									setAttributes({
-										lazyLoad: { ...lazyLoad, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
+										<PGIconPicker
+											library={pagination.options.loadingIcon.library}
+											srcType={pagination.options.loadingIcon.srcType}
+											iconSrc={pagination.options.loadingIcon.iconSrc}
+											onChange={(arg) => {
+												var options = {
+													...pagination.options,
+													loadingIcon: {
+														srcType: arg.srcType,
+														library: arg.library,
+														iconSrc: arg.iconSrc,
+													},
+												};
 
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Lazyload Icon
-							</label>
+												setAttributes({
+													pagination: { ...pagination, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</>
+							)}
 
-							<PGIconPicker
-								library={
-									lazyLoad.options.icon != undefined
-										? lazyLoad.options.icon.library
-										: "fontAwesome"
-								}
-								srcType={
-									lazyLoad.options.icon != undefined
-										? lazyLoad.options.icon.srcType
-										: "class"
-								}
-								iconSrc={
-									lazyLoad.options.icon != undefined
-										? lazyLoad.options.icon.iconSrc
-										: ""
-								}
-								onChange={(arg) => {
-									var options = {
-										...lazyLoad.options,
-										icon: {
-											srcType: arg.srcType,
-											library: arg.library,
-											iconSrc: arg.iconSrc,
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Pagination Wrapper"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="styles"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "styles",
+											title: "Styles",
+											icon: pencil,
+											className: "tab-style",
 										},
-									};
+										{
+											name: "css",
+											title: "CSS Library",
+											icon: cloud,
+											className: "tab-css",
+										},
+									]}>
+									<PGtab name="styles">
+										<PGStyles
+											obj={pagination}
+											onChange={onChangeStylePagination}
+											onAdd={onAddStylePagination}
+											onRemove={onRemoveStylePagination}
+										/>
+									</PGtab>
+									<PGtab name="css">
+										<PGCssLibrary
+											blockId={blockId}
+											obj={pagination}
+											onChange={onPickCssLibraryPagination}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
 
-									setAttributes({
-										lazyLoad: { ...lazyLoad, options: options },
-									});
-								}}
-							/>
-						</PanelRow>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Pagination Items"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="styles"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "styles",
+											title: "Styles",
+											icon: pencil,
+											className: "tab-style",
+										},
+										{
+											name: "css",
+											title: "CSS Library",
+											icon: cloud,
+											className: "tab-css",
+										},
+									]}>
+									<PGtab name="styles">
+										<PGStyles
+											obj={paginationItem}
+											onChange={onChangeStylePaginationItem}
+											onAdd={onAddStylePaginationItem}
+											onRemove={onRemoveStylePaginationItem}
+										/>
+									</PGtab>
+									<PGtab name="css">
+										<PGCssLibrary
+											blockId={blockId}
+											obj={paginationItem}
+											onChange={onPickCssLibraryPaginationItem}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
 
-						<PanelRow>
-							<label for="" className="font-medium text-slate-900 ">
-								Lazy Load Image
-							</label>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Pagination Item Active"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="styles"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "styles",
+											title: "Styles",
+											icon: pencil,
+											className: "tab-style",
+										},
+										{
+											name: "css",
+											title: "CSS Library",
+											icon: cloud,
+											className: "tab-css",
+										},
+									]}>
+									<PGtab name="styles">
+										<PGStyles
+											obj={paginationItemActive}
+											onChange={onChangeStylePaginationItemActive}
+											onAdd={onAddStylePaginationItemActive}
+											onRemove={onRemoveStylePaginationItemActive}
+										/>
+									</PGtab>
+									<PGtab name="css">
+										<PGCssLibrary
+											blockId={blockId}
+											obj={paginationItemActive}
+											onChange={onPickCssLibraryPaginationItemActive}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+						</PanelBody>
 
-							<MediaUploadCheck>
-								<MediaUpload
-									onSelect={(media) => {
-										// media.id
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Lazy load"
+							initialOpen={false}>
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Enable Lazyload{" "}
+								</label>
 
-										var options = {
-											...lazyLoad.options,
-											srcUrl: media.url,
-											srcId: media.id,
-										};
+								<SelectControl
+									value={lazyLoad.options.enable}
+									options={[
+										{ label: "Yes", value: "yes" },
+										{ label: "No", value: "no" },
+									]}
+									onChange={(newVal) => {
+										var options = { ...lazyLoad.options, enable: newVal };
 										setAttributes({
 											lazyLoad: { ...lazyLoad, options: options },
 										});
 									}}
-									onClose={() => {}}
-									allowedTypes={ALLOWED_MEDIA_TYPES}
-									value={lazyLoad.options.srcId}
-									render={({ open }) => (
-										<Button onClick={open}>Media Library</Button>
-									)}
 								/>
-							</MediaUploadCheck>
-						</PanelRow>
+							</PanelRow>
 
-						<img className="my-4" src={lazyLoad.options.srcUrl} alt="" />
-					</PanelBody>
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Lazyload Icon
+								</label>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						className="hidden"
-						title="Search"
-						initialOpen={false}>
-						<SelectControl
-							label="Enable"
-							value={search.enable}
-							options={[
-								{ label: "No", value: "no" },
-								{ label: "Yes", value: "yes" },
-							]}
-							onChange={(newVal) =>
-								setAttributes({
-									search: {
-										enable: newVal,
-										type: search.type,
-										placeholder: search.placeholder,
-										icon: search.icon,
-										busyIcon: search.busyIcon,
+								<PGIconPicker
+									library={
+										lazyLoad.options.icon != undefined
+											? lazyLoad.options.icon.library
+											: "fontAwesome"
+									}
+									srcType={
+										lazyLoad.options.icon != undefined
+											? lazyLoad.options.icon.srcType
+											: "class"
+									}
+									iconSrc={
+										lazyLoad.options.icon != undefined
+											? lazyLoad.options.icon.iconSrc
+											: ""
+									}
+									onChange={(arg) => {
+										var options = {
+											...lazyLoad.options,
+											icon: {
+												srcType: arg.srcType,
+												library: arg.library,
+												iconSrc: arg.iconSrc,
+											},
+										};
+
+										setAttributes({
+											lazyLoad: { ...lazyLoad, options: options },
+										});
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow>
+								<label for="" className="font-medium text-slate-900 ">
+									Lazy Load Image
+								</label>
+
+								<MediaUploadCheck>
+									<MediaUpload
+										onSelect={(media) => {
+											// media.id
+
+											var options = {
+												...lazyLoad.options,
+												srcUrl: media.url,
+												srcId: media.id,
+											};
+											setAttributes({
+												lazyLoad: { ...lazyLoad, options: options },
+											});
+										}}
+										onClose={() => {}}
+										allowedTypes={ALLOWED_MEDIA_TYPES}
+										value={lazyLoad.options.srcId}
+										render={({ open }) => (
+											<Button onClick={open}>Media Library</Button>
+										)}
+									/>
+								</MediaUploadCheck>
+							</PanelRow>
+
+							<img className="my-4" src={lazyLoad.options.srcUrl} alt="" />
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 hidden"
+							title="Search"
+							initialOpen={false}>
+							<SelectControl
+								label="Enable"
+								value={search.enable}
+								options={[
+									{ label: "No", value: "no" },
+									{ label: "Yes", value: "yes" },
+								]}
+								onChange={(newVal) =>
+									setAttributes({
+										search: {
+											enable: newVal,
+											type: search.type,
+											placeholder: search.placeholder,
+											icon: search.icon,
+											busyIcon: search.busyIcon,
+										},
+									})
+								}
+							/>
+
+							<SelectControl
+								label="Search action"
+								value={search.type}
+								options={[
+									{ label: "Ajax - On change form data", value: "ajax" },
+									{
+										label: "On form submit - GET method",
+										value: "form_submit",
 									},
-								})
-							}
-						/>
+								]}
+								onChange={(newVal) =>
+									setAttributes({
+										search: {
+											enable: search.type,
+											type: newVal,
+											placeholder: search.placeholder,
+											icon: search.icon,
+											busyIcon: search.busyIcon,
+										},
+									})
+								}
+							/>
 
-						<SelectControl
-							label="Search action"
-							value={search.type}
-							options={[
-								{ label: "Ajax - On change form data", value: "ajax" },
-								{ label: "On form submit - GET method", value: "form_submit" },
-							]}
-							onChange={(newVal) =>
-								setAttributes({
-									search: {
-										enable: search.type,
-										type: newVal,
-										placeholder: search.placeholder,
-										icon: search.icon,
-										busyIcon: search.busyIcon,
-									},
-								})
-							}
-						/>
+							<InputControl
+								label="Placeholder text"
+								value={search.placeholder}
+								onChange={(newVal) =>
+									setAttributes({
+										search: {
+											enable: search.type,
+											type: search.type,
+											placeholder: newVal,
+											icon: search.icon,
+											busyIcon: search.busyIcon,
+										},
+									})
+								}
+							/>
 
-						<InputControl
-							label="Placeholder text"
-							value={search.placeholder}
-							onChange={(newVal) =>
-								setAttributes({
-									search: {
-										enable: search.type,
-										type: search.type,
-										placeholder: newVal,
-										icon: search.icon,
-										busyIcon: search.busyIcon,
-									},
-								})
-							}
-						/>
+							<InputControl
+								label="Search icon"
+								value={search.icon}
+								onChange={(newVal) =>
+									setAttributes({
+										search: {
+											enable: search.type,
+											type: search.type,
+											placeholder: search.placeholder,
+											icon: newVal,
+											busyIcon: search.busyIcon,
+										},
+									})
+								}
+							/>
 
-						<InputControl
-							label="Search icon"
-							value={search.icon}
-							onChange={(newVal) =>
-								setAttributes({
-									search: {
-										enable: search.type,
-										type: search.type,
-										placeholder: search.placeholder,
-										icon: newVal,
-										busyIcon: search.busyIcon,
-									},
-								})
-							}
-						/>
+							<InputControl
+								label="Loading icon"
+								value={search.busyIcon}
+								onChange={(newVal) =>
+									setAttributes({
+										search: {
+											enable: search.type,
+											type: search.type,
+											placeholder: search.placeholder,
+											icon: search.icon,
+											busyIcon: newVal,
+										},
+									})
+								}
+							/>
+						</PanelBody>
 
-						<InputControl
-							label="Loading icon"
-							value={search.busyIcon}
-							onChange={(newVal) =>
-								setAttributes({
-									search: {
-										enable: search.type,
-										type: search.type,
-										placeholder: search.placeholder,
-										icon: search.icon,
-										busyIcon: newVal,
-									},
-								})
-							}
-						/>
-					</PanelBody>
+						<div className="px-3">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockPostGrid",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 
-					<div className="px-3">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockPostGrid",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Tutorials"
+							initialOpen={false}>
+							<PGTutorials links={tutorialsLinks} />
+						</PanelBody>
 					</div>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						className=""
-						title="Tutorials"
-						initialOpen={false}>
-						<PGTutorials links={tutorialsLinks} />
-					</PanelBody>
 				</InspectorControls>
 
 				<div {...blockProps}>

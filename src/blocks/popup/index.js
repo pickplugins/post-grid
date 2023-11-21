@@ -69,12 +69,9 @@ const { RawHTML } = wp.element;
 import { store } from "../../store";
 import { __experimentalScrollable as Scrollable } from "@wordpress/components";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import variations from "./variations";
 
 import PGDropdown from "../../components/dropdown";
@@ -141,7 +138,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		// Wrapper CSS Class Selectors
@@ -393,15 +389,6 @@ registerBlockType(metadata, {
 			myStore.generateBlockCss(blockCssY.items, blockId);
 		}, [blockCssY]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
 
@@ -409,15 +396,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var innerX = attributes.inner;
 				var closeWrapX = attributes.closeWrap;
@@ -524,7 +509,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -608,7 +592,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddInner(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, inner);
 			obj[sudoScource] = cssObj;
 
@@ -692,7 +675,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddCloseWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, closeWrap);
 			obj[sudoScource] = cssObj;
 
@@ -720,6 +702,73 @@ registerBlockType(metadata, {
 			var cssItemsX = { ...cssItems, ...stylesObj };
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		function onResetWrapper(sudoScources) {
+			let obj = Object.assign({}, wrapper);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						wrapperSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ wrapper: obj });
+		}
+		function onResetCloseWrap(sudoScources) {
+			let obj = Object.assign({}, closeWrap);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						closeWrapSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ closeWrap: obj });
+		}
+		function onResetInner(sudoScources) {
+			let obj = Object.assign({}, inner);
+
+			Object.entries(sudoScources).map((args) => {
+				var sudoScource = args[0];
+				if (obj[sudoScource] == undefined) {
+				} else {
+					obj[sudoScource] = {};
+					var elementSelector = myStore.getElementSelector(
+						sudoScource,
+						innerSelector
+					);
+
+					var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+						elementSelector,
+					]);
+					setAttributes({ blockCssY: { items: cssObject } });
+				}
+			});
+
+			setAttributes({ inner: obj });
 		}
 
 		var RemoveVisibleGroup = function ({ title, index }) {
@@ -777,51 +826,55 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="p-3">
-						<ToggleControl
-							label="Edit Mode?"
-							help={editMode ? "Edit Mode Enabled" : "Edit Mode Disabled."}
-							checked={editMode ? true : false}
-							onChange={(e) => {
-								setAttributes({ editMode: editMode ? false : true });
-							}}
-						/>
-					</div>
-
-					{/* <PanelBody className="font-medium text-slate-900 " title="Templates" initialOpen={false}>
-          </PanelBody> */}
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Visiblity"
-						initialOpen={true}>
-						<div
-							className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
-							onClick={(ev) => {
-								var visibleX = { ...visible };
-
-								var index = Object.entries(visibleX).length;
-
-								visibleX[index] = { logic: "OR", title: "", args: [] };
-
-								setAttributes({ visible: visibleX });
-							}}>
-							Add Group
+					<div className="pg-setting-input-text">
+						<div className="p-3">
+							<ToggleControl
+								label="Edit Mode?"
+								help={editMode ? "Edit Mode Enabled" : "Edit Mode Disabled."}
+								checked={editMode ? true : false}
+								onChange={(e) => {
+									setAttributes({ editMode: editMode ? false : true });
+								}}
+							/>
 						</div>
 
-						<div class="my-4">
-							{Object.entries(visible).map((group, groupIndex) => {
-								var groupId = group[0];
-								var groupData = group[1];
+						{/* <PanelBody className="font-medium text-slate-900 " title="Templates" initialOpen={false}>
+          </PanelBody> */}
 
-								return (
-									<PanelBody
-										title={
-											<RemoveVisibleGroup title={groupIndex} index={groupId} />
-										}
-										initialOpen={false}>
-										<PanelRow className="my-3">
-											{/* <label>Logic?</label>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Visibility"
+							initialOpen={true}>
+							<div
+								className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
+								onClick={(ev) => {
+									var visibleX = { ...visible };
+
+									var index = Object.entries(visibleX).length;
+
+									visibleX[index] = { logic: "OR", title: "", args: [] };
+
+									setAttributes({ visible: visibleX });
+								}}>
+								Add Group
+							</div>
+
+							<div class="my-4">
+								{Object.entries(visible).map((group, groupIndex) => {
+									var groupId = group[0];
+									var groupData = group[1];
+
+									return (
+										<PanelBody
+											title={
+												<RemoveVisibleGroup
+													title={groupIndex}
+													index={groupId}
+												/>
+											}
+											initialOpen={false}>
+											<PanelRow className="my-3">
+												{/* <label>Logic?</label>
                       <PGDropdown position="bottom right" variant="secondary" buttonTitle={(groupData['logic'] == undefined) ? 'Choose' : groupData['logic']} options={[
                         { label: 'OR', value: 'OR' },
                         { label: 'AND', value: 'AND' }
@@ -832,413 +885,413 @@ registerBlockType(metadata, {
                           setAttributes({ visible: visibleX });
                         }} values=""></PGDropdown> */}
 
-											<PGDropdown
-												position="bottom right"
-												variant="secondary"
-												buttonTitle={"Add Condition"}
-												options={visibleArgs}
-												onChange={(option, index) => {
-													var visibleX = { ...visible };
+												<PGDropdown
+													position="bottom right"
+													variant="secondary"
+													buttonTitle={"Add Condition"}
+													options={visibleArgs}
+													onChange={(option, index) => {
+														var visibleX = { ...visible };
 
-													visibleX[groupId]["args"].push(option.args);
-													setAttributes({ visible: visibleX });
-												}}
-												values=""></PGDropdown>
-										</PanelRow>
+														visibleX[groupId]["args"].push(option.args);
+														setAttributes({ visible: visibleX });
+													}}
+													values=""></PGDropdown>
+											</PanelRow>
 
-										{visible[groupId]["args"] != undefined &&
-											visible[groupId]["args"].map((item, index) => {
-												var id = item.id;
+											{visible[groupId]["args"] != undefined &&
+												visible[groupId]["args"].map((item, index) => {
+													var id = item.id;
 
-												//console.log(item);
+													//console.log(item);
 
-												return (
-													<>
-														{id == "initial" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<div>
-																	No Option available for this condition.
-																</div>
-															</PanelBody>
-														)}
-
-														{id == "delay" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Element ID/Class
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		placeholder=".element or #elementId"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-
-														{id == "scrollParcent" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Scroll Minimum
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.min}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].min =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Scroll Max
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.max}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].max =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-
-														{id == "scrollFixed" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Scroll Minimum
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.min}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].min =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Scroll Max
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.max}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].max =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-
-														{id == "scrollEnd" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<div>
-																	No Option available for this condition.
-																</div>
-															</PanelBody>
-														)}
-
-														{id == "scrollElement" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Element Class/ID
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-
-														{id == "clickFirst" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<div>
-																	No Option available for this condition.
-																</div>
-															</PanelBody>
-														)}
-
-														{id == "clickCount" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Click Count
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-
-														{id == "clickRight" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<ToggleControl
-																	label="Disabled right menu?"
-																	help={
-																		item.value
-																			? "Right Menu Disabled "
-																			: "Right Menu Enabled."
+													return (
+														<>
+															{id == "initial" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
 																	}
-																	checked={item.value ? true : false}
-																	onChange={(e) => {
-																		var visibleX = { ...visible };
-																		visibleX[groupId]["args"][index].value =
-																			item.value ? 0 : 1;
-																		setAttributes({ visible: visibleX });
-																	}}
-																/>
-															</PanelBody>
-														)}
+																	initialOpen={false}>
+																	<div>
+																		No Option available for this condition.
+																	</div>
+																</PanelBody>
+															)}
 
-														{id == "onExit" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<div>
-																	No Option available for this condition.
-																</div>
-															</PanelBody>
-														)}
+															{id == "delay" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Element ID/Class
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			placeholder=".element or #elementId"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
 
-														{id == "clickElement" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
+															{id == "scrollParcent" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Scroll Minimum
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.min}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].min =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Scroll Max
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.max}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].max =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+
+															{id == "scrollFixed" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Scroll Minimum
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.min}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].min =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Scroll Max
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.max}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].max =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+
+															{id == "scrollEnd" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<div>
+																		No Option available for this condition.
+																	</div>
+																</PanelBody>
+															)}
+
+															{id == "scrollElement" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Element Class/ID
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+
+															{id == "clickFirst" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<div>
+																		No Option available for this condition.
+																	</div>
+																</PanelBody>
+															)}
+
+															{id == "clickCount" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Click Count
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+
+															{id == "clickRight" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<ToggleControl
+																		label="Disabled right menu?"
+																		help={
+																			item.value
+																				? "Right Menu Disabled "
+																				: "Right Menu Enabled."
 																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		{__("Element ID/Class", "post-grid")}
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		placeholder=".element or #elementId"
-																		value={item.value}
-																		onChange={(newVal) => {
+																		checked={item.value ? true : false}
+																		onChange={(e) => {
 																			var visibleX = { ...visible };
 																			visibleX[groupId]["args"][index].value =
-																				newVal;
+																				item.value ? 0 : 1;
 																			setAttributes({ visible: visibleX });
 																		}}
 																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
+																</PanelBody>
+															)}
 
-														{id == "dateCountdownExpired" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<ToggleControl
-																	label="Is Once?"
-																	className="my-4"
-																	help={
-																		item.once
-																			? "IsOnce is Enable"
-																			: "IsOnce is disabled."
+															{id == "onExit" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
 																	}
-																	checked={item.once ? true : false}
-																	onChange={(e) => {
-																		var visibleX = { ...visible };
-																		visibleX[groupId]["args"][index].once =
-																			item.once ? 0 : 1;
-																		setAttributes({ visible: visibleX });
-																	}}
-																/>
-																{/* <PanelRow className='mb-4'>
+																	initialOpen={false}>
+																	<div>
+																		No Option available for this condition.
+																	</div>
+																</PanelBody>
+															)}
+
+															{id == "clickElement" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			{__("Element ID/Class", "post-grid")}
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			placeholder=".element or #elementId"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+
+															{id == "dateCountdownExpired" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<ToggleControl
+																		label="Is Once?"
+																		className="my-4"
+																		help={
+																			item.once
+																				? "IsOnce is Enable"
+																				: "IsOnce is disabled."
+																		}
+																		checked={item.once ? true : false}
+																		onChange={(e) => {
+																			var visibleX = { ...visible };
+																			visibleX[groupId]["args"][index].once =
+																				item.once ? 0 : 1;
+																			setAttributes({ visible: visibleX });
+																		}}
+																	/>
+																	{/* <PanelRow className='mb-4'>
                                 <label for=""  className="font-medium text-slate-900 " >{__('Element ID/Class', 'post-grid')}</label>
                                 <InputControl
                                   className='mr-2'
@@ -1251,425 +1304,430 @@ registerBlockType(metadata, {
                                   }}
                                 />
                               </PanelRow> */}
-															</PanelBody>
-														)}
+																</PanelBody>
+															)}
 
-														{id == "cookieExist" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Cookie Name
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-														{id == "cookieNotExist" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Cookie Name
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-														{id == "userLogged" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<div>
-																	No Option available for this condition.
-																</div>
-															</PanelBody>
-														)}
+															{id == "cookieExist" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Cookie Name
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+															{id == "cookieNotExist" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Cookie Name
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+															{id == "userLogged" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<div>
+																		No Option available for this condition.
+																	</div>
+																</PanelBody>
+															)}
 
-														{id == "userIds" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		User IDs
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		placeholder="1,2,3"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-														{id == "urlPrams" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		URL Parameter
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-														{id == "referrerExist" && (
-															<PanelBody
-																title={
-																	<RemoveVisibleArg
-																		title={
-																			visibleArgs[id] == undefined
-																				? id
-																				: visibleArgs[id].label
-																		}
-																		index={index}
-																		groupId={groupIndex}
-																	/>
-																}
-																initialOpen={false}>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Referrer Domain
-																	</label>
-																	<InputControl
-																		className="mr-2"
-																		value={item.value}
-																		onChange={(newVal) => {
-																			var visibleX = { ...visible };
-																			visibleX[groupId]["args"][index].value =
-																				newVal;
-																			setAttributes({ visible: visibleX });
-																		}}
-																	/>
-																</PanelRow>
-															</PanelBody>
-														)}
-													</>
-												);
-											})}
-									</PanelBody>
-								);
-							})}
-						</div>
-					</PanelBody>
+															{id == "userIds" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			User IDs
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			placeholder="1,2,3"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+															{id == "urlPrams" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			URL Parameter
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+															{id == "referrerExist" && (
+																<PanelBody
+																	title={
+																		<RemoveVisibleArg
+																			title={
+																				visibleArgs[id] == undefined
+																					? id
+																					: visibleArgs[id].label
+																			}
+																			index={index}
+																			groupId={groupIndex}
+																		/>
+																	}
+																	initialOpen={false}>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Referrer Domain
+																		</label>
+																		<InputControl
+																			className="mr-2"
+																			value={item.value}
+																			onChange={(newVal) => {
+																				var visibleX = { ...visible };
+																				visibleX[groupId]["args"][index].value =
+																					newVal;
+																				setAttributes({ visible: visibleX });
+																			}}
+																		/>
+																	</PanelRow>
+																</PanelBody>
+															)}
+														</>
+													);
+												})}
+										</PanelBody>
+									);
+								})}
+							</div>
+						</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
-										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
-										});
-									}}
-								/>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
 										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
-												blockId: newVal,
+												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Inner"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options"></PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={inner}
-									onChange={onChangeStyleInner}
-									onAdd={onAddStyleInner}
-									onRemove={onRemoveStyleInner}
-									onBulkAdd={onBulkAddInner}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Close"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Choose Icon
-									</label>
-
-									<PGIconPicker
-										library={closeWrap.options.library}
-										srcType={closeWrap.options.srcType}
-										iconSrc={closeWrap.options.iconSrc}
-										onChange={(arg) => {
-											var options = {
-												...closeWrap.options,
-												srcType: arg.srcType,
-												library: arg.library,
-												iconSrc: arg.iconSrc,
-											};
-
-											setAttributes({
-												closeWrap: { ...closeWrap, options: options },
-											});
-										}}
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onReset={onResetWrapper}
 									/>
-								</PanelRow>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Inner"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options"></PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={inner}
+										onChange={onChangeStyleInner}
+										onAdd={onAddStyleInner}
+										onRemove={onRemoveStyleInner}
+										onBulkAdd={onBulkAddInner}
+										onReset={onResetInner}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Out animation
-									</label>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Close"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Choose Icon
+										</label>
 
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											closeAnimateArgs[closeWrap.options.animation] == undefined
-												? "Choose"
-												: closeAnimateArgs[closeWrap.options.animation].label
-										}
-										options={closeAnimateArgs}
-										onChange={(option, index) => {
-											var options = {
-												...closeWrap.options,
-												animation: option.value,
-											};
+										<PGIconPicker
+											library={closeWrap.options.library}
+											srcType={closeWrap.options.srcType}
+											iconSrc={closeWrap.options.iconSrc}
+											onChange={(arg) => {
+												var options = {
+													...closeWrap.options,
+													srcType: arg.srcType,
+													library: arg.library,
+													iconSrc: arg.iconSrc,
+												};
 
-											setAttributes({
-												closeWrap: { ...closeWrap, options: options },
-											});
+												setAttributes({
+													closeWrap: { ...closeWrap, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
 
-											const element = document.querySelector(
-												wrapperSelector + " .inner"
-											);
-											element.classList.add(
-												"animate__animated",
-												"animate__" + option.value
-											);
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Out animation
+										</label>
 
-											setTimeout(() => {
-												element.classList.remove(
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												closeAnimateArgs[closeWrap.options.animation] ==
+												undefined
+													? "Choose"
+													: closeAnimateArgs[closeWrap.options.animation].label
+											}
+											options={closeAnimateArgs}
+											onChange={(option, index) => {
+												var options = {
+													...closeWrap.options,
+													animation: option.value,
+												};
+
+												setAttributes({
+													closeWrap: { ...closeWrap, options: options },
+												});
+
+												const element = document.querySelector(
+													wrapperSelector + " .inner"
+												);
+												element.classList.add(
 													"animate__animated",
 													"animate__" + option.value
 												);
-											}, 2000);
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={closeWrap}
-									onChange={onChangeStyleCloseWrap}
-									onAdd={onAddStyleCloseWrap}
-									onRemove={onRemoveStyleCloseWrap}
-									onBulkAdd={onBulkAddCloseWrap}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"popup"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
+												setTimeout(() => {
+													element.classList.remove(
+														"animate__animated",
+														"animate__" + option.value
+													);
+												}, 2000);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={closeWrap}
+										onChange={onChangeStyleCloseWrap}
+										onAdd={onAddStyleCloseWrap}
+										onRemove={onRemoveStyleCloseWrap}
+										onBulkAdd={onBulkAddCloseWrap}
+										onReset={onResetCloseWrap}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockText",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"popup"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
+
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockText",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 					</div>
 				</InspectorControls>
 

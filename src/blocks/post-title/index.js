@@ -123,7 +123,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
@@ -243,15 +242,6 @@ registerBlockType(metadata, {
 		const prefixSelector = blockClass + " .prefix";
 		const postfixSelector = blockClass + " .postfix";
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		const [postTitleEdited, setpostTitleEdited] = useState(currentPostTitle);
 
 		useEffect(() => {
@@ -275,7 +265,7 @@ registerBlockType(metadata, {
 		useEffect(() => {
 			var count =
 				postTitle.options.limitCount > 0 ? postTitle.options.limitCount : 0;
-				var currentPostTitleX =
+			var currentPostTitleX =
 				currentPostTitle != undefined
 					? currentPostTitle
 					: "What is Lorem Ipsum?";
@@ -296,15 +286,14 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			// if (action == "applyStyle") {
-			// 	// var options = attributes.options
+			//
 			// 	var wrapper = attributes.wrapper;
 			// 	var postTitle = attributes.postTitle;
 			// 	var prefix = attributes.prefix;
@@ -820,7 +809,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -851,7 +839,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostTitle(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, postTitle);
 			obj[sudoScource] = cssObj;
 
@@ -882,7 +869,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPrefix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, prefix);
 			obj[sudoScource] = cssObj;
 
@@ -913,7 +899,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostfix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, postfix);
 			obj[sudoScource] = cssObj;
 
@@ -979,7 +964,7 @@ registerBlockType(metadata, {
 
 		return (
 			<>
-				<InspectorControls>
+				<InspectorControls className=" pg-setting-input-text ">
 					<div className=" pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
@@ -1012,23 +997,25 @@ registerBlockType(metadata, {
 								]}>
 								<PGtab name="options">
 									{/* <div className="pg-setting-input-textarea"> */}
-										<PGcssClassPicker
-											tags={customTags}
-											label="CSS Class"
-											className="pg-setting-input-textarea"
-											placeholder="Add Class"
-											value={wrapper.options.class}
-											onChange={(newVal) => {
-												var options = { ...wrapper.options, class: newVal };
-												setAttributes({
-													wrapper: { styles: wrapper.styles, options: options },
-												});
-											}}
-										/>
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										className="pg-setting-input-textarea"
+										placeholder="Add Class"
+										value={wrapper.options.class}
+										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
+											setAttributes({
+												wrapper: { styles: wrapper.styles, options: options },
+											});
+										}}
+									/>
 									{/* </div> */}
 
 									<PanelRow className="pg-setting-input-text">
-										<label for="" className="font-medium text-slate-900 pg-font ">
+										<label
+											for=""
+											className="font-medium text-slate-900 pg-font ">
 											CSS ID
 										</label>
 										<InputControl
@@ -1042,7 +1029,9 @@ registerBlockType(metadata, {
 									</PanelRow>
 
 									<PanelRow className="pg-setting-select">
-										<label for="" className="font-medium text-slate-900 pg-font ">
+										<label
+											for=""
+											className="font-medium text-slate-900 pg-font ">
 											Wrapper Tag
 										</label>
 										<SelectControl
@@ -1190,13 +1179,14 @@ registerBlockType(metadata, {
 									{postTitle.options.isLink && (
 										<>
 											<PanelRow>
-												<label for="" className="font-medium text-slate-900  pg-font  ">
+												<label
+													for=""
+													className="font-medium text-slate-900  pg-font  ">
 													Link To
 												</label>
 
 												<PGDropdown
 													position="bottom right"
-													btnClass="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
 													// variant="secondary"
 													options={linkToArgs}
 													buttonTitle={
@@ -1216,7 +1206,9 @@ registerBlockType(metadata, {
 
 											{postTitle.options.linkTo == "authorMeta" && (
 												<PanelRow>
-													<label for="" className="font-medium text-slate-900  pg-font  ">
+													<label
+														for=""
+														className="font-medium text-slate-900  pg-font  ">
 														Author Meta Key
 													</label>
 
@@ -1237,7 +1229,9 @@ registerBlockType(metadata, {
 
 											{postTitle.options.linkTo == "customField" && (
 												<PanelRow>
-													<label for="" className="font-medium text-slate-900  pg-font  ">
+													<label
+														for=""
+														className="font-medium text-slate-900  pg-font  ">
 														Custom Meta Key
 													</label>
 
@@ -1258,7 +1252,9 @@ registerBlockType(metadata, {
 
 											{postTitle.options.linkTo == "customUrl" && (
 												<PanelRow>
-													<label for="" className="font-medium text-slate-900  pg-font  ">
+													<label
+														for=""
+														className="font-medium text-slate-900  pg-font  ">
 														Custom Url
 													</label>
 
@@ -1322,7 +1318,9 @@ registerBlockType(metadata, {
 											)}
 
 											<PanelRow className="pg-setting-select">
-												<label for="" className="font-medium text-slate-900 pg-font  ">
+												<label
+													for=""
+													className="font-medium text-slate-900 pg-font  ">
 													Link Target
 												</label>
 
@@ -1352,7 +1350,9 @@ registerBlockType(metadata, {
 									{postTitle.options.isLink && (
 										<div>
 											<PanelRow>
-												<label for="" className="font-medium text-slate-900 pg-font  ">
+												<label
+													for=""
+													className="font-medium text-slate-900 pg-font  ">
 													Custom Attributes
 												</label>
 												<div
@@ -1455,7 +1455,9 @@ registerBlockType(metadata, {
 									)}
 
 									<PanelRow>
-										<label for="" className="font-medium text-slate-900 pg-font  ">
+										<label
+											for=""
+											className="font-medium text-slate-900 pg-font  ">
 											Limit By
 										</label>
 
@@ -1577,7 +1579,9 @@ registerBlockType(metadata, {
 									</PanelRow> */}
 
 									<PanelRow className="pg-setting-select">
-										<label for="" className="font-medium text-slate-900 pg-font  ">
+										<label
+											for=""
+											className="font-medium text-slate-900 pg-font  ">
 											Position
 										</label>
 										<SelectControl
@@ -1675,7 +1679,9 @@ registerBlockType(metadata, {
 									</PanelRow> */}
 
 									<PanelRow className="pg-setting-select">
-										<label for="" className="font-medium text-slate-900 pg-font  ">
+										<label
+											for=""
+											className="font-medium text-slate-900 pg-font  ">
 											Position
 										</label>
 										<SelectControl
@@ -1829,14 +1835,15 @@ registerBlockType(metadata, {
 				)}
 
 				{wrapper.options.tag.length == 0 && postTitle.options.isLink && (
-					<>
+					<div {...blockProps}>
 						{prefix.options.position == "beforebegin" &&
 							prefix.options.text && (
 								<span className={prefix.options.class}>{prefixText}</span>
 							)}
 						<a
 							onClick={handleLinkClick}
-							{...blockProps}
+							// {...blockProps}
+							// className="p"
 							{...linkAttrItems}
 							href={postUrl}
 							target={postTitle.options.linkTarget}>
@@ -1853,7 +1860,7 @@ registerBlockType(metadata, {
 						{postfix.options.position == "afterend" && postfix.options.text && (
 							<span className={postfix.options.class}>{postfixText}</span>
 						)}
-					</>
+					</div>
 				)}
 
 				{wrapper.options.tag.length == 0 && !postTitle.options.isLink && (

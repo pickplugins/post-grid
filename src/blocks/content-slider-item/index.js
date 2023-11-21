@@ -60,12 +60,8 @@ import {
 	mediaAndText,
 } from "@wordpress/icons";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -134,7 +130,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		// Wrapper CSS Class Selectors
@@ -167,9 +162,6 @@ registerBlockType(metadata, {
 				if (sudoSrc != "options") {
 					var selector = myStore.getElementSelector(sudoSrc, wrapperSelector);
 
-					//console.log(selector);
-					//console.log(sudoArgs);
-
 					Object.entries(args[1]).map((x) => {
 						var attr = x[0];
 						var cssPropty = myStore.cssAttrParse(attr);
@@ -185,35 +177,17 @@ registerBlockType(metadata, {
 						stylesObj[selector][cssPropty] = x[1];
 					});
 				}
-
-				//console.log(stylesObj);
 			});
 
 			var cssItems = { ...blockCssY.items };
 			var cssItemsX = { ...cssItems, ...stylesObj };
-			//console.log(cssItemsX);
 
 			setAttributes({ blockCssY: { items: cssItemsX } });
 		}
 
 		useEffect(() => {
-			//console.log(wrapper);
-
-			///myStore.generateBlockCss(blockCssY.items, blockId);
-
 			var elementCss = generateElementSudoCss(wrapper);
-
-			//console.log(elementCss);
 		}, [wrapper]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function onChangeStyleWrapper(sudoScource, newVal, attr) {
 			var path = [sudoScource, attr, breakPointX];
@@ -269,7 +243,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -324,7 +297,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls className="">
-					<div className="px-3">
+					<div className="pg-setting-input-text">
 						{/* <PanelBody className="font-medium text-slate-900 " title="Flex Options" initialOpen={true}>
 
 

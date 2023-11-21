@@ -9,7 +9,9 @@
     "postId",
     "loopIndex",
     "postType",
-    "queryId"
+    "queryId",
+    "post-grid/listNestedId",
+    "post-grid/icon"
   ],
   "supports": {
     "align": [
@@ -39,6 +41,29 @@
           "right": {},
           "bottom": {},
           "left": {}
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-chevron-right",
+          "class": "icon",
+          "position": "before"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 10px"
+          }
         }
       }
     },

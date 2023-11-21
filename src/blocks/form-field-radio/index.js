@@ -61,13 +61,8 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import PGcssTextAlign from "../../components/css-text-align";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
@@ -125,7 +120,6 @@ registerBlockType("post-grid/form-field-radio", {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -161,15 +155,6 @@ registerBlockType("post-grid/form-field-radio", {
 			var items = blockCssRules;
 			setAttributes({ blockCssY: { items: items } });
 		}, [blockId]);
-
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
 
 		function handleLinkClick(ev) {
 			ev.stopPropagation();
@@ -231,7 +216,6 @@ registerBlockType("post-grid/form-field-radio", {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -315,7 +299,6 @@ registerBlockType("post-grid/form-field-radio", {
 		}
 
 		function onBulkAddLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, label);
 			obj[sudoScource] = cssObj;
 
@@ -399,7 +382,6 @@ registerBlockType("post-grid/form-field-radio", {
 		}
 
 		function onBulkAddInput(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, radio);
 			obj[sudoScource] = cssObj;
 
@@ -483,7 +465,6 @@ registerBlockType("post-grid/form-field-radio", {
 		}
 
 		function onBulkAddLabelWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, labelWrap);
 			obj[sudoScource] = cssObj;
 
@@ -567,7 +548,6 @@ registerBlockType("post-grid/form-field-radio", {
 		}
 
 		function onBulkAddInputWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, inputWrap);
 			obj[sudoScource] = cssObj;
 
@@ -651,7 +631,6 @@ registerBlockType("post-grid/form-field-radio", {
 		}
 
 		function onBulkAddErrorWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, errorWrap);
 			obj[sudoScource] = cssObj;
 
@@ -692,7 +671,7 @@ registerBlockType("post-grid/form-field-radio", {
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-3" initialOpen={false}>
+					<div className="px-3 pg-setting-input-text" initialOpen={false}>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"

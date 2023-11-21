@@ -67,9 +67,6 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 import PGDropdown from "../../components/dropdown";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -131,7 +128,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [metaValue, setMetaValue] = useState(null);
@@ -269,13 +265,6 @@ registerBlockType(metadata, {
 
 		// var breakPointList = [];
 
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		const WrapperTag =
 			wrapper.options.tag != undefined && wrapper.options.tag.length != 0
 				? `${wrapper.options.tag}`
@@ -293,15 +282,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var metaX = attributes.meta;
 				var prefixX = attributes.prefix;
@@ -646,7 +633,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -677,7 +663,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddMeta(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, meta);
 			obj[sudoScource] = cssObj;
 
@@ -734,280 +719,282 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								{
-									name: "css",
-									title: "CSS Library",
-									icon: mediaAndText,
-									className: "tab-css",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
-										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
-										});
-									}}
-								/>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
+					<div className="pg-setting-input-text">
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: mediaAndText,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
 										onChange={(newVal) => {
-											setAttributes({
-												blockId: newVal,
-											});
-										}}
-									/>
-								</PanelRow>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Tag
-									</label>
-									<SelectControl
-										label=""
-										value={wrapper.options.tag}
-										options={[
-											{ label: "Choose", value: "" },
-											{ label: "H1", value: "h1" },
-											{ label: "H2", value: "h2" },
-											{ label: "H3", value: "h3" },
-											{ label: "H4", value: "h4" },
-											{ label: "H5", value: "h5" },
-											{ label: "H6", value: "h6" },
-											{ label: "SPAN", value: "span" },
-											{ label: "DIV", value: "div" },
-											{ label: "P", value: "p" },
-										]}
-										onChange={(newVal) => {
-											var options = { ...wrapper.options, tag: newVal };
+											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
 												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Wrapper Class
+
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											CSS ID
+										</label>
+										<InputControl
+											value={blockId}
+											onChange={(newVal) => {
+												setAttributes({
+													blockId: newVal,
+												});
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Tag
+										</label>
+										<SelectControl
+											label=""
+											value={wrapper.options.tag}
+											options={[
+												{ label: "Choose", value: "" },
+												{ label: "H1", value: "h1" },
+												{ label: "H2", value: "h2" },
+												{ label: "H3", value: "h3" },
+												{ label: "H4", value: "h4" },
+												{ label: "H5", value: "h5" },
+												{ label: "H6", value: "h6" },
+												{ label: "SPAN", value: "span" },
+												{ label: "DIV", value: "div" },
+												{ label: "P", value: "p" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, tag: newVal };
+												setAttributes({
+													wrapper: { styles: wrapper.styles, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Wrapper Class
+										</label>
+
+										<InputControl
+											value={wrapper.options.class}
+											onChange={(newVal) => {
+												var options = { ...wrapper.options, class: newVal };
+												setAttributes({
+													wrapper: { ...wrapper, options: options },
+												});
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
+										onRemove={onRemoveStyleWrapper}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={wrapper}
+										onChange={onPickCssLibraryWrapper}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Meta Key"
+							initialOpen={true}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+									// {
+									//   name: 'css',
+									//   title: 'CSS Library',
+									//   icon: styles,
+									//   className: 'tab-css',
+									// },
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label for="" className="font-medium text-slate-900 ">
+											Meta Key
+										</label>
+
+										<InputControl
+											placeholder="Meta key"
+											value={meta.options.key}
+											onChange={(newVal) => {
+												var options = { ...meta.options, key: newVal };
+												setAttributes({ meta: { ...meta, options: options } });
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label>Meta Key Type </label>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											options={metaKeyTypeArgs}
+											buttonTitle="Choose"
+											onChange={(option, index) => {
+												var options = { ...meta.options, type: option.value };
+												setAttributes({ meta: { ...meta, options: options } });
+											}}
+											values=""
+											value={meta.options.type}></PGDropdown>
+									</PanelRow>
+
+									<label className="my-3" for="">
+										Template
 									</label>
 
-									<InputControl
-										value={wrapper.options.class}
+									<TextareaControl
+										value={template}
 										onChange={(newVal) => {
-											var options = { ...wrapper.options, class: newVal };
-											setAttributes({
-												wrapper: { ...wrapper, options: options },
-											});
+											setAttributes({ template: newVal });
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-									onRemove={onRemoveStyleWrapper}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={wrapper}
-									onChange={onPickCssLibraryWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Meta Key"
-						initialOpen={true}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-								// {
-								//   name: 'css',
-								//   title: 'CSS Library',
-								//   icon: styles,
-								//   className: 'tab-css',
-								// },
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										Meta Key
-									</label>
 
-									<InputControl
-										placeholder="Meta key"
-										value={meta.options.key}
-										onChange={(newVal) => {
-											var options = { ...meta.options, key: newVal };
-											setAttributes({ meta: { ...meta, options: options } });
-										}}
-									/>
-								</PanelRow>
+									<p>
+										You can use following <code>&#123;metaValue&#125;</code> to
+										display output
+									</p>
 
-								<PanelRow>
-									<label>Meta Key Type </label>
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										options={metaKeyTypeArgs}
-										buttonTitle="Choose"
-										onChange={(option, index) => {
-											var options = { ...meta.options, type: option.value };
-											setAttributes({ meta: { ...meta, options: options } });
-										}}
-										values=""
-										value={meta.options.type}></PGDropdown>
-								</PanelRow>
+									{meta.options.type != "string" && (
+										<>
+											<div className="hidden">
+												<label className="mt-5 block" for="">
+													Loop Template{" "}
+												</label>
+												<TextareaControl
+													placeholder="<div>{title}</div><div>{details}</div>"
+													value={templateLoop}
+													onChange={(newVal) => {
+														setAttributes({ templateLoop: newVal });
+													}}
+												/>
 
-								<label className="my-3" for="">
-									Template
-								</label>
-
-								<TextareaControl
-									value={template}
-									onChange={(newVal) => {
-										setAttributes({ template: newVal });
-									}}
-								/>
-
-								<p>
-									You can use following <code>&#123;metaValue&#125;</code> to
-									display output
-								</p>
-
-								{meta.options.type != "string" && (
-									<>
-										<div className="hidden">
-											<label className="mt-5 block" for="">
-												Loop Template{" "}
-											</label>
-											<TextareaControl
-												placeholder="<div>{title}</div><div>{details}</div>"
-												value={templateLoop}
-												onChange={(newVal) => {
-													setAttributes({ templateLoop: newVal });
-												}}
-											/>
-
-											<p>
-												You can use following for loop template to iterate array
-												elements{" "}
-												<code>
-													&#60;div&#62;
-													&#123;itemIndex1&#125;&#60;/div&#62;&#60;div&#62;&#123;itemIndex2&#125;&#60;/div&#62;
-												</code>
-											</p>
-										</div>
-										<div className="my-3">
-											<label for="" className="font-medium text-slate-900 ">
-												Parameters
-											</label>
-											<div className="">
-												{metaArgs != undefined &&
-													Object.entries(metaArgs).map((arg, i) => {
-														var key = arg[0];
-														var val = arg[1];
-
-														return (
-															<div className="my-2 bg-gray-300">
-																<div
-																	onClick={(ev) => {
-																		var target = ev.target;
-																	}}
-																	className="bg-gray-500 px-3 py-2 text-white">
-																	{key}
-																</div>
-																<div className="px-3 py-2">{val}</div>
-															</div>
-														);
-													})}
+												<p>
+													You can use following for loop template to iterate
+													array elements{" "}
+													<code>
+														&#60;div&#62;
+														&#123;itemIndex1&#125;&#60;/div&#62;&#60;div&#62;&#123;itemIndex2&#125;&#60;/div&#62;
+													</code>
+												</p>
 											</div>
-										</div>
-									</>
-								)}
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={meta}
-									onChange={onChangeStyleMeta}
-									onAdd={onAddStyleMeta}
-									onBulkAdd={onBulkAddMeta}
-									onRemove={onRemoveStyleMeta}
-								/>
-							</PGtab>
-							<PGtab name="css">
-								<PGCssLibrary
-									blockId={blockId}
-									obj={meta}
-									onChange={onPickCssLibraryMeta}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+											<div className="my-3">
+												<label for="" className="font-medium text-slate-900 ">
+													Parameters
+												</label>
+												<div className="">
+													{metaArgs != undefined &&
+														Object.entries(metaArgs).map((arg, i) => {
+															var key = arg[0];
+															var val = arg[1];
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"post-meta"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
+															return (
+																<div className="my-2 bg-gray-300">
+																	<div
+																		onClick={(ev) => {
+																			var target = ev.target;
+																		}}
+																		className="bg-gray-500 px-3 py-2 text-white">
+																		{key}
+																	</div>
+																	<div className="px-3 py-2">{val}</div>
+																</div>
+															);
+														})}
+												</div>
+											</div>
+										</>
+									)}
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={meta}
+										onChange={onChangeStyleMeta}
+										onAdd={onAddStyleMeta}
+										onBulkAdd={onBulkAddMeta}
+										onRemove={onRemoveStyleMeta}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={meta}
+										onChange={onPickCssLibraryMeta}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Block Variations"
+							initialOpen={false}>
+							<PGLibraryBlockVariations
+								blockName={"post-meta"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
+						</PanelBody>
+					</div>
 				</InspectorControls>
 
 				<>
@@ -1017,8 +1004,7 @@ registerBlockType(metadata, {
 								<div className="w-[400px] mx-auto my-0">
 									<label
 										for=""
-										className="font-medium text-slate-900 "
-										className="my-4 block">
+										className="font-medium text-slate-900 my-4 block">
 										Meta Field Key
 									</label>
 									<InputControl

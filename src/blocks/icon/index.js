@@ -61,15 +61,10 @@ import {
 } from "@wordpress/icons";
 import { applyFilters } from "@wordpress/hooks";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGIconPicker from "../../components/icon-picker";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
 
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
-import PGcssDisplay from "../../components/css-display";
 import PGDropdown from "../../components/dropdown";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
@@ -138,7 +133,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		const [isLoading, setisLoading] = useState(false);
@@ -235,7 +229,7 @@ registerBlockType(metadata, {
 
 		let linkToArgs = applyFilters("linkToArgs", linkToArgsBasic);
 
-		var textSrcArgs = {
+		var textSrcArgsX = {
 			siteTitle: { label: "Site Title", value: "siteTitle" },
 			tagline: { label: "Tag line", value: "tagline" },
 			siteUrl: { label: "Site URL", value: "siteUrl" },
@@ -244,7 +238,7 @@ registerBlockType(metadata, {
 			postTitle: { label: "Post Title", value: "postTitle", isPro: true },
 		};
 
-		//var textSrcArgs = applyFilters('textSrcArgs', textSrcArgsX);
+		var textSrcArgs = applyFilters("textSrcArgs", textSrcArgsX);
 
 		const [linkPickerExcerpt, setLinkPickerExcerpt] = useState(false);
 		const [linkPickerText, setLinkPickerText] = useState(false);
@@ -264,15 +258,6 @@ registerBlockType(metadata, {
 			setIconHtml(iconHtml);
 		}, [icon]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
 
@@ -280,15 +265,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var textX = attributes.text;
 				var iconX = attributes.icon;
@@ -813,7 +796,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -844,7 +826,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddText(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, text);
 			obj[sudoScource] = cssObj;
 
@@ -875,7 +856,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -906,7 +886,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPrefix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, prefix);
 			obj[sudoScource] = cssObj;
 
@@ -937,7 +916,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostfix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, postfix);
 			obj[sudoScource] = cssObj;
 
@@ -1008,7 +986,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="">
+					<div className="pg-setting-input-text">
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"
@@ -1100,7 +1078,8 @@ registerBlockType(metadata, {
 											Custom Attributes
 										</label>
 										<div
-											className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+											// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+											className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
 											onClick={(ev) => {
 												if (wrapper.options.attr == undefined) {
 													wrapper.options.attr = {};
@@ -1428,7 +1407,8 @@ registerBlockType(metadata, {
 													Custom Attributes
 												</label>
 												<div
-													className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+													// className=" cursor-pointer px-3 text-white py-1 bg-blue-600"
+													className="flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:!bg-gray-700 hover:text-white  focus:outline-none focus:bg-gray-700"
 													onClick={(ev) => {
 														var sdsd = text.options.linkAttr.concat({
 															id: "",

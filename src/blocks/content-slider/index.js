@@ -71,11 +71,10 @@ import { __experimentalScrollable as Scrollable } from "@wordpress/components";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 
 import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
+
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import variations from "./variations";
 
 import PGDropdown from "../../components/dropdown";
@@ -144,7 +143,6 @@ registerBlockType(metadata, {
 		var postId = context["postId"];
 		var postType = context["postType"];
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		//var breakPointX = myStore.getBreakPoint();
 
 		const [breakPointX, setBreakPointX] = useState(
@@ -365,15 +363,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var navsWrapX = attributes.navsWrap;
 				var pervX = attributes.perv;
@@ -545,7 +541,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -629,7 +624,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddNext(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, next);
 			obj[sudoScource] = cssObj;
 
@@ -713,7 +707,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPrev(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, perv);
 			obj[sudoScource] = cssObj;
 
@@ -797,7 +790,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPagination(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, pagination);
 			obj[sudoScource] = cssObj;
 
@@ -884,7 +876,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPaginationActive(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, paginationActive);
 			obj[sudoScource] = cssObj;
 
@@ -971,7 +962,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPaginationWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, paginationWrap);
 			obj[sudoScource] = cssObj;
 
@@ -1058,7 +1048,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddNextIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, nextIcon);
 			obj[sudoScource] = cssObj;
 
@@ -1142,7 +1131,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPervIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, pervIcon);
 			obj[sudoScource] = cssObj;
 
@@ -1226,7 +1214,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddNavsWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]
 			let obj = Object.assign({}, navsWrap);
 			obj[sudoScource] = cssObj;
 
@@ -1326,2194 +1313,2135 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div
-						className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
-						onClick={(ev) => {
-							addSlide();
-						}}>
-						Add Slide Item
-					</div>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Slider Options"
-						initialOpen={true}>
-						<PGtabs
-							activeTab="normal"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "normal",
-									title: "Normal",
-									icon: settings,
-									className: "tab-normal",
-								},
-								{
-									name: "responsive",
-									title: "Responsive",
-									icon: styles,
-									className: "tab-responsive",
-								},
-							]}>
-							<PGtab name="normal">
-								<PanelRow className="my-3">
-									<label>Slider Options</label>
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={"Choose"}
-										options={sliderOptionsArgs}
-										onChange={(option, index) => {
-											var sliderOptionsX = { ...sliderOptions };
-
-											sliderOptionsX[index] = option.value;
-
-											setAttributes({ sliderOptions: sliderOptionsX });
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-
-								{Object.entries(sliderOptions).map((item, index) => {
-									var id = item[0];
-									var value = item[1];
-
-									return (
-										<>
-											{id == "autoplay" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Autoplay?</span>
-													</div>
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-											{id == "rewind" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Rewind?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-											{id == "interval" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Interval?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "speed" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Speed?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "rewindSpeed" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Rewind Speed?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "start" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Start?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "perPage" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Per Page?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "perMove" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Per Move?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "gap" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Gap?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "padding" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Padding?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "focus" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Focus?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "width" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Width?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "height" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Height?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "fixedWidth" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Fixed Width?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "fixedHeight" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Fixed Height?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "heightRatio" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Height Ratio?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "easing" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Easing?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "pauseOnHover" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Pause On Hover?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "pauseOnFocus" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Pause On Focus?</span>
-													</div>
-													<label for="" className="font-medium text-slate-900 ">
-														?
-													</label>
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "rewindByDrag" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Rewind By Drag?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "autoWidth" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Auto Width?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "autoHeight" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Auto Height?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "arrows" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Navigation?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "pagination" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Pagination?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "paginationKeyboard" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Pagination Keyboard?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "drag" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Drag?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "snap" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Snap?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "noDrag" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>noDrag?</span>
-													</div>
-
-													<InputControl
-														value={value}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "paginationDirection" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Pagination Direction?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "ltr", value: "ltr" },
-															{ label: "rtl", value: "rtl" },
-															{ label: "ttb", value: "ttb" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "direction" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Direction?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "ltr", value: "ltr" },
-															{ label: "rtl", value: "rtl" },
-															{ label: "ttb", value: "ttb" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "lazyLoad" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>LazyLoad?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-															{ label: "Nearby", value: "nearby" },
-															{ label: "Sequential", value: "sequential" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "keyboard" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Keyboard?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-															{ label: "global", value: "global" },
-															{ label: "focused", value: "focused" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "mediaQuery" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Media Query?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "min", value: "min" },
-															{ label: "max", value: "max" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "wheel" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Wheel?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-
-											{id == "cover" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArg index={id} />
-														<span>Cover?</span>
-													</div>
-
-													<SelectControl
-														label=""
-														value={value}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsX = { ...sliderOptions };
-															sliderOptionsX[id] = newVal;
-															setAttributes({ sliderOptions: sliderOptionsX });
-														}}
-													/>
-												</PanelRow>
-											)}
-										</>
-									);
-								})}
-							</PGtab>
-							<PGtab name="responsive">
-								<PanelRow className="my-3">
-									<label>Slider Options</label>
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={"Choose"}
-										options={sliderOptionsArgsRes}
-										onChange={(option, index) => {
-											var sliderOptionsResX = { ...sliderOptionsRes };
-
-											if (sliderOptionsResX[index] == undefined) {
-												sliderOptionsResX[index] = {};
-											}
-
-											if (sliderOptionsResX[index][breakPointX] == undefined) {
-												sliderOptionsResX[index][breakPointX] = option.value;
-											}
-
-											setAttributes({ sliderOptionsRes: sliderOptionsResX });
-										}}
-										values=""></PGDropdown>
-
-									<IconToggle
-										position="bottom"
-										variant="secondary"
-										iconList={breakPointList}
-										buttonTitle="Break Point Switch"
-										onChange={onChangeBreakPoint}
-										activeIcon={breakPoints[breakPointX].icon}
-										value={breakPointX}
-									/>
-								</PanelRow>
-
-								{Object.entries(sliderOptionsRes).map((item, index) => {
-									var id = item[0];
-									var value = item[1];
-
-									return (
-										<>
-											{id == "autoplay" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Autoplay?</span>
-													</div>
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+					<div className="pg-setting-input-text">
+						<div
+							className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 mx-3"
+							// className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
+							onClick={(ev) => {
+								addSlide();
+							}}>
+							Add Slide Item
+						</div>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Slider Options"
+							initialOpen={true}>
+							<PGtabs
+								activeTab="normal"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "normal",
+										title: "Normal",
+										icon: settings,
+										className: "tab-normal",
+									},
+									{
+										name: "responsive",
+										title: "Responsive",
+										icon: styles,
+										className: "tab-responsive",
+									},
+								]}>
+								<PGtab name="normal">
+									<PanelRow className="my-3">
+										<label>Slider Options</label>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Choose"}
+											options={sliderOptionsArgs}
+											onChange={(option, index) => {
+												var sliderOptionsX = { ...sliderOptions };
+
+												sliderOptionsX[index] = option.value;
+
+												setAttributes({ sliderOptions: sliderOptionsX });
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+
+									{Object.entries(sliderOptions).map((item, index) => {
+										var id = item[0];
+										var value = item[1];
+
+										return (
+											<>
+												{id == "autoplay" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Autoplay?</span>
+														</div>
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+												{id == "rewind" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Rewind?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+												{id == "interval" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Interval?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "speed" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Speed?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "rewindSpeed" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Rewind Speed?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "start" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Start?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "perPage" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Per Page?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "perMove" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Per Move?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "gap" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Gap?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "padding" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Padding?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "focus" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Focus?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "width" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Width?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "height" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Height?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "fixedWidth" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Fixed Width?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "fixedHeight" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Fixed Height?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "heightRatio" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Height Ratio?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "easing" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Easing?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "pauseOnHover" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Pause On Hover?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "pauseOnFocus" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Pause On Focus?</span>
+														</div>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															?
+														</label>
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "rewindByDrag" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Rewind By Drag?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "autoWidth" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Auto Width?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "autoHeight" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Auto Height?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "arrows" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Navigation?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "pagination" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Pagination?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "paginationKeyboard" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Pagination Keyboard?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "drag" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Drag?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "snap" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Snap?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "noDrag" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>noDrag?</span>
+														</div>
+
+														<InputControl
+															value={value}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "paginationDirection" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Pagination Direction?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "ltr", value: "ltr" },
+																{ label: "rtl", value: "rtl" },
+																{ label: "ttb", value: "ttb" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "direction" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Direction?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "ltr", value: "ltr" },
+																{ label: "rtl", value: "rtl" },
+																{ label: "ttb", value: "ttb" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "lazyLoad" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>LazyLoad?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+																{ label: "Nearby", value: "nearby" },
+																{ label: "Sequential", value: "sequential" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "keyboard" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Keyboard?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+																{ label: "global", value: "global" },
+																{ label: "focused", value: "focused" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "mediaQuery" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Media Query?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "min", value: "min" },
+																{ label: "max", value: "max" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "wheel" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Wheel?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+
+												{id == "cover" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArg index={id} />
+															<span>Cover?</span>
+														</div>
+
+														<SelectControl
+															label=""
+															value={value}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsX = { ...sliderOptions };
+																sliderOptionsX[id] = newVal;
+																setAttributes({
+																	sliderOptions: sliderOptionsX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+											</>
+										);
+									})}
+								</PGtab>
+								<PGtab name="responsive">
+									<PanelRow className="my-3">
+										<label>Slider Options</label>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Choose"}
+											options={sliderOptionsArgsRes}
+											onChange={(option, index) => {
+												var sliderOptionsResX = { ...sliderOptionsRes };
+
+												if (sliderOptionsResX[index] == undefined) {
+													sliderOptionsResX[index] = {};
+												}
+
+												if (
+													sliderOptionsResX[index][breakPointX] == undefined
+												) {
+													sliderOptionsResX[index][breakPointX] = option.value;
+												}
+
+												setAttributes({ sliderOptionsRes: sliderOptionsResX });
+											}}
+											values=""></PGDropdown>
+
+										<IconToggle
+											position="bottom"
+											variant="secondary"
+											iconList={breakPointList}
+											buttonTitle="Break Point Switch"
+											onChange={onChangeBreakPoint}
+											activeIcon={breakPoints[breakPointX].icon}
+											value={breakPointX}
+										/>
+									</PanelRow>
+
+									{Object.entries(sliderOptionsRes).map((item, index) => {
+										var id = item[0];
+										var value = item[1];
+
+										return (
+											<>
+												{id == "autoplay" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Autoplay?</span>
+														</div>
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
-											{id == "rewind" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Rewind?</span>
-													</div>
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+												{id == "rewind" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Rewind?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
-											{id == "interval" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Interval?</span>
-													</div>
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+												{id == "interval" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Interval?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "speed" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Speed?</span>
-													</div>
+												{id == "speed" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Speed?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "rewindSpeed" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Rewind Speed?</span>
-													</div>
+												{id == "rewindSpeed" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Rewind Speed?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "start" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Start?</span>
-													</div>
+												{id == "start" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Start?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "perPage" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Per Page?</span>
-													</div>
+												{id == "perPage" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Per Page?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "perMove" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Per Move?</span>
-													</div>
+												{id == "perMove" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Per Move?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														type="number"
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															type="number"
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "gap" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Gap?</span>
-													</div>
+												{id == "gap" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Gap?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "padding" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Padding?</span>
-													</div>
+												{id == "padding" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Padding?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "focus" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Focus?</span>
-													</div>
+												{id == "focus" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Focus?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "width" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Width?</span>
-													</div>
+												{id == "width" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Width?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "height" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Height?</span>
-													</div>
+												{id == "height" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Height?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "fixedWidth" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Fixed Width?</span>
-													</div>
+												{id == "fixedWidth" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Fixed Width?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "fixedHeight" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Fixed Height?</span>
-													</div>
+												{id == "fixedHeight" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Fixed Height?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "heightRatio" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Height Ratio?</span>
-													</div>
+												{id == "heightRatio" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Height Ratio?</span>
+														</div>
 
-													<InputControl
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<InputControl
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "pauseOnHover" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Pause On Hover?</span>
-													</div>
+												{id == "pauseOnHover" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Pause On Hover?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "pauseOnFocus" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Pause On Focus?</span>
-													</div>
-													<label for="" className="font-medium text-slate-900 ">
-														?
-													</label>
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+												{id == "pauseOnFocus" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Pause On Focus?</span>
+														</div>
+														<label
+															for=""
+															className="font-medium text-slate-900 ">
+															?
+														</label>
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "rewindByDrag" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Rewind By Drag?</span>
-													</div>
+												{id == "rewindByDrag" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Rewind By Drag?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "autoWidth" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Auto Width?</span>
-													</div>
+												{id == "autoWidth" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Auto Width?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "autoHeight" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Auto Height?</span>
-													</div>
+												{id == "autoHeight" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Auto Height?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "arrows" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Navigation?</span>
-													</div>
+												{id == "arrows" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Navigation?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "pagination" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Pagination?</span>
-													</div>
+												{id == "pagination" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Pagination?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "paginationKeyboard" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Pagination Keyboard?</span>
-													</div>
+												{id == "paginationKeyboard" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Pagination Keyboard?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "drag" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Drag?</span>
-													</div>
+												{id == "drag" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Drag?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "snap" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Snap?</span>
-													</div>
+												{id == "snap" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Snap?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "noDrag" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>No Drag?</span>
-													</div>
+												{id == "noDrag" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>No Drag?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "paginationDirection" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Pagination Direction?</span>
-													</div>
+												{id == "paginationDirection" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Pagination Direction?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "ltr", value: "ltr" },
-															{ label: "rtl", value: "rtl" },
-															{ label: "ttb", value: "ttb" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "ltr", value: "ltr" },
+																{ label: "rtl", value: "rtl" },
+																{ label: "ttb", value: "ttb" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "direction" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Direction?</span>
-													</div>
+												{id == "direction" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Direction?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "ltr", value: "ltr" },
-															{ label: "rtl", value: "rtl" },
-															{ label: "ttb", value: "ttb" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "ltr", value: "ltr" },
+																{ label: "rtl", value: "rtl" },
+																{ label: "ttb", value: "ttb" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "lazyLoad" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>LazyLoad?</span>
-													</div>
+												{id == "lazyLoad" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>LazyLoad?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-															{ label: "Nearby", value: "nearby" },
-															{ label: "Sequential", value: "sequential" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+																{ label: "Nearby", value: "nearby" },
+																{ label: "Sequential", value: "sequential" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "keyboard" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Keyboard?</span>
-													</div>
+												{id == "keyboard" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Keyboard?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-															{ label: "global", value: "global" },
-															{ label: "focused", value: "focused" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+																{ label: "global", value: "global" },
+																{ label: "focused", value: "focused" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "mediaQuery" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Media Query?</span>
-													</div>
+												{id == "mediaQuery" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Media Query?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "min", value: "min" },
-															{ label: "max", value: "max" },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "min", value: "min" },
+																{ label: "max", value: "max" },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "wheel" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Wheel?</span>
-													</div>
+												{id == "wheel" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Wheel?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
 
-											{id == "cover" && (
-												<PanelRow>
-													<div className="flex items-center">
-														<RemoveSliderArgRes index={id} />
-														<span>Cover?</span>
-													</div>
+												{id == "cover" && (
+													<PanelRow>
+														<div className="flex items-center">
+															<RemoveSliderArgRes index={id} />
+															<span>Cover?</span>
+														</div>
 
-													<SelectControl
-														label=""
-														value={
-															value[breakPointX] == undefined
-																? ""
-																: value[breakPointX]
-														}
-														options={[
-															{ label: "True", value: 1 },
-															{ label: "False", value: 0 },
-														]}
-														onChange={(newVal) => {
-															var sliderOptionsResX = { ...sliderOptionsRes };
-															if (
-																sliderOptionsResX[id][breakPointX] == undefined
-															) {
-																sliderOptionsResX[id][breakPointX] = "";
+														<SelectControl
+															label=""
+															value={
+																value[breakPointX] == undefined
+																	? ""
+																	: value[breakPointX]
 															}
+															options={[
+																{ label: "True", value: 1 },
+																{ label: "False", value: 0 },
+															]}
+															onChange={(newVal) => {
+																var sliderOptionsResX = { ...sliderOptionsRes };
+																if (
+																	sliderOptionsResX[id][breakPointX] ==
+																	undefined
+																) {
+																	sliderOptionsResX[id][breakPointX] = "";
+																}
 
-															sliderOptionsResX[id][breakPointX] = newVal;
-															setAttributes({
-																sliderOptionsRes: sliderOptionsResX,
-															});
-														}}
-													/>
-												</PanelRow>
-											)}
-										</>
-									);
-								})}
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+																sliderOptionsResX[id][breakPointX] = newVal;
+																setAttributes({
+																	sliderOptionsRes: sliderOptionsResX,
+																});
+															}}
+														/>
+													</PanelRow>
+												)}
+											</>
+										);
+									})}
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Wrapper"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PGcssClassPicker
-									tags={customTags}
-									label="CSS Class"
-									placeholder="Add Class"
-									value={wrapper.options.class}
-									onChange={(newVal) => {
-										var options = { ...wrapper.options, class: newVal };
-										setAttributes({
-											wrapper: { styles: wrapper.styles, options: options },
-										});
-									}}
-								/>
-
-								<PanelRow>
-									<label for="" className="font-medium text-slate-900 ">
-										CSS ID
-									</label>
-									<InputControl
-										value={blockId}
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Wrapper"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PGcssClassPicker
+										tags={customTags}
+										label="CSS Class"
+										placeholder="Add Class"
+										value={wrapper.options.class}
 										onChange={(newVal) => {
+											var options = { ...wrapper.options, class: newVal };
 											setAttributes({
-												blockId: newVal,
+												wrapper: { styles: wrapper.styles, options: options },
 											});
 										}}
 									/>
-								</PanelRow>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									onBulkAdd={onBulkAddWrapper}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Navigation"
-						initialOpen={false}>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Nav Wrap"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options"></PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={navsWrap}
-										onChange={onChangeStyleNavsWrap}
-										onAdd={onAddStyleNavsWrap}
-										onRemove={onRemoveStyleNavsWrap}
-										onBulkAdd={onBulkAddNavsWrap}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Prev"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
 									<PanelRow>
 										<label for="" className="font-medium text-slate-900 ">
-											Previuos Text
+											CSS ID
 										</label>
 										<InputControl
-											value={perv.options.text}
+											value={blockId}
 											onChange={(newVal) => {
-												var options = { ...perv.options, text: newVal };
-												setAttributes({ perv: { ...perv, options: options } });
-											}}
-										/>
-									</PanelRow>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={perv}
-										onChange={onChangeStylePrev}
-										onAdd={onAddStylePrev}
-										onRemove={onRemoveStylePrev}
-										onBulkAdd={onBulkAddPrev}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Prev Icon"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Choose Icon
-										</label>
-
-										<PGIconPicker
-											library={pervIcon.options.library}
-											srcType={pervIcon.options.srcType}
-											iconSrc={pervIcon.options.iconSrc}
-											onChange={(arg) => {
-												var options = {
-													...pervIcon.options,
-													srcType: arg.srcType,
-													library: arg.library,
-													iconSrc: arg.iconSrc,
-												};
-
 												setAttributes({
-													pervIcon: { ...pervIcon, options: options },
-												});
-											}}
-										/>
-									</PanelRow>
-
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Icon Position
-										</label>
-
-										<SelectControl
-											label=""
-											value={pervIcon.options.position}
-											options={[
-												{ label: "None", value: "" },
-												{ label: "After", value: "after" },
-												{ label: "Before", value: "before" },
-											]}
-											onChange={(newVal) => {
-												var options = { ...pervIcon.options, position: newVal };
-												setAttributes({
-													pervIcon: { ...pervIcon, options: options },
+													blockId: newVal,
 												});
 											}}
 										/>
@@ -3521,11 +3449,11 @@ registerBlockType(metadata, {
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
-										obj={pervIcon}
-										onChange={onChangeStylePervIcon}
-										onAdd={onAddStylePervIcon}
-										onRemove={onRemoveStylePervIcon}
-										onBulkAdd={onBulkAddPervIcon}
+										obj={wrapper}
+										onChange={onChangeStyleWrapper}
+										onAdd={onAddStyleWrapper}
+										onRemove={onRemoveStyleWrapper}
+										onBulkAdd={onBulkAddWrapper}
 									/>
 								</PGtab>
 							</PGtabs>
@@ -3533,270 +3461,452 @@ registerBlockType(metadata, {
 
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Next"
+							title="Navigation"
 							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Previuos Text
-										</label>
-										<InputControl
-											value={next.options.text}
-											onChange={(newVal) => {
-												var options = { ...next.options, text: newVal };
-												setAttributes({ next: { ...next, options: options } });
-											}}
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Nav Wrap"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options"></PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={navsWrap}
+											onChange={onChangeStyleNavsWrap}
+											onAdd={onAddStyleNavsWrap}
+											onRemove={onRemoveStyleNavsWrap}
+											onBulkAdd={onBulkAddNavsWrap}
 										/>
-									</PanelRow>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={next}
-										onChange={onChangeStyleNext}
-										onAdd={onAddStyleNext}
-										onRemove={onRemoveStyleNext}
-										onBulkAdd={onBulkAddNext}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
 
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Next Icon"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Choose Icon
-										</label>
-
-										<PGIconPicker
-											library={nextIcon.options.library}
-											srcType={nextIcon.options.srcType}
-											iconSrc={nextIcon.options.iconSrc}
-											onChange={(arg) => {
-												var options = {
-													...nextIcon.options,
-													srcType: arg.srcType,
-													library: arg.library,
-													iconSrc: arg.iconSrc,
-												};
-
-												setAttributes({
-													nextIcon: { ...nextIcon, options: options },
-												});
-											}}
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Prev"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options">
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Previuos Text
+											</label>
+											<InputControl
+												value={perv.options.text}
+												onChange={(newVal) => {
+													var options = { ...perv.options, text: newVal };
+													setAttributes({
+														perv: { ...perv, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									</PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={perv}
+											onChange={onChangeStylePrev}
+											onAdd={onAddStylePrev}
+											onRemove={onRemoveStylePrev}
+											onBulkAdd={onBulkAddPrev}
 										/>
-									</PanelRow>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
 
-									<PanelRow>
-										<label for="" className="font-medium text-slate-900 ">
-											Icon Position
-										</label>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Prev Icon"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options">
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Choose Icon
+											</label>
 
-										<SelectControl
-											label=""
-											value={nextIcon.options.position}
-											options={[
-												{ label: "None", value: "" },
-												{ label: "After", value: "after" },
-												{ label: "Before", value: "before" },
-											]}
-											onChange={(newVal) => {
-												var options = { ...nextIcon.options, position: newVal };
-												setAttributes({
-													nextIcon: { ...nextIcon, options: options },
-												});
-											}}
+											<PGIconPicker
+												library={pervIcon.options.library}
+												srcType={pervIcon.options.srcType}
+												iconSrc={pervIcon.options.iconSrc}
+												onChange={(arg) => {
+													var options = {
+														...pervIcon.options,
+														srcType: arg.srcType,
+														library: arg.library,
+														iconSrc: arg.iconSrc,
+													};
+
+													setAttributes({
+														pervIcon: { ...pervIcon, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Icon Position
+											</label>
+
+											<SelectControl
+												label=""
+												value={pervIcon.options.position}
+												options={[
+													{ label: "None", value: "" },
+													{ label: "After", value: "after" },
+													{ label: "Before", value: "before" },
+												]}
+												onChange={(newVal) => {
+													var options = {
+														...pervIcon.options,
+														position: newVal,
+													};
+													setAttributes({
+														pervIcon: { ...pervIcon, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									</PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={pervIcon}
+											onChange={onChangeStylePervIcon}
+											onAdd={onAddStylePervIcon}
+											onRemove={onRemoveStylePervIcon}
+											onBulkAdd={onBulkAddPervIcon}
 										/>
-									</PanelRow>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={nextIcon}
-										onChange={onChangeStyleNextIcon}
-										onAdd={onAddStyleNextIcon}
-										onRemove={onRemoveStyleNextIcon}
-										onBulkAdd={onBulkAddNextIcon}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-					</PanelBody>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
 
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Pagination"
-						initialOpen={false}>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Next"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options">
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Previuos Text
+											</label>
+											<InputControl
+												value={next.options.text}
+												onChange={(newVal) => {
+													var options = { ...next.options, text: newVal };
+													setAttributes({
+														next: { ...next, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									</PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={next}
+											onChange={onChangeStyleNext}
+											onAdd={onAddStyleNext}
+											onRemove={onRemoveStyleNext}
+											onBulkAdd={onBulkAddNext}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Next Icon"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options">
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Choose Icon
+											</label>
+
+											<PGIconPicker
+												library={nextIcon.options.library}
+												srcType={nextIcon.options.srcType}
+												iconSrc={nextIcon.options.iconSrc}
+												onChange={(arg) => {
+													var options = {
+														...nextIcon.options,
+														srcType: arg.srcType,
+														library: arg.library,
+														iconSrc: arg.iconSrc,
+													};
+
+													setAttributes({
+														nextIcon: { ...nextIcon, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+
+										<PanelRow>
+											<label for="" className="font-medium text-slate-900 ">
+												Icon Position
+											</label>
+
+											<SelectControl
+												label=""
+												value={nextIcon.options.position}
+												options={[
+													{ label: "None", value: "" },
+													{ label: "After", value: "after" },
+													{ label: "Before", value: "before" },
+												]}
+												onChange={(newVal) => {
+													var options = {
+														...nextIcon.options,
+														position: newVal,
+													};
+													setAttributes({
+														nextIcon: { ...nextIcon, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									</PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={nextIcon}
+											onChange={onChangeStyleNextIcon}
+											onAdd={onAddStyleNextIcon}
+											onRemove={onRemoveStyleNextIcon}
+											onBulkAdd={onBulkAddNextIcon}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+						</PanelBody>
+
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Pagination Wrap"
+							title="Pagination"
 							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options"></PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={paginationWrap}
-										onChange={onChangeStylePaginationWrap}
-										onAdd={onAddStylePaginationWrap}
-										onRemove={onRemoveStylePaginationWrap}
-										onBulkAdd={onBulkAddPaginationWrap}
-									/>
-								</PGtab>
-							</PGtabs>
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Pagination Wrap"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options"></PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={paginationWrap}
+											onChange={onChangeStylePaginationWrap}
+											onAdd={onAddStylePaginationWrap}
+											onRemove={onRemoveStylePaginationWrap}
+											onBulkAdd={onBulkAddPaginationWrap}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Pagination Idle"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options"></PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={pagination}
+											onChange={onChangeStylePagination}
+											onAdd={onAddStylePagination}
+											onRemove={onRemoveStylePagination}
+											onBulkAdd={onBulkAddPagination}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
+
+							<PanelBody
+								className="font-medium text-slate-900 "
+								title="Pagination Active"
+								initialOpen={false}>
+								<PGtabs
+									activeTab="options"
+									orientation="horizontal"
+									activeClass="active-tab"
+									onSelect={(tabName) => {}}
+									tabs={[
+										{
+											name: "options",
+											title: "Options",
+											icon: settings,
+											className: "tab-settings",
+										},
+										{
+											name: "styles",
+											title: "Styles",
+											icon: brush,
+											className: "tab-style",
+										},
+									]}>
+									<PGtab name="options"></PGtab>
+									<PGtab name="styles">
+										<PGStyles
+											obj={paginationActive}
+											onChange={onChangeStylePaginationActive}
+											onAdd={onAddStylePaginationActive}
+											onRemove={onRemoveStylePaginationActive}
+											onBulkAdd={onBulkAddPaginationActive}
+										/>
+									</PGtab>
+								</PGtabs>
+							</PanelBody>
 						</PanelBody>
 
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Pagination Idle"
+							title="Block Variations"
 							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options"></PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={pagination}
-										onChange={onChangeStylePagination}
-										onAdd={onAddStylePagination}
-										onRemove={onRemoveStylePagination}
-										onBulkAdd={onBulkAddPagination}
-									/>
-								</PGtab>
-							</PGtabs>
+							<PGLibraryBlockVariations
+								blockName={"content-slider"}
+								blockId={blockId}
+								clientId={clientId}
+								onChange={onPickBlockPatterns}
+							/>
 						</PanelBody>
 
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Pagination Active"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => {}}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options"></PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={paginationActive}
-										onChange={onChangeStylePaginationActive}
-										onAdd={onAddStylePaginationActive}
-										onRemove={onRemoveStylePaginationActive}
-										onBulkAdd={onBulkAddPaginationActive}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Block Variations"
-						initialOpen={false}>
-						<PGLibraryBlockVariations
-							blockName={"content-slider"}
-							blockId={blockId}
-							clientId={clientId}
-							onChange={onPickBlockPatterns}
-						/>
-					</PanelBody>
-
-					<div className="px-2">
-						<PGMailSubsctibe />
-						<PGContactSupport
-							utm={{
-								utm_source: "BlockText",
-								utm_campaign: "PostGridCombo",
-								utm_content: "BlockOptions",
-							}}
-						/>
+						<div className="px-2">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockText",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
 					</div>
 				</InspectorControls>
 

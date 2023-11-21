@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				);
 
 				tabByattr.classList.add("pg-tabs-panel-active");
-				console.log(tabByattr);
+				// console.log(tabByattr);
 
 				//tabByattr.hidden = false;
 			});

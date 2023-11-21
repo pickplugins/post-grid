@@ -64,19 +64,14 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
-import PGDivider from "../../components/divider";
 import PGLibraryBlockVariations from "../../components/library-block-variations";
 
 import variations from "./variations";
@@ -151,7 +146,6 @@ registerBlockType(metadata, {
 
 		let isProFeature = applyFilters("isProFeature", true);
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		// Wrapper CSS Class Selectors
@@ -252,15 +246,6 @@ registerBlockType(metadata, {
 		// 	wp.data.dispatch("core/block-editor").selectBlock(clientId);
 		// }, [labelCounter.options.position]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		function onPickBlockPatterns(content, action) {
 			const { parse } = wp.blockSerializationDefaultParser;
 
@@ -268,8 +253,7 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
@@ -1210,7 +1194,6 @@ registerBlockType(metadata, {
 
 		// add bulk style start
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -1241,7 +1224,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddHeader(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, header);
 			obj[sudoScource] = cssObj;
 
@@ -1272,7 +1254,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddHeaderActive(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, headerActive);
 			obj[sudoScource] = cssObj;
 
@@ -1306,7 +1287,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddHeaderLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, headerLabel);
 			obj[sudoScource] = cssObj;
 
@@ -1340,7 +1320,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddLabelIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, labelIcon);
 			obj[sudoScource] = cssObj;
 
@@ -1371,7 +1350,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddLabelCounter(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, labelCounter);
 			obj[sudoScource] = cssObj;
 
@@ -1405,7 +1383,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddContent(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, content);
 			obj[sudoScource] = cssObj;
 
@@ -1436,7 +1413,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -1467,7 +1443,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIconToggle(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, iconToggle);
 			obj[sudoScource] = cssObj;
 
@@ -1762,15 +1737,15 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div
-						className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
-						onClick={(ev) => {
-							addChild();
-						}}>
-						Add Item
-					</div>
-
-					<div className="">
+					<div className="pg-setting-input-text">
+						<div
+							className="pg-font flex gap-2 justify-center my-2 cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-800 text-white font-medium rounded hover:bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 mx-3"
+							// className="bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded"
+							onClick={(ev) => {
+								addChild();
+							}}>
+							Add Item
+						</div>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Wrapper"

@@ -69,12 +69,9 @@ import breakPoints from "../../breakpoints";
 const { RawHTML } = wp.element;
 import { store } from "../../store";
 
-import IconToggle from "../../components/icon-toggle";
-import Typography from "../../components/typography";
 import PGMailSubsctibe from "../../components/mail-subscribe";
 import PGContactSupport from "../../components/contact-support";
-import BreakpointToggle from "../../components/breakpoint-toggle";
-import colorsPresets from "../../colors-presets";
+
 import PGDropdown from "../../components/dropdown";
 import PGIconPicker from "../../components/icon-picker";
 import PGcssDisplay from "../../components/css-display";
@@ -173,7 +170,6 @@ registerBlockType(metadata, {
 
 		var blockCssY = attributes.blockCssY;
 
-		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 		var breakPointX = myStore.getBreakPoint();
 
 		// Wrapper CSS Class Selectors
@@ -238,15 +234,13 @@ registerBlockType(metadata, {
 			console.log(content);
 			console.log(blocks);
 			const attributes = blocks[0].attrs;
-			// attributes.blockId = Date.now();
-			// console.log(Date.now());
+
 			if (action == "insert") {
 				wp.data
 					.dispatch("core/block-editor")
 					.insertBlocks(wp.blocks.parse(content));
 			}
 			if (action == "applyStyle") {
-				// var options = attributes.options
 				var wrapperX = attributes.wrapper;
 				var dateCountdownX = attributes.dateCountdown;
 				var scheduleTimeX = attributes.scheduleTime;
@@ -2274,7 +2268,6 @@ registerBlockType(metadata, {
 		// add bulk style start
 
 		function onBulkAddWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, wrapper);
 			obj[sudoScource] = cssObj;
 
@@ -2305,7 +2298,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddCountdownWrapper(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, countdownWrapper);
 			obj[sudoScource] = cssObj;
 
@@ -2339,7 +2331,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddInner(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, inner);
 			obj[sudoScource] = cssObj;
 
@@ -2370,7 +2361,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddItems(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, items);
 			obj[sudoScource] = cssObj;
 
@@ -2401,7 +2391,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddSecondWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, secondWrap);
 			obj[sudoScource] = cssObj;
 
@@ -2435,7 +2424,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddSecond(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, second);
 			obj[sudoScource] = cssObj;
 
@@ -2466,7 +2454,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddMinuteWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, minuteWrap);
 			obj[sudoScource] = cssObj;
 
@@ -2500,7 +2487,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddMinute(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, minute);
 			obj[sudoScource] = cssObj;
 
@@ -2531,7 +2517,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddHourWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, hourWrap);
 			obj[sudoScource] = cssObj;
 
@@ -2562,7 +2547,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddHour(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, hour);
 			obj[sudoScource] = cssObj;
 
@@ -2593,7 +2577,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddDayWrap(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, dayWrap);
 			obj[sudoScource] = cssObj;
 
@@ -2624,7 +2607,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddDay(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, day);
 			obj[sudoScource] = cssObj;
 
@@ -2655,7 +2637,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddIcon(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, icon);
 			obj[sudoScource] = cssObj;
 
@@ -2686,7 +2667,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddSeparator(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, separator);
 			obj[sudoScource] = cssObj;
 
@@ -2717,7 +2697,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddLabel(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, label);
 			obj[sudoScource] = cssObj;
 
@@ -2748,7 +2727,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPrefix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, prefix);
 			obj[sudoScource] = cssObj;
 
@@ -2779,7 +2757,6 @@ registerBlockType(metadata, {
 		}
 
 		function onBulkAddPostfix(sudoScource, cssObj) {
-			// var path = [sudoScource, attr, breakPointX]s
 			let obj = Object.assign({}, postfix);
 			obj[sudoScource] = cssObj;
 
@@ -3270,15 +3247,6 @@ registerBlockType(metadata, {
 			setAttributes({ blockCssY: { items: itemX } });
 		}, [blockId]);
 
-		// var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-		// for (var x in breakPoints) {
-
-		//   var item = breakPoints[x];
-		//   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-		// }
-
 		var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 		useEffect(() => {
@@ -3305,7 +3273,7 @@ registerBlockType(metadata, {
 		return (
 			<>
 				<InspectorControls>
-					<div className="px-3 ">
+					<div className="px-3 pg-setting-input-text">
 						<div className="pb-3 mb-4">
 							<PanelRow className="my-4">
 								<label for="" className="font-medium text-slate-900 ">

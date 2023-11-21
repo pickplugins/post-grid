@@ -66,7 +66,7 @@ function Html(props) {
 
       {(widthUnit != 'max-content' || widthUnit != 'min-content' || widthUnit != 'inherit' || widthUnit != 'initial' || widthUnit != 'revert' || widthUnit != 'revert-layer' || widthUnit != 'unset') && (
 
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center pg-font'>
 
           {(widthUnit != 'auto') && (
             <InputControl
@@ -121,7 +121,7 @@ function Html(props) {
 
                 </Button>
               )}
-              renderContent={() => <div className='w-32'>
+              renderContent={() => <div className='w-32 pg-font'>
 
                 {Object.entries(unitArgs).map((y) => {
 

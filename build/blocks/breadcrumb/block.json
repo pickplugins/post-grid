@@ -1,0 +1,222 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/breadcrumb",
+  "title": "Breadcrumb",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-breadcrumb"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "margin": {
+            "Desktop": "0px 0px 0px 0px"
+          },
+          "padding": {
+            "Desktop": "0px 0px 0px 20px"
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "icon",
+          "position": "beforeLabel"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000 !important"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 0px"
+          }
+        }
+      }
+    },
+    "label": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000 !important"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          }
+        }
+      }
+    },
+    "separator": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "text": "»"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000 !important"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 10px"
+          }
+        }
+      }
+    },
+    "elements": {
+      "type": "object",
+      "default": {
+        "options": {
+          "linkTarget": "_blank",
+          "showLabel": true,
+          "showSeparator": true,
+          "showIcon": false,
+          "iconPositon": "beforeLabel"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000 !important"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "display": {
+            "Desktop": "inline-block"
+          }
+        },
+        "items": [
+          {
+            "id": "text",
+            "label": "Text",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {
+              "text": "You are here: ",
+              "showSeparator": true
+            },
+            "styles": {}
+          },
+          {
+            "id": "homePage",
+            "label": "Home Page Link",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {
+              "showSeparator": true
+            },
+            "styles": {}
+          },
+          {
+            "id": "postTitle",
+            "label": "Post Title",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {
+              "showSeparator": true
+            },
+            "styles": {}
+          }
+        ]
+      }
+    },
+    "schema": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true
+        }
+      }
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "breadcrumb",
+    "breadcrumb navs",
+    "breadcrumbs",
+    "breadcrumb block"
+  ],
+  "description": "Display custom breadcrumb for your website."
+}

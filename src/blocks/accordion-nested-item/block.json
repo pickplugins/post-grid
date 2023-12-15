@@ -1,0 +1,145 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/accordion-nested-item",
+  "title": "Accordion Item",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "post-grid/accordionNestedIcon",
+    "post-grid/accordionNestedIconToggle",
+    "post-grid/accordionNestedLabelIcon",
+    "post-grid/accordionNestedLabelCounter"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "parent": [
+    "post-grid/accordion-nested"
+  ],
+  "attributes": {
+    "content": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "accordion-content"
+        },
+        "styles": {
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "header": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "accordion-header"
+        },
+        "styles": {
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "display": {
+            "Desktop": "flex"
+          }
+        }
+      }
+    },
+    "headerLabel": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "Accordion Header Text",
+          "tag": "div",
+          "class": "accordion-header-label"
+        },
+        "styles": {
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "labelCounter": {
+      "type": "object",
+      "default": {
+        "options": {
+          "position": "",
+          "tag": "div",
+          "class": "accordion-header-counter"
+        },
+        "styles": {}
+      }
+    },
+    "labelIcon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "",
+          "enable": false,
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "",
+          "class": "accordion-icon"
+        },
+        "styles": {}
+      }
+    },
+    "iconToggle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "class": "accordion-icon-toggle"
+        },
+        "styles": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "accordion",
+    "accordion faq",
+    "accordions",
+    "faq",
+    "toggle",
+    "collapsible",
+    "accordion nested",
+    "accordion block",
+    "accordion plugin",
+    "question answer"
+  ],
+  "description": "This block is the inner block of accordion nested block"
+}

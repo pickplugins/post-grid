@@ -1,0 +1,83 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/masonry-wrap",
+  "title": "Masonry Wrap",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "providesContext": {
+    "post-grid/galleryId": "blockId",
+    "post-grid/lightbox": "lightbox"
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-masonry-wrap"
+        },
+        "styles": {}
+      }
+    },
+    "item": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-masonry-wrap-item"
+        },
+        "styles": {
+          "width": {
+            "Desktop": "200px"
+          }
+        }
+      }
+    },
+    "masonryOptions": {
+      "type": "object",
+      "default": {
+        "gutter": 20,
+        "itemSelector": ".pg-masonry-wrap-item"
+      }
+    },
+    "lightbox": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": false
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "masonry wrapper",
+    "masonry layout",
+    "masonry wordpress",
+    "masonry block for wordpress"
+  ],
+  "description": "The masonry wrapper provides dynamic control over content organization within a responsive layout."
+}

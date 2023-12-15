@@ -1,0 +1,97 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/post-featured-image",
+  "title": "Featured Image",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-post-featured-image",
+          "useAsBackground": "no"
+        },
+        "styles": {
+          "width": {
+            "Desktop": "100%"
+          },
+          "overflow": {
+            "Desktop": "hidden"
+          }
+        }
+      }
+    },
+    "featuredImage": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "",
+          "linkTo": "",
+          "customUrl": "",
+          "linkToMetaKey": "",
+          "altTextSrc": "imgAltText",
+          "altTextCustom": "",
+          "altTextMetaKey": "",
+          "titleTextSrc": "imgTitle",
+          "titleTextCustom": "",
+          "titleTextMetaKey": "",
+          "linkTarget": "_blank",
+          "linkAttr": [],
+          "class": "",
+          "size": {
+            "Desktop": "full",
+            "Tablet": "full",
+            "Mobile": "full"
+          }
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "maxWidth": {
+            "Desktop": "100%"
+          },
+          "height": {
+            "Desktop": "auto"
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "style": "front_style",
+  "script": "front_script",
+  "keywords": [
+    "featured image",
+    "post featured image",
+    "post thumbnail image",
+    "featured image block",
+    "featured image for wordpress",
+    "featured image block for wordpress"
+  ],
+  "description": "The featured image block is a container for displaying the featured image within a webpage."
+}

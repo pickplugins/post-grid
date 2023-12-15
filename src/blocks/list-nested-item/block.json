@@ -1,0 +1,92 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/list-nested-item",
+  "title": "List item",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId",
+    "post-grid/listNestedId",
+    "post-grid/icon"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "parent": [
+    "post-grid/list-nested"
+  ],
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "tag": "div",
+          "class": "pg-list-nested-item"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "position": {},
+          "zIndex": {},
+          "top": {},
+          "right": {},
+          "bottom": {},
+          "left": {}
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-chevron-right",
+          "class": "icon",
+          "position": "before"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 10px"
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "advanced nested list item",
+    "nested list item block",
+    "list",
+    "list maker",
+    "list block",
+    "list for wordpress",
+    "list block for wordpress"
+  ],
+  "description": "This block is the inner block of nested list block"
+}

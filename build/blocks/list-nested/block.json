@@ -1,0 +1,138 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/list-nested",
+  "title": "List Nested",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "providesContext": {
+    "post-grid/listNestedId": "blockId",
+    "post-grid/icon": "icon"
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "ul",
+          "class": "pg-list-nested"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "text": "",
+          "icon": {
+            "library": "fontAwesome",
+            "srcType": "class",
+            "iconSrc": "fas fa-chevron-right"
+          },
+          "styles": {}
+        }
+      ]
+    },
+    "itemsX": {
+      "type": "object",
+      "default": {
+        "items": []
+      }
+    },
+    "item": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "tag": "li",
+          "counter": false,
+          "reversed": false,
+          "start": 1,
+          "type": "1",
+          "class": "item"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "listStyle": {
+            "Desktop": "circle outside url(sqpurple.gif)"
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-chevron-right",
+          "class": "icon",
+          "positon": "before"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 10px"
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "advanced nested list",
+    "nested list block",
+    "list",
+    "list maker",
+    "list block",
+    "list for wordpress",
+    "list block for wordpress"
+  ],
+  "description": "The nested list block is a list within another list, allowing for hierarchical organization and categorization of content."
+}

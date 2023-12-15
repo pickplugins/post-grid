@@ -1,0 +1,173 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/form-field-radio",
+  "title": "Form Field - Radio",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "parent": [
+    "post-grid/form-wrap"
+  ],
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-form-field-radio"
+        },
+        "styles": {}
+      }
+    },
+    "label": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "tag": "label",
+          "for": "label",
+          "text": "Your Name",
+          "class": "pg-form-field-label"
+        },
+        "styles": {}
+      }
+    },
+    "inputWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "enable": true,
+          "class": ""
+        }
+      }
+    },
+    "radio": {
+      "type": "object",
+      "default": {
+        "options": {
+          "value": null,
+          "name": "",
+          "required": false,
+          "disabled": false,
+          "multiple": false,
+          "autofocus": null,
+          "readonly": false,
+          "args": {
+            "0": {
+              "label": "Option 1",
+              "value": "option1"
+            },
+            "1": {
+              "label": "Option 2",
+              "value": "option2"
+            },
+            "2": {
+              "label": "Option 3",
+              "value": "option3"
+            }
+          },
+          "id": "",
+          "class": "pg-form-field-radio",
+          "position": "afterLabel"
+        },
+        "styles": {}
+      }
+    },
+    "item": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "itemLabel": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "labelWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "enable": true,
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "errorWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "enable": true,
+          "text": "",
+          "position": "afterInput",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "requiredWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "span",
+          "enable": true,
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "form block for wordpress",
+    "form block",
+    "form builder",
+    "form maker",
+    "dynamic form",
+    "Contact Form Plugin",
+    "opt-in form",
+    "login form",
+    "register form",
+    "custom form",
+    "wordpress form",
+    "wordpress form plugin",
+    "Subscription form",
+    "contact form block"
+  ],
+  "description": "The radio field block is a component in web forms that lets users choose a single option from a list using radio buttons."
+}

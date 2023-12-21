@@ -4,7 +4,7 @@
   "name": "post-grid/post-excerpt",
   "title": "Post Excerpt",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-post",
   "usesContext": [
     "postId",
     "loopIndex",

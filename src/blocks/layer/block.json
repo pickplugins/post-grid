@@ -4,7 +4,7 @@
   "name": "post-grid/layer",
   "title": "Layer",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/layers"
   ],

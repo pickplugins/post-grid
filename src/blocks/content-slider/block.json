@@ -4,7 +4,7 @@
   "name": "post-grid/content-slider",
   "title": "Content Slider",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",

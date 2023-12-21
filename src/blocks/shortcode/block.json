@@ -4,7 +4,7 @@
   "name": "post-grid/shortcode",
   "title": "Shortcode",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",

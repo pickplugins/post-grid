@@ -1,7 +1,0 @@
-node_modules
-.DS_Store
-**/.DS_Store
-tailwind.config.js
-package-lock.json
-.npmignore
-

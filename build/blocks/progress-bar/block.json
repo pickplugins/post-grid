@@ -4,7 +4,7 @@
   "name": "post-grid/progress-bar",
   "title": "Progress Bar",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [],
   "supports": {
     "align": [

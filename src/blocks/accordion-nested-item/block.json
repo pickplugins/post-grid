@@ -4,7 +4,7 @@
   "name": "post-grid/accordion-nested-item",
   "title": "Accordion Item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "post-grid/accordionNestedIcon",
     "post-grid/accordionNestedIconToggle",

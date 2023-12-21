@@ -4,7 +4,7 @@
   "name": "post-grid/wordpress-org",
   "title": "wordpress-org",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",

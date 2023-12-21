@@ -375,6 +375,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
                             $terms_relation = isset($taxonomies[$taxonomy]['terms_relation']) ? $taxonomies[$taxonomy]['terms_relation'] : 'IN';
                             $terms = isset($taxonomies[$taxonomy]['terms']) ? $taxonomies[$taxonomy]['terms'] : array();
                             $checked = isset($taxonomies[$taxonomy]['checked']) ? $taxonomies[$taxonomy]['checked'] : '';
+                            //var_dump($terms_relation);
                             $taxonomy_terms = get_terms($taxonomy, array(
                                 'hide_empty' => false,
                             ));
@@ -2218,28 +2219,18 @@ function post_grid_metabox_tabs_content_custom_scripts($tab, $post_id)
 
 
         <?php
+        $args = array(
+            'id'        => 'custom_js',
+            'parent'        => 'post_grid_meta_options',
+            'title'        => __('Custom Js.', 'post-grid'),
+            'details'    => __('You can add custom scripts here, do not use <code>&lt;script&gt; &lt;/script&gt;</code> tag', 'post-grid'),
+            'type'        => 'scripts_js',
+            'default'        => '',
+            'value'        => $custom_js,
 
-        if (current_user_can('administrator')) :
-            $args = array(
-                'id'        => 'custom_js',
-                'parent'        => 'post_grid_meta_options',
-                'title'        => __('Custom Js.', 'post-grid'),
-                'details'    => __('You can add custom scripts here, do not use <code>&lt;script&gt; &lt;/script&gt;</code> tag', 'post-grid'),
-                'type'        => 'scripts_js',
-                'default'        => '',
-                'value'        => $custom_js,
+        );
 
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-        endif;
-
-
-
-
-
-
-
+        $settings_tabs_field->generate_field($args, $post_id);
         ?>
 
         <?php

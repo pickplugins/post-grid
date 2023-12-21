@@ -356,7 +356,8 @@ const variations = [
 		title: __("33-66"),
 		description: __("33-66"),
 		isDefault: true,
-		isPro: !isProFeature ? false : true,
+		// isPro: !isProFeature ? false : true,
+		isPro: false,
 		atts: {
 			wrapper: {
 				options: { tag: "div", class: "pg-flex-wrap" },
@@ -402,7 +403,7 @@ const variations = [
 		title: __("66-33"),
 		description: __("66-33"),
 		isDefault: true,
-		isPro: !isProFeature ? false : true,
+		isPro: false,
 		atts: {
 			wrapper: {
 				options: { tag: "div", class: "pg-flex-wrap" },
@@ -448,7 +449,7 @@ const variations = [
 		title: __("25-50-25"),
 		description: __("25-50-25"),
 		isDefault: true,
-		isPro: !isProFeature ? false : true,
+		isPro: false,
 		atts: {
 			wrapper: {
 				options: { tag: "div", class: "pg-flex-wrap" },
@@ -504,7 +505,7 @@ const variations = [
 		title: __("25-25-50"),
 		description: __("25-25-50"),
 		isDefault: true,
-		isPro: !isProFeature ? false : true,
+		isPro: false,
 		atts: {
 			wrapper: {
 				options: { tag: "div", class: "pg-flex-wrap" },
@@ -560,7 +561,7 @@ const variations = [
 		title: __("50-25-25"),
 		description: __("50-25-25"),
 		isDefault: true,
-		isPro: !isProFeature ? false : true,
+		isPro: false,
 		atts: {
 			wrapper: {
 				options: { tag: "div", class: "pg-flex-wrap" },

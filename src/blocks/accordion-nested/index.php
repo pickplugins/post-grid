@@ -131,7 +131,7 @@ class PGBlockAccordionNested
 
 
       $json['mainEntity'][$i]['@type'] = "Question";
-      $json['mainEntity'][$i]['@id'] = "#" . $block['attrs']['blockId'];
+      $json['mainEntity'][$i]['@id'] = isset($block['attrs']['blockId']) ? "#" . $block['attrs']['blockId'] : '';
       $json['mainEntity'][$i]['name'] = isset($block['attrs']['headerLabel']['options']['text']) ? $block['attrs']['headerLabel']['options']['text'] : '';
       $json['mainEntity'][$i]['acceptedAnswer']['@type'] = "Answer";
       $json['mainEntity'][$i]['acceptedAnswer']['text'] = _wp_specialchars(render_block($block), ENT_QUOTES);
@@ -148,7 +148,7 @@ class PGBlockAccordionNested
 
 
 
-    ?>
+?>
 
 
     <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
@@ -156,12 +156,12 @@ class PGBlockAccordionNested
     </div>
 
     <?php
-    if ($schemaEnable):
-      ?>
+    if ($schemaEnable) :
+    ?>
       <script type="application/ld+json">
-                                                                                                                                                                      <?php echo wp_unslash(json_encode($json)); ?>
-                                                                                                                                                                  </script>
-      <?php
+        <?php echo wp_unslash(json_encode($json)); ?>
+      </script>
+    <?php
     endif;
     ?>
 
@@ -169,7 +169,7 @@ class PGBlockAccordionNested
 
 
 
-    <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

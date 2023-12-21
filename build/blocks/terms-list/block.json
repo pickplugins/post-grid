@@ -4,7 +4,7 @@
   "name": "post-grid/terms-list",
   "title": "Terms List",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",
@@ -79,6 +79,12 @@
             "Desktop": "400"
           }
         }
+      }
+    },
+    "queryArgs": {
+      "type": "object",
+      "default": {
+        "items": []
       }
     },
     "icon": {

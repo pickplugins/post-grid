@@ -4,7 +4,7 @@ Donate link: https://www.pickplugins.com/post-grid
 Tags: post grid, post grid block, block, custom post grid, post type grid, grid display, grid layout, post list, masonry grid
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.65
+Stable tag: 2.2.66
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -382,9 +382,29 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 == Changelog ==
 
-= 2.2.65 =
+= 2.2.66 =
 
-- 2023-12-15 - fix - Remove access to Admin menus to non admins
+- 2023-12-20 - update - Breadcrumb Block - Dynamic Style for individual item.
+- 2023-12-20 - update - Post Grid Block - Dynamic Style for individual item.
+- 2023-12-20 - update - Post Categories Block - Post Count style section.
+- 2023-12-20 - update - Star Rate Block - Dynamic rating and reviews.
+- 2023-12-20 - update - Global Color Library update.
+- 2023-12-20 - update - Global Font Library update.
+- 2023-12-20 - added - Post Grid Block - Variation Picker added.
+- 2023-12-20 - added - Post Grid Filterable Block - Variation Picker added.
+- 2023-12-20 - added - Post Title Block - A/B Test added.
+- 2023-12-20 - fix - Accordion Nested Block - Frontend issue fixed.
+- 2023-12-20 - fix - Icon Button Link Block - Text disable issue fixed.
+- 2023-12-20 - fix - Icon Button Link Block - Link issue fixed.
+- 2023-12-20 - fix - Shortcdoe Block - Attribute duplicate issue fixed.
+- 2023-12-20 - fix - Product Rating Block - Summary type issue fixed.
+- 2023-12-20 - fix - Opacity Component - Opacity value update issue fixed.
+- 2023-12-20 - removed - Shortcdoe Block - Block variation removed.
+
+
+= 2.2.65=
+
+- 2023-12-15 – fix – Remove access to Admin menus to non admins
 
 = 2.2.64 =
 

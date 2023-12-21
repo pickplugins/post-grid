@@ -264,6 +264,12 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
     $last_name = isset($formFields['last_name']) ? sanitize_text_field($formFields['last_name']) : '';
     $email = isset($formFields['email']) ? sanitize_email($formFields['email']) : '';
 
+    $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+    $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+        __('Contact added', 'post-grid');
+    $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+        __('Contact failed', 'post-grid');
+
 
     error_log($email);
 
@@ -279,6 +285,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
     $entryData['formFields'] = $formFields;
     $entryData['user_id'] = isset($user->ID) ? $user->ID : 0;
 
+    error_log("Hello");
 
 
     if (!empty($onprocessargs))
@@ -290,7 +297,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
                 $lists = isset($arg->lists) ? $arg->lists : [];
                 $tags = isset($arg->tags) ? $arg->tags : [];
 
-                error_log(serialize($lists));
 
 
                 $subscriber = FluentCrm\App\Models\Subscriber::create([
@@ -301,7 +307,10 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
 
                 ]);
-                $subscriber->save();
+
+            $status = $subscriber->save();
+
+                
 
                 if (!empty($lists)) {
                     $listIds = [];
@@ -325,16 +334,19 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
 
 
-                $status = true;
+                // $status = true;
 
 
-
+                
                 if (is_wp_error($status)) {
                     //$error_string = $status->get_error_message();
-                    $response['errors']['termSubmitFailed'] = __('fluentcrmAddContact failed');
+                    $response['errors']['fluentcrmAddContactFailed'] = $errorMessage;
                 } else {
-                    $response['success']['termSubmitted'] = __('fluentcrmAddContact added', 'post-grid');
+                    $response['success']['fluentcrmAddContactSuccess'] = $successMessage;
                 }
+
+
+                error_log(serialize($response));
             }
 
             if ($id == 'createEntry') {
@@ -789,6 +801,10 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
             $subject = isset($arg->subject) ? $arg->subject : '';
 
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Send mail success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Send mail failed', 'post-grid');
 
 
             $email_data['email_to'] = $mailTo;
@@ -804,9 +820,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['sendMail'] = __('Send mail success', 'post-grid');
+                    $response['success']['sendMail'] = $successMessage;
                 } else {
-                    $response['errors']['sendMail'] = __('Send mail failed', 'post-grid');
+                    $response['errors']['sendMail'] = $errorMessage;
                 }
             }
         }
@@ -821,6 +837,10 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
             $subject = isset($arg->subject) ? $arg->subject : '';
 
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Email copy user success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Email copy user failed', 'post-grid');
 
 
 
@@ -838,9 +858,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['emailCopyUser'] = __('Email copy user success', 'post-grid');
+                    $response['success']['emailCopyUser'] = $successMessage;
                 } else {
-                    $response['errors']['emailCopyUser'] = __('Email copy user failed', 'post-grid');
+                    $response['errors']['emailCopyUser'] = $errorMessage;
                 }
             }
         }
@@ -856,7 +876,10 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
             $subject = isset($arg->subject) ? $arg->subject : '';
 
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
-
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Email Bcc success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Email Bcc failed', 'post-grid');
 
             $email_data['email_to'] = $mailTo;
             $email_data['email_bcc'] = $bcc;
@@ -873,9 +896,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['emailBcc'] = __('Email Bcc success', 'post-grid');
+                    $response['success']['emailBcc'] = $successMessage;
                 } else {
-                    $response['errors']['emailBcc'] = __('Email Bcc failed', 'post-grid');
+                    $response['errors']['emailBcc'] = $errorMessage;
                 }
             }
         }
@@ -890,6 +913,10 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             $message = isset($arg->message) ? $arg->message : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Auto Reply success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Auto Reply failed', 'post-grid');
 
             $email_data['email_to'] = $email;
             $email_data['email_bcc'] = $bcc;
@@ -905,9 +932,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['autoReply'] = __('Auto Reply success', 'post-grid');
+                    $response['success']['autoReply'] = $successMessage;
                 } else {
-                    $response['errors']['autoReply'] = __('Auto Reply failed', 'post-grid');
+                    $response['errors']['autoReply'] = $errorMessage;
                 }
             }
         }
@@ -915,12 +942,16 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
         if ($id == 'createEntry') {
             $status = form_wrap_process_create_entry($email_data);
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Create entry success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Create entry failed', 'post-grid');
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['createEntry'] = __('Create entry success', 'post-grid');
+                    $response['success']['createEntry'] = $successMessage;
                 } else {
-                    $response['errors']['createEntry'] = __('Create entry failed', 'post-grid');
+                    $response['errors']['createEntry'] = $errorMessage;
                 }
             }
         }
@@ -981,6 +1012,10 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $bcc = isset($arg->bcc) ? $arg->bcc : '';
             $footer = isset($arg->footer) ? $arg->footer : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Send mail success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Send mail failed', 'post-grid');
 
             $email_data['email_to'] = $mailTo;
             $email_data['email_bcc'] = $bcc;
@@ -995,9 +1030,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['sendMail'] = __('Send mail success', 'post-grid');
+                    $response['success']['sendMail'] = $successMessage;
                 } else {
-                    $response['errors']['sendMail'] = __('Send mail failed', 'post-grid');
+                    $response['errors']['sendMail'] = $errorMessage;
                 }
             }
         }
@@ -1010,6 +1045,10 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $replyToName = isset($arg->replyToName) ? $arg->replyToName : '';
             $footer = isset($arg->footer) ? $arg->footer : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Email copy user success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Email copy user failed', 'post-grid');
 
 
 
@@ -1027,9 +1066,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['emailCopyUser'] = __('Email copy user success', 'post-grid');
+                    $response['success']['emailCopyUser'] = $successMessage;
                 } else {
-                    $response['errors']['emailCopyUser'] = __('Email copy user failed', 'post-grid');
+                    $response['errors']['emailCopyUser'] = $errorMessage;
                 }
             }
         }
@@ -1043,6 +1082,10 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $replyToName = isset($arg->replyToName) ? $arg->replyToName : '';
             $footer = isset($arg->footer) ? $arg->footer : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Email Bcc success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Email Bcc failed', 'post-grid');
 
 
             $email_data['email_to'] = $mailTo;
@@ -1060,9 +1103,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['emailBcc'] = __('Email Bcc success', 'post-grid');
+                    $response['success']['emailBcc'] = $successMessage;
                 } else {
-                    $response['errors']['emailBcc'] = __('Email Bcc failed', 'post-grid');
+                    $response['errors']['emailBcc'] = $errorMessage;
                 }
             }
         }
@@ -1075,6 +1118,10 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $footer = isset($arg->footer) ? $arg->footer : '';
             $message = isset($arg->message) ? $arg->message : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Auto Reply success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Auto Reply failed', 'post-grid');
 
             $email_data['email_to'] = $email;
             $email_data['email_bcc'] = $bcc;
@@ -1090,9 +1137,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['autoReply'] = __('Auto Reply success', 'post-grid');
+                    $response['success']['autoReply'] = $successMessage;
                 } else {
-                    $response['errors']['autoReply'] = __('Auto Reply failed', 'post-grid');
+                    $response['errors']['autoReply'] = $errorMessage;
                 }
             }
         }
@@ -1100,12 +1147,16 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
         if ($id == 'createEntry') {
             $status = form_wrap_process_create_entry($email_data);
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+            $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+            __('Create entry success', 'post-grid');
+            $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+            __('Create entry failed', 'post-grid');
 
             if ($showOnResponse) {
                 if ($status) {
-                    $response['success']['createEntry'] = __('Create entry success', 'post-grid');
+                    $response['success']['createEntry'] = $successMessage;
                 } else {
-                    $response['errors']['createEntry'] = __('Create entry failed', 'post-grid');
+                    $response['errors']['createEntry'] = $errorMessage;
                 }
             }
         }

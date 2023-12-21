@@ -4,7 +4,7 @@
   "name": "post-grid/grid-wrap",
   "title": "Grid Wrap",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",
@@ -33,7 +33,7 @@
             "Desktop": "1em"
           },
           "gridTemplateColumns": {
-            "Desktop": "1fr 1fr"
+            "Desktop": "1fr"
           }
         }
       }

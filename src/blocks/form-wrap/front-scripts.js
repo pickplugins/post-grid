@@ -30,13 +30,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var formId = form.getAttribute("formId");
 
 				form.addEventListener("submit", (event) => {
-					//console.log('#### Form On Submit');
 
 					event.preventDefault();
 
 					var formByID = document.querySelector(`[formid="${formId}"]`);
-
-					//console.log(formByID);
 
 					const formData = new FormData(event.target);
 					var onsubmitprams = formByID.getAttribute("onsubmitprams");
@@ -57,12 +54,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					var responsesWrap = document.querySelector(
 						"." + formId + "-responses"
 					);
+					
 
 					loadingWrap.style.display = "block";
 
-					// for (var pair of formData.entries()) {
-					//     //console.log(pair[0] + ', ' + pair[1]);
-					// }
+					
 
 					var onsubmitProceed = false;
 
@@ -74,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 							responsesWrap.innerHTML = "";
 
-							loadingWrap.style.display = "none";
+							// loadingWrap.style.display = "none";
 
 
 							if (Object.keys(errors).length > 0) {
@@ -88,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								responsesWrap.innerHTML = responseHtml;
 								responsesWrap.style.display = "block";
 
-								loadingWrap.style.display = "none";
+								// loadingWrap.style.display = "none";
 								onsubmitProceed = true;
 								throw errors;
 							}
@@ -104,6 +100,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								onsubmitProceed = false;
 							}
 						}
+						if (actionId == "loading") {
+							
+						}
 					});
 
 
@@ -114,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-					//formData.append('formData', formData);
+					
 
 					setTimeout(() => { }, 3000);
 				});
@@ -151,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		var errors = {};
 
-		//var formByID = document.querySelector('.' + formId);
+		
 		var formByID = document.querySelector(`[formid="${formId}"]`);
 
 		for (var pair of formData.entries()) {
@@ -214,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var successArgs = data.success == undefined ? {} : data.success;
 						var errorsArgs = data.errors == undefined ? {} : data.errors;
 
-						(data);
+						console.log(data);
 
 						if (aftersubmitargsObj == null) return;
 

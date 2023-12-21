@@ -22,27 +22,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     if (pgAccordionHeader != null) {
         pgAccordionHeader.forEach(item => {
 
-            // item.addEventListener('click', function () {
-
-            //     var isActive = item.classList.contains('active');
-            //     var blockId = item.getAttribute('blockId');
-            //     var index = item.getAttribute('index');
-
-
-            //     var contentWrap = document.getElementById(blockId + index);
-
-
-            //     if (isActive) {
-            //         item.classList.remove('active');
-            //         contentWrap.style.display = 'none'
-
-            //     } else {
-            //         item.classList.add('active');
-            //         contentWrap.style.display = 'block'
-
-
-            //     }
-            // })
+            
 
         })
     }

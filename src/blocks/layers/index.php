@@ -82,6 +82,8 @@ class PGBlockLayers
     $wrapperRel = isset($wrapperOptions['rel']) ? $wrapperOptions['rel'] : '';
     $wrapperLinkToMetaKey = isset($wrapperOptions['linkToMetaKey']) ? $wrapperOptions['linkToMetaKey'] : '';
 
+    
+
 
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
     $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
@@ -105,7 +107,7 @@ class PGBlockLayers
       $linkUrl = get_author_posts_url($author_id);
     } else if ($wrapperLinkTo == 'homeUrl') {
       $linkUrl = get_bloginfo('url');
-    } else if ($wrapperLinkTo == 'custom') {
+    } else if ($wrapperLinkTo == 'customUrl') {
       $linkUrl = $wrapperCustomUrl;
     }
 

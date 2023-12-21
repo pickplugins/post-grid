@@ -4,7 +4,7 @@
   "name": "post-grid/popup",
   "title": "Popup",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",

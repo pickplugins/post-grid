@@ -41,21 +41,19 @@ if (!function_exists('post_grid_layout_metabox_content_custom_scripts')) {
 
             $settings_tabs_field->generate_field($args);
 
-            if (current_user_can('administrator')) :
-                $args = array(
-                    'id'        => 'custom_js',
-                    'parent'        => 'custom_scripts',
-                    'title'        => __('Custom JS', 'post-grid'),
-                    'details'    => __('Write custom JS to override default style, do not use <code>&lt;script>&lt;/script></code> tag.', 'post-grid'),
-                    'type'        => 'scripts_js',
-                    'value'        => $custom_js,
-                    'default'        => '',
-                    'placeholder'        => '',
-                );
 
-                $settings_tabs_field->generate_field($args);
-            endif;
+            $args = array(
+                'id'        => 'custom_js',
+                'parent'        => 'custom_scripts',
+                'title'        => __('Custom JS', 'post-grid'),
+                'details'    => __('Write custom JS to override default style, do not use <code>&lt;script>&lt;/script></code> tag.', 'post-grid'),
+                'type'        => 'scripts_js',
+                'value'        => $custom_js,
+                'default'        => '',
+                'placeholder'        => '',
+            );
 
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'        => 'layout_preview_img',

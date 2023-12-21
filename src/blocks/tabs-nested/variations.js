@@ -68,9 +68,19 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
+					iconSrc: "fas fa-angle-right",
+					position: "before",
+					class: "nav-icon nav-icon-idle",
+				},
+				styles: { fontSize: { Desktop: "20px" } },
+			},
+			iconToggle: {
+				options: {
+					library: "fontAwesome",
+					srcType: "class",
 					iconSrc: "fas fa-angle-down",
 					position: "before",
-					class: "icon",
+					class: "nav-icon-toggle nav-icon",
 				},
 				styles: { fontSize: { Desktop: "20px" } },
 			},
@@ -89,6 +99,7 @@ const variations = [
 				{
 					wrapper: { options: { tag: "div", class: "pg-tabs" }, styles: {} },
 					content: { options: { tag: "div", class: "" }, styles: {} },
+
 					header: {
 						options: { text: "Accordion Header", tag: "div", class: "" },
 						styles: {},
@@ -938,3 +949,7 @@ const variations = [
 ];
 
 export default variations;
+
+
+
+

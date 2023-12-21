@@ -2,9 +2,9 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "post-grid/text",
-  "title": "Text",
+  "title": "Advance Text",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [],
   "supports": {
     "align": [
@@ -21,6 +21,7 @@
           "content": "Hello World!",
           "tag": "div",
           "class": "pg-text",
+          "id": "",
           "limitBy": "",
           "limitCount": 99
         },

@@ -106,6 +106,8 @@ class PGBlockPostTitle
     $postfix = isset($attributes["postfix"]) ? $attributes["postfix"] : "";
     $postfixOptions = isset($postfix["options"]) ? $postfix["options"] : "";
 
+    $abTest = isset($attributes["abTest"]) ? $attributes["abTest"] : [];
+
     $postfixText = isset($postfixOptions["text"])
       ? _wp_specialchars($postfixOptions["text"])
       : "";
@@ -138,6 +140,13 @@ class PGBlockPostTitle
     }
 
     $post_title = get_the_title($post_ID);
+
+
+    if(!empty($abTest)){
+      $abTest[]=["content" => $post_title];
+      $abTestLength = count($abTest) -1;
+      $post_title = $abTest[rand(0,$abTestLength)]["content"];
+    }
 
     if ($limitBy == "character") {
       $post_title = substr($post_title, 0, $limitCount);

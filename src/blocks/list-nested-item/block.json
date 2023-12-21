@@ -4,7 +4,7 @@
   "name": "post-grid/list-nested-item",
   "title": "List item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",

@@ -4,7 +4,7 @@
   "name": "post-grid/post-query-pagination",
   "title": "Post Query - Pagination",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/post-grid"
   ],
@@ -38,9 +38,18 @@
           "noMorePosts": "No More Posts",
           "loadingText": "Loading...",
           "loadingIcon": {
-            "library": "",
+            "loadingPosition": "beforeText",
+            "library": "fontAwesome",
             "srcType": "class",
-            "iconSrc": ""
+            "iconSrc": "",
+            "class": "load-more"
+          },
+          "loadMoreIcon": {
+            "library": "fontAwesome",
+            "srcType": "class",
+            "iconSrc": "",
+            "position": "beforeText",
+            "class": "load-more"
           }
         },
         "styles": {}
@@ -60,6 +69,62 @@
       "default": {
         "options": {
           "class": "page-numbers "
+        },
+        "styles": {}
+      }
+    },
+    "next": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeText",
+          "class": "next"
+        },
+        "styles": {}
+      }
+    },
+    "previous": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeText",
+          "class": "previous"
+        },
+        "styles": {}
+      }
+    },
+    "start": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeText",
+          "class": "start"
+        },
+        "styles": {}
+      }
+    },
+    "end": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeText",
+          "class": "end"
         },
         "styles": {}
       }

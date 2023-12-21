@@ -4,7 +4,7 @@
   "name": "post-grid/archive-description",
   "title": "Archive description",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-archive",
   "usesContext": [
     "postId",
     "loopIndex",

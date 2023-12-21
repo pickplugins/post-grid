@@ -4,7 +4,7 @@
   "name": "post-grid/post-taxonomies",
   "title": "Post Terms",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-post",
   "usesContext": [
     "postId",
     "loopIndex",

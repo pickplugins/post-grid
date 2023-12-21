@@ -65,6 +65,11 @@
 	/* font-weight: 500; */
 	/* font-size: 13px; */
 }
+
+.pg-setting-input-text button{
+	border: 0;
+	cursor: pointer;
+}
 /* .pg-setting-css-components .components-button {
 	font-family: "Poppins" !important;
 	

@@ -57,6 +57,7 @@ class BlockPostGridRest
 			)
 		);
 
+	
 
 		register_rest_route(
 			'post-grid/v2',
@@ -767,6 +768,9 @@ class BlockPostGridRest
 
 
 
+
+
+
 	/**
 	 * Return update_options
 	 *
@@ -940,6 +944,7 @@ class BlockPostGridRest
 		$onprocessargs = $request->get_param('onprocessargs');
 		$onprocessargs = json_decode($onprocessargs);
 
+		
 
 
 		if (!wp_verify_nonce($form_wrap_nonce, 'form_wrap_nonce')) {

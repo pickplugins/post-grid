@@ -4,7 +4,7 @@
   "name": "post-grid/menu-wrap",
   "title": "Menu Wrap",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",
@@ -64,9 +64,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "pg-menu-link",
-          "text": "Label",
-          "url": ""
+          "class": "pg-menu-link"
         },
         "styles": {
           "backgroundColor": {

@@ -107,7 +107,7 @@ class PGBlockBreadcrumb
 
 
 
-		?>
+?>
 
 
 
@@ -143,14 +143,14 @@ class PGBlockBreadcrumb
 				$linkData = [];
 
 
-				if ($id == 'text'):
+				if ($id == 'text') :
 
 					$links[] = [
 						'label' => (!empty($customText)) ? $customText : __('You are here: ', 'post-grid'),
 						'link' => $custom_url
 					];
 
-				elseif ($id == 'homePage'):
+				elseif ($id == 'homePage') :
 					$home_url = get_bloginfo('url');
 
 					$links[] = [
@@ -160,7 +160,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'frontPage'):
+				elseif ($id == 'frontPage') :
 					$post_id = get_option('page_on_front');
 
 					$post_url = get_permalink($post_id);
@@ -176,7 +176,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'postsPage'):
+				elseif ($id == 'postsPage') :
 					$post_id = get_option('page_for_posts');
 
 					$post_url = get_permalink($post_id);
@@ -190,7 +190,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'postTitle'):
+				elseif ($id == 'postTitle') :
 					$post_id = get_the_ID();
 					$post_url = get_permalink($post_id);
 					$post_title = get_the_title($post_id);
@@ -202,7 +202,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'postAuthor'):
+				elseif ($id == 'postAuthor') :
 
 					$post_id = get_the_ID();
 					$post = get_post($post_id);
@@ -216,7 +216,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'postDate'):
+				elseif ($id == 'postDate') :
 
 					$format = !empty($item['options']['format']) ? $item['options']['format'] : 'Y-m-d';
 					$post_date = get_the_time($format);
@@ -237,7 +237,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'postDay'):
+				elseif ($id == 'postDay') :
 
 					$post_date_year = get_the_time('Y');
 					$post_date_month = get_the_time('m');
@@ -254,7 +254,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'postMonth'):
+				elseif ($id == 'postMonth') :
 
 					$post_date_year = get_the_time('Y');
 					$post_date_month = get_the_time('m');
@@ -270,7 +270,7 @@ class PGBlockBreadcrumb
 						'link' => !empty($custom_url) ? $custom_url : $get_month_link
 					];
 
-				elseif ($id == 'postYear'):
+				elseif ($id == 'postYear') :
 
 					$post_date_year = get_the_time('Y');
 					$post_date_month = get_the_time('m');
@@ -287,7 +287,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'postAncestors'):
+				elseif ($id == 'postAncestors') :
 
 					$count = !empty($item['options']['count']) ? (int) $item['options']['count'] : 0;
 
@@ -317,7 +317,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'postId'):
+				elseif ($id == 'postId') :
 
 					$post_id = get_the_ID();
 					$post_url = get_permalink($post_id);
@@ -328,7 +328,7 @@ class PGBlockBreadcrumb
 						'link' => !empty($custom_url) ? $custom_url : $post_url
 					];
 
-				elseif ($id == 'postCategory'):
+				elseif ($id == 'postCategory') :
 
 					$taxonomy = 'category';
 					$post_id = get_the_ID();
@@ -353,7 +353,7 @@ class PGBlockBreadcrumb
 						'link' => !empty($custom_url) ? $custom_url : $term_link
 					];
 
-				elseif ($id == 'postTag'):
+				elseif ($id == 'postTag') :
 
 
 					$taxonomy = 'post_tag';
@@ -377,7 +377,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'postCategories'):
+				elseif ($id == 'postCategories') :
 
 					$taxonomy = 'category';
 					$post_id = get_the_ID();
@@ -387,7 +387,7 @@ class PGBlockBreadcrumb
 					if ($term_obj_list == false)
 						continue;
 
-					if (!empty($term_obj_list)):
+					if (!empty($term_obj_list)) :
 						foreach ($term_obj_list as $term) {
 
 							$term_id = isset($term->term_id) ? $term->term_id : '';
@@ -414,7 +414,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'postTags'):
+				elseif ($id == 'postTags') :
 
 
 					$taxonomy = 'post_tag';
@@ -425,7 +425,7 @@ class PGBlockBreadcrumb
 					if ($term_obj_list == false)
 						continue;
 
-					if (!empty($term_obj_list)):
+					if (!empty($term_obj_list)) :
 						foreach ($term_obj_list as $term) {
 
 							$term_id = isset($term->term_id) ? $term->term_id : '';
@@ -448,7 +448,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'postTerm'):
+				elseif ($id == 'postTerm') :
 
 
 					$taxonomy = !empty($item['options']['taxonomy']) ? $item['options']['taxonomy'] : '';
@@ -459,7 +459,7 @@ class PGBlockBreadcrumb
 					if ($term_obj_list == false)
 						continue;
 
-					if (!empty($term_obj_list)):
+					if (!empty($term_obj_list)) :
 						foreach ($term_obj_list as $term) {
 
 							$term_id = isset($term->term_id) ? $term->term_id : '';
@@ -480,7 +480,7 @@ class PGBlockBreadcrumb
 					endif;
 
 
-				elseif ($id == 'postTerms'):
+				elseif ($id == 'postTerms') :
 
 					$taxonomy = !empty($item['options']['taxonomy']) ? $item['options']['taxonomy'] : '';
 
@@ -495,7 +495,7 @@ class PGBlockBreadcrumb
 					if ($term_obj_list == false)
 						continue;
 
-					if (!empty($term_obj_list)):
+					if (!empty($term_obj_list)) :
 						foreach ($term_obj_list as $term) {
 
 							$term_id = isset($term->term_id) ? $term->term_id : '';
@@ -517,7 +517,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'termParents'):
+				elseif ($id == 'termParents') :
 					$count = !empty($item['options']['count']) ? (int) $item['options']['count'] : 0;
 
 
@@ -552,7 +552,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'termTitle'):
+				elseif ($id == 'termTitle') :
 
 					$queried_object = get_queried_object();
 					$term_name = $queried_object->name;
@@ -571,10 +571,10 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'termAncestors'):
-				elseif ($id == 'wcShop'):
+				elseif ($id == 'termAncestors') :
+				elseif ($id == 'wcShop') :
 
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))):
+					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
 
 						$post_id = wc_get_page_id('shop');
 
@@ -597,8 +597,8 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'wcAccount'):
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))):
+				elseif ($id == 'wcAccount') :
+					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
 						$post_id = wc_get_page_id('myaccount');
 
 
@@ -615,9 +615,9 @@ class PGBlockBreadcrumb
 					endif;
 
 
-				elseif ($id == 'wcCart'):
+				elseif ($id == 'wcCart') :
 
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))):
+					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
 						$post_id = wc_get_page_id('cart');
 
 
@@ -636,9 +636,9 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'wcCheckout'):
+				elseif ($id == 'wcCheckout') :
 
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))):
+					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
 						$post_url = wc_get_checkout_url();
 						$post_title = 'Checkout';
 						$customText = !empty($customText) ? $customText : '%s';
@@ -654,7 +654,7 @@ class PGBlockBreadcrumb
 
 
 
-				elseif ($id == 'searchText'):
+				elseif ($id == 'searchText') :
 					$current_query = sanitize_text_field(get_query_var('s'));
 					$customText = !empty($customText) ? $customText : '%s';
 
@@ -664,7 +664,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'archiveTitle'):
+				elseif ($id == 'archiveTitle') :
 
 					$archive_title = get_the_archive_title();
 					$customText = !empty($customText) ? $customText : '%s';
@@ -674,7 +674,7 @@ class PGBlockBreadcrumb
 						'link' => !empty($custom_url) ? $custom_url : '#'
 					];
 
-				elseif ($id == '404Text'):
+				elseif ($id == '404Text') :
 
 					$archive_title = get_the_archive_title();
 					$customText = !empty($customText) ? $customText : '%s';
@@ -684,7 +684,7 @@ class PGBlockBreadcrumb
 						'link' => !empty($custom_url) ? $custom_url : '#'
 					];
 
-				elseif ($id == 'dateText'):
+				elseif ($id == 'dateText') :
 
 
 
@@ -700,7 +700,7 @@ class PGBlockBreadcrumb
 						'link' => !empty($custom_url) ? $custom_url : '#'
 					];
 
-				elseif ($id == 'monthText'):
+				elseif ($id == 'monthText') :
 
 					$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
 
@@ -715,7 +715,7 @@ class PGBlockBreadcrumb
 					];
 
 
-				elseif ($id == 'yearText'):
+				elseif ($id == 'yearText') :
 					$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
 
 					$date = get_the_date($format);
@@ -728,7 +728,7 @@ class PGBlockBreadcrumb
 						'link' => !empty($custom_url) ? $custom_url : '#'
 					];
 
-				elseif ($id == 'authorName'):
+				elseif ($id == 'authorName') :
 
 					$archive_title = get_the_author();
 					$customText = !empty($customText) ? $customText : '%s';
@@ -760,8 +760,8 @@ class PGBlockBreadcrumb
 
 
 
-				?>
-				<?php
+		?>
+		<?php
 				$i++;
 			}
 
@@ -784,13 +784,15 @@ class PGBlockBreadcrumb
 
 		ob_start();
 
-		if (!empty($wrapperTag)):
+		if (!empty($wrapperTag)) :
 
-			?>
-			<<?php echo esc_attr($wrapperTag); ?> class="
+		?>
+			<!-- <<?php //echo esc_attr($wrapperTag); ?> class="
+				<?php //echo esc_attr($blockId); ?>
+				<?php //echo esc_attr($wrapperClass); ?>"> -->
+				<ol class="
 				<?php echo esc_attr($blockId); ?>
 				<?php echo esc_attr($wrapperClass); ?>">
-				<ol>
 					<?php
 					$i = 1;
 					$j = 0;
@@ -807,75 +809,75 @@ class PGBlockBreadcrumb
 							$j++;
 
 
-							?>
-							<li class="<?php echo esc_attr('item item-' . $index); ?>">
-								<?php if (!empty($item_link)): ?>
-									<a href="<?php echo esc_url_raw($item_link); ?>">
-										<?php if ($showIcon): ?>
-											<?php //echo wp_kses_post($item['icon']); 
-																		?>
-										<?php endif; ?>
-										<?php if ($showLabel): ?>
-											<span class='label'>
-												<?php echo wp_kses_post($item['label']); ?>
-											</span>
-										<?php endif; ?>
-										<?php if ($showSeparator && $total > $i): ?>
-											<span class="separator">
-												<?php echo esc_html($separatorText); ?>
-											</span>
-										<?php endif; ?>
-									</a>
+					?>
+						<li class="<?php echo esc_attr('item item-' . $index); ?>">
+							<?php if (!empty($item_link)) : ?>
+								<a href="<?php echo esc_url_raw($item_link); ?>">
+									<?php if ($showIcon) : ?>
+										<?php //echo wp_kses_post($item['icon']); 
+										?>
+									<?php endif; ?>
+									<?php if ($showLabel) : ?>
+										<span class='label'>
+											<?php echo wp_kses_post($item['label']); ?>
+										</span>
+									<?php endif; ?>
+									<?php if ($showSeparator && $total > $i) : ?>
+										<span class="separator">
+											<?php echo esc_html($separatorText); ?>
+										</span>
+									<?php endif; ?>
+								</a>
 
-								<?php else: ?>
+							<?php else : ?>
 
-									<span>
-										<?php if ($showIcon): ?>
-											<?php //echo wp_kses_post($item['icon']); 
-																		?>
-										<?php endif; ?>
-										<?php if ($showLabel): ?>
-											<span class='label'>
-												<?php echo wp_kses_post($item['label']); ?>
-											</span>
-										<?php endif; ?>
-										<?php if ($showSeparator && $total > $i): ?>
-											<span class="separator">
-												<?php echo esc_html($separatorText); ?>
-											</span>
-										<?php endif; ?>
-									</span>
-								<?php endif; ?>
+								<span>
+									<?php if ($showIcon) : ?>
+										<?php //echo wp_kses_post($item['icon']); 
+										?>
+									<?php endif; ?>
+									<?php if ($showLabel) : ?>
+										<span class='label'>
+											<?php echo wp_kses_post($item['label']); ?>
+										</span>
+									<?php endif; ?>
+									<?php if ($showSeparator && $total > $i) : ?>
+										<span class="separator">
+											<?php echo esc_html($separatorText); ?>
+										</span>
+									<?php endif; ?>
+								</span>
+							<?php endif; ?>
 
-							</li>
-							<?php
+						</li>
+					<?php
 							$i++;
 						}
 
 
 					?>
 				</ol>
-			</<?php echo esc_attr($wrapperTag); ?>>
+			<!-- </<?php //echo esc_attr($wrapperTag); ?>> -->
 
 
 
 
 			<?php
-			if ($schemaEnable):
-				?>
+			if ($schemaEnable) :
+			?>
 				<script type="application/ld+json">
-																																																						<?php echo wp_unslash(json_encode($json)); ?>
-																																																				</script>
-				<?php
+					<?php echo wp_unslash(json_encode($json)); ?>
+				</script>
+			<?php
 			endif;
-		?>
+			?>
 		<?php
 
 		endif;
 
 		?>
 
-		<?php return ob_get_clean();
+<?php return ob_get_clean();
 	}
 }
 

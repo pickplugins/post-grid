@@ -133,31 +133,25 @@ class PGBlockFormWrap
 
 
 
-    ?>
+?>
 
-                <div
-                  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-
+    <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
-                  <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
 
-                  <form class="<?php echo esc_attr($formClass); ?> " formId="<?php echo esc_attr($blockId); ?>" method="GET"
-                    onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>'
-                    formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)): ?>
-                            onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?>                 <?php if (!empty($afterSubmit)): ?>
-                            afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?>                 <?php if (!empty($visible)): ?>
-                            data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
-                    <?php echo $content ?>
-                    <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
-                  </form>
 
-                  <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
-                </div>
 
-                <?php
+      <form class="<?php echo esc_attr($formClass); ?> " formId="<?php echo esc_attr($blockId); ?>" method="GET" onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)) : ?> onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?> <?php if (!empty($afterSubmit)) : ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?> <?php if (!empty($visible)) : ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
+        <?php echo $content ?>
+        <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
+      </form>
+      <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
+      <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
+    </div>
 
-                return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

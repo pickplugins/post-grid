@@ -4,7 +4,7 @@
   "name": "post-grid/menu-wrap-item",
   "title": "Menu Item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",

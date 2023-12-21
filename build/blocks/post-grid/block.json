@@ -4,7 +4,7 @@
   "name": "post-grid/post-grid",
   "title": "Post Grid",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "providesContext": {
     "post-grid/postGridId": "blockId",
     "post-grid/queryArgs": "queryArgs",
@@ -132,6 +132,14 @@
           }
         }
       }
+    },
+    "nthItemStyle": {
+      "type": "array",
+      "default": [
+        {
+          "styles": {}
+        }
+      ]
     },
     "pagination": {
       "type": "object",

@@ -4,7 +4,7 @@
   "name": "post-grid/flex-wrap",
   "title": "Flex Wrap",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",

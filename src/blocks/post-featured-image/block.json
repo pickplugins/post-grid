@@ -4,7 +4,7 @@
   "name": "post-grid/post-featured-image",
   "title": "Featured Image",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-post",
   "usesContext": [
     "postId",
     "loopIndex",

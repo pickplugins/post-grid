@@ -143,7 +143,7 @@ const queryPramsBasic = {
   hasPassword: { val: '', multiple: false, id: 'hasPassword', label: 'Has Password', description: "Post query for posts with passwords" },
   postPassword: { val: '', multiple: false, id: 'postPassword', label: 'Post Password', description: "Post query for posts with particular passwords", /*isPro: true*/ },
 
-  commentCount: { val: { compare: '=' }, multiple: false, id: 'commentCount', label: 'Comment Count', description: "Post query by comment count" },
+  commentCount: { val: { compare: "=", value: 10 }, multiple: false, id: 'commentCount', label: 'Comment Count', description: "Post query by comment count" },
 
   nopaging: { val: '', multiple: false, id: 'nopaging', label: 'No Paging', description: "Enable show all posts or use pagination" },
   postsPerPage: { val: '', multiple: false, id: 'postsPerPage', label: 'Posts Per Page', description: "Number of post to show per page" },

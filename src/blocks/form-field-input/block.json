@@ -4,7 +4,7 @@
   "name": "post-grid/form-field-input",
   "title": "Form Field - Input",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/form-wrap",
     "post-grid/flex-wrap",

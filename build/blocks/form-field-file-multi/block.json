@@ -4,7 +4,7 @@
   "name": "post-grid/form-field-file-multi",
   "title": "Form Field - Multi File",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/form-wrap"
   ],

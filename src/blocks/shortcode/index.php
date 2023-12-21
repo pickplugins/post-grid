@@ -109,10 +109,12 @@ class BlockPostShortcode
         ////var_dump($shortcodePrams);
 
 
-        if (!empty($wrapperTag)):
+        if (!empty($wrapperTag)) :
+
+            
 
             echo do_shortcode('[' . $shortcodeKey . ' ' . $shortcodeAtts . ']');
-
+           
         endif;
 
 

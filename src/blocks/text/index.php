@@ -62,6 +62,7 @@ class PGBlockPostText
     $text = isset($attributes['text']) ? $attributes['text'] : [];
     $textOptions = isset($text['options']) ? $text['options'] : [];
     $textClass = isset($textOptions['class']) ? $textOptions['class'] : '';
+    $textId = isset($textOptions['id']) ? $textOptions['id'] : '';
 
     $wrapperTag = isset($textOptions['tag']) ? $textOptions['tag'] : 'div';
     $content = isset($textOptions['content']) ? $textOptions['content'] : '';
@@ -106,7 +107,7 @@ class PGBlockPostText
 ?>
       <<?php echo esc_attr($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($textClass); ?>">
+        <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>">
         <?php echo $content; ?>
       </<?php echo esc_attr($wrapperTag); ?>>
     <?php

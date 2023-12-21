@@ -4,7 +4,7 @@
   "name": "post-grid/image",
   "title": "Image",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",
@@ -25,7 +25,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "pg-post-image",
+          "class": "pg-image",
           "useAsBackground": "no"
         },
         "styles": {
@@ -47,6 +47,10 @@
           "imgSrcMetaKeyType": "ID",
           "imgSrcImgId": "",
           "srcUrl": "",
+          "lazy": true,
+          "lazySrc": "",
+          "lazySrcId": "",
+          "lazySrcType": "media",
           "srcId": "",
           "linkTo": "",
           "linkToMetaKey": "",

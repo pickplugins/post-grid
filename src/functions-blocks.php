@@ -17,7 +17,7 @@ function post_grid_global_css()
 
 
 
-  ?>
+?>
 
 
   <?php
@@ -275,211 +275,211 @@ function parse_css_class($classStr, $obj)
 
 
 function post_grid_parse_query_prams($queryArgs)
-  {
+{
 
-    $query_args = [];
-
-
-
-    foreach ($queryArgs as $item) {
+  $query_args = [];
 
 
 
-      $id = isset($item['id']) ? $item['id'] : '';
-      $val = isset($item['val']) ? $item['val'] : '';
+  foreach ($queryArgs as $item) {
 
 
-      if (isset($item['val'])) {
-        if ($id == 'postType') {
-          $query_args['post_type'] = $val;
-        } elseif ($id == 'postStatus') {
-          $query_args['post_status'] = $val;
-        } elseif ($id == 'order') {
-          $query_args['order'] = $val;
-        } elseif ($id == 'orderby') {
-          $query_args['orderby'] = implode(' ', $val);
-        } elseif ($id == 'metaKey') {
-          $query_args['meta_key'] = $val;
-        } elseif ($id == 'dateQuery') {
+
+    $id = isset($item['id']) ? $item['id'] : '';
+    $val = isset($item['val']) ? $item['val'] : '';
 
 
-          $date_query = [];
+    if (isset($item['val'])) {
+      if ($id == 'postType') {
+        $query_args['post_type'] = $val;
+      } elseif ($id == 'postStatus') {
+        $query_args['post_status'] = $val;
+      } elseif ($id == 'order') {
+        $query_args['order'] = $val;
+      } elseif ($id == 'orderby') {
+        $query_args['orderby'] = implode(' ', $val);
+      } elseif ($id == 'metaKey') {
+        $query_args['meta_key'] = $val;
+      } elseif ($id == 'dateQuery') {
 
-          foreach ($val as $arg) {
-            $id = isset($arg['id']) ? $arg['id'] : '';
-            $value = isset($arg['value']) ? $arg['value'] : '';
+
+        $date_query = [];
+
+        foreach ($val as $arg) {
+          $id = isset($arg['id']) ? $arg['id'] : '';
+          $value = isset($arg['value']) ? $arg['value'] : '';
 
 
-            if ($id == 'year' || $id == 'month' || $id == 'week' || $id == 'day' || $id == 'hour' || $id == 'minute' || $id == 'second') {
-              $compare = isset($arg['compare']) ? $arg['compare'] : '';
+          if ($id == 'year' || $id == 'month' || $id == 'week' || $id == 'day' || $id == 'hour' || $id == 'minute' || $id == 'second') {
+            $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-              if (!empty($value))
-                $date_query[] = [$id => $value, 'compare' => $compare,];
-            }
-
-
-            if ($id == 'inclusive' || $id == 'compare' || $id == 'relation') {
-
-              if (!empty($value))
-                $date_query[$id] = $value;
-            }
-
-            if ($id == 'after' || $id == 'before') {
-              $year = isset($arg['year']) ? $arg['year'] : '';
-              $month = isset($arg['month']) ? $arg['month'] : '';
-              $day = isset($arg['day']) ? $arg['day'] : '';
-
-              if (!empty($year))
-                $date_query[$id]['year'] = $year;
-
-              if (!empty($month))
-                $date_query[$id]['month'] = $month;
-
-              if (!empty($day))
-                $date_query[$id]['day'] = $day;
-            }
+            if (!empty($value))
+              $date_query[] = [$id => $value, 'compare' => $compare,];
           }
 
 
+          if ($id == 'inclusive' || $id == 'compare' || $id == 'relation') {
 
-          $query_args['date_query'] = $date_query;
-        } elseif ($id == 'year') {
+            if (!empty($value))
+              $date_query[$id] = $value;
+          }
 
+          if ($id == 'after' || $id == 'before') {
+            $year = isset($arg['year']) ? $arg['year'] : '';
+            $month = isset($arg['month']) ? $arg['month'] : '';
+            $day = isset($arg['day']) ? $arg['day'] : '';
 
+            if (!empty($year))
+              $date_query[$id]['year'] = $year;
 
-          $query_args['year'] = $val;
-        } elseif ($id == 'monthnum') {
-          $query_args['monthnum'] = $val;
-        } elseif ($id == 'w') {
-          $query_args['w'] = $val;
-        } elseif ($id == 'day') {
-          $query_args['day'] = $val;
-        } elseif ($id == 'hour') {
-          $query_args['hour'] = $val;
-        } elseif ($id == 'minute') {
-          $query_args['minute'] = $val;
-        } elseif ($id == 'second') {
-          $query_args['second'] = $val;
-        } elseif ($id == 'm') {
-          $query_args['m'] = $val;
-        } elseif ($id == 'author') {
-          $query_args['author'] = $val;
-        } elseif ($id == 'authorName') {
-          $query_args['author_name'] = $val;
-        } elseif ($id == 'authorIn') {
-          $query_args['author_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'authorNotIn') {
-          $query_args['author__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'cat') {
-          $query_args['cat'] = $val;
-        } elseif ($id == 'categoryName') {
-          $query_args['category_name'] = $val;
-        } elseif ($id == 'categoryAnd') {
-          $query_args['category_and'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'categoryIn') {
-          $query_args['category__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'categoryNotIn') {
-          $query_args['category__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tag') {
-          $query_args['tag'] = $val;
-        } elseif ($id == 'tagId') {
-          $query_args['tag_id'] = $val;
-        } elseif ($id == 'tagAnd') {
-          $query_args['tag__and'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagIn') {
-          $query_args['tag__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagNotIn') {
-          $query_args['tag__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagSlugAnd') {
-          $query_args['tag_slug__and'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'tagSlugIn') {
-          $query_args['tag_slug__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'taxQuery') {
-          $query_args['tax_query'] = isset($val[0]) ? $val[0] : $val;
-        } elseif ($id == 'p') {
-          $query_args['p'] = $val;
-        } elseif ($id == 'name') {
-          $query_args['name'] = $val;
-        } elseif ($id == 'pageId') {
-          $query_args['page_id'] = $val;
-        } elseif ($id == 'pagename') {
-          $query_args['pagename'] = $val;
-        } elseif ($id == 'postParent') {
-          $query_args['post_parent'] = $val;
-        } elseif ($id == 'postParentIn') {
-          $query_args['post_parent__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postParentNotIn') {
-          $query_args['post_parent__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postIn') {
+            if (!empty($month))
+              $date_query[$id]['month'] = $month;
 
-          $query_args['post__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postNotIn') {
-          $query_args['post__not_in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'postNameIn') {
-          $query_args['post_name__in'] = !empty($val) ? explode(',', $val) : [];
-        } elseif ($id == 'hasPassword') {
-
-          $query_args['has_password'] = $val;
-        } elseif ($id == 'postPassword') {
-          $query_args['post_password'] = $val;
-        } elseif ($id == 'commentCount') {
-          $query_args['comment_count'] = $val;
-        } elseif ($id == 'nopaging') {
-          $query_args['nopaging'] = $val;
-        } elseif ($id == 'postsPerPage') {
-          $query_args['posts_per_page'] = $val;
-        } elseif ($id == 'paged') {
-          $query_args['paged'] = $val;
-        } elseif ($id == 'offset') {
-
-          $query_args['offset'] = $val;
-        } elseif ($id == 'postsPerArchivePage') {
-          $query_args['posts_per_archive_page'] = $val;
-        } elseif ($id == 'ignoreStickyPosts') {
-          $query_args['ignore_sticky_posts'] = $val;
-        } elseif ($id == 'metaKey') {
-          $query_args['meta_key'] = $val;
-        } elseif ($id == 'metaValue') {
-
-          $query_args['meta_value'] = $val;
-        } elseif ($id == 'metaValueNum') {
-
-
-
-          $query_args['meta_value_num'] = $val;
-        } elseif ($id == 'metaCompare') {
-          $query_args['meta_compare'] = $val;
-        } elseif ($id == 'metaQuery') {
-          $query_args['meta_query'] = $val;
-        } elseif ($id == 'perm') {
-          $query_args['perm'] = $val;
-        } elseif ($id == 'postMimeType') {
-          $query_args['post_mime_type'] = $val;
-        } elseif ($id == 'cacheResults') {
-          $query_args['cache_results'] = $val;
-        } elseif ($id == 'updatePostMetaCache') {
-          $query_args['update_post_meta_cache '] = $val;
-        } elseif ($id == 'updatePostTermCache') {
-          $query_args['update_post_term_cache'] = $val;
+            if (!empty($day))
+              $date_query[$id]['day'] = $day;
+          }
         }
+
+
+
+        $query_args['date_query'] = $date_query;
+      } elseif ($id == 'year') {
+
+
+
+        $query_args['year'] = $val;
+      } elseif ($id == 'monthnum') {
+        $query_args['monthnum'] = $val;
+      } elseif ($id == 'w') {
+        $query_args['w'] = $val;
+      } elseif ($id == 'day') {
+        $query_args['day'] = $val;
+      } elseif ($id == 'hour') {
+        $query_args['hour'] = $val;
+      } elseif ($id == 'minute') {
+        $query_args['minute'] = $val;
+      } elseif ($id == 'second') {
+        $query_args['second'] = $val;
+      } elseif ($id == 'm') {
+        $query_args['m'] = $val;
+      } elseif ($id == 'author') {
+        $query_args['author'] = $val;
+      } elseif ($id == 'authorName') {
+        $query_args['author_name'] = $val;
+      } elseif ($id == 'authorIn') {
+        $query_args['author_in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'authorNotIn') {
+        $query_args['author__not_in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'cat') {
+        $query_args['cat'] = $val;
+      } elseif ($id == 'categoryName') {
+        $query_args['category_name'] = $val;
+      } elseif ($id == 'categoryAnd') {
+        $query_args['category_and'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'categoryIn') {
+        $query_args['category__in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'categoryNotIn') {
+        $query_args['category__not_in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'tag') {
+        $query_args['tag'] = $val;
+      } elseif ($id == 'tagId') {
+        $query_args['tag_id'] = $val;
+      } elseif ($id == 'tagAnd') {
+        $query_args['tag__and'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'tagIn') {
+        $query_args['tag__in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'tagNotIn') {
+        $query_args['tag__not_in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'tagSlugAnd') {
+        $query_args['tag_slug__and'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'tagSlugIn') {
+        $query_args['tag_slug__in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'taxQuery') {
+        $query_args['tax_query'] = isset($val[0]) ? $val[0] : $val;
+      } elseif ($id == 'p') {
+        $query_args['p'] = $val;
+      } elseif ($id == 'name') {
+        $query_args['name'] = $val;
+      } elseif ($id == 'pageId') {
+        $query_args['page_id'] = $val;
+      } elseif ($id == 'pagename') {
+        $query_args['pagename'] = $val;
+      } elseif ($id == 'postParent') {
+        $query_args['post_parent'] = $val;
+      } elseif ($id == 'postParentIn') {
+        $query_args['post_parent__in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'postParentNotIn') {
+        $query_args['post_parent__not_in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'postIn') {
+
+        $query_args['post__in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'postNotIn') {
+        $query_args['post__not_in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'postNameIn') {
+        $query_args['post_name__in'] = !empty($val) ? explode(',', $val) : [];
+      } elseif ($id == 'hasPassword') {
+
+        $query_args['has_password'] = $val;
+      } elseif ($id == 'postPassword') {
+        $query_args['post_password'] = $val;
+      } elseif ($id == 'commentCount') {
+        $query_args['comment_count'] = $val;
+      } elseif ($id == 'nopaging') {
+        $query_args['nopaging'] = $val;
+      } elseif ($id == 'postsPerPage') {
+        $query_args['posts_per_page'] = $val;
+      } elseif ($id == 'paged') {
+        $query_args['paged'] = $val;
+      } elseif ($id == 'offset') {
+
+        $query_args['offset'] = $val;
+      } elseif ($id == 'postsPerArchivePage') {
+        $query_args['posts_per_archive_page'] = $val;
+      } elseif ($id == 'ignoreStickyPosts') {
+        $query_args['ignore_sticky_posts'] = $val;
+      } elseif ($id == 'metaKey') {
+        $query_args['meta_key'] = $val;
+      } elseif ($id == 'metaValue') {
+
+        $query_args['meta_value'] = $val;
+      } elseif ($id == 'metaValueNum') {
+
+
+
+        $query_args['meta_value_num'] = $val;
+      } elseif ($id == 'metaCompare') {
+        $query_args['meta_compare'] = $val;
+      } elseif ($id == 'metaQuery') {
+        $query_args['meta_query'] = $val;
+      } elseif ($id == 'perm') {
+        $query_args['perm'] = $val;
+      } elseif ($id == 'postMimeType') {
+        $query_args['post_mime_type'] = $val;
+      } elseif ($id == 'cacheResults') {
+        $query_args['cache_results'] = $val;
+      } elseif ($id == 'updatePostMetaCache') {
+        $query_args['update_post_meta_cache '] = $val;
+      } elseif ($id == 'updatePostTermCache') {
+        $query_args['update_post_term_cache'] = $val;
       }
     }
-
-
-    if (get_query_var('paged')) {
-      $paged = get_query_var('paged');
-    } elseif (get_query_var('page')) {
-      $paged = get_query_var('page');
-    } else {
-      $paged = 1;
-    }
-
-    if (!empty($paged))
-      $query_args['paged'] = $paged;
-
-
-    return $query_args;
   }
+
+
+  if (get_query_var('paged')) {
+    $paged = get_query_var('paged');
+  } elseif (get_query_var('page')) {
+    $paged = get_query_var('page');
+  } else {
+    $paged = 1;
+  }
+
+  if (!empty($paged))
+    $query_args['paged'] = $paged;
+
+
+  return $query_args;
+}
 
 
 function post_grid_global_cssY()
@@ -642,9 +642,9 @@ function post_grid_global_cssY()
   //var_dump($fonts);
 
   if (!empty($fonts)) {
-    ?>
+  ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
-    <?php
+  <?php
 
   }
 
@@ -654,7 +654,7 @@ function post_grid_global_cssY()
     <?php echo ($reponsiveCss); ?>
   </style>
 
-  <?php
+<?php
 
 }
 add_action('wp_footer', 'post_grid_global_cssY', 999);
@@ -666,8 +666,9 @@ function post_grid_global_vars()
   $postGridScriptData['siteUrl'] = get_bloginfo('url');
 
 
-  ?>
-  <script>     var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
+?>
+  <script>
+    var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
   </script>
   <?php
 }
@@ -690,13 +691,22 @@ function post_grid_block_categories($categories, $context)
   if (!empty($categories)) {
 
     $inserted = array(
+
       array(
-        'slug' => 'post-grid',
-        'title' => __('Post Grid Combo', 'boilerplate'),
+        'slug' => 'post-grid-post',
+        'title' => __('Post Grid - Post Element', 'boilerplate'),
+      ),
+      array(
+        'slug' => 'post-grid-tools',
+        'title' => __('Post Grid - Tools', 'boilerplate'),
       ),
       array(
         'slug' => 'post-grid-woo',
-        'title' => __('Post Grid Combo - WooCommerce', 'boilerplate'),
+        'title' => __('Post Grid - WooCommerce', 'boilerplate'),
+      ),
+      array(
+        'slug' => 'post-grid-archive',
+        'title' => __('Post Grid - Archive', 'boilerplate'),
       ),
     );
 
@@ -942,9 +952,9 @@ function post_grid_page_styles()
   $fonts = str_replace(" ", "+", $fontsArrStr);
 
   if (!empty($fonts)) {
-    ?>
+  ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
-    <?php
+  <?php
 
   }
 
@@ -955,12 +965,43 @@ function post_grid_page_styles()
     <?php echo ($reponsiveCss); ?>
   </style>
 
-  <?php
+<?php
 
 
 
 }
 add_action('wp_footer', 'post_grid_page_styles', 999);
+
+
+function post_grid_font_family()
+{
+
+  $post_grid_block_editor = get_option('post_grid_block_editor');
+  $customFonts = isset($post_grid_block_editor['customFonts']) ? $post_grid_block_editor['customFonts'] : [];
+
+  $faceStr = '';
+
+  foreach ($customFonts as $face) {
+
+    $fontFamily = $face['family'];
+    $src = $face['src'][0]['url'];
+    $fontWeight = $face['weight'];
+
+    $faceStr .= "@font-face {
+    font-family: '$fontFamily';
+    src: url('$src');
+    font-weight: $fontWeight;
+  }";
+  }
+?>
+  <style>
+    <?php echo ($faceStr); ?>
+  </style>
+<?php
+}
+add_action('wp_footer', 'post_grid_font_family', 999);
+
+
 
 
 

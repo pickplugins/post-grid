@@ -4,7 +4,7 @@
   "name": "post-grid/flex-wrap-item",
   "title": "Flex Item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/flex-wrap"
   ],

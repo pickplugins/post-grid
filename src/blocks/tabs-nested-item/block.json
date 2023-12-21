@@ -4,15 +4,12 @@
   "name": "post-grid/tabs-nested-item",
   "title": "Tabs Nested Item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/tabs-nested"
   ],
   "usesContext": [
-    "postId",
-    "loopIndex",
-    "postType",
-    "queryId"
+    "activeTab"
   ],
   "supports": {
     "align": [
@@ -26,8 +23,7 @@
       "default": {
         "options": {
           "viewType": "horizontal",
-          "class": "",
-          "activeTab": ""
+          "class": ""
         },
         "styles": {}
       }
@@ -89,11 +85,9 @@
         "styles": {}
       }
     },
-    "activeTab": {
-      "type": "string"
-    },
     "uid": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "blockId": {
       "type": "string",

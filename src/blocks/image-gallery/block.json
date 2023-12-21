@@ -4,7 +4,7 @@
   "name": "post-grid/image-gallery",
   "title": "Image Gallery",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",
@@ -37,7 +37,7 @@
             "Desktop": "1em"
           },
           "gridTemplateColumns": {
-            "Desktop": "1fr 1fr"
+            "Desktop": "1fr"
           }
         }
       }

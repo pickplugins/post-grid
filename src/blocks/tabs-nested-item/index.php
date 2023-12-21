@@ -56,9 +56,10 @@ class PGBlockTabsNestedItem
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 		$blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
+		$activeTab = isset($block->context['activeTab']) ? $block->context['activeTab'] : null;
 
 
-		$activeTab = isset($attributes['activeTab']) ? $attributes['activeTab'] : '';
+		//$activeTab = isset($attributes['activeTab']) ? $attributes['activeTab'] : '';
 		$uid = isset($attributes['uid']) ? $attributes['uid'] : '';
 
 
@@ -104,8 +105,8 @@ class PGBlockTabsNestedItem
 			wp_enqueue_style('bootstrap-icons');
 		}
 
-		$obj['id'] = $post_ID;
-		$obj['type'] = 'post';
+		// $obj['id'] = $post_ID;
+		// $obj['type'] = 'post';
 
 
 
@@ -115,9 +116,8 @@ class PGBlockTabsNestedItem
 		ob_start();
 
 
-		?>
-		<div class="pg-tabs-panel  <?php echo ($uid == $activeTab) ? 'pg-tabs-panel-active' : '' ?>"
-			data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true">
+?>
+		<div class="pg-tabs-panel  <?php echo ($uid == $activeTab) ? '' : '' ?>" data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true">
 
 			<?php echo $content; ?>
 
@@ -128,7 +128,7 @@ class PGBlockTabsNestedItem
 
 
 
-		<?php return ob_get_clean();
+<?php return ob_get_clean();
 	}
 }
 

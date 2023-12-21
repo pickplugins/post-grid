@@ -63,6 +63,7 @@ const variations = [
 					enable: false,
 					tag: "div",
 					class: "accordion-header-counter",
+					overrideChild: true,
 				},
 				styles: {},
 			},
@@ -74,6 +75,7 @@ const variations = [
 					position: "left",
 					enable: false,
 					class: "accordion-icon",
+					overrideChild: true,
 				},
 				styles: {},
 			},
@@ -81,9 +83,10 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "left",
 					class: "accordion-icon",
+					overrideChild: true,
 				},
 				styles: {},
 			},
@@ -91,7 +94,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -153,7 +156,7 @@ const variations = [
 							library: "fontAwesome",
 							srcType: "class",
 							iconSrc: "",
-							position: "left",
+							position: "",
 							class: "accordion-icon",
 						},
 						styles: {},
@@ -278,7 +281,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "left",
 					class: "accordion-icon",
 				},
@@ -288,7 +291,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -487,7 +490,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "left",
 					class: "accordion-icon",
 				},
@@ -497,7 +500,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -725,7 +728,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "left",
 					class: "accordion-icon",
 				},
@@ -739,7 +742,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -953,7 +956,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "right",
 					class: "accordion-icon",
 				},
@@ -967,7 +970,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -1172,7 +1175,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "",
 					class: "accordion-icon",
 				},
@@ -1182,7 +1185,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -1367,7 +1370,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "",
 					class: "accordion-icon",
 				},
@@ -1377,7 +1380,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -1579,7 +1582,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "",
 					class: "accordion-icon",
 				},
@@ -1589,7 +1592,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -1803,7 +1806,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-down",
 					position: "",
 					class: "accordion-icon",
 				},
@@ -1813,7 +1816,7 @@ const variations = [
 				options: {
 					library: "fontAwesome",
 					srcType: "class",
-					iconSrc: "",
+					iconSrc: "fas fa-angle-up",
 					class: "accordion-icon-toggle",
 				},
 				styles: {},
@@ -1926,4 +1929,7 @@ const variations = [
 ];
 
 export default variations;
+
+
+
 

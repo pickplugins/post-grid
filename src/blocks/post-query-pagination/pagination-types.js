@@ -8,6 +8,8 @@ const paginationTypesBasic = {
   next_previous: { label: 'Next-Previous', value: 'next_previous', /*isPro: false*/ },
   loadmore: { label: 'Load More', value: 'loadmore', /*isPro: false*/ },
   infinite: { label: 'Infinite Load', value: 'infinite', /*isPro: false*/ },
+  filterable: { label: 'Filterable', value: 'filterable', },
+
 };
 
 let paginationTypes = applyFilters('paginationTypes', paginationTypesBasic);

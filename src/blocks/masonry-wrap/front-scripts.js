@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			// console.log(elemX);
 			if (elemX != null) {
 				// elemX.forEach((item) => {
-					imagesLoaded(item, function () {
+					// imagesLoaded(item, function () {
 						var msnry = new Masonry(
 							item,
 							masonryOptions
 							
 						);
-					});
+					// });
 				// });
 			}
 		});

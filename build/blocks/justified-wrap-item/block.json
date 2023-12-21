@@ -4,7 +4,7 @@
   "name": "post-grid/justified-wrap-item",
   "title": "Justified Item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/justified-wrap"
   ],

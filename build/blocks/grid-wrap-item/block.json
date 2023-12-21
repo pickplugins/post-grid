@@ -4,7 +4,7 @@
   "name": "post-grid/grid-wrap-item",
   "title": "Grid Item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/grid-wrap"
   ],

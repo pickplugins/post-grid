@@ -31,7 +31,6 @@ if (!defined('ABSPATH')) exit;  // if direct access
 
 
 
-
 //add_image_size( 'custom-size', 435, 435, true );
 //add_image_size( 'center-435', 220, 220, array( 'center', 'center' ) );
 
@@ -388,6 +387,7 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
         //$post_type = $post->post_type;
         $post_type = isset($post->post_type) ? $post->post_type : '';
 
+        //var_dump($post_type);
 
         if ($post_type == 'page') {
             $content = '';

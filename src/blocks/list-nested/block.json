@@ -4,7 +4,7 @@
   "name": "post-grid/list-nested",
   "title": "List Nested",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "usesContext": [
     "postId",
     "loopIndex",
@@ -85,7 +85,7 @@
             "Desktop": "400"
           },
           "listStyle": {
-            "Desktop": "circle outside url(sqpurple.gif)"
+            "Desktop": "circle"
           }
         }
       }

@@ -4,7 +4,7 @@
   "name": "post-grid/masonry-wrap-item",
   "title": "Masonry Item",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/masonry-wrap"
   ],

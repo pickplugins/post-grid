@@ -4,7 +4,7 @@
   "name": "post-grid/tabs",
   "title": "Tabs",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-tools",
   "parent": [
     "post-grid/accordion-nested"
   ],

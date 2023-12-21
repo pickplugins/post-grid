@@ -4,7 +4,7 @@
   "name": "post-grid/read-more",
   "title": "Read More",
   "textdomain": "post-grid",
-  "category": "post-grid",
+  "category": "post-grid-post",
   "usesContext": [
     "postId",
     "loopIndex",

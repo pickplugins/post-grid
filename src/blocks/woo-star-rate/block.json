@@ -31,6 +31,9 @@
           },
           "alignItems": {
             "Desktop": "center"
+          },
+          "gap": {
+            "Desktop": "10px"
           }
         }
       }
@@ -134,9 +137,6 @@
           },
           "fontWeight": {
             "Desktop": "400"
-          },
-          "lineHeight": {
-            "Desktop": "155%"
           }
         }
       }

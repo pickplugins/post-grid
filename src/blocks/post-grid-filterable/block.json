@@ -15,6 +15,10 @@
     "post-grid/postGridId": "blockId",
     "post-grid/queryArgs": "queryArgs",
     "post-grid/layout": "layout",
+    "post-grid/filterable": "filterable",
+    "post-grid/activeFilter": "activeFilter",
+    "post-grid/filterGroupWrap": "filterGroupWrap",
+    "post-grid/filterGroup": "filterGroup",
     "post-grid/pagination": "pagination",
     "post-grid/paginationItem": "paginationItem",
     "post-grid/paginationItemActive": "paginationItemActive"

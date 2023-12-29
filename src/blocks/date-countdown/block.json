@@ -516,7 +516,7 @@
       "type": "object",
       "default": {
         "options": {
-          "enable": true,
+          "enable": false,
           "text": "",
           "class": "prefix"
         },
@@ -546,7 +546,7 @@
       "type": "object",
       "default": {
         "options": {
-          "enable": true,
+          "enable": false,
           "text": "",
           "class": "postfix"
         },

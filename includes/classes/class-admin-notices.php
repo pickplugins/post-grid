@@ -7,11 +7,57 @@ class class_post_grid_notices
     public function __construct()
     {
         add_action('admin_notices', array($this, 'license_expired'));
+        add_action('admin_notices', array($this, 'rebrand'));
 
         //add_action('admin_notices', array($this, 'layout_depricated'));
         //add_action('admin_notices', array( $this, 'import_layouts' ));
 
     }
+
+
+    public function rebrand()
+    {
+
+        $screen = get_current_screen();
+        $post_grid_notices = get_option('post_grid_notices', []);
+        $is_hidden = isset($post_grid_notices['hide_notice_rebrand']) ? $post_grid_notices['hide_notice_rebrand'] : 'no';
+
+        //var_dump($post_grid_notices);
+        //delete_option('post_grid_notices');
+
+        $actionurl = admin_url() . '?hide_notice_rebrand=yes';
+        $actionurl = wp_nonce_url($actionurl,  'hide_notice_rebrand');
+
+        $nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '';
+        $hide_notice_rebrand = isset($_REQUEST['hide_notice_rebrand']) ? sanitize_text_field($_REQUEST['hide_notice_rebrand']) : '';
+
+        //var_dump($hide_notice_rebrand);
+
+
+        if (wp_verify_nonce($nonce, 'hide_notice_rebrand') && $hide_notice_rebrand == 'yes') {
+            $post_grid_notices['hide_notice_rebrand'] = 'hidden';
+            update_option('post_grid_notices', $post_grid_notices);
+
+            return;
+        }
+
+
+
+        ob_start();
+
+        if ($is_hidden == 'no') :
+?>
+            <div class="notice notice-error">
+                <p><strong>Post Grid/Post Grid Combo</strong> is now <strong><a target="_blank" class="" href="https://getpostgrid.com/?utm_source=WPadminNotice&utm_campaign=comboBlocks&utm_medium=userClick">Combo Blocks</a></strong> <a class="button" href="<?php echo esc_url_raw($actionurl) ?>">Hide</a></p>
+            </div>
+            <?php
+        endif;
+
+
+        echo (ob_get_clean());
+    }
+
+
 
 
     public function license_expired()
@@ -53,8 +99,8 @@ class class_post_grid_notices
 
                 // wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
 
-?>
-                <div class="notice error">
+            ?>
+                <div class="notice notice-error is-dismissible">
                     <p class="text-lg flex justify-between">
                         <span>
                             <span class="dashicons dashicons-warning align-middle text-red-600"></span> Your license for Post Grid plugin has expried, please <a target="_blank" class="bg-blue-600 rounded-sm inline-block text-white hover:text-white hover:bg-blue-700 px-5 py-1" href="https://pickplugins.com/post-grid/purchase-license/?licenseKey=<?php echo $license_key; ?>">Renew</a>

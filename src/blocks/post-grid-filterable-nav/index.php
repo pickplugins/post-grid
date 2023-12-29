@@ -265,9 +265,6 @@ class PGBlockPostGridFilterableNav
 
       <div class="<?php echo esc_attr($blockId); ?> PGBlockPostGridFilterableNav PGBlockPostGridFilterableNav-<?php echo esc_attr($postGridId); ?>" postgridargs=<?php echo wp_json_encode($postGridArgs); ?>>
         <form class="filterable-group-wrap">
-
-
-
           <?php
 
           $groupLogic = '';

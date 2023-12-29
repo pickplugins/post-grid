@@ -39,7 +39,7 @@ class PGBlockFlexWrap
 		register_block_type(
 			post_grid_plugin_dir . 'build/blocks/flex-wrap/block.json',
 			array(
-				'title' => 'Flex Wrap',
+				'title' => 'Flex Maker',
 				'render_callback' => array($this, 'theHTML'),
 
 

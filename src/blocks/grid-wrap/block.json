@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "post-grid/grid-wrap",
-  "title": "Grid Wrap",
+  "title": "Grid Maker",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "usesContext": [

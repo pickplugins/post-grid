@@ -14,7 +14,7 @@ const variations = [
 
 		isPro: false,
 		atts: {
-			wrapper: { options: { tag: "div", class: "" }, styles: {} },
+			wrapper: { options: { tag: "div", class: "", accOption: [] }, styles: {} },
 			searchWrap: {
 				options: {
 					enable: false,

@@ -136,6 +136,7 @@ class PGBlockPostCategories
 
 
 
+
     $termsCount = (is_array($terms)) ? count($terms) : 0;
 
     $maxCount = ($termsCount > $itemsMaxCount) ? $itemsMaxCount : $termsCount;

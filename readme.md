@@ -1,23 +1,23 @@
-=== Post Grid Combo - 36+ Gutenberg Blocks ===
+=== Post Grid, Form Maker, Popup Maker, WooCommerce Blocks, Post Blocks, Post Carousel - Combo Blocks ===
 Contributors: PickPlugins
-Donate link: https://www.pickplugins.com/post-grid
-Tags: post grid, post grid block, block, custom post grid, post type grid, grid display, grid layout, post list, masonry grid
+Donate link: https://getpostgrid.com/
+Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.66
+Stable tag: 2.2.67
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-    Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
+    Combo Blocks for Landing Page Builder, Blog Builder, eCommerce Builder, Niche Site Builder, News Site Builder and More.
 
 == Description ==
 
-Post Grid is now Post Grid Combo. We have added 40+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
+Post Grid is now Combo Blocks. We have added 45+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
 
 ### Post Grid by [PickPlugins](http://pickplugins.com)
 
 - 👉 [See the Live demo](https://getpostgrid.com/)
-- 👉 [Buy Premium](https://www.pickplugins.com/post-grid/)
+- 👉 [Buy Premium](https://getpostgrid.com/pricing/)
 - 👉 [Documentation](https://getpostgrid.com/documentations/)
 - 👉 [Support](https://www.pickplugins.com/support/)
 - 👉 [Tutorials](https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6)
@@ -53,8 +53,6 @@ Post Layouts are templates library for Post Grid and could be used to design pos
 ### Grid Layouts Library
 
 Creating advanced and complex grids could be painful for everyone, so we make this easy by creating a library for grid layouts. You can click to import grid layouts to apply to your grid.
-
-[👉 Checkout Grid Layouts Library](https://getpostgrid.com/grid-layouts/)
 
 ### Style Components
 
@@ -122,7 +120,7 @@ Post tags blocks are specially designed for displaying post tags. You can displa
 
 Post-category blocks are specially designed for displaying custom taxonomy and terms. You can display post terms with a link or without a link, with custom separator text, or with front text. Also, an icons option is available to display on various positions like the beginning of items, front of each item, after of each item, etc.
 
-[👉 Checkout Taxonomy/Terms Block]([)](https://getpostgrid.com/blocks/post-terms/)
+[👉 Checkout Taxonomy/Terms Block](https://getpostgrid.com/blocks/post-terms/)
 
 ### Post Date Block
 
@@ -150,11 +148,9 @@ The advanced text allows you to display custom text anywhere on your page. Our a
 
 [👉 Checkout Post Grid Filterable Block](https://getpostgrid.com/blocks/post-grid-filterable/)
 
-### List Block
-
-[👉 Checkout List Block](https://getpostgrid.com/blocks/list)
 
 ### List Nested Block
+Create Beautiful Lists with Gutenberg, Best WordPress List Block, Responsive List Block, Accessibility-Friendly List Listings, and More.
 
 [👉 Checkout List Block](https://getpostgrid.com/blocks/list)
 
@@ -194,17 +190,17 @@ Number Counters are usually displayed to count down numbers with animation, whic
 
 [👉 Checkout Number Counter](https://getpostgrid.com/blocks/number-counter/)
 
-### Flex Wrap Block
+### Flex Maker Block
 
-Flex wrap block is powerful to generate a flex-wrap. It has a child block flex-wrap item to use as a child item of flex wrapper. You can customize the flex-wrap or items as you want.
+Flex Maker block is powerful to generate a flex-wrap. It has a child block flex-wrap item to use as a child item of flex wrapper. You can customize the flex-wrap or items as you want.
 
-[👉 Checkout Flex Wrap](https://getpostgrid.com/blocks/flex-wrap/)
+[👉 Checkout Flex Maker](https://getpostgrid.com/blocks/flex-wrap/)
 
-### Grid Wrap Block
+### Grid Maker Block
 
-Grid wrap is another powerful block to generate a CSS grid. It has a child block grid-wrap-item. We have provided many variations to get started quickly.
+Grid Maker is another powerful block to generate a CSS grid. It has a child block grid-wrap-item. We have provided many variations to get started quickly.
 
-[👉 Checkout Grid Wrap](https://getpostgrid.com/blocks/grid-wrap/)
+[👉 Checkout Grid Maker](https://getpostgrid.com/blocks/grid-wrap/)
 
 ### Image Gallery Block
 
@@ -234,7 +230,7 @@ Progress Bars are exciting elements on a website. They can display stats, achiev
 
 Form block is another powerful block to generate forms. We have provided such a powerful tool to generate essential to advanced forms. With many ready variations, you can get started quickly with the login form, registration form, post-submission form, contact form, term submission form, post-comment form, etc. You can display forms conditionally with advanced options.
 
-[👉 Checkout Form Wrap Block](https://getpostgrid.com/blocks/form-wrap/)
+[👉 Checkout Form Maker Block](https://getpostgrid.com/blocks/form-wrap/)
 
 ### Breadcrumb Block
 
@@ -291,7 +287,7 @@ To extend the functinality of our post grid plugin we have added many popular pl
 - 🔥 The SEO Framework
 - 🔥 SEO SIMPLE PACK
 
-## 🏆 Users Feedback For Post Grid Combo
+## 🏆 Users Feedback For Combo Blocks
 
 [Miguelapps](https://wordpress.org/support/topic/easy-and-intuitive-plugin-to-use/):
 
@@ -322,7 +318,7 @@ To extend the functinality of our post grid plugin we have added many popular pl
 = Automatic installation =
 
 1. Go to your WordPress Plugin installation menu (Dashboard > Plugins > Add New)
-2. In the search field type Post Grid Combo and press enter.
+2. In the search field type Combo Blocks and press enter.
 3. "Install Now" and then click "Active"
 
 = Manual installation =
@@ -331,7 +327,7 @@ For Manual installation, you download our product from WordPress directory uploa
 
 1. Download the plugin and unzip it, make sure its under the folder name "post-grid"
 2. Using an FTP program or CPanel upload the unzipped plugin folder to your WordPress installation’s wp-content/plugins/ directory.
-3. Activate the plugin from the Plugins menu (Dashboard > Plugins > Installed Plugins > Post Grid Combo) within the WordPress admin.
+3. Activate the plugin from the Plugins menu (Dashboard > Plugins > Installed Plugins > Combo Blocks) within the WordPress admin.
 
 == Frequently Asked Questions ==
 
@@ -355,7 +351,7 @@ Filterable Post Grid is a WordPress plugin that allows you to display posts or c
 
 = Is this plugin renamed? =
 
-Yes, We have recently renamed this plugin "Post Grid" to "Post Grid Combo"
+Yes, We have recently renamed this plugin "Post Grid" to "Combo Blocks"
 
 = Is this a Gutenberg Blocks plugin? =
 
@@ -371,16 +367,31 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 == Screenshots ==
 
-1. screenshot-1
-2. screenshot-2
-3. screenshot-3
-4. screenshot-4
-5. screenshot-5
-6. screenshot-6
-7. screenshot-7
-8. screenshot-8
+1. Content Slider Block
+2. Date Countdown Block
+3. Form Maker Block
+4. Grid Maker Block
+5. Image Gallery Block
+6. layer Block
+7. List Block
+8. Masonry Grid Block
+9. Number Counter Block
+10. Popup Maker Block
+11. Post Grid Filterable Block
+12. Progressbar Block
+13. Social Share Block
+14. Star Rate Block
+15. Accordion Block
 
 == Changelog ==
+
+= 2.2.67 =
+- 2023-12-28 - update - Plugin name update Post Grid Combo to Combo Blocks
+- 2023-12-28 - fix - Block icons updated.
+- 2023-12-28 - fix - Post Query Block - Layout fetch issue fixed.
+- 2023-12-28 - fix - List Nested Block - Frontend output issue fixed
+- 2023-12-28 - fix - Post Categories Block - Term link added
+
 
 = 2.2.66 =
 
@@ -415,7 +426,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 - 2023-11-16 - added - Post Query block added.
 - 2023-11-16 - added - Post Query Pagination block added.
 - 2023-11-16 - added - CSS class picker added.
-- 2023-11-16 - added - Add item button on Flex Wrap, Grid Wrap, Image Gallery block.
+- 2023-11-16 - added - Add item button on Flex Maker, Grid Wrap, Image Gallery block.
 - 2023-11-16 - update - Accordion Item Block - copy style feature update.
 - 2023-11-21 - fix - Menu block updated
 - 2023-11-21 - fix - Tabs Nested dupilcate issue fixed
@@ -512,7 +523,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 - 2023-07-30 - add - List Block - Add button click issue fixed
 - 2023-07-30 - add - Content Slider Block - Multiple slider issue fixed.
 - 2023-07-30 - add - WordPress.org Block - Missing field values display issue fixed
-- 2023-07-30 - add - Block Insert - Change Post Grid Combo category position
+- 2023-07-30 - add - Block Insert - Change Combo Blocks category position
 - 2023-07-30 - add - REST API - Permission updated.
 
 = 2.2.50 =
@@ -575,7 +586,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 = 2.2.40 =
 
-- 2023-04-15 - add - New block flex wrap added.
+- 2023-04-15 - add - New block Flex Maker added.
 - 2023-04-15 - add - New block flex item wrap added.
 - 2023-04-15 - add - New block accordion wrap added.
 - 2023-04-15 - add - New block accordion item wrap added.
@@ -785,7 +796,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 = 2.2.0 =
 
-- 2022-08-13 - update - Rebanding the plugin name "Post Grid" to "Post Grid Combo"
+- 2022-08-13 - update - Rebanding the plugin name "Post Grid" to "Combo Blocks"
 - 2022-08-13 - add - Added sevral Gutenberg blocks
 - 2022-08-13 - add - "Post Title" block added.
 - 2022-08-13 - add - "Post Excerpt" block added.

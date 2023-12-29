@@ -6,10 +6,6 @@
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "usesContext": [
-    "postId",
-    "loopIndex",
-    "postType",
-    "queryId",
     "post-grid/listNestedId",
     "post-grid/icon"
   ],
@@ -28,7 +24,7 @@
       "default": {
         "options": {
           "content": "",
-          "tag": "div",
+          "tag": "li",
           "class": "pg-list-nested-item"
         },
         "styles": {

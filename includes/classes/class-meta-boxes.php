@@ -606,12 +606,12 @@ class post_grid_meta_boxs
             <br><br>
             <h3>Try Pro</h3>
             <br>
-            <a class="button" href="https://www.pickplugins.com/post-grid/" target="_blank">Buy Pro</a>
+            <a class="button" href="https://getpostgrid.com/" target="_blank">Buy Pro</a>
             <p class="description">If you are looking some extra feature you may try our premium version.</p>
             <br><br>
             <h3>Documentation</h3>
             <br>
-            <a class="button" href="https://www.pickplugins.com/documentation/post-grid/?ref=dashboard" target="_blank">Documentation</a>
+            <a class="button" href="https://getpostgrid.com/documentations/" target="_blank">Documentation</a>
             <p class="description">Before asking, submitting reviews please take a look on our documentation, may help your issue fast.</p>
             <br><br>
             <h3>Video Tutorials</h3>

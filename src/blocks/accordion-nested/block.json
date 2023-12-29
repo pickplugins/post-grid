@@ -19,7 +19,8 @@
         "options": {
           "content": "",
           "tag": "div",
-          "class": "pg-accordion-nested"
+          "class": "pg-accordion-nested",
+          "accOption": []
         },
         "styles": {
           "display": {

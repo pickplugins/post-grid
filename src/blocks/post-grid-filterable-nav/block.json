@@ -6,13 +6,17 @@
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "parent": [
-    "post-grid/post-grid-filterable"
+    "post-grid/post-grid"
   ],
   "usesContext": [
     "post-grid/postGridId",
     "post-grid/pagination",
     "post-grid/paginationItem",
-    "post-grid/paginationItemActive"
+    "post-grid/paginationItemActive",
+    "post-grid/activeFilter",
+    "post-grid/filterGroupWrap",
+    "post-grid/filterGroup",
+    "post-grid/filterable"
   ],
   "supports": {
     "align": [

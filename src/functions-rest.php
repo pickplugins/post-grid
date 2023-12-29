@@ -30,10 +30,10 @@ class BlockPostGridRest
 				},
 				'update_callback' => function ($value, $object, $field_name) {
 
-					error_log('pgc_meta - Update');
-					error_log($object->ID);
+					// error_log('pgc_meta - Update');
+					// error_log($object->ID);
 
-					error_log(serialize($value));
+					// error_log(serialize($value));
 
 					return update_post_meta($object->ID, 'pgc_meta', $value);
 				},
@@ -57,7 +57,7 @@ class BlockPostGridRest
 			)
 		);
 
-	
+
 
 		register_rest_route(
 			'post-grid/v2',
@@ -300,7 +300,7 @@ class BlockPostGridRest
 
 		register_rest_route(
 			'post-grid/v2',
-			'/get_terms',
+			'/get_all_terms',
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'get_all_terms'),
@@ -343,9 +343,7 @@ class BlockPostGridRest
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'get_post_type_objects'),
-				'permission_callback' => function () {
-					return current_user_can('edit_posts');
-				},
+				'permission_callback' => '__return_true',
 			)
 		);
 
@@ -356,6 +354,18 @@ class BlockPostGridRest
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'get_posts'),
+				'permission_callback' => '__return_true',
+
+			)
+		);
+
+
+		register_rest_route(
+			'post-grid/v2',
+			'/get_terms',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_terms'),
 				'permission_callback' => '__return_true',
 
 			)
@@ -480,9 +490,9 @@ class BlockPostGridRest
 		$wp_query = new WP_Query($query_args);
 
 
-		if ($wp_query->have_posts()):
+		if ($wp_query->have_posts()) :
 
-			while ($wp_query->have_posts()):
+			while ($wp_query->have_posts()) :
 				$wp_query->the_post();
 
 				$post = get_post(get_the_id());
@@ -859,12 +869,9 @@ class BlockPostGridRest
 
 
 		foreach ($lists as $list) {
-			$title = $list->title;
-			;
-			$id = $list->id;
-			;
-			$slug = $list->slug;
-			;
+			$title = $list->title;;
+			$id = $list->id;;
+			$slug = $list->slug;;
 
 			$response[$id]['title'] = $title;
 			$response[$id]['id'] = $id;
@@ -897,12 +904,9 @@ class BlockPostGridRest
 
 
 		foreach ($tags as $tag) {
-			$title = $tag->title;
-			;
-			$id = $tag->id;
-			;
-			$slug = $tag->slug;
-			;
+			$title = $tag->title;;
+			$id = $tag->id;;
+			$slug = $tag->slug;;
 
 			$response[$id]['title'] = $title;
 			$response[$id]['id'] = $id;
@@ -944,7 +948,7 @@ class BlockPostGridRest
 		$onprocessargs = $request->get_param('onprocessargs');
 		$onprocessargs = json_decode($onprocessargs);
 
-		
+
 
 
 		if (!wp_verify_nonce($form_wrap_nonce, 'form_wrap_nonce')) {
@@ -1778,8 +1782,7 @@ class BlockPostGridRest
 						$query_args['post_name__in'] = !empty($val) ? explode(',', $val) : [];
 					} elseif ($id == 'hasPassword') {
 
-						$query_args['has_password'] = ($val === 'true') ? true : false;
-						;
+						$query_args['has_password'] = ($val === 'true') ? true : false;;
 					} elseif ($id == 'postPassword') {
 						$query_args['post_password'] = $val;
 					} elseif ($id == 'commentCount') {
@@ -1831,12 +1834,12 @@ class BlockPostGridRest
 
 
 
-		if ($post_grid_wp_query->have_posts()):
+		if ($post_grid_wp_query->have_posts()) :
 
 			$responses['noPosts'] = false;
 
 
-			while ($post_grid_wp_query->have_posts()):
+			while ($post_grid_wp_query->have_posts()) :
 				$post_grid_wp_query->the_post();
 
 				global $post;
@@ -1900,7 +1903,166 @@ class BlockPostGridRest
 
 			wp_reset_query();
 			wp_reset_postdata();
-		else:
+		else :
+			$responses['noPosts'] = true;
+
+		endif;
+
+
+		die(wp_json_encode($responses));
+	}
+
+
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function get_terms($post_data)
+	{
+
+		error_log("get_terms");
+
+
+		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
+		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
+		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
+
+		$prevText = !empty($post_data['prevText']) ? $post_data['prevText'] : "";
+		$nextText = !empty($post_data['nextText']) ? $post_data['nextText'] : "";
+		$maxPageNum = !empty($post_data['maxPageNum']) ? $post_data['maxPageNum'] : 0;
+
+
+		$paged = 1;
+error_log(serialize($queryArgs));
+
+		$query_args = [];
+
+		if (is_array($queryArgs))
+			foreach ($queryArgs as $item) {
+
+
+
+				$id = isset($item['id']) ? $item['id'] : '';
+				$val = isset($item['val']) ? $item['val'] : '';
+
+
+
+				if ($val) {
+					if ($id == 'taxonomy') {
+						$query_args['taxonomy'] = $val;
+					} elseif ($id == 'orderby') {
+						$query_args['orderby'] = $val;
+					} elseif ($id == 'order') {
+						$query_args['order'] = $val;
+					} elseif ($id == 'hide_empty') {
+						$query_args['hide_empty'] = $val;
+					} elseif ($id == 'include') {
+						$query_args['include'] =
+					!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'exclude') {
+						$query_args['exclude'] =
+					!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'exclude_tree') {
+						$query_args['exclude_tree'] =
+					!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'number') {
+						$query_args['number'] = $val;
+					} elseif ($id == 'count') {
+						$query_args['count'] = $val;
+					} elseif ($id == 'offset') {
+						$query_args['offset'] = $val;
+					} elseif ($id == 'name') {
+						$query_args['name'] =
+					!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'slug') {
+						$query_args['slug'] =
+					!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'hierarchical') {
+						$query_args['hierarchical'] = $val;
+					} elseif ($id == 'search') {
+						$query_args['search'] = $val;
+					} elseif ($id == 'name__like') {
+						$query_args['name__like'] = $val;
+					} elseif ($id == 'description__like') {
+						$query_args['description__like'] = $val;
+					} elseif ($id == 'pad_counts') {
+						$query_args['pad_counts'] = $val;
+					} elseif ($id == 'get') {
+						$query_args['get'] = $val;
+					} elseif ($id == 'parent') {
+						$query_args['parent'] = $val;
+					} elseif ($id == 'childless') {
+						$query_args['childless'] = $val;
+					} elseif ($id == 'child_of') {
+						$query_args['child_of'] = $val;
+					} elseif ($id == 'cache_domain') {
+						$query_args['cache_domain'] = $val;
+					} elseif ($id == 'update_term_meta_cache') {
+						$query_args['update_term_meta_cache'] = $val;
+					} elseif ($id == 'meta_key') {
+						$query_args['meta_key'] = $val;
+					} elseif ($id == 'meta_value') {
+						$query_args['meta_value'] = $val;
+					} 
+					
+				}
+			}
+
+
+		$posts = [];
+		$responses = [];
+
+
+		$terms = get_terms($query_args);
+
+
+
+		if ($terms) :
+
+			$responses['noPosts'] = false;
+
+
+			foreach ($terms as  $term) :
+
+
+					$term_id = $term->term_id;
+					$term_taxonomy = $term->taxonomy;
+				$term->link = get_term_link($term_id, $term_taxonomy);
+
+
+				// $blocks = parse_blocks($rawData);
+
+				// $html = '';
+
+				// foreach ($blocks as $block) {
+				// 	//look to see if your block is in the post content -> if yes continue past it if no then render block as normal
+				// 	$html .= render_block($block);
+				// }
+
+				// $term->html = $html;
+
+				$posts[] = $term;
+
+
+
+
+			endforeach;
+
+
+
+
+
+
+
+
+			$responses['posts'] = $posts;
+
+
+		else :
 			$responses['noPosts'] = true;
 
 		endif;
@@ -1968,8 +2130,11 @@ class BlockPostGridRest
 			$postTypes[] = $post_type;
 		}
 
+		
+		//error_log($request['postTypes']);
+		// error_log(serialize($postTypes));
 
-		$post_types = isset($request['postTypes']) ? $request['postTypes'] : $postTypes;
+		$post_types =  (empty($request['postTypes'])) ? $request['postTypes'] : $postTypes;
 		$search = isset($request['search']) ? $request['search'] : '';
 
 		$taxonomies = get_object_taxonomies($post_types);
@@ -1984,26 +2149,6 @@ class BlockPostGridRest
 			$taxonomiesArr[] = ['label' => $taxDetails->label, 'id' => $taxonomy];
 
 
-			// $terms_results = get_terms($taxonomy, array(
-			//     'hide_empty' => false,
-			//     'search' => $search,
-			// ));
-
-			// if (!empty($terms_results)) {
-
-			//     $terms[] = ['name' => '--- ' . $taxonomy . ' ---', 'slug' => '', 'term_id' => ''];
-
-			//     foreach ($terms_results as $term) {
-			//         $terms[] = [
-			//             'name' => $term->name,
-			//             'slug' => $term->slug,
-			//             'term_id' => $term->term_id,
-			//             'count' => $term->count,
-
-
-			//         ];
-			//     }
-			// }
 		}
 
 

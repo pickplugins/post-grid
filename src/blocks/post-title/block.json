@@ -34,9 +34,7 @@
     },
     "abTest": {
       "type": "array",
-      "default": [{
-        "content" : ""
-      }]
+      "default": []
     },
     "postTitle": {
       "type": "object",

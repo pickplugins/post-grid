@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "post-grid/masonry-wrap",
-  "title": "Masonry Wrap",
+  "title": "Masonry Maker",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "usesContext": [

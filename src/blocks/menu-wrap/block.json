@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "post-grid/menu-wrap",
-  "title": "Menu Wrap",
+  "title": "Menu Maker",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "usesContext": [

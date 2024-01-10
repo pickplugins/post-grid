@@ -92,6 +92,15 @@ class PGBlockPostTags
     $iconPosition = isset($iconOptions['position']) ? $iconOptions['position'] : '';
     $iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : '';
 
+  $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
+  $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
+  $utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
+  $utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
+  $utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
+  $utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
+  $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
+  $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
+
 
     $separator = isset($attributes['separator']) ? $attributes['separator'] : [];
     $separatorOptions = isset($separator['options']) ? $separator['options'] : [];
@@ -191,6 +200,28 @@ class PGBlockPostTags
           } else if ($itemsLinkTo == 'custom') {
             $linkUrl = $itemsCustomUrl;
           }
+
+
+        if ($utmTrackingEnable == true) {
+          $utmValue = [];
+
+          if (!empty($utmTrackingID))
+          $utmValue['utm_id'] = $utmTrackingID;
+          if (!empty($utmTrackingSource))
+          $utmValue['utm_source'] = $utmTrackingSource;
+          if (!empty($utmTrackingMedium))
+          $utmValue['utm_medium'] = $utmTrackingMedium;
+          if (!empty($utmTrackingCampaign))
+          $utmValue['utm_campaign'] = $utmTrackingCampaign;
+          if (!empty($utmTrackingTerm))
+          $utmValue['utm_term'] = $utmTrackingTerm;
+          if (!empty($utmTrackingContent))
+          $utmValue['utm_content'] = $utmTrackingContent;
+
+          $utmUrl = add_query_arg($utmValue, $linkUrl);
+
+          $linkUrl = $utmUrl;
+        }
 
           if ($i > $maxCount)
             break;

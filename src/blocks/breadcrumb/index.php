@@ -80,6 +80,16 @@ class PGBlockBreadcrumb
 		$showSeparator = isset($elementsOptions['showSeparator']) ? $elementsOptions['showSeparator'] : false;
 
 
+		$utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
+		$utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
+		$utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
+		$utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
+		$utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
+		$utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
+		$utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
+		$utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
+
+
 
 		$icon = isset($attributes['icon']) ? $attributes['icon'] : [];
 		$iconOptions = isset($icon['options']) ? $icon['options'] : [];
@@ -787,77 +797,81 @@ class PGBlockBreadcrumb
 		if (!empty($wrapperTag)) :
 
 		?>
-			<!-- <<?php //echo esc_attr($wrapperTag); ?> class="
-				<?php //echo esc_attr($blockId); ?>
-				<?php //echo esc_attr($wrapperClass); ?>"> -->
-				<ol class="
+			<!-- <<?php //echo esc_attr($wrapperTag); 
+						?> class="
+				<?php //echo esc_attr($blockId); 
+				?>
+				<?php //echo esc_attr($wrapperClass); 
+				?>"> -->
+			<ol class="
 				<?php echo esc_attr($blockId); ?>
 				<?php echo esc_attr($wrapperClass); ?>">
-					<?php
-					$i = 1;
-					$j = 0;
-					if (!empty($links))
-						foreach ($links as $index => $item) {
-							$item_link = isset($item['link']) ? $item['link'] : '';
+				<?php
+				$i = 1;
+				$j = 0;
+				if (!empty($links))
+					foreach ($links as $index => $item) {
+						$item_link = isset($item['link']) ? $item['link'] : '';
 
 
-							$json['itemListElement'][$j]['@type'] = "ListItem";
-							$json['itemListElement'][$j]['position'] = $j + 1;
-							$json['itemListElement'][$j]['item'] = !empty($item_link) ? $item_link : '#';
-							$json['itemListElement'][$j]['name'] = !empty($item['label']) ? wp_kses_post($item['label']) : 'Page Title';
+						$json['itemListElement'][$j]['@type'] = "ListItem";
+						$json['itemListElement'][$j]['position'] = $j + 1;
+						$json['itemListElement'][$j]['item'] = !empty($item_link) ? $item_link : '#';
+						$json['itemListElement'][$j]['name'] = !empty($item['label']) ? wp_kses_post($item['label']) : 'Page Title';
 
-							$j++;
-
-
-					?>
-						<li class="<?php echo esc_attr('item item-' . $index); ?>">
-							<?php if (!empty($item_link)) : ?>
-								<a href="<?php echo esc_url_raw($item_link); ?>">
-									<?php if ($showIcon) : ?>
-										<?php //echo wp_kses_post($item['icon']); 
-										?>
-									<?php endif; ?>
-									<?php if ($showLabel) : ?>
-										<span class='label'>
-											<?php echo wp_kses_post($item['label']); ?>
-										</span>
-									<?php endif; ?>
-									<?php if ($showSeparator && $total > $i) : ?>
-										<span class="separator">
-											<?php echo esc_html($separatorText); ?>
-										</span>
-									<?php endif; ?>
-								</a>
-
-							<?php else : ?>
-
-								<span>
-									<?php if ($showIcon) : ?>
-										<?php //echo wp_kses_post($item['icon']); 
-										?>
-									<?php endif; ?>
-									<?php if ($showLabel) : ?>
-										<span class='label'>
-											<?php echo wp_kses_post($item['label']); ?>
-										</span>
-									<?php endif; ?>
-									<?php if ($showSeparator && $total > $i) : ?>
-										<span class="separator">
-											<?php echo esc_html($separatorText); ?>
-										</span>
-									<?php endif; ?>
-								</span>
-							<?php endif; ?>
-
-						</li>
-					<?php
-							$i++;
-						}
+						$j++;
 
 
-					?>
-				</ol>
-			<!-- </<?php //echo esc_attr($wrapperTag); ?>> -->
+				?>
+					<li class="<?php echo esc_attr('item item-' . $index); ?>">
+						<?php if (!empty($item_link)) : ?>
+							<a href="<?php echo esc_url_raw($item_link); ?>">
+								<?php if ($showIcon) : ?>
+									<?php //echo wp_kses_post($item['icon']); 
+									?>
+								<?php endif; ?>
+								<?php if ($showLabel) : ?>
+									<span class='label'>
+										<?php echo wp_kses_post($item['label']); ?>
+									</span>
+								<?php endif; ?>
+								<?php if ($showSeparator && $total > $i) : ?>
+									<span class="separator">
+										<?php echo esc_html($separatorText); ?>
+									</span>
+								<?php endif; ?>
+							</a>
+
+						<?php else : ?>
+
+							<span>
+								<?php if ($showIcon) : ?>
+									<?php //echo wp_kses_post($item['icon']); 
+									?>
+								<?php endif; ?>
+								<?php if ($showLabel) : ?>
+									<span class='label'>
+										<?php echo wp_kses_post($item['label']); ?>
+									</span>
+								<?php endif; ?>
+								<?php if ($showSeparator && $total > $i) : ?>
+									<span class="separator">
+										<?php echo esc_html($separatorText); ?>
+									</span>
+								<?php endif; ?>
+							</span>
+						<?php endif; ?>
+
+					</li>
+				<?php
+						$i++;
+					}
+
+
+				?>
+			</ol>
+			<!-- </<?php //echo esc_attr($wrapperTag); 
+							?>> -->
 
 
 

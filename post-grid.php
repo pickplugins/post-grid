@@ -49,7 +49,7 @@ if (!class_exists('PostGrid')) {
 
             // require_once(post_grid_plugin_dir . 'src/blocks/table-of-contents/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-title/index.php');
-            require_once(post_grid_plugin_dir . 'src/blocks/post-title/patterns.php');
+            // require_once(post_grid_plugin_dir . 'src/blocks/post-title/patterns.php');
 
 
             require_once(post_grid_plugin_dir . 'src/blocks/post-excerpt/index.php');

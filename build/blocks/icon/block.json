@@ -81,6 +81,18 @@
         "styles": {}
       }
     },
+    "utmTracking": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "id": "",
+        "source": "",
+        "medium": "",
+        "campaign": "",
+        "term": "",
+        "content": ""
+      }
+    },
     "blockId": {
       "type": "string",
       "default": ""

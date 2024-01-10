@@ -38,6 +38,42 @@ class PGBlockTermsList
   {
   }
 
+
+  function addUTMTracking($link, $utmTracking)
+  {
+
+    $utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
+    $utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
+    $utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
+    $utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
+    $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
+    $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
+
+
+
+    $utmValue = [];
+
+    if (!empty($utmTrackingID))
+      $utmValue['utm_id'] = $utmTrackingID;
+    if (!empty($utmTrackingSource))
+      $utmValue['utm_source'] = $utmTrackingSource;
+    if (!empty($utmTrackingMedium))
+      $utmValue['utm_medium'] = $utmTrackingMedium;
+    if (!empty($utmTrackingCampaign))
+      $utmValue['utm_campaign'] = $utmTrackingCampaign;
+    if (!empty($utmTrackingTerm))
+      $utmValue['utm_term'] = $utmTrackingTerm;
+    if (!empty($utmTrackingContent))
+      $utmValue['utm_content'] = $utmTrackingContent;
+
+
+    $link = add_query_arg($utmValue, $link);
+
+
+
+    return $link;
+  }
+
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
@@ -87,6 +123,10 @@ class PGBlockTermsList
 
     $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
     $queryItems = isset($queryArgs['items']) ? $queryArgs['items'] : [];
+
+    $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
+    $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
+    
 
 
 
@@ -147,12 +187,24 @@ class PGBlockTermsList
 
       $term_id = isset($term->term_id) ?  $term->term_id : "";
       $term_taxonomy = isset($term->taxonomy) ?  $term->taxonomy : "";
+
+
+
+      $term_link = get_term_link($term_id, $term_taxonomy);
+
+
+      if ($utmTrackingEnable) {
+
+        // UTM tracking
+        $term_link = $this->addUTMTracking($term_link, $utmTracking);
+      }
+
       if (gettype($term) == "array") {
 
-        $term['link'] = get_term_link($term_id, $term_taxonomy);
+        $term['link'] = $term_link;
       } else {
 
-        $term->link = get_term_link($term_id, $term_taxonomy);
+        $term->link = $term_link;
       }
 
       $termsX[] =  $term;
@@ -169,6 +221,10 @@ class PGBlockTermsList
 
     $maxCount = ($termsCount > $itemsMaxCount) ? $itemsMaxCount : $termsCount;
     $maxCount = (empty($maxCount)) ? $termsCount : $maxCount;
+
+
+
+
 
 
     $obj['id'] = $post_ID;
@@ -263,7 +319,7 @@ class PGBlockTermsList
 
         <?php if (!empty($itemsLinkTo)) : ?>
 
-          <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+          <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?> ">
 
             <?php if ($iconPosition == 'beforeItem') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>

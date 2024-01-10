@@ -68,6 +68,27 @@ const variations = [
 				},
 				hover: { backgroundColor: { Desktop: "#a82b2b" } },
 			},
+			entranceWrap: {
+				options: {
+					tag: "span",
+					class: "",
+					library: "fontAwesome",
+					srcType: "class",
+					iconSrc: "fas fa-times",
+					animation: "fadeIn",
+				},
+				styles: {
+					backgroundColor: { Desktop: "#ff6565" },
+					padding: { Desktop: "8px 15px 7px 15px" },
+					borderRadius: { Desktop: "50px 50px 50px 50px" },
+					color: { Desktop: "#ffffff" },
+					right: { Desktop: "-21px" },
+					top: { Desktop: "-21px" },
+					position: { Desktop: "absolute" },
+					cursor: { Desktop: "pointer" },
+				},
+				hover: { backgroundColor: { Desktop: "#a82b2b" } },
+			},
 
 			blockId: "",
 			blockCssY: { items: {} },
@@ -338,3 +359,5 @@ const variations = [
 ];
 
 export default variations;
+
+

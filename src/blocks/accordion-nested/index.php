@@ -85,6 +85,8 @@ class PGBlockAccordionNested
     $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
     $textOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
+    $accOptions = isset($attributes['accOptions']) ? $attributes['accOptions'] : [];
+
     $wrapperTag = isset($textOptions['tag']) ? $textOptions['tag'] : 'div';
     //$content = isset($textOptions['content']) ? $textOptions['content'] : '';
 
@@ -151,7 +153,7 @@ class PGBlockAccordionNested
 ?>
 
 
-    <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+    <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-accordion="<?php echo esc_attr(json_encode($accOptions)) ?>">
       <?php echo $content; ?>
     </div>
 

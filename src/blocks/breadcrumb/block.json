@@ -218,6 +218,18 @@
         ]
       }
     },
+    "utmTracking": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "id": "",
+        "source": "",
+        "medium": "",
+        "campaign": "",
+        "term": "",
+        "content": ""
+      }
+    },
     "schema": {
       "type": "object",
       "default": {

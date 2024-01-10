@@ -187,7 +187,7 @@ class PGBlockStarRate
 
 
 
-    $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
+    $fontIconHtml = '<span class="'  . ' ' . $iconSrc . '"></span>';
 
 
     $obj['id'] = $post_ID;
@@ -218,25 +218,25 @@ class PGBlockStarRate
 
 
         <?php if ($textIsLink) : ?>
-          <a class='text' <?php
-                          /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                          echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
-            <div class="text-icon">
-              <div class="icons-idle">
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              </div>
-              <div class="icons-filled" style="width:<?php echo esc_attr($filled_width) . '%'; ?>">
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              </div>
+          <a class='text-icon' <?php
+                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+            <!-- <div class="text-icon"> -->
+            <div class="icons-idle">
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
             </div>
+            <div class="icons-filled" style="width:<?php echo esc_attr($filled_width) . '%'; ?>">
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            </div>
+            <!-- </div> -->
 
 
           </a>
@@ -251,7 +251,7 @@ class PGBlockStarRate
           <?php if (empty($summarytypeCustom)) : ?>
 
             <?php if (!empty($summaryType)) : ?>
-              <div class="summury">
+              <div class="summary">
                 <?php
                 echo wp_kses_post(strtr($summaryType, $summaryVars));
                 ?>
@@ -261,11 +261,22 @@ class PGBlockStarRate
 
         <?php else : ?>
 
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
+          <div class="text-icon">
+            <div class="icons-idle">
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            </div>
+            <div class="icons-filled" style="width:<?php echo esc_attr($filled_width) . '%'; ?>">
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            </div>
+          </div>
 
 
         <?php endif; ?>

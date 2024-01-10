@@ -24,6 +24,10 @@ const variations = [
 				},
 				styles: {},
 			},
+			count: {
+				options: { enable: true, text: "", class: "count", position: "" },
+				styles: {},
+			},
 			dateCountdown: {
 				options: {
 					tag: "div",
@@ -358,4 +362,5 @@ const variations = [
 ];
 
 export default variations;
+
 

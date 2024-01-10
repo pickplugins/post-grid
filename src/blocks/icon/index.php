@@ -100,6 +100,14 @@ class PGBlockIcon
     $textRel = isset($textOptions['rel']) ? $textOptions['rel'] : '';
 
 
+    $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
+    $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
+    $utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
+    $utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
+    $utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
+    $utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
+    $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
+    $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
 
     $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
     $iconOptions = isset($icon['options']) ? $icon['options'] : [];
@@ -170,6 +178,36 @@ class PGBlockIcon
       }
 
 
+    // $utmGeneratedText = "utm_medium=".$utmTrackingMedium. "&utm_source=". $utmTrackingSource . "&utm_content=" . $utmTrackingContent . "&utm_term=" . $utmTrackingTerm;
+
+
+
+
+
+
+    if ($utmTrackingEnable == true) {
+      $utmValue = [];
+
+      if (!empty($utmTrackingID))
+        $utmValue['utm_id'] = $utmTrackingID;
+      if (!empty($utmTrackingSource))
+        $utmValue['utm_source'] = $utmTrackingSource;
+      if (!empty($utmTrackingMedium))
+        $utmValue['utm_medium'] = $utmTrackingMedium;
+      if (!empty($utmTrackingCampaign))
+        $utmValue['utm_campaign'] = $utmTrackingCampaign;
+      if (!empty($utmTrackingTerm))
+        $utmValue['utm_term'] = $utmTrackingTerm;
+      if (!empty($utmTrackingContent))
+        $utmValue['utm_content'] = $utmTrackingContent;
+
+      $utmUrl = add_query_arg($utmValue, $textCustomUrl);
+
+      $textCustomUrl = $utmUrl;
+    }
+
+
+
 
 
 
@@ -194,7 +232,7 @@ class PGBlockIcon
 ?>
       <<?php echo esc_attr($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
-                            <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+                            <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
 
 
         <?php if ($iconPosition == 'beforePrefix') : ?>

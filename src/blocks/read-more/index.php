@@ -83,6 +83,14 @@ class PGBlockReadmore
     $readMoreLinkToMetaKey = isset($readMoreOptions['linkToMetaKey']) ? $readMoreOptions['linkToMetaKey'] : '';
 
 
+  $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
+  $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
+  $utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
+  $utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
+  $utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
+  $utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
+  $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
+  $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
 
     $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
     $iconOptions = isset($icon['options']) ? $icon['options'] : [];
@@ -164,6 +172,31 @@ class PGBlockReadmore
         if (!empty($attr['val']))
           $linkAttrStrReadmore .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
       }
+
+
+    if (!empty($readMoreLinkTo)) {
+
+      if ($utmTrackingEnable == true) {
+        $utmValue = [];
+
+        if (!empty($utmTrackingID))
+          $utmValue['utm_id'] = $utmTrackingID;
+        if (!empty($utmTrackingSource))
+          $utmValue['utm_source'] = $utmTrackingSource;
+        if (!empty($utmTrackingMedium))
+          $utmValue['utm_medium'] = $utmTrackingMedium;
+        if (!empty($utmTrackingCampaign))
+          $utmValue['utm_campaign'] = $utmTrackingCampaign;
+        if (!empty($utmTrackingTerm))
+          $utmValue['utm_term'] = $utmTrackingTerm;
+        if (!empty($utmTrackingContent))
+          $utmValue['utm_content'] = $utmTrackingContent;
+
+        $utmUrl = add_query_arg($utmValue, $linkUrl);
+
+        $linkUrl = $utmUrl;
+      }
+    }
 
 
 

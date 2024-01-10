@@ -15,31 +15,32 @@ class PGBlockMasonryWrap
 
 	function front_scripts($attributes)
 	{
-		wp_register_script('pgmasonry-wrap_front_script', post_grid_plugin_url . 'src/blocks/masonry-wrap/front-scripts.js', [], '', true);
-
+		wp_register_script('pgmasonry-wrap_image_loaded', post_grid_plugin_url . 'src/blocks/masonry-wrap/imagesloaded.pkgd.min.js', [], '', true);
+		
 		wp_register_script('pgmasonry-wrap_masonry_core', post_grid_plugin_url . 'src/blocks/masonry-wrap/masonry.pkgd.js', [], '', true);
 		wp_register_script('pgmasonry-wrap_masonry_min', post_grid_plugin_url . 'src/blocks/masonry-wrap/masonry.pkgd.min.js', [], '', true);
-		wp_register_script('pgmasonry-wrap_image_loaded', post_grid_plugin_url . 'src/blocks/masonry-wrap/imagesloaded.pkgd.min.js', [], '', true);
+		wp_register_script('pgmasonry-wrap_front_script', post_grid_plugin_url . 'src/blocks/masonry-wrap/front-scripts.js', [], '', true);
 
 
 		if (has_block('post-grid/masonry-wrap')) {
 
-			wp_enqueue_script('pgmasonry-wrap_front_script');
-
-			//wp_enqueue_script('pgmasonry-wrap_masonry_core');
-			wp_enqueue_script('pgmasonry-wrap_masonry_min');
-			wp_enqueue_script('pgmasonry-wrap_image_loaded');
-
-
-
-			wp_enqueue_style('jquery-ui');
-
+			
+			
+			
+			// wp_enqueue_style('jquery-ui');
+			
 			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-ui-core');
-			wp_enqueue_script('jquery-ui-accordion');
-			wp_enqueue_script('jquery-effects-core');
+			// wp_enqueue_script('jquery-ui-core');
+			// wp_enqueue_script('jquery-ui-accordion');
+			// wp_enqueue_script('jquery-effects-core');
+			
+			
+			wp_enqueue_script('pgmasonry-wrap_image_loaded');
+			
+			wp_enqueue_script('pgmasonry-wrap_masonry_core');
+			wp_enqueue_script('pgmasonry-wrap_masonry_min');
 
-			wp_enqueue_script('pgflex-wrap_front_script');
+			wp_enqueue_script('pgmasonry-wrap_front_script');
 		}
 	}
 	// loading src files in the gutenberg editor screen
@@ -52,7 +53,6 @@ class PGBlockMasonryWrap
 		register_block_type(
 			post_grid_plugin_dir . 'build/blocks/masonry-wrap/block.json',
 			array(
-				'title' => 'Masonry Wrap',
 				'render_callback' => array($this, 'theHTML'),
 
 

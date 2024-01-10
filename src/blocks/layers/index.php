@@ -70,6 +70,7 @@ class PGBlockLayers
     $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
     $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
+    $wrapperID = isset($wrapperOptions['id']) ? $wrapperOptions['id'] : '';
     $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
     $wrapperLinkTo = isset($wrapperOptions['linkTo']) ? $wrapperOptions['linkTo'] : '';
     //$content = isset($wrapperOptions['content']) ? $wrapperOptions['content'] : '';
@@ -82,7 +83,7 @@ class PGBlockLayers
     $wrapperRel = isset($wrapperOptions['rel']) ? $wrapperOptions['rel'] : '';
     $wrapperLinkToMetaKey = isset($wrapperOptions['linkToMetaKey']) ? $wrapperOptions['linkToMetaKey'] : '';
 
-    
+
 
 
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
@@ -125,13 +126,13 @@ class PGBlockLayers
 
 
     if ($wrapperTag == 'a') { ?>
-      <a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
+      <a id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
         <?php echo $content ?>
       </a>
     <?php
 
     } else { ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"> <?php echo $content ?> </<?php echo esc_attr($wrapperTag); ?>>
+      <<?php echo esc_attr($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"> <?php echo $content ?> </<?php echo esc_attr($wrapperTag); ?>>
 <?php
     }
 

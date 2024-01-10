@@ -46,15 +46,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				},
 				templates: {
 					pagerPrev:
-						'<span class="page-numbers pg-filter-' +
+						'<span className="page-numbers pg-filter-' +
 						blockId +
 						' ${classNames}" data-page="prev">Prev</span>',
 					pagerNext:
-						'<span class="page-numbers pg-filter-' +
+						'<span className="page-numbers pg-filter-' +
 						blockId +
 						' ${classNames}" data-page="next">Next</span>',
 					pager:
-						'<span class="page-numbers pg-filter-' +
+						'<span className="page-numbers pg-filter-' +
 						blockId +
 						' ${classNames}" data-page="${pageNumber}">${pageNumber}</span>',
 				},
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								var html = "";
 
 								posts.map((x) => {
-									html += '<div class="item">' + x.html + "</div>";
+									html += '<div className="item">' + x.html + "</div>";
 								});
 
 								itemsLoopWrap.insertAdjacentHTML("beforeend", html);
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									var paginationHtml = "";
 
 									posts.map((x) => {
-										html += '<div class="item">' + x.html + "</div>";
+										html += '<div className="item">' + x.html + "</div>";
 									});
 
 									pagination.map((x) => {
@@ -390,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									var html = "";
 
 									posts.map((x) => {
-										html += '<div class="item">' + x.html + "</div>";
+										html += '<div className="item">' + x.html + "</div>";
 									});
 
 									itemsLoopWrap.insertAdjacentHTML("beforeend", html);

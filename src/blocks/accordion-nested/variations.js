@@ -14,7 +14,7 @@ const variations = [
 
 		isPro: false,
 		atts: {
-			wrapper: { options: { tag: "div", class: "", accOption: [] }, styles: {} },
+			wrapper: { options: { tag: "div", class: "" }, styles: {} },
 			searchWrap: {
 				options: {
 					enable: false,
@@ -24,6 +24,7 @@ const variations = [
 				},
 				styles: {},
 			},
+			accOptions: {},
 			searchInput: {
 				options: {
 					tag: "input",
@@ -1929,7 +1930,3 @@ const variations = [
 ];
 
 export default variations;
-
-
-
-

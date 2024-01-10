@@ -159,6 +159,25 @@
         }
       }
     },
+    "count": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "text": "",
+          "class": "count",
+          "position": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
     "secondWrap": {
       "type": "object",
       "default": {

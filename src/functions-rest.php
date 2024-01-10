@@ -1590,7 +1590,7 @@ class BlockPostGridRest
 
 
 		$response->freeUrl = 'https://wordpress.org/plugins/post-grid/';
-		$response->proUrl = 'https://pickplugins.com/post-grid/';
+		$response->proUrl = 'https://getpostgrid.com/pricing/';
 		$response->websiteUrl = 'https://pickplugins.com/';
 		$response->demoUrl = 'http://getpostgrid.com/';
 		$response->siteAdminurl = $siteAdminurl;
@@ -1653,7 +1653,11 @@ class BlockPostGridRest
 					if ($id == 'postType') {
 						$query_args['post_type'] = $val;
 					} elseif ($id == 'postStatus') {
-						$query_args['post_status'] = $val;
+
+					$status = ($val == 'draft') ? "publish" : $val;
+					$query_args['post_status'] = $status;
+
+						// $query_args['post_status'] = $val;
 					} elseif ($id == 'order') {
 						$query_args['order'] = $val;
 					} elseif ($id == 'orderby') {
@@ -1790,7 +1794,12 @@ class BlockPostGridRest
 					} elseif ($id == 'nopaging') {
 						$query_args['nopaging'] = $val;
 					} elseif ($id == 'postsPerPage') {
-						$query_args['posts_per_page'] = $val;
+
+					$per_page = (int) $val;
+					$per_page = ($val > 50) ? 50 : $val;
+					$query_args['posts_per_page'] = $per_page;
+
+						// $query_args['posts_per_page'] = $val;
 					} elseif ($id == 'paged') {
 						$paged = $val;
 						$query_args['paged'] = $val;

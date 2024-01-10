@@ -19,8 +19,7 @@
         "options": {
           "content": "",
           "tag": "div",
-          "class": "pg-accordion-nested",
-          "accOption": []
+          "class": "pg-accordion-nested"
         },
         "styles": {
           "display": {
@@ -209,6 +208,14 @@
           "class": "accordion-icon-toggle"
         },
         "styles": {}
+      }
+    },
+    "accOptions": {
+      "type": "object",
+      "default": {
+        "active": "9999",
+        "collapsible": true,
+        "heightStyle": "content"
       }
     },
     "schema": {

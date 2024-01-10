@@ -200,6 +200,18 @@
         }
       }
     },
+    "utmTracking": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "id": "",
+        "source": "",
+        "medium": "",
+        "campaign": "",
+        "term": "",
+        "content": ""
+      }
+    },
     "blockCssY": {
       "type": "object",
       "default": {

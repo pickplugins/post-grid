@@ -108,6 +108,15 @@ class PGBlockPostTitle
 
     $abTest = isset($attributes["abTest"]) ? $attributes["abTest"] : [];
 
+  $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
+  $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
+  $utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
+  $utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
+  $utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
+  $utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
+  $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
+  $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
+
     $postfixText = isset($postfixOptions["text"])
       ? _wp_specialchars($postfixOptions["text"])
       : "";
@@ -142,16 +151,38 @@ class PGBlockPostTitle
     $post_title = get_the_title($post_ID);
 
 
-    if(!empty($abTest)){
-      $abTest[]=["content" => $post_title];
-      $abTestLength = count($abTest) -1;
-      $post_title = $abTest[rand(0,$abTestLength)]["content"];
+    if (!empty($abTest)) {
+      $abTest[] = ["content" => $post_title];
+      $abTestLength = count($abTest) - 1;
+      $post_title = $abTest[rand(0, $abTestLength)]["content"];
     }
 
     if ($limitBy == "character") {
       $post_title = substr($post_title, 0, $limitCount);
     } else {
       $post_title = wp_trim_words($post_title, $limitCount, "");
+    }
+
+
+    if ($utmTrackingEnable == true) {
+      $utmValue = [];
+
+      if (!empty($utmTrackingID))
+        $utmValue['utm_id'] = $utmTrackingID;
+      if (!empty($utmTrackingSource))
+        $utmValue['utm_source'] = $utmTrackingSource;
+      if (!empty($utmTrackingMedium))
+        $utmValue['utm_medium'] = $utmTrackingMedium;
+      if (!empty($utmTrackingCampaign))
+        $utmValue['utm_campaign'] = $utmTrackingCampaign;
+      if (!empty($utmTrackingTerm))
+        $utmValue['utm_term'] = $utmTrackingTerm;
+      if (!empty($utmTrackingContent))
+        $utmValue['utm_content'] = $utmTrackingContent;
+
+      $utmUrl = add_query_arg($utmValue, $customUrl);
+
+      $customUrl = $utmUrl;
     }
 
     $obj["id"] = $post_ID;
@@ -167,8 +198,8 @@ class PGBlockPostTitle
     <?php
     if (!empty($wrapperTag)) : ?>
       <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
-        <?php if ($postTitleIsLink) : ?> 
-          <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo !empty($customUrl) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr( $rel ); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
+        <?php if ($postTitleIsLink) : ?>
+          <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo !empty($customUrl) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
             <?php if (!empty($prefixText)) : ?>
               <span class="<?php echo esc_attr($prefixClass); ?>"> <?php echo wp_kses_post($prefixText); ?> </span>
             <?php endif; ?>

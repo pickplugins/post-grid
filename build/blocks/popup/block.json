@@ -55,6 +55,20 @@
         "styles": {}
       }
     },
+    "entranceWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "span",
+          "class": "",
+          "animation": "fadeIn",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-chevron-right"
+        },
+        "styles": {}
+      }
+    },
     "visible": {
       "type": "object",
       "default": {}

@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								var html = "";
 
 								posts.map((x) => {
-									html += '<div class="item">' + x.html + "</div>";
+									html += '<div className="item">' + x.html + "</div>";
 								});
 
 								itemsLoopWrap.insertAdjacentHTML("beforeend", html);
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									var paginationHtml = "";
 
 									posts.map((x) => {
-										html += '<div class="item">' + x.html + "</div>";
+										html += '<div className="item">' + x.html + "</div>";
 									});
 
 									pagination.map((x) => {
@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									var html = "";
 
 									posts.map((x) => {
-										html += '<div class="item">' + x.html + "</div>";
+										html += '<div className="item">' + x.html + "</div>";
 									});
 
 									itemsLoopWrap.insertAdjacentHTML("beforeend", html);

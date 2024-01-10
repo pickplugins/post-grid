@@ -226,8 +226,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			// Function to set a cookie with a name, value, and expiration date
 			function setCookie(cookieName, cookieValue, days) {
 				const d = new Date();
-				d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+				d.setTime(d.getTime() + days);
+				// d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+				
 				const expires = "expires=" + d.toUTCString();
+				// const expires = "expires=" + days.toUTCString();
 				document.cookie =
 					cookieName + "=" + cookieValue + "; " + expires + "; path=/";
 			}
@@ -244,6 +247,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				const everStart = new Date().getTime();
 				// Calculate the end time (everEnd) based on your logic
 				const everEnd = everStart + totalTime; // Calculate the end time as needed
+
+				
 				let everDuration = everEnd - everStart;
 				everDurationX = everDuration;
 
@@ -255,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				setCookie(
 					"pgEverGreenCountdownData" + blockId,
 					JSON.stringify(pgEverGreenCountdownData),
-					10
+					totalTime
 				); // Set the cookie for 30 days
 			} else {
 				// The cookie exists, retrieve the JSON object
@@ -464,3 +469,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
+

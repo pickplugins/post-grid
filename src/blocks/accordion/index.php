@@ -146,7 +146,7 @@ class PGBlockAccordion
                                 "srcType" => "class",
                                 "iconSrc" => "fas fa-chevron-right",
                                 "class" => "icon",
-                                "positon" => "beforeHeader",
+                                "position" => "beforeHeader",
                                 "enableToggle" => "yes"
                             ],
                             "styles" => [
@@ -301,88 +301,88 @@ class PGBlockAccordion
         if (!empty($wrapperTag)):
             ?>
 
-                                    <div class="PGBlockAccordion <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+            <div class="PGBlockAccordion <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 
-                                        <?php
-                                        foreach ($items as $index => $item) {
+                <?php
+                foreach ($items as $index => $item) {
 
-                                            ?>
-                                                    <div class="ac">
-                                                        <<?php echo esc_attr($headerTag); ?> class="ac-header ac-trigger
-                                                            <?php echo esc_attr($headerOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
-                                                            <?php if ($iconPosition == 'beforeHeader'): ?>
-                                                                        <span class="icon-idle">
-                                                                            <?php echo wp_kses_post($iconHtml); ?>
-                                                                        </span>
-                                                                        <span class="icon-toggled">
-                                                                            <?php echo wp_kses_post($iconToggleHtml); ?>
-                                                                        </span>
+                    ?>
+                    <div class="ac">
+                        <<?php echo esc_attr($headerTag); ?> class="ac-header ac-trigger
+                            <?php echo esc_attr($headerOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
+                            <?php if ($iconPosition == 'beforeHeader'): ?>
+                                <span class="icon-idle">
+                                    <?php echo wp_kses_post($iconHtml); ?>
+                                </span>
+                                <span class="icon-toggled">
+                                    <?php echo wp_kses_post($iconToggleHtml); ?>
+                                </span>
 
-                                                            <?php endif; ?>
-                                                            <span>
-                                                                <?php echo $item['headerText']; ?>
-                                                            </span>
-                                                            <?php if ($iconPosition == 'afterHeader'): ?>
-                                                                        <span class="float-right">
-                                                                            <span class="icon-idle">
-                                                                                <?php echo wp_kses_post($iconHtml); ?>
-                                                                            </span>
-                                                                            <span class="icon-toggled">
-                                                                                <?php echo wp_kses_post($iconToggleHtml); ?>
-                                                                            </span>
-                                                                        </span>
-                                                            <?php endif; ?>
-                                                        </<?php echo esc_attr($headerTag); ?>>
+                            <?php endif; ?>
+                            <span>
+                                <?php echo $item['headerText']; ?>
+                            </span>
+                            <?php if ($iconPosition == 'afterHeader'): ?>
+                                <span class="float-right">
+                                    <span class="icon-idle">
+                                        <?php echo wp_kses_post($iconHtml); ?>
+                                    </span>
+                                    <span class="icon-toggled">
+                                        <?php echo wp_kses_post($iconToggleHtml); ?>
+                                    </span>
+                                </span>
+                            <?php endif; ?>
+                        </<?php echo esc_attr($headerTag); ?>>
 
-                                                        <div class="ac-panel <?php echo esc_attr($contentOptions['class']); ?>"
-                                                            id="<?php echo esc_attr($blockId . $index); ?>">
+                        <div class="ac-panel <?php echo esc_attr($contentOptions['class']); ?>"
+                            id="<?php echo esc_attr($blockId . $index); ?>">
 
-                                                            <?php ?>
-                                                            <div class="ac-text">
-                                                                <?php echo wp_kses_post($item['content']); ?>
-                                                            </div>
-                                                            <?php ?>
-                                                        </div>
-                                                    </div>
+                            <?php ?>
+                            <div class="ac-text">
+                                <?php echo wp_kses_post($item['content']); ?>
+                            </div>
+                            <?php ?>
+                        </div>
+                    </div>
 
 
-                                                    <?php
-                                        }
+                    <?php
+                }
 
-                                        ?>
-                                    </div>
-                                    <?php
+                ?>
+            </div>
+            <?php
 
         endif;
         ?>
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function (event) {
-                                new Accordion('.<?php echo esc_attr($blockId); ?>', {
-                                    duration: 400,
-                                    onOpen: (currElement) => { },
-                                    onClose: (currElement) => { },
-                                    beforeOpen: (currElement) => {
-                                        var iconIdle = currElement.querySelector('.icon-idle');
-                                        var iconToggled = currElement.querySelector('.icon-toggled');
-                                        if (iconIdle != null) {
-                                            iconIdle.style.display = 'none';
-                                            iconToggled.style.display = 'inline-block';
-                                        }
-                                    },
-                                    beforeClose: (currElement) => {
-                                        var iconIdle = currElement.querySelector('.icon-idle');
-                                        var iconToggled = currElement.querySelector('.icon-toggled');
-                                        if (iconIdle != null) {
-                                            iconIdle.style.display = 'inline-block';
-                                            iconToggled.style.display = 'none';
-                                        }
-                                    }
-                                });
-                            })
-                        </script>
-                        <?php return ob_get_clean();
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                new Accordion('.<?php echo esc_attr($blockId); ?>', {
+                    duration: 400,
+                    onOpen: (currElement) => { },
+                    onClose: (currElement) => { },
+                    beforeOpen: (currElement) => {
+                        var iconIdle = currElement.querySelector('.icon-idle');
+                        var iconToggled = currElement.querySelector('.icon-toggled');
+                        if (iconIdle != null) {
+                            iconIdle.style.display = 'none';
+                            iconToggled.style.display = 'inline-block';
+                        }
+                    },
+                    beforeClose: (currElement) => {
+                        var iconIdle = currElement.querySelector('.icon-idle');
+                        var iconToggled = currElement.querySelector('.icon-toggled');
+                        if (iconIdle != null) {
+                            iconIdle.style.display = 'inline-block';
+                            iconToggled.style.display = 'none';
+                        }
+                    }
+                });
+            })
+        </script>
+        <?php return ob_get_clean();
     }
 }
 

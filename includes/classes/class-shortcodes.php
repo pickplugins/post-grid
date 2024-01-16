@@ -1,17 +1,19 @@
 <?php
-if ( ! defined('ABSPATH')) exit;  // if direct access
+if (!defined('ABSPATH')) exit;  // if direct access
 
-class class_post_grid_shortcodes{
-	
-	
-    public function __construct(){
-		
-		add_shortcode( 'post_grid', array( $this, 'post_grid_new_display' ) );
+class class_post_grid_shortcodes
+{
 
+
+    public function __construct()
+    {
+
+        add_shortcode('post_grid', array($this, 'post_grid_new_display'));
     }
 
 
-    public function post_grid_new_display($atts, $content = null ){
+    public function post_grid_new_display($atts, $content = null)
+    {
 
         $atts = shortcode_atts(
             array(
@@ -26,7 +28,7 @@ class class_post_grid_shortcodes{
 
         ob_start();
 
-        if(empty($grid_id)){
+        if (empty($grid_id)) {
             echo 'Please provide valid post grid id, ex: <code>[post_grid id="123"]</code>';
             return;
         }
@@ -35,19 +37,14 @@ class class_post_grid_shortcodes{
 
         do_action('post_grid_main', $atts);
 
+        wp_enqueue_script('post_grid_scripts');
+        wp_localize_script('post_grid_scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
 
 
 
 
         return ob_get_clean();
-
-
     }
-
-
-
-
-
 }
 
 new class_post_grid_shortcodes();

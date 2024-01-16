@@ -104,7 +104,6 @@ class PGBlockFormWrap
 
     $roles = (array) $user->roles;
 
-    ////var_dump($formType);
 
     $formArgs['type'] = $formType;
     $formArgs['isLogged'] = !empty($user_id) ? true : false;

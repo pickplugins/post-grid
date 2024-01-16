@@ -257,21 +257,19 @@ add_filter('form_wrap_process_optInForm', 'form_wrap_process_optInForm', 99, 2);
 function form_wrap_process_optInForm($formFields, $onprocessargs)
 {
 
+
     $response = [];
     $entryData = [];
 
     $first_name = isset($formFields['first_name']) ? sanitize_text_field($formFields['first_name']) : '';
     $last_name = isset($formFields['last_name']) ? sanitize_text_field($formFields['last_name']) : '';
     $email = isset($formFields['email']) ? sanitize_email($formFields['email']) : '';
-
-    $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
-    $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-        __('Contact added', 'post-grid');
-    $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-        __('Contact failed', 'post-grid');
+    $message = isset($formFields['message']) ? wp_kses_post($formFields['message']) : '';
+    $full_name = isset($formFields['full_name']) ? sanitize_text_field($formFields['full_name']) : '';
 
 
-    error_log($email);
+    //error_log(serialize($onprocessargs));
+
 
     $user = get_user_by('email', $email);
     if (empty($user))
@@ -285,17 +283,179 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
     $entryData['formFields'] = $formFields;
     $entryData['user_id'] = isset($user->ID) ? $user->ID : 0;
 
-    error_log("Hello");
 
 
     if (!empty($onprocessargs))
         foreach ($onprocessargs as $arg) {
 
-            $id = $arg->id;
+
+            //error_log(serialize($arg));
+
+            $id = isset($arg->id) ? $arg->id : "";
+
+
+
+            if ($id == 'sendMail') {
+                $fromEmail = $email;
+                $fromName = $full_name;
+                $replyTo = $email;
+                $replyToName = $full_name;
+
+                $mailTo = isset($arg->mailTo) ? $arg->mailTo : '';
+                $bcc = isset($arg->bcc) ? $arg->bcc : '';
+                $footer = isset($arg->footer) ? $arg->footer : '';
+                $subject = isset($arg->subject) ? $arg->subject : '';
+
+                $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+                $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+                    __('Send mail success', 'post-grid');
+                $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+                    __('Send mail failed', 'post-grid');
+
+
+                $email_data['email_to'] = $mailTo;
+                $email_data['email_bcc'] = $bcc;
+                $email_data['email_from'] = $email;
+                $email_data['email_from_name'] = $full_name;
+                $email_data['subject'] = $subject;
+                $email_data['html'] = $message . $footer;
+                $email_data['attachments'] = [];
+
+
+                $status = form_wrap_process_send_email($email_data);
+
+                if ($showOnResponse) {
+                    if ($status) {
+                        $response['success']['sendMail'] = $successMessage;
+                    } else {
+                        $response['errors']['sendMail'] = $errorMessage;
+                    }
+                }
+            }
+
+
+
+            if ($id == 'emailCopyUser') {
+
+                $fromEmail = isset($arg->fromEmail) ? $arg->fromEmail : '';
+                $fromName = isset($arg->fromName) ? $arg->fromName : '';
+                $replyTo = isset($arg->replyTo) ? $arg->replyTo : '';
+                $replyToName = isset($arg->replyToName) ? $arg->replyToName : '';
+                $footer = isset($arg->footer) ? $arg->footer : '';
+                $subject = isset($arg->subject) ? $arg->subject : '';
+
+                $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+                $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+                    __('Email copy user success', 'post-grid');
+                $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+                    __('Email copy user failed', 'post-grid');
+
+
+
+                $email_data['email_to'] = $email;
+                $email_data['email_bcc'] = $bcc;
+                $email_data['email_from'] = $fromEmail;
+                $email_data['email_from_name'] = $fromName;
+                $email_data['reply_to'] = $replyTo;
+                $email_data['reply_to_name'] = $replyToName;
+                $email_data['subject'] = $subject;
+                $email_data['html'] = $message . $footer;
+                $email_data['attachments'] = [];
+
+                $status = form_wrap_process_send_email($email_data);
+
+                if ($showOnResponse) {
+                    if ($status) {
+                        $response['success']['emailCopyUser'] = $successMessage;
+                    } else {
+                        $response['errors']['emailCopyUser'] = $errorMessage;
+                    }
+                }
+            }
+
+            if ($id == 'emailBcc') {
+                $mailTo = isset($arg->mailTo) ? $arg->mailTo : '';
+
+                $fromEmail = isset($arg->fromEmail) ? $arg->fromEmail : '';
+                $fromName = isset($arg->fromName) ? $arg->fromName : '';
+                $replyTo = isset($arg->replyTo) ? $arg->replyTo : '';
+                $replyToName = isset($arg->replyToName) ? $arg->replyToName : '';
+                $footer = isset($arg->footer) ? $arg->footer : '';
+                $subject = isset($arg->subject) ? $arg->subject : '';
+
+                $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+                $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+                    __('Email Bcc success', 'post-grid');
+                $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+                    __('Email Bcc failed', 'post-grid');
+
+                $email_data['email_to'] = $mailTo;
+                $email_data['email_bcc'] = $bcc;
+                $email_data['email_from'] = $fromEmail;
+                $email_data['email_from_name'] = $fromName;
+                $email_data['reply_to'] = $replyTo;
+                $email_data['reply_to_name'] = $replyToName;
+                $email_data['subject'] = $subject;
+                $email_data['html'] = $message . $footer;
+                $email_data['attachments'] = [];
+
+
+                $status = form_wrap_process_send_email($email_data);
+
+                if ($showOnResponse) {
+                    if ($status) {
+                        $response['success']['emailBcc'] = $successMessage;
+                    } else {
+                        $response['errors']['emailBcc'] = $errorMessage;
+                    }
+                }
+            }
+
+            if ($id == 'autoReply') {
+                $fromEmail = isset($arg->fromEmail) ? $arg->fromEmail : '';
+                $fromName = isset($arg->fromName) ? $arg->fromName : '';
+                $replyTo = isset($arg->replyTo) ? $arg->replyTo : '';
+                $replyToName = isset($arg->replyToName) ? $arg->replyToName : '';
+                $footer = isset($arg->footer) ? $arg->footer : '';
+                $subject = isset($arg->subject) ? $arg->subject : '';
+
+                $message = isset($arg->message) ? $arg->message : '';
+                $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+                $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+                    __('Auto Reply success', 'post-grid');
+                $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+                    __('Auto Reply failed', 'post-grid');
+
+                $email_data['email_to'] = $email;
+                $email_data['email_bcc'] = $bcc;
+                $email_data['email_from'] = $fromEmail;
+                $email_data['email_from_name'] = $fromName;
+                $email_data['reply_to'] = $replyTo;
+                $email_data['reply_to_name'] = $replyToName;
+                $email_data['subject'] = $subject;
+                $email_data['html'] = $message . $footer;
+                $email_data['attachments'] = [];
+
+                $status = form_wrap_process_send_email($email_data);
+
+                if ($showOnResponse) {
+                    if ($status) {
+                        $response['success']['autoReply'] = $successMessage;
+                    } else {
+                        $response['errors']['autoReply'] = $errorMessage;
+                    }
+                }
+            }
+
+
+
             if ($id == 'fluentcrmAddContact') {
 
                 $lists = isset($arg->lists) ? $arg->lists : [];
                 $tags = isset($arg->tags) ? $arg->tags : [];
+                $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+                $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+                $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
 
 
 
@@ -308,9 +468,9 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
                 ]);
 
-            $status = $subscriber->save();
+                $status = $subscriber->save();
 
-                
+
 
                 if (!empty($lists)) {
                     $listIds = [];
@@ -337,25 +497,110 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
                 // $status = true;
 
 
-                
-                if (is_wp_error($status)) {
-                    //$error_string = $status->get_error_message();
-                    $response['errors']['fluentcrmAddContactFailed'] = $errorMessage;
-                } else {
-                    $response['success']['fluentcrmAddContactSuccess'] = $successMessage;
+                if ($showOnResponse) {
+                    if (is_wp_error($status)) {
+                        //$error_string = $status->get_error_message();
+                        $response['errors']['fluentcrmAddContactFailed'] = $errorMessage;
+                    } else {
+                        $response['success']['fluentcrmAddContactSuccess'] = $successMessage;
+                    }
+                }
+            }
+            if ($id == 'mailpickerAddContact') {
+
+                $lists = isset($arg->lists) ? $arg->lists : [];
+                //$tags = isset($arg->tags) ? $arg->tags : [];
+                $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+                $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+                $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+                $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+
+                if (!class_exists("Mailpicker_Subscribers")) {
+                    $response['errors']['mailpickerAddContactFailed'] = __("Mail Picker plugin not active", "");
+                    continue;
                 }
 
 
-                error_log(serialize($response));
+                $Mailpicker_Subscribers = new Mailpicker_Subscribers();
+
+
+
+
+                $listIds = "";
+
+                if (!empty($lists)) {
+                    foreach ($lists as $list) {
+
+                        $id = $list->id;
+                        $listIds .= $id . ",";
+                    }
+                }
+
+                $mpResponse = $Mailpicker_Subscribers->add_subscriber(
+                    [
+                        'first_name' => $first_name,
+                        'last_name' => $last_name,
+                        'email' => $email,
+                        'status' => 'active',
+                        'subscriber_list' => $listIds,
+                    ]
+                );
+
+
+
+
+
+                if ($showOnResponse) {
+
+
+                    if (isset($mpResponse['status']) && $mpResponse['status'] == 'exist') {
+                        $response['errors']['mailpickerAddContactExist'] = $existMessage;
+                    }
+
+                    if (isset($mpResponse['status']) && $mpResponse['status'] == 'fail') {
+                        $response['errors']['mailpickerAddContactFailed'] = $errorMessage;
+                    }
+
+
+
+                    if (isset($mpResponse['status']) && $mpResponse['status'] == 'success') {
+                        $response['success']['mailpickerAddContactSuccess'] = $successMessage;
+                    }
+
+
+                    error_log(serialize($response));
+                }
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             if ($id == 'createEntry') {
                 $status = form_wrap_process_create_entry($entryData);
+                $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+                $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+                $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
 
-                if ($status) {
-                    $response['success']['createEntry'] = __('Create entry success', 'post-grid');
-                } else {
-                    $response['errors']['createEntry'] = __('Create entry failed', 'post-grid');
+                if ($showOnResponse) {
+                    if ($status) {
+                        $response['success']['createEntry'] = $successMessage;
+                    } else {
+                        $response['errors']['createEntry'] = $errorMessage;
+                    }
                 }
             }
         }
@@ -789,6 +1034,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
         $id = $arg->id;
 
+
+
+
         if ($id == 'sendMail') {
             $fromEmail = $email;
             $fromName = $full_name;
@@ -802,9 +1050,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Send mail success', 'post-grid');
+                __('Send mail success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Send mail failed', 'post-grid');
+                __('Send mail failed', 'post-grid');
 
 
             $email_data['email_to'] = $mailTo;
@@ -838,9 +1086,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Email copy user success', 'post-grid');
+                __('Email copy user success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Email copy user failed', 'post-grid');
+                __('Email copy user failed', 'post-grid');
 
 
 
@@ -877,9 +1125,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
 
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Email Bcc success', 'post-grid');
+                __('Email Bcc success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Email Bcc failed', 'post-grid');
+                __('Email Bcc failed', 'post-grid');
 
             $email_data['email_to'] = $mailTo;
             $email_data['email_bcc'] = $bcc;
@@ -914,9 +1162,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
             $message = isset($arg->message) ? $arg->message : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Auto Reply success', 'post-grid');
+                __('Auto Reply success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Auto Reply failed', 'post-grid');
+                __('Auto Reply failed', 'post-grid');
 
             $email_data['email_to'] = $email;
             $email_data['email_bcc'] = $bcc;
@@ -943,9 +1191,9 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs)
             $status = form_wrap_process_create_entry($email_data);
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Create entry success', 'post-grid');
+                __('Create entry success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Create entry failed', 'post-grid');
+                __('Create entry failed', 'post-grid');
 
             if ($showOnResponse) {
                 if ($status) {
@@ -1013,9 +1261,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $footer = isset($arg->footer) ? $arg->footer : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Send mail success', 'post-grid');
+                __('Send mail success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Send mail failed', 'post-grid');
+                __('Send mail failed', 'post-grid');
 
             $email_data['email_to'] = $mailTo;
             $email_data['email_bcc'] = $bcc;
@@ -1025,6 +1273,7 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $email_data['html'] = $message . $footer;
             $email_data['attachments'] = [];
 
+            error_log(serialize($email_data));
 
             $status = form_wrap_process_send_email($email_data);
 
@@ -1046,9 +1295,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $footer = isset($arg->footer) ? $arg->footer : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Email copy user success', 'post-grid');
+                __('Email copy user success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Email copy user failed', 'post-grid');
+                __('Email copy user failed', 'post-grid');
 
 
 
@@ -1083,9 +1332,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $footer = isset($arg->footer) ? $arg->footer : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Email Bcc success', 'post-grid');
+                __('Email Bcc success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Email Bcc failed', 'post-grid');
+                __('Email Bcc failed', 'post-grid');
 
 
             $email_data['email_to'] = $mailTo;
@@ -1119,9 +1368,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $message = isset($arg->message) ? $arg->message : '';
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Auto Reply success', 'post-grid');
+                __('Auto Reply success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Auto Reply failed', 'post-grid');
+                __('Auto Reply failed', 'post-grid');
 
             $email_data['email_to'] = $email;
             $email_data['email_bcc'] = $bcc;
@@ -1148,9 +1397,9 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $status = form_wrap_process_create_entry($email_data);
             $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
             $successMessage = isset($arg->successMessage) ? $arg->successMessage :
-            __('Create entry success', 'post-grid');
+                __('Create entry success', 'post-grid');
             $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
-            __('Create entry failed', 'post-grid');
+                __('Create entry failed', 'post-grid');
 
             if ($showOnResponse) {
                 if ($status) {

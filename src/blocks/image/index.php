@@ -137,14 +137,14 @@ class PGBlockImage
     $rel = isset($featuredImageOptions['rel']) ? $featuredImageOptions['rel'] : '';
     $size = isset($featuredImageOptions['size']) ? $featuredImageOptions['size'] : '';
 
-  $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
-  $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
-  $utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
-  $utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
-  $utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
-  $utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
-  $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
-  $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
+    $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
+    $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
+    $utmTrackingID = isset($utmTracking['id']) ? $utmTracking['id'] : '';
+    $utmTrackingSource = isset($utmTracking['source']) ? $utmTracking['source'] : '';
+    $utmTrackingMedium = isset($utmTracking['medium']) ? $utmTracking['medium'] : '';
+    $utmTrackingCampaign = isset($utmTracking['campaign']) ? $utmTracking['campaign'] : '';
+    $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
+    $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
 
 
 
@@ -311,7 +311,7 @@ class PGBlockImage
 
 
     if (strlen($lazyLoadSrc) === 0) {
-      $lazyLoadSrc = post_grid_plugin_url . "/assets/admin/gif/lazyPlaceholder.gif";
+      $lazyLoadSrc = post_grid_plugin_url . "/assets/admin/gif/ajax-loader.gif";
     }
 
 
@@ -363,7 +363,7 @@ class PGBlockImage
         <?php else : ?>
 
           <?php if ($lightboxEnable == true) : ?>
-            <a  href="<?php if ($lazyLoad == true) : ?><?php echo esc_url_raw($dataSrc); ?><?php endif; ?><?php if ($lazyLoad == false) : ?><?php echo esc_url_raw($attachment_url); ?><?php endif; ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
+            <a href="<?php if ($lazyLoad == true) : ?><?php echo esc_url_raw($dataSrc); ?><?php endif; ?><?php if ($lazyLoad == false) : ?><?php echo esc_url_raw($attachment_url); ?><?php endif; ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
               <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
             </a>
           <?php else : ?>

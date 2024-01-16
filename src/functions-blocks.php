@@ -20,7 +20,7 @@ function post_grid_global_css()
 ?>
 
 
-  <?php
+<?php
 }
 function parse_css_class($classStr, $obj)
 {
@@ -507,13 +507,13 @@ function post_grid_parse_query_terms($queryArgs)
         $query_args['hide_empty'] = $val;
       } elseif ($id == 'include') {
         $query_args['include'] =
-        !empty($val) ? explode(',', $val) : [];
+          !empty($val) ? explode(',', $val) : [];
       } elseif ($id == 'exclude') {
         $query_args['exclude'] =
-        !empty($val) ? explode(',', $val) : [];
+          !empty($val) ? explode(',', $val) : [];
       } elseif ($id == 'exclude_tree') {
         $query_args['exclude_tree'] =
-        !empty($val) ? explode(',', $val) : [];
+          !empty($val) ? explode(',', $val) : [];
       } elseif ($id == 'number') {
         $query_args['number'] = $val;
       } elseif ($id == 'count') {
@@ -522,10 +522,10 @@ function post_grid_parse_query_terms($queryArgs)
         $query_args['offset'] = $val;
       } elseif ($id == 'name') {
         $query_args['name'] =
-        !empty($val) ? explode(',', $val) : [];
+          !empty($val) ? explode(',', $val) : [];
       } elseif ($id == 'slug') {
         $query_args['slug'] =
-        !empty($val) ? explode(',', $val) : [];
+          !empty($val) ? explode(',', $val) : [];
       } elseif ($id == 'hierarchical') {
         $query_args['hierarchical'] = $val;
       } elseif ($id == 'search') {
@@ -602,7 +602,9 @@ function post_grid_global_cssY()
                   if ('font-family' == $att) {
                     $postGridFonts[$device][] = $val;
                   }
-                  $reponsiveCssGroups[$device][$selector][$att] = $val;
+                  // $reponsiveCssGroups[$device][$selector][$att] = $val;
+                  $reponsiveCssGroups[$device][$selector][$att] = str_replace("u0022", '"', $val);
+
                 }
             }
 
@@ -734,16 +736,17 @@ function post_grid_global_cssY()
 
   if (!empty($fonts)) {
   ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
-  <?php
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
+<?php
 
   }
 
   ?>
 
-  <style>
-    <?php echo ($reponsiveCss); ?>
-  </style>
+<style>
+<?php echo ($reponsiveCss);
+?>
+</style>
 
 <?php
 
@@ -758,10 +761,10 @@ function post_grid_global_vars()
 
 
 ?>
-  <script>
-    var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
-  </script>
-  <?php
+<script>
+var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
+</script>
+<?php
 }
 add_action('wp_footer', 'post_grid_global_vars', 999);
 
@@ -1044,17 +1047,18 @@ function post_grid_page_styles()
 
   if (!empty($fonts)) {
   ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
-  <?php
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
+<?php
 
   }
 
   ?>
 
 
-  <style>
-    <?php echo ($reponsiveCss); ?>
-  </style>
+<style>
+<?php echo ($reponsiveCss);
+?>
+</style>
 
 <?php
 
@@ -1085,9 +1089,10 @@ function post_grid_font_family()
   }";
   }
 ?>
-  <style>
-    <?php echo ($faceStr); ?>
-  </style>
+<style>
+<?php echo ($faceStr);
+?>
+</style>
 <?php
 }
 add_action('wp_footer', 'post_grid_font_family', 999);

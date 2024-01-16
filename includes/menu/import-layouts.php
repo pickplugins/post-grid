@@ -79,6 +79,9 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
         <div class="block-list-items">
             <?php
 
+            // var_dump($post_data);
+
+
             if (!empty($post_data)) :
 
                 foreach ($post_data as $item_index => $item) :

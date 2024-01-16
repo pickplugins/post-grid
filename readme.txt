@@ -1,19 +1,18 @@
 === Post Grid, Form Maker, Popup Maker, WooCommerce Blocks, Post Blocks, Post Carousel - Combo Blocks ===
 Contributors: PickPlugins
 Donate link: https://getpostgrid.com/
-Tags: post grid, post grid block, block, custom post grid, post type grid, grid display, grid layout, post list, masonry grid
+Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.67
+Stable tag: 2.2.68
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-    Combo Blocks for Landing Page Builder, Blog Builder, eCommerce Builder, Niche Site
-Builder, News Site Builder and More.
+    Combo Blocks for Landing Page Builder, Blog Builder, eCommerce Builder, Niche Site Builder, News Site Builder and More.
 
 == Description ==
 
-Post Grid is now Combo Blocks. We have added 40+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
+Post Grid is now Combo Blocks. We have added 45+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
 
 ### Post Grid by [PickPlugins](http://pickplugins.com)
 
@@ -385,6 +384,14 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 15. Accordion Block
 
 == Changelog ==
+
+= 2.2.68 =
+- 2024-01-16 - fix - Settings page broken issue fixed.
+- 2024-01-16 - fix - shortcode based Layouts library broken issue fixed.
+- 2024-01-16 - fix - Block Transform Support added for default blocks.
+- 2024-01-16 - fix - Block variation picker updated.
+- 2024-01-16 - fix - Term list block updated.
+
 
 = 2.2.67 =
 - 2023-12-28 - update - Plugin name update Post Grid Combo to Combo Blocks

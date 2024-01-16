@@ -68,7 +68,7 @@
           "library": "fontAwesome",
           "srcType": "class",
           "iconSrc": "far fa-calendar-alt",
-          "position": "beforeCommentCount",
+          "position": "",
           "class": "number-count-icon"
         },
         "styles": {

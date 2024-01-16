@@ -34,11 +34,11 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
                     </div>
 
                     <div>
-                        Post Grid Combo - <?php echo post_grid_version; ?>
+                        Combo Blcoks - <?php echo post_grid_version; ?>
                     </div>
                 </div>
 
-                <p class="text-lg">Welcome to <span class="font-bold">Post Grid Combo</span>, We have started diving with Gutenberg.</p>
+                <p class="text-lg">Welcome to <span class="font-bold">Combo Blcoks</span>, We have started diving with Gutenberg.</p>
 
 
             </div>

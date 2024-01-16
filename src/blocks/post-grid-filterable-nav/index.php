@@ -18,7 +18,6 @@ class PGBlockPostGridFilterableNav
   {
     //wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid/index.css');
     //wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
-    //wp_register_script('anime.min', post_grid_plugin_url . 'assets/global/js/anime.min.js', []);
 
 
 
@@ -77,10 +76,10 @@ class PGBlockPostGridFilterableNav
 
 
 
-    
 
 
-    
+
+
 
 
     $grid = isset($attributes['grid']) ? $attributes['grid'] : [];
@@ -88,17 +87,17 @@ class PGBlockPostGridFilterableNav
     $gridOptionsItemCss = isset($gridOptions['itemCss']) ? $gridOptions['itemCss'] : [];
 
 
-    
 
 
 
-    
+
+
 
     $lazyLoad = isset($attributes['lazyLoad']) ? $attributes['lazyLoad'] : [];
     $lazyLoadOptions = isset($lazyLoad['options']) ? $lazyLoad['options'] : [];
     $lazyLoadEnable = isset($lazyLoadOptions['enable']) ? $lazyLoadOptions['enable'] : 'no';
 
-    
+
 
 
 
@@ -149,8 +148,8 @@ class PGBlockPostGridFilterableNav
     }
 
     $blockCssY = isset($attributes["blockCssY"])
-    ? $attributes["blockCssY"]
-    : [];
+      ? $attributes["blockCssY"]
+      : [];
     // $postGridCssY[] = array_merge($blockCssY['items'], $itemCssArr);
     $postGridCssY[] = isset($blockCssY["items"]) ? $blockCssY["items"] : [];
 
@@ -229,7 +228,7 @@ class PGBlockPostGridFilterableNav
     endif;
 
 
-    
+
 
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
@@ -250,7 +249,7 @@ class PGBlockPostGridFilterableNav
 
 
 
-    
+
     ob_start();
 
 
@@ -259,91 +258,91 @@ class PGBlockPostGridFilterableNav
 
 
 
-    
 
 
 
-      <div class="<?php echo esc_attr($blockId); ?> PGBlockPostGridFilterableNav PGBlockPostGridFilterableNav-<?php echo esc_attr($postGridId); ?>" postgridargs=<?php echo wp_json_encode($postGridArgs); ?>>
-        <form class="filterable-group-wrap">
-          <?php
 
-          $groupLogic = '';
+    <div class="<?php echo esc_attr($blockId); ?> PGBlockPostGridFilterableNav PGBlockPostGridFilterableNav-<?php echo esc_attr($postGridId); ?>" postgridargs=<?php echo wp_json_encode($postGridArgs); ?>>
+      <form class="filterable-group-wrap">
+        <?php
 
-          if (empty($filterableFilters)) {
+        $groupLogic = '';
 
-          ?>
-            <div class="filterable-group" data-filter-group data-logic="OR">
-              <?php if ($filterableShowAll == 'yes') : ?>
-                <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-filter="all"><?php echo 'All'; ?></span>
-              <?php endif; ?>
-            </div>
-            <?php
+        if (empty($filterableFilters)) {
 
-
-          }
-
-
-
-          if (!empty($filterableFilters)) {
-
-            $groupCount = 0;
-
-            foreach ($filterableFilters as $filterGroup) {
-              $groupTitle = isset($filterGroup['groupTitle']) ? $filterGroup['groupTitle'] : '';
-              $groupType = isset($filterGroup['type']) ? $filterGroup['type'] : '';
-              $groupLogic = isset($filterGroup['logic']) ? $filterGroup['logic'] : '';
-              $groupshowPostCount = isset($filterGroup['showPostCount']) ? $filterGroup['showPostCount'] : '';
-              $groupitems = isset($filterGroup['items']) ? $filterGroup['items'] : [];
-              if (!empty($groupitems)) {
-            ?>
-                <div class="filterable-group" data-filter-group data-logic="<?php echo esc_attr($groupLogic); ?>">
-                  <span class="filterable-group-title">
-                    <?php echo esc_html($groupTitle); ?>
-                  </span>
-
-                  <?php if ($groupCount == 0 && count($filterableFilters) == 1) : ?>
-                    <?php if ($filterableShowAll == 'yes') : ?>
-                      <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-filter="all"><?php echo 'All'; ?></span>
-                    <?php endif; ?>
-                  <?php endif; ?>
-
-
-                  <?php
-                  if (!empty($groupitems))
-                    foreach ($groupitems as $item) {
-                      $itemId = isset($item['id']) ? $item['id'] : '';
-                      $itemSlug = isset($item['slug']) ? $item['slug'] : '';
-                      $itemTitle = isset($item['title']) ? $item['title'] : '';
-                      $itemCount = isset($item['count']) ? $item['count'] : '';
-                  ?>
-                    <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" <?php if ($filterToggle == 'yes') : ?> data-toggle="<?php echo '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
-                      <?php echo esc_html($itemTitle) ?>
-                      <?php echo ($groupshowPostCount == 'yes') ? '(' . esc_html($itemCount) . ')' : '' ?>
-                    </span>
-                  <?php
-                    }
-                  ?>
-                </div>
-          <?php
-              }
-              $groupCount++;
-            }
-          }
-          ?>
-          <div class="filterable-group" data-filter-group data-logic="<?php echo esc_attr($groupLogic); ?>">
-            <?php if ($filterableShowSort == 'yes') : ?>
-              <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-sort="order:asc"><?php echo __('ASC', 'post-grid'); ?></span>
-              <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-sort="order:desc"><?php echo __('DESC', 'post-grid'); ?></span>
-            <?php endif; ?>
-            <?php if ($filterableShowRandom == 'yes') : ?>
-              <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-sort="random"><?php echo __('Random', 'post-grid'); ?></span>
-            <?php endif; ?>
-            <?php if (count($filterableFilters) > 1 && $filterableShowClear == 'yes') : ?>
-              <button class="pg-filter" type="reset"><?php echo __('Clear', 'post-grid'); ?></button>
+        ?>
+          <div class="filterable-group" data-filter-group data-logic="OR">
+            <?php if ($filterableShowAll == 'yes') : ?>
+              <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-filter="all"><?php echo 'All'; ?></span>
             <?php endif; ?>
           </div>
-        </form>
-      </div>
+          <?php
+
+
+        }
+
+
+
+        if (!empty($filterableFilters)) {
+
+          $groupCount = 0;
+
+          foreach ($filterableFilters as $filterGroup) {
+            $groupTitle = isset($filterGroup['groupTitle']) ? $filterGroup['groupTitle'] : '';
+            $groupType = isset($filterGroup['type']) ? $filterGroup['type'] : '';
+            $groupLogic = isset($filterGroup['logic']) ? $filterGroup['logic'] : '';
+            $groupshowPostCount = isset($filterGroup['showPostCount']) ? $filterGroup['showPostCount'] : '';
+            $groupitems = isset($filterGroup['items']) ? $filterGroup['items'] : [];
+            if (!empty($groupitems)) {
+          ?>
+              <div class="filterable-group" data-filter-group data-logic="<?php echo esc_attr($groupLogic); ?>">
+                <span class="filterable-group-title">
+                  <?php echo esc_html($groupTitle); ?>
+                </span>
+
+                <?php if ($groupCount == 0 && count($filterableFilters) == 1) : ?>
+                  <?php if ($filterableShowAll == 'yes') : ?>
+                    <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-filter="all"><?php echo 'All'; ?></span>
+                  <?php endif; ?>
+                <?php endif; ?>
+
+
+                <?php
+                if (!empty($groupitems))
+                  foreach ($groupitems as $item) {
+                    $itemId = isset($item['id']) ? $item['id'] : '';
+                    $itemSlug = isset($item['slug']) ? $item['slug'] : '';
+                    $itemTitle = isset($item['title']) ? $item['title'] : '';
+                    $itemCount = isset($item['count']) ? $item['count'] : '';
+                ?>
+                  <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" <?php if ($filterToggle == 'yes') : ?> data-toggle="<?php echo '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
+                    <?php echo esc_html($itemTitle) ?>
+                    <?php echo ($groupshowPostCount == 'yes') ? '(' . esc_html($itemCount) . ')' : '' ?>
+                  </span>
+                <?php
+                  }
+                ?>
+              </div>
+        <?php
+            }
+            $groupCount++;
+          }
+        }
+        ?>
+        <div class="filterable-group" data-filter-group data-logic="<?php echo esc_attr($groupLogic); ?>">
+          <?php if ($filterableShowSort == 'yes') : ?>
+            <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-sort="order:asc"><?php echo __('ASC', 'post-grid'); ?></span>
+            <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-sort="order:desc"><?php echo __('DESC', 'post-grid'); ?></span>
+          <?php endif; ?>
+          <?php if ($filterableShowRandom == 'yes') : ?>
+            <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" data-sort="random"><?php echo __('Random', 'post-grid'); ?></span>
+          <?php endif; ?>
+          <?php if (count($filterableFilters) > 1 && $filterableShowClear == 'yes') : ?>
+            <button class="pg-filter" type="reset"><?php echo __('Clear', 'post-grid'); ?></button>
+          <?php endif; ?>
+        </div>
+      </form>
+    </div>
 
 
 
@@ -359,7 +358,7 @@ class PGBlockPostGridFilterableNav
 
 
 
-  <?php
+<?php
 
     return ob_get_clean();
   }

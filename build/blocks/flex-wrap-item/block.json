@@ -26,7 +26,13 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "pg-flex-wrap-item"
+          "class": "pg-flex-wrap-item",
+          "id": "",
+          "linkTo": "postUrl",
+          "linkToAuthorMeta": "",
+          "linkToCustomMeta": "",
+          "linkTarget": "_blank",
+          "customUrl": ""
         },
         "styles": {
           "backgroundColor": {

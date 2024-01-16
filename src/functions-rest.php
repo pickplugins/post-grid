@@ -30,10 +30,7 @@ class BlockPostGridRest
 				},
 				'update_callback' => function ($value, $object, $field_name) {
 
-					// error_log('pgc_meta - Update');
-					// error_log($object->ID);
 
-					// error_log(serialize($value));
 
 					return update_post_meta($object->ID, 'pgc_meta', $value);
 				},
@@ -110,7 +107,17 @@ class BlockPostGridRest
 			)
 		);
 
-
+		register_rest_route(
+			'post-grid/v2',
+			'/mailpicker_lists',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'mailpicker_lists'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 		register_rest_route(
@@ -570,7 +577,7 @@ class BlockPostGridRest
 
 
 	/**
-	 * Return process_form_data
+	 * Return wordpress_org_data
 	 *
 	 * @since 1.0.0
 	 * @param WP_REST_Request $post_data Post data.
@@ -824,7 +831,6 @@ class BlockPostGridRest
 
 		$option = isset($request['option']) ? $request['option'] : '';
 
-		//error_log($option);
 		$response = get_option($option);
 
 		// $response['customFonts'] = [];
@@ -851,7 +857,48 @@ class BlockPostGridRest
 
 
 	/**
-	 * Return process_form_data
+	 * Return mailpicker_lists
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function mailpicker_lists($request)
+	{
+		$response = [];
+
+
+		//$formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
+
+
+
+		$terms = get_terms(
+			array(
+				'taxonomy' => 'subscriber_list',
+				'hide_empty' => 0,
+				'post_type' => 'subscriber',
+			)
+		);
+
+
+		foreach ($terms as $term) {
+
+			$title = isset($term->name) ? $term->name : '';
+			$id = isset($term->term_id) ? $term->term_id : '';
+			$slug = isset($term->slug) ? $term->slug : '';
+
+			$response[$id]['title'] = $title;
+			$response[$id]['id'] = $id;
+			$response[$id]['slug'] = $slug;
+		}
+
+
+
+		die(wp_json_encode($response));
+	}
+
+
+	/**
+	 * Return fluentcrm_lists
 	 *
 	 * @since 1.0.0
 	 * @param WP_REST_Request $post_data Post data.
@@ -862,6 +909,10 @@ class BlockPostGridRest
 
 
 		//$formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
+
+		if (!class_exists("FluentCrmApi")) {
+			die(wp_json_encode($response));
+		}
 
 		$listApi = FluentCrmApi('lists');
 
@@ -876,8 +927,6 @@ class BlockPostGridRest
 			$response[$id]['title'] = $title;
 			$response[$id]['id'] = $id;
 			$response[$id]['slug'] = $slug;
-
-			//error_log(serialize($list->id));
 		}
 
 
@@ -886,7 +935,7 @@ class BlockPostGridRest
 
 
 	/**
-	 * Return process_form_data
+	 * Return fluentcrm_tags
 	 *
 	 * @since 1.0.0
 	 * @param WP_REST_Request $post_data Post data.
@@ -911,8 +960,6 @@ class BlockPostGridRest
 			$response[$id]['title'] = $title;
 			$response[$id]['id'] = $id;
 			$response[$id]['slug'] = $slug;
-
-			//error_log(serialize($list->id));
 		}
 
 
@@ -947,7 +994,6 @@ class BlockPostGridRest
 		$formType = $request->get_param('formType');
 		$onprocessargs = $request->get_param('onprocessargs');
 		$onprocessargs = json_decode($onprocessargs);
-
 
 
 
@@ -1654,8 +1700,8 @@ class BlockPostGridRest
 						$query_args['post_type'] = $val;
 					} elseif ($id == 'postStatus') {
 
-					$status = ($val == 'draft') ? "publish" : $val;
-					$query_args['post_status'] = $status;
+						$status = ($val == 'draft') ? "publish" : $val;
+						$query_args['post_status'] = $status;
 
 						// $query_args['post_status'] = $val;
 					} elseif ($id == 'order') {
@@ -1795,9 +1841,9 @@ class BlockPostGridRest
 						$query_args['nopaging'] = $val;
 					} elseif ($id == 'postsPerPage') {
 
-					$per_page = (int) $val;
-					$per_page = ($val > 50) ? 50 : $val;
-					$query_args['posts_per_page'] = $per_page;
+						$per_page = (int) $val;
+						$per_page = ($val > 50) ? 50 : $val;
+						$query_args['posts_per_page'] = $per_page;
 
 						// $query_args['posts_per_page'] = $val;
 					} elseif ($id == 'paged') {
@@ -1933,7 +1979,6 @@ class BlockPostGridRest
 	public function get_terms($post_data)
 	{
 
-		error_log("get_terms");
 
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
@@ -1946,7 +1991,6 @@ class BlockPostGridRest
 
 
 		$paged = 1;
-error_log(serialize($queryArgs));
 
 		$query_args = [];
 
@@ -1971,13 +2015,13 @@ error_log(serialize($queryArgs));
 						$query_args['hide_empty'] = $val;
 					} elseif ($id == 'include') {
 						$query_args['include'] =
-					!empty($val) ? explode(',', $val) : [];
+							!empty($val) ? explode(',', $val) : [];
 					} elseif ($id == 'exclude') {
 						$query_args['exclude'] =
-					!empty($val) ? explode(',', $val) : [];
+							!empty($val) ? explode(',', $val) : [];
 					} elseif ($id == 'exclude_tree') {
 						$query_args['exclude_tree'] =
-					!empty($val) ? explode(',', $val) : [];
+							!empty($val) ? explode(',', $val) : [];
 					} elseif ($id == 'number') {
 						$query_args['number'] = $val;
 					} elseif ($id == 'count') {
@@ -1986,10 +2030,10 @@ error_log(serialize($queryArgs));
 						$query_args['offset'] = $val;
 					} elseif ($id == 'name') {
 						$query_args['name'] =
-					!empty($val) ? explode(',', $val) : [];
+							!empty($val) ? explode(',', $val) : [];
 					} elseif ($id == 'slug') {
 						$query_args['slug'] =
-					!empty($val) ? explode(',', $val) : [];
+							!empty($val) ? explode(',', $val) : [];
 					} elseif ($id == 'hierarchical') {
 						$query_args['hierarchical'] = $val;
 					} elseif ($id == 'search') {
@@ -2016,8 +2060,7 @@ error_log(serialize($queryArgs));
 						$query_args['meta_key'] = $val;
 					} elseif ($id == 'meta_value') {
 						$query_args['meta_value'] = $val;
-					} 
-					
+					}
 				}
 			}
 
@@ -2038,8 +2081,8 @@ error_log(serialize($queryArgs));
 			foreach ($terms as  $term) :
 
 
-					$term_id = $term->term_id;
-					$term_taxonomy = $term->taxonomy;
+				$term_id = $term->term_id;
+				$term_taxonomy = $term->taxonomy;
 				$term->link = get_term_link($term_id, $term_taxonomy);
 
 
@@ -2139,7 +2182,7 @@ error_log(serialize($queryArgs));
 			$postTypes[] = $post_type;
 		}
 
-		
+
 		//error_log($request['postTypes']);
 		// error_log(serialize($postTypes));
 
@@ -2156,8 +2199,6 @@ error_log(serialize($queryArgs));
 			$taxDetails = get_taxonomy($taxonomy);
 
 			$taxonomiesArr[] = ['label' => $taxDetails->label, 'id' => $taxonomy];
-
-
 		}
 
 

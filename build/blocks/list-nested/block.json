@@ -95,7 +95,7 @@
           "srcType": "class",
           "iconSrc": "fas fa-chevron-right",
           "class": "icon",
-          "positon": "before"
+          "position": "before"
         },
         "styles": {
           "color": {

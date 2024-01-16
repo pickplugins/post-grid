@@ -37,10 +37,20 @@ const termsQueryPramsBasic = {
 		longDescription:
 			"Whether to hide terms not assigned to any posts. Accepts 1|true or 0|false.",
 	},
+	number: {
+		value: false,
+		multiple: false,
+		id: "number",
+		label: "Number",
+		description: "Accepts 0 (all) or any positive number.",
+		longDescription:
+			"Maximum number of terms to return. Accepts ''|0 (all) or any positive number. Default ''|0 (all). Note that $number may not return accurate results when coupled with $object_ids.",
+	},
 	include: {
 		value: "category",
 		multiple: false,
 		id: "include",
+		isPro: true,
 		label: "Include",
 		description: "Comma-separated string of term IDs to include.",
 		longDescription:
@@ -51,6 +61,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "exclude",
+		isPro: true,
 		label: "Exclude",
 		description: "Comma-separated string of term IDs to exclude.",
 		longDescription:
@@ -63,25 +74,19 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "exclude_tree",
+		isPro: true,
 		label: "Exclude Tree",
 		description: "Comma-separated string of term IDs to exclude.",
 		longDescription:
 			"Array or comma/space-separated string of term IDs to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array.",
 		placeholder: "Comma-separated string of term IDs to exclude.",
 	},
-	number: {
-		value: false,
-		multiple: false,
-		id: "number",
-		label: "Number",
-		description: "Accepts 0 (all) or any positive number.",
-		longDescription:
-			"Maximum number of terms to return. Accepts ''|0 (all) or any positive number. Default ''|0 (all). Note that $number may not return accurate results when coupled with $object_ids.",
-	},
+
 	count: {
 		value: false,
 		multiple: false,
 		id: "count",
+		isPro: true,
 		label: "count",
 		description:
 			"Whether to return a term count. If true, will take precedence over $fields.",
@@ -90,6 +95,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "offset",
+		isPro: true,
 		label: "Offset",
 		description: "The number by which to offset the terms query.",
 		longDescription: "The number by which to offset the terms query.",
@@ -105,6 +111,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "name",
+		isPro: true,
 		label: "Name",
 		description: "Name or array of names to return term(s) for.",
 		longDescription: "Comma-separated names to return term(s) for.",
@@ -116,6 +123,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "slug",
+		isPro: true,
 		label: "Slug",
 		description: "Slug or array of slugs to return term(s) for.",
 		longDescription: "Comma-separated slugs to return term(s) for.",
@@ -124,6 +132,7 @@ const termsQueryPramsBasic = {
 		value: true,
 		multiple: false,
 		id: "hierarchical",
+		isPro: true,
 		label: "Hierarchical",
 		description: "Whether to include terms that have non-empty descendants.",
 		longDescription:
@@ -133,6 +142,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "search",
+		isPro: true,
 		label: "Search",
 		description: "Search criteria to match terms.",
 		longDescription:
@@ -142,6 +152,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "name__like",
+		isPro: true,
 		label: "Name like",
 		description:
 			"Retrieve terms with criteria by which a term is LIKE $name__like.",
@@ -152,6 +163,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "description__like",
+		isPro: true,
 		label: "Description like",
 		description:
 			"Retrieve terms where the description is LIKE $description__like.",
@@ -162,6 +174,7 @@ const termsQueryPramsBasic = {
 		value: false,
 		multiple: false,
 		id: "pad_counts",
+		isPro: true,
 		label: "Pad counts",
 		description:
 			'Whether to pad the quantity of a term’s children in the quantity of each term’s "count" object variable.',
@@ -172,6 +185,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "get",
+		isPro: true,
 		label: "Get",
 		description:
 			"Whether to return terms regardless of ancestry or whether the terms are empty.",
@@ -183,6 +197,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "child_of",
+		isPro: true,
 		label: "Child of",
 		description: "Term ID to retrieve child terms of.",
 		longDescription:
@@ -193,6 +208,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "parent",
+		isPro: true,
 		label: "Parent",
 		description: "Parent term ID to retrieve direct-child terms of.",
 		longDescription: "Parent term ID to retrieve direct-child terms of.",
@@ -202,6 +218,7 @@ const termsQueryPramsBasic = {
 		value: false,
 		multiple: false,
 		id: "childless",
+		isPro: true,
 		label: "Childless",
 		description: "True to limit results to terms that have no children.",
 		longDescription:
@@ -213,6 +230,7 @@ const termsQueryPramsBasic = {
 		value: "core",
 		multiple: false,
 		id: "cache_domain",
+		isPro: true,
 		label: "Cache domain",
 		description:
 			"Unique cache key to be produced when this query is stored in an object cache.",
@@ -223,6 +241,7 @@ const termsQueryPramsBasic = {
 		value: true,
 		multiple: false,
 		id: "update_term_meta_cache",
+		isPro: true,
 		label: "Update term meta Cache",
 		description:
 			"Whether to prime meta caches for matched terms. Default true.",
@@ -238,6 +257,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "meta_key",
+		isPro: true,
 		label: "Meta key",
 		description: "Comma-separated keys to return term(s) for.",
 		longDescription: "Meta key or keys to filter by.",
@@ -246,6 +266,7 @@ const termsQueryPramsBasic = {
 		value: "",
 		multiple: false,
 		id: "meta_value",
+		isPro: true,
 		label: "Meta value",
 		description: "Comma-separated keys to return term(s) for.",
 		longDescription: "Meta value or values to filter by.",

@@ -136,7 +136,7 @@
         "options": {
           "linkTarget": "_blank",
           "showIcon": false,
-          "iconPositon": "beforePrefix",
+          "iconPosition": "beforePrefix",
           "tag": "li"
         },
         "styles": {

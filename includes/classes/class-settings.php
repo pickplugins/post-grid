@@ -78,10 +78,7 @@ class class_post_grid_settings
         include(post_grid_plugin_dir . 'includes/menu/settings.php');
     }
 
-    public function addons()
-    {
-        include(post_grid_plugin_dir . 'includes/menu/addons.php');
-    }
+
 
 
     public function data_update()

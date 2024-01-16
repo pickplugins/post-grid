@@ -4,7 +4,7 @@ Donate link: https://getpostgrid.com/
 Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.67
+Stable tag: 2.2.68
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -384,6 +384,14 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 15. Accordion Block
 
 == Changelog ==
+
+= 2.2.68 =
+- 2024-01-16 - fix - Settings page broken issue fixed.
+- 2024-01-16 - fix - shortcode based Layouts library broken issue fixed.
+- 2024-01-16 - fix - Block Transform Support added for default blocks.
+- 2024-01-16 - fix - Block variation picker updated.
+- 2024-01-16 - fix - Term list block updated.
+
 
 = 2.2.67 =
 - 2023-12-28 - update - Plugin name update Post Grid Combo to Combo Blocks

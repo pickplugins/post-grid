@@ -18,7 +18,6 @@ class PGBlockPostGrid
   {
     //wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid/index.css');
     //wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
-    //wp_register_script('anime.min', post_grid_plugin_url . 'assets/global/js/anime.min.js', []);
 
 
 

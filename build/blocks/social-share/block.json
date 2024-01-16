@@ -116,7 +116,7 @@
           "showLabel": false,
           "showCount": false,
           "showIcon": true,
-          "iconPositon": "beforeLabel"
+          "iconPosition": "beforeLabel"
         },
         "styles": {
           "margin": {

@@ -62,7 +62,7 @@ $post_grid_settings = get_option('post_grid_settings');
                     </div>
 
                     <div>
-                        Post Grid Combo - <?php echo post_grid_version; ?>
+                        Combo Blcoks - <?php echo post_grid_version; ?>
                     </div>
                 </div>
 

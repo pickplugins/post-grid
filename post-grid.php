@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://getpostgrid.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.67
+Version: 2.2.68
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,8 +28,8 @@ if (!class_exists('PostGrid')) {
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Combo Blocks');
-            define('post_grid_version', '2.2.67');
-            define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
+            define('post_grid_version', '2.2.68');
+            define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
 
@@ -300,8 +300,6 @@ if (!class_exists('PostGrid')) {
             // Register Scripts & JS
             wp_register_script('post_grid_scripts', post_grid_plugin_url . 'assets/frontend/js/scripts.js', array('jquery'));
 
-            wp_enqueue_script('post_grid_scripts');
-            wp_localize_script('post_grid_scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
 
             //wp_register_script('masonry', post_grid_plugin_url . 'assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
             //wp_register_script('imagesloaded', post_grid_plugin_url . 'assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
@@ -316,7 +314,6 @@ if (!class_exists('PostGrid')) {
 
             wp_register_style('font-awesome-4', post_grid_plugin_url . 'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/global/css/font-awesome-5.css');
-
             wp_register_style('bootstrap-icons', post_grid_plugin_url . 'assets/css/bootstrap-icons/bootstrap-icons.css');
             wp_register_style('fontawesome-icons', post_grid_plugin_url . 'assets/css/fontawesome/css/all.min.css');
             wp_register_style('icofont-icons', post_grid_plugin_url . 'assets/css/icofont/icofont.min.css');
@@ -345,7 +342,7 @@ if (!class_exists('PostGrid')) {
             wp_register_script('jquery.lazy', post_grid_plugin_url . 'assets/admin/js/jquery.lazy.js', array('jquery'));
 
 
-            wp_enqueue_style('post_grid_skin', post_grid_plugin_url . 'assets/global/css/style.skins.css');
+            wp_register_style('post_grid_skin', post_grid_plugin_url . 'assets/global/css/style.skins.css');
 
             wp_register_style('jquery-ui', post_grid_plugin_url . 'assets/admin/css/jquery-ui.css');
 
@@ -355,11 +352,11 @@ if (!class_exists('PostGrid')) {
             wp_enqueue_style('font-awesome-5');
 
 
-            wp_register_style('icofont', post_grid_plugin_url . 'assets/global/css/icofont/icofont.min.css');
+            wp_register_style('icofont', post_grid_plugin_url . 'assets/css/icofont/icofont.min.css');
 
             wp_enqueue_style('icofont');
 
-            wp_register_style('bootstrap-icons', post_grid_plugin_url . 'assets/global/css/bootstrap-icons/bootstrap-icons.css');
+            wp_register_style('bootstrap-icons', post_grid_plugin_url . 'assets/css/bootstrap-icons/bootstrap-icons.css');
 
             wp_enqueue_style('bootstrap-icons');
 
@@ -419,13 +416,16 @@ if (!class_exists('PostGrid')) {
             }
 
 
-            if ($screen->id == 'post-grid-combo_page_post-grid-settings') {
+
+            if ($screen->id == 'combo-blocks_page_post-grid-settings') {
 
                 wp_enqueue_script('post_grid_admin_js');
                 wp_localize_script('post_grid_admin_js', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
                 wp_enqueue_style('select2');
                 wp_enqueue_script('select2');
 
+                $settings_tabs_field = new settings_tabs_field();
+                $settings_tabs_field->admin_scripts();
 
                 wp_enqueue_style(
                     'prefix-editor',
@@ -463,22 +463,10 @@ if (!class_exists('PostGrid')) {
                 'all'
             );
 
-            wp_enqueue_style(
-                'PostGrid-v1.0',
-                post_grid_plugin_url . '/assets/PostGrid-v1.0/style.css',
-                [],
-                time(),
-                'all'
-            );
 
 
-            // wp_enqueue_style(
-            //     'PostGrid-custom',
-            //     post_grid_plugin_url . '/src/css/custom-style.css',
-            //     [],
-            //     time(),
-            //     'all'
-            // );
+
+
 
             wp_enqueue_style(
                 'post-grid-combo-editor',

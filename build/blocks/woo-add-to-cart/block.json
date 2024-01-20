@@ -31,11 +31,11 @@
             "Tablet": "flex",
             "Mobile": "flex"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "gap": {
+            "Desktop": "10px"
           },
-          "padding": {
-            "Desktop": ""
+          "alignItems": {
+            "Desktop": "center"
           },
           "margin": {
             "Desktop": ""
@@ -88,8 +88,8 @@
           "padding": {
             "Desktop": ""
           },
-          "margin": {
-            "Desktop": ""
+          "textDecoration": {
+            "Desktop": "none"
           }
         }
       }
@@ -102,19 +102,18 @@
           "class": ""
         },
         "styles": {
-          "display": {},
           "width": {},
           "color": {
             "Desktop": ""
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "gap": {
+            "Desktop": "10px"
           },
-          "padding": {
-            "Desktop": ""
+          "alignItems": {
+            "Desktop": "center"
           },
-          "margin": {
-            "Desktop": ""
+          "display": {
+            "Desktop": "flex"
           }
         }
       }
@@ -162,8 +161,8 @@
           "padding": {
             "Desktop": ""
           },
-          "margin": {
-            "Desktop": ""
+          "cursor": {
+            "Desktop": "pointer"
           }
         }
       }
@@ -186,8 +185,8 @@
           "padding": {
             "Desktop": ""
           },
-          "margin": {
-            "Desktop": ""
+          "cursor": {
+            "Desktop": "pointer"
           }
         }
       }

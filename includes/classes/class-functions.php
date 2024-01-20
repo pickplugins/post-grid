@@ -64,19 +64,7 @@ class class_post_grid_functions
         return apply_filters('post_grid_post_status', $args);
     }
 
-    function addons_list()
-    {
 
-        $args['pro'] = array('title' => __('Post Grid Pro', 'post-grid'), 'thumb' => post_grid_plugin_url . 'assets/admin/images/pro.png', 'item_link' => 'https://www.pickplugins.com/post-grid');
-
-        $args['search'] = array('title' => __('Search & Filter', 'post-grid'), 'thumb' => post_grid_plugin_url . 'assets/admin/images/search.png', 'item_link' => 'https://github.com/pickplugins/post-grid-search');
-        $args['post-templates'] = array('title' => __('Post/Page Templates', 'post-grid'), 'thumb' => post_grid_plugin_url . 'assets/admin/images/post-templates.png',  'item_link' => 'https://github.com/pickplugins/post-grid-post-templates');
-        $args['loop-ads'] = array('title' => __('Loop ads', 'post-grid'), 'thumb' => post_grid_plugin_url . 'assets/admin/images/loop-ads.png', 'item_link' => 'https://github.com/pickplugins/post-grid-loop-ads');
-
-
-
-        return apply_filters('post_grid_extensions', $args);
-    }
 
     public function media_source()
     {
@@ -130,12 +118,12 @@ class class_post_grid_functions
                 ),
                 'thumb' => array(
                     'name' => 'Thumbnail',
-                    'dummy_html' => '<img style="width:100%;" src="' . post_grid_plugin_url . 'assets/admin/images/thumb.png" />',
+                    'dummy_html' => '<img style="width:100%;" src="' . post_grid_plugin_url . 'assets/images/placeholder.png" />',
                     'css' => 'display: block;font-size: 13px;line-height: normal;padding: 5px 10px;text-align: left;',
                 ),
                 'thumb_link' => array(
                     'name' => 'Thumbnail with Link',
-                    'dummy_html' => '<a href="#"><img style="width:100%;" src="' . post_grid_plugin_url . 'assets/admin/images/thumb.png" /></a>',
+                    'dummy_html' => '<a href="#"><img style="width:100%;" src="' . post_grid_plugin_url . 'assets/images/placeholder.png" /></a>',
                     'css' => 'display: block;font-size: 13px;line-height: normal;padding: 5px 10px;text-align: left;',
                 ),
                 'excerpt' => array(

@@ -4,7 +4,7 @@ Donate link: https://getpostgrid.com/
 Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.68
+Stable tag: 2.2.69
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -384,6 +384,11 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 15. Accordion Block
 
 == Changelog ==
+
+= 2.2.69 =
+- 2024-01-20 - update - Block Dynamic class parsing update.
+- 2024-01-20 - update - Block postfix and prefix dynamic tags parsing update.
+- 2024-01-20 - update - Woo In Stock block updated.
 
 = 2.2.68 =
 - 2024-01-16 - fix - Settings page broken issue fixed.

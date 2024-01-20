@@ -49,7 +49,67 @@
           "outOfStock": "Out of Stock",
           "backOrder": "Backorder Enabled",
           "tag": "span",
-          "class": ""
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "",
+          "class": "stock"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "outOfStock": {
+      "type": "object",
+      "default": {
+        "options": {
+          "outOfStock": "Out of Stock",
+          "tag": "span",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "",
+          "class": "out-of-stock"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "backOrder": {
+      "type": "object",
+      "default": {
+        "options": {
+          "backOrder": "Backorder Enabled",
+          "tag": "span",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "",
+          "class": "backorder"
         },
         "styles": {
           "color": {

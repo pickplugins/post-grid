@@ -706,7 +706,7 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
         $query_args['posts_per_page']     = -1;
         $wp_query = new WP_Query($query_args);
 
-        $item_layout_args[''] = array('name' => 'Empty layout',  'thumb' => post_grid_plugin_url . 'assets/admin/images/placeholder.jpg',);
+        $item_layout_args[''] = array('name' => 'Empty layout',  'thumb' => post_grid_plugin_url . 'assets/images/placeholder.jpg',);
 
 
         if ($wp_query->have_posts()) :
@@ -720,7 +720,7 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
                 $product_thumb_url = isset($product_thumb['0']) ? esc_url($product_thumb['0']) : '';
 
                 $layout_options = get_post_meta($post_id, 'layout_options', true);
-                $layout_preview_img = !empty($layout_options['layout_preview_img']) ? $layout_options['layout_preview_img'] : post_grid_plugin_url . 'assets/admin/images/placeholder.jpg';
+                $layout_preview_img = !empty($layout_options['layout_preview_img']) ? $layout_options['layout_preview_img'] : post_grid_plugin_url . 'assets/images/placeholder.jpg';
 
                 $product_thumb_url = !empty($product_thumb_url) ? $product_thumb_url : $layout_preview_img;
 
@@ -742,7 +742,7 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
             'value'        => $layout_id,
             'default'        => '',
             'width'        => '250px',
-            'lazy_load_img'        => post_grid_plugin_url . 'assets/admin/images/loading.gif',
+            'lazy_load_img'        => post_grid_plugin_url . 'assets/images/loading.gif',
 
             'args'        => $item_layout_args,
         );
@@ -883,7 +883,7 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
                                 if ($item_key == 'thumb') {
 
                                 ?>
-                                    <img style="width:100%; height:auto;" src="<?php echo esc_url(post_grid_plugin_url . 'assets/admin/images/thumb.png'); ?>" />
+                                    <img style="width:100%; height:auto;" src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" />
                                 <?php
                                 } elseif ($item_key == 'title') {
 
@@ -1003,7 +1003,7 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
                     </div>
                     <div class="skin <?php echo esc_attr($skin_slug); ?>">
                         <div class="layer-media">
-                            <div class="thumb "><img src="<?php echo esc_url(post_grid_plugin_url . 'assets/admin/images/thumb.png'); ?>" /></div>
+                            <div class="thumb "><img src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" /></div>
                         </div>
                         <div class="layer-content">
                             <div class="title "> title</div>

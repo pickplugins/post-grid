@@ -47,10 +47,12 @@ class class_post_grid_notices
 
         if ($is_hidden == 'no') :
 ?>
-            <div class="notice notice-error">
-                <p><strong>Post Grid/Post Grid Combo</strong> is now <strong><a target="_blank" class="" href="https://getpostgrid.com/?utm_source=WPadminNotice&utm_campaign=comboBlocks&utm_medium=userClick">Combo Blocks</a></strong> <a class="button" href="<?php echo esc_url_raw($actionurl) ?>">Hide</a></p>
-            </div>
-            <?php
+<div class="notice notice-error">
+  <p><strong>Post Grid/Post Grid Combo</strong> is now <strong><a target="_blank" class=""
+        href="https://getpostgrid.com/?utm_source=WPadminNotice&utm_campaign=comboBlocks&utm_medium=userClick">Combo
+        Blocks</a></strong> <a class="button" href="<?php echo esc_url_raw($actionurl) ?>">Hide</a></p>
+</div>
+<?php
         endif;
 
 
@@ -97,22 +99,27 @@ class class_post_grid_notices
 
 
 
-                // wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
+               
 
             ?>
-                <div class="notice notice-error is-dismissible">
-                    <p class="text-lg flex justify-between">
-                        <span>
-                            <span class="dashicons dashicons-warning align-middle text-red-600"></span> Your license for Post Grid plugin has expried, please <a target="_blank" class="bg-blue-600 rounded-sm inline-block text-white hover:text-white hover:bg-blue-700 px-5 py-1" href="https://pickplugins.com/post-grid/purchase-license/?licenseKey=<?php echo $license_key; ?>">Renew</a>
+<div class="notice notice-error is-dismissible">
+  <p class="text-lg flex justify-between">
+    <span>
+      <span class="dashicons dashicons-warning align-middle text-red-600"></span> Your license for Post Grid plugin has
+      expried, please <a target="_blank"
+        class="bg-blue-600 rounded-sm inline-block text-white hover:text-white hover:bg-blue-700 px-5 py-1"
+        href="https://pickplugins.com/post-grid/purchase-license/?licenseKey=<?php echo $license_key; ?>">Renew</a>
 
-                            <span class="text-amber-500 rounded-sm px-2 py-1 font-bold">Grab 25% Off!</span>
+      <span class="text-amber-500 rounded-sm px-2 py-1 font-bold">Grab 25% Off!</span>
 
-                        </span>
-                        <a href="<?php echo esc_url_raw($actionurl); ?>" class="bg-red-600 inline-block cursor-pointer  rounded-sm text-white hover:text-white hover:bg-red-400 px-2  py-1"><span class="align-middle dashicons dashicons-no"></span> Hide this</a>
+    </span>
+    <a href="<?php echo esc_url_raw($actionurl); ?>"
+      class="bg-red-600 inline-block cursor-pointer  rounded-sm text-white hover:text-white hover:bg-red-400 px-2  py-1"><span
+        class="align-middle dashicons dashicons-no"></span> Hide this</a>
 
-                    </p>
-                </div>
-            <?php
+  </p>
+</div>
+<?php
             endif;
         endif;
 
@@ -137,10 +144,11 @@ class class_post_grid_notices
 
         if ($screen->id == 'edit-post_grid_layout' || $screen->id == 'post_grid_layout') :
             ?>
-            <div class="notice notice-error is-dismissible">
-                <p>Old Layout is about to depricated but you can still use and it works fine, we will longer update, please try Gutenberg Post Grid block instaed, we have added some exciting feature with gutenberg block.</p>
-            </div>
-        <?php
+<div class="notice notice-error is-dismissible">
+  <p>Old Layout is about to depricated but you can still use and it works fine, we will longer update, please try
+    Gutenberg Post Grid block instaed, we have added some exciting feature with gutenberg block.</p>
+</div>
+<?php
         endif;
 
 
@@ -163,11 +171,11 @@ class class_post_grid_notices
 
         if ($import_layouts != 'done') :
         ?>
-            <div class="update-nag">
-                <?php
+<div class="update-nag">
+  <?php
                 echo esc_html(sprintf(__('Post grid require import free layouts, please <a href="%s">click here</a> to go import page', 'post-grid-pro'), esc_url(admin_url() . 'edit.php?post_type=post_grid&page=post-grid-settings&tab=help_support')))
                 ?>
-            </div>
+</div>
 <?php
         endif;
 

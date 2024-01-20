@@ -37,10 +37,9 @@ class class_post_grid_shortcodes
 
         do_action('post_grid_main', $atts);
 
-        wp_enqueue_script('post_grid_scripts');
+
+        wp_enqueue_script('post-grid-shortcode-scripts');
         wp_localize_script('post_grid_scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
-
-
 
 
         return ob_get_clean();

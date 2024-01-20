@@ -206,7 +206,7 @@ class class_post_grid_support
 
 
             array(
-                'title' => __('How to display HTML/Shortcode via layout editor ?', 'post-grid'),
+                'title' => __('How to display HTML/Shortcode via layout editor?', 'post-grid'),
                 'url' => 'https://www.pickplugins.com/documentation/post-grid/faq/layout-editor-how-at-add-htmlshortcode/',
             ),
 

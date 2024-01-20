@@ -27,7 +27,7 @@
         },
         "styles": {
           "display": {
-            "Desktop": "inline-block"
+            "Desktop": "block"
           }
         }
       }

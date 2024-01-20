@@ -31,7 +31,10 @@ function post_grid_main_lazy($atts)
             })
         </script>
         <style type="text/css">
-            <?php echo esc_attr('#post-grid-' . $grid_id); ?> {display: none;}
+            <?php echo esc_attr('#post-grid-' . $grid_id); ?> {
+                display: none;
+            }
+
             .post-grid-lazy {
                 text-align: center;
             }
@@ -683,6 +686,7 @@ function post_grid_loop($args)
         ?><?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?>a {
             <?php echo esc_attr($item_css); ?>
         }
+
         <?php
                 } elseif ($item_key == 'down_arrow') {
                     $arrow_size = $item_info['arrow_size'];
@@ -695,7 +699,10 @@ function post_grid_loop($args)
             border-left: <?php echo esc_attr($arrow_size); ?> solid rgba(0, 0, 0, 0);
             border-right: <?php echo esc_attr($arrow_size); ?> solid rgba(0, 0, 0, 0);
             border-top: <?php echo esc_attr($arrow_size); ?> solid <?php echo esc_attr($arrow_bg_color); ?>;
-            height: 0; width: 0;}
+            height: 0;
+            width: 0;
+        }
+
         <?php
                 } elseif ($item_key == 'up_arrow') {
                     $arrow_size = $item_info['arrow_size'];
@@ -703,6 +710,7 @@ function post_grid_loop($args)
         ?><?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
             <?php echo esc_attr($item_css); ?>
         }
+
         <?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
             border-bottom: <?php echo esc_attr($arrow_size); ?> solid <?php echo esc_attr($arrow_bg_color); ?>;
             border-left: <?php echo esc_attr($arrow_size); ?> solid transparent;
@@ -710,11 +718,13 @@ function post_grid_loop($args)
             height: 0;
             width: 0;
         }
+
         <?php
                 } else {
         ?><?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
             <?php echo esc_attr($item_css); ?>
         }
+
         <?php
                 }
             }
@@ -850,6 +860,7 @@ function post_grid_loop($args)
             color: <?php echo esc_attr($pagination_font_color); ?>;
             background: <?php echo esc_attr($pagination_bg_color); ?>;
         }
+
         <?php echo esc_attr('#post-grid-' . $grid_id) . ' .pagination .page-numbers:hover'; ?>,
         <?php echo esc_attr('#post-grid-' . $grid_id) . ' .pagination .page-numbers.current'; ?> {
             background: <?php echo esc_attr($pagination_active_bg_color); ?>;
@@ -956,11 +967,13 @@ function post_grid_loop($args)
             <?php endif; ?><?php if (!empty($container_text_align)) : ?>text-align: <?php echo esc_attr($container_text_align); ?>;
             <?php endif; ?>
         }
+
         <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
             <?php if (!empty($item_padding)) : ?>padding: <?php echo esc_attr($item_padding); ?>;
             <?php endif; ?><?php if ($items_bg_color_type == 'fixed') : ?>background: <?php echo esc_attr($items_bg_color); ?>;
             <?php endif; ?>
         }
+
         <?php echo esc_attr('#post-grid-' . $grid_id . ' .item .layer-media'); ?> {
             <?php
             if ($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height') {
@@ -972,6 +985,7 @@ function post_grid_loop($args)
             }
             ?>
         }
+
         @media only screen and (min-width: 0px) and (max-width: 767px) {
             <?php echo esc_attr('#post-grid-' . $grid_id . ' .grid-items'); ?> {
                 <?php if (is_integer($items_width_mobile)) :
@@ -989,6 +1003,7 @@ function post_grid_loop($args)
                 <?php
                 endif; ?>
             }
+
             <?php echo esc_attr('#post-grid-' . $grid_id . ' .item'); ?> {
                 <?php if (!empty($items_width_mobile) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_mobile); ?>;
                 margin: <?php echo esc_attr($items_margin); ?>;
@@ -1007,6 +1022,7 @@ function post_grid_loop($args)
                                 ?>
             }
         }
+
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
             <?php echo esc_attr('#post-grid-' . $grid_id . ' .grid-items'); ?> {
                 <?php if (is_integer($items_width_tablet)) :
@@ -1017,14 +1033,16 @@ function post_grid_loop($args)
                 ?>display: grid;
                 grid-template-columns: <?php echo esc_attr($column_html); ?>;
                 column-gap: <?php echo esc_attr($items_margin); ?>;
-                row-gap: <?php echo esc_attr($items_margin); ?>; <?php
-
-                                                            else :
-
-                                                                ?> text-align: <?php echo esc_attr($items_wrapper_text_align); ?>;
+                row-gap: <?php echo esc_attr($items_margin); ?>;
                 <?php
-                                                            endif; ?>
+
+                else :
+
+                ?>text-align: <?php echo esc_attr($items_wrapper_text_align); ?>;
+                <?php
+                endif; ?>
             }
+
             <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
                 <?php if (!empty($items_width_tablet) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_tablet); ?>;
                 margin: <?php echo esc_attr($items_margin); ?>;
@@ -1043,6 +1061,7 @@ function post_grid_loop($args)
                 ?>
             }
         }
+
         @media only screen and (min-width: 1024px) {
             <?php echo esc_attr('#post-grid-' . $grid_id) . ' .grid-items'; ?> {
                 <?php if (is_integer($items_width_desktop)) : ?><?php
@@ -1060,6 +1079,7 @@ function post_grid_loop($args)
                 <?php
                 endif; ?>
             }
+
             <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
                 <?php if (!empty($items_width_desktop) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_desktop); ?>;
                 display: inline-block;
@@ -1078,6 +1098,7 @@ function post_grid_loop($args)
                                 ?>
             }
         }
+
         <?php
             if ($grid_layout_name == 'layout_grid') {
             } elseif ($grid_layout_name == 'layout_1_N') {
@@ -1087,6 +1108,7 @@ function post_grid_loop($args)
                 width: <?php echo esc_attr($width); ?>px;
             }
         }
+
         <?php
             } elseif ($grid_layout_name == 'layout_N_1') {
                 $width = intval((int)$items_width_desktop * $grid_layout_col_multi) + intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
@@ -1095,6 +1117,7 @@ function post_grid_loop($args)
                 width: <?php echo esc_attr($width); ?>px;
             }
         }
+
         <?php
             } elseif ($grid_layout_name == 'layout_3') {
                 $width = intval($items_width_desktop) + intval($items_margin);
@@ -1107,6 +1130,7 @@ function post_grid_loop($args)
                 float: right;
             }
         }
+
         <?php
             } elseif ($grid_layout_name == 'layout_L_R') {
         ?>@media only screen and (min-width: 1024px) {
@@ -1114,15 +1138,18 @@ function post_grid_loop($args)
                 float: right;
             }
         }
+
         <?php
             } elseif ($grid_layout_name == 'layout_1_N_1') {
                 $width = intval((int)$items_width_desktop * $grid_layout_col_multi) + intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
         ?>@media only screen and (min-width: 1024px) {
+
             <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item:nth-child(1)'; ?>,
             <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item:nth-child'; ?>(<?php echo esc_attr($grid_layout_col_multi + 2); ?>) {
                 width: <?php echo esc_attr($width); ?>px;
             }
         }
+
         <?php
             }
         ?>
@@ -1212,19 +1239,23 @@ function post_grid_loop($args)
             <?php endif; ?><?php if (!empty($container_bg_image)) : ?>background-image: url(<?php echo esc_attr($container_bg_image); ?>);
             <?php endif; ?>
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .grid-items'; ?> {
             box-sizing: border-box;
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
 
             margin-bottom: <?php echo esc_attr($masonry_gutter . 'px'); ?>;
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .layer-wrapper'; ?> {
 
             <?php if ($items_bg_color_type == 'fixed') : ?>background: <?php echo esc_attr($items_bg_color); ?>;
             <?php endif; ?>padding: <?php echo esc_attr($item_padding); ?>;
 
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item .layer-media'; ?> {
             overflow: hidden;
             <?php
@@ -1237,6 +1268,7 @@ function post_grid_loop($args)
             }
             ?>
         }
+
         @media only screen and (min-width: 0px) and (max-width: 767px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
@@ -1255,6 +1287,7 @@ function post_grid_loop($args)
                 ?>
             }
         }
+
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
@@ -1274,6 +1307,7 @@ function post_grid_loop($args)
                 ?>
             }
         }
+
         @media only screen and (min-width: 1024px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
@@ -1292,6 +1326,7 @@ function post_grid_loop($args)
                 ?>
             }
         }
+
         <?php
 
             $filterable_font_size = !empty($post_grid_options['nav_top']['filterable_font_size']) ? $post_grid_options['nav_top']['filterable_font_size'] : '14px';
@@ -1306,18 +1341,22 @@ function post_grid_loop($args)
             background: <?php echo esc_attr($filterable_bg_color); ?>;
             margin: <?php echo esc_attr($filterable_navs_margin); ?>;
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .nav-filter .filter:hover'; ?>,
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .nav-filter .filter.mixitup-control-active'; ?> {
             background: <?php echo esc_attr($filterable_active_bg_color); ?>;
         }
+
         .post-grid .grid-nav-top .nav-filter {
             text-align: center;
             padding: 20px 0;
         }
+
         .filter-group {
             display: inline-block;
             margin: 10px;
         }
+
         .post-grid .nav-filter .filter {
             background: rgba(220, 220, 220, 0.3) none repeat scroll 0 0;
             color: #333;
@@ -1422,10 +1461,12 @@ function post_grid_loop($args)
             <?php endif; ?><?php if (!empty($container_bg_image)) : ?>background-image: url(<?php echo esc_attr($container_bg_image); ?>);
             <?php endif; ?>
         }
+
         .post-grid .layer-wrapper {
             position: relative;
             overflow: hidden;
         }
+
         .post-grid .layer-wrapper:before {
             padding-top: 100% !important;
             content: "";
@@ -1433,6 +1474,7 @@ function post_grid_loop($args)
             display: block;
             overflow: hidden;
         }
+
         .layer-media {
             overflow: hidden;
             position: absolute;
@@ -1441,27 +1483,35 @@ function post_grid_loop($args)
             width: 100% !important;
             height: 100% !important;
         }
-        .element-media,.thumb,.thumb_link {
+
+        .element-media,
+        .thumb,
+        .thumb_link {
             width: 100% !important;
             height: 100% !important;
         }
+
         .post-grid .layer-wrapper img {
             width: 100% !important;
             height: 100% !important;
             object-fit: cover;
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .grid-items'; ?> {
             box-sizing: border-box;
             display: flex;
             flex-wrap: wrap;
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
             padding: <?php echo $tiles_gutter; ?>px;
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .layer-wrapper'; ?> {
             <?php if ($items_bg_color_type == 'fixed') : ?>background: <?php echo esc_attr($items_bg_color); ?>;
             <?php endif; ?>
         }
+
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item .layer-media'; ?> {
             overflow: hidden;
             <?php
@@ -1474,6 +1524,7 @@ function post_grid_loop($args)
             }
             ?>
         }
+
         @media only screen and (min-width: 0px) and (max-width: 767px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
@@ -1496,6 +1547,7 @@ function post_grid_loop($args)
                 ?>
             }
         }
+
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
@@ -1518,6 +1570,7 @@ function post_grid_loop($args)
                 ?>
             }
         }
+
         @media only screen and (min-width: 1024px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
@@ -1572,8 +1625,7 @@ function post_grid_loop($args)
             $font_aw_version = isset($post_grid_settings['font_aw_version']) ? $post_grid_settings['font_aw_version'] : '';
 
 
-            wp_enqueue_style('post-grid-style');
-            wp_enqueue_style('post-grid-skin');
+            wp_enqueue_style('post-grid-shortcode-style');
 
 
 
@@ -1621,6 +1673,8 @@ function post_grid_loop($args)
                 }
 
 ?>
+
+
     <?php if (!empty($custom_css)) : ?>
         <style type="text/css">
             <?php
@@ -1638,50 +1692,50 @@ function post_grid_loop($args)
         </style>
     <?php endif; ?>
     <script>
-    <?php
-        if (!empty($custom_js)) : ?>
-        <?php echo wp_kses_post($custom_js); ?>
-    <?php
-        endif;
-        $masonry_load = apply_filters('post_grid_masonry_load', true, $args);
-        if ($grid_type == 'masonry') :
-    ?>
-        jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
-            var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
-            $container.masonry({
-                itemSelector: '.item',
-                columnWidth: '.item', //as you wish , you can use numeric
-                isAnimated: true,
-                isFitWidth: true,
-                horizontalOrder: true,
-                gutter: <?php echo esc_attr($masonry_gutter); ?>,
-                percentPosition: true,
-            });
-            $container.imagesLoaded().done(function() {
-                $container.masonry('layout');
-            });
-        })
-    <?php endif; ?>
-    <?php if ($grid_type == 'justified') : ?>
         <?php
-            $justified = !empty($post_grid_options['justified']) ? $post_grid_options['justified'] : [];
-            $justified_gutter = isset($justified['gutter']) ? $justified['gutter'] : 20;
-            $maxHeight = isset($justified['maxHeight']) ? $justified['maxHeight'] : 180;
-            wp_enqueue_script('imagesloaded');
-            wp_enqueue_script('justifiedGallery');
-            wp_enqueue_style('justifiedGallery');
+            if (!empty($custom_js)) : ?>
+            <?php echo wp_kses_post($custom_js); ?>
+        <?php
+            endif;
+            $masonry_load = apply_filters('post_grid_masonry_load', true, $args);
+            if ($grid_type == 'masonry') :
         ?>
-        jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
-            var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
-            $container.imagesLoaded().done(function() {
-                $container.justifiedGallery({
-                    rowHeight: <?php echo esc_attr($maxHeight); ?>,
-                    margins: <?php echo esc_attr($justified_gutter); ?>,
+            jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
+                var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
+                $container.masonry({
+                    itemSelector: '.item',
+                    columnWidth: '.item', //as you wish , you can use numeric
+                    isAnimated: true,
+                    isFitWidth: true,
+                    horizontalOrder: true,
+                    gutter: <?php echo esc_attr($masonry_gutter); ?>,
+                    percentPosition: true,
                 });
-            });
-        })
-    <?php endif; ?>
-</script>
+                $container.imagesLoaded().done(function() {
+                    $container.masonry('layout');
+                });
+            })
+        <?php endif; ?>
+        <?php if ($grid_type == 'justified') : ?>
+            <?php
+                $justified = !empty($post_grid_options['justified']) ? $post_grid_options['justified'] : [];
+                $justified_gutter = isset($justified['gutter']) ? $justified['gutter'] : 20;
+                $maxHeight = isset($justified['maxHeight']) ? $justified['maxHeight'] : 180;
+                wp_enqueue_script('imagesloaded');
+                wp_enqueue_script('justifiedGallery');
+                wp_enqueue_style('justifiedGallery');
+            ?>
+            jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
+                var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
+                $container.imagesLoaded().done(function() {
+                    $container.justifiedGallery({
+                        rowHeight: <?php echo esc_attr($maxHeight); ?>,
+                        margins: <?php echo esc_attr($justified_gutter); ?>,
+                    });
+                });
+            })
+        <?php endif; ?>
+    </script>
     <?php
 
         }

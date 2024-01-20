@@ -159,7 +159,7 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     $item_post_permalink = apply_filters('post_grid_item_post_permalink', get_permalink($item_post_id));
 
     $post_grid_post_settings = get_post_meta($item_post_id, 'post_grid_post_settings');
-    $item_thumb_placeholder = apply_filters('post_grid_item_thumb_placeholder', post_grid_plugin_url . 'assets/frontend/images/placeholder.png');
+    $item_thumb_placeholder = apply_filters('post_grid_item_thumb_placeholder', post_grid_plugin_url . 'assets/images/placeholder.png');
 
     $custom_thumb_source = isset($post_grid_post_settings[0]['custom_thumb_source']) ? $post_grid_post_settings[0]['custom_thumb_source'] : $item_thumb_placeholder;
     $thumb_custom_url = isset($post_grid_post_settings[0]['thumb_custom_url']) ? $post_grid_post_settings[0]['thumb_custom_url'] : '';
@@ -197,9 +197,9 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'empty_thumb') {
 
         if ($thumb_linked == 'yes') {
-            $html_thumb .= '<a class="custom" href="' . esc_url_raw($item_post_permalink) . '"><img src="' . post_grid_plugin_url . 'assets/frontend/images/placeholder.png" /></a>';
+            $html_thumb .= '<a class="custom" href="' . esc_url_raw($item_post_permalink) . '"><img src="' . post_grid_plugin_url . 'assets/images/placeholder.png" /></a>';
         } else {
-            $html_thumb .= '<img class="custom" src="' . post_grid_plugin_url . 'assets/frontend/images/placeholder.png" />';
+            $html_thumb .= '<img class="custom" src="' . post_grid_plugin_url . 'assets/images/placeholder.png" />';
         }
     } elseif ($media_source == 'custom_thumb') {
         if (!empty($custom_thumb_source)) {
@@ -527,7 +527,7 @@ function post_grid_media($post_id, $args)
         $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
         $link_target = isset($source_args['link_target']) ? $source_args['link_target'] : '';
 
-        $default_thumb_src = isset($source_args['default_thumb_src']) ? $source_args['default_thumb_src'] : post_grid_plugin_url . 'assets/frontend/images/placeholder.png';
+        $default_thumb_src = isset($source_args['default_thumb_src']) ? $source_args['default_thumb_src'] : post_grid_plugin_url . 'assets/images/placeholder.png';
 
 
         if ($link_to == 'post_link') {
@@ -728,7 +728,7 @@ function post_grid_layout_content_ajax()
                     if ($item_key == 'thumb') {
 
                     ?>
-                        <img src="<?php echo esc_url(post_grid_plugin_url . 'assets/admin/images/thumb.png'); ?>" />
+                        <img src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" />
                     <?php
                     } elseif ($item_key == 'title') {
 

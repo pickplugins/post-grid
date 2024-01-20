@@ -191,7 +191,6 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
                             input_name = $(this).attr('input_name');
                             id = $.now();
 
-                            console.log(id);
 
                             tag_options_html = layout_elements_option[tag_id];
                             var res = tag_options_html.replace(/{input_name}/g, input_name + '[' + id + ']');
@@ -421,7 +420,7 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
             ?>
             <style type="text/css">
                 .layout-preview {
-                    background: url(<?php echo esc_url(post_grid_plugin_url . 'assets/admin/images/tile.png'); ?>);
+                    background: url(<?php echo esc_url(post_grid_plugin_url . 'assets/images/tile.png'); ?>);
                     padding: 20px;
                 }
 

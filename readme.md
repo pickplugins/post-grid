@@ -4,7 +4,7 @@ Donate link: https://getpostgrid.com/
 Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.69
+Stable tag: 2.2.70
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -384,6 +384,11 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 15. Accordion Block
 
 == Changelog ==
+
+
+
+= 2.2.70 =
+- 2024-01-21 - Fix - Broken blocks panel style issue fixed
 
 = 2.2.69 =
 - 2024-01-20 - update - Block Dynamic class parsing update.

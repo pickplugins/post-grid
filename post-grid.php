@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://getpostgrid.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.69
+Version: 2.2.70
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.69');
+      define('post_grid_version', '2.2.70');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -414,7 +414,7 @@ if (!class_exists('PostGrid')) {
 
         wp_enqueue_style(
           'prefix-editor',
-          post_grid_plugin_url . 'build/output.css',
+          post_grid_plugin_url . 'dist/output.css',
           [],
           time(),
           'all'
@@ -432,7 +432,7 @@ if (!class_exists('PostGrid')) {
 
       wp_enqueue_style(
         'post-grid-editor',
-        post_grid_plugin_url . '/build/output.css',
+        post_grid_plugin_url . '/dist/output.css',
         [],
         time(),
         'all'

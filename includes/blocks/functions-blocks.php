@@ -909,7 +909,11 @@ function post_grid_global_cssY()
                     $postGridFonts[$device][] = $val;
                   }
                   // $reponsiveCssGroups[$device][$selector][$att] = $val;
-                  $reponsiveCssGroups[$device][$selector][$att] = str_replace("u0022", '"', $val);
+
+
+                  if (!is_array($val)) {
+                    $reponsiveCssGroups[$device][$selector][$att] = str_replace("u0022", '"', $val);
+                  }
                 }
             }
 

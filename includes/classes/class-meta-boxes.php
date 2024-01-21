@@ -101,7 +101,7 @@ class post_grid_meta_boxs
         wp_enqueue_style('settings-tabs');
         wp_enqueue_script('settings-tabs');
 
-        wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/build/output.css', [], time(), 'all');
+        wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
 
 ?>
 
@@ -344,7 +344,7 @@ class post_grid_meta_boxs
         foreach ($settings_tabs as $page_key => $tab) $tabs_sorted[$page_key] = isset($tab['priority']) ? $tab['priority'] : 0;
         array_multisort($tabs_sorted, SORT_ASC, $settings_tabs);
 
-        wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/build/output.css', [], time(), 'all');
+        wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
 
     ?>
 

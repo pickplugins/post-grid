@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					var responsesWrap = document.querySelector(
 						"." + formId + "-responses"
 					);
-					
+
 
 					loadingWrap.style.display = "block";
 
-					
+
 
 					var onsubmitProceed = false;
 
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							}
 						}
 						if (actionId == "loading") {
-							
+
 						}
 					});
 
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-					
+
 
 					setTimeout(() => { }, 3000);
 				});
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		var errors = {};
 
-		
+
 		var formByID = document.querySelector(`[formid="${formId}"]`);
 
 		for (var pair of formData.entries()) {
@@ -194,6 +194,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var inputName = pair[0];
 			var inputValue = pair[1];
 
+			// console.log(inputName);
+			// console.log(inputValue);
+
 
 			formFieldNames.push(inputName);
 		}
@@ -218,6 +221,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 						aftersubmitargsObj.map((action) => {
 							var actionId = action.id;
+							console.log(actionId);
+
 
 							if (actionId == "showResponse") {
 
@@ -246,6 +251,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								var url = action.url;
 								location.href = url;
 							}
+							if (actionId == "filterPosts") {
+								//var url = action.url;
+								//location.href = url;
+								console.log();
+								var pageUrl = window.location.href.split("?")[0];
+
+								var url = window.location;
+								//console.log(formByID);
+								formData.delete('formType');
+								formData.delete('onprocessargs');
+								formData.delete('formFieldNames');
+
+
+								let queryString = new URLSearchParams(formData).toString();
+								console.log(queryString);
+								location.href = pageUrl + "?" + queryString;
+								//console.log("filterPosts");
+
+							}
+
+
 
 							if (actionId == "refreshPage") {
 								var delay =

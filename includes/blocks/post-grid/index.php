@@ -199,6 +199,10 @@ class PGBlockPostGrid
     $query_args = post_grid_parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
 
 
+
+    //echo var_export($query_args, true);
+
+
     if (get_query_var('paged')) {
       $paged = get_query_var('paged');
     } elseif (get_query_var('page')) {

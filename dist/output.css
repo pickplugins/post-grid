@@ -136,6 +136,14 @@
   top: 50%;
 }
 
+.top-full{
+  top: 100%;
+}
+
+.z-30{
+  z-index: 30;
+}
+
 .z-\[999\]{
   z-index: 999;
 }
@@ -324,6 +332,10 @@
   margin-top: 1.25rem;
 }
 
+.mt-\[28px\]{
+  margin-top: 28px;
+}
+
 .mt-\[70px\]{
   margin-top: 70px;
 }
@@ -444,6 +456,10 @@
   height: 2.25rem;
 }
 
+.h-\[30px\]{
+  height: 30px;
+}
+
 .h-\[50px\]{
   height: 50px;
 }
@@ -455,6 +471,10 @@
 
 .h-full{
   height: 100%;
+}
+
+.min-h-\[200px\]{
+  min-height: 200px;
 }
 
 .min-h-\[40px\]{
@@ -549,6 +569,10 @@
   width: 300px;
 }
 
+.w-\[30px\]{
+  width: 30px;
+}
+
 .w-\[400px\]{
   width: 400px;
 }
@@ -559,6 +583,10 @@
 
 .w-\[95\%\]{
   width: 95%;
+}
+
+.w-\[calc\(100\%_-_8px\)\]{
+  width: calc(100% - 8px);
 }
 
 .w-full{
@@ -695,12 +723,20 @@
   justify-content: space-between;
 }
 
+.justify-around{
+  justify-content: space-around;
+}
+
 .justify-evenly{
   justify-content: space-evenly;
 }
 
 .justify-items-stretch{
   justify-items: stretch;
+}
+
+.gap-1{
+  gap: 0.25rem;
 }
 
 .gap-10{
@@ -745,6 +781,10 @@
 
 .overflow-y-scroll{
   overflow-y: scroll;
+}
+
+.whitespace-nowrap{
+  white-space: nowrap;
 }
 
 .whitespace-pre-line{
@@ -951,6 +991,10 @@
 .bg-gray-300{
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+.bg-gray-300\/30{
+  background-color: rgb(209 213 219 / 0.3);
 }
 
 .bg-gray-400{
@@ -1254,6 +1298,10 @@
   padding-bottom: 200px;
 }
 
+.pb-\[20px\]{
+  padding-bottom: 20px;
+}
+
 .pb-\[30px\]{
   padding-bottom: 30px;
 }
@@ -1264,6 +1312,10 @@
 
 .pr-\[320px\]{
   padding-right: 320px;
+}
+
+.pt-1{
+  padding-top: 0.25rem;
 }
 
 .pt-2{
@@ -1646,10 +1698,6 @@
   transition-duration: 150ms;
 }
 
-.duration-1000{
-  transition-duration: 1000ms;
-}
-
 .duration-150{
   transition-duration: 150ms;
 }
@@ -1950,6 +1998,11 @@
   background-color: #e5e7eb;
 }
 
+.pg-icon-picker button:focus:not(:disabled) {
+  outline: 0;
+  box-shadow: 0 0 0 0 #000;
+}
+
 /* 
   You want a simple and fancy tooltip?
   Just copy all [data-tooltip] blocks:
@@ -2141,6 +2194,11 @@
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.hover\:border-gray-800:hover{
+  --tw-border-opacity: 1;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity));
+}
+
 .hover\:border-indigo-400:hover{
   --tw-border-opacity: 1;
   border-color: rgb(129 140 248 / var(--tw-border-opacity));
@@ -2324,4 +2382,8 @@
   --tw-scale-x: .75;
   --tw-scale-y: .75;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group:hover .group-hover\:opacity-100{
+  opacity: 1;
 }

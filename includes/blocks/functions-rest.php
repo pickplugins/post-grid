@@ -912,6 +912,7 @@ class BlockPostGridRest
 
 		if (!class_exists("FluentCrmApi")) {
 			die(wp_json_encode($response));
+			exit(0);
 		}
 
 		$listApi = FluentCrmApi('lists');
@@ -946,6 +947,11 @@ class BlockPostGridRest
 
 
 		//$formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
+
+		if (!class_exists("FluentCrmApi")) {
+			die(wp_json_encode($response));
+			exit(0);
+		}
 
 		$listApi = FluentCrmApi('tags');
 
@@ -2148,7 +2154,7 @@ class BlockPostGridRest
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param WP_REST_Request $tax_data The tax data.
+	 * @param WP_REST_Request $tax_data Theget_image_sizes tax data.
 	 */
 	public function get_image_sizes($request)
 	{
@@ -2203,10 +2209,10 @@ class BlockPostGridRest
 		}
 
 
-		//error_log($request['postTypes']);
+		// error_log(serialize($request['postTypes']));
 		// error_log(serialize($postTypes));
 
-		$post_types =  (empty($request['postTypes'])) ? $request['postTypes'] : $postTypes;
+		$post_types =  (!empty($request['postTypes'])) ? $request['postTypes'] : $postTypes;
 		$search = isset($request['search']) ? $request['search'] : '';
 
 		$taxonomies = get_object_taxonomies($post_types);
@@ -2221,7 +2227,7 @@ class BlockPostGridRest
 			$taxonomiesArr[] = ['label' => $taxDetails->label, 'id' => $taxonomy];
 		}
 
-
+		//error_log(serialize($post_types_all));
 
 
 

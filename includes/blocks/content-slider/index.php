@@ -90,6 +90,7 @@ class PGBlockContentSlider
 
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 		$blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
+		
 
 
 		$sliderOptions = isset($attributes['sliderOptions']) ? $attributes['sliderOptions'] : [];
@@ -210,77 +211,77 @@ class PGBlockContentSlider
 		?>
 
 
-						<div
-							class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+<div
+  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
-							<div class="splide" id="splide-<?php echo esc_attr($blockId); ?>"
-								data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
-
-
-								<div class="splide__arrows">
-									<div class='perv splide__arrow splide__arrow--prev'>
-
-										<?php if ($pervIconPosition == 'before'): ?>
-													<span class='icon'>
-														<?php echo wp_kses_post($pervIconHtml); ?>
-													</span>
-										<?php endif; ?>
-
-										<?php if (!empty($pervText)): ?>
-													<span>
-														<?php echo $pervText; ?>
-													</span>
-										<?php endif; ?>
+  <div class="splide" id="splide-<?php echo esc_attr($blockId); ?>"
+    data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 
 
+    <div class="splide__arrows">
+      <div class='perv splide__arrow splide__arrow--prev'>
 
-										<?php if ($pervIconPosition == 'after'): ?>
-													<span class='icon'>
-														<?php echo wp_kses_post($pervIconHtml); ?>
-													</span>
-										<?php endif; ?>
+        <?php if ($pervIconPosition == 'before'): ?>
+        <span class='icon'>
+          <?php echo wp_kses_post($pervIconHtml); ?>
+        </span>
+        <?php endif; ?>
 
-									</div>
-									<div class='next splide__arrow splide__arrow--next'>
+        <?php if (!empty($pervText)): ?>
+        <span>
+          <?php echo $pervText; ?>
+        </span>
+        <?php endif; ?>
 
 
 
-										<?php if ($nextIconPosition == 'before'): ?>
-													<span class='icon'>
-														<?php echo wp_kses_post($nextIconHtml); ?>
-													</span>
-										<?php endif; ?>
-										<?php if (!empty($nextText)): ?>
-													<span>
-														<?php echo $nextText; ?>
-													</span>
-										<?php endif; ?>
+        <?php if ($pervIconPosition == 'after'): ?>
+        <span class='icon'>
+          <?php echo wp_kses_post($pervIconHtml); ?>
+        </span>
+        <?php endif; ?>
+
+      </div>
+      <div class='next splide__arrow splide__arrow--next'>
 
 
 
-										<?php if ($nextIconPosition == 'after'): ?>
-													<span class='icon'>
-														<?php echo wp_kses_post($nextIconHtml); ?>
-													</span>
-										<?php endif; ?>
-									</div>
-								</div>
-
-								<div class="splide__track">
-									<ul class="splide__list">
-										<?php echo $content ?>
-									</ul>
-								</div>
+        <?php if ($nextIconPosition == 'before'): ?>
+        <span class='icon'>
+          <?php echo wp_kses_post($nextIconHtml); ?>
+        </span>
+        <?php endif; ?>
+        <?php if (!empty($nextText)): ?>
+        <span>
+          <?php echo $nextText; ?>
+        </span>
+        <?php endif; ?>
 
 
 
+        <?php if ($nextIconPosition == 'after'): ?>
+        <span class='icon'>
+          <?php echo wp_kses_post($nextIconHtml); ?>
+        </span>
+        <?php endif; ?>
+      </div>
+    </div>
 
-								<ul class="splide__pagination "></ul>
+    <div class="splide__track">
+      <ul class="splide__list">
+        <?php echo $content ?>
+      </ul>
+    </div>
 
 
-							</div>
-						</div>
-						<?php
+
+
+    <ul class="splide__pagination "></ul>
+
+
+  </div>
+</div>
+<?php
 
 						return ob_get_clean();
 	}

@@ -124,7 +124,7 @@ class PGBlockBreadcrumb
 
 
 
-				<?php
+<?php
 
 
 
@@ -771,7 +771,7 @@ class PGBlockBreadcrumb
 
 
 						?>
-						<?php
+<?php
 						$i++;
 					}
 
@@ -797,20 +797,21 @@ class PGBlockBreadcrumb
 				if (!empty($wrapperTag)):
 
 					?>
-						<!-- <<?php //echo esc_attr($wrapperTag); 
+<!-- <<?php //echo esc_attr($wrapperTag); 
 									?> class="
 				<?php //echo esc_attr($blockId); 
 							?>
 				<?php //echo esc_attr($wrapperClass); 
 							?>"> -->
-						<ol class="
+<ol class="
 				<?php echo esc_attr($blockId); ?>
 				<?php echo esc_attr($wrapperClass); ?>">
-							<?php
+  <?php
 							$i = 1;
 							$j = 0;
 							if (!empty($links))
 								foreach ($links as $index => $item) {
+							// var_dump($item['icon']);
 									$item_link = isset($item['link']) ? $item['link'] : '';
 
 
@@ -823,75 +824,74 @@ class PGBlockBreadcrumb
 
 
 									?>
-										<li class="<?php echo esc_attr('item item-' . $index); ?>">
-											<?php if (!empty($item_link)): ?>
-													<a href="<?php echo esc_url_raw($item_link); ?>">
-														<?php if ($showIcon): ?>
-																<?php //echo wp_kses_post($item['icon']); 
-																							?>
-														<?php endif; ?>
-														<?php if ($showLabel): ?>
-																<span class='label'>
-																	<?php echo wp_kses_post($item['label']); ?>
-																</span>
-														<?php endif; ?>
-														<?php if ($showSeparator && $total > $i): ?>
-																<span class="separator">
-																	<?php echo esc_html($separatorText); ?>
-																</span>
-														<?php endif; ?>
-													</a>
+  <li class="<?php echo esc_attr('item item-' . $index); ?>">
+    <?php if (!empty($item_link)): ?>
+    <a href="<?php echo esc_url_raw($item_link); ?>">
+      <?php if ($showIcon): ?>
+      <?php //echo wp_kses_post($item['icon']);	?>
+      <?php endif; ?>
+      <?php if ($showLabel): ?>
+      <span class='label'>
+        <?php echo wp_kses_post($item['label']); ?>
+      </span>
+      <?php endif; ?>
 
-											<?php else: ?>
+    </a>
+    <?php  if ($showSeparator && $total > $i): ?>
+    <span class="separator">
+      <?php echo esc_html($separatorText); ?>
+    </span>
+    <?php endif; ?>
 
-													<span>
-														<?php if ($showIcon): ?>
-																<?php //echo wp_kses_post($item['icon']); 
-																							?>
-														<?php endif; ?>
-														<?php if ($showLabel): ?>
-																<span class='label'>
-																	<?php echo wp_kses_post($item['label']); ?>
-																</span>
-														<?php endif; ?>
-														<?php if ($showSeparator && $total > $i): ?>
-																<span class="separator">
-																	<?php echo esc_html($separatorText); ?>
-																</span>
-														<?php endif; ?>
-													</span>
-											<?php endif; ?>
+    <?php else: ?>
 
-										</li>
-									<?php
+    <span>
+      <?php if ($showIcon): ?>
+      <?php //echo wp_kses_post($item['icon']); 	?>
+      <?php endif; ?>
+      <?php if ($showLabel): ?>
+      <span class='label'>
+        <?php echo wp_kses_post($item['label']); ?>
+      </span>
+      <?php endif; ?>
+      <?php if ($showSeparator && $total > $i): ?>
+      <span class="separator">
+        <?php echo esc_html($separatorText); ?>
+      </span>
+      <?php endif; ?>
+    </span>
+    <?php endif; ?>
+
+  </li>
+  <?php
 									$i++;
 								}
 
 
 							?>
-						</ol>
-						<!-- </<?php //echo esc_attr($wrapperTag); 
+</ol>
+<!-- </<?php //echo esc_attr($wrapperTag); 
 									?>> -->
 
 
 
 
-						<?php
+<?php
 						if ($schemaEnable):
 							?>
-								<script type="application/ld+json">
-									<?php echo wp_unslash(json_encode($json)); ?>
-								</script>
-							<?php
+<script type="application/ld+json">
+<?php echo wp_unslash(json_encode($json)); ?>
+</script>
+<?php
 						endif;
 						?>
-					<?php
+<?php
 
 				endif;
 
 				?>
 
-		<?php return ob_get_clean();
+<?php return ob_get_clean();
 	}
 }
 

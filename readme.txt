@@ -4,7 +4,7 @@ Donate link: https://getpostgrid.com/
 Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.70
+Stable tag: 2.2.71
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -386,6 +386,12 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 == Changelog ==
 
 
+
+= 2.2.70 =
+- 2024-01-27 - Fix - Tabs Blocks skip variation issue fized
+- 2024-01-27 - Fix - Post Grid Block Nth item style issue fixed.
+- 2024-01-27 - Fix - Form Maker block - input pramater source issue fixed
+- 2024-01-27 - Fix - SHortcode based import layout broken issue fixed.
 
 = 2.2.70 =
 - 2024-01-21 - Fix - Broken blocks panel style issue fixed

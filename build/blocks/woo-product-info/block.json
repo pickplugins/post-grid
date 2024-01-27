@@ -161,35 +161,6 @@
         },
         "elements": [
           {
-            "id": "text",
-            "label": "Text",
-            "prefix": "",
-            "postfix": "",
-            "value": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {
-              "text": ""
-            },
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
-          },
-          {
             "id": "weight",
             "label": "Weight",
             "prefix": "Weight: ",

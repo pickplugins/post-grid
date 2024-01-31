@@ -32,8 +32,8 @@
           "margin": {
             "Desktop": "0px 0px 0px 0px"
           },
-          "padding": {
-            "Desktop": "0px 0px 0px 20px"
+          "paddingLeft": {
+            "Desktop": "0px"
           }
         }
       }
@@ -181,7 +181,8 @@
             },
             "options": {
               "text": "You are here: ",
-              "showSeparator": true
+              "showSeparator": true,
+              "isLink": false
             },
             "styles": {}
           },
@@ -196,7 +197,8 @@
               "iconSrc": ""
             },
             "options": {
-              "showSeparator": true
+              "showSeparator": true,
+              "isLink": true
             },
             "styles": {}
           },

@@ -73,6 +73,9 @@ class PGBlockFormFieldRadio
     $inputReadonly = isset($inputOptions['readonly']) ? $inputOptions['readonly'] : false;
     $inputArgs = isset($inputOptions['args']) ? $inputOptions['args'] : [];
 
+    $inputargsSrc = isset($inputOptions['argsSrc']) ? $inputOptions['argsSrc'] : [];
+    $argsSrc = isset($inputargsSrc['src']) ? $inputargsSrc['src'] : "";
+    $inputName = $inputName . '[]';
 
     $inputWrap = isset($attributes['inputWrap']) ? $attributes['inputWrap'] : [];
     $inputWrapOptions = isset($inputWrap['options']) ? $inputWrap['options'] : [];
@@ -95,6 +98,9 @@ class PGBlockFormFieldRadio
 
 
 
+    if (!empty($argsSrc)) {
+      $inputArgs = post_grid_generate_input_prams($inputargsSrc);
+    }
 
 
 
@@ -111,47 +117,47 @@ class PGBlockFormFieldRadio
 
     ?>
 
-    <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
+<div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
 
 
-      <div class='label-wrap'>
+  <div class='label-wrap'>
 
-        <?php if ($labelEnable): ?>
-          <label for="" class="font-medium text-slate-900 ">
-            <?php echo wp_kses_post($labelText); ?>
-          </label>
-        <?php endif; ?>
-
-
-        <?php if ($errorWrapPosition == 'afterlabel'): ?>
-          <div class='error-wrap'>
-            <?php echo wp_kses_post($errorWrapText); ?>
-          </div>
-        <?php endif; ?>
+    <?php if ($labelEnable): ?>
+    <label for="" class="font-medium text-slate-900 ">
+      <?php echo wp_kses_post($labelText); ?>
+    </label>
+    <?php endif; ?>
 
 
-      </div>
-      <div class='input-wrap'>
+    <?php if ($errorWrapPosition == 'afterlabel'): ?>
+    <div class='error-wrap'>
+      <?php echo wp_kses_post($errorWrapText); ?>
+    </div>
+    <?php endif; ?>
 
 
-        <?php
+  </div>
+  <div class='input-wrap'>
+
+
+    <?php
 
         if (!empty($inputArgs)):
           foreach ($inputArgs as $index => $inputArg):
 
             ?>
-            <div class='item'>
-              <input id="<?php echo esc_attr($blockId . '-' . $index) ?>" type="radio"
-                placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputArg['value']); ?>"
-                name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>
-                <?php if ($inputDisabled): ?> disabled <?php endif; ?>         <?php if ($inputReadonly): ?> readonly <?php endif; ?>
-                <?php if ($inputValue == $inputArg['value']): ?> checked <?php endif; ?> />
-              <label for="<?php echo esc_attr($blockId . '-' . $index) ?>">
-                <?php echo wp_kses_post($inputArg['label']); ?>
-              </label>
-            </div>
+    <div class='item'>
+      <input id="<?php echo esc_attr($blockId . '-' . $index) ?>" type="radio"
+        placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputArg['value']); ?>"
+        name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>
+        <?php if ($inputDisabled): ?> disabled <?php endif; ?> <?php if ($inputReadonly): ?> readonly <?php endif; ?>
+        <?php if ($inputValue == $inputArg['value']): ?> checked <?php endif; ?> />
+      <label for="<?php echo esc_attr($blockId . '-' . $index) ?>">
+        <?php echo wp_kses_post($inputArg['label']); ?>
+      </label>
+    </div>
 
-            <?php
+    <?php
 
           endforeach;
         endif;
@@ -162,22 +168,22 @@ class PGBlockFormFieldRadio
 
 
 
-        <?php if ($errorWrapPosition == 'afterInput'): ?>
-          <div class='error-wrap'>
-            <?php echo wp_kses_post($errorWrapText); ?>
-          </div>
-
-        <?php endif; ?>
-      </div>
-
-
-
-
-
-
+    <?php if ($errorWrapPosition == 'afterInput'): ?>
+    <div class='error-wrap'>
+      <?php echo wp_kses_post($errorWrapText); ?>
     </div>
 
-    <?php
+    <?php endif; ?>
+  </div>
+
+
+
+
+
+
+</div>
+
+<?php
     return ob_get_clean();
   }
 }

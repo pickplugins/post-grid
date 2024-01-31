@@ -9,6 +9,8 @@
     "post-grid/tabs-nested"
   ],
   "usesContext": [
+    "post-grid/tabsNestedIcon",
+    "post-grid/tabsNestedIconToggle",
     "activeTab"
   ],
   "supports": {

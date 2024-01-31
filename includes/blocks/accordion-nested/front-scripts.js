@@ -22,14 +22,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var accordionWrap = document.querySelectorAll(".accordion-header");
 				var dataAccordionArgsObj = JSON.parse(dataAccordionArgs);
 				// console.log(dataAccordionArgsObj);
+				var icons = {
+					header: "accordion-icon",    // custom icon class
+					activeHeader: "accordion-icon accordion-icon-toggle" // custom icon class
+				};
+
 
 				var extraPram = {
 					// classes: {
 					// 	"ui-accordion-header": "accordion-header-active",
 					// 	"ui-accordion-header-collapsed": "accordion-header",
 					// },
+					icons: icons,
 					activate: function (event, ui) {
-						// console.log(ui);
+						console.log(ui);
 						// ui[0].classList.toggle("accordion-header-active");
 					},
 				};

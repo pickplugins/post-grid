@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			} else {
 				if (iconToggle[index] != undefined) {
 					iconToggle[index].style.display = "none";
+				}
+				if (iconIdle[index] != undefined) {
 					iconIdle[index].style.display = "inline-block";
 				}
 				
@@ -72,11 +74,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 					// event.currentTarget.classList.add("nav-item-active");
 					// tabPanels[index].classList.add("pg-tabs-panel-active");
-					if (iconToggle[index] != undefined) {
+					if (iconToggle[index] != undefined ) {
 					iconToggle[index].style.display = "inline-block";
-					iconIdle[index].style.display = "none";}
-				} else {
-				}
+					}
+					if (iconIdle[index] != undefined) {
+						iconIdle[index].style.display = "none";
+					}
+				} 
+				
 
 				var tabByattr = document.querySelector(
 					`.pg-tabs-panel[data-tab-id="${tabId}"]`

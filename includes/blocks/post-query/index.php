@@ -121,6 +121,8 @@ class PGBlockPostQuery
     $query_args = post_grid_parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
     $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
 
+    $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
+
     //echo var_export($query_args, true);
 
 
@@ -157,15 +159,16 @@ class PGBlockPostQuery
 ?>
 
 
-    <?php
+<?php
     if (!$itemsWrapExcluded) :
     ?>
-      <div class="loop-loading"></div>
-      <div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-      <?php
+<div class="loop-loading"></div>
+<div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop"
+  id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+  <?php
     endif;
       ?>
-      <?php
+  <?php
       if ($PGPostQuery->have_posts()) :
 
         $counter = 1;
@@ -189,7 +192,7 @@ class PGBlockPostQuery
           }
 
       ?>
-          <<?php echo esc_html($itemWrapTag); ?> class="
+  <<?php echo esc_html($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php if ($itemWrapTermsClass) {
               echo esc_attr($slug);
@@ -200,10 +203,10 @@ class PGBlockPostQuery
             <?php if ($itemWrapOddEvenClass) {
               echo esc_attr($odd_even_class);
             } ?> ">
-            <?php echo wp_kses_post($html);
+    <?php echo wp_kses_post($html);
             ?>
-          </<?php echo esc_html($itemWrapTag); ?>>
-      <?php
+  </<?php echo esc_html($itemWrapTag); ?>>
+  <?php
           $counter++;
         endwhile;
         wp_reset_query();
@@ -212,10 +215,10 @@ class PGBlockPostQuery
 
       ?>
 
-      <?php
+  <?php
       if (!$itemsWrapExcluded) : ?>
-      </div>
-    <?php
+</div>
+<?php
       endif; ?>
 <?php return ob_get_clean();
   }

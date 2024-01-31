@@ -9,8 +9,8 @@ if (!function_exists('post_grid_pagination_ajax_pagination_22032023')) {
     function post_grid_pagination_ajax_pagination_22032023($args, $post_grid_wp_query)
     {
 
-        wp_enqueue_script('post_grid_scripts');
-        wp_localize_script('post_grid_scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
+        wp_enqueue_script('post-grid-shortcode-scripts');
+        wp_localize_script('post-grid-shortcode-scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
 
         $grid_id = $args['grid_id'];
 

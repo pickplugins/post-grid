@@ -80,6 +80,10 @@
               "value": "option3"
             }
           },
+          "argsSrc": {
+            "src": "",
+            "srcPrams": {}
+          },
           "id": "",
           "class": "pg-form-field-select",
           "position": "afterLabel"

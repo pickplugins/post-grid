@@ -905,8 +905,8 @@ function post_grid_global_cssY()
               if (is_array($responsiveVals))
                 foreach ($responsiveVals as $device => $val) {
 
-                  if ('font-family' == $att) {
-                    $postGridFonts[$device][] = $val;
+                  if ('font-family' == $att && !empty($val)) {
+                    $postGridFonts[$val] = $val;
                   }
                   // $reponsiveCssGroups[$device][$selector][$att] = $val;
 
@@ -1015,18 +1015,19 @@ function post_grid_global_cssY()
   $fonts = '';
   $fontsArr = [];
 
-  if (!empty($postGridFonts)) {
-    foreach ($postGridFonts as $device => $itemFont) {
-      if (!empty($itemFont)) {
-        foreach ($itemFont as $itemFon) {
-          $fonts .= $itemFon . ',';
 
-          if (!in_array($itemFon, $fontsArr)) {
-            $fontsArr[] = $itemFon . ':wght@100;200;300;400;500;600;700;800;900';
-          }
-        }
+  if (!empty($postGridFonts)) {
+    //foreach ($postGridFonts as $device => $itemFont) {
+    //if (!empty($postGridFonts)) {
+    foreach ($postGridFonts as $itemFon) {
+      $fonts .= $itemFon . ',';
+
+      if (!in_array($itemFon, $fontsArr)) {
+        $fontsArr[] = $itemFon . ':wght@100;200;300;400;500;600;700;800;900';
       }
     }
+    // }
+    //}
   }
 
 
@@ -1058,7 +1059,7 @@ function post_grid_global_cssY()
 <?php
 
 }
-add_action('wp_footer', 'post_grid_global_cssY', 999);
+add_action('wp_footer', 'post_grid_global_cssY', 99);
 
 
 function post_grid_global_vars()
@@ -1071,7 +1072,7 @@ function post_grid_global_vars()
   <script>
     var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
   </script>
-  <?php
+<?php
 }
 add_action('wp_footer', 'post_grid_global_vars', 999);
 
@@ -1093,22 +1094,12 @@ function post_grid_block_categories($categories, $context)
 
     $inserted = array(
 
-      array(
-        'slug' => 'post-grid-post',
-        'title' => __('Post Grid - Post Element', 'boilerplate'),
-      ),
+
       array(
         'slug' => 'post-grid-tools',
         'title' => __('Post Grid - Tools', 'boilerplate'),
       ),
-      array(
-        'slug' => 'post-grid-woo',
-        'title' => __('Post Grid - WooCommerce', 'boilerplate'),
-      ),
-      array(
-        'slug' => 'post-grid-archive',
-        'title' => __('Post Grid - Archive', 'boilerplate'),
-      ),
+
     );
 
     array_splice($categories, 3, 0, $inserted); // splice in at position 3
@@ -1168,9 +1159,8 @@ function post_grid_block_categories($categories, $context)
 function post_grid_page_styles()
 {
 
-
-  global $postGridCssY;
   global $postGridFonts;
+
 
   //$url = $_SERVER['REQUEST_URI'];
 
@@ -1238,6 +1228,7 @@ function post_grid_page_styles()
   if (is_array($pageStyles))
     foreach ($pageStyles as $index => $blockCss) {
 
+
       if (is_array($blockCss))
         foreach ($blockCss as $selector => $atts) {
 
@@ -1247,8 +1238,9 @@ function post_grid_page_styles()
               if (is_array($responsiveVals))
                 foreach ($responsiveVals as $device => $val) {
 
-                  if ('font-family' == $att) {
-                    $postGridFonts[$device][] = $val;
+                  if ('fontFamily' == $att) {
+
+                    $postGridFonts[$val] = $val;
                   }
                   $cssAttr = cssAttrParse($att);
 
@@ -1329,37 +1321,8 @@ function post_grid_page_styles()
   }
 
 
-  $fonts = '';
-  $fontsArr = [];
 
-  if (!empty($postGridFonts)) {
-    foreach ($postGridFonts as $device => $itemFont) {
-      if (!empty($itemFont)) {
-        foreach ($itemFont as $itemFon) {
-          $fonts .= $itemFon . ',';
-
-          if (!in_array($itemFon, $fontsArr)) {
-            $fontsArr[] = $itemFon . ':wght@100;200;300;400;500;600;700;800;900';
-          }
-        }
-      }
-    }
-  }
-
-
-
-  $fontsArrStr = implode('&family=', $fontsArr);
-
-  $fonts = str_replace(" ", "+", $fontsArrStr);
-
-  if (!empty($fonts)) {
-  ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
-  <?php
-
-  }
-
-  ?>
+?>
 
 
   <style>
@@ -1372,7 +1335,7 @@ function post_grid_page_styles()
 
 
 }
-add_action('wp_footer', 'post_grid_page_styles', 999);
+add_action('wp_footer', 'post_grid_page_styles', 80);
 
 
 function post_grid_font_family()
@@ -1475,6 +1438,12 @@ function cssAttrParse($key)
     $cssProp = 'cursor';
   } else if ($key == 'content') {
     $cssProp = 'content';
+  } else if ($key == 'counterIncrement') {
+    $cssProp = 'counter-increment';
+  } else if ($key == 'counterReset') {
+    $cssProp = 'counter-reset';
+  } else if ($key == 'counterSet') {
+    $cssProp = 'counter-set';
   } else if ($key == 'columnCount') {
     $cssProp = 'column-count';
   } else if ($key == 'columnRule') {

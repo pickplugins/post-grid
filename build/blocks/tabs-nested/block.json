@@ -12,6 +12,8 @@
     "queryId"
   ],
   "providesContext": {
+    "post-grid/tabsNestedIcon": "icon",
+    "post-grid/tabsNestedIconToggle": "iconToggle",
     "activeTab": "activeTab"
   },
   "supports": {

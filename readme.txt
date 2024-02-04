@@ -4,7 +4,7 @@ Donate link: https://getpostgrid.com/
 Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.72
+Stable tag: 2.2.73
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -385,6 +385,14 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 == Changelog ==
 
+
+
+
+= 2.2.73 =
+- 2024-02-04 - Fix - List to List Nested block transform.
+- 2024-02-04 - add - Terms List Block added
+- 2024-02-04 - add - Terms Query List Block added
+- 2024-02-04 - fix - Google font loading issue fixed.
 
 
 = 2.2.72 =

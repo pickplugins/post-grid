@@ -77,56 +77,7 @@
     "blockCssY": {
       "type": "object",
       "default": {
-        "items": [
-          {
-            "val": [
-              "post"
-            ],
-            "multiple": false,
-            "id": "postType",
-            "label": "Post Types",
-            "description": "Select Post Types to Query"
-          },
-          {
-            "val": [
-              "publish"
-            ],
-            "multiple": false,
-            "id": "postStatus",
-            "label": "Post status",
-            "description": "Query post by post status"
-          },
-          {
-            "val": "DESC",
-            "multiple": false,
-            "id": "order",
-            "label": "Order",
-            "description": "Post query order"
-          },
-          {
-            "val": [
-              "date"
-            ],
-            "multiple": false,
-            "id": "orderby",
-            "label": "Orderby",
-            "description": "Post query orderby"
-          },
-          {
-            "val": "3",
-            "multiple": false,
-            "id": "postsPerPage",
-            "label": "Posts Per Page",
-            "description": "Number of post to show per page"
-          },
-          {
-            "val": "1",
-            "multiple": false,
-            "id": "paged",
-            "label": "Paged",
-            "description": "Pagination start with"
-          }
-        ]
+        "items": []
       }
     }
   },

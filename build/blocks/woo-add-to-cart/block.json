@@ -98,7 +98,7 @@
       "type": "object",
       "default": {
         "options": {
-          "enable": true,
+          "enable": false,
           "class": ""
         },
         "styles": {

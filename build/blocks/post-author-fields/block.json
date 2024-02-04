@@ -123,7 +123,8 @@
       "default": {
         "options": {
           "text": "",
-          "class": "prefix"
+          "class": "prefix",
+          "position": ""
         },
         "styles": {
           "color": {
@@ -152,7 +153,8 @@
       "default": {
         "options": {
           "text": "",
-          "class": "postfix"
+          "class": "postfix",
+          "position": ""
         },
         "styles": {
           "color": {

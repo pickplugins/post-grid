@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "post-grid/list-nested-item",
-  "title": "List item",
+  "title": "List Nested item",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "usesContext": [
@@ -48,7 +48,7 @@
           "srcType": "class",
           "iconSrc": "fas fa-chevron-right",
           "class": "icon",
-          "position": "before"
+          "position": ""
         },
         "styles": {
           "color": {

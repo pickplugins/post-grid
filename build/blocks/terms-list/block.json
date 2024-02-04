@@ -39,6 +39,19 @@
         }
       }
     },
+    "itemWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "item",
+          "counterClass": true,
+          "termsClass": true,
+          "oddEvenClass": true
+        },
+        "styles": {}
+      }
+    },
     "items": {
       "type": "object",
       "default": {

@@ -20,7 +20,7 @@ function post_grid_global_css()
 ?>
 
 
-  <?php
+<?php
 }
 
 
@@ -1044,17 +1044,17 @@ function post_grid_global_cssY()
 
   if (!empty($fonts)) {
   ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
-  <?php
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
+<?php
 
   }
 
   ?>
 
-  <style>
-    <?php echo ($reponsiveCss);
-    ?>
-  </style>
+<style>
+<?php echo ($reponsiveCss);
+?>
+</style>
 
 <?php
 
@@ -1069,9 +1069,9 @@ function post_grid_global_vars()
 
 
 ?>
-  <script>
-    var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
-  </script>
+<script>
+var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
+</script>
 <?php
 }
 add_action('wp_footer', 'post_grid_global_vars', 999);
@@ -1096,8 +1096,20 @@ function post_grid_block_categories($categories, $context)
 
 
       array(
+        'slug' => 'post-grid-post',
+        'title' => __('Post Grid - Post Element', 'boilerplate'),
+      ),
+      array(
         'slug' => 'post-grid-tools',
         'title' => __('Post Grid - Tools', 'boilerplate'),
+      ),
+      array(
+        'slug' => 'post-grid-woo',
+        'title' => __('Post Grid - WooCommerce', 'boilerplate'),
+      ),
+      array(
+        'slug' => 'post-grid-archive',
+        'title' => __('Post Grid - Archive', 'boilerplate'),
       ),
 
     );
@@ -1325,10 +1337,10 @@ function post_grid_page_styles()
 ?>
 
 
-  <style>
-    <?php echo ($reponsiveCss);
-    ?>
-  </style>
+<style>
+<?php echo ($reponsiveCss);
+?>
+</style>
 
 <?php
 
@@ -1359,10 +1371,10 @@ function post_grid_font_family()
   }";
   }
 ?>
-  <style>
-    <?php echo ($faceStr);
-    ?>
-  </style>
+<style>
+<?php echo ($faceStr);
+?>
+</style>
 <?php
 }
 add_action('wp_footer', 'post_grid_font_family', 999);

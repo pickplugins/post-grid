@@ -196,153 +196,136 @@ class PGBlocpostCommentCount
         if (!empty($wrapperTag)):
 
             ?>
-                                                            <<?php echo esc_attr($wrapperTag); ?> class="
+<<?php echo esc_attr($wrapperTag); ?> class="
                                                                 <?php echo esc_attr($blockId); ?>
                                                                 <?php echo esc_attr($wrapperClass); ?>">
 
 
-                                                                <?php if ($iconPosition == 'beforePrefix'): ?>
-                                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                <?php endif; ?>
+  <?php if ($iconPosition == 'beforePrefix'): ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-                                                                <?php if ($prefixText): ?>
-                                                                                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                                                                                        <?php echo wp_kses_post($prefixText); ?>
-                                                                                    </span>
-                                                                <?php endif; ?>
+  <?php if ($prefixText): ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-                                                                <?php if ($iconPosition == 'afterPrefix'): ?>
-                                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                <?php endif; ?>
+  <?php if ($iconPosition == 'afterPrefix'): ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-                                                                <?php if (!empty($commentCountLinkTo)): ?>
-                                                                                    <a class='commentCount' <?php
-                                                                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                                                                    echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>"
-                                                                                        rel="<?php echo esc_attr($commentCountRel); ?>"
-                                                                                        href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-                                                                                        <?php if ($iconPosition == 'beforeCommentCount'): ?>
-                                                                                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                        <?php endif; ?>
-                                                                                        <?php echo wp_kses_post($formatedcommentCount); ?>
-                                                                                        <?php if ($iconPosition == 'afterCommentCount'): ?>
-                                                                                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                        <?php endif; ?>
-                                                                                    </a>
+  <?php if (!empty($commentCountLinkTo)): ?>
+  <a class='commentCount' <?php  echo ($linkAttrStrcommentCount); ?>
+    target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>"
+    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+    <?php if ($iconPosition == 'beforeCommentCount'): ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php echo wp_kses_post($formatedcommentCount); ?>
+    <?php if ($iconPosition == 'afterCommentCount'): ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+  </a>
 
-                                                                <?php else: ?>
+  <?php else: ?>
 
-                                                                                    <span class='commentCount' <?php
-                                                                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                                                                    echo ($linkAttrStrcommentCount); ?>>
-                                                                                        <?php if ($iconPosition == 'beforeCommentCount'):
-                                                                                            ?>
-                                                                                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                        <?php endif;
-                                                                                        ?>
-                                                                                        <?php echo wp_kses_post($formatedcommentCount); ?>
-                                                                                        <?php if ($iconPosition == 'afterCommentCount'): ?>
-                                                                                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                        <?php endif; ?>
-                                                                                    </span>
+  <?php if ($iconPosition == 'beforeCommentCount'):  ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif;  ?>
+  <span class='commentCount' <?php   echo ($linkAttrStrcommentCount); ?>>
+    <?php echo wp_kses_post($formatedcommentCount); ?>
+    <?php if ($iconPosition == 'afterCommentCount'): ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+  </span>
 
 
-                                                                <?php endif; ?>
+  <?php endif; ?>
 
 
 
 
 
 
-                                                                <?php if ($iconPosition == 'beforePostfix'): ?>
-                                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                <?php endif; ?>
-                                                                <?php if ($postfixText): ?>
-                                                                                    <span class="<?php echo $postfixClass; ?>">
-                                                                                        <?php echo $postfixText; ?>
-                                                                                    </span>
-                                                                <?php endif; ?>
+  <?php if ($iconPosition == 'beforePostfix'): ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if ($postfixText): ?>
+  <span class="<?php echo $postfixClass; ?>">
+    <?php echo $postfixText; ?>
+  </span>
+  <?php endif; ?>
 
-                                                                <?php if ($iconPosition == 'afterPostfix'): ?>
-                                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                <?php endif; ?>
+  <?php if ($iconPosition == 'afterPostfix'): ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-                                                            </<?php echo esc_attr($wrapperTag); ?>>
-                                                            <?php
+</<?php echo esc_attr($wrapperTag); ?>>
+<?php
 
         endif;
 
         if (empty($wrapperTag)):
 
             ?>
-                                                            <?php if ($iconPosition == 'beforePrefix'): ?>
-                                                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                                            <?php endif; ?>
-                                                            <?php if ($prefixText): ?>
-                                                                                <span class="<?php echo esc_attr($prefixClass); ?>">
-                                                                                    <?php echo $prefixText; ?>
-                                                                                </span>
-                                                            <?php endif; ?>
+<?php if ($iconPosition == 'beforePrefix'): ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php if ($prefixText): ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo $prefixText; ?>
+</span>
+<?php endif; ?>
 
-                                                            <?php if ($iconPosition == 'afterPrefix'): ?>
-                                                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                                            <?php endif; ?>
+<?php if ($iconPosition == 'afterPrefix'): ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
 
-                                                            <?php if (!empty($commentCountLinkTo)): ?>
+<?php if (!empty($commentCountLinkTo)): ?>
 
-                                                                                <a class='commentCount' <?php
-                                                                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                                                                echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>"
-                                                                                    rel="<?php echo esc_attr($commentCountRel); ?>"
-                                                                                    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-                                                                                    <?php if ($iconPosition == 'beforeCommentCount'): ?>
-                                                                                                        <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                    <?php endif; ?>
-                                                                                    <?php echo wp_kses_post($formatedcommentCount); ?>C
-                                                                                    <?php if ($iconPosition == 'afterCommentCount'): ?>
-                                                                                                        <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                    <?php endif; ?>
-                                                                                </a>
-                                                            <?php else: ?>
-                                                                                <?php if ($iconPosition == 'beforeCommentCount'): ?>
-                                                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                <?php endif; ?>
-                                                                                <span class='commentCount'>
-                                                                                    <?php echo wp_kses_post($formatedcommentCount); ?>
-                                                                                </span>
-                                                                                <?php if ($iconPosition == 'afterCommentCount'): ?>
-                                                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                                                <?php endif; ?>
-                                                            <?php endif; ?>
-
+<a class='commentCount'
+  <?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo ($linkAttrStrcommentCount); ?>
+  target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>"
+  href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+  <?php if ($iconPosition == 'beforeCommentCount'): ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php echo wp_kses_post($formatedcommentCount); ?>C
+  <?php if ($iconPosition == 'afterCommentCount'): ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+</a>
+<?php else: ?>
+<?php if ($iconPosition == 'beforeCommentCount'): ?>
+<?php echo wp_kses_post($fontIconHtml); ?>HELOO
+<?php endif; ?>
+<span class='commentCount'>
+  <?php echo wp_kses_post($formatedcommentCount); ?>
+</span>
+<?php if ($iconPosition == 'afterCommentCount'): ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php endif; ?>
 
 
-                                                            <?php if ($iconPosition == 'beforePostfix'): ?>
-                                                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                                            <?php endif; ?>
-                                                            <?php if ($postfixText): ?>
-                                                                                <span class="<?php echo $postfixClass; ?>">
-                                                                                    <?php echo $postfixText; ?>
-                                                                                </span>
-                                                            <?php endif; ?>
-                                                            <?php if ($iconPosition == 'afterPostfix'): ?>
-                                                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                                            <?php endif; ?>
-                                                        <?php
 
-        endif;
+<?php if ($iconPosition == 'beforePostfix'): ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php if ($postfixText): ?>
+<span class="<?php echo $postfixClass; ?>">
+  <?php echo $postfixText; ?>
+</span>
+<?php endif; ?>
+<?php if ($iconPosition == 'afterPostfix'): ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php endif;
 
         ?>
 
-
-
-
-
-
-
-
-
-                                        <?php return ob_get_clean();
+<?php return ob_get_clean();
     }
 }
 

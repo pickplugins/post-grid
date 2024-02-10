@@ -89,9 +89,12 @@ class BlockPostGridRest
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'fluentcrm_lists'),
-				'permission_callback' => function () {
-					return current_user_can('manage_options');
-				},
+				// 'permission_callback' => function () {
+				// 	return current_user_can('manage_options');
+				// },
+				'permission_callback' => '__return_true',
+
+
 			)
 		);
 
@@ -910,7 +913,7 @@ class BlockPostGridRest
 
 		//$formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
-		if (!class_exists("FluentCrmApi")) {
+		if (!function_exists("FluentCrmApi")) {
 			die(wp_json_encode($response));
 			exit(0);
 		}
@@ -919,6 +922,7 @@ class BlockPostGridRest
 
 		$lists = $listApi->get();
 
+		error_log(serialize($lists));
 
 		foreach ($lists as $list) {
 			$title = $list->title;;
@@ -948,7 +952,7 @@ class BlockPostGridRest
 
 		//$formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
-		if (!class_exists("FluentCrmApi")) {
+		if (!function_exists("FluentCrmApi")) {
 			die(wp_json_encode($response));
 			exit(0);
 		}

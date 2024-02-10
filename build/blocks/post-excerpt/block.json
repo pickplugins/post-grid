@@ -51,6 +51,9 @@
           "linkTarget": "_blank",
           "customUrl": "",
           "linkAttr": [],
+          "linkTo": "postUrl",
+          "linkToAuthorMeta": "",
+          "linkToCustomMeta": "",
           "class": "excerpt-text"
         },
         "styles": {
@@ -85,6 +88,9 @@
           "linkTarget": "_blank",
           "customUrl": "",
           "linkAttr": [],
+          "linkTo": "postUrl",
+          "linkToAuthorMeta": "",
+          "linkToCustomMeta": "",
           "class": "readmore"
         },
         "styles": {

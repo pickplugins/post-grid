@@ -9,6 +9,9 @@
     "post-grid/accordionNestedIcon",
     "post-grid/accordionNestedIconToggle",
     "post-grid/accordionNestedLabelIcon",
+    "post-grid/accordionNestedContent",
+    "post-grid/accordionNestedHeader",
+    "post-grid/accordionNestedHeaderLabel",
     "post-grid/accordionNestedLabelCounter"
   ],
   "supports": {

@@ -170,68 +170,66 @@ class PGBlockTabs
 
 
 
-    ?>
-        <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-tabData="<?php echo esc_attr(json_encode($tabData)); ?>">
-          <div class="navs-wrapper">
-            <?php
+?>
+    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-tabData="<?php echo esc_attr(json_encode($tabData)); ?>">
+      <div class="navs-wrapper">
+        <?php
 
-            foreach ($tabs as $tab) {
+        foreach ($tabs as $tab) {
 
-              $uid = isset($tab['uid']) ? $tab['uid'] : '';
+          $uid = isset($tab['uid']) ? $tab['uid'] : '';
 
-              ?>
-                <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>" class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="0">
-
-
-                  <?php if ($iconPosition == 'before'): ?>
-
-              
-                      <?php echo wp_kses_post($iconHtml); ?>
-              
-
-              
-                      <?php echo wp_kses_post($iconToggleHtml); ?>
-             
-
-                  <?php endif; ?>
+        ?>
+          <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>" class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="0">
 
 
-                  <div class="nav-label">
-                    <?php echo wp_kses_post($tab['title']); ?>
-                  </div>
-                  <?php if ($iconPosition == 'after'): ?>
-                      <div class='nav-icon'>
-                        <?php echo wp_kses_post($iconHtml); ?>
-                      </div>
-                  <?php endif; ?>
+            <?php if ($iconPosition == 'before') : ?>
 
-                </div>
 
-              <?php
+              <?php echo wp_kses_post($iconHtml); ?>
 
-            }
 
-            ?>
 
+              <?php echo wp_kses_post($iconToggleHtml); ?>
+
+
+            <?php endif; ?>
+
+
+            <div class="nav-label">
+              <?php echo isset($tab['title']) ? wp_kses_post($tab['title']) : ""; ?>
+            </div>
+            <?php if ($iconPosition == 'after') : ?>
+              <div class='nav-icon'>
+                <?php echo wp_kses_post($iconHtml); ?>
+              </div>
+            <?php endif; ?>
 
           </div>
-          <div class='panels-wrap'>
-            <?php echo $content; ?>
-          </div>
-        </div>
-
-
-
-
 
         <?php
 
-
-
+        }
 
         ?>
 
 
+      </div>
+      <div class='panels-wrap'>
+        <?php echo $content; ?>
+      </div>
+    </div>
+
+
+
+
+
+    <?php
+
+
+
+
+    ?>
 
 
 
@@ -239,7 +237,9 @@ class PGBlockTabs
 
 
 
-    <?php return ob_get_clean();
+
+
+<?php return ob_get_clean();
   }
 }
 

@@ -43,6 +43,8 @@ class PGBlockPostTitle
       ? $block->context["postId"]
       : "";
     $post_url = get_the_permalink($post_ID);
+    $the_post = get_post($post_ID);
+    $post_author_id = $the_post->post_author;
 
     $blockId = isset($attributes["blockId"]) ? $attributes["blockId"] : "";
     $blockAlign = isset($attributes["align"])
@@ -72,6 +74,10 @@ class PGBlockPostTitle
     $postTitleIsLink = isset($postTitleOptions["isLink"])
       ? $postTitleOptions["isLink"]
       : true;
+    $postTitleLinkTo = isset($postTitleOptions['linkTo']) ? $postTitleOptions['linkTo'] : false;
+    $postTitleLinkAttr = isset($postTitleOptions['linkAttr']) ? $postTitleOptions['linkAttr'] : [];
+    $postTitleLinkToAuthorMeta = isset($postTitleOptions['linkToAuthorMeta']) ? $postTitleOptions['linkToAuthorMeta'] : '';
+    $postTitleLinkToCustomMeta = isset($postTitleOptions['linkToCustomMeta']) ? $postTitleOptions['linkToCustomMeta'] : '';
     $linkTarget = isset($postTitleOptions["linkTarget"])
       ? $postTitleOptions["linkTarget"]
       : "_blank";
@@ -131,6 +137,27 @@ class PGBlockPostTitle
       ? $attributes["blockCssY"]
       : [];
     $postGridCssY[] = isset($blockCssY["items"]) ? $blockCssY["items"] : [];
+
+    if ($postTitleLinkTo == 'postUrl') {
+      $post_url = get_permalink($post_ID);
+    } else if ($postTitleLinkTo == 'homeUrl') {
+      $post_url = get_home_url();
+    } else if ($postTitleLinkTo == 'authorUrl') {
+      $user = get_user_by('ID', $post_author_id);
+      $post_url = $user->user_url;
+    } else if ($postTitleLinkTo == 'authorMail') {
+      $user = get_user_by('ID', $post_author_id);
+
+      $post_url = $user->user_email;
+    } else if ($postTitleLinkTo == 'authorLink') {
+      $post_url = get_author_posts_url($post_author_id);
+    } else if ($postTitleLinkTo == 'customUrl') {
+      $post_url = $customUrl;
+    } else if ($postTitleLinkTo == 'authorMeta') {
+      $post_url = get_user_meta($post_author_id, $postTitleLinkToAuthorMeta, true);
+    } else if ($postTitleLinkTo == 'customField') {
+      $post_url = get_post_meta($post_author_id, $postTitleLinkToCustomMeta, true);
+    }
 
     $linkAttrStr = "";
     $attrArr = [];
@@ -196,77 +223,78 @@ class PGBlockPostTitle
 
     ob_start();
     ?>
-    <?php
+<?php
     if (!empty($wrapperTag)): ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="
+<<?php echo esc_attr($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($wrapperClass); ?>">
-        <?php if ($postTitleIsLink): ?>
-          <a class="<?php echo esc_attr($postTitleClass); ?>"
-            href="<?php echo !empty($customUrl) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
-            rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
-            <?php if (!empty($prefixText)): ?>
-              <span class="<?php echo esc_attr($prefixClass); ?>">
-                <?php echo wp_kses_post($prefixText); ?>
-              </span>
-            <?php endif; ?>
-            <?php echo wp_kses_post($post_title); ?>
-            <?php if (!empty($postfixText)): ?>
-              <span class="<?php echo esc_attr($postfixClass); ?>">
-                <?php echo wp_kses_post($postfixText); ?>
-              </span>
-            <?php endif; ?>
-          </a>
-        <?php else: ?>
-          <?php if (!empty($prefixText)): ?>
-            <span class="<?php echo esc_attr($prefixClass); ?>">
-              <?php echo wp_kses_post($prefixText); ?>
-            </span>
-          <?php endif; ?>
-          <?php echo wp_kses_post($post_title); ?>
-          <?php if (!empty($postfixText)): ?>
-            <span class="<?php echo esc_attr($postfixClass); ?>">
-              <?php echo wp_kses_post($postfixText); ?>
-            </span>
-          <?php endif; ?>
-        <?php endif; ?>
-      </<?php echo esc_attr($wrapperTag); ?>>
-    <?php endif;
+  <?php if ($postTitleIsLink): ?>
+  <a class="<?php echo esc_attr($postTitleClass); ?>"
+    href="<?php echo !empty($customUrl) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
+    rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
+    <?php if (!empty($prefixText)): ?>
+    <span class="<?php echo esc_attr($prefixClass); ?>">
+      <?php echo wp_kses_post($prefixText); ?>
+    </span>
+    <?php endif; ?>
+    <?php echo wp_kses_post($post_title); ?>
+    <?php if (!empty($postfixText)): ?>
+    <span class="<?php echo esc_attr($postfixClass); ?>">
+      <?php echo wp_kses_post($postfixText); ?>
+    </span>
+    <?php endif; ?>
+  </a>
+  <?php else: ?>
+  <?php if (!empty($prefixText)): ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
+  <?php echo wp_kses_post($post_title); ?>
+  <?php if (!empty($postfixText)): ?>
+  <span class="<?php echo esc_attr($postfixClass); ?>">
+    <?php echo wp_kses_post($postfixText); ?>
+  </span>
+  <?php endif; ?>
+  <?php endif; ?>
+</<?php echo esc_attr($wrapperTag); ?>>
+<?php endif;
 
     if (empty($wrapperTag)): ?>
 
-      <?php if ($postTitleIsLink): ?>
-        <a class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($postTitleClass); ?>"
-          href="<?php echo !empty($customUrl) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
-          rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/echo $linkAttrStr; ?>>
-          <?php if (!empty($prefixText)): ?>
-            <span class="<?php echo esc_attr($prefixClass); ?>">
-              <?php echo wp_kses_post($prefixText); ?>
-            </span>
-          <?php endif; ?>
-          <?php echo wp_kses_post($post_title); ?>
-          <?php if (!empty($postfixText)): ?>
-            <span class="<?php echo esc_attr($postfixClass); ?>">
-              <?php echo wp_kses_post($postfixText); ?>
-            </span>
-          <?php endif; ?>
-        </a>
+<?php if ($postTitleIsLink): ?>
+<a class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($postTitleClass); ?>"
+  href="<?php echo !empty($customUrl) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
+  rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>"
+  <?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/echo $linkAttrStr; ?>>
+  <?php if (!empty($prefixText)): ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
+  <?php echo wp_kses_post($post_title); ?>
+  <?php if (!empty($postfixText)): ?>
+  <span class="<?php echo esc_attr($postfixClass); ?>">
+    <?php echo wp_kses_post($postfixText); ?>
+  </span>
+  <?php endif; ?>
+</a>
 
-      <?php else: ?>
-        <?php if (!empty($prefixText)): ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
-        <?php echo wp_kses_post($post_title); ?>
-        <?php if (!empty($postfixText)): ?>
-          <span class="<?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
-      <?php endif; ?>
+<?php else: ?>
+<?php if (!empty($prefixText)): ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo wp_kses_post($prefixText); ?>
+</span>
+<?php endif; ?>
+<?php echo wp_kses_post($post_title); ?>
+<?php if (!empty($postfixText)): ?>
+<span class="<?php echo esc_attr($postfixClass); ?>">
+  <?php echo wp_kses_post($postfixText); ?>
+</span>
+<?php endif; ?>
+<?php endif; ?>
 
-    <?php endif;
+<?php endif;
     ?>
 
 
@@ -277,7 +305,7 @@ class PGBlockPostTitle
 
 
 
-    <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

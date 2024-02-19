@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://getpostgrid.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.74
+Version: 2.2.75
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later

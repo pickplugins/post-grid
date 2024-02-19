@@ -67,6 +67,39 @@ class BlockPostGridRest
 				},
 			)
 		);
+		register_rest_route(
+			'post-grid/v2',
+			'/activate_license',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'activate_license'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'post-grid/v2',
+			'/deactivate_license',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'deactivate_license'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'post-grid/v2',
+			'/check_icense',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'check_icense'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 		register_rest_route(
@@ -768,14 +801,22 @@ class BlockPostGridRest
 	{
 		$response = [];
 
+		error_log(serialize($request['value']));
 
 		$name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
 		$value = isset($request['value']) ? post_grid_recursive_sanitize_arr($request['value']) : '';
+		$message = "";
+		if (!empty($value)) {
+			$status = update_option($name, $value);
+			$message = __("Options updated", "post-grid");
+		} else {
+			$status = false;
+			$message = __("Value should not empty", "post-grid");
+		}
 
-
-		$status = update_option($name, $value);
 
 		$response['status'] = $status;
+		$response['message'] = $message;
 
 		die(wp_json_encode($response));
 	}
@@ -801,6 +842,7 @@ class BlockPostGridRest
 	{
 		$response = [];
 
+		$name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
 
 
 
@@ -809,6 +851,144 @@ class BlockPostGridRest
 		//$response['status'] = $status;
 
 
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return activate_license
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function activate_license($request)
+	{
+		$response = [];
+		$license_key = isset($request['license_key']) ? sanitize_text_field($request['license_key']) : '';
+
+		$domain = site_url();
+
+
+		//$license_key = "3410E9CF-6362-4A36-AF6E-1D01BB2AEE02";
+		error_log(($license_key));
+
+
+		// API query parameters
+		$api_params = array(
+			'license_key' => $license_key,
+			'instance_name' => $domain,
+		);
+
+		// Send query to the license manager server
+		$response = wp_remote_post(add_query_arg($api_params, "https://api.lemonsqueezy.com/v1/licenses/activate"), array('timeout' => 20, 'sslverify' => false));
+
+		// Check for error in the response
+		if (is_wp_error($response)) {
+			echo __("Unexpected Error! The query returned with an error.", 'post-grid');
+		} else {
+
+			// License data.
+			$license_data = json_decode(wp_remote_retrieve_body($response));
+			error_log(serialize($license_data));
+
+
+			//$date_created = isset($license_data->date_created) ? sanitize_text_field($license_data->date_created) : '';
+			//$response['status'] = $status;
+
+		}
+
+		die(wp_json_encode($response));
+	}
+
+
+	/**
+	 * Return activate_license
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function deactivate_license($request)
+	{
+		$response = [];
+		$license_key = isset($request['license_key']) ? sanitize_text_field($request['license_key']) : '';
+		$instance_id = isset($request['instance_id']) ? sanitize_text_field($request['instance_id']) : '';
+
+		$domain = site_url();
+
+
+		//$license_key = "3410E9CF-6362-4A36-AF6E-1D01BB2AEE02";
+		error_log(($license_key));
+		error_log(($instance_id));
+
+
+		// API query parameters
+		$api_params = array(
+			'license_key' => $license_key,
+			'instance_id' => $instance_id,
+		);
+
+		// Send query to the license manager server
+		$response = wp_remote_post(add_query_arg($api_params, "https://api.lemonsqueezy.com/v1/licenses/deactivate"), array('timeout' => 20, 'sslverify' => false));
+
+		// Check for error in the response
+		if (is_wp_error($response)) {
+			echo __("Unexpected Error! The query returned with an error.", 'post-grid');
+		} else {
+
+			// License data.
+			$license_data = json_decode(wp_remote_retrieve_body($response));
+			//error_log(serialize($license_data));
+
+
+			//$date_created = isset($license_data->date_created) ? sanitize_text_field($license_data->date_created) : '';
+			//$response['status'] = $status;
+
+		}
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return activate_license
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function check_icense($request)
+	{
+		$response = [];
+		$license_key = isset($request['license_key']) ? sanitize_text_field($request['license_key']) : '';
+
+		$domain = site_url();
+
+
+		//$license_key = "3410E9CF-6362-4A36-AF6E-1D01BB2AEE02";
+		error_log(($license_key));
+
+
+		// API query parameters
+		$api_params = array(
+			'license_key' => $license_key,
+			//'instance_id' => $domain,
+		);
+
+		// Send query to the license manager server
+		$response = wp_remote_post(add_query_arg($api_params, "https://api.lemonsqueezy.com/v1/licenses/validate"), array('timeout' => 20, 'sslverify' => false));
+
+		// Check for error in the response
+		if (is_wp_error($response)) {
+			echo __("Unexpected Error! The query returned with an error.", 'post-grid');
+		} else {
+
+			// License data.
+			$license_data = json_decode(wp_remote_retrieve_body($response));
+			error_log(serialize($license_data));
+
+
+			//$date_created = isset($license_data->date_created) ? sanitize_text_field($license_data->date_created) : '';
+			//$response['status'] = $status;
+
+		}
 
 		die(wp_json_encode($response));
 	}

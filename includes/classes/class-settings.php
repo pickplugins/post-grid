@@ -53,7 +53,7 @@ class class_post_grid_settings
         //add_submenu_page('post-grid', __('Layouts', 'post-grid'), __('All Layouts', 'post-grid'), 'manage_options', 'edit.php?post_type=post_grid_layout',);
 
         add_submenu_page('post-grid', __('Settings', 'post-grid'), __('Settings', 'post-grid'), 'manage_options', 'post-grid-settings', array($this, 'settings'), 80);
-        //add_submenu_page('post-grid', __('dashboard', 'post-grid'), __('dashboard', 'post-grid'), 'manage_options', 'post-grid-dashboard', array($this, 'dashboard'), 80);
+        add_submenu_page('post-grid', __('Dashboard', 'post-grid'), __('Dashboard', 'post-grid'), 'manage_options', 'post-grid-dashboard', array($this, 'dashboard'), 80);
 
 
         if ($data_update_status == 'pending') :

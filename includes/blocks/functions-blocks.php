@@ -1097,19 +1097,19 @@ function post_grid_block_categories($categories, $context)
 
       array(
         'slug' => 'post-grid-post',
-        'title' => __('Post Grid - Post Element', 'boilerplate'),
+        'title' => __('Combo Blocks - Post Element', 'boilerplate'),
       ),
       array(
         'slug' => 'post-grid-tools',
-        'title' => __('Post Grid - Tools', 'boilerplate'),
+        'title' => __('Combo Blocks - Tools', 'boilerplate'),
       ),
       array(
         'slug' => 'post-grid-woo',
-        'title' => __('Post Grid - WooCommerce', 'boilerplate'),
+        'title' => __('Combo Blocks - WooCommerce', 'boilerplate'),
       ),
       array(
         'slug' => 'post-grid-archive',
-        'title' => __('Post Grid - Archive', 'boilerplate'),
+        'title' => __('Combo Blocks - Archive', 'boilerplate'),
       ),
 
     );

@@ -1005,7 +1005,8 @@ function post_grid_loop($args)
             }
 
             <?php echo esc_attr('#post-grid-' . $grid_id . ' .item'); ?> {
-                <?php if (!empty($items_width_mobile) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_mobile); ?>;
+                <?php if (!empty($items_width_mobile) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_mobile);
+                                                                                                        ?>;
                 margin: <?php echo esc_attr($items_margin); ?>;
                 display: inline-block;
                 vertical-align: top;
@@ -1044,7 +1045,8 @@ function post_grid_loop($args)
             }
 
             <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
-                <?php if (!empty($items_width_tablet) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_tablet); ?>;
+                <?php if (!empty($items_width_tablet) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_tablet);
+                                                                                                        ?>;
                 margin: <?php echo esc_attr($items_margin); ?>;
                 display: inline-block;
                 vertical-align: top;

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			if (Number.isInteger(end)) {
 				target.innerText = Math.floor(numberX);
 			} else {
-				target.innerText = Number(numberX).toFixed(2);
+				target.innerText = Number(numberX).toFixed(0);
 			}
 
 			if (progress < 1) {

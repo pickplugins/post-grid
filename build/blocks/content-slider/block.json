@@ -72,7 +72,7 @@
         }
       }
     },
-    "perv": {
+    "prev": {
       "type": "object",
       "default": {
         "options": {
@@ -110,7 +110,7 @@
         }
       }
     },
-    "pervIcon": {
+    "prevIcon": {
       "type": "object",
       "default": {
         "options": {

@@ -44,6 +44,14 @@
         }
       }
     },
+    "other": {
+      "type": "object",
+      "default": {
+        "options": {
+          "copyObj": false
+        }
+      }
+    },
     "blockId": {
       "type": "string",
       "default": ""

@@ -1001,6 +1001,11 @@
   border-color: rgb(67 56 202 / var(--tw-border-opacity));
 }
 
+.border-slate-300{
+  --tw-border-opacity: 1;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity));
+}
+
 .border-slate-400{
   --tw-border-opacity: 1;
   border-color: rgb(148 163 184 / var(--tw-border-opacity));

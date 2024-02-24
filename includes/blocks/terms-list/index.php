@@ -146,6 +146,7 @@ class PGBlockTermsList
 
     $separatorClass = isset($separatorOptions['class']) ? $separatorOptions['class'] : '';
     $separatorText = isset($separatorOptions['text']) ? $separatorOptions['text'] : '';
+    $separatorPosition = isset($separatorOptions['position']) ? $separatorOptions['position'] : '';
 
 
 
@@ -180,39 +181,40 @@ class PGBlockTermsList
     $terms = get_terms($query_args);
     $termsX = [];
 
-    foreach ($terms as $term):
+    foreach ($terms as $term) :
+
+
+      if (!is_wp_error($term)) {
+
+        $term_id = isset($term->term_id) ? $term->term_id : "";
+        $term_taxonomy = isset($term->taxonomy) ? $term->taxonomy : "";
 
 
 
-
-      $term_id = isset($term->term_id) ? $term->term_id : "";
-      $term_taxonomy = isset($term->taxonomy) ? $term->taxonomy : "";
+        $term_link = get_term_link($term_id, $term_taxonomy);
 
 
+        if ($utmTrackingEnable) {
 
-      $term_link = get_term_link($term_id, $term_taxonomy);
+          // UTM tracking
+          $term_link = $this->addUTMTracking($term_link, $utmTracking);
+        }
 
+        if (gettype($term) == "array") {
 
-      if ($utmTrackingEnable) {
+          $term['link'] = $term_link;
+        } else {
 
-        // UTM tracking
-        $term_link = $this->addUTMTracking($term_link, $utmTracking);
+          $term->link = $term_link;
+        }
+
+        $termsX[] = $term;
       }
 
-      if (gettype($term) == "array") {
-
-        $term['link'] = $term_link;
-      } else {
-
-        $term->link = $term_link;
-      }
-
-      $termsX[] = $term;
 
 
     endforeach;
 
-    // var_dump($termsX);
 
 
 
@@ -250,163 +252,148 @@ class PGBlockTermsList
 
 
 
-    ?>
+?>
 
 
-        <<?php echo esc_attr($wrapperTag); ?> class="
+    <<?php echo esc_attr($wrapperTag); ?> class="
                                         <?php echo $blockId; ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
-          <?php if ($iconPosition == 'beforeFronttext'): ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
+      <?php if ($iconPosition == 'beforeFronttext') : ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php endif; ?>
 
-          <?php if (!empty($frontTexttext)): ?>
-              <span class='frontText '>
-                <?php echo $frontTexttext; ?>
+      <?php if (!empty($frontTexttext)) : ?>
+        <span class='frontText '>
+          <?php echo $frontTexttext; ?>
+        </span>
+      <?php endif; ?>
+
+
+      <?php if ($iconPosition == 'afterFronttext') : ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php endif; ?>
+
+
+      <?php if ($iconPosition == 'beforeItems') : ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php endif; ?>
+
+      <?php
+
+      $i = 1;
+      if (!empty($termsX))
+        foreach ($termsX as $term) {
+
+          if (!is_wp_error($term)) {
+            continue;
+          }
+          $term_id = isset($term->term_id) ? $term->term_id : "";
+          $term_post_count = isset($term->count) ? $term->count : "";
+          $term_link = isset($term->link) ? $term->link : "";
+          $linkUrl = $term_link;
+
+
+
+
+          /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+      ?>
+
+        <?php if (!empty($itemsLinkTo)) : ?>
+
+          <a href="<?php //echo esc_url_raw($linkUrl); 
+                    ?>" target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?> ">
+
+            <?php if ($iconPosition == 'beforeItem') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
+            <?php if (!empty($itemsPrefix)) : ?>
+              <span class='prefix'>
+                <?php echo wp_kses_post($itemsPrefix); ?>
               </span>
-          <?php endif; ?>
+
+            <?php endif; ?>
+
+            <span class='termTitle'>
+              <?php echo isset($term->name) ? wp_kses_post($term->name) : ''; ?>
+            </span>
+            <?php if ($itemsPostCount) : ?>
+              <span class='postCount'>
+                <?php echo wp_kses_post($term_post_count); ?>
+              </span>
+            <?php endif; ?>
 
 
-          <?php if ($iconPosition == 'afterFronttext'): ?>
+
+            <?php if (!empty($itemsPostfix)) : ?>
+              <span class='postfix'>
+                <?php echo wp_kses_post($itemsPostfix); ?>
+              </span>
+
+            <?php endif; ?>
+
+
+
+            <?php if ($iconPosition == 'afterItem') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
+            <?php endif; ?>
+          </a>
+        <?php else : ?>
 
+          <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
 
-          <?php if ($iconPosition == 'beforeItems'): ?>
+            <?php if ($iconPosition == 'beforeItem') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
+            <?php endif; ?>
 
-          <?php
+            <?php if (!empty($itemsPrefix)) : ?>
+              <span class='prefix'>
+                <?php echo wp_kses_post($itemsPrefix); ?>
+              </span>
 
-          $i = 1;
-          if (!empty($termsX))
-            foreach ($termsX as $term) {
+            <?php endif; ?>
 
-              $term_id = isset($term->term_id) ? $term->term_id : "";
-              $term_post_count = isset($term->count) ? $term->count : "";
-              $term_link = isset($term->link) ? $term->link : "";
-              $linkUrl = $term_link;
+            <span class='termTitle'>
+              <?php echo isset($term->name) ? wp_kses_post($term->name) : ''; ?>
+            </span>
+            <?php if ($itemsPostCount) : ?>
+              <span class='postCount'>
+                <?php echo wp_kses_post($term_post_count); ?>
+              </span>
+            <?php endif; ?>
 
+            <?php if (!empty($itemsPostfix)) : ?>
+              <span class='postfix'>
+                <?php echo wp_kses_post($itemsPostfix); ?>
+              </span>
 
+            <?php endif; ?>
 
-              // if ($itemsLinkTo == 'postUrl') {
-      
-              //   $linkUrl = get_permalink($post_ID);
-              // } else if ($itemsLinkTo == 'termUrl') {
-              //   $linkUrl = get_term_link($term_id);
-              // } else if ($itemsLinkTo == 'customField') {
-              //   $linkUrl = get_post_meta($post_ID, $itemsLinkToCustomMeta, true);
-              // } else if ($itemsLinkTo == 'authorUrl') {
-              //   $author_id = get_post_field('post_author', $post_ID);
-              //   $user = get_user_by('ID', $author_id);
-              //   $linkUrl = $user->user_url;
-              // } else if ($itemsLinkTo == 'authorLink') {
-              //   $author_id = get_post_field('post_author', $post_ID);
-              //   $linkUrl = get_author_posts_url($author_id);
-              // } else if ($itemsLinkTo == 'homeUrl') {
-              //   $linkUrl = get_bloginfo('url');
-              // } else if ($itemsLinkTo == 'custom') {
-              //   $linkUrl = $itemsCustomUrl;
-              // }
-      
-
-              // if ($i > $maxCount)
-              //   break;
-      
-              /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-              ?>
-
-                <?php if (!empty($itemsLinkTo)): ?>
-
-                    <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?> ">
-
-                      <?php if ($iconPosition == 'beforeItem'): ?>
-                          <?php echo wp_kses_post($fontIconHtml); ?>
-                      <?php endif; ?>
-
-                      <?php if (!empty($itemsPrefix)): ?>
-                          <span class='prefix'>
-                            <?php echo wp_kses_post($itemsPrefix); ?>
-                          </span>
-
-                      <?php endif; ?>
-
-                      <span class='termTitle'>
-                        <?php echo isset($term->name) ? wp_kses_post($term->name) : ''; ?>
-                      </span>
-                      <?php if ($itemsPostCount): ?>
-                          <span class='postCount'>
-                            <?php echo wp_kses_post($term_post_count); ?>
-                          </span>
-                      <?php endif; ?>
-
-                      <?php if (!empty($itemsPostfix)): ?>
-                          <span class='postfix'>
-                            <?php echo wp_kses_post($itemsPostfix); ?>
-                          </span>
-
-                      <?php endif; ?>
-
-                      <?php if ($iconPosition == 'afterItem'): ?>
-                          <?php echo wp_kses_post($fontIconHtml); ?>
-                      <?php endif; ?>
-                    </a>
-                <?php else: ?>
-
-                    <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
-
-                      <?php if ($iconPosition == 'beforeItem'): ?>
-                          <?php echo wp_kses_post($fontIconHtml); ?>
-                      <?php endif; ?>
-
-                      <?php if (!empty($itemsPrefix)): ?>
-                          <span class='prefix'>
-                            <?php echo wp_kses_post($itemsPrefix); ?>
-                          </span>
-
-                      <?php endif; ?>
-
-                      <span class='termTitle'>
-                        <?php echo isset($term->name) ? wp_kses_post($term->name) : ''; ?>
-                      </span>
-                      <?php if ($itemsPostCount): ?>
-                          <span class='postCount'>
-                            <?php echo wp_kses_post($term_post_count); ?>
-                          </span>
-                      <?php endif; ?>
-
-                      <?php if (!empty($itemsPostfix)): ?>
-                          <span class='postfix'>
-                            <?php echo wp_kses_post($itemsPostfix); ?>
-                          </span>
-
-                      <?php endif; ?>
-
-                      <?php if ($iconPosition == 'afterItem'): ?>
-                          <?php echo wp_kses_post($fontIconHtml); ?>
-                      <?php endif; ?>
-                    </span>
-                <?php endif; ?>
-
-
-                <?php if ($maxCount > $i && !empty($separatorText)): ?>
-                    <span class='separator'>
-                      <?php echo esc_html($separatorText); ?>
-                    </span>
-                <?php endif; ?>
-              <?php
-              $i++;
-            }
-
-          ?>
-
-          <?php if ($iconPosition == 'afterItems'): ?>
+            <?php if ($iconPosition == 'afterItem') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
+            <?php endif; ?>
+          </span>
+        <?php endif; ?>
 
 
-        </<?php echo esc_attr($wrapperTag); ?>>
+        <?php if ($maxCount > $i && !empty($separatorText)) : ?>
+          <span class='separator'>
+            <?php echo esc_html($separatorText); ?>
+          </span>
+        <?php endif; ?>
+      <?php
+          $i++;
+        }
+
+      ?>
+
+      <?php if ($iconPosition == 'afterItems') : ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php endif; ?>
+
+
+    </<?php echo esc_attr($wrapperTag); ?>>
 
 
 
@@ -418,7 +405,7 @@ class PGBlockTermsList
 
 
 
-    <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

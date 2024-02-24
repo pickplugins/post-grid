@@ -9,6 +9,7 @@ class PGBlockPostText
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
+    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -29,8 +30,14 @@ class PGBlockPostText
     );
   }
 
-  function front_script($attributes)
+  function front_scripts($attributes)
   {
+    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', true);
+
+        if (has_block('post-grid/text')) {
+
+            wp_enqueue_script('pg-text');
+        }
   }
   function front_style($attributes)
   {
@@ -59,6 +66,10 @@ class PGBlockPostText
 
 
 
+    $other = isset($attributes['other']) ? $attributes['other'] : [];
+    $otherOptions = isset($other['options']) ? $other['options'] : [];
+    $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : [];
+    
     $text = isset($attributes['text']) ? $attributes['text'] : [];
     $textOptions = isset($text['options']) ? $text['options'] : [];
     $textClass = isset($textOptions['class']) ? $textOptions['class'] : '';
@@ -108,12 +119,12 @@ class PGBlockPostText
 
     if (!empty($wrapperTag)) :
 ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="
+<<?php echo esc_attr($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>">
-        <?php echo $content; ?>
-      </<?php echo esc_attr($wrapperTag); ?>>
-    <?php
+        <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>"
+  clickToCopy="<?php echo esc_attr($otherCopyObj); ?>"><?php echo $content; ?>
+</<?php echo esc_attr($wrapperTag); ?>>
+<?php
 
     endif;
 

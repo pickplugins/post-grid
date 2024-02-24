@@ -12,6 +12,8 @@
     "postId",
     "loopIndex",
     "postType",
+    "term_id",
+    "taxonomy",
     "queryId"
   ],
   "supports": {
@@ -46,7 +48,7 @@
           "limitBy": "",
           "limitCount": 99,
           "isLink": true,
-          "linkTo": "postUrl",
+          "linkTo": "termUrl",
           "linkToAuthorMeta": "",
           "linkToCustomMeta": "",
           "linkTarget": "_blank",

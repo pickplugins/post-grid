@@ -186,6 +186,7 @@
       "type": "object",
       "default": {
         "options": {
+          "position": "",
           "class": "inline-block",
           "text": ", "
         },

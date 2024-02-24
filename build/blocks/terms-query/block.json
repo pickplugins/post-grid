@@ -9,6 +9,8 @@
     "postId",
     "loopIndex",
     "postType",
+    "term_id",
+    "taxonomy",
     "queryId"
   ],
   "supports": {
@@ -64,7 +66,16 @@
     "queryArgs": {
       "type": "object",
       "default": {
-        "items": []
+        "items": [
+          {
+            "val": "category",
+            "id": "taxonomy"
+          },
+          {
+            "val": "6",
+            "id": "number"
+          }
+        ]
       }
     },
     "blockCssY": {

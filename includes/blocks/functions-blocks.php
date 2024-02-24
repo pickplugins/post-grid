@@ -863,16 +863,16 @@ function post_grid_parse_query_terms($queryArgs)
   }
 
 
-  if (get_query_var('paged')) {
-    $paged = get_query_var('paged');
-  } elseif (get_query_var('page')) {
-    $paged = get_query_var('page');
-  } else {
-    $paged = 1;
-  }
+  // if (get_query_var('paged')) {
+  //   $paged = get_query_var('paged');
+  // } elseif (get_query_var('page')) {
+  //   $paged = get_query_var('page');
+  // } else {
+  //   $paged = 1;
+  // }
 
-  if (!empty($paged))
-    $query_args['paged'] = $paged;
+  // if (!empty($paged))
+  //   $query_args['paged'] = $paged;
 
 
   return $query_args;

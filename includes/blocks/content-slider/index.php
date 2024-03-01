@@ -102,10 +102,10 @@ class PGBlockContentSlider
 		$wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
 
-		$perv = isset($attributes['perv']) ? $attributes['perv'] : [];
-		$pervOptions = isset($perv['options']) ? $perv['options'] : [];
+		$prev = isset($attributes['prev']) ? $attributes['prev'] : [];
+		$prevOptions = isset($prev['options']) ? $prev['options'] : [];
 
-		$pervText = isset($pervOptions['text']) ? $pervOptions['text'] : '';
+		$prevText = isset($prevOptions['text']) ? $prevOptions['text'] : '';
 
 		$next = isset($attributes['next']) ? $attributes['next'] : [];
 		$nextOptions = isset($next['options']) ? $next['options'] : [];
@@ -114,14 +114,14 @@ class PGBlockContentSlider
 
 
 
-		$pervIcon = isset($attributes['pervIcon']) ? $attributes['pervIcon'] : [];
-		$pervIconOptions = isset($pervIcon['options']) ? $pervIcon['options'] : [];
+		$prevIcon = isset($attributes['prevIcon']) ? $attributes['prevIcon'] : [];
+		$prevIconOptions = isset($prevIcon['options']) ? $prevIcon['options'] : [];
 
-		$pervIconLibrary = isset($pervIconOptions['library']) ? $pervIconOptions['library'] : '';
-		$pervIconSrcType = isset($pervIconOptions['srcType']) ? $pervIconOptions['srcType'] : '';
-		$pervIconSrc = isset($pervIconOptions['iconSrc']) ? $pervIconOptions['iconSrc'] : '';
-		$pervIconClass = isset($pervIconOptions['class']) ? $pervIconOptions['class'] : '';
-		$pervIconPosition = isset($pervIconOptions['position']) ? $pervIconOptions['position'] : '';
+		$prevIconLibrary = isset($prevIconOptions['library']) ? $prevIconOptions['library'] : '';
+		$prevIconSrcType = isset($prevIconOptions['srcType']) ? $prevIconOptions['srcType'] : '';
+		$prevIconSrc = isset($prevIconOptions['iconSrc']) ? $prevIconOptions['iconSrc'] : '';
+		$prevIconClass = isset($prevIconOptions['class']) ? $prevIconOptions['class'] : '';
+		$prevIconPosition = isset($prevIconOptions['position']) ? $prevIconOptions['position'] : '';
 
 
 		$nextIcon = isset($attributes['nextIcon']) ? $attributes['nextIcon'] : [];
@@ -144,11 +144,11 @@ class PGBlockContentSlider
 
 
 
-		if ($pervIconLibrary == 'fontAwesome') {
+		if ($prevIconLibrary == 'fontAwesome') {
 			wp_enqueue_style('fontawesome-icons');
-		} else if ($pervIconLibrary == 'iconFont') {
+		} else if ($prevIconLibrary == 'iconFont') {
 			wp_enqueue_style('icofont-icons');
-		} else if ($pervIconLibrary == 'bootstrap') {
+		} else if ($prevIconLibrary == 'bootstrap') {
 			wp_enqueue_style('bootstrap-icons');
 		}
 
@@ -163,7 +163,7 @@ class PGBlockContentSlider
 
 
 
-		$pervIconHtml = '<span class="' . $pervIconClass . ' ' . $pervIconSrc . '"></span>';
+		$prevIconHtml = '<span class="' . $prevIconClass . ' ' . $prevIconSrc . '"></span>';
 		$nextIconHtml = '<span class="' . $nextIconClass . ' ' . $nextIconSrc . '"></span>';
 
 
@@ -219,25 +219,25 @@ class PGBlockContentSlider
 
 
     <div class="splide__arrows">
-      <div class='perv splide__arrow splide__arrow--prev'>
+      <div class='prev splide__arrow splide__arrow--prev'>
 
-        <?php if ($pervIconPosition == 'before'): ?>
+        <?php if ($prevIconPosition == 'before'): ?>
         <span class='icon'>
-          <?php echo wp_kses_post($pervIconHtml); ?>
+          <?php echo wp_kses_post($prevIconHtml); ?>
         </span>
         <?php endif; ?>
 
-        <?php if (!empty($pervText)): ?>
+        <?php if (!empty($prevText)): ?>
         <span>
-          <?php echo $pervText; ?>
+          <?php echo $prevText; ?>
         </span>
         <?php endif; ?>
 
 
 
-        <?php if ($pervIconPosition == 'after'): ?>
+        <?php if ($prevIconPosition == 'after'): ?>
         <span class='icon'>
-          <?php echo wp_kses_post($pervIconHtml); ?>
+          <?php echo wp_kses_post($prevIconHtml); ?>
         </span>
         <?php endif; ?>
 

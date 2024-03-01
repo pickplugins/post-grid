@@ -10,18 +10,6 @@ register_meta('post', 'pgc_meta', [
 
 
 
-add_action('wp_footer', 'post_grid_global_css', 999);
-
-function post_grid_global_css()
-{
-
-
-
-?>
-
-
-<?php
-}
 
 
 
@@ -879,187 +867,6 @@ function post_grid_parse_query_terms($queryArgs)
 }
 
 
-function post_grid_global_cssY()
-{
-
-  global $postGridCssY;
-  global $postGridFonts;
-
-  //$url = $_SERVER['REQUEST_URI'];
-
-
-  $reponsiveCssGroups = [];
-  $reponsiveCss = '';
-
-
-
-  if (is_array($postGridCssY))
-    foreach ($postGridCssY as $index => $blockCss) {
-
-      if (is_array($blockCss))
-        foreach ($blockCss as $selector => $atts) {
-
-          if (is_array($blockCss))
-            foreach ($atts as $att => $responsiveVals) {
-
-              if (is_array($responsiveVals))
-                foreach ($responsiveVals as $device => $val) {
-
-                  if ('font-family' == $att && !empty($val)) {
-                    $postGridFonts[$val] = $val;
-                  }
-                  // $reponsiveCssGroups[$device][$selector][$att] = $val;
-
-
-                  if (is_string($val)) {
-                    $reponsiveCssGroups[$device][$selector][$att] = str_replace("u0022", '"', $val);
-                    //var_dump($val);
-                  }
-                }
-            }
-
-
-
-          // $attr = isset($arg['attr']) ? $arg['attr'] : '';
-          // $id = isset($arg['id']) ? $arg['id'] : '';
-          // $reponsive = isset($arg['reponsive']) ? $arg['reponsive'] : '';
-
-
-          // foreach ($reponsive as $device => $value) {
-
-          //     if (!empty($value))
-          //         $reponsiveCssGroups[$device][] = ['id' => $id, 'attr' => $attr,  'val' => $value];
-          // }
-        }
-    }
-
-
-
-
-
-  if (!empty($reponsiveCssGroups['Desktop'])) {
-    //$reponsiveCss .= '@media only screen and (min-width: 782px){';
-
-
-    foreach ($reponsiveCssGroups['Desktop'] as $selector => $atts) {
-
-      $reponsiveCss .= $selector . '{';
-
-      if (!empty($atts))
-        foreach ($atts as $attr => $val) {
-
-
-
-          if (!empty($val) && !is_array($val)) {
-
-            $reponsiveCss .= $attr . ':' . $val . ';';
-          }
-        }
-      $reponsiveCss .= '}';
-    }
-
-
-
-
-    //$reponsiveCss .= '}';
-  }
-
-
-
-  if (!empty($reponsiveCssGroups['Tablet'])) {
-    //$reponsiveCss .= '@media only screen and (min-width: 361px) and (max-width: 780px){';
-    // $reponsiveCss .= '@media(max-width: 780px){';
-    $reponsiveCss .= '@media(max-width: 991px){';
-
-
-    foreach ($reponsiveCssGroups['Tablet'] as $selector => $atts) {
-
-      $reponsiveCss .= $selector . '{';
-
-      if (!empty($atts))
-        foreach ($atts as $attr => $val) {
-          if (!empty($val))
-            $reponsiveCss .= $attr . ':' . $val . ';';
-        }
-      $reponsiveCss .= '}';
-    }
-
-
-    $reponsiveCss .= '}';
-  }
-
-
-  if (!empty($reponsiveCssGroups['Mobile'])) {
-    //$reponsiveCss .= '@media only screen and (min-width: 0px) and (max-width: 360px){';
-    //$reponsiveCss .= '@media(max-width:360px){';
-    $reponsiveCss .= '@media(max-width:767px){';
-
-    foreach ($reponsiveCssGroups['Mobile'] as $selector => $atts) {
-
-      $reponsiveCss .= $selector . '{';
-
-      if (!empty($atts))
-        foreach ($atts as $attr => $val) {
-          if (!empty($val))
-            $reponsiveCss .= $attr . ':' . $val . ';';
-        }
-      $reponsiveCss .= '}';
-    }
-
-
-
-    $reponsiveCss .= '}';
-  }
-
-
-  $fonts = '';
-  $fontsArr = [];
-
-
-  if (!empty($postGridFonts)) {
-    //foreach ($postGridFonts as $device => $itemFont) {
-    //if (!empty($postGridFonts)) {
-    foreach ($postGridFonts as $itemFon) {
-      $fonts .= $itemFon . ',';
-
-      if (!in_array($itemFon, $fontsArr)) {
-        $fontsArr[] = $itemFon . ':wght@100;200;300;400;500;600;700;800;900';
-      }
-    }
-    // }
-    //}
-  }
-
-
-
-  $fontsArrStr = implode('&family=', $fontsArr);
-
-
-  // $fonts = substr($fonts, 0, -1);
-
-  //$fonts = str_replace(",", "|", $fonts);
-  $fonts = str_replace(" ", "+", $fontsArrStr);
-
-  //echo '###############';
-
-  if (!empty($fonts)) {
-  ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
-<?php
-
-  }
-
-  ?>
-
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
-
-<?php
-
-}
-add_action('wp_footer', 'post_grid_global_cssY', 99);
 
 
 function post_grid_global_vars()
@@ -1069,9 +876,9 @@ function post_grid_global_vars()
 
 
 ?>
-<script>
-var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
-</script>
+  <script>
+    var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
+  </script>
 <?php
 }
 add_action('wp_footer', 'post_grid_global_vars', 999);
@@ -1337,17 +1144,385 @@ function post_grid_page_styles()
 ?>
 
 
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
 
 <?php
 
 
 
 }
+add_action('wp_footer', 'post_grid_global_styles', 80);
+
+
+function post_grid_global_styles()
+{
+
+  global $postGridFonts;
+
+
+  //$url = $_SERVER['REQUEST_URI'];
+
+
+  $reponsiveCssGroups = [];
+  $reponsiveCss = '';
+
+  $post_grid_block_editor = get_option("post_grid_block_editor");
+
+  $pgc_meta = isset($post_grid_block_editor['globalStyles']) ? $post_grid_block_editor['globalStyles'] : [];
+
+
+  $globalStyles = [];
+
+  if (!empty($pgc_meta)) {
+
+    foreach ($pgc_meta as $i => $items) {
+
+      $selector = isset($items['options']['selector']) ? $items['options']['selector'] : '';
+
+
+
+      foreach ($items as $itemIndex => $blockCss) {
+
+
+
+        if ($itemIndex != 'options') {
+
+
+
+          $elementSelector = '';
+
+          if ($itemIndex == 'styles') {
+            $elementSelector = $selector;
+          } else if ($itemIndex == 'hover') {
+            $elementSelector = $selector . ':hover';
+          } else if ($itemIndex == 'after') {
+            $elementSelector = $selector . '::after';
+          } else if ($itemIndex == 'before') {
+            $elementSelector = $selector . '::before';
+          } else if ($itemIndex == 'first-child') {
+            $elementSelector = $selector . ':first-child';
+          } else if ($itemIndex == 'last-child') {
+            $elementSelector = $selector . ':last-child';
+          } else if ($itemIndex == 'visited') {
+            $elementSelector = $selector . ':visited';
+          } else if ($itemIndex == 'selection') {
+            $elementSelector = $selector . '::selection';
+          } else if ($itemIndex == 'first-letter') {
+            $elementSelector = $selector . '::first-letter';
+          } else if ($itemIndex == 'first-line') {
+            $elementSelector = $selector . '::first-line';
+          }
+
+
+
+
+          $globalStyles[$i][$elementSelector] = $blockCss;
+        }
+      }
+    }
+  }
+
+
+
+  if (is_array($globalStyles))
+    foreach ($globalStyles as $index => $blockCss) {
+
+
+      if (is_array($blockCss))
+        foreach ($blockCss as $selector => $atts) {
+
+          if (is_array($blockCss))
+            foreach ($atts as $att => $responsiveVals) {
+
+              if (is_array($responsiveVals))
+                foreach ($responsiveVals as $device => $val) {
+
+                  if ('fontFamily' == $att) {
+
+                    $postGridFonts[$val] = $val;
+                  }
+                  $cssAttr = cssAttrParse($att);
+
+                  $reponsiveCssGroups[$device][$selector][$cssAttr] = $val;
+                }
+            }
+        }
+    }
+
+
+
+
+
+  if (!empty($reponsiveCssGroups['Desktop'])) {
+
+
+    foreach ($reponsiveCssGroups['Desktop'] as $selector => $atts) {
+
+      $reponsiveCss .= $selector . '{';
+
+      if (!empty($atts))
+        foreach ($atts as $attr => $val) {
+
+
+
+          if (!empty($val)) {
+
+            $reponsiveCss .= $attr . ':' . $val . ';';
+          }
+        }
+      $reponsiveCss .= '}';
+    }
+  }
+
+
+
+  if (!empty($reponsiveCssGroups['Tablet'])) {
+
+    $reponsiveCss .= '@media(max-width: 991px){';
+
+
+    foreach ($reponsiveCssGroups['Tablet'] as $selector => $atts) {
+
+      $reponsiveCss .= $selector . '{';
+
+      if (!empty($atts))
+        foreach ($atts as $attr => $val) {
+          if (!empty($val))
+            $reponsiveCss .= $attr . ':' . $val . ';';
+        }
+      $reponsiveCss .= '}';
+    }
+
+
+    $reponsiveCss .= '}';
+  }
+
+
+  if (!empty($reponsiveCssGroups['Mobile'])) {
+
+    $reponsiveCss .= '@media(max-width:767px){';
+
+    foreach ($reponsiveCssGroups['Mobile'] as $selector => $atts) {
+
+      $reponsiveCss .= $selector . '{';
+
+      if (!empty($atts))
+        foreach ($atts as $attr => $val) {
+          if (!empty($val))
+            $reponsiveCss .= $attr . ':' . $val . ';';
+        }
+      $reponsiveCss .= '}';
+    }
+
+
+
+    $reponsiveCss .= '}';
+  }
+
+
+
+?>
+
+
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
+
+  <?php
+
+
+
+}
 add_action('wp_footer', 'post_grid_page_styles', 80);
+
+
+function post_grid_global_cssY()
+{
+
+  global $postGridCssY;
+  global $postGridFonts;
+
+  //$url = $_SERVER['REQUEST_URI'];
+
+
+  $reponsiveCssGroups = [];
+  $reponsiveCss = '';
+
+
+
+  if (is_array($postGridCssY))
+    foreach ($postGridCssY as $index => $blockCss) {
+
+      if (is_array($blockCss))
+        foreach ($blockCss as $selector => $atts) {
+
+          if (is_array($blockCss))
+            foreach ($atts as $att => $responsiveVals) {
+
+              if (is_array($responsiveVals))
+                foreach ($responsiveVals as $device => $val) {
+
+                  if ('font-family' == $att && !empty($val)) {
+                    $postGridFonts[$val] = $val;
+                  }
+                  // $reponsiveCssGroups[$device][$selector][$att] = $val;
+
+
+                  if (is_string($val)) {
+                    $reponsiveCssGroups[$device][$selector][$att] = str_replace("u0022", '"', $val);
+                    //var_dump($val);
+                  }
+                }
+            }
+
+
+
+          // $attr = isset($arg['attr']) ? $arg['attr'] : '';
+          // $id = isset($arg['id']) ? $arg['id'] : '';
+          // $reponsive = isset($arg['reponsive']) ? $arg['reponsive'] : '';
+
+
+          // foreach ($reponsive as $device => $value) {
+
+          //     if (!empty($value))
+          //         $reponsiveCssGroups[$device][] = ['id' => $id, 'attr' => $attr,  'val' => $value];
+          // }
+        }
+    }
+
+
+
+
+
+  if (!empty($reponsiveCssGroups['Desktop'])) {
+    //$reponsiveCss .= '@media only screen and (min-width: 782px){';
+
+
+    foreach ($reponsiveCssGroups['Desktop'] as $selector => $atts) {
+
+      $reponsiveCss .= $selector . '{';
+
+      if (!empty($atts))
+        foreach ($atts as $attr => $val) {
+
+
+
+          if (!empty($val) && !is_array($val)) {
+
+            $reponsiveCss .= $attr . ':' . $val . ';';
+          }
+        }
+      $reponsiveCss .= '}';
+    }
+
+
+
+
+    //$reponsiveCss .= '}';
+  }
+
+
+
+  if (!empty($reponsiveCssGroups['Tablet'])) {
+    //$reponsiveCss .= '@media only screen and (min-width: 361px) and (max-width: 780px){';
+    // $reponsiveCss .= '@media(max-width: 780px){';
+    $reponsiveCss .= '@media(max-width: 991px){';
+
+
+    foreach ($reponsiveCssGroups['Tablet'] as $selector => $atts) {
+
+      $reponsiveCss .= $selector . '{';
+
+      if (!empty($atts))
+        foreach ($atts as $attr => $val) {
+          if (!empty($val))
+            $reponsiveCss .= $attr . ':' . $val . ';';
+        }
+      $reponsiveCss .= '}';
+    }
+
+
+    $reponsiveCss .= '}';
+  }
+
+
+  if (!empty($reponsiveCssGroups['Mobile'])) {
+    //$reponsiveCss .= '@media only screen and (min-width: 0px) and (max-width: 360px){';
+    //$reponsiveCss .= '@media(max-width:360px){';
+    $reponsiveCss .= '@media(max-width:767px){';
+
+    foreach ($reponsiveCssGroups['Mobile'] as $selector => $atts) {
+
+      $reponsiveCss .= $selector . '{';
+
+      if (!empty($atts))
+        foreach ($atts as $attr => $val) {
+          if (!empty($val))
+            $reponsiveCss .= $attr . ':' . $val . ';';
+        }
+      $reponsiveCss .= '}';
+    }
+
+
+
+    $reponsiveCss .= '}';
+  }
+
+
+  $fonts = '';
+  $fontsArr = [];
+
+
+  if (!empty($postGridFonts)) {
+    //foreach ($postGridFonts as $device => $itemFont) {
+    //if (!empty($postGridFonts)) {
+    foreach ($postGridFonts as $itemFon) {
+      $fonts .= $itemFon . ',';
+
+      if (!in_array($itemFon, $fontsArr)) {
+        $fontsArr[] = $itemFon . ':wght@100;200;300;400;500;600;700;800;900';
+      }
+    }
+    // }
+    //}
+  }
+
+
+
+  $fontsArrStr = implode('&family=', $fontsArr);
+
+
+  // $fonts = substr($fonts, 0, -1);
+
+  //$fonts = str_replace(",", "|", $fonts);
+  $fonts = str_replace(" ", "+", $fontsArrStr);
+
+  //echo '###############';
+
+  if (!empty($fonts)) {
+  ?>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
+  <?php
+
+  }
+
+  ?>
+
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
+
+<?php
+
+}
+add_action('wp_footer', 'post_grid_global_cssY', 99);
+
+
 
 
 function post_grid_font_family()
@@ -1371,10 +1546,10 @@ function post_grid_font_family()
   }";
   }
 ?>
-<style>
-<?php echo ($faceStr);
-?>
-</style>
+  <style>
+    <?php echo ($faceStr);
+    ?>
+  </style>
 <?php
 }
 add_action('wp_footer', 'post_grid_font_family', 999);

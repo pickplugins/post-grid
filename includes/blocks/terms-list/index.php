@@ -183,34 +183,34 @@ class PGBlockTermsList
 
     foreach ($terms as $term) :
 
-
       if (!is_wp_error($term)) {
-
-        $term_id = isset($term->term_id) ? $term->term_id : "";
-        $term_taxonomy = isset($term->taxonomy) ? $term->taxonomy : "";
-
-
-
-        $term_link = get_term_link($term_id, $term_taxonomy);
-
-
-        if ($utmTrackingEnable) {
-
-          // UTM tracking
-          $term_link = $this->addUTMTracking($term_link, $utmTracking);
-        }
-
-        if (gettype($term) == "array") {
-
-          $term['link'] = $term_link;
-        } else {
-
-          $term->link = $term_link;
-        }
-
-        $termsX[] = $term;
+        continue;
       }
 
+
+      $term_id = isset($term->term_id) ? $term->term_id : "";
+      $term_taxonomy = isset($term->taxonomy) ? $term->taxonomy : "";
+
+
+
+      $term_link = get_term_link($term_id, $term_taxonomy);
+
+
+      if ($utmTrackingEnable) {
+
+        // UTM tracking
+        $term_link = $this->addUTMTracking($term_link, $utmTracking);
+      }
+
+      if (gettype($term) == "array") {
+
+        $term['link'] = $term_link;
+      } else {
+
+        $term->link = $term_link;
+      }
+
+      $termsX[] = $term;
 
 
     endforeach;
@@ -285,9 +285,6 @@ class PGBlockTermsList
       if (!empty($termsX))
         foreach ($termsX as $term) {
 
-          if (!is_wp_error($term)) {
-            continue;
-          }
           $term_id = isset($term->term_id) ? $term->term_id : "";
           $term_post_count = isset($term->count) ? $term->count : "";
           $term_link = isset($term->link) ? $term->link : "";
@@ -295,16 +292,38 @@ class PGBlockTermsList
 
 
 
+          // if ($itemsLinkTo == 'postUrl') {
+
+          //   $linkUrl = get_permalink($post_ID);
+          // } else if ($itemsLinkTo == 'termUrl') {
+          //   $linkUrl = get_term_link($term_id);
+          // } else if ($itemsLinkTo == 'customField') {
+          //   $linkUrl = get_post_meta($post_ID, $itemsLinkToCustomMeta, true);
+          // } else if ($itemsLinkTo == 'authorUrl') {
+          //   $author_id = get_post_field('post_author', $post_ID);
+          //   $user = get_user_by('ID', $author_id);
+          //   $linkUrl = $user->user_url;
+          // } else if ($itemsLinkTo == 'authorLink') {
+          //   $author_id = get_post_field('post_author', $post_ID);
+          //   $linkUrl = get_author_posts_url($author_id);
+          // } else if ($itemsLinkTo == 'homeUrl') {
+          //   $linkUrl = get_bloginfo('url');
+          // } else if ($itemsLinkTo == 'custom') {
+          //   $linkUrl = $itemsCustomUrl;
+          // }
+
+
+          // if ($i > $maxCount)
+          //   break;
 
           /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
       ?>
 
         <?php if (!empty($itemsLinkTo)) : ?>
 
-          <a href="<?php //echo esc_url_raw($linkUrl); 
-                    ?>" target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?> ">
+          <a href="<?php echo esc_url_raw($linkUrl); ?>" target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?> ">
 
-            <?php if ($iconPosition == 'beforeItem') : ?>
+            <?php if ($iconPosition == 'beforeLabel') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
@@ -333,17 +352,20 @@ class PGBlockTermsList
 
             <?php endif; ?>
 
-
-
-            <?php if ($iconPosition == 'afterItem') : ?>
+            <?php if ($iconPosition == 'afterLabel') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($maxCount > $i && !empty($separatorText) && ($separatorPosition == "afterTermTitle")) : ?>
+              <span class='separator'>
+                <?php echo esc_html($separatorText); ?>
+              </span>
             <?php endif; ?>
           </a>
         <?php else : ?>
 
           <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
 
-            <?php if ($iconPosition == 'beforeItem') : ?>
+            <?php if ($iconPosition == 'beforeLabel') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
@@ -370,14 +392,19 @@ class PGBlockTermsList
 
             <?php endif; ?>
 
-            <?php if ($iconPosition == 'afterItem') : ?>
+            <?php if ($iconPosition == 'afterLabel') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($maxCount > $i && !empty($separatorText) && ($separatorPosition == "afterTermTitle")) : ?>
+              <span class='separator'>
+                <?php echo esc_html($separatorText); ?>
+              </span>
             <?php endif; ?>
           </span>
         <?php endif; ?>
 
 
-        <?php if ($maxCount > $i && !empty($separatorText)) : ?>
+        <?php if ($maxCount > $i && !empty($separatorText) && ($separatorPosition == "afterItem")) : ?>
           <span class='separator'>
             <?php echo esc_html($separatorText); ?>
           </span>

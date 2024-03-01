@@ -112,15 +112,22 @@ class PGBlockPostAuthor
       $nameLink = get_permalink($post_ID);
     } else if ($nameLinkTo == 'authorUrl') {
       $user = get_user_by('ID', $post_author_id);
-
       $nameLink = $user->user_url;
     } else if ($nameLinkTo == 'authorLink') {
       $nameLink = get_author_posts_url($post_author_id);
     } else if ($nameLinkTo == 'customUrl') {
-
       $nameLink = $nameCustomUrl;
     } else if ($nameLinkTo == 'authorMeta') {
       $nameLink = !empty($nameLinkToMeta) ? get_user_meta($post_author_id, $nameLinkToMeta, true) : '';
+    } else if ($nameLinkTo == 'authorMail') {
+      $user = get_user_by('ID', $post_author_id);
+      $nameLink = $user->user_email;
+      $nameLink = "mailto:$nameLink";
+    } else if ($nameLinkTo == 'homeUrl') {
+      $nameLink = get_home_url();
+    } else if ($nameLinkTo == 'customField') {
+      // $nameLink = get_post_meta($post_author_id, $nameLinkToMeta, true);
+      $nameLink = "";
     }
 
 
@@ -136,108 +143,104 @@ class PGBlockPostAuthor
 
 
     ob_start();
+?>
+
+    <div class="<?php echo esc_attr($nameClass); ?>">
+      <?php if (!empty($nameLink)) : ?>
+
+        <?php if ($namePrefix) : ?>
+          <span class="prefix">
+            <?php echo wp_kses_post($namePrefix); ?>
+          </span>
+        <?php endif; ?>
+        <a href="<?php echo esc_url_raw($nameLink); ?>">
+          <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
+        </a>
+        <?php if ($namePostfix) : ?>
+          <span class="prefix">
+            <?php echo wp_kses_post($namePostfix); ?>
+          </span>
+        <?php endif; ?>
+
+
+      <?php else : ?>
+
+
+        <?php if ($namePrefix) : ?>
+          <span class="prefix">
+            <?php echo wp_kses_post($namePrefix); ?>
+          </span>
+        <?php endif; ?>
+        <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
+        <?php if ($namePostfix) : ?>
+          <span class="prefix">
+            <?php echo wp_kses_post($namePostfix); ?>
+          </span>
+        <?php endif; ?>
+      <?php endif; ?>
+
+    </div>
+
+    <?php
+    $htmlGroups['name'] = ob_get_clean();
+
+
+    ob_start();
     ?>
 
-        <div class="<?php echo esc_attr($nameClass); ?>">
-          <?php if (!empty($nameLink)): ?>
+    <div class="<?php echo esc_attr($descriptionClass); ?>">
+      <?php echo wp_kses_post(get_the_author_meta('description', $post_author_id)); ?>
+    </div>
 
-              <?php if ($namePrefix): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($namePrefix); ?>
-                  </span>
-              <?php endif; ?>
-              <a href="<?php echo esc_url_raw($nameLink); ?>">
-                <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
-              </a>
-              <?php if ($namePostfix): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($namePostfix); ?>
-                  </span>
-              <?php endif; ?>
+    <?php
+    $htmlGroups['description'] = ob_get_clean();
 
 
-          <?php else: ?>
+    ob_start();
+    ?>
 
+    <div class="<?php echo esc_attr($avatarClass); ?>">
+      <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>" alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
+    </div>
 
-              <?php if ($namePrefix): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($namePrefix); ?>
-                  </span>
-              <?php endif; ?>
-              <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
-              <?php if ($namePostfix): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($namePostfix); ?>
-                  </span>
-              <?php endif; ?>
-          <?php endif; ?>
-
-        </div>
-
-        <?php
-        $htmlGroups['name'] = ob_get_clean();
-
-
-        ob_start();
-        ?>
-
-        <div class="<?php echo esc_attr($descriptionClass); ?>">
-          <?php echo wp_kses_post(get_the_author_meta('description', $post_author_id)); ?>
-        </div>
-
-        <?php
-        $htmlGroups['description'] = ob_get_clean();
-
-
-        ob_start();
-        ?>
-
-        <div class="<?php echo esc_attr($avatarClass); ?>">
-          <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>"
-            alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
-        </div>
-
-        <?php
-        $htmlGroups['avatar'] = ob_get_clean();
+    <?php
+    $htmlGroups['avatar'] = ob_get_clean();
 
 
 
 
-        $linkAttrStr = '';
+    $linkAttrStr = '';
 
 
 
-        if (!empty($itemsLinkAttr))
-          foreach ($itemsLinkAttr as $attr) {
+    if (!empty($itemsLinkAttr))
+      foreach ($itemsLinkAttr as $attr) {
 
-            if (!empty($attr['val']))
-              $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
-          }
-
-
-        ob_start();
+        if (!empty($attr['val']))
+          $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
+      }
 
 
-        ?>
+    ob_start();
 
 
-        <<?php echo esc_attr($wrapperTag); ?> class="
+    ?>
+
+
+    <<?php echo esc_attr($wrapperTag); ?> class="
           <?php echo esc_attr($wrapperClass); ?>
           <?php echo $blockId; ?>">
-          <?php
-          foreach ($elementsItems as $item) {
+      <?php
+      foreach ($elementsItems as $item) {
 
 
-            echo $htmlGroups[$item['id']];
-          }
-
-
-
-          ?>
-        </<?php echo esc_attr($wrapperTag); ?>>
+        echo $htmlGroups[$item['id']];
+      }
 
 
 
+      ?>
+    </<?php echo esc_attr($wrapperTag); ?>>
 
 
 
@@ -246,7 +249,10 @@ class PGBlockPostAuthor
 
 
 
-        <?php return ob_get_clean();
+
+
+
+<?php return ob_get_clean();
   }
 }
 

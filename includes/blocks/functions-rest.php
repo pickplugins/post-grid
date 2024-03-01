@@ -801,7 +801,6 @@ class BlockPostGridRest
 	{
 		$response = [];
 
-		error_log(serialize($request['value']));
 
 		$name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
 		$value = isset($request['value']) ? post_grid_recursive_sanitize_arr($request['value']) : '';
@@ -870,7 +869,6 @@ class BlockPostGridRest
 
 
 		//$license_key = "3410E9CF-6362-4A36-AF6E-1D01BB2AEE02";
-		error_log(($license_key));
 
 
 		// API query parameters
@@ -889,7 +887,6 @@ class BlockPostGridRest
 
 			// License data.
 			$license_data = json_decode(wp_remote_retrieve_body($response));
-			error_log(serialize($license_data));
 
 
 			//$date_created = isset($license_data->date_created) ? sanitize_text_field($license_data->date_created) : '';
@@ -917,8 +914,6 @@ class BlockPostGridRest
 
 
 		//$license_key = "3410E9CF-6362-4A36-AF6E-1D01BB2AEE02";
-		error_log(($license_key));
-		error_log(($instance_id));
 
 
 		// API query parameters
@@ -937,7 +932,6 @@ class BlockPostGridRest
 
 			// License data.
 			$license_data = json_decode(wp_remote_retrieve_body($response));
-			//error_log(serialize($license_data));
 
 
 			//$date_created = isset($license_data->date_created) ? sanitize_text_field($license_data->date_created) : '';
@@ -963,7 +957,6 @@ class BlockPostGridRest
 
 
 		//$license_key = "3410E9CF-6362-4A36-AF6E-1D01BB2AEE02";
-		error_log(($license_key));
 
 
 		// API query parameters
@@ -982,7 +975,6 @@ class BlockPostGridRest
 
 			// License data.
 			$license_data = json_decode(wp_remote_retrieve_body($response));
-			error_log(serialize($license_data));
 
 
 			//$date_created = isset($license_data->date_created) ? sanitize_text_field($license_data->date_created) : '';
@@ -1102,7 +1094,6 @@ class BlockPostGridRest
 
 		$lists = $listApi->get();
 
-		error_log(serialize($lists));
 
 		foreach ($lists as $list) {
 			$title = $list->title;;
@@ -1826,9 +1817,9 @@ class BlockPostGridRest
 
 
 		$response->freeUrl = 'https://wordpress.org/plugins/post-grid/';
-		$response->proUrl = 'https://getpostgrid.com/pricing/';
+		$response->proUrl = 'https://comboblocks.com/pricing/';
 		$response->websiteUrl = 'https://pickplugins.com/';
-		$response->demoUrl = 'http://getpostgrid.com/';
+		$response->demoUrl = 'http://comboblocks.com/';
 		$response->siteAdminurl = $siteAdminurl;
 
 
@@ -1890,7 +1881,6 @@ class BlockPostGridRest
 						$query_args['post_type'] = $val;
 					} elseif ($id == 'postStatus') {
 
-						//error_log(serialize($val));
 
 
 
@@ -1907,7 +1897,6 @@ class BlockPostGridRest
 
 
 
-						//error_log(serialize($val));
 
 
 						$status =  $val;
@@ -2393,8 +2382,6 @@ class BlockPostGridRest
 		}
 
 
-		// error_log(serialize($request['postTypes']));
-		// error_log(serialize($postTypes));
 
 		$post_types =  (!empty($request['postTypes'])) ? $request['postTypes'] : $postTypes;
 		$search = isset($request['search']) ? $request['search'] : '';
@@ -2411,7 +2398,6 @@ class BlockPostGridRest
 			$taxonomiesArr[] = ['label' => $taxDetails->label, 'id' => $taxonomy];
 		}
 
-		//error_log(serialize($post_types_all));
 
 
 
@@ -2505,7 +2491,7 @@ class BlockPostGridRest
 		);
 
 		// Send query to the license manager server
-		$response = wp_remote_get(add_query_arg($api_params, 'https://getpostgrid.com/'), array('timeout' => 20, 'sslverify' => false));
+		$response = wp_remote_get(add_query_arg($api_params, 'https://comboblocks.com/'), array('timeout' => 20, 'sslverify' => false));
 
 		// Check for error in the response
 		if (is_wp_error($response)) {

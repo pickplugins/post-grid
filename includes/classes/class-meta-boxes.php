@@ -611,7 +611,7 @@ class post_grid_meta_boxs
       ?>
         <h3>Try Pro</h3>
 
-        <a class="button" href="https://getpostgrid.com/" target="_blank">Buy Pro</a>
+        <a class="button" href="https://comboblocks.com/" target="_blank">Buy Pro</a>
         <p class="description">If you are looking some extra feature you may try our premium version.</p>
         <br>
 
@@ -625,7 +625,7 @@ class post_grid_meta_boxs
 
       <h3>Documentation</h3>
 
-      <a class="button" href="https://getpostgrid.com/documentations/" target="_blank">Documentation</a>
+      <a class="button" href="https://comboblocks.com/documentations/" target="_blank">Documentation</a>
       <p class="description">Before asking, submitting reviews please take a look on our documentation, may help your issue
         fast.</p>
       <br>

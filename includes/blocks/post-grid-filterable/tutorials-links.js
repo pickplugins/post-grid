@@ -1,7 +1,7 @@
 var tutorialsLinks = [];
 
 
-fetch("https://getpostgrid.com/wp-json/wp/v2/docs", {
+fetch("https://comboblocks.com/wp-json/wp/v2/docs", {
     method: "GET",
     headers: {
         "Content-Type": "application/json;charset=utf-8",

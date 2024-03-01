@@ -20,27 +20,14 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
           <div class="mr-5">
             <svg width="50" height="50" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M267.846 117.688C267.846 114.926 270.085 112.688 272.846 112.688H450C452.761 112.688 455 114.926 455 117.688V144.205C455 146.967 452.761 149.205 450 149.205H272.846C270.085 149.205 267.846 146.967 267.846 144.205V117.688Z"
-                fill="#4f46e5" />
-              <path
-                d="M267.846 194.375C267.846 191.614 270.085 189.375 272.846 189.375H450C452.761 189.375 455 191.614 455 194.375V220.893C455 223.654 452.761 225.893 450 225.893H272.846C270.085 225.893 267.846 223.654 267.846 220.893V194.375Z"
-                fill="#4f46e5" />
-              <path
-                d="M267.846 41C267.846 38.2386 270.085 36 272.846 36H450C452.761 36 455 38.2386 455 41V67.5179C455 70.2793 452.761 72.5179 450 72.5179H272.846C270.085 72.5179 267.846 70.2793 267.846 67.5179V41Z"
-                fill="#4f46e5" />
+              <path d="M267.846 117.688C267.846 114.926 270.085 112.688 272.846 112.688H450C452.761 112.688 455 114.926 455 117.688V144.205C455 146.967 452.761 149.205 450 149.205H272.846C270.085 149.205 267.846 146.967 267.846 144.205V117.688Z" fill="#4f46e5" />
+              <path d="M267.846 194.375C267.846 191.614 270.085 189.375 272.846 189.375H450C452.761 189.375 455 191.614 455 194.375V220.893C455 223.654 452.761 225.893 450 225.893H272.846C270.085 225.893 267.846 223.654 267.846 220.893V194.375Z" fill="#4f46e5" />
+              <path d="M267.846 41C267.846 38.2386 270.085 36 272.846 36H450C452.761 36 455 38.2386 455 41V67.5179C455 70.2793 452.761 72.5179 450 72.5179H272.846C270.085 72.5179 267.846 70.2793 267.846 67.5179V41Z" fill="#4f46e5" />
               <rect x="66" y="56" width="149.893" height="149.893" stroke="#4f46e5" stroke-width="40" />
-              <path
-                d="M233.154 383.355C233.154 386.116 230.915 388.355 228.154 388.355L51 388.355C48.2386 388.355 46 386.116 46 383.355L46 356.837C46 354.076 48.2386 351.837 51 351.837L228.154 351.837C230.915 351.837 233.154 354.076 233.154 356.837L233.154 383.355Z"
-                fill="#4f46e5" />
-              <path
-                d="M233.154 306.667C233.154 309.429 230.915 311.667 228.154 311.667L51 311.667C48.2386 311.667 46 309.429 46 306.667L46 280.15C46 277.388 48.2386 275.15 51 275.15L228.154 275.15C230.915 275.15 233.154 277.388 233.154 280.15L233.154 306.667Z"
-                fill="#4f46e5" />
-              <path
-                d="M233.154 460.042C233.154 462.804 230.915 465.042 228.154 465.042L51 465.042C48.2386 465.042 46 462.804 46 460.042L46 433.525C46 430.763 48.2386 428.525 51 428.525L228.154 428.525C230.915 428.525 233.154 430.763 233.154 433.525L233.154 460.042Z"
-                fill="#4f46e5" />
-              <rect x="435" y="445.042" width="149.893" height="149.893" transform="rotate(-180 435 445.042)"
-                stroke="#4f46e5" stroke-width="40" />
+              <path d="M233.154 383.355C233.154 386.116 230.915 388.355 228.154 388.355L51 388.355C48.2386 388.355 46 386.116 46 383.355L46 356.837C46 354.076 48.2386 351.837 51 351.837L228.154 351.837C230.915 351.837 233.154 354.076 233.154 356.837L233.154 383.355Z" fill="#4f46e5" />
+              <path d="M233.154 306.667C233.154 309.429 230.915 311.667 228.154 311.667L51 311.667C48.2386 311.667 46 309.429 46 306.667L46 280.15C46 277.388 48.2386 275.15 51 275.15L228.154 275.15C230.915 275.15 233.154 277.388 233.154 280.15L233.154 306.667Z" fill="#4f46e5" />
+              <path d="M233.154 460.042C233.154 462.804 230.915 465.042 228.154 465.042L51 465.042C48.2386 465.042 46 462.804 46 460.042L46 433.525C46 430.763 48.2386 428.525 51 428.525L228.154 428.525C230.915 428.525 233.154 430.763 233.154 433.525L233.154 460.042Z" fill="#4f46e5" />
+              <rect x="435" y="445.042" width="149.893" height="149.893" transform="rotate(-180 435 445.042)" stroke="#4f46e5" stroke-width="40" />
             </svg>
 
           </div>
@@ -57,11 +44,9 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
       </div>
       <div class="col-span-6 text-right">
 
-        <a target="_blank" href="https://pickplugins.com/create-support-ticket/"
-          class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Contact
+        <a target="_blank" href="https://pickplugins.com/create-support-ticket/" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Contact
           Support</a>
-        <a target="_blank" href="https://getpostgrid.com/documentations/"
-          class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Documentations</a>
+        <a target="_blank" href="https://comboblocks.com/documentations/" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Documentations</a>
 
 
 
@@ -80,19 +65,14 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
         <div class="p-5">
 
 
-          <iframe width="100%" height="415" src="https://www.youtube.com/embed/EpRVcnkRfG0" title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+          <iframe width="100%" height="415" src="https://www.youtube.com/embed/EpRVcnkRfG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
           <div class="text-center">
 
-            <a target="_blank" href="https://getpostgrid.com/"
-              class="inline-block mt-5 px-6 py-1 rounded-sm  text-center border-4 border-indigo-600 hover:border-indigo-400	 text-gray-600  text-lg mx-2  ">Live
+            <a target="_blank" href="https://comboblocks.com/" class="inline-block mt-5 px-6 py-1 rounded-sm  text-center border-4 border-indigo-600 hover:border-indigo-400	 text-gray-600  text-lg mx-2  ">Live
               Demo</a>
-            <a target="_blank" href="https://pickplugins.com/post-grid/"
-              class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-600	hover:bg-indigo-400 text-white text-lg mx-2 hover:text-white ">Plugin
+            <a target="_blank" href="https://pickplugins.com/post-grid/" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-600	hover:bg-indigo-400 text-white text-lg mx-2 hover:text-white ">Plugin
               Details</a>
 
           </div>
@@ -106,8 +86,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
 
 
-          <h3 class="text-2xl mb-5 font-bold text-gray-600"><span
-              class="text-4xl mr-3 dashicons dashicons-megaphone"></span> Why Post Grid?</h3>
+          <h3 class="text-2xl mb-5 font-bold text-gray-600"><span class="text-4xl mr-3 dashicons dashicons-megaphone"></span> Why Post Grid?</h3>
           <ul class="	">
 
 
@@ -122,21 +101,16 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
             </li>
             <li><span class="dashicons dashicons-yes-alt align-middle"></span> Advance Grid Layout Builder </li>
-            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Advance Grid Layout Presets <span
-                class="text-rose-700 font-bold">[Pro]</span></li>
+            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Advance Grid Layout Presets <span class="text-rose-700 font-bold">[Pro]</span></li>
 
             <li><span class="dashicons dashicons-format-status align-middle"></span> More Blocks Comming... </li>
 
           </ul>
 
           <?php if ($license_status != 'active') : ?>
-          <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank"
-            class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-amber-500 hover:bg-amber-600	cursor-pointer	 text-white text-lg hover:text-white "><span
-              class="text-2xl mr-3 dashicons dashicons-cart"></span> Purchase License</a>
+            <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-amber-500 hover:bg-amber-600	cursor-pointer	 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Purchase License</a>
           <?php else : ?>
-          <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank"
-            class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-green-500 hover:bg-green-600	cursor-pointer	 text-white text-lg hover:text-white "><span
-              class="text-2xl mr-3 dashicons dashicons-cart"></span> Thanks for using pro version</a>
+            <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-green-500 hover:bg-green-600	cursor-pointer	 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Thanks for using pro version</a>
           <?php endif; ?>
 
 
@@ -386,7 +360,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
     <div class="grid grid-cols-12 max-w-6xl mx-auto items-center">
       <div class="col-span-6 bg-white ">
 
-        <img src="https://getpostgrid.com/wp-content/uploads/2022/11/Post-Layout-Library.png" alt="">
+        <img src="https://comboblocks.com/wp-content/uploads/2022/11/Post-Layout-Library.png" alt="">
 
       </div>
 
@@ -400,9 +374,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <p class="text-[16px]">We create ready post layout templates for you. so that you don't have to wast time for
             creating complex and advance layout by own. Our designer and developer team continuesly sketch, build new
             layouts everyday, just take a search and pick the best templates that you need.</p>
-          <a target="_blank" href="https://getpostgrid.com/post-layouts"
-            class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span
-              class="dashicons dashicons-buddicons-groups align-middle"></span> See Layouts Library</a>
+          <a target="_blank" href="https://comboblocks.com/post-layouts" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Layouts Library</a>
 
         </div>
       </div>
@@ -428,15 +400,13 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             help you to create post grid quickly.</p>
 
 
-          <a target="_blank" href="https://getpostgrid.com/grid-layouts"
-            class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span
-              class="dashicons dashicons-buddicons-groups align-middle"></span> See Grid Layout Presets</a>
+          <a target="_blank" href="https://comboblocks.com/grid-layouts" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Grid Layout Presets</a>
 
         </div>
       </div>
       <div class="col-span-6 bg-white">
 
-        <img src="https://getpostgrid.com/wp-content/uploads/2022/11/Complex-Grid-Layout-Presets.png" alt="">
+        <img src="https://comboblocks.com/wp-content/uploads/2022/11/Complex-Grid-Layout-Presets.png" alt="">
 
       </div>
 
@@ -461,8 +431,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             your own, just choose query arguments from drop down and set your options values and your post will be
             displyed for your desired post query arguments.</p>
 
-          <a target="_blank" href=""
-            class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
+          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
             Documentations</a>
         </div>
 
@@ -480,8 +449,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <p class="text-[16px]">We provide 5 different type of pagination, you can choose as you need, there is normal
             pagination, Ajax Pagination, Next Previous Button, Load More and infinite loading.</p>
 
-          <a target="_blank" href=""
-            class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
+          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
             Documentations</a>
         </div>
 
@@ -500,8 +468,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <p class="text-[16px]">Our post grid also support for search query arguments, there is default search form
             avilable on top of post grid, you can customize or override the form input fields as your need.</p>
 
-          <a target="_blank" href=""
-            class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
+          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
             Documentations</a>
         </div>
 
@@ -520,8 +487,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <p class="text-[16px]">By advance post query arguments you can query post by custom taxonomies & terms. you
             can also provide multiple taxonomies & terms with complex relations.</p>
 
-          <a target="_blank" href=""
-            class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
+          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
             Documentations</a>
         </div>
 
@@ -540,8 +506,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <p class="text-[16px]">By advance post query arguments you can query post by custom fields or meta field
             query. you can also provide multiple meta key value with complex relations.</p>
 
-          <a target="_blank" href=""
-            class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
+          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
             Documentations</a>
         </div>
 
@@ -756,8 +721,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
           </div>
 
-          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/"
-            class="bg-indigo-300 hover:bg-indigo-600 block border-indigo-700 border rounded-sm py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
+          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-300 hover:bg-indigo-600 block border-indigo-700 border rounded-sm py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
             Started</a>
           <div class="py-3 text-[18px] ">1 Domain License</div>
           <div class="py-3 text-[18px] ">1 Year of Support</div>
@@ -783,8 +747,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
           </div>
 
-          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/"
-            class="bg-indigo-600 rounded-sm block py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
+          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-600 rounded-sm block py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
             Started</a>
           <div class="py-3 text-[18px] ">Unlimited Domain License</div>
           <div class="py-3 text-[18px] ">1 Year of Support</div>
@@ -808,8 +771,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <span class=" inline-block  text-lg  text-gray-600">/ Year</span>
           </div>
 
-          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/"
-            class="bg-indigo-300 hover:bg-indigo-600 rounded-sm block border-indigo-700 border py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
+          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-300 hover:bg-indigo-600 rounded-sm block border-indigo-700 border py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
             Started</a>
 
           <div class="py-3 text-[18px] ">10 Domain License</div>
@@ -912,15 +874,11 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
         <div class="p-5">
 
           <h3 class="text-lg inline-block mr-12 font-bold">Follow Us</h3>
-          <div class="inline-block  "><a target="_blank" target="_blank" class="p-2 "
-              href="https://www.facebook.com/PickPlugins/"><span class="dashicons   dashicons-facebook"></span></a>
+          <div class="inline-block  "><a target="_blank" target="_blank" class="p-2 " href="https://www.facebook.com/PickPlugins/"><span class="dashicons   dashicons-facebook"></span></a>
           </div>
-          <div class="inline-block "><a target="_blank" class="p-2 " href="https://twitter.com/pickplugins"><span
-                class="dashicons  dashicons-twitter"></span></a></div>
-          <div class="inline-block "><a target="_blank" class="p-2 " href="https://www.pinterest.com/pickplugins/"><span
-                class="dashicons  dashicons-pinterest"></span></a></div>
-          <div class="inline-block "><a target="_blank" class="p-2 "
-              href="https://www.linkedin.com/in/pickplugins"><span class="dashicons  dashicons-linkedin"></span></a>
+          <div class="inline-block "><a target="_blank" class="p-2 " href="https://twitter.com/pickplugins"><span class="dashicons  dashicons-twitter"></span></a></div>
+          <div class="inline-block "><a target="_blank" class="p-2 " href="https://www.pinterest.com/pickplugins/"><span class="dashicons  dashicons-pinterest"></span></a></div>
+          <div class="inline-block "><a target="_blank" class="p-2 " href="https://www.linkedin.com/in/pickplugins"><span class="dashicons  dashicons-linkedin"></span></a>
           </div>
 
         </div>
@@ -928,9 +886,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
       <div class="col-span-8 bg-white ">
         <div class="p-5">
 
-          <a target="_blank"
-            class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white "
-            href="https://www.facebook.com/groups/PickPlugins">Join Our Facebook Group</a>
+          <a target="_blank" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white " href="https://www.facebook.com/groups/PickPlugins">Join Our Facebook Group</a>
 
         </div>
       </div>
@@ -952,8 +908,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <p class="text-[16px]">Read the documentations our techincal writer team already solve many issues for your
             needs. We update our documentation frequently.</p>
 
-          <a target="_blank" href="https://getpostgrid.com/documentations/"
-            class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
+          <a target="_blank" href="https://comboblocks.com/documentations/" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
             Documentations</a>
 
         </div>
@@ -974,8 +929,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <p class="text-[16px]">Our content creator team is preparing video tutorials for you. Keep watching these and
             we have many more video tutorials on the pipeline.</p>
 
-          <a target="_blank" href="https://getpostgrid.com/video-tutorials"
-            class="inline-block mt-5 text-red-500	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> Watch on
+          <a target="_blank" href="https://comboblocks.com/video-tutorials" class="inline-block mt-5 text-red-500	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> Watch on
             YouTube</a>
 
         </div>
@@ -995,8 +949,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             person is ready to help you and resolve.</p>
 
 
-          <a target="_blank" href="https://pickplugins.com/create-support-ticket/"
-            class="inline-block mt-5 text-indigo-700 font-bold	  py-2 rounded-sm  text-center text-lg"> Create Support
+          <a target="_blank" href="https://pickplugins.com/create-support-ticket/" class="inline-block mt-5 text-indigo-700 font-bold	  py-2 rounded-sm  text-center text-lg"> Create Support
             Ticket</a>
 
         </div>
@@ -1013,8 +966,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             Our team is continuesly planing, updating and fixing many issues, we need your feedback about our services,
             support and plugins, how we help your bussiness growth.
           </p>
-          <a target="_blank" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post"
-            class="inline-block mt-5 text-amber-500 font-bold	  py-2 rounded-sm  text-center 		  text-lg  "> Write a
+          <a target="_blank" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" class="inline-block mt-5 text-amber-500 font-bold	  py-2 rounded-sm  text-center 		  text-lg  "> Write a
             Review</a>
 
         </div>

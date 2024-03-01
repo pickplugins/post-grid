@@ -268,7 +268,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
     $full_name = isset($formFields['full_name']) ? sanitize_text_field($formFields['full_name']) : '';
 
 
-    //error_log(serialize($onprocessargs));
 
 
     $user = get_user_by('email', $email);
@@ -289,7 +288,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
         foreach ($onprocessargs as $arg) {
 
 
-            //error_log(serialize($arg));
 
             $id = isset($arg->id) ? $arg->id : "";
 
@@ -569,9 +567,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
                     if (isset($mpResponse['status']) && $mpResponse['status'] == 'success') {
                         $response['success']['mailpickerAddContactSuccess'] = $successMessage;
                     }
-
-
-                    error_log(serialize($response));
                 }
             }
 
@@ -1273,7 +1268,6 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
             $email_data['html'] = $message . $footer;
             $email_data['attachments'] = [];
 
-            error_log(serialize($email_data));
 
             $status = form_wrap_process_send_email($email_data);
 

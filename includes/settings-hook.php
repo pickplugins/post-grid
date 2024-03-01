@@ -153,7 +153,7 @@ if (!function_exists('post_grid_settings_content_help_support')) {
             <a class="button" href="https://www.pickplugins.com/create-support-ticket/"><?php echo __('Create support ticket', 'post-grid'); ?></a>
 
             <p><?php echo __('Read our documentation before asking your question.', 'post-grid'); ?></p>
-            <a class="button" href="https://getpostgrid.com/documentations/"><?php echo __('Documentation', 'post-grid'); ?></a>
+            <a class="button" href="https://comboblocks.com/documentations/"><?php echo __('Documentation', 'post-grid'); ?></a>
 
             <p><?php echo __('Watch video tutorials.', 'post-grid'); ?></p>
             <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94Yut5Y0MSVg1wqmqWz0UYpt"><i class="fab fa-youtube"></i> <?php echo __('All tutorials', 'post-grid'); ?></a>

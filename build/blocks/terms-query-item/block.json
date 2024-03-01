@@ -6,7 +6,11 @@
   "textdomain": "post-grid",
   "category": "post-grid-post",
   "parent": [
-    "post-grid/terms-query"
+    "post-grid/terms-query",
+    "post-grid/layers",
+    "post-grid/layer",
+    "post-grid/grid-wrap-item",
+    "post-grid/flex-wrap-item"
   ],
   "usesContext": [
     "postId",

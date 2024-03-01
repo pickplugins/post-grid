@@ -95,7 +95,6 @@ if (!function_exists('post_grid_paginate_ajax_free')) {
         }
 
 
-        error_log($nonce);
         $keyword = isset($form_data['keyword']) ? sanitize_text_field($form_data['keyword']) : '';
 
 

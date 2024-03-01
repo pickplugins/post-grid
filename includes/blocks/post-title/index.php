@@ -59,7 +59,7 @@ class PGBlockPostTitle
       : "";
     $wrapperTag = isset($wrapperOptions["tag"])
       ? $wrapperOptions["tag"]
-      : "h2";
+      : "div";
 
     $postTitle = isset($attributes["postTitle"])
       ? $attributes["postTitle"]
@@ -70,6 +70,10 @@ class PGBlockPostTitle
     $postTitleClass = isset($postTitleOptions["class"])
       ? $postTitleOptions["class"]
       : "";
+
+    $postTitleTag = isset($postTitleOptions["tag"])
+      ? $postTitleOptions["tag"]
+      : "span";
 
     $postTitleIsLink = isset($postTitleOptions["isLink"])
       ? $postTitleOptions["isLink"]
@@ -172,8 +176,7 @@ class PGBlockPostTitle
             '" ';
           $attrArr[$attr["id"]] = $attr["val"];
         }
-      }
-      ;
+      };
     }
 
     $post_title = get_the_title($post_ID);
@@ -213,6 +216,8 @@ class PGBlockPostTitle
       $customUrl = $utmUrl;
     }
 
+
+
     $obj["id"] = $post_ID;
     $obj["type"] = "post";
 
@@ -222,102 +227,98 @@ class PGBlockPostTitle
     $postfixText = parse_css_class($postfixText, $obj);
 
     ob_start();
-    ?>
+?>
 
 
-<?php if (!empty($wrapperTag)): ?>
+<<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php
+  echo esc_attr($wrapperClass); ?>">
 
-<<?php echo esc_attr($wrapperTag); ?> class="
-        <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($wrapperClass); ?>">
-  <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")): ?>
+  <?php // * prefix afterbegin
+      ?>
+
+  <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
   <span class="<?php echo esc_attr($prefixClass); ?>">
     <?php echo wp_kses_post($prefixText); ?>
   </span>
   <?php endif; ?>
 
 
-  <?php if ($postTitleIsLink): ?>
+  <?php if ($postTitleIsLink) : ?>
+
   <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo esc_url_raw($post_url); ?>"
     rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
-    <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")): ?>
+
+    <?php  // * prefix isLink true beforebegin 
+          ?>
+    <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
     <span class="<?php echo esc_attr($prefixClass); ?>">
       <?php echo wp_kses_post($prefixText); ?>
     </span>
     <?php endif; ?>
+
     <?php echo wp_kses_post($post_title); ?>
-    <?php if (!empty($postfixText) && ($postfixPosition == "afterend")): ?>
+
+
+    <?php  // * postfix isLink true afterend 
+          ?>
+    <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
     <span class="<?php echo esc_attr($postfixClass); ?>">
       <?php echo wp_kses_post($postfixText); ?>
     </span>
     <?php endif; ?>
+
   </a>
 
+  <?php else : ?>
 
-  <?php else: ?>
-  <?php echo wp_kses_post($post_title); ?>
+  <<?php echo esc_attr($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
+
+
+    <?php  // * prefix isLink true beforebegin 
+          ?>
+    <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
+    <span class="<?php echo esc_attr($prefixClass); ?>">
+      <?php echo wp_kses_post($prefixText); ?>
+    </span>
+    <?php endif; ?>
+
+    <?php echo wp_kses_post($post_title); ?>
+
+
+    <?php  // * postfix isLink true afterend 
+          ?>
+    <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
+    <span class="<?php echo esc_attr($postfixClass); ?>">
+      <?php echo wp_kses_post($postfixText); ?>
+    </span>
+    <?php endif; ?>
+
+
+  </<?php echo esc_attr($postTitleTag); ?>>
+
   <?php endif; ?>
 
-  <?php if (!empty($postfixText) && ($postfixPosition == "beforeend")): ?>
+
+  <?php  // * postfix isLink true beforeend 
+      ?>
+  <?php if (!empty($postfixText) && ($postfixPosition == "beforeend")) : ?>
   <span class="<?php echo esc_attr($postfixClass); ?>">
     <?php echo wp_kses_post($postfixText); ?>
   </span>
   <?php endif; ?>
-
-
 
 
 
 </<?php echo esc_attr($wrapperTag); ?>>
 
-<?php elseif (empty($wrapperTag)): ?>
-
-
-
-
-<?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")): ?>
-<span class="<?php echo esc_attr($prefixClass); ?>">
-  <?php echo wp_kses_post($prefixText); ?>
-</span>
-<?php endif; ?>
-<?php if ($postTitleIsLink): ?>
-<a class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($postTitleClass); ?>"
-  href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>"
-  target="<?php echo esc_attr($linkTarget); ?>"
-  <?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/echo $linkAttrStr; ?>>
-  <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")): ?>
-  <span class="<?php echo esc_attr($prefixClass); ?>">
-    <?php echo wp_kses_post($prefixText); ?>
-  </span>
-  <?php endif; ?>
-  <?php echo wp_kses_post($post_title); ?>
-  <?php if (!empty($postfixText) && ($postfixPosition == "afterend")): ?>
-  <span class="<?php echo esc_attr($postfixClass); ?>">
-    <?php echo wp_kses_post($postfixText); ?>
-  </span>
-  <?php endif; ?>
-</a>
-
-
-
-<?php else: ?>
-
-<?php echo wp_kses_post($post_title); ?>
-<?php endif; ?>
-<?php if (!empty($postfixText) && ($postfixPosition == "afterend")): ?>
-<span class="<?php echo esc_attr($postfixClass); ?>">
-  <?php echo wp_kses_post($postfixText); ?>
-</span>
 
 
 
 
 
 
-<?php endif; ?>
 
 
-<?php endif; ?>
 
 
 

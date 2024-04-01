@@ -6,7 +6,8 @@
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "parent": [
-    "post-grid/post-grid"
+    "post-grid/post-grid",
+    "post-grid/post-grid-filterable"
   ],
   "usesContext": [
     "post-grid/postGridId",

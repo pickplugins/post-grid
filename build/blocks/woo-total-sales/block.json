@@ -89,7 +89,7 @@
           "library": "fontAwesome",
           "srcType": "class",
           "iconSrc": "",
-          "position": "beforeSaleCount",
+          "position": "",
           "class": "saleCount-icon"
         },
         "styles": {

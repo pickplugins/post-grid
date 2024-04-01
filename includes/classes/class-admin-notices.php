@@ -22,7 +22,7 @@ class class_post_grid_notices
     $post_grid_notices = get_option('post_grid_notices', []);
     $is_hidden = isset($post_grid_notices['hide_notice_rebrand']) ? $post_grid_notices['hide_notice_rebrand'] : 'no';
 
-    //var_dump($post_grid_notices);
+    ////var_dump($post_grid_notices);
     //delete_option('post_grid_notices');
 
     $actionurl = admin_url() . '?hide_notice_rebrand=yes';
@@ -31,7 +31,7 @@ class class_post_grid_notices
     $nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '';
     $hide_notice_rebrand = isset($_REQUEST['hide_notice_rebrand']) ? sanitize_text_field($_REQUEST['hide_notice_rebrand']) : '';
 
-    //var_dump($hide_notice_rebrand);
+    ////var_dump($hide_notice_rebrand);
 
 
     if (wp_verify_nonce($nonce, 'hide_notice_rebrand') && $hide_notice_rebrand == 'yes') {
@@ -74,7 +74,7 @@ class class_post_grid_notices
 
     $screen = get_current_screen();
 
-    //var_dump($post_grid_notices);
+    ////var_dump($post_grid_notices);
 
     ob_start();
 
@@ -130,7 +130,7 @@ class class_post_grid_notices
     $post_grid_info = get_option('post_grid_info');
     $import_layouts = isset($post_grid_info['import_layouts']) ? $post_grid_info['import_layouts'] : '';
 
-    //var_dump($screen);
+    ////var_dump($screen);
 
 
     //delete_option('post_grid_info');

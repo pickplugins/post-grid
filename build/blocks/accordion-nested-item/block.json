@@ -29,7 +29,8 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "accordion-content"
+          "class": "accordion-content",
+          "overrideChild": true
         },
         "styles": {
           "backgroundColor": {
@@ -43,7 +44,8 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "accordion-header"
+          "class": "accordion-header",
+          "overrideChild": true
         },
         "styles": {
           "backgroundColor": {
@@ -61,7 +63,8 @@
         "options": {
           "text": "Accordion Header Text",
           "tag": "div",
-          "class": "accordion-header-label"
+          "class": "accordion-header-label",
+          "overrideChild": true
         },
         "styles": {
           "backgroundColor": {
@@ -76,7 +79,8 @@
         "options": {
           "position": "",
           "tag": "div",
-          "class": "accordion-header-counter"
+          "class": "accordion-header-counter",
+          "overrideChild": true
         },
         "styles": {}
       }
@@ -90,7 +94,8 @@
           "iconSrc": "",
           "position": "",
           "enable": false,
-          "class": ""
+          "class": "",
+          "overrideChild": true
         },
         "styles": {}
       }
@@ -103,7 +108,8 @@
           "srcType": "class",
           "iconSrc": "",
           "position": "",
-          "class": "accordion-icon"
+          "class": "accordion-icon",
+          "overrideChild": true
         },
         "styles": {}
       }

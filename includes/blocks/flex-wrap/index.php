@@ -9,31 +9,19 @@ class PGBlockFlexWrap
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
-		add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+		//add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
 	}
 
 
 	function front_scripts($attributes)
 	{
-		wp_register_script('pgflex-wrap_front_script', post_grid_plugin_url . 'includes/blocks/flex-wrap/front-scripts.js', [], '', true);
 
 		if (has_block('post-grid/flex-wrap')) {
-
-			wp_enqueue_style('jquery-ui');
-
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-ui-core');
-			wp_enqueue_script('jquery-ui-accordion');
-			wp_enqueue_script('jquery-effects-core');
-
-			wp_enqueue_script('pgflex-wrap_front_script');
 		}
 	}
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
-		//wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/layers/index.css');
-		//wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
 		register_block_type(
@@ -97,14 +85,13 @@ class PGBlockFlexWrap
 
 
 
-		?>
-										<div
-											class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
-											<?php echo $content ?>
-										</div>
-										<?php
+?>
+		<div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
+			<?php echo $content ?>
+		</div>
+<?php
 
-										return ob_get_clean();
+		return ob_get_clean();
 	}
 }
 

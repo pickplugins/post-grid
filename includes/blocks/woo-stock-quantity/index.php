@@ -47,7 +47,7 @@ class PGBlockWooStockQuantity
     {
 
 
-        global $postGridCss;
+
 
         global $postGridCssY;
 
@@ -70,6 +70,7 @@ class PGBlockWooStockQuantity
         $skuOptions = isset($sku['options']) ? $sku['options'] : [];
 
 
+        $skuTag = isset($skuOptions['tag']) ? $skuOptions['tag'] : 'span';
         $skuLinkTarget = isset($skuOptions['linkTarget']) ? $skuOptions['linkTarget'] : '_blank';
         $skuCustomUrl = isset($skuOptions['customUrl']) ? $skuOptions['customUrl'] : '';
         $skuLinkAttr = isset($skuOptions['linkAttr']) ? $skuOptions['linkAttr'] : [];
@@ -167,7 +168,7 @@ class PGBlockWooStockQuantity
             $linkUrl = get_the_author_link($author_id);
         } else if ($skuLinkTo == 'homeUrl') {
             $linkUrl = get_bloginfo('url');
-        } else if ($skuLinkTo == 'custom') {
+        } else if ($skuLinkTo == 'customUrl') {
             $linkUrl = $customUrl;
         }
 
@@ -187,141 +188,137 @@ class PGBlockWooStockQuantity
         ob_start();
 
 
-        if (!empty($wrapperTag)):
+        if (!empty($wrapperTag)) :
 
-            ?>
-                                    <<?php echo esc_attr($wrapperTag); ?> class="
+?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
                                         <?php echo esc_attr($blockId); ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
 
-                                        <?php if ($iconPosition == 'beforePrefix'): ?>
-                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
+                <?php if ($iconPosition == 'beforePrefix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                                        <?php if ($prefixText): ?>
-                                                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                                                        <?php echo wp_kses_post($prefixText); ?>
-                                                    </span>
-                                        <?php endif; ?>
+                <?php if ($prefixText) : ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
+                <?php endif; ?>
 
-                                        <?php if ($iconPosition == 'afterPrefix'): ?>
-                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
+                <?php if ($iconPosition == 'afterPrefix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                                        <?php if (!empty($skuLinkTo)):
+                <?php if (!empty($skuLinkTo)) :
 
-                                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                            ?>
-                                                    <a class='stockQuantity-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>"
-                                                        rel="<?php echo esc_attr($skuRel); ?>"
-                                                        href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-                                                        <?php if ($iconPosition == 'beforeQuantity'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                        <?php endif; ?>
-                                                        <?php echo wp_kses_post($productStockQuantity); ?>
-                                                        <?php if ($iconPosition == 'afterQuantity'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                        <?php endif; ?>
-                                                    </a>
+                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                ?>
+                    <<?php echo esc_attr($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                        <?php if ($iconPosition == 'beforeQuantity') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($productStockQuantity); ?>
+                        <?php if ($iconPosition == 'afterQuantity') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </<?php echo esc_attr($skuTag); ?>>
 
-                                        <?php else:
-                                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                            ?>
+                <?php else :
+                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                ?>
 
-                                                    <span class='stockQuantity-text' <?php echo ($linkAttrStrsku); ?>>
-                                                        <?php if ($iconPosition == 'beforeQuantity'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                        <?php endif; ?>
-                                                        <?php echo wp_kses_post($productStockQuantity); ?>
-                                                        <?php if ($iconPosition == 'afterQuantity'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                        <?php endif; ?>
-                                                    </span>
+                    <<?php echo esc_attr($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?>>
+                        <?php if ($iconPosition == 'beforeQuantity') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($productStockQuantity); ?>
+                        <?php if ($iconPosition == 'afterQuantity') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </<?php echo esc_attr($skuTag); ?>>
 
 
-                                        <?php endif; ?>
+                <?php endif; ?>
 
 
 
 
 
 
-                                        <?php if ($iconPosition == 'beforePostfix'): ?>
-                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                        <?php if ($postfixText): ?>
-                                                    <span class="<?php echo $postfixClass; ?>">
-                                                        <?php echo $postfixText; ?>
-                                                    </span>
-                                        <?php endif; ?>
+                <?php if ($iconPosition == 'beforePostfix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+                <?php if ($postfixText) : ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
+                <?php endif; ?>
 
-                                        <?php if ($iconPosition == 'afterPostfix'): ?>
-                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
+                <?php if ($iconPosition == 'afterPostfix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                                    </<?php echo esc_attr($wrapperTag); ?>>
-                                    <?php
+            </<?php echo esc_attr($wrapperTag); ?>>
+        <?php
 
         endif;
 
-        if (empty($wrapperTag)):
+        if (empty($wrapperTag)) :
 
+        ?>
+            <?php if ($iconPosition == 'beforePrefix') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($prefixText) : ?>
+                <span class="<?php echo esc_attr($prefixClass); ?>">
+                    <?php echo $prefixText; ?>
+                </span>
+            <?php endif; ?>
+
+            <?php if ($iconPosition == 'afterPrefix') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
+            <?php if (!empty($skuLinkTo)) :
+                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
             ?>
-                                    <?php if ($iconPosition == 'beforePrefix'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                    <?php endif; ?>
-                                    <?php if ($prefixText): ?>
-                                                <span class="<?php echo esc_attr($prefixClass); ?>">
-                                                    <?php echo $prefixText; ?>
-                                                </span>
-                                    <?php endif; ?>
 
-                                    <?php if ($iconPosition == 'afterPrefix'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                    <?php endif; ?>
-
-                                    <?php if (!empty($skuLinkTo)):
-                                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                        ?>
-
-                                                <a class='stockQuantity-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>"
-                                                    rel="<?php echo esc_attr($skuRel); ?>"
-                                                    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-                                                    <?php if ($iconPosition == 'beforeQuantity'): ?>
-                                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
-                                                    <?php echo wp_kses_post($productStockQuantity); ?>C
-                                                    <?php if ($iconPosition == 'afterQuantity'): ?>
-                                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
-                                                </a>
-                                    <?php else: ?>
-                                                <?php if ($iconPosition == 'beforeQuantity'): ?>
-                                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                                <?php endif; ?>
-                                                <span class='stockQuantity-text'>
-                                                    <?php echo wp_kses_post($productStockQuantity); ?>
-                                                </span>
-                                                <?php if ($iconPosition == 'afterQuantity'): ?>
-                                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                                <?php endif; ?>
-                                    <?php endif; ?>
+                <<?php echo esc_attr($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                    <?php if ($iconPosition == 'beforeQuantity') : ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+                    <?php echo wp_kses_post($productStockQuantity); ?>C
+                    <?php if ($iconPosition == 'afterQuantity') : ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+                </<?php echo esc_attr($skuTag); ?>>
+            <?php else : ?>
+                <?php if ($iconPosition == 'beforeQuantity') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+                <<?php echo esc_attr($skuTag); ?> class='stockQuantity'>
+                    <?php echo wp_kses_post($productStockQuantity); ?>
+                </<?php echo esc_attr($skuTag); ?>>
+                <?php if ($iconPosition == 'afterQuantity') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+            <?php endif; ?>
 
 
 
-                                    <?php if ($iconPosition == 'beforePostfix'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                    <?php endif; ?>
-                                    <?php if ($postfixText): ?>
-                                                <span class="<?php echo $postfixClass; ?>">
-                                                    <?php echo $postfixText; ?>
-                                                </span>
-                                    <?php endif; ?>
-                                    <?php if ($iconPosition == 'afterPostfix'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                    <?php endif; ?>
-                                <?php
+            <?php if ($iconPosition == 'beforePostfix') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($postfixText) : ?>
+                <span class="<?php echo $postfixClass; ?>">
+                    <?php echo $postfixText; ?>
+                </span>
+            <?php endif; ?>
+            <?php if ($iconPosition == 'afterPostfix') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+        <?php
 
         endif;
 
@@ -335,7 +332,7 @@ class PGBlockWooStockQuantity
 
 
 
-                        <?php return ob_get_clean();
+<?php return ob_get_clean();
     }
 }
 

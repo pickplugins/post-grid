@@ -375,7 +375,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
                             $terms_relation = isset($taxonomies[$taxonomy]['terms_relation']) ? $taxonomies[$taxonomy]['terms_relation'] : 'IN';
                             $terms = isset($taxonomies[$taxonomy]['terms']) ? $taxonomies[$taxonomy]['terms'] : array();
                             $checked = isset($taxonomies[$taxonomy]['checked']) ? $taxonomies[$taxonomy]['checked'] : '';
-                            //var_dump($terms_relation);
+                            ////var_dump($terms_relation);
                             $taxonomy_terms = get_terms($taxonomy, array(
                                 'hide_empty' => false,
                             ));
@@ -644,7 +644,7 @@ add_action('post_grid_metabox_tabs_content_layouts', 'post_grid_metabox_tabs_con
 function post_grid_metabox_tabs_content_layouts($tab, $post_id)
 {
 
-    //var_dump($post_id);
+    ////var_dump($post_id);
     $settings_tabs_field = new settings_tabs_field();
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
     $layout_id = !empty($post_grid_meta_options['layout_id']) ? $post_grid_meta_options['layout_id'] : ''; //post_grid_get_first_post('post_grid_layout')
@@ -652,7 +652,7 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
     $post_grid_info = get_option('post_grid_info');
     $import_layouts = isset($post_grid_info['import_layouts']) ? $post_grid_info['import_layouts'] : '';
 
-    //var_dump($import_layouts);
+    ////var_dump($import_layouts);
 
 ?>
     <div class="section">
@@ -865,7 +865,7 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
 
                         //  $layout = $class_post_grid_functions->layout_content($layout_content);
 
-                        //var_dump($layout);
+                        ////var_dump($layout);
 
                         foreach ($layout as $item_key => $item_info) {
 
@@ -2290,13 +2290,13 @@ function post_grid_update_taxonomies_terms_by_posttypes()
                 $terms_relation = isset($taxonomies[$taxonomy]['terms_relation']) ? $taxonomies[$taxonomy]['terms_relation'] : 'IN';
                 $terms = isset($taxonomies[$taxonomy]['terms']) ? $taxonomies[$taxonomy]['terms'] : array();
                 $checked = isset($taxonomies[$taxonomy]['checked']) ? $taxonomies[$taxonomy]['checked'] : '';
-                //var_dump($terms_relation);
+                ////var_dump($terms_relation);
                 $taxonomy_terms = get_terms($taxonomy, array(
                     'hide_empty' => false,
                 ));
 
 
-                //var_dump($taxonomy_terms);
+                ////var_dump($taxonomy_terms);
 
                 if (!empty($taxonomy_terms))
                     foreach ($taxonomy_terms as $taxonomy_term) {

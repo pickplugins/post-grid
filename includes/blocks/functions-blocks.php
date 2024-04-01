@@ -11,12 +11,6 @@ register_meta('post', 'pgc_meta', [
 
 
 
-
-
-
-
-
-
 function parse_css_class($classStr, $obj)
 {
 
@@ -790,63 +784,62 @@ function post_grid_parse_query_terms($queryArgs)
     $val = isset($item['val']) ? $item['val'] : '';
 
 
-    if ($val) {
-      if ($id == 'taxonomy') {
-        $query_args['taxonomy'] = $val;
-      } elseif ($id == 'orderby') {
-        $query_args['orderby'] = $val;
-      } elseif ($id == 'order') {
-        $query_args['order'] = $val;
-      } elseif ($id == 'hide_empty') {
-        $query_args['hide_empty'] = $val;
-      } elseif ($id == 'include') {
-        $query_args['include'] =
-          !empty($val) ? explode(',', $val) : [];
-      } elseif ($id == 'exclude') {
-        $query_args['exclude'] =
-          !empty($val) ? explode(',', $val) : [];
-      } elseif ($id == 'exclude_tree') {
-        $query_args['exclude_tree'] =
-          !empty($val) ? explode(',', $val) : [];
-      } elseif ($id == 'number') {
-        $query_args['number'] = $val;
-      } elseif ($id == 'count') {
-        $query_args['count'] = $val;
-      } elseif ($id == 'offset') {
-        $query_args['offset'] = $val;
-      } elseif ($id == 'name') {
-        $query_args['name'] =
-          !empty($val) ? explode(',', $val) : [];
-      } elseif ($id == 'slug') {
-        $query_args['slug'] =
-          !empty($val) ? explode(',', $val) : [];
-      } elseif ($id == 'hierarchical') {
-        $query_args['hierarchical'] = $val;
-      } elseif ($id == 'search') {
-        $query_args['search'] = $val;
-      } elseif ($id == 'name__like') {
-        $query_args['name__like'] = $val;
-      } elseif ($id == 'description__like') {
-        $query_args['description__like'] = $val;
-      } elseif ($id == 'pad_counts') {
-        $query_args['pad_counts'] = $val;
-      } elseif ($id == 'get') {
-        $query_args['get'] = $val;
-      } elseif ($id == 'parent') {
-        $query_args['parent'] = $val;
-      } elseif ($id == 'childless') {
-        $query_args['childless'] = $val;
-      } elseif ($id == 'child_of') {
-        $query_args['child_of'] = $val;
-      } elseif ($id == 'cache_domain') {
-        $query_args['cache_domain'] = $val;
-      } elseif ($id == 'update_term_meta_cache') {
-        $query_args['update_term_meta_cache'] = $val;
-      } elseif ($id == 'meta_key') {
-        $query_args['meta_key'] = $val;
-      } elseif ($id == 'meta_value') {
-        $query_args['meta_value'] = $val;
-      }
+
+    if ($id == 'taxonomy') {
+      $query_args['taxonomy'] = $val;
+    } elseif ($id == 'orderby') {
+      $query_args['orderby'] = $val;
+    } elseif ($id == 'order') {
+      $query_args['order'] = $val;
+    } elseif ($id == 'hide_empty') {
+      $query_args['hide_empty'] = $val;
+    } elseif ($id == 'include') {
+      $query_args['include'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'exclude') {
+      $query_args['exclude'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'exclude_tree') {
+      $query_args['exclude_tree'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'number') {
+      $query_args['number'] = $val;
+    } elseif ($id == 'count') {
+      $query_args['count'] = $val;
+    } elseif ($id == 'offset') {
+      $query_args['offset'] = $val;
+    } elseif ($id == 'name') {
+      $query_args['name'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'slug') {
+      $query_args['slug'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'hierarchical') {
+      $query_args['hierarchical'] = $val;
+    } elseif ($id == 'search') {
+      $query_args['search'] = $val;
+    } elseif ($id == 'name__like') {
+      $query_args['name__like'] = $val;
+    } elseif ($id == 'description__like') {
+      $query_args['description__like'] = $val;
+    } elseif ($id == 'pad_counts') {
+      $query_args['pad_counts'] = $val;
+    } elseif ($id == 'get') {
+      $query_args['get'] = $val;
+    } elseif ($id == 'parent') {
+      $query_args['parent'] = $val;
+    } elseif ($id == 'childless') {
+      $query_args['childless'] = $val;
+    } elseif ($id == 'child_of') {
+      $query_args['child_of'] = $val;
+    } elseif ($id == 'cache_domain') {
+      $query_args['cache_domain'] = $val;
+    } elseif ($id == 'update_term_meta_cache') {
+      $query_args['update_term_meta_cache'] = $val;
+    } elseif ($id == 'meta_key') {
+      $query_args['meta_key'] = $val;
+    } elseif ($id == 'meta_value') {
+      $query_args['meta_value'] = $val;
     }
   }
 
@@ -1374,7 +1367,7 @@ function post_grid_global_cssY()
 
                   if (is_string($val)) {
                     $reponsiveCssGroups[$device][$selector][$att] = str_replace("u0022", '"', $val);
-                    //var_dump($val);
+                    ////var_dump($val);
                   }
                 }
             }
@@ -1505,7 +1498,7 @@ function post_grid_global_cssY()
 
   if (!empty($fonts)) {
   ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
   <?php
 
   }
@@ -1792,7 +1785,7 @@ function pgb_post_query_prams($query_args, $prams)
     $post_status = isset($_GET["post_status"]) ? sanitize_text_field($_GET["post_status"]) : [];
     $posts_per_page = isset($_GET["posts_per_page"]) ? sanitize_text_field($_GET["posts_per_page"]) : "";
 
-    //var_dump($post_status);
+    ////var_dump($post_status);
 
 
     if (!empty($keyword)) {

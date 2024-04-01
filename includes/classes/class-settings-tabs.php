@@ -454,7 +454,7 @@ if (!class_exists('settings_tabs_field')) {
                 <div class="media-preview-wrap" style="width: 150px;margin-bottom: 10px;background: #eee;padding: 5px;    text-align: center;word-break: break-all;">
                     <?php
 
-                    //var_dump($media_type);
+                    ////var_dump($media_type);
 
                     if ("audio/mpeg" == $media_type) {
                     ?>
@@ -680,7 +680,7 @@ if (!class_exists('settings_tabs_field')) {
                         foreach ($values as $index => $val) :
                             $title_field_val = !empty($val[$title_field]) ? $val[$title_field] : '#' . $count;
 
-                            //var_dump($index);
+                            ////var_dump($index);
 
                     ?>
                             <div class="item-wrap <?php if ($collapsible) echo 'collapsible'; ?>" index="<?php echo esc_attr($index); ?>">
@@ -704,7 +704,7 @@ if (!class_exists('settings_tabs_field')) {
                                     $fieldId = $field['id'];
                                     $field_css_id = isset($field['css_id']) ? str_replace('TIMEINDEX', $index, $field['css_id']) : '';
 
-                                    //var_dump($field_css_id);
+                                    ////var_dump($field_css_id);
 
                                     $title_field_class = ($title_field == $field_index) ? 'title-field' : '';
                                 ?>
@@ -852,7 +852,7 @@ if (!class_exists('settings_tabs_field')) {
             $pro_text             = isset($option['pro_text']) ? $option['pro_text'] : '';
 
 
-            //var_dump($css_id);
+            ////var_dump($css_id);
 
             if ($multiple) {
                 $value     = isset($option['value']) ? $option['value'] : array();
@@ -1606,7 +1606,7 @@ if (!class_exists('settings_tabs_field')) {
 
             $field_name = !empty($parent) ? $parent . '[' . $id . ']' : $id;
 
-            //var_dump($option_value);
+            ////var_dump($option_value);
 
             $option_value = empty($option_value) ? $default : $option_value;
 
@@ -1627,7 +1627,7 @@ if (!class_exists('settings_tabs_field')) {
 
                     $checked = ($key == $option_value) ? "checked" : "";
 
-                    //var_dump($checked);
+                    ////var_dump($checked);
 
                 ?>
                     <label style="width: <?php echo esc_attr($width); ?>;" title="<?php echo esc_attr($name); ?>" data-value="<?php echo esc_attr($key); ?>" class="<?php if ($checked == 'checked') echo 'active'; ?> <?php if ($disabled == true) echo 'disabled'; ?>">

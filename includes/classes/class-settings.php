@@ -54,6 +54,7 @@ class class_post_grid_settings
 
         add_submenu_page('post-grid', __('Settings', 'post-grid'), __('Settings', 'post-grid'), 'manage_options', 'post-grid-settings', array($this, 'settings'), 80);
         add_submenu_page('post-grid', __('Dashboard', 'post-grid'), __('Dashboard', 'post-grid'), 'manage_options', 'post-grid-dashboard', array($this, 'dashboard'), 80);
+        add_submenu_page('post-grid', __('Overview', 'post-grid'), __('Overview', 'post-grid'), 'manage_options', 'post-grid-overview', array($this, 'overview'), 80);
 
 
         if ($data_update_status == 'pending') :
@@ -63,7 +64,7 @@ class class_post_grid_settings
         endif;
     }
 
-    public function post_grid()
+    public function overview()
     {
         include(post_grid_plugin_dir . 'includes/menu/overview.php');
     }

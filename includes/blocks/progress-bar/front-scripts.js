@@ -24,6 +24,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var duration = progressBarArgsObj.duration;
 			var animate = progressBarArgsObj.animate;
 			var type = progressBarArgsObj.type;
+			var source = progressBarArgsObj.source;
+
+			// if (source.length > 0) {
+			// 	end = saleCount;
+			// } else {
+			// 	end = endX;
+			// }
 
 			var wrapHandle = "." + blockId + " .progress-fill";
 

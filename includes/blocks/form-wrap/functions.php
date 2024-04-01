@@ -1450,7 +1450,7 @@ function form_wrap_process_send_email($email_data)
     $headers = apply_filters('post_grid_mail_headers', $headers);
 
 
-    ////var_dump($headers);
+    //////var_dump($headers);
 
     $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 

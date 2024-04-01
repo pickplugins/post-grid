@@ -2,6 +2,7 @@
 if (!defined('ABSPATH')) exit;  // if direct access
 
 wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
+wp_enqueue_style('font-awesome-5');
 $admin_email = get_option('admin_email');
 
 
@@ -11,971 +12,507 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
 
 ?>
-<div class="wrap">
-  <div class="p-5 bg-white ">
-    <div class="grid grid-cols-12 gap-3">
-      <div class="col-span-6 ">
+<div class="wrap pg-overview font-lato text-color bg-[linear-gradient(101deg,_rgba(238,_255,_251,_0.83)_0%,_rgba(235,_235,_235,_0.44)_50%,_rgb(255,_253,_238)_100%)]
+   ">
 
-        <div class="text-[40px] font-black flex text-indigo-600 items-center ">
 
-          <div class="mr-5">
-            <svg width="50" height="50" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M267.846 117.688C267.846 114.926 270.085 112.688 272.846 112.688H450C452.761 112.688 455 114.926 455 117.688V144.205C455 146.967 452.761 149.205 450 149.205H272.846C270.085 149.205 267.846 146.967 267.846 144.205V117.688Z" fill="#4f46e5" />
-              <path d="M267.846 194.375C267.846 191.614 270.085 189.375 272.846 189.375H450C452.761 189.375 455 191.614 455 194.375V220.893C455 223.654 452.761 225.893 450 225.893H272.846C270.085 225.893 267.846 223.654 267.846 220.893V194.375Z" fill="#4f46e5" />
-              <path d="M267.846 41C267.846 38.2386 270.085 36 272.846 36H450C452.761 36 455 38.2386 455 41V67.5179C455 70.2793 452.761 72.5179 450 72.5179H272.846C270.085 72.5179 267.846 70.2793 267.846 67.5179V41Z" fill="#4f46e5" />
-              <rect x="66" y="56" width="149.893" height="149.893" stroke="#4f46e5" stroke-width="40" />
-              <path d="M233.154 383.355C233.154 386.116 230.915 388.355 228.154 388.355L51 388.355C48.2386 388.355 46 386.116 46 383.355L46 356.837C46 354.076 48.2386 351.837 51 351.837L228.154 351.837C230.915 351.837 233.154 354.076 233.154 356.837L233.154 383.355Z" fill="#4f46e5" />
-              <path d="M233.154 306.667C233.154 309.429 230.915 311.667 228.154 311.667L51 311.667C48.2386 311.667 46 309.429 46 306.667L46 280.15C46 277.388 48.2386 275.15 51 275.15L228.154 275.15C230.915 275.15 233.154 277.388 233.154 280.15L233.154 306.667Z" fill="#4f46e5" />
-              <path d="M233.154 460.042C233.154 462.804 230.915 465.042 228.154 465.042L51 465.042C48.2386 465.042 46 462.804 46 460.042L46 433.525C46 430.763 48.2386 428.525 51 428.525L228.154 428.525C230.915 428.525 233.154 430.763 233.154 433.525L233.154 460.042Z" fill="#4f46e5" />
-              <rect x="435" y="445.042" width="149.893" height="149.893" transform="rotate(-180 435 445.042)" stroke="#4f46e5" stroke-width="40" />
-            </svg>
 
+
+  <div class="text-center w-full">
+    <h2 class=" text-color font-lato lg:!text-5xl md:!text-4xl !text-3xl !font-bold tracking-[2.5px] text-center w-full max-w-[900px] !mx-auto !py-6 md:!py-10 lg:!py-12  ">
+      50+ Blocks Available to Create Next Level Landing Pages</h2>
+  </div>
+  <div class=" grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 w-full max-w-[1200px] mx-auto ">
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group " href="https://comboblocks.com/blocks/post-grid?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-post-grid-150x150.png" alt="Post Grid">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Post Grid</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/content-slider?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-content-slider-1-150x150.png" alt="Content Slider">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Content Slider</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/form-maker/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-form-wrap.png" alt="Form Maker">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Form Maker</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/popup-maker/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-pop-up.png" alt="Popup Maker">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Popup Maker</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/breadcrumb/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-breadcrumb-1.png" alt="Breadcrumb">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Breadcrumb</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/masonry-grid/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-mesonry-wrap.png" alt="Masonry Grid">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Masonry Grid</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/progressbar/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-progressbar.png" alt="Progress Bar">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Progress Bar</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/accordion/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/11/Accordion-150x106.png" alt="Accordion">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Accordion</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/image-gallery/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/11/Image-Gallery-150x138.png" alt="Image Gallery">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Image Gallery</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/woo-product-price/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-product-price-150x138.png" alt="Product Price">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Product Price</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/woo-product-info/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-product-info-150x138.png" alt="Product Info">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Product Info</div>
+    </a>
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/woo-product-ratings?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+      <span class=" w-12 mx-auto ">
+        <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-product-rating-150x138.png" alt="Product Rate">
+      </span>
+      <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
+        Product Rate</div>
+    </a>
+  </div>
+
+
+
+
+  <div class="pt-7 md:pt-14 lg:pt-20 pb-10 w-full text-center">
+    <a class=" !text-white text-2xl font-lato font-bold tracking-[1.2px] px-8 py-[10px] rounded-md inline-block bg-[linear-gradient(90deg,_rgb(252,_127,_100)_0%,_rgb(255,_157,_66)_100%)] no-underline " href="https://comboblocks.com/blocks/?utm_source=overview&utm_medium=SeeAllBlocks&utm_id=comboBlocksUser"><span class="!text-white">See All Blocks</span></a>
+  </div>
+
+
+  <div class="bg-[#eef8ffd4] py-8 md:py-14 lg:py-20">
+
+    <div class="w-full text-center">
+      <h2 class="text-color my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Ready
+        Design Library</h2>
+      <p class="text-color font-lato text-lg md:text-xl max-w-[600px] mx-auto">Design library will save your time and
+        increase
+        productivity up to 200% and deliver quick result.</p>
+    </div>
+
+    <div class="mt-8 md:mt-14 lg:mt-20">
+
+      <div class="flex flex-col gap-12 ">
+
+
+        <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden ">
+          <div class="flex-1 pl-5 flex flex-col gap-5 pb-7 ">
+            <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px] ">Post Layouts
+              Library</h4>
+            <p class="text-lg md:text-xl  ">Our post layouts library is now the master of creating any type of archive
+              pages and
+              post grid.</p>
+            <a href="https://comboblocks.com/server/post-layouts/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  ">
+              <i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See Post
+                Layouts</span></a>
           </div>
-
-          <div>
-            Combo Blcoks - <?php echo post_grid_version; ?>
+          <div class="w-full md:w-[60%] p-5 bg-white ">
+            <img src="https://comboblocks.com/wp-content/uploads/2023/11/post-layouts.png" alt="Post Layouts Library" srcset="">
           </div>
         </div>
 
-        <p class="text-lg">Welcome to <span class="font-bold">Combo Blcoks</span>, We have started diving with
-          Gutenberg.</p>
 
 
-      </div>
-      <div class="col-span-6 text-right">
-
-        <a target="_blank" href="https://pickplugins.com/create-support-ticket/" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Contact
-          Support</a>
-        <a target="_blank" href="https://comboblocks.com/documentations/" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Documentations</a>
-
-
-
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-  <div class=" my-10 container mx-auto">
-    <div class="grid grid-cols-12 max-w-6xl gap-10 mx-auto">
-      <div class="col-span-8 bg-white">
-
-        <div class="p-5">
-
-
-          <iframe width="100%" height="415" src="https://www.youtube.com/embed/EpRVcnkRfG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-          <div class="text-center">
-
-            <a target="_blank" href="https://comboblocks.com/" class="inline-block mt-5 px-6 py-1 rounded-sm  text-center border-4 border-indigo-600 hover:border-indigo-400	 text-gray-600  text-lg mx-2  ">Live
-              Demo</a>
-            <a target="_blank" href="https://pickplugins.com/post-grid/" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-600	hover:bg-indigo-400 text-white text-lg mx-2 hover:text-white ">Plugin
-              Details</a>
-
+        <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
+          <div class="w-full md:w-[60%] p-5 bg-white ">
+            <img src="https://comboblocks.com/wp-content/uploads/2023/12/css-library.png" alt="CSS Library" srcset="">
           </div>
-
-
-        </div>
-      </div>
-      <div class="col-span-4 bg-white">
-
-        <div class="p-5 text-lg">
-
-
-
-          <h3 class="text-2xl mb-5 font-bold text-gray-600"><span class="text-4xl mr-3 dashicons dashicons-megaphone"></span> Why Post Grid?</h3>
-          <ul class="	">
-
-
-            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Most Advance Query Builder</li>
-            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Ready Post Query Presets
-              <span class="text-rose-700 font-bold">[Pro]</span>
-            </li>
-            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Ready Post Layouts
-            </li>
-            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Archive Post Query
-              <span class="text-rose-700 font-bold">[Pro]</span>
-
-            </li>
-            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Advance Grid Layout Builder </li>
-            <li><span class="dashicons dashicons-yes-alt align-middle"></span> Advance Grid Layout Presets <span class="text-rose-700 font-bold">[Pro]</span></li>
-
-            <li><span class="dashicons dashicons-format-status align-middle"></span> More Blocks Comming... </li>
-
-          </ul>
-
-          <?php if ($license_status != 'active') : ?>
-            <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-amber-500 hover:bg-amber-600	cursor-pointer	 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Purchase License</a>
-          <?php else : ?>
-            <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-green-500 hover:bg-green-600	cursor-pointer	 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Thanks for using pro version</a>
-          <?php endif; ?>
-
-
-        </div>
-
-      </div>
-
-
-
-    </div>
-
-  </div>
-
-
-
-  <div class="p-5 ">
-
-
-    <div class="p-5 max-w-6xl mx-auto my-10">
-      <h2 class=" text-center text-3xl font-bold">Available Gutenberg Blocks</h2>
-    </div>
-
-    <div class="grid grid-cols-12 gap-3 max-w-6xl mx-auto text-center">
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Title
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Excerpt
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Author
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Author Fields
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Featured Image
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Image
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Categories
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Tags
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Terms
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Date
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Read More
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Advance Text
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Grid
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-        </div>
-      </div>
-
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            List Items
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Icons
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Layers
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Accordion
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Tabs
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Grid - Filterable
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
-
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Post Carusel
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-orange-400 px-3 py-1 text-white">Comming soon</span>
-
-        </div>
-      </div>
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Category Grid
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-orange-400 px-3 py-1 text-white">Comming soon</span>
-
-        </div>
-      </div>
-      <div class="col-span-4 bg-white">
-        <div class="p-5 relative">
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            Category Carusel
-          </h3>
-          <span class="absolute bottom-0 right-0 bg-orange-400 px-3 py-1 text-white">Comming soon</span>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class=" my-10 container mx-auto">
-    <div class="grid grid-cols-12 max-w-6xl mx-auto items-center">
-      <div class="col-span-6 bg-white ">
-
-        <img src="https://comboblocks.com/wp-content/uploads/2022/11/Post-Layout-Library.png" alt="">
-
-      </div>
-
-      <div class="col-span-6 bg-white">
-
-        <div class="p-5 py-20">
-
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-            <span class="text-4xl mr-3 dashicons dashicons-welcome-widgets-menus"></span> Post Layout Library
-          </h3>
-          <p class="text-[16px]">We create ready post layout templates for you. so that you don't have to wast time for
-            creating complex and advance layout by own. Our designer and developer team continuesly sketch, build new
-            layouts everyday, just take a search and pick the best templates that you need.</p>
-          <a target="_blank" href="https://comboblocks.com/post-layouts" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Layouts Library</a>
-
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-  <div class=" my-10 container mx-auto">
-    <div class="grid grid-cols-12 max-w-6xl mx-auto items-center">
-
-
-      <div class="col-span-6 bg-white">
-
-        <div class="p-5 py-20">
-
-          <h3 class="text-3xl mb-5 font-bold text-gray-600">
-
-            <span class="text-4xl mr-3 dashicons dashicons-images-alt  "></span> Complex Grid Layout Presets
-          </h3>
-
-          <p class="text-[16px]">Our Post Grid plugin is master for creating advance and complex layout for grid. We use
-            most advantage for grid CSS to build beautifull and complex grid layout, Hope it will save your time and
-            help you to create post grid quickly.</p>
-
-
-          <a target="_blank" href="https://comboblocks.com/grid-layouts" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Grid Layout Presets</a>
-
-        </div>
-      </div>
-      <div class="col-span-6 bg-white">
-
-        <img src="https://comboblocks.com/wp-content/uploads/2022/11/Complex-Grid-Layout-Presets.png" alt="">
-
-      </div>
-
-    </div>
-  </div>
-  <div class=" my-10 container mx-auto">
-    <div class="grid grid-cols-12 gap-4 max-w-6xl mx-auto">
-
-
-
-
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            Advance Query Arguments
-          </h3>
-          <p class="text-[16px]">We have provided all support for WP_Query Class query arguments, you don't have to code
-            your own, just choose query arguments from drop down and set your options values and your post will be
-            displyed for your desired post query arguments.</p>
-
-          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
-            Documentations</a>
-        </div>
-
-      </div>
-
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            Advance Paginations
-          </h3>
-          <p class="text-[16px]">We provide 5 different type of pagination, you can choose as you need, there is normal
-            pagination, Ajax Pagination, Next Previous Button, Load More and infinite loading.</p>
-
-          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
-            Documentations</a>
-        </div>
-
-      </div>
-
-
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            Advance Post Search
-          </h3>
-          <p class="text-[16px]">Our post grid also support for search query arguments, there is default search form
-            avilable on top of post grid, you can customize or override the form input fields as your need.</p>
-
-          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
-            Documentations</a>
-        </div>
-
-      </div>
-
-
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            Taxonomy & Terms Query
-          </h3>
-          <p class="text-[16px]">By advance post query arguments you can query post by custom taxonomies & terms. you
-            can also provide multiple taxonomies & terms with complex relations.</p>
-
-          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
-            Documentations</a>
-        </div>
-
-      </div>
-
-
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            Custom Fields Query
-          </h3>
-          <p class="text-[16px]">By advance post query arguments you can query post by custom fields or meta field
-            query. you can also provide multiple meta key value with complex relations.</p>
-
-          <a target="_blank" href="" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
-            Documentations</a>
-        </div>
-
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-  </div>
-
-
-  <div class=" my-10 container mx-auto">
-
-    <div class="grid grid-cols-12 gap-4 max-w-6xl mx-auto">
-      <div class="col-span-12  ">
-
-        <div class="p-5 ">
-          <h2 class="mx-auto text-center text-3xl font-bold">3rd Party Plugins Support</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-12 gap-4 max-w-6xl mx-auto my-10">
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            WooCommerce Support
-          </h3>
-          <p class="text-[16px]">We have provided many support to display custom post types like WooCommerce product and
-            there is layout block avilable to display various WooCommerce elements.</p>
-
-
-        </div>
-      </div>
-
-
-
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            Advanced Custom Fields(ACF) Support
-          </h3>
-          <p class="text-[16px]">Advanced Custom Fields is #1 custom fields plugin for WordPress and we added full
-            support to display following meta fields for any post types.</p>
-
-
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            Easy Digital Download(EDD) Support
-
-          </h3>
-          <p class="text-[16px]">Easy Digital Download is another best eCommerce for digital products and we provide
-            full support to display following elements for downloads on the post grid.</p>
-
-
-        </div>
-      </div>
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-
-            CMB2
-
-          </h3>
-          <p class="text-[16px]">CMB2 is another best custom field’s plugin for WordPress and we added full support to
-            display following meta fields for any post types.</p>
-
-
-        </div>
-      </div>
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-
-
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            Custom Field Suite
-          </h3>
-          <p class="text-[16px]">Custom Field Suite is another best custom field’s plugin for WordPress and we added
-            full support to display following meta fields for any post types.
-          </p>
-
-
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            Rank Math
-          </h3>
-          <p class="text-[16px]">Rank Math is one of the best popular SEO plugin for WordPress SEO, so we have added
-            integration with Rank math
-          </p>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            Yoast SEO
-          </h3>
-          <p class="text-[16px]">Yoast is #1 SEO plugin for WordPress SEO, so we have added integration with Yoast.
-          </p>
-        </div>
-      </div>
-
-
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            AIO SEO
-          </h3>
-          <p class="text-[16px]">AIO SEO. is one of the best popular SEO plugin for WordPress SEO, so we have added
-            integration with AIO SEO.
-          </p>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            SEOPress
-          </h3>
-          <p class="text-[16px]">SEOPress. is one of the best popular SEO plugin for WordPress SEO, so we have added
-            integration with SEOPress.
-          </p>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            WP Meta SEO
-          </h3>
-          <p class="text-[16px]">WP Meta SEO is one of the best SEO plugin for WordPress SEO, so we have added
-            integration with WP Meta SEO .
-          </p>
-        </div>
-      </div>
-
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            The SEO Framework
-          </h3>
-          <p class="text-[16px]">The SEO Framework is one of the best SEO plugin for WordPress SEO, so we have added
-            integration with The SEO Framework .
-          </p>
-        </div>
-      </div>
-
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
-          <h3 class="text-2xl my-5 font-bold text-gray-600">
-            SEO SIMPLE PACK
-          </h3>
-          <p class="text-[16px]">SEO SIMPLE PACK is one of the best SEO plugin for WordPress SEO, so we have added
-            integration with SEO SIMPLE PACK .
-          </p>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-
-
-
-  <div id="purchase-license" class="p-5 ">
-    <div class="p-5 max-w-6xl mx-auto my-10">
-      <h2 class=" text-center text-3xl font-bold">Purchse a License</h2>
-    </div>
-
-    <div class="grid grid-cols-12 gap-3 max-w-6xl mx-auto text-center">
-
-      <div class="col-span-4  bg-white">
-        <div class="px-8 relative py-5">
-          <h3 class="text-2xl py-5 font-bold text-gray-600">
-            1 Site License
-          </h3>
-          <div class="py-6 pb-10">
-            <span class="line-through inline-block text-2xl font-black text-gray-500">$49</span>
-            <span class=" inline-block text-6xl font-black  text-indigo-700">$38</span>
-            <span class=" inline-block  text-lg  text-gray-600">/ Year</span>
-
+          <div class="flex-1 pr-5 flex flex-col gap-5 pl-5 pb-7 md:pl-0 ">
+            <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px] ">CSS Library</h4>
+            <p class="text-lg md:text-xl  ">We have created a vast library of CSS that can be applied to any element
+              with just
+              one click using our
+              blocks.</p>
+            <a href="https://comboblocks.com/server/css-library/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See CSS Layouts</span></a>
           </div>
-
-          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-300 hover:bg-indigo-600 block border-indigo-700 border rounded-sm py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
-            Started</a>
-          <div class="py-3 text-[18px] ">1 Domain License</div>
-          <div class="py-3 text-[18px] ">1 Year of Support</div>
-          <div class="py-3 text-[18px] ">1 Year of Updates</div>
-          <div class="py-3 text-[18px] ">All Upcoming Features</div>
-          <div class="py-3 text-[18px] ">14 Day Guarantee</div>
-          <div class="py-3 text-[18px] ">Including Pro Blocks</div>
-          <div class="py-3 text-[18px] ">25% Renewal Discount</div>
-
         </div>
-      </div>
 
-      <div class="col-span-4 bg-white">
-        <div class="px-8 relative py-5">
-          <h3 class="text-2xl py-5 font-bold text-gray-600">
-            Unlimited Sites License
-          </h3>
 
-          <div class="py-6 pb-10">
-            <span class="line-through inline-block text-2xl font-black text-gray-500">$99</span>
-            <span class=" inline-block text-6xl font-black  text-indigo-700">$88</span>
-            <span class=" inline-block  text-lg  text-gray-600">/ Year</span>
 
+        <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
+          <div class="flex-1 pl-5 flex flex-col gap-5 pb-7 ">
+            <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]  ">Page Sections
+            </h4>
+            <p class="text-lg md:text-xl  ">Page sections can help you build a landing page without needing PSD or Figma
+              files.
+              Simply select the
+              sections you want
+              to use.</p>
+            <a href="https://comboblocks.com/server/sections-templates/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See Page Sections</span></a>
           </div>
-
-          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-600 rounded-sm block py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
-            Started</a>
-          <div class="py-3 text-[18px] ">Unlimited Domain License</div>
-          <div class="py-3 text-[18px] ">1 Year of Support</div>
-          <div class="py-3 text-[18px] ">1 Year of Updates</div>
-          <div class="py-3 text-[18px] ">All Upcoming Features</div>
-          <div class="py-3 text-[18px] ">14 Day Guarantee</div>
-          <div class="py-3 text-[18px] ">Including Pro Blocks</div>
-          <div class="py-3 text-[18px] ">25% Renewal Discount</div>
-
-        </div>
-      </div>
-      <div class="col-span-4 bg-white">
-        <div class="px-8 relative py-5">
-          <h3 class="text-2xl py-5 font-bold text-gray-600">
-            10 Sites License
-          </h3>
-
-          <div class="py-6 pb-10">
-            <span class="line-through inline-block text-2xl font-black text-gray-500">$79</span>
-            <span class=" inline-block text-6xl font-black  text-indigo-700">$68</span>
-            <span class=" inline-block  text-lg  text-gray-600">/ Year</span>
+          <div class="w-full md:w-[60%] p-5 bg-white ">
+            <img src="https://comboblocks.com/wp-content/uploads/2023/11/page-sections.png" alt="Page Sections Library" srcset="">
           </div>
-
-          <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-300 hover:bg-indigo-600 rounded-sm block border-indigo-700 border py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get
-            Started</a>
-
-          <div class="py-3 text-[18px] ">10 Domain License</div>
-          <div class="py-3 text-[18px] ">1 Year of Support</div>
-          <div class="py-3 text-[18px] ">1 Year of Updates</div>
-          <div class="py-3 text-[18px] ">All Upcoming Features</div>
-          <div class="py-3 text-[18px] ">14 Day Guarantee</div>
-          <div class="py-3 text-[18px] ">Including Pro Blocks</div>
-          <div class="py-3 text-[18px] ">25% Renewal Discount</div>
-
         </div>
-      </div>
 
 
 
-    </div>
-
-
-
-    <div class="max-w-6xl mx-auto my-10">
-
-      <div class="grid grid-cols-12">
-
-        <div class="col-span-8">
-
-
-          <div class="grid grid-cols-3 gap-3 ">
-
-            <div class="bg-white ">
-              <div class="p-3 text-center">
-                <div class="text-lg ">Active User </div>
-                <div class="text-3xl font-black my-5">60000+</div>
-              </div>
-            </div>
-
-            <div class="bg-white ">
-              <div class="p-3 text-center">
-                <div class="text-lg ">Total Downloads </div>
-                <div class="text-3xl font-black my-5">1,727,151+</div>
-              </div>
-            </div>
-
-            <div class="bg-white ">
-              <div class="p-3 text-center">
-                <div class="text-lg ">Star Ratting </div>
-                <div class="text-3xl font-black my-5">4.5/5</div>
-              </div>
-            </div>
-
-            <div class="bg-white ">
-              <div class="p-3 text-center">
-                <div class="text-lg ">Support Issue Solved </div>
-                <div class="text-3xl font-black my-5">5000+</div>
-              </div>
-            </div>
-
-            <div class="bg-white ">
-              <div class="p-3 text-center">
-                <div class="text-lg ">Years We Serving </div>
-                <div class="text-3xl font-black my-5">8 Years</div>
-              </div>
-            </div>
-
-            <div class="bg-white ">
-              <div class="p-3 text-center">
-                <div class="text-lg ">3rd Party Integration </div>
-                <div class="text-3xl font-black my-5">12+</div>
-              </div>
-            </div>
-
+        <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
+          <div class="w-full md:w-[60%] p-5 bg-white ">
+            <img src="https://comboblocks.com/wp-content/uploads/2023/12/full-page-library.png" alt="Full page Library" srcset="">
           </div>
-
-
-
-
-
+          <div class="flex-1 pr-5 flex flex-col gap-5 pl-5 pb-7 md:pl-0 ">
+            <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Full Page Library
+            </h4>
+            <p class="text-lg md:text-xl ">Our full-page library is an all-in-one solution for creating customized
+              landing
+              pages, pricing pages,
+              about us pages,
+              and more.</p>
+            <a href="https://comboblocks.com/server/full-page-templates/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See Full Pages</span></a>
+          </div>
         </div>
 
-        <div class="col-span-4 text-right">
-          <div class="col-span-8 mb-5 text-lg font-bold">Secure Checkout by Paddle.com</div>
-          <img class="inline-block w-28" src="<?php echo post_grid_plugin_url; ?>assets/images/paddle-net.png" alt="">
+
+
+        <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden ">
+          <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
+            <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Block Variations
+            </h4>
+            <p class="text-lg md:text-xl  ">We offer a wide range of pre-designed blocks for faster production. Simply
+              import and
+              customize as
+              needed.</p>
+            <a href="https://comboblocks.com/server/block-variations/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See Full Pages</span></a>
+          </div>
+          <div class="w-full md:w-[60%] p-5 bg-white ">
+            <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-variations-library.png" alt="Full Pages Library" srcset="">
+          </div>
         </div>
-
-
-
       </div>
-
-
-
 
     </div>
   </div>
 
 
+  <div class="pt-6 md:pt-10 lg:pt-16">
+
+    <div class="w-full text-center">
+      <h2 class="text-color !my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Style
+        Component</h2>
+      <p class="text-color font-lato text-lg md:text-xl max-w-[600px] mx-auto">The most powerful feature for styling
+        with
+        responsive support, advanced pseudo selectors, and almost all the CSS
+        properties supported by a browser.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 max-w-[1200px] mx-auto gap-4 md:gap-6 lg:gap-12  mt-12">
 
 
-  <div class=" my-10 container mx-auto">
-    <div class="grid grid-cols-12 max-w-6xl mx-auto just">
-      <div class="col-span-4 bg-white ">
-        <div class="p-5">
+      <div class="bg-[#51557E] rounded-lg overflow-hidden">
+        <div class=" flex gap-2 h-8 px-3 items-center  ">
+          <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
+        </div>
 
-          <h3 class="text-lg inline-block mr-12 font-bold">Follow Us</h3>
-          <div class="inline-block  "><a target="_blank" target="_blank" class="p-2 " href="https://www.facebook.com/PickPlugins/"><span class="dashicons   dashicons-facebook"></span></a>
-          </div>
-          <div class="inline-block "><a target="_blank" class="p-2 " href="https://twitter.com/pickplugins"><span class="dashicons  dashicons-twitter"></span></a></div>
-          <div class="inline-block "><a target="_blank" class="p-2 " href="https://www.pinterest.com/pickplugins/"><span class="dashicons  dashicons-pinterest"></span></a></div>
-          <div class="inline-block "><a target="_blank" class="p-2 " href="https://www.linkedin.com/in/pickplugins"><span class="dashicons  dashicons-linkedin"></span></a>
-          </div>
+        <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-pseudo-selector.png" alt="Pseudo Selectors" srcset="">
+
+        <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Pseudo Selectors</h5>
+        <p class="text-white text-base text-center p-3 pb-4 ">Pseudo CSS selectors are special keywords to target
+          specific states of elements beyond their basic HTML tag or class.</p>
+      </div>
+
+
+      <div class="bg-[#51557E] rounded-lg overflow-hidden">
+        <div class=" flex gap-2 h-8 px-3 items-center  ">
+          <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
+        </div>
+        <!-- <a href="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-css-properties-150x150.png"> -->
+        <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-css-properties.png" alt="CSS Properties" srcset="">
+
+        <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">CSS Properties</h5>
+        <p class="text-white text-base text-center p-3 pb-4 ">No code experience. Search, click, and fine-tune any
+          property to achieve your unique style.</p>
+      </div>
+
+
+      <div class="bg-[#51557E] rounded-lg overflow-hidden">
+        <div class=" flex gap-2 h-8 px-3 items-center  ">
+          <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
+        </div>
+
+        <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-responsive-picker.png" alt="Responsiveness" srcset="">
+
+        <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Responsiveness</h5>
+        <p class="text-white text-base text-center p-3 pb-4 ">Apply device specific styles with ease, achieving
+          pixel-perfect responsiveness that adapt to any screen size.</p>
+      </div>
+
+
+      <div class="bg-[#51557E] rounded-lg overflow-hidden">
+        <div class=" flex gap-2 h-8 px-3 items-center  ">
+          <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
+        </div>
+
+        <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-copy-paste.png" alt="Copy Paste" srcset="">
+
+        <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Copy Paste</h5>
+        <p class="text-white text-base text-center p-3 pb-4 ">Save time by copying and pasting styles, or inject your
+          own raw CSS code directly into our powerful style component.</p>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+
+  <div class=" pt-8 md:pt-14 lg:pt-20">
+
+    <div class="w-full text-center">
+      <h2 class="text-color my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Fonts
+      </h2>
+      <!-- <p class="text-color font-lato text-xl max-w-[600px] mx-auto">The most powerful feature for styling with responsive support, advanced pseudo selectors, and almost all the CSS
+      properties supported by a browser.</p> -->
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-12 mx-auto max-w-[1100px] mt-12">
+      <div class="rounded-3xl overflow-hidden bg-[#ffebd8]">
+        <div class="p-5 bg-white lg:h-[400px] overflow-hidden "><img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-google-fonts.png" alt="" srcset="">
+        </div>
+        <div class=" px-6 pt-4 pb-7 text-center flex flex-col gap-5 ">
+          <h5 class="font-lato text-color !my-0 text-2xl md:text-3xl lg:text-4xl font-bold tracking-[2.5px] ">Google
+            Fonts</h5>
+          <p class="text-lg md:text-xl ">We have incorporated almost all of the popular fonts offered by Google. You
+            don’t need
+            to add a CDN, just
+            search for the font you want and click to add it.</p>
+        </div>
+      </div>
+      <div class="rounded-3xl overflow-hidden bg-[#ffebd8]">
+        <div class="p-5 bg-white lg:h-[400px] overflow-hidden "><img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-custom-fonts.png" alt="" srcset="">
+        </div>
+        <div class=" px-6 pt-4 pb-7 text-center flex flex-col gap-5 ">
+          <h5 class="font-lato text-color !my-0 text-2xl md:text-3xl lg:text-4xl font-bold tracking-[2.5px] ">Custom
+            Fonts</h5>
+          <p class="text-lg md:text-xl ">Sometimes you may want to use a custom font. For this, we have added the Font
+            URL’s
+            option. You can host
+            your custom
+            font and use the URL under Font Family CSS.</p>
 
         </div>
       </div>
-      <div class="col-span-8 bg-white ">
-        <div class="p-5">
+    </div>
 
-          <a target="_blank" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white " href="https://www.facebook.com/groups/PickPlugins">Join Our Facebook Group</a>
+  </div>
 
+
+
+  <div class=" py-8 md:py-14 lg:py-20">
+
+    <div class="w-full text-center">
+      <h2 class="text-color !my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Custom
+        CSS</h2>
+      <p class="text-color font-lato text-lg md:text-xl max-w-[600px] mx-auto">Effortlessly manage your styles with
+        “Combo
+        Blocks”! Global styles for consistency, page styles for unique touches, and
+        block styles for ultimate control. All without writing a single line of CSS code.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 max-w-[1200px] mx-auto gap-4 md:gap-5  mt-12">
+
+
+      <div class="bg-[#51557E] rounded-lg overflow-hidden">
+        <div class=" flex gap-2 h-8 px-3 items-center  ">
+          <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
+
+        <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-global-styles.png" alt="Global Styles" srcset="">
+
+        <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Global Styles</h5>
+        <p class="text-white text-base text-center p-3 pb-4 ">For example you might want to set a universal look for
+          all links with our intuitive global style option.</p>
+      </div>
+
+
+      <div class="bg-[#51557E] rounded-lg overflow-hidden">
+        <div class=" flex gap-2 h-8 px-3 items-center  ">
+          <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
+        </div>
+        <!-- <a href="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-css-properties-150x150.png"> -->
+        <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-page-styles.png" alt="Page Styles" srcset="">
+
+        <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Page Styles</h5>
+        <p class="text-white text-base text-center p-3 pb-4 ">Beyond global styles? Page Styles offers unique design
+          control for each page, all without code.</p>
+      </div>
+
+
+      <div class="bg-[#51557E] rounded-lg overflow-hidden">
+        <div class=" flex gap-2 h-8 px-3 items-center  ">
+          <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
+        </div>
+
+        <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-block-styles.png" alt="Block Styles" srcset="">
+
+        <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Block Styles</h5>
+        <p class="text-white text-base text-center p-3 pb-4 ">Block Style unlocks unique CSS for each Gutenberg block,
+          fine-tuning every detail for pixel-perfect content.</p>
+      </div>
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="bg-[#eef8ffd4] pb-20">
+
+    <div class="">
+
+
+      <div class="flex flex-col gap-12 ">
+
+        <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden ">
+          <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
+            <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px] ">Custom Colors</h4>
+            <p class="text-lg md:text-xl">Simplify your design workflow by setting a pre-defined color palette in our
+              plugin
+              settings. This saves
+              you time and
+              ensures brand consistency without the need to pick colors every time.</p>
+          </div>
+          <div class="w-full md:w-[60%] p-5 bg-white ">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-custom-colors.png" alt="Custom Colors" srcset="">
+          </div>
+        </div>
+
+
+
+        <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
+          <div class="w-full md:w-[60%] p-5 bg-white ">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Dynamic Class" srcset="">
+          </div>
+          <div class="flex-1 pr-5 flex flex-col gap-5 pl-5 pb-7 md:pl-0 ">
+            <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Dynamic Class</h4>
+            <p class="text-lg md:text-xl">Set dynamic class names that adapt to changing data (like year/month). CSS
+              automatically adjusts, saving
+              you time and
+              ensuring dynamic design elements.</p>
+          </div>
+        </div>
+
+
+
+        <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
+          <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
+            <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Terms Query Builder
+            </h4>
+            <p class="text-lg md:text-xl">Search across different terms (e.g., posts, pages, products) and refine your
+              results
+              by
+              filtering based
+              on categories,
+              tags, or custom taxonomies.</p>
+          </div>
+          <div class="w-full md:w-[60%] p-5 bg-white">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Terms Query Builder" srcset="">
+          </div>
+        </div>
+
+
+
+        <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
+          <div class="w-full md:w-[60%] p-5 bg-white">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Post Query Builder" srcset="">
+          </div>
+          <div class="flex-1 pr-5 flex flex-col gap-5 pl-5 pb-7 md:pl-0 ">
+            <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Post Query Builder
+            </h4>
+            <p class="text-lg md:text-xl">Search across different post types (e.g., posts, pages, products) and refine
+              your
+              results by filtering
+              based on
+              categories, tags, or custom taxonomies.</p>
+          </div>
+        </div>
+
+
+
+        <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
+          <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
+            <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Third Party
+              Integration</h4>
+            <p class="text-lg md:text-xl">We have added some well-known WordPress plugins such as WooCommerce and ACF to
+              our
+              blocks to enhance
+              their capabilities.
+              This allows you to create more intricate and dynamic layouts. We only choose plugins that are
+              well-maintained and
+              compatible with your WordPress version and other plugins, as there is a vast selection of third-party
+              plugins available.</p>
+          </div>
+          <div class="w-full md:w-[60%] p-5 bg-white">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Third Party Integration" srcset="">
+          </div>
+        </div>
+
+
+
+        <!-- <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
+          <div class="w-full md:w-[60%] p-5 bg-white">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="CSS Animations" srcset="">
+          </div>
+          <div class="flex-1 pr-5 flex flex-col gap-5 pl-5 pb-7 md:pl-0">
+            <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px] ">CSS Animations
+            </h4>
+            <p class="text-lg md:text-xl  ">You can create personalized keyframe animations with custom names and
+              styles, which
+              can
+              later be used with any Gutenberg
+              blocks.</p>
+          </div>
+        </div> -->
       </div>
 
 
     </div>
   </div>
 
-  <div class=" my-10 container mx-auto">
-    <div class="grid grid-cols-12 gap-4 max-w-6xl mx-auto">
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-          <h3 class="text-2xl mb-5 font-bold text-gray-600">
-
-            Documentation
-          </h3>
-          <p class="text-[16px]">Read the documentations our techincal writer team already solve many issues for your
-            needs. We update our documentation frequently.</p>
-
-          <a target="_blank" href="https://comboblocks.com/documentations/" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See
-            Documentations</a>
-
-        </div>
-
-
-
-      </div>
-
-
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-          <h3 class="text-2xl mb-5 font-bold text-gray-600">
-
-            Video Tutorials
-          </h3>
-          <p class="text-[16px]">Our content creator team is preparing video tutorials for you. Keep watching these and
-            we have many more video tutorials on the pipeline.</p>
-
-          <a target="_blank" href="https://comboblocks.com/video-tutorials" class="inline-block mt-5 text-red-500	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> Watch on
-            YouTube</a>
-
-        </div>
-
-
-
-      </div>
-
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-          <h3 class="text-2xl mb-5 font-bold text-gray-600">
-            Need Support?
-          </h3>
-          <p class="text-[16px]">Do you have any question that need to be answered as soon as possible, our support tech
-            person is ready to help you and resolve.</p>
-
-
-          <a target="_blank" href="https://pickplugins.com/create-support-ticket/" class="inline-block mt-5 text-indigo-700 font-bold	  py-2 rounded-sm  text-center text-lg"> Create Support
-            Ticket</a>
-
-        </div>
-
-      </div>
-      <div class="col-span-6 bg-white ">
-
-        <div class="p-5">
-
-          <h3 class="text-2xl mb-5 font-bold text-gray-600">
-            Write Feedback & Reviews
-          </h3>
-          <p class="text-[16px]">
-            Our team is continuesly planing, updating and fixing many issues, we need your feedback about our services,
-            support and plugins, how we help your bussiness growth.
-          </p>
-          <a target="_blank" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" class="inline-block mt-5 text-amber-500 font-bold	  py-2 rounded-sm  text-center 		  text-lg  "> Write a
-            Review</a>
-
-        </div>
-
-      </div>
-
-
-
-    </div>
-  </div>
 
 </div>

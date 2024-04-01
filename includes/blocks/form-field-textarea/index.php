@@ -110,8 +110,8 @@ class PGBlockFormFieldTextarea
 
 
 
-    ////var_dump($labelEnable);
-    ////var_dump($labelText);
+    //////var_dump($labelEnable);
+    //////var_dump($labelText);
 
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
@@ -124,38 +124,27 @@ class PGBlockFormFieldTextarea
     ob_start();
 
 
-    ?>
+?>
 
-    <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>"
-      id="<?php echo esc_attr($blockId); ?>">
+    <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" id="<?php echo esc_attr($blockId); ?>">
 
 
       <div class='label-wrap'>
 
-        <?php if ($labelEnable): ?>
+        <?php if ($labelEnable) : ?>
           <label for="" class="font-medium text-slate-900 "><?php echo wp_kses_post($labelText); ?></label>
         <?php endif; ?>
 
 
-        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+        <?php if ($errorWrapPosition == 'afterlabel') : ?>
           <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
         <?php endif; ?>
 
 
       </div>
       <div class='input-wrap'>
-        <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
-          value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>
-          <?php if ($inputDisabled): ?> disabled <?php endif; ?>     <?php if ($inputReadonly): ?> readonly <?php endif; ?>
-          <?php if ($inputAutocomplete): ?> autocomplete="on" <?php endif; ?>     <?php if (!$inputAutocomplete): ?>
-            autocomplete="off" <?php endif; ?>     <?php if ($inputAutocorrect): ?> autocorrect="on" <?php endif; ?>
-          <?php if (!$inputAutocorrect): ?> autocorrect="off" <?php endif; ?>     <?php if ($inputCols): ?>
-            cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?>     <?php if ($inputRows): ?>
-            rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?>     <?php if ($inputMinLength): ?>
-            minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?>     <?php if ($inputMaxLength): ?>
-            maxLength="<?php echo esc_attr($inputMaxLength); ?>"
-          <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
-        <?php if ($errorWrapPosition == 'afterInput'): ?>
+        <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired) : ?> required <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> <?php if ($inputAutocomplete) : ?> autocomplete="on" <?php endif; ?> <?php if (!$inputAutocomplete) : ?> autocomplete="off" <?php endif; ?> <?php if ($inputAutocorrect) : ?> autocorrect="on" <?php endif; ?> <?php if (!$inputAutocorrect) : ?> autocorrect="off" <?php endif; ?> <?php if ($inputCols) : ?> cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?> <?php if ($inputRows) : ?> rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?> <?php if ($inputMinLength) : ?> minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?> <?php if ($inputMaxLength) : ?> maxLength="<?php echo esc_attr($inputMaxLength); ?>" <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
+        <?php if ($errorWrapPosition == 'afterInput') : ?>
           <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
 
         <?php endif; ?>
@@ -168,7 +157,7 @@ class PGBlockFormFieldTextarea
 
     </div>
 
-    <?php
+<?php
 
     return ob_get_clean();
   }

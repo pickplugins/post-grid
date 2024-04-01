@@ -16,8 +16,7 @@ class PGBlockImage
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/image/index.css');
-    // wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', array());
+
 
 
 
@@ -57,7 +56,6 @@ class PGBlockImage
 
 
     wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', true);
-    wp_register_script('pgimage_front_script', post_grid_plugin_url . 'includes/blocks/image/front-scripts.js', [], '', true);
     wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/image/lazy-load.js', [], '', true);
 
 
@@ -68,20 +66,26 @@ class PGBlockImage
 
     $lightboxEnable = isset($lightboxOptions['enable']) ? $lightboxOptions['enable'] : false;
 
+    $featuredImage = isset($attributes['image']) ? $attributes['image'] : [];
+    $featuredImageOptions = isset($featuredImage['options']) ? $featuredImage['options'] : [];
+    $lazyLoad = isset($featuredImageOptions['lazy']) ? $featuredImageOptions['lazy'] : false;
+
+
     if (has_block('post-grid/image')) {
 
-      wp_enqueue_script('lazyLoad');
 
+      if ($lazyLoad == true) {
+        wp_enqueue_script('lazyLoad');
+      }
       if ($lightboxEnable == true) {
         wp_enqueue_script('fslightbox');
-        wp_enqueue_script('pgimage_front_script');
       }
     }
 
 
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -135,7 +139,8 @@ class PGBlockImage
 
     $linkAttr = isset($featuredImageOptions['linkAttr']) ? $featuredImageOptions['linkAttr'] : [];
     $rel = isset($featuredImageOptions['rel']) ? $featuredImageOptions['rel'] : '';
-    $size = isset($featuredImageOptions['size']) ? $featuredImageOptions['size'] : '';
+    $sizes = isset($featuredImageOptions['size']) ? $featuredImageOptions['size'] : [];
+    $size = isset($sizes['Desktop']) ? $sizes['Desktop'] : '';
 
     $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
     $utmTrackingEnable = isset($utmTracking['enable']) ? $utmTracking['enable'] : '';
@@ -178,32 +183,67 @@ class PGBlockImage
 
 
 
-    $image_src = wp_get_attachment_image_src($thumb_id);
-    $attachment_url = wp_get_attachment_url($thumb_id);
+
+    $attachment_url = wp_get_attachment_image_url($thumb_id, $size);
+
     $attachment_post = get_post($thumb_id);
 
     $image_srcset = wp_get_attachment_image_srcset($thumb_id);
     $attachment_metadata = wp_get_attachment_metadata($thumb_id);
+
+    $width = isset($attachment_metadata['width']) ? $attachment_metadata['width'] : '';
+    $height = isset($attachment_metadata['height']) ? $attachment_metadata['height'] : '';
 
     if ($featuredImageSrcType == 'customField') {
 
       if ($featuredImageSrcMetaKeyType == 'ID') {
 
         $thumb_id = get_post_meta($post_ID, $featuredImageSrcMetaKey, true);
-        //echo '<pre>' . //var_export($thumb_id, true) . '</pre>';
+
+        $attachment_metadata = wp_get_attachment_metadata($thumb_id);
+
+        $width = isset($attachment_metadata['width']) ? $attachment_metadata['width'] : '';
+        $height = isset($attachment_metadata['height']) ? $attachment_metadata['height'] : '';
 
 
-        $attachment_url = wp_get_attachment_url($thumb_id);
+        $attachment_url = wp_get_attachment_image_url($thumb_id, $size);
         $attachment_post = get_post($thumb_id);
 
         $image_srcset = wp_get_attachment_image_srcset($thumb_id);
       } else {
+
+
+
         $attachment_url = get_post_meta($post_ID, $featuredImageSrcMetaKey, true);
+
+        $imagesize = getimagesize($attachment_url);
+
+
+        $width = isset($imagesize[0]) ? $imagesize[0] : '';
+        $height = isset($imagesize[1]) ? $imagesize[1] : '';
       }
     } elseif ($featuredImageSrcType == 'customUrl') {
+
+      //$imagesize = getimagesize($featuredImagesrcUrl);
+
+
+      // $width = isset($imagesize[0]) ? $imagesize[0] : '';
+      // $height = isset($imagesize[1]) ? $imagesize[1] : '';
+
+      $width =  '';
+      $height =  '';
+
+
       $attachment_url = $featuredImagesrcUrl;
     } elseif ($featuredImageSrcType == 'imgId') {
-      $attachment_url = wp_get_attachment_url($featuredImagesrcId);
+
+      $attachment_metadata = wp_get_attachment_metadata($featuredImagesrcId);
+
+      $width = isset($attachment_metadata['width']) ? $attachment_metadata['width'] : '';
+      $height = isset($attachment_metadata['height']) ? $attachment_metadata['height'] : '';
+
+
+      $attachment_url = wp_get_attachment_image_url($featuredImagesrcId, $size);
     }
 
     $linkUrl = "";
@@ -226,6 +266,10 @@ class PGBlockImage
     } else if ($featuredImageLinkTo == 'customUrl') {
       $linkUrl = $linkTocustomUrl;
     }
+    // else if ($featuredImageLinkTo == 'authorMeta') {
+    //   $author_id = get_post_field('post_author', $post_ID);
+    //   $post_url = get_user_meta($author_id, $featuredImageLinkToMetaKey, true);
+    // }
 
     if ($utmTrackingEnable == true) {
       $utmValue = [];
@@ -357,18 +401,18 @@ class PGBlockImage
         <?php if (!empty($featuredImageLinkTo)) : ?>
           <a <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?> href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
 
           </a>
         <?php else : ?>
 
           <?php if ($lightboxEnable == true) : ?>
             <a href="<?php if ($lazyLoad == true) : ?><?php echo esc_url_raw($dataSrc); ?><?php endif; ?><?php if ($lazyLoad == false) : ?><?php echo esc_url_raw($attachment_url); ?><?php endif; ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
-              <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+              <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
             </a>
           <?php else : ?>
 
-            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
           <?php endif; ?>
 
         <?php endif; ?>
@@ -385,7 +429,7 @@ class PGBlockImage
         <a class=" <?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
 
 
-          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
 
         </a>
       <?php else : ?>
@@ -393,7 +437,7 @@ class PGBlockImage
         <?php if ($lightboxEnable == true) : ?>
           <a class=" <?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" data-fslightbox=" <?php echo esc_attr($galleryId); ?>"> <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title=" <?php echo esc_attr($titleText); ?>" /> </a>
         <?php else : ?>
-          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
 
         <?php endif; ?>
 

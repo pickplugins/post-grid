@@ -387,7 +387,7 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
         //$post_type = $post->post_type;
         $post_type = isset($post->post_type) ? $post->post_type : '';
 
-        //var_dump($post_type);
+        ////var_dump($post_type);
 
         if ($post_type == 'page') {
             $content = '';
@@ -436,7 +436,7 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
         }
     } elseif ($media_source == 'custom_video') {
 
-        //var_dump($post_grid_post_settings);
+        ////var_dump($post_grid_post_settings);
 
         $video_html = '';
 

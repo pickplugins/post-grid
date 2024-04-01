@@ -53,7 +53,7 @@ class PGBlockPostQuery
     wp_enqueue_style('font-awesome-5');
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
     global $postGridScriptData;
@@ -108,8 +108,10 @@ class PGBlockPostQuery
     $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
 
 
+
     $parsed_block = isset($block->parsed_block) ? $block->parsed_block : [];
     $innerBlocks = isset($parsed_block['innerBlocks']) ? $parsed_block['innerBlocks'] : [];
+
 
 
 
@@ -125,6 +127,18 @@ class PGBlockPostQuery
 
     //echo var_export($query_args, true);
 
+
+    if (array_key_exists('post_parent', $query_args)) {
+
+      $post_parent_value = $query_args['post_parent'];
+
+      if ($post_parent_value == '{ID}') {
+        $post_id = get_the_id();
+        $parent_id = wp_get_post_parent_id($post_id);
+        $query_args['post_parent'] = $parent_id;
+      }
+    } else {
+    }
 
     if (get_query_var('paged')) {
       $paged = get_query_var('paged');
@@ -159,16 +173,15 @@ class PGBlockPostQuery
 ?>
 
 
-<?php
+    <?php
     if (!$itemsWrapExcluded) :
     ?>
-<div class="loop-loading"></div>
-<div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop"
-  id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-  <?php
+      <div class="loop-loading"></div>
+      <div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+      <?php
     endif;
       ?>
-  <?php
+      <?php
       if ($PGPostQuery->have_posts()) :
 
         $counter = 1;
@@ -192,7 +205,7 @@ class PGBlockPostQuery
           }
 
       ?>
-  <<?php echo esc_html($itemWrapTag); ?> class="
+          <<?php echo esc_html($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php if ($itemWrapTermsClass) {
               echo esc_attr($slug);
@@ -203,10 +216,10 @@ class PGBlockPostQuery
             <?php if ($itemWrapOddEvenClass) {
               echo esc_attr($odd_even_class);
             } ?> ">
-    <?php echo wp_kses_post($html);
+            <?php echo wp_kses_post($html);
             ?>
-  </<?php echo esc_html($itemWrapTag); ?>>
-  <?php
+          </<?php echo esc_html($itemWrapTag); ?>>
+      <?php
           $counter++;
         endwhile;
         wp_reset_query();
@@ -215,10 +228,10 @@ class PGBlockPostQuery
 
       ?>
 
-  <?php
+      <?php
       if (!$itemsWrapExcluded) : ?>
-</div>
-<?php
+      </div>
+    <?php
       endif; ?>
 <?php return ob_get_clean();
   }

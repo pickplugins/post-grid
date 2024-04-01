@@ -35,7 +35,7 @@ class PGBlockPostTitle
   // front-end output from the gutenberg editor
   function theHTML($attributes, $content, $block)
   {
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -230,86 +230,85 @@ class PGBlockPostTitle
 ?>
 
 
-<<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php
-  echo esc_attr($wrapperClass); ?>">
+    <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php
+                                                                                    echo esc_attr($wrapperClass); ?>">
 
-  <?php // * prefix afterbegin
+      <?php // * prefix afterbegin
       ?>
 
-  <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
-  <span class="<?php echo esc_attr($prefixClass); ?>">
-    <?php echo wp_kses_post($prefixText); ?>
-  </span>
-  <?php endif; ?>
+      <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
+        <span class="<?php echo esc_attr($prefixClass); ?>">
+          <?php echo wp_kses_post($prefixText); ?>
+        </span>
+      <?php endif; ?>
 
 
-  <?php if ($postTitleIsLink) : ?>
+      <?php if ($postTitleIsLink) : ?>
 
-  <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo esc_url_raw($post_url); ?>"
-    rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
+        <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
 
-    <?php  // * prefix isLink true beforebegin 
+          <?php  // * prefix isLink true beforebegin 
           ?>
-    <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
-    <span class="<?php echo esc_attr($prefixClass); ?>">
-      <?php echo wp_kses_post($prefixText); ?>
-    </span>
-    <?php endif; ?>
+          <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
+            <span class="<?php echo esc_attr($prefixClass); ?>">
+              <?php echo wp_kses_post($prefixText); ?>
+            </span>
+          <?php endif; ?>
 
-    <?php echo wp_kses_post($post_title); ?>
+          <?php echo wp_kses_post($post_title); ?>
 
 
-    <?php  // * postfix isLink true afterend 
+          <?php  // * postfix isLink true afterend 
           ?>
-    <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
-    <span class="<?php echo esc_attr($postfixClass); ?>">
-      <?php echo wp_kses_post($postfixText); ?>
-    </span>
-    <?php endif; ?>
+          <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
+            <span class="<?php echo esc_attr($postfixClass); ?>">
+              <?php echo wp_kses_post($postfixText); ?>
+            </span>
+          <?php endif; ?>
 
-  </a>
+        </a>
 
-  <?php else : ?>
+      <?php else : ?>
 
-  <<?php echo esc_attr($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
+        <<?php echo esc_attr($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
 
 
-    <?php  // * prefix isLink true beforebegin 
+          <?php  // * prefix isLink true beforebegin 
           ?>
-    <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
-    <span class="<?php echo esc_attr($prefixClass); ?>">
-      <?php echo wp_kses_post($prefixText); ?>
-    </span>
-    <?php endif; ?>
+          <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
+            <span class="<?php echo esc_attr($prefixClass); ?>">
+              <?php echo wp_kses_post($prefixText); ?>
+            </span>
+          <?php endif; ?>
 
-    <?php echo wp_kses_post($post_title); ?>
+          <?php echo wp_kses_post($post_title); ?>
 
 
-    <?php  // * postfix isLink true afterend 
+          <?php  // * postfix isLink true afterend 
           ?>
-    <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
-    <span class="<?php echo esc_attr($postfixClass); ?>">
-      <?php echo wp_kses_post($postfixText); ?>
-    </span>
-    <?php endif; ?>
+          <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
+            <span class="<?php echo esc_attr($postfixClass); ?>">
+              <?php echo wp_kses_post($postfixText); ?>
+            </span>
+          <?php endif; ?>
 
 
-  </<?php echo esc_attr($postTitleTag); ?>>
+        </<?php echo esc_attr($postTitleTag); ?>>
 
-  <?php endif; ?>
+      <?php endif; ?>
 
 
-  <?php  // * postfix isLink true beforeend 
+      <?php  // * postfix isLink true beforeend 
       ?>
-  <?php if (!empty($postfixText) && ($postfixPosition == "beforeend")) : ?>
-  <span class="<?php echo esc_attr($postfixClass); ?>">
-    <?php echo wp_kses_post($postfixText); ?>
-  </span>
-  <?php endif; ?>
+      <?php if (!empty($postfixText) && ($postfixPosition == "beforeend")) : ?>
+        <span class="<?php echo esc_attr($postfixClass); ?>">
+          <?php echo wp_kses_post($postfixText); ?>
+        </span>
+      <?php endif; ?>
 
 
 
-</<?php echo esc_attr($wrapperTag); ?>>
+    </<?php echo esc_attr($wrapperTag); ?>>
 
 
 

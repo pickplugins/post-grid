@@ -13,6 +13,7 @@
   ],
   "providesContext": {
     "post-grid/listNestedId": "blockId",
+    "post-grid/listItemTag": "item",
     "post-grid/icon": "icon"
   },
   "supports": {

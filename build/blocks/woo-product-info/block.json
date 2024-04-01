@@ -5,6 +5,10 @@
   "title": "Product Info",
   "textdomain": "post-grid",
   "category": "post-grid-woo",
+  "providesContext": {
+    "post-grid/productInfo": "itemInfo",
+    "post-grid/wordpressORG": "blockId"
+  },
   "usesContext": [
     "postId",
     "loopIndex",
@@ -112,7 +116,8 @@
       "type": "object",
       "default": {
         "options": {
-          "class": ""
+          "class": "",
+          "productData": ""
         },
         "styles": {
           "color": {

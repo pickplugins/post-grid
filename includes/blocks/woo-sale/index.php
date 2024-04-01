@@ -47,7 +47,7 @@ class PGBlockWooSale
     {
 
 
-        global $postGridCss;
+
 
         global $postGridCssY;
 
@@ -136,9 +136,9 @@ class PGBlockWooSale
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
 
-        // //var_dump($product->get_price());
-        // //var_dump($product->get_onSale());
-        // //var_dump($product->get_onSale());
+        // ////var_dump($product->get_price());
+        // ////var_dump($product->get_onSale());
+        // ////var_dump($product->get_onSale());
 
 
         $product_type = ($product != null) ? $product->get_type() : '';
@@ -158,80 +158,80 @@ class PGBlockWooSale
         ob_start();
 
 
-        if (!empty($wrapperTag)):
+        if (!empty($wrapperTag)) :
 
-            ?>
-                                                <<?php echo esc_attr($wrapperTag); ?> class="
+?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
                                                     <?php echo esc_attr($blockId); ?>
                                                     <?php echo esc_attr($wrapperClass); ?>">
 
 
-                                                    <?php if ($iconPosition == 'beforePrefix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
+                <?php if ($iconPosition == 'beforePrefix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                                                    <?php if ($prefixText): ?>
-                                                                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                                                                        <?php echo wp_kses_post($prefixText); ?>
-                                                                    </span>
-                                                    <?php endif; ?>
+                <?php if ($prefixText) : ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
+                <?php endif; ?>
 
-                                                    <?php if ($iconPosition == 'afterPrefix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
+                <?php if ($iconPosition == 'afterPrefix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                                                    <?php
+                <?php
 
-                                                    if ($product_type != 'variable'):
-                                                        $onSale = ($product != null) ? $product->is_on_sale() : '';
-                                                        ?>
-                                                                    <span class='sale'>
-                                                                        <?php
-                                                                        if ($onSale) {
-                                                                            echo wp_kses_post($saleText);
-                                                                        } else {
-                                                                            echo wp_kses_post($saleNoSale);
-                                                                        }
-                                                                        ?>
-                                                                    </span>
-                                                                    <?php
-                                                    endif;
-                                                    if ($product_type == 'variable'):
+                if ($product_type != 'variable') :
+                    $onSale = ($product != null) ? $product->is_on_sale() : '';
+                ?>
+                    <span class='sale'>
+                        <?php
+                        if ($onSale) {
+                            echo wp_kses_post($saleText);
+                        } else {
+                            echo wp_kses_post($saleNoSale);
+                        }
+                        ?>
+                    </span>
+                <?php
+                endif;
+                if ($product_type == 'variable') :
 
-                                                        $onSale = ($product != null) ? $product->is_on_sale() : '';
+                    $onSale = ($product != null) ? $product->is_on_sale() : '';
 
-                                                        ?>
-                                                                    <span class='sale'>
-                                                                        <?php
-                                                                        if ($onSale) {
-                                                                            echo wp_kses_post($saleText);
-                                                                        } else {
-                                                                            echo wp_kses_post($saleNoSale);
-                                                                        }
-                                                                        ?>
-                                                                    </span>
+                ?>
+                    <span class='sale'>
+                        <?php
+                        if ($onSale) {
+                            echo wp_kses_post($saleText);
+                        } else {
+                            echo wp_kses_post($saleNoSale);
+                        }
+                        ?>
+                    </span>
 
-                                                                    <?php
+                <?php
 
-                                                    endif;
+                endif;
 
-                                                    ?>
+                ?>
 
-                                                    <?php if ($iconPosition == 'beforePostfix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
-                                                    <?php if ($postfixText): ?>
-                                                                    <span class="<?php echo $postfixClass; ?>">
-                                                                        <?php echo $postfixText; ?>
-                                                                    </span>
-                                                    <?php endif; ?>
+                <?php if ($iconPosition == 'beforePostfix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+                <?php if ($postfixText) : ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
+                <?php endif; ?>
 
-                                                    <?php if ($iconPosition == 'afterPostfix'): ?>
-                                                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                                                    <?php endif; ?>
+                <?php if ($iconPosition == 'afterPostfix') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                                                </<?php echo esc_attr($wrapperTag); ?>>
-                                                <?php
+            </<?php echo esc_attr($wrapperTag); ?>>
+        <?php
 
         endif;
 
@@ -245,7 +245,7 @@ class PGBlockWooSale
 
 
 
-                                <?php return ob_get_clean();
+<?php return ob_get_clean();
     }
 }
 

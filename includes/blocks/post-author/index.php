@@ -43,7 +43,7 @@ class PGBlockPostAuthor
   {
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -125,11 +125,13 @@ class PGBlockPostAuthor
       $nameLink = "mailto:$nameLink";
     } else if ($nameLinkTo == 'homeUrl') {
       $nameLink = get_home_url();
+    } else if ($nameLinkTo == 'customURL') {
+      $nameLink = $nameCustomUrl;
     } else if ($nameLinkTo == 'customField') {
-      // $nameLink = get_post_meta($post_author_id, $nameLinkToMeta, true);
-      $nameLink = "";
+      $nameLink = get_post_meta($post_ID, $nameLinkToMeta, true);
     }
 
+    // var_export(get_post_meta($post_author_id, $nameLinkToMeta, true));
 
 
     $htmlGroups = [];
@@ -223,7 +225,6 @@ class PGBlockPostAuthor
 
     ob_start();
 
-
     ?>
 
 
@@ -231,15 +232,7 @@ class PGBlockPostAuthor
           <?php echo esc_attr($wrapperClass); ?>
           <?php echo $blockId; ?>">
       <?php
-      foreach ($elementsItems as $item) {
-
-
-        echo $htmlGroups[$item['id']];
-      }
-
-
-
-      ?>
+      echo $content ?>
     </<?php echo esc_attr($wrapperTag); ?>>
 
 

@@ -4,10 +4,11 @@
   "name": "post-grid/terms-list",
   "title": "Terms List",
   "textdomain": "post-grid",
-  "category": "post-grid-tools",
+  "category": "post-grid-archive",
   "usesContext": [
     "postId",
     "loopIndex",
+    "term_id",
     "postType",
     "queryId"
   ],
@@ -101,7 +102,16 @@
     "queryArgs": {
       "type": "object",
       "default": {
-        "items": []
+        "items": [
+          {
+            "val": "category",
+            "id": "taxonomy"
+          },
+          {
+            "val": "6",
+            "id": "number"
+          }
+        ]
       }
     },
     "termTitle": {

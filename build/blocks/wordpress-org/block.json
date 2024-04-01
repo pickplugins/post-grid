@@ -5,12 +5,10 @@
   "title": "wordpress-org",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
-  "usesContext": [
-    "postId",
-    "loopIndex",
-    "postType",
-    "queryId"
-  ],
+  "providesContext": {
+    "post-grid/WPObject": "object",
+    "post-grid/wordpressORG": "blockId"
+  },
   "supports": {
     "align": [
       "wide",
@@ -83,6 +81,7 @@
       "default": {
         "options": {
           "type": "plugin",
+          "data": {},
           "slug": "post-grid"
         }
       }

@@ -104,7 +104,7 @@ class PGBlockFormFieldSubmit
 
 
 
-    ////var_dump($content);
+    //////var_dump($content);
 
 
     $obj['id'] = $post_ID;
@@ -117,30 +117,27 @@ class PGBlockFormFieldSubmit
 
     ob_start();
 
-    ?>
+?>
 
     <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
 
 
       <div class='label-wrap'>
 
-        <?php if ($labelEnable): ?>
+        <?php if ($labelEnable) : ?>
           <label for="" class="font-medium text-slate-900 "><?php echo wp_kses_post($labelText); ?></label>
         <?php endif; ?>
 
 
-        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+        <?php if ($errorWrapPosition == 'afterlabel') : ?>
           <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
         <?php endif; ?>
 
 
       </div>
       <div class='input-wrap'>
-        <input type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
-          value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>"
-          <?php if ($inputRequired): ?> required <?php endif; ?>     <?php if ($inputDisabled): ?> disabled <?php endif; ?>
-          <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
-        <?php if ($errorWrapPosition == 'afterInput'): ?>
+        <input type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired) : ?> required <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> />
+        <?php if ($errorWrapPosition == 'afterInput') : ?>
           <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
 
         <?php endif; ?>
@@ -153,7 +150,7 @@ class PGBlockFormFieldSubmit
 
     </div>
 
-    <?php
+<?php
 
     return ob_get_clean();
   }

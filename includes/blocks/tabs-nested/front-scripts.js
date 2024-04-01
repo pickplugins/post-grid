@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				item.classList.add("nav-item-active");
 				tabPanels[index].classList.add("pg-tabs-panel-active");
 				if (iconToggle[index] != undefined) {
-				iconToggle[index].style.display = "inline-block";}
+					iconToggle[index].style.display = "inline-block";
+				}
 				if (iconIdle[index] != undefined) {
 					iconIdle[index].style.display = "none";
 				}
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				if (iconIdle[index] != undefined) {
 					iconIdle[index].style.display = "inline-block";
 				}
-				
+
 			}
 
 			item.addEventListener("click", function (event) {
@@ -74,14 +75,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 					// event.currentTarget.classList.add("nav-item-active");
 					// tabPanels[index].classList.add("pg-tabs-panel-active");
-					if (iconToggle[index] != undefined ) {
-					iconToggle[index].style.display = "inline-block";
+					if (iconToggle[index] != undefined) {
+						iconToggle[index].style.display = "inline-block";
 					}
 					if (iconIdle[index] != undefined) {
 						iconIdle[index].style.display = "none";
 					}
-				} 
-				
+				}
+
 
 				var tabByattr = document.querySelector(
 					`.pg-tabs-panel[data-tab-id="${tabId}"]`
@@ -94,40 +95,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	});
 
-	// var navItems = document.querySelectorAll('.pg-tabs .nav-item');
-	// var tabPanels = document.querySelectorAll('.pg-tabs .pg-tabs-panel');
 
-	// hide all tab panels
-	// tabPanels.forEach(panel => {
-	//     panel.hidden = true;
-	// });
-	// mark all tabs as unselected
-	// navItems.forEach(tab => {
-	//     tab.classList.remove('nav-item-active')
-	// });
-
-	//event.currentTarget.classList.add('nav-item-active')
-	//var tabId = event.currentTarget.getAttribute("data-tab-id");
-	//var tabByattr = document.querySelector(`.pg-tabs-panel[data-tab-id="${tabId}"]`);
-	//tabByattr.hidden = false;
-
-	// navItems.forEach(item => {
-	//     item.addEventListener('click', function (event) {
-	//         // hide all tab panels
-	//         tabPanels.forEach(panel => {
-	//             panel.hidden = true;
-	//         });
-	//         // mark all tabs as unselected
-	//         navItems.forEach(tab => {
-	//             tab.classList.remove('nav-item-active')
-	//         });
-	//         event.currentTarget.classList.add('nav-item-active')
-	//         var tabId = event.currentTarget.getAttribute("data-tab-id");
-	//         var tabByattr = document.querySelector(`.pg-tabs-panel[data-tab-id="${tabId}"]`);
-	//         tabByattr.hidden = false;
-
-	//     })
-	// })
 });
 
 

@@ -40,6 +40,7 @@
           "start": 0,
           "end": 0,
           "duration": 1000,
+          "source": "",
           "class": "number-count"
         },
         "styles": {

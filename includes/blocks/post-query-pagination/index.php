@@ -55,7 +55,7 @@ class PGBlockPostQueryPagination
     wp_enqueue_style('font-awesome-5');
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
     global $postGridScriptData;
@@ -182,7 +182,7 @@ class PGBlockPostQueryPagination
 
 
 
-    //var_dump($maxPageNum);
+    ////var_dump($maxPageNum);
 
     $layout = isset($attributes['layout']) ? $attributes['layout'] : [];
 

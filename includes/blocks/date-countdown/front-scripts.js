@@ -50,12 +50,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		if (timeDifference <= 0) {
 			document.dispatchEvent(pgDateCountdownExpired);
 
+			var contentWrapper = document.querySelector(".countdown-wrapper");
+			contentWrapper.style.display = "none";
+
 			// targetInner.style.display = "block";
 			if (targetCountdown != null) {
 				// targetCountdown.style.display = "none";
 			}
 
 			return;
+		}
+
+		if (timeDifference > 0) {
+			var innerWrap = document.querySelector(".inner");
+			innerWrap.style.display = "none";
 		}
 
 		document.addEventListener("pgDateCountdownExpired", (event) => {});
@@ -87,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			dataVisible.forEach((item) => {
 				var countdownExpiredArg = item.getAttribute("countdown-expired-arg");
 				var countdownExpiredArgObject = JSON.parse(countdownExpiredArg);
+
 
 				var dateCountdownId = item.getAttribute("date-countdown-id");
 
@@ -132,7 +141,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							countdownWrap.style.display = "none";
 						}
 						if (conditionId == "showExpiredMsg") {
-							innerWrap.style.display = "block";
+							document.addEventListener(
+								"pgDateCountdownExpired",
+								(event) => {
+
+									var innerWrap = document.querySelector(".inner");
+									innerWrap.style.display = "block";
+								}
+							);
 						}
 						if (conditionId == "showElement") {
 							value = conditions.value;

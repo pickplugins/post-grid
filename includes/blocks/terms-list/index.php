@@ -79,7 +79,7 @@ class PGBlockTermsList
   {
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -178,19 +178,31 @@ class PGBlockTermsList
 
     $taxonomy = 'category';
     $query_args = post_grid_parse_query_terms(isset($queryArgs['items']) ? $queryArgs['items'] : []);
+
+    $term_ID = isset($block->context['term_id']) ? $block->context['term_id'] : '';
+    $post_parent_value = $query_args['parent'];
+    $post_taxonomy_value = $query_args['taxonomy'];
+
+    if ($post_parent_value == '{ID}') {
+      // $post_id = get_the_id();
+      $parent_id = wp_get_term_taxonomy_parent_id($term_ID, $post_taxonomy_value);
+      $query_args['parent'] = $parent_id;
+    }
+
+    // $query_args['post_parent'] = $parent_id;
+    // var_dump($query_args);
     $terms = get_terms($query_args);
     $termsX = [];
 
     foreach ($terms as $term) :
 
-      if (!is_wp_error($term)) {
+      if (is_wp_error($term)) {
         continue;
       }
 
 
       $term_id = isset($term->term_id) ? $term->term_id : "";
       $term_taxonomy = isset($term->taxonomy) ? $term->taxonomy : "";
-
 
 
       $term_link = get_term_link($term_id, $term_taxonomy);
@@ -210,10 +222,14 @@ class PGBlockTermsList
         $term->link = $term_link;
       }
 
+
       $termsX[] = $term;
 
 
+
+
     endforeach;
+
 
 
 
@@ -283,9 +299,12 @@ class PGBlockTermsList
 
       $i = 1;
       if (!empty($termsX))
+
         foreach ($termsX as $term) {
 
+
           $term_id = isset($term->term_id) ? $term->term_id : "";
+
           $term_post_count = isset($term->count) ? $term->count : "";
           $term_link = isset($term->link) ? $term->link : "";
           $linkUrl = $term_link;

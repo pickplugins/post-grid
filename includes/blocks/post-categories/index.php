@@ -43,7 +43,7 @@ class PGBlockPostCategories
   {
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -175,28 +175,28 @@ class PGBlockPostCategories
 
 
 
-    ?>
+?>
 
 
     <<?php echo esc_attr($wrapperTag); ?> class=" <?php echo $blockId; ?>     <?php echo esc_attr($wrapperClass); ?>">
 
-      <?php if ($iconPosition == 'beforeFronttext'): ?>
+      <?php if ($iconPosition == 'beforeFronttext') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
-      <?php if (!empty($frontTexttext)): ?>
+      <?php if (!empty($frontTexttext)) : ?>
         <span class='frontText '>
           <?php echo $frontTexttext; ?>
         </span>
       <?php endif; ?>
 
 
-      <?php if ($iconPosition == 'afterFronttext'): ?>
+      <?php if ($iconPosition == 'afterFronttext') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
 
-      <?php if ($iconPosition == 'beforeItems'): ?>
+      <?php if ($iconPosition == 'beforeItems') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
@@ -227,7 +227,7 @@ class PGBlockPostCategories
             $linkUrl = get_author_posts_url($author_id);
           } else if ($itemsLinkTo == 'homeUrl') {
             $linkUrl = get_bloginfo('url');
-          } else if ($itemsLinkTo == 'custom') {
+          } else if ($itemsLinkTo == 'customUrl') {
             $linkUrl = $itemsCustomUrl;
           }
 
@@ -256,96 +256,95 @@ class PGBlockPostCategories
             break;
 
           /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-          ?>
+      ?>
 
-          <?php if (!empty($itemsLinkTo)): ?>
+        <?php if (!empty($itemsLinkTo)) : ?>
 
-            <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?>
-              target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+          <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
 
-              <?php if ($iconPosition == 'beforeItem'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php endif; ?>
+            <?php if ($iconPosition == 'beforeItem') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
 
-              <?php if (!empty($itemsPrefix)): ?>
-                <span class='prefix'>
-                  <?php echo wp_kses_post($itemsPrefix); ?>
-                </span>
-
-              <?php endif; ?>
-
-              <span class='termTitle'>
-                <?php echo wp_kses_post($term->name); ?>
+            <?php if (!empty($itemsPrefix)) : ?>
+              <span class='prefix'>
+                <?php echo wp_kses_post($itemsPrefix); ?>
               </span>
-              <?php if ($itemsPostCount): ?>
-                <span class='postCount'>
-                  <?php echo wp_kses_post($term_post_count); ?>
-                </span>
-              <?php endif; ?>
 
-              <?php if (!empty($itemsPostfix)): ?>
-                <span class='postfix'>
-                  <?php echo wp_kses_post($itemsPostfix); ?>
-                </span>
+            <?php endif; ?>
 
-              <?php endif; ?>
-
-              <?php if ($iconPosition == 'afterItem'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php endif; ?>
-            </a>
-          <?php else: ?>
-
-            <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
-
-              <?php if ($iconPosition == 'beforeItem'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php endif; ?>
-
-              <?php if (!empty($itemsPrefix)): ?>
-                <span class='prefix'>
-                  <?php echo wp_kses_post($itemsPrefix); ?>
-                </span>
-
-              <?php endif; ?>
-
-              <span class='termTitle'>
-                <?php echo wp_kses_post($term->name); ?>
-              </span>
-              <?php if ($itemsPostCount): ?>
-                <span class='postCount'>
-                  <?php echo wp_kses_post($term_post_count); ?>
-                </span>
-              <?php endif; ?>
-
-              <?php if (!empty($itemsPostfix)): ?>
-                <span class='postfix'>
-                  <?php echo wp_kses_post($itemsPostfix); ?>
-                </span>
-
-              <?php endif; ?>
-
-              <?php if ($iconPosition == 'afterItem'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php endif; ?>
+            <span class='termTitle'>
+              <?php echo wp_kses_post($term->name); ?>
             </span>
-          <?php endif; ?>
-
-
-          <?php if ($maxCount > $i): ?>
-            <?php if (!empty($separatorText)): ?>
-              <span class='separator'>
-                <?php echo esc_html($separatorText); ?>
+            <?php if ($itemsPostCount) : ?>
+              <span class='postCount'>
+                <?php echo wp_kses_post($term_post_count); ?>
               </span>
             <?php endif; ?>
+
+            <?php if (!empty($itemsPostfix)) : ?>
+              <span class='postfix'>
+                <?php echo wp_kses_post($itemsPostfix); ?>
+              </span>
+
+            <?php endif; ?>
+
+            <?php if ($iconPosition == 'afterItem') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+          </a>
+        <?php else : ?>
+
+          <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
+
+            <?php if ($iconPosition == 'beforeItem') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
+            <?php if (!empty($itemsPrefix)) : ?>
+              <span class='prefix'>
+                <?php echo wp_kses_post($itemsPrefix); ?>
+              </span>
+
+            <?php endif; ?>
+
+            <span class='termTitle'>
+              <?php echo wp_kses_post($term->name); ?>
+            </span>
+            <?php if ($itemsPostCount) : ?>
+              <span class='postCount'>
+                <?php echo wp_kses_post($term_post_count); ?>
+              </span>
+            <?php endif; ?>
+
+            <?php if (!empty($itemsPostfix)) : ?>
+              <span class='postfix'>
+                <?php echo wp_kses_post($itemsPostfix); ?>
+              </span>
+
+            <?php endif; ?>
+
+            <?php if ($iconPosition == 'afterItem') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+          </span>
+        <?php endif; ?>
+
+
+        <?php if ($maxCount > $i) : ?>
+          <?php if (!empty($separatorText)) : ?>
+            <span class='separator'>
+              <?php echo esc_html($separatorText); ?>
+            </span>
           <?php endif; ?>
-          <?php
+        <?php endif; ?>
+      <?php
           $i++;
         }
 
       ?>
 
-      <?php if ($iconPosition == 'afterItems'): ?>
+      <?php if ($iconPosition == 'afterItems') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
@@ -362,7 +361,7 @@ class PGBlockPostCategories
 
 
 
-    <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

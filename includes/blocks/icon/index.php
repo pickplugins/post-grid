@@ -15,13 +15,8 @@ class PGBlockIcon
 
   function front_scripts($attributes)
   {
-    //wp_register_script('pgicon_front_script', post_grid_plugin_url . 'includes/blocks/icon/front-scripts.js', [], '', true);
-
 
     if (has_block('post-grid/icon')) {
-      wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/css/fontawesome-old/css/font-awesome-5.css', []);
-      wp_enqueue_style('font-awesome-5');
-
 
       //wp_enqueue_script('pgicon_front_script');
     }
@@ -30,11 +25,6 @@ class PGBlockIcon
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/icon/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/icon/index.js', array('wp-blocks', 'wp-element'));
-    wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/css/fontawesome-old/css/font-awesome-5.css', []);
-
-
 
     register_block_type(
       post_grid_plugin_dir . 'build/blocks/icon/block.json',
@@ -63,7 +53,7 @@ class PGBlockIcon
   {
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -72,6 +62,7 @@ class PGBlockIcon
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $post_url = get_the_permalink($post_ID);
     $the_post = get_post($post_ID);
+    $post_author_id = $the_post->post_author;
     $post_excerpt = '';
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -94,6 +85,8 @@ class PGBlockIcon
 
     $textLinkTo = isset($textOptions['linkTo']) ? $textOptions['linkTo'] : '';
     $textLinkTarget = isset($textOptions['linkTarget']) ? $textOptions['linkTarget'] : '_blank';
+    $textLinkToAuthorMeta = isset($textOptions['linkToAuthorMeta']) ? $textOptions['linkToAuthorMeta'] : '';
+    $textLinkToCustomMeta = isset($textOptions['linkToCustomMeta']) ? $textOptions['linkToCustomMeta'] : '';
     $textCustomUrl = isset($textOptions['customUrl']) ? $textOptions['customUrl'] : '';
     $textLinkAttr = isset($textOptions['linkAttr']) ? $textOptions['linkAttr'] : [];
     $textRel = isset($textOptions['rel']) ? $textOptions['rel'] : '';
@@ -180,6 +173,30 @@ class PGBlockIcon
     // $utmGeneratedText = "utm_medium=".$utmTrackingMedium. "&utm_source=". $utmTrackingSource . "&utm_content=" . $utmTrackingContent . "&utm_term=" . $utmTrackingTerm;
 
 
+    if ($textLinkTo == 'postUrl') {
+      $post_url = get_permalink($post_ID);
+    } else if ($textLinkTo == 'homeUrl') {
+      $post_url = get_home_url();
+    } else if ($textLinkTo == 'authorUrl') {
+      $user = get_user_by('ID', $post_author_id);
+      $post_url = $user->user_url;
+    } else if ($textLinkTo == 'authorMail') {
+      $user = get_user_by('ID', $post_author_id);
+
+      $post_url = $user->user_email;
+      $post_url = "mailto:$post_url";
+    } else if ($textLinkTo == 'authorLink') {
+      $post_url = get_author_posts_url($post_author_id);
+    } else if (
+      $textLinkTo == 'customUrl'
+    ) {
+      $post_url = $textCustomUrl;
+    } else if ($textLinkTo == 'authorMeta') {
+      $post_url = get_user_meta($post_author_id, $textLinkToAuthorMeta, true);
+    } else if ($textLinkTo == 'customField') {
+      $post_url = get_post_meta($post_author_id, $textLinkToCustomMeta, true);
+    }
+
 
 
 
@@ -200,7 +217,7 @@ class PGBlockIcon
       if (!empty($utmTrackingContent))
         $utmValue['utm_content'] = $utmTrackingContent;
 
-      $utmUrl = add_query_arg($utmValue, $textCustomUrl);
+      $utmUrl = add_query_arg($utmValue, $post_url);
 
       $textCustomUrl = $utmUrl;
     }

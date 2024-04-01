@@ -137,19 +137,7 @@
       "type": "array",
       "default": [
         {
-          "styles": {
-            "color": {
-              "Desktop": ""
-            },
-            "backgroundColor": {},
-            "padding": {
-              "Desktop": ""
-            },
-            "margin": {
-              "Desktop": ""
-            },
-            "display": {}
-          }
+          "styles": {}
         }
       ]
     },

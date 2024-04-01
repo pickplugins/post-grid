@@ -11,6 +11,9 @@
     "postType",
     "queryId"
   ],
+  "providesContext": {
+    "post-grid/postElement": "elements"
+  },
   "supports": {
     "align": [
       "wide",
@@ -37,16 +40,8 @@
       "default": {
         "items": [
           {
-            "id": "avatar",
-            "label": "Avatar"
-          },
-          {
-            "id": "name",
+            "id": "display_name",
             "label": "Name"
-          },
-          {
-            "id": "description",
-            "label": "Description"
           }
         ]
       }

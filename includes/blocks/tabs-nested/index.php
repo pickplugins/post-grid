@@ -19,14 +19,6 @@ class PGBlockTabs
     wp_register_style('pgtabs_front_style', post_grid_plugin_url . 'includes/blocks/tabs-nested/index.css');
 
     if (has_block('post-grid/tabs-nested')) {
-
-      wp_enqueue_style('jquery-ui');
-
-      wp_enqueue_script('jquery');
-      wp_enqueue_script('jquery-ui-core');
-      wp_enqueue_script('jquery-ui-accordion');
-      wp_enqueue_script('jquery-effects-core');
-
       wp_enqueue_script('pgtabs_front_script');
       wp_enqueue_style('pgtabs_front_style');
     }
@@ -34,8 +26,6 @@ class PGBlockTabs
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/layers/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(

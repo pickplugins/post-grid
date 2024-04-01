@@ -34,7 +34,8 @@
         "animateDuration": 1,
         "animateIteration": 2,
         "animateDelay": 2,
-        "fill": 45
+        "source": "normal",
+        "fill": 75
       }
     },
     "progressInfo": {

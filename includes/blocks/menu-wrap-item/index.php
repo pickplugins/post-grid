@@ -112,7 +112,7 @@ class PGBlockMenuWrapItem
 
 
     $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
-    ////var_dump($link);
+    //////var_dump($link);
 
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';

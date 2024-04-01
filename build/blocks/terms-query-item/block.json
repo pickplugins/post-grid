@@ -4,7 +4,7 @@
   "name": "post-grid/terms-query-item",
   "title": "Term Field",
   "textdomain": "post-grid",
-  "category": "post-grid-post",
+  "category": "post-grid-archive",
   "parent": [
     "post-grid/terms-query",
     "post-grid/layers",
@@ -41,6 +41,20 @@
         }
       }
     },
+    "thumb": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "img",
+          "class": ""
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          }
+        }
+      }
+    },
     "termField": {
       "type": "object",
       "default": {
@@ -58,7 +72,7 @@
           "linkTarget": "_blank",
           "linkAttr": [],
           "customUrl": "",
-          "class": ""
+          "class": "field"
         },
         "styles": {
           "color": {

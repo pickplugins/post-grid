@@ -382,7 +382,7 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
                                 $args['element'] = $elementData;
                                 $args['index'] = $elementGroupIndex;
 
-                                //var_dump($elementIndex);
+                                ////var_dump($elementIndex);
 
                                 do_action('post_grid_layout_element_' . $elementIndex, $args);
                             }

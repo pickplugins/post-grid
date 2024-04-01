@@ -47,7 +47,7 @@ class PGBlockWooStarRate
   {
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -174,14 +174,14 @@ class PGBlockWooStarRate
     ob_start();
 
 
-    if (!empty($wrapperTag)):
+    if (!empty($wrapperTag)) :
 
-      ?>
+?>
       <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>       <?php echo esc_attr($wrapperClass); ?>">
 
 
 
-        <?php if ($prefixText): ?>
+        <?php if ($prefixText) : ?>
           <span class="<?php echo esc_attr($prefixClass); ?>">
             <?php echo wp_kses_post($prefixText); ?>
           </span>
@@ -208,7 +208,7 @@ class PGBlockWooStarRate
         </div>
 
 
-        <?php if (!empty($summarytypeCustom)): ?>
+        <?php if (!empty($summarytypeCustom)) : ?>
           <div class="summary">
             <?php
             echo wp_kses_post(strtr($summarytypeCustom, $summaryVars));
@@ -216,9 +216,9 @@ class PGBlockWooStarRate
           </div>
         <?php endif; ?>
 
-        <?php if (empty($summarytypeCustom)): ?>
+        <?php if (empty($summarytypeCustom)) : ?>
 
-          <?php if (!empty($summaryType)): ?>
+          <?php if (!empty($summaryType)) : ?>
             <div class="summary">
               <?php
               echo wp_kses_post(strtr($summaryType, $summaryVars));
@@ -232,7 +232,7 @@ class PGBlockWooStarRate
 
 
 
-        <?php if ($postfixText): ?>
+        <?php if ($postfixText) : ?>
           <span class="<?php echo $postfixClass; ?>">
             <?php echo $postfixText; ?>
           </span>
@@ -241,61 +241,61 @@ class PGBlockWooStarRate
 
 
       </<?php echo esc_attr($wrapperTag); ?>>
-      <?php
+    <?php
 
     endif;
 
-    if (empty($wrapperTag)):
+    if (empty($wrapperTag)) :
 
-      ?>
-      <?php if ($iconsWrapPosition == 'beforePrefix'): ?>
+    ?>
+      <?php if ($iconsWrapPosition == 'beforePrefix') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
-      <?php if ($prefixText): ?>
+      <?php if ($prefixText) : ?>
         <span class="<?php echo esc_attr($prefixClass); ?>">
           <?php echo $prefixText; ?>
         </span>
       <?php endif; ?>
 
-      <?php if ($iconsWrapPosition == 'afterPrefix'): ?>
+      <?php if ($iconsWrapPosition == 'afterPrefix') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
-      <?php if (!empty($skuLinkTo)):
-        ?>
+      <?php if (!empty($skuLinkTo)) :
+      ?>
 
         <a class='sku-text' target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>">
-          <?php if ($iconsWrapPosition == 'beforeSku'): ?>
+          <?php if ($iconsWrapPosition == 'beforeSku') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
           <?php echo wp_kses_post($productSKu); ?>C
-          <?php if ($iconsWrapPosition == 'afterSku'): ?>
+          <?php if ($iconsWrapPosition == 'afterSku') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
         </a>
-      <?php else: ?>
-        <?php if ($iconsWrapPosition == 'beforeSku'): ?>
+      <?php else : ?>
+        <?php if ($iconsWrapPosition == 'beforeSku') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
         <span class='sku-text'>
           <?php echo wp_kses_post($productSKu); ?>
         </span>
-        <?php if ($iconsWrapPosition == 'afterSku'): ?>
+        <?php if ($iconsWrapPosition == 'afterSku') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
       <?php endif; ?>
 
 
 
-      <?php if ($iconsWrapPosition == 'beforePostfix'): ?>
+      <?php if ($iconsWrapPosition == 'beforePostfix') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
-      <?php if ($postfixText): ?>
+      <?php if ($postfixText) : ?>
         <span class="<?php echo $postfixClass; ?>">
           <?php echo $postfixText; ?>
         </span>
       <?php endif; ?>
-      <?php if ($iconsWrapPosition == 'afterPostfix'): ?>
+      <?php if ($iconsWrapPosition == 'afterPostfix') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
     <?php
@@ -311,7 +311,7 @@ class PGBlockWooStarRate
 
 
 
-    <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

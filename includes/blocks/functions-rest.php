@@ -493,6 +493,14 @@ class BlockPostGridRest
 	public function get_posts_layout($post_data)
 	{
 
+		$query_args = [];
+
+
+		$nonce = isset($post_data['nonce']) ? $post_data['nonce'] : [];
+
+		if (!wp_verify_nonce($nonce, 'post_grid_editor_nonce')) return $query_args;
+
+
 		$category = isset($post_data['category']) ? $post_data['category'] : '';
 		$keyword = isset($post_data['keyword']) ? $post_data['keyword'] : '';
 
@@ -504,7 +512,6 @@ class BlockPostGridRest
 
 
 
-		$query_args = [];
 		$query_args['post_type'] = 'post_grid_template';
 
 		if (!empty($keyword)) {
@@ -1850,9 +1857,16 @@ class BlockPostGridRest
 	 */
 	public function get_posts($post_data)
 	{
+		$query_args = [];
+
+
+		$nonce = isset($post_data['nonce']) ? $post_data['nonce'] : [];
+
+		if (!wp_verify_nonce($nonce, 'post_grid_editor_nonce')) return $query_args;
 
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
+		error_log(serialize($queryArgs));
 		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
 		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
 
@@ -1864,7 +1878,8 @@ class BlockPostGridRest
 		$paged = 1;
 
 
-		$query_args = [];
+
+
 
 		if (is_array($queryArgs))
 			foreach ($queryArgs as $item) {

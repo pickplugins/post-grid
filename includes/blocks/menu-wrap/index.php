@@ -87,19 +87,19 @@ class PGBlockMenuWrap
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
-    ////var_dump($blockCssY);
+    //////var_dump($blockCssY);
 
     ob_start();
 
 
 
-    ?>
-        <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-          <ul class="<?php echo esc_attr($menuWrapClass); ?>">
-            <?php echo $content ?>
-          </ul>
-        </div>
-    <?php
+?>
+    <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+      <ul class="<?php echo esc_attr($menuWrapClass); ?>">
+        <?php echo $content ?>
+      </ul>
+    </div>
+<?php
 
     return ob_get_clean();
   }

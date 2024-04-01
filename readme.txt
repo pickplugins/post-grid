@@ -4,7 +4,7 @@ Donate link: https://comboblocks.com/
 Tags: post grid, form blocks, woocommerce blocks, popup, popup blocks, post blocks, carousel, breadcrumb, icon block, button block, date countdown 
 Requires at least: 5.0.0
 Tested up to: 6.4
-Stable tag: 2.2.77
+Stable tag: 2.2.78
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -390,6 +390,32 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 == Changelog ==
 
 
+
+= 2.2.78 =
+- 2024-04-01 - update - Overview Menu page update.
+- 2024-03-31 - update - Product Info block update.
+- 2024-03-31 - add - Product Info Item block update as a child block of Product Info block.
+- 2024-03-30 - fix - Sidebar Component fixed.
+- 2024-03-30 - update - Update Post Types Component.
+- 2024-03-30 - update - Update Page Styles Component.
+- 2024-03-30 - update - Update Global Styles Component.
+- 2024-03-28 - update - Update function.php file.
+- 2024-03-21 - fix - List Nested Item block fix wrapper tag.
+- 2024-03-21 - fix - Terms Field block display meta value fixed.
+- 2024-03-20 - update - Archive Title block update.
+- 2024-03-20 - update - Archive Description block update.
+- 2024-03-20 - update - Post Author block update.
+- 2024-03-20 - add - Post Author Field block update as a child block of Post Author block.
+- 2024-03-19 - fix - Social Share Block style issue fixed.
+- 2024-03-18 - update - Post Query Block update.
+- 2024-03-17 - update - Terms List Block update.
+- 2024-03-17 - fix - Breadcrumb Block style issue fixed.
+- 2024-03-16 - fix - Post Grid Block nth item style issue fixed.
+- 2024-03-16 - fix - Post Grid Filterable Block nth item style issue fixed.
+- 2024-03-16 - support - Post Grid Block to Post Grid Filterable Block transform support.
+- 2024-03-16 - add - Added some CSS properties (place-items, grid-auto-column, grid-auto-flow).
+- 2024-03-11 - add - Added wordpress-org-item block as a child block of wordpress-org block.
+- 2024-03-10 - update - Terms Field Block update.
 
 = 2.2.77 =
 - 2024-03-01 - fix - Post Title block postfix and prefix position issue fixed.
@@ -1112,7 +1138,7 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 = 2.0.53 =
 
-- 2020-05-04 fix - var_dump issue fixed for excerpt.
+- 2020-05-04 fix - //var_dump issue fixed for excerpt.
   - 2020-05-04 add - query post by ids added.
 
 = 2.0.52 =

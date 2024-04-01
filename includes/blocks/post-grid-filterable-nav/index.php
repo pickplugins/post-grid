@@ -56,7 +56,7 @@ class PGBlockPostGridFilterableNav
     wp_enqueue_style('font-awesome-5');
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
     global $postGridScriptData;

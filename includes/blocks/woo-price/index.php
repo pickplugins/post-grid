@@ -47,7 +47,7 @@ class PGBlockWooPrice
   {
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -133,9 +133,9 @@ class PGBlockWooPrice
     $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
 
-    // //var_dump($product->get_price());
-    // //var_dump($product->get_regular_price());
-    // //var_dump($product->get_sale_price());
+    // ////var_dump($product->get_price());
+    // ////var_dump($product->get_regular_price());
+    // ////var_dump($product->get_sale_price());
 
 
     $product_type = ($product != null) ? $product->get_type() : '';
@@ -159,46 +159,44 @@ class PGBlockWooPrice
     ob_start();
 
 
-    if (!empty($wrapperTag)):
+    if (!empty($wrapperTag)) :
 
-      ?>
+?>
       <<?php echo esc_attr($wrapperTag); ?> class="
               <?php echo esc_attr($blockId); ?>
               <?php echo esc_attr($wrapperClass); ?>">
 
 
-        <?php if ($iconPosition == 'beforePrefix'): ?>
+        <?php if ($iconPosition == 'beforePrefix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
 
-        <?php if ($prefixText): ?>
+        <?php if ($prefixText) : ?>
           <span class="<?php echo esc_attr($prefixClass); ?>">
             <?php echo wp_kses_post($prefixText); ?>
           </span>
         <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPrefix'): ?>
+        <?php if ($iconPosition == 'afterPrefix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
 
-        <?php if ($product_type == 'simple' || $product_type == 'external'):
+        <?php if ($product_type == 'simple' || $product_type == 'external') :
           $regular_price = ($product != null) ? $product->get_regular_price() : '';
           $sale_price = ($product != null) ? $product->get_sale_price() : ''; ?>
 
-          <?php if (empty($sale_price)): ?>
+          <?php if (empty($sale_price)) : ?>
 
             <span class=' regular'>
-              <span
-                class='currency'><?php echo wp_kses_post($currency_symbol); ?></span><?php echo wp_kses_post($regular_price); ?>
+              <span class='currency'><?php echo wp_kses_post($currency_symbol); ?></span><?php echo wp_kses_post($regular_price); ?>
             </span>
 
           <?php endif; ?>
-          <?php if (!empty($sale_price)): ?>
+          <?php if (!empty($sale_price)) : ?>
 
 
             <span class='regular'>
-              <span
-                class='currency'><?php echo wp_kses_post($currency_symbol); ?></span><?php echo wp_kses_post($regular_price); ?>
+              <span class='currency'><?php echo wp_kses_post($currency_symbol); ?></span><?php echo wp_kses_post($regular_price); ?>
             </span>
 
             <span class=' discounted'>
@@ -212,10 +210,10 @@ class PGBlockWooPrice
 
 
         <?php endif;
-        if ($product_type == 'variable'):
+        if ($product_type == 'variable') :
           $min_price = ($product != null) ? $product->get_variation_price() : '';
           $max_price = ($product != null) ? $product->get_variation_price('max') : '';
-          ?>
+        ?>
           <span class='regular'>
             <span class='currency'><?php echo wp_kses_post($currency_symbol); ?></span><?php echo wp_kses_post($min_price); ?>
           </span>
@@ -227,7 +225,7 @@ class PGBlockWooPrice
           </span>
         <?php endif;
 
-        if ($product_type == 'grouped'):
+        if ($product_type == 'grouped') :
           $child_prices = array();
           foreach ($product->get_children() as $child_id) {
             $child_prices[] = get_post_meta($child_id, '_price', true);
@@ -235,7 +233,7 @@ class PGBlockWooPrice
           $child_prices = array_unique($child_prices);
           $min_price = min($child_prices);
           $max_price = max($child_prices);
-          ?>
+        ?>
           <span class='regular'>
             <span class='currency'><?php echo wp_kses_post($currency_symbol); ?></span><?php echo wp_kses_post($min_price); ?>
           </span>
@@ -247,16 +245,16 @@ class PGBlockWooPrice
           </span>
         <?php endif; ?>
 
-        <?php if ($iconPosition == 'beforePostfix'): ?>
+        <?php if ($iconPosition == 'beforePostfix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-        <?php if ($postfixText): ?>
+        <?php if ($postfixText) : ?>
           <span class="<?php echo $postfixClass; ?>">
             <?php echo $postfixText; ?>
           </span>
         <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPostfix'): ?>
+        <?php if ($iconPosition == 'afterPostfix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
 
@@ -264,7 +262,7 @@ class PGBlockWooPrice
     <?php endif; ?>
 
 
-    <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

@@ -64,7 +64,7 @@ class BlockPostMeta
     {
 
 
-        global $postGridCss;
+
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
@@ -142,8 +142,8 @@ class BlockPostMeta
 
 
 
-        if (!empty($wrapperTag)):
-            ?>
+        if (!empty($wrapperTag)) :
+?>
             <<?php echo esc_attr($wrapperTag); ?> class="
                 <?php echo esc_attr($blockId); ?>
                 <?php echo esc_attr($wrapperClass); ?>">
@@ -184,7 +184,7 @@ class BlockPostMeta
 
             </<?php echo esc_attr($wrapperTag); ?>>
 
-            <?php
+<?php
 
         endif;
 

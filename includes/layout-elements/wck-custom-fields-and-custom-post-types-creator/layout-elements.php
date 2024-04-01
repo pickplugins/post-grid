@@ -248,7 +248,7 @@ function post_grid_layout_element_wck_text($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -502,7 +502,7 @@ function post_grid_layout_element_wck_textarea($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -756,7 +756,7 @@ function post_grid_layout_element_wck_number($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -1025,7 +1025,7 @@ function post_grid_layout_element_wck_email($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -1294,7 +1294,7 @@ function post_grid_layout_element_wck_url($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -1564,7 +1564,7 @@ function post_grid_layout_element_wck_range($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -1822,7 +1822,7 @@ function post_grid_layout_element_wck_wysiwyg($args)
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     if (!empty($wck_value)) :
 
@@ -2088,7 +2088,7 @@ function post_grid_layout_element_wck_upload($args)
 
 
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     $attachment_id = get_post_meta($post_id, $wck_key, true);
 
@@ -2402,7 +2402,7 @@ function post_grid_layout_element_wck_file($args)
 
 
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -2728,11 +2728,11 @@ function post_grid_layout_element_wck_select($args)
 
 
 
-    //var_dump($wck_key);
-    //var_dump($item_wrapper_html);
+    ////var_dump($wck_key);
+    ////var_dump($item_wrapper_html);
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     $html = '';
 
@@ -2740,7 +2740,7 @@ function post_grid_layout_element_wck_select($args)
 
         if (is_array($wck_value)) {
             foreach ($wck_value as $_items) {
-                //var_dump($_items);
+                ////var_dump($_items);
                 $html .= sprintf($item_wrapper_html, $_items);
             }
         } else {
@@ -3030,8 +3030,8 @@ function post_grid_layout_element_wck_checkbox($args)
 
 
 
-    //var_dump($wck_key);
-    //var_dump($item_wrapper_html);
+    ////var_dump($wck_key);
+    ////var_dump($item_wrapper_html);
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     $html = '';
@@ -3040,7 +3040,7 @@ function post_grid_layout_element_wck_checkbox($args)
 
         if (is_array($wck_value)) {
             foreach ($wck_value as $_items) {
-                //var_dump($_items);
+                ////var_dump($_items);
                 $html .= sprintf($item_wrapper_html, $_items);
             }
         } else {
@@ -3331,11 +3331,11 @@ function post_grid_layout_element_wck_radio($args)
 
 
 
-    //var_dump($wck_key);
-    //var_dump($item_wrapper_html);
+    ////var_dump($wck_key);
+    ////var_dump($item_wrapper_html);
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     $html = '';
 
@@ -3641,11 +3641,11 @@ function post_grid_layout_element_wck_buttongroup($args)
 
 
 
-    //var_dump($wck_key);
-    //var_dump($item_wrapper_html);
+    ////var_dump($wck_key);
+    ////var_dump($item_wrapper_html);
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     $html = '';
 
@@ -3949,11 +3949,11 @@ function post_grid_layout_element_wck_page_link($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     if (!empty($wck_value)) :
         $html = '';
@@ -4252,18 +4252,18 @@ function post_grid_layout_element_wck_taxonomy($args)
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    //var_dump($item_wrapper_html);
+    ////var_dump($item_wrapper_html);
 
     if (!empty($wck_value)) :
-        //var_dump($wck_value);
+        ////var_dump($wck_value);
         $term_html = '';
         foreach ($wck_value as $term) {
 
-            //var_dump('#########');
+            ////var_dump('#########');
             //echo esc_html($item_wrapper_html);
 
             if (is_object($term)) {
@@ -4552,12 +4552,12 @@ function post_grid_layout_element_wck_user($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     if (!empty($wck_value)) :
 
@@ -4845,7 +4845,7 @@ function post_grid_layout_element_wck_date_picker($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -5116,7 +5116,7 @@ function post_grid_layout_element_wck_time_picker($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -5387,7 +5387,7 @@ function post_grid_layout_element_wck_datetime_picker($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -5639,7 +5639,7 @@ function post_grid_layout_element_wck_google_map($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -5892,7 +5892,7 @@ function post_grid_layout_element_wck_colorpicker($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -6161,11 +6161,11 @@ function post_grid_layout_element_wck_link($args)
 
 
 
-    //var_dump($wrapper_html);
+    ////var_dump($wrapper_html);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    //var_dump($wck_value);
+    ////var_dump($wck_value);
 
     if (!empty($wck_value)) :
 
@@ -6425,7 +6425,7 @@ function post_grid_layout_element_wck_post_object($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -6676,7 +6676,7 @@ function post_grid_layout_element_wck_oembed($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -6945,7 +6945,7 @@ function post_grid_layout_element_wck_password($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -7229,7 +7229,7 @@ function post_grid_layout_element_wck_relationship($args)
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -7535,7 +7535,7 @@ function post_grid_layout_element_wck_true_false($args)
 
 
 
-    //var_dump($wck_key);
+    ////var_dump($wck_key);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 

@@ -77,7 +77,7 @@ class PGBlockJustifiedImage
 
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
 
@@ -149,7 +149,7 @@ class PGBlockJustifiedImage
     //echo '<pre>' . //var_export($galleryLightbox, true) . '</pre>';
     // echo '<pre>' . //var_export($featuredImageSrcMetaKeyType, true) . '</pre>';
 
-    //var_dump($lightboxOptions);
+    ////var_dump($lightboxOptions);
 
 
     $linkAttrStr = '';
@@ -296,101 +296,82 @@ class PGBlockJustifiedImage
 
 
 
-    if (!empty($wrapperTag) && $useAsBackground == 'no'):
+    if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
-      ?>
-                  <<?php echo esc_attr($wrapperTag); ?> class="
+?>
+      <<?php echo esc_attr($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>">
-                    <?php if (!empty($featuredImageLinkTo)): ?>
-                          <a <?php if ($lightboxEnable == true): ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>
-                            href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
-                            rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+        <?php if (!empty($featuredImageLinkTo)) : ?>
+          <a <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?> href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-                            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
-                              srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>"
-                              title="<?php echo esc_attr($titleText); ?>" />
+            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
-                          </a>
-                    <?php else: ?>
+          </a>
+        <?php else : ?>
 
-                          <?php if ($lightboxEnable == true): ?>
-                                <a href=" <?php echo esc_url_raw($attachment_url); ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
-                                  <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
-                                    srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>"
-                                    title="<?php echo esc_attr($titleText); ?>" />
-                                </a>
-                          <?php else: ?>
-                                <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
-                                  srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>"
-                                  title="<?php echo esc_attr($titleText); ?>" />
-                          <?php endif; ?>
+          <?php if ($lightboxEnable == true) : ?>
+            <a href=" <?php echo esc_url_raw($attachment_url); ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
+              <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+            </a>
+          <?php else : ?>
+            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+          <?php endif; ?>
 
-                    <?php endif; ?>
-                  </<?php echo esc_attr($wrapperTag); ?>>
-                  <?php
+        <?php endif; ?>
+      </<?php echo esc_attr($wrapperTag); ?>>
+    <?php
 
     endif;
 
-    if (empty($wrapperTag) && $useAsBackground == 'no'):
+    if (empty($wrapperTag) && $useAsBackground == 'no') :
 
-      ?>
+    ?>
 
-                  <?php if (!empty($featuredImageLinkTo)): ?>
-                        <a class=" <?php echo esc_attr($blockId); ?>"
-                          href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
-                          rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php if ($lightboxEnable == true): ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
+      <?php if (!empty($featuredImageLinkTo)) : ?>
+        <a class=" <?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
 
 
-                          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
-                            srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>"
-                            title="<?php echo esc_attr($titleText); ?>" />
+          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" srcset=" <?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
-                        </a>
-                  <?php else: ?>
+        </a>
+      <?php else : ?>
 
-                        <?php if ($lightboxEnable == true): ?>
-                              <a class=" <?php echo esc_attr($blockId); ?>"
-                                href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
-                                data-fslightbox=" <?php echo esc_attr($galleryId); ?>"> <img <?php echo esc_attr($linkAttrStr); ?>
-                                  src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>"
-                                  alt="<?php echo esc_attr($altText); ?>" title=" <?php echo esc_attr($titleText); ?>" /> </a>
-                        <?php else: ?>
-                              <img class="<?php echo esc_attr($blockId); ?>" <?php echo esc_attr($linkAttrStr); ?>
-                                src=" <?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>"
-                                alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
+        <?php if ($lightboxEnable == true) : ?>
+          <a class=" <?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" data-fslightbox=" <?php echo esc_attr($galleryId); ?>"> <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title=" <?php echo esc_attr($titleText); ?>" /> </a>
+        <?php else : ?>
+          <img class="<?php echo esc_attr($blockId); ?>" <?php echo esc_attr($linkAttrStr); ?> src=" <?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
-                        <?php endif; ?>
+        <?php endif; ?>
 
-                  <?php endif; ?>
+      <?php endif; ?>
 
-                  <?php
+    <?php
 
     endif;
 
 
 
-    if (!empty($wrapperTag) && $useAsBackground == 'yes'):
+    if (!empty($wrapperTag) && $useAsBackground == 'yes') :
 
-      ?>
+    ?>
 
-                  <?php if (!empty($featuredImageLinkTo)): ?>
-                        <a href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
-                          rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-                          <<?php echo esc_attr($wrapperTag); ?> class="
+      <?php if (!empty($featuredImageLinkTo)) : ?>
+        <a href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+          <<?php echo esc_attr($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>">
 
-                          </<?php echo esc_attr($wrapperTag); ?>>
-                        </a>
-                  <?php else: ?>
+          </<?php echo esc_attr($wrapperTag); ?>>
+        </a>
+      <?php else : ?>
 
-                        <<?php echo esc_attr($wrapperTag); ?> class="
+        <<?php echo esc_attr($wrapperTag); ?> class="
                           <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-                        </<?php echo esc_attr($wrapperTag); ?>>
-                  <?php endif; ?>
+        </<?php echo esc_attr($wrapperTag); ?>>
+      <?php endif; ?>
 
-                  <?php
+    <?php
 
     endif;
 
@@ -405,7 +386,7 @@ class PGBlockJustifiedImage
 
 
 
-            <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

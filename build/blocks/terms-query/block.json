@@ -4,7 +4,7 @@
   "name": "post-grid/terms-query",
   "title": "Terms Query",
   "textdomain": "post-grid",
-  "category": "post-grid-tools",
+  "category": "post-grid-archive",
   "usesContext": [
     "postId",
     "loopIndex",

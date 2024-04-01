@@ -44,9 +44,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			var blockId = numberCountArgsObj.blockId;
 			var start = numberCountArgsObj.start;
-			var end = numberCountArgsObj.end;
+			var endX = numberCountArgsObj.end;
 			var duration = numberCountArgsObj.duration;
 			var onScroll = numberCountArgsObj.onScroll;
+			var source = numberCountArgsObj.source;
+			var saleCount = numberCountArgsObj.saleCount;
+			var end = "";
+			if (source.length > 0) {
+				end = saleCount;
+			} else {
+				end = endX;
+			}
 
 			var wrapHandle = "." + blockId + " .number-count";
 
@@ -65,4 +73,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
-

@@ -83,8 +83,8 @@ class PGBlockAccordionNestedItem
 		$headerLabelSlug = isset($headerLabelOptions['slug']) ? $headerLabelOptions['slug'] : "";
 		$headerLabelTag = isset($headerLabelOptions['tag']) ? $headerLabelOptions['tag'] : "";
 
-		// var_dump($headerTag);
-		//var_dump($headerLabelTag);
+		// //var_dump($headerTag);
+		////var_dump($headerLabelTag);
 
 		$icon = isset($attributes['icon']) ? $attributes['icon'] : $parentIcon;
 		$iconOptions = isset($icon['options']) ? $icon['options'] : [];
@@ -101,6 +101,7 @@ class PGBlockAccordionNestedItem
 
 
 		$iconToggle = isset($attributes['iconToggle']) ? $attributes['iconToggle'] : $parentIconToggle;
+
 		$iconToggleOptions = isset($iconToggle['options']) ? $iconToggle['options'] : [];
 		$parentIconToggleOptions = isset($iconToggle['options']) ? $iconToggle['options'] : [];
 
@@ -136,7 +137,7 @@ class PGBlockAccordionNestedItem
 		$labelIconHtml = !empty($labelIconSrc) ? '<span class="accordion-label-icon ' . $labelIconClass . ' ' . $labelIconSrc . '"></span>' : '';
 
 		$contentWrapper = isset($attributes['content']) ? $attributes['content'] : $parentContent;
-		// var_dump($contentWrapper);
+		// //var_dump($contentWrapper);
 		$contentOptions = isset($contentWrapper['options']) ? $contentWrapper['options'] : [];
 		$parentContentOptions = isset($contentWrapper['options']) ? $contentWrapper['options'] : [];
 		$contentWrapperTag = !empty($contentOptions['tag']) ? $contentOptions['tag'] : $parentContentOptions['tag'];
@@ -181,8 +182,8 @@ class PGBlockAccordionNestedItem
 		}
 
 
-		////var_dump($labelIconSrc);
-		////var_dump($labelIconOptions);
+		//////var_dump($labelIconSrc);
+		//////var_dump($labelIconOptions);
 
 		//echo '<pre>' . var_export($labelCounterEnable, true) . '</pre>';
 		//echo '<pre>' . var_export($count, true) . '</pre>';
@@ -193,47 +194,44 @@ class PGBlockAccordionNestedItem
 
 
 ?>
-<<?php echo esc_attr($headerTag); ?> class="<?php echo esc_attr($headerClass); ?>">
-  <?php if ($iconPosition == 'left') : ?>
-  <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
-    <?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
-  </span>
-  <?php endif; ?>
+		<<?php echo esc_attr($headerTag); ?> class="<?php echo esc_attr($headerClass); ?>">
+			<?php if ($iconPosition == 'left') : ?>
+				<span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
+					<?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
+				</span>
+			<?php endif; ?>
 
-  <?php if ($labelCounterEnable) : ?>
-  <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
-    <?php echo wp_kses_post($count); ?>
-  </span>
-  <?php endif; ?>
-  <?php if ($labelIconPosition == 'beforeLabel') : ?>
-  <?php echo wp_kses_post($labelIconHtml); ?>
-  <?php endif; ?>
-  <<?php echo esc_attr($headerLabelTag); ?>
-    class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label"
-    <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>
-    <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
-    <?php if ($labelIconPosition == 'beforeLabelText') : ?>
-    <?php echo wp_kses_post($labelIconHtml); ?>
-    <?php endif; ?>
-    <?php echo wp_kses_post($headerLabelText); ?>
-    <?php if ($labelIconPosition == 'afterLabelText') : ?>
-    <?php echo wp_kses_post($labelIconHtml); ?>
-    <?php endif; ?>
-  </<?php echo esc_attr($headerLabelTag); ?>>
-  <?php if ($labelIconPosition == 'afterLabel') : ?>
-  <?php echo wp_kses_post($labelIconHtml); ?>
-  <?php endif; ?>
-  <?php if ($iconPosition == 'right') : ?>
-  <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
-    <?php echo wp_kses_post($iconIdleHtml); ?>
-    <?php echo wp_kses_post($iconToggleHtml); ?>
-  </span>
-  <?php endif; ?>
-</<?php echo esc_attr($headerTag); ?>>
+			<?php if ($labelCounterEnable) : ?>
+				<span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
+					<?php echo wp_kses_post($count); ?>
+				</span>
+			<?php endif; ?>
+			<?php if ($labelIconPosition == 'beforeLabel') : ?>
+				<?php echo wp_kses_post($labelIconHtml); ?>
+			<?php endif; ?>
+			<<?php echo esc_attr($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+				<?php if ($labelIconPosition == 'beforeLabelText') : ?>
+					<?php echo wp_kses_post($labelIconHtml); ?>
+				<?php endif; ?>
+				<?php echo wp_kses_post($headerLabelText); ?>
+				<?php if ($labelIconPosition == 'afterLabelText') : ?>
+					<?php echo wp_kses_post($labelIconHtml); ?>
+				<?php endif; ?>
+			</<?php echo esc_attr($headerLabelTag); ?>>
+			<?php if ($labelIconPosition == 'afterLabel') : ?>
+				<?php echo wp_kses_post($labelIconHtml); ?>
+			<?php endif; ?>
+			<?php if ($iconPosition == 'right') : ?>
+				<span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
+					<?php echo wp_kses_post($iconIdleHtml); ?>
+					<?php echo wp_kses_post($iconToggleHtml); ?>
+				</span>
+			<?php endif; ?>
+		</<?php echo esc_attr($headerTag); ?>>
 
-<<?php echo esc_attr($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>">
-  <?php echo $content; ?>
-</<?php echo esc_attr($contentWrapperTag); ?>>
+		<<?php echo esc_attr($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>">
+			<?php echo $content; ?>
+		</<?php echo esc_attr($contentWrapperTag); ?>>
 <?php return ob_get_clean();
 	}
 }

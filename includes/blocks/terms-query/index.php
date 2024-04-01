@@ -53,7 +53,7 @@ class PGBlockTermsQuery
     wp_enqueue_style('font-awesome-5');
 
 
-    global $postGridCss;
+
 
     global $postGridCssY;
     global $postGridScriptData;
@@ -62,13 +62,15 @@ class PGBlockTermsQuery
 
     $block_instance = $block->parsed_block;
 
-    //var_dump($block_instance);
+    ////var_dump($block_instance);
 
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
     $postGridId = isset($block->context['post-grid/postGridId']) ? $block->context['post-grid/postGridId'] : '';
+
+    // $term_ID = isset($block->context['term_id']) ? $block->context['term_id'] : '';
 
 
 
@@ -123,14 +125,31 @@ class PGBlockTermsQuery
 
 
     $query_args = post_grid_parse_query_terms(isset($queryArgs['items']) ? $queryArgs['items'] : []);
+
     // $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
 
     // $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
 
     //echo var_export($query_args, true);
+    $object = get_queried_object();
+    $term_id = isset($object->term_id) ? $object->term_id : 0;
+
+    // var_dump($term_id);
+
+    // if (array_key_exists('parent', $query_args)) {
+
+    //   $post_parent_value = $query_args['parent'];
+    //   $post_taxonomy_value = $query_args['taxonomy'];
+
+    //   if ($post_parent_value == '$id') {
+
+    //     $parent_id =
+    //       wp_get_term_taxonomy_parent_id($term_ID, $post_taxonomy_value);
+    //     $query_args['parent'] = $parent_id;
+    //   }
+    // }
 
 
-    
 
 
     $posts = [];
@@ -141,7 +160,8 @@ class PGBlockTermsQuery
 
     $terms = get_terms($query_args);
 
-    // var_dump($innerBlocks);
+
+    // //var_dump($innerBlocks);
 
     $blockArgs = [
       'blockId' => $blockId,
@@ -156,21 +176,20 @@ class PGBlockTermsQuery
 ?>
 
 
-<?php
+    <?php
     if (!$itemsWrapExcluded) :
     ?>
-<div class="loop-loading"></div>
-<div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop"
-  id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-  <?php
+      <div class="loop-loading"></div>
+      <div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+      <?php
     endif;
       ?>
-  <?php
+      <?php
       if ($terms) :
 
         $counter = 1;
 
-      
+
         $the_query = new WP_Term_Query($query_args);
         foreach ($the_query->get_terms() as $term) {
 
@@ -199,7 +218,7 @@ class PGBlockTermsQuery
             return $context;
           };
 
-          //var_dump($filter_block_context);
+          ////var_dump($filter_block_context);
           add_filter('render_block_context', $filter_block_context, 1);
 
 
@@ -219,7 +238,7 @@ class PGBlockTermsQuery
 
 
       ?>
-  <<?php echo esc_html($itemWrapTag); ?> class="
+          <<?php echo esc_html($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php ?>
             <?php if ($itemWrapCounterClass) {
@@ -228,10 +247,10 @@ class PGBlockTermsQuery
             <?php if ($itemWrapOddEvenClass) {
               echo esc_attr($odd_even_class);
             } ?> ">
-    <?php echo wp_kses_post($html);
+            <?php echo wp_kses_post($html);
             ?>
-  </<?php echo esc_html($itemWrapTag); ?>>
-  <?php
+          </<?php echo esc_html($itemWrapTag); ?>>
+      <?php
           $counter++;
         }
 
@@ -239,10 +258,10 @@ class PGBlockTermsQuery
 
       ?>
 
-  <?php
+      <?php
       if (!$itemsWrapExcluded) : ?>
-</div>
-<?php
+      </div>
+    <?php
       endif; ?>
 <?php return ob_get_clean();
   }

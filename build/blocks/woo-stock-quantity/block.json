@@ -89,7 +89,7 @@
           "library": "fontAwesome",
           "srcType": "class",
           "iconSrc": "",
-          "position": "beforeQuantity",
+          "position": "",
           "class": "stockQuantity-icon"
         },
         "styles": {

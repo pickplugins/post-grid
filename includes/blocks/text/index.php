@@ -125,13 +125,13 @@ class PGBlockPostText
 
     if (!empty($wrapperTag)) :
 ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="
+      <<?php echo esc_html($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
 
                                                                                     if ($otherCopyObj) :
                                                                                     ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" <?php endif; ?>><?php echo $content; ?>
-      </<?php echo esc_attr($wrapperTag); ?>>
+      </<?php echo esc_html($wrapperTag); ?>>
     <?php
 
     endif;

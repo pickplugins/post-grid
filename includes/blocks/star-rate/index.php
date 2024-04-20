@@ -205,7 +205,7 @@ class PGBlockStarRate
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+      <<?php echo esc_html($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
 
 
 
@@ -294,7 +294,7 @@ class PGBlockStarRate
 
 
 
-      </<?php echo esc_attr($wrapperTag); ?>>
+      </<?php echo esc_html($wrapperTag); ?>>
     <?php
 
     endif;

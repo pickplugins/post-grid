@@ -287,7 +287,7 @@ class PGBlockDateCountdown
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo esc_attr($wrapperTag); ?> class="PGBlockDateCountdown
+			<<?php echo esc_html($wrapperTag); ?> class="PGBlockDateCountdown
 											<?php echo esc_attr($blockId); ?>						 			<?php echo esc_attr($wrapperClass); ?>
 											<?php echo esc_attr($blockAlign); ?>" date-countdown-id="<?php echo esc_attr($blockId); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>" countdown-expired-arg="<?php echo esc_attr(json_encode($expiredArg)) ?>">
 
@@ -571,7 +571,7 @@ class PGBlockDateCountdown
 
 
 
-			</<?php echo esc_attr($wrapperTag); ?>>
+			</<?php echo esc_html($wrapperTag); ?>>
 		<?php
 
 		endif;

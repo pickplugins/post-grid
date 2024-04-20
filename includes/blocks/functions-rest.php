@@ -496,9 +496,9 @@ class BlockPostGridRest
 		$query_args = [];
 
 
-		$nonce = isset($post_data['nonce']) ? $post_data['nonce'] : [];
+		$nonce = isset($post_data['_wpnonce']) ? $post_data['_wpnonce'] : [];
 
-		if (!wp_verify_nonce($nonce, 'post_grid_editor_nonce')) return $query_args;
+		if (!wp_verify_nonce($nonce, 'wp_rest')) return $query_args;
 
 
 		$category = isset($post_data['category']) ? $post_data['category'] : '';
@@ -1287,7 +1287,7 @@ class BlockPostGridRest
 		$formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
 
-		$form_wrap_nonce = $request->get_param('nonce');
+		$form_wrap_nonce = $request->get_param('_wpnonce');
 
 
 
@@ -1689,8 +1689,49 @@ class BlockPostGridRest
 		}
 
 
+		error_log(rwmb_meta($meta_key, [], $postId));
 
-		if ($meta_type == 'acfImage' || $meta_type == 'acfFile' || $meta_type == 'acfButtonGroup') {
+		if ($meta_type == 'mbTaxonomy' || $meta_type == 'mbSelect') {
+			$mb_Value = rwmb_meta($meta_key, [], $postId);
+			// error_log(gettype($mb_Value));
+			if (gettype($mb_Value) == 'object') {
+				error_log(serialize($mb_Value));
+			}
+			if (gettype($mb_Value) == 'array') {
+				$singleArray = $this->nestedToSingle($mb_Value);
+				$response->html = strtr($template, (array) $singleArray);
+				$response->args = $singleArray;
+			} else if (gettype($mb_Value) == 'object') {
+				$arrayValue = (array)$mb_Value;
+
+				// Process the array
+				$singleArray = $this->nestedToSingle($arrayValue);
+
+				// Assuming $template is defined elsewhere
+				$response->html = strtr($template, $singleArray);
+
+				// Set $singleArray as args
+				$response->args = $singleArray;
+				// $singleArray = $this->nestedToSingle($mb_Value);
+				// $response->html = strtr($template, (array) $singleArray);
+				// $response->args = $singleArray;
+			} else {
+
+				$singleArray = ['{metaValue}' => $mb_Value];
+				$response->args = $singleArray;
+				$response->html = strtr($template, (array) $singleArray);
+				$response->meta_value = $mb_Value;
+				$response->meta_key = $meta_key;
+			}
+		} else if ($meta_type == 'mbButton') {
+			$mb_Value = rwmb_meta($meta_key, [], $postId);
+			// error_log(gettype($mb_Value));
+			$singleArray = ['{metaValue}' => $mb_Value];
+			$response->args = $singleArray;
+			$response->html = strtr($template, (array) $singleArray);
+			$response->meta_value = $mb_Value;
+			$response->meta_key = $meta_key;
+		} else if ($meta_type == 'acfImage' || $meta_type == 'acfFile' || $meta_type == 'acfButtonGroup') {
 
 			$acf_value = get_field($meta_key, $postId);
 
@@ -1724,6 +1765,26 @@ class BlockPostGridRest
 				$response->args = $singleArray;
 				$response->html = strtr($template, (array) $singleArray);
 				$response->meta_value = $acf_value;
+				$response->meta_key = $meta_key;
+			}
+		} else if ($meta_type == 'podsImage' || $meta_type == 'podsFile' || $meta_type == 'podsSelect' || $meta_type == 'podsCheckbox' || $meta_type == 'podsRadio' || $meta_type == 'podsButtonGroup' || $meta_type == 'podsLink' || $meta_type == 'podsTaxonomy' || $meta_type == 'podsUser' || $meta_type == 'podsPostObject' || $meta_type == 'podsRelationship' || $meta_type == 'podsTrueFalse') {
+
+
+			$post_type = get_post_type($postId);
+			$pods_value = pods_field($post_type, $postId, $meta_key, true);
+
+
+			if (gettype($pods_value) == 'array') {
+				$singleArray = $this->nestedToSingle($pods_value);
+				$response->html = strtr($template, (array) $singleArray);
+				$response->args = $singleArray;
+			} else if (gettype($pods_value) == 'object') {
+			} else {
+
+				$singleArray = ['{metaValue}' => $pods_value];
+				$response->args = $singleArray;
+				$response->html = strtr($template, (array) $singleArray);
+				$response->meta_value = $pods_value;
 				$response->meta_key = $meta_key;
 			}
 		} else {
@@ -1860,9 +1921,11 @@ class BlockPostGridRest
 		$query_args = [];
 
 
-		$nonce = isset($post_data['nonce']) ? $post_data['nonce'] : [];
+		$nonce = isset($post_data['_wpnonce']) ? $post_data['_wpnonce'] : "";
 
-		if (!wp_verify_nonce($nonce, 'post_grid_editor_nonce')) return $query_args;
+
+		if (!wp_verify_nonce($nonce, 'wp_rest')) return $query_args;
+
 
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
@@ -2445,7 +2508,7 @@ class BlockPostGridRest
 
 
 		$response['email'] = $admin_email;
-		$response['name'] = $adminData->display_name;
+		$response['name'] = isset($adminData->display_name) ? $adminData->display_name : '';
 
 		$response['siteurl'] = $siteurl;
 		$response['siteAdminurl'] = $siteAdminurl;

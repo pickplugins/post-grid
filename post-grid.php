@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.78
+Version: 2.2.79
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.78');
+      define('post_grid_version', '2.2.79');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -373,8 +373,7 @@ if (!class_exists('PostGrid')) {
       wp_register_script('post_grid_layouts', post_grid_plugin_url . 'assets/js/scripts-layouts.js', array('jquery'));
 
 
-      // wp_localize_script('wp-api', 'wpApiSettings', array('root' => esc_url_raw(rest_url()), 'nonce' => wp_create_nonce('wp_rest')));
-      // wp_enqueue_script('wp-api');
+
 
 
 
@@ -481,7 +480,7 @@ if (!class_exists('PostGrid')) {
 
       );
 
-      wp_localize_script('post-grid-blocks', 'post_grid_editor_js', array('post_grid_ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('post_grid_editor_nonce')));
+      wp_localize_script('post-grid-blocks', 'post_grid_editor_js', array('post_grid_ajaxurl' => admin_url('admin-ajax.php'), '_wpnonce' => wp_create_nonce('wp_rest')));
 
 
 

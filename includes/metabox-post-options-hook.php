@@ -28,12 +28,12 @@ function post_grid_post_options_content_options($tab, $post_id){
 
 
     ?>
-    <div class="section">
-        <div class="section-title">Options</div>
-        <p class="description section-description">Change post option here.</p>
+<div class="section">
+  <div class="section-title">Options</div>
+  <p class="description section-description">Change post option here.</p>
 
 
-        <?php
+  <?php
 
         $args = array(
             'id'		=> 'custom_thumb_source',
@@ -67,9 +67,6 @@ function post_grid_post_options_content_options($tab, $post_id){
 
 
         ?>
-    </div>
-    <?php
+</div>
+<?php
 }
-
-
-

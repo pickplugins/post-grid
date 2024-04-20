@@ -246,7 +246,7 @@ class PGBlockIcon
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="
+      <<?php echo esc_html($wrapperTag); ?> class="
                                   <?php echo esc_attr($blockId); ?>
                                   <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
 
@@ -324,7 +324,7 @@ class PGBlockIcon
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
 
-      </<?php echo esc_attr($wrapperTag); ?>>
+      </<?php echo esc_html($wrapperTag); ?>>
     <?php
 
     endif;

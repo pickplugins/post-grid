@@ -191,7 +191,7 @@ class PGBlockWooProductInfoItem
 ?>
 
 
-    <<?php echo esc_attr($wrapperTag); ?> class="
+    <<?php echo esc_html($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($wrapperClass); ?>">
 
@@ -287,7 +287,7 @@ class PGBlockWooProductInfoItem
 
 
 
-      </<?php echo esc_attr($wrapperTag); ?>>
+      </<?php echo esc_html($wrapperTag); ?>>
 
 
 

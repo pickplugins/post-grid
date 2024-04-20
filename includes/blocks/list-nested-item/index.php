@@ -97,35 +97,36 @@ class PGBlockListNestedItem
 
 
     ob_start();
-    ?>
+?>
 
-        <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>     <?php echo esc_attr($wrapperClass); ?>" <?php //echo esc_attr($wrapperAttrText); ?>>
-
-      
-
-      
-
-            <?php if ($iconPosition == 'before'): ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-            <?php echo $content; ?>
-      
-          <?php if ($iconPosition == 'after'): ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
+    <<?php echo esc_html($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>     <?php echo esc_attr($wrapperClass); ?>" <?php //echo esc_attr($wrapperAttrText); 
+                                                                                                                                ?>>
 
 
 
 
 
+      <?php if ($iconPosition == 'before') : ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php endif; ?>
 
-        </<?php echo esc_attr($wrapperTag); ?>>
+      <?php echo $content; ?>
+
+      <?php if ($iconPosition == 'after') : ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php endif; ?>
 
 
 
 
-    <?php return ob_get_clean();
+
+
+    </<?php echo esc_html($wrapperTag); ?>>
+
+
+
+
+<?php return ob_get_clean();
   }
 }
 

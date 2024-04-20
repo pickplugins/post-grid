@@ -299,7 +299,7 @@ class PGBlockJustifiedImage
     if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
 ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="
+      <<?php echo esc_html($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>">
         <?php if (!empty($featuredImageLinkTo)) : ?>
@@ -319,7 +319,7 @@ class PGBlockJustifiedImage
           <?php endif; ?>
 
         <?php endif; ?>
-      </<?php echo esc_attr($wrapperTag); ?>>
+      </<?php echo esc_html($wrapperTag); ?>>
     <?php
 
     endif;
@@ -358,17 +358,17 @@ class PGBlockJustifiedImage
 
       <?php if (!empty($featuredImageLinkTo)) : ?>
         <a href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-          <<?php echo esc_attr($wrapperTag); ?> class="
+          <<?php echo esc_html($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>">
 
-          </<?php echo esc_attr($wrapperTag); ?>>
+          </<?php echo esc_html($wrapperTag); ?>>
         </a>
       <?php else : ?>
 
-        <<?php echo esc_attr($wrapperTag); ?> class="
+        <<?php echo esc_html($wrapperTag); ?> class="
                           <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-        </<?php echo esc_attr($wrapperTag); ?>>
+        </<?php echo esc_html($wrapperTag); ?>>
       <?php endif; ?>
 
     <?php

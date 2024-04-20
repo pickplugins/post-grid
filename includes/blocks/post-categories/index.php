@@ -178,7 +178,7 @@ class PGBlockPostCategories
 ?>
 
 
-    <<?php echo esc_attr($wrapperTag); ?> class=" <?php echo $blockId; ?>     <?php echo esc_attr($wrapperClass); ?>">
+    <<?php echo esc_html($wrapperTag); ?> class=" <?php echo $blockId; ?>     <?php echo esc_attr($wrapperClass); ?>">
 
       <?php if ($iconPosition == 'beforeFronttext') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
@@ -349,7 +349,7 @@ class PGBlockPostCategories
       <?php endif; ?>
 
 
-    </<?php echo esc_attr($wrapperTag); ?>>
+    </<?php echo esc_html($wrapperTag); ?>>
 
 
 

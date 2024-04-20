@@ -125,13 +125,13 @@ class PGBlockPostTableOfContents
 
 
 
-    if (!empty($wrapperTag)):
-      ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="
+    if (!empty($wrapperTag)) :
+?>
+      <<?php echo esc_html($wrapperTag); ?> class="
               <?php echo esc_attr($blockId); ?>">
-              <?php echo $content; ?>
-            </<?php echo esc_attr($wrapperTag); ?>>
-            <?php
+        <?php echo $content; ?>
+      </<?php echo esc_html($wrapperTag); ?>>
+    <?php
 
     endif;
 
@@ -147,7 +147,7 @@ class PGBlockPostTableOfContents
 
 
 
-        <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

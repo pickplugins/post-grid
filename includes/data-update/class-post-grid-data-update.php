@@ -34,11 +34,11 @@ class class_post_grid_data_update
 
         if ($data_update_status == 'pending') :
 ?>
-            <div class="update-nag">
-                <?php
+<div class="update-nag">
+  <?php
                 echo sprintf(__('Data update required for  <b>%s &raquo; <a href="%sedit.php?post_type=post_grid&page=data-update">Update</a></b>', 'post-grid'), post_grid_plugin_name, $admin_url)
                 ?>
-            </div>
+</div>
 <?php
         endif;
 

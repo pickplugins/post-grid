@@ -314,6 +314,10 @@
   margin-bottom: 1.75rem;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -684,6 +688,10 @@
   max-width: 600px;
 }
 
+.max-w-\[800px\] {
+  max-width: 800px;
+}
+
 .max-w-\[900px\] {
   max-width: 900px;
 }
@@ -890,6 +898,10 @@
   gap: 1.5rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .gap-\[4px\] {
   gap: 4px;
 }
@@ -1044,6 +1056,11 @@
   border-color: rgb(107 114 128 / var(--tw-border-opacity)) !important;
 }
 
+.border-\[\#e0e0e0\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(224 224 224 / var(--tw-border-opacity));
+}
+
 .border-\[rgba\(6\2c 44\2c 241\2c 0\.46\)\] {
   border-color: rgba(6,44,241,0.46);
 }
@@ -1134,6 +1151,11 @@
   background-color: rgb(67 196 38 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#4c5eea\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(76 94 234 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#51557E\] {
   --tw-bg-opacity: 1;
   background-color: rgb(81 85 126 / var(--tw-bg-opacity));
@@ -1142,6 +1164,11 @@
 .bg-\[\#5655ff\] {
   --tw-bg-opacity: 1;
   background-color: rgb(86 85 255 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#c4dcc2\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(196 220 194 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#e13d3d\] {
@@ -1390,6 +1417,14 @@
   background-image: linear-gradient(90deg, rgb(252, 127, 100) 0%, rgb(255, 157, 66) 100%);
 }
 
+.bg-\[url\(https\:\/\/comboblocks\.com\/wp-content\/uploads\/2023\/12\/get-started-bg\.png\)\] {
+  background-image: url(https://comboblocks.com/wp-content/uploads/2023/12/get-started-bg.png);
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
 .fill-white {
   fill: #fff;
 }
@@ -1420,6 +1455,10 @@
 
 .p-5 {
   padding: 1.25rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .\!px-3 {
@@ -1497,6 +1536,11 @@
   padding-bottom: 0.5rem;
 }
 
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -1505,6 +1549,11 @@
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .py-8 {
@@ -1779,6 +1828,10 @@
   font-style: italic;
 }
 
+.\!leading-\[50px\] {
+  line-height: 50px !important;
+}
+
 .leading-\[32px\] {
   line-height: 32px;
 }
@@ -1814,6 +1867,11 @@
   color: rgb(3 150 255 / var(--tw-text-opacity));
 }
 
+.text-\[\#393b41\] {
+  --tw-text-opacity: 1;
+  color: rgb(57 59 65 / var(--tw-text-opacity));
+}
+
 .text-\[\#ec942c\] {
   --tw-text-opacity: 1;
   color: rgb(236 148 44 / var(--tw-text-opacity));
@@ -1822,6 +1880,11 @@
 .text-amber-500 {
   --tw-text-opacity: 1;
   color: rgb(245 158 11 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-emerald-500 {
@@ -1945,6 +2008,12 @@
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[0_0_4px_1px_\#8db3ff66\] {
+  --tw-shadow: 0 0 4px 1px #8db3ff66;
+  --tw-shadow-colored: 0 0 4px 1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -3143,6 +3212,10 @@
 
   .lg\:w-auto {
     width: auto;
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-4 {

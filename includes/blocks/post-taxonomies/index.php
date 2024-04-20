@@ -176,7 +176,7 @@ class PGBlockPostTaxonomies
 
 
 
-    <<?php echo esc_attr($wrapperTag); ?> class="
+    <<?php echo esc_html($wrapperTag); ?> class="
       <?php echo $blockId; ?>
       <?php echo esc_attr($wrapperClass); ?>">
 
@@ -347,7 +347,7 @@ class PGBlockPostTaxonomies
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
-    </<?php echo esc_attr($wrapperTag); ?>>
+    </<?php echo esc_html($wrapperTag); ?>>
 
 
 

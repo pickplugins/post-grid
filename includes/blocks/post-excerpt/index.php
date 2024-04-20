@@ -308,7 +308,7 @@ class PGBlockPostExcerpt
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="
+      <<?php echo esc_html($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($wrapperClass); ?>">
         <?php if ($postExcerptLinkTo) : ?>
@@ -399,7 +399,7 @@ class PGBlockPostExcerpt
         <?php endif; ?>
 
 
-      </<?php echo esc_attr($wrapperTag); ?>>
+      </<?php echo esc_html($wrapperTag); ?>>
     <?php
 
     endif;

@@ -122,60 +122,60 @@ class PGBlockList
 
 
 
-    if (!empty($wrapperTag)):
-      ?>
+    if (!empty($wrapperTag)) :
+?>
 
-                  <<?php echo esc_attr($wrapperTag); ?> class="
+      <<?php echo esc_html($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>
                     <?php echo esc_attr($blockAlign); ?>">
 
 
 
-                    <?php
-                    if (!empty($items))
-                      foreach ($items as $index => $item) {
+        <?php
+        if (!empty($items))
+          foreach ($items as $index => $item) {
 
-                        ?>
-                                <<?php echo esc_attr($itemTag); ?> class="
+        ?>
+          <<?php echo esc_attr($itemTag); ?> class="
                                   <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
 
 
-                                  <?php if ($iconPosition == 'left'): ?>
-                                        <?php echo wp_kses_post($iconHtml); ?>
-                                  <?php endif; ?>
+            <?php if ($iconPosition == 'left') : ?>
+              <?php echo wp_kses_post($iconHtml); ?>
+            <?php endif; ?>
 
-                                  <span>
+            <span>
 
-                                    <?php if ($iconPosition == 'before'): ?>
-                                          <?php echo wp_kses_post($iconHtml); ?>
-                                    <?php endif; ?>
-                                    <?php echo (isset($item['text'])) ? wp_kses_post($item['text']) : ''; ?>
-                                  </span>
-                                  <?php if ($iconPosition == 'after'): ?>
-                                        <?php echo wp_kses_post($iconHtml); ?>
-                                  <?php endif; ?>
-
-
-                                  <?php if ($iconPosition == 'right'): ?>
-                                        <span class="float-right">
-                                          <?php echo wp_kses_post($iconHtml); ?>
-                                        </span>
-                                  <?php endif; ?>
+              <?php if ($iconPosition == 'before') : ?>
+                <?php echo wp_kses_post($iconHtml); ?>
+              <?php endif; ?>
+              <?php echo (isset($item['text'])) ? wp_kses_post($item['text']) : ''; ?>
+            </span>
+            <?php if ($iconPosition == 'after') : ?>
+              <?php echo wp_kses_post($iconHtml); ?>
+            <?php endif; ?>
 
 
-                                </<?php echo esc_attr($itemTag); ?>>
+            <?php if ($iconPosition == 'right') : ?>
+              <span class="float-right">
+                <?php echo wp_kses_post($iconHtml); ?>
+              </span>
+            <?php endif; ?>
 
 
+          </<?php echo esc_attr($itemTag); ?>>
 
 
 
-                                <?php
-                      }
 
-                    ?>
-                  </<?php echo esc_attr($wrapperTag); ?>>
-                  <?php
+
+        <?php
+          }
+
+        ?>
+      </<?php echo esc_html($wrapperTag); ?>>
+    <?php
 
     endif;
 
@@ -190,7 +190,7 @@ class PGBlockList
 
 
 
-            <?php return ob_get_clean();
+<?php return ob_get_clean();
   }
 }
 

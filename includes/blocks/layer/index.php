@@ -86,20 +86,19 @@ class PGBlockLayer
 
 
     if ($wrapperTag == 'a') { ?>
-                  <a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-                    href="" target="">
-                    <?php echo $content ?>
-                  </a>
-                  <?php
+      <a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" href="" target="">
+        <?php echo $content ?>
+      </a>
+    <?php
 
     } else { ?>
-                  <<?php echo esc_attr($wrapperTag); ?> class="
+      <<?php echo esc_html($wrapperTag); ?> class="
                     <?php echo esc_attr($wrapperClass); ?>
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($blockAlign); ?>">
-                    <?php echo $content ?>
-                  </<?php echo esc_attr($wrapperTag); ?>>
-                  <?php
+        <?php echo $content ?>
+      </<?php echo esc_html($wrapperTag); ?>>
+<?php
     }
 
     return ob_get_clean();

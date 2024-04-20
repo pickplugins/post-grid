@@ -798,7 +798,7 @@ class PGBlockBreadcrumb
 		if (!empty($wrapperTag)) :
 
 		?>
-			<!-- <<?php //echo esc_attr($wrapperTag); 
+			<!-- <<?php //echo esc_html($wrapperTag); 
 					?> class="
 				<?php //echo esc_attr($blockId); 
 				?>
@@ -873,7 +873,7 @@ class PGBlockBreadcrumb
 
 				?>
 			</ol>
-			<!-- </<?php //echo esc_attr($wrapperTag); 
+			<!-- </<?php //echo esc_html($wrapperTag); 
 					?>> -->
 
 

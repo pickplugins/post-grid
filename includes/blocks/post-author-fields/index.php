@@ -189,7 +189,7 @@ class PGBlockPostAuthorields
 ?>
 
 
-    <<?php echo esc_attr($wrapperTag); ?> class="
+    <<?php echo esc_html($wrapperTag); ?> class="
           <?php echo $blockId; ?>
           <?php echo esc_attr($wrapperClass); ?>">
 
@@ -265,7 +265,7 @@ class PGBlockPostAuthorields
           <?php echo wp_kses_post($postfixText); ?>
         </span>
       <?php endif; ?>
-    </<?php echo esc_attr($wrapperTag); ?>>
+    </<?php echo esc_html($wrapperTag); ?>>
 
 
 

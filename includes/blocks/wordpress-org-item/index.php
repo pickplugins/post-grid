@@ -101,220 +101,218 @@ class PGBlockWordpressOrgItem
 ?>
 
 
-<<?php echo esc_attr($wrapperTag); ?> class="	<?php echo esc_attr($blockId); ?>	<?php echo esc_attr($wrapperClass); ?>">
-  <span> <?php echo esc_attr($wrapperPrefix) ?> </span>
-  <span>
-    <?php if ($objectType == 'theme') : ?>
-    <?php if ($wrapperField == 'name') {
+		<<?php echo esc_html($wrapperTag); ?> class="	<?php echo esc_attr($blockId); ?>	<?php echo esc_attr($wrapperClass); ?>">
+			<span> <?php echo esc_attr($wrapperPrefix) ?> </span>
+			<span>
+				<?php if ($objectType == 'theme') : ?>
+					<?php if ($wrapperField == 'name') {
 						echo esc_attr($objectData['name']);
 					} ?>
-    <?php if ($wrapperField == 'version') {
+					<?php if ($wrapperField == 'version') {
 						echo esc_attr($objectData['version']);
 					} ?>
-    <?php if ($wrapperField == 'is_commercial') {
+					<?php if ($wrapperField == 'is_commercial') {
 						if ($objectData['is_commercial']) {
 							echo "Yes";
 						} else {
 							echo "No";
 						}
 					} ?>
-    <?php if ($wrapperField == 'preview_url') {
+					<?php if ($wrapperField == 'preview_url') {
 						if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['preview_url']); ?>">
-      <?php echo esc_attr($wrapperLinkText); ?>
-    </a>
-    <?php } else {
+							<a href="<?php echo esc_url_raw($objectData['preview_url']); ?>">
+								<?php echo esc_attr($wrapperLinkText); ?>
+							</a>
+					<?php } else {
 							echo esc_attr($objectData['preview_url']);
 						}
 					}
 					?>
-    <?php if ($wrapperField == 'author') {
+					<?php if ($wrapperField == 'author') {
 						echo esc_attr($objectData['author']);
 					} ?>
-    <?php if ($wrapperField == 'screenshot_url') {
+					<?php if ($wrapperField == 'screenshot_url') {
 						if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['screenshot_url']); ?>">
-      <img src="<?php echo esc_url_raw($objectData['screenshot_url']); ?>"
-        alt="<?php echo esc_attr($objectData['name']) ?>" /></a>
-    <?php } else { ?>
-    <img src="<?php echo esc_url_raw($objectData['screenshot_url']); ?>"
-      alt="<?php echo esc_attr($objectData['name']) ?>" />
-    <?php }
+							<a href="<?php echo esc_url_raw($objectData['screenshot_url']); ?>">
+								<img src="<?php echo esc_url_raw($objectData['screenshot_url']); ?>" alt="<?php echo esc_attr($objectData['name']) ?>" /></a>
+						<?php } else { ?>
+							<img src="<?php echo esc_url_raw($objectData['screenshot_url']); ?>" alt="<?php echo esc_attr($objectData['name']) ?>" />
+					<?php }
 					} ?>
-    <?php if ($wrapperField == 'rating') {
+					<?php if ($wrapperField == 'rating') {
 						echo esc_attr($objectData['rating']);
 					} ?>
-    <?php if ($wrapperField == 'num_ratings') {
+					<?php if ($wrapperField == 'num_ratings') {
 						echo esc_attr($objectData['num_ratings']);
 					} ?>
-    <?php if ($wrapperField == 'ratings') { ?>
-    <ul><?php
-								if (isset($objectData['ratings'])) {
-									foreach ($objectData['ratings'] as $x => $value) { ?>
-      <li><?php echo $x; ?>: <?php echo $value; ?></li>
-      <?php } ?>
-    </ul><?php }
-							} ?>
-    <?php if ($wrapperField == 'reviews_url') {
+					<?php if ($wrapperField == 'ratings') { ?>
+						<ul><?php
+							if (isset($objectData['ratings'])) {
+								foreach ($objectData['ratings'] as $x => $value) { ?>
+									<li><?php echo $x; ?>: <?php echo $value; ?></li>
+								<?php } ?>
+						</ul><?php }
+						} ?>
+				<?php if ($wrapperField == 'reviews_url') {
 						if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['reviews_url']); ?>">
-      <?php echo esc_attr($wrapperLinkText) ?>
-    </a> <?php } else {
-									echo esc_attr($objectData['reviews_url']);
-								}
-							} ?>
-    <?php if ($wrapperField == 'last_update') {
+						<a href="<?php echo esc_url_raw($objectData['reviews_url']); ?>">
+							<?php echo esc_attr($wrapperLinkText) ?>
+						</a> <?php } else {
+								echo esc_attr($objectData['reviews_url']);
+							}
+						} ?>
+				<?php if ($wrapperField == 'last_update') {
 						echo esc_attr($objectData['last_update']);
 					} ?>
-    <?php if ($wrapperField == 'creation_time') {
+				<?php if ($wrapperField == 'creation_time') {
 						echo esc_attr($objectData['creation_time']);
 					} ?>
-    <?php if ($wrapperField == 'homepage') {
+				<?php if ($wrapperField == 'homepage') {
 						if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['homepage']); ?>">
-      <?php echo esc_attr($wrapperLinkText) ?>
-    </a> <?php } else {
-									echo esc_attr($objectData['homepage']);
-								}
-							} ?>
-    <?php if ($wrapperField == 'tags') { ?>
-    <ul><?php
-							if (isset($objectData['tags'])) {
-								foreach ($objectData['tags'] as $x => $value) { ?>
-      <li><?php echo $value; ?></li>
-      <?php } ?>
-    </ul><?php }
-						} ?>
-    <?php if ($wrapperField == 'download_link') {
-						if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['download_link']); ?>">
-      <?php echo esc_attr($wrapperLinkText) ?>
-    </a> <?php } else {
-								echo esc_attr($objectData['download_link']);
+						<a href="<?php echo esc_url_raw($objectData['homepage']); ?>">
+							<?php echo esc_attr($wrapperLinkText) ?>
+						</a> <?php } else {
+								echo esc_attr($objectData['homepage']);
 							}
 						} ?>
-    <?php if ($wrapperField == 'requires') {
-						echo esc_attr($objectData['requires']);
+				<?php if ($wrapperField == 'tags') { ?>
+					<ul><?php
+						if (isset($objectData['tags'])) {
+							foreach ($objectData['tags'] as $x => $value) { ?>
+								<li><?php echo $value; ?></li>
+							<?php } ?>
+					</ul><?php }
 					} ?>
-    <?php if ($wrapperField == 'requires_php') {
-						echo esc_attr($objectData['requires_php']);
-					} ?>
-    <?php if ($wrapperField == 'external_support_url') {
+			<?php if ($wrapperField == 'download_link') {
 						if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['external_support_url']); ?>">
-      <?php echo esc_attr($wrapperLinkText) ?>
-    </a> <?php } else {
-								echo esc_attr($objectData['external_support_url']);
-							}
-						} ?>
-    <?php if ($wrapperField == 'external_repository_url') {
-						if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['external_repository_url']); ?>">
-      <?php echo esc_attr($wrapperLinkText) ?>
-    </a> <?php } else {
-								echo esc_attr($objectData['external_repository_url']);
-							}
-						} ?>
-    <?php endif; ?>
-    <?php if ($objectType == 'plugin') : ?>
-    <?php if ($wrapperField == 'name') {
-				echo esc_attr($objectData['name']);
-			} ?>
-    <?php if ($wrapperField == 'version') {
-				echo esc_attr($objectData['version']);
-			} ?>
-    <?php if ($wrapperField == 'author') {
-				echo esc_attr($objectData['author']);
-			} ?>
-    <?php if ($wrapperField == 'author_profile') {
-				echo esc_attr($objectData['author_profile']);
-			} ?>
-    <?php if ($wrapperField == 'contributors') { ?>
-    <ul><?php
-						if (isset($objectData['contributors'])) {
-
-							foreach ($objectData['contributors'] as $x => $value) { ?>
-      <li><?php echo $value; ?></li>
-      <?php }
-						} ?>
-    </ul><?php } ?>
-    <?php if ($wrapperField == 'tested') {
-				echo esc_attr($objectData['tested']);
-			} ?>
-    <?php if ($wrapperField == 'requires') {
-				echo esc_attr($objectData['requires']);
-			} ?>
-    <?php if ($wrapperField == 'requires_php') {
-				echo esc_attr($objectData['requires_php']);
-			} ?>
-    <?php if ($wrapperField == 'requires_plugins') {
-				echo esc_attr($objectData['requires_plugins']);
-			} ?>
-    <?php if ($wrapperField == 'rating') {
-				echo esc_attr($objectData['rating']);
-			} ?>
-    <?php if ($wrapperField == 'num_ratings') {
-				echo esc_attr($objectData['num_ratings']);
-			} ?>
-    <?php if ($wrapperField == 'support_threads') {
-				echo esc_attr($objectData['support_threads']);
-			} ?>
-    <?php if ($wrapperField == 'support_threads_resolved') {
-				echo esc_attr($objectData['support_threads_resolved']);
-			} ?>
-    <?php if ($wrapperField == 'active_installs') {
-				echo esc_attr($objectData['active_installs']);
-			} ?>
-    <?php if ($wrapperField == 'last_updated') {
-				echo esc_attr($objectData['last_updated']);
-			} ?>
-    <?php if ($wrapperField == 'added') {
-				echo esc_attr($objectData['added']);
-			} ?>
-    <?php if ($wrapperField == 'ratings') { ?>
-    <ul><?php
-						if (isset($objectData['ratings'])) {
-							foreach ($objectData['ratings'] as $x => $value) { ?>
-      <li><?php echo $x; ?>: <?php echo $value; ?></li>
-      <?php } ?>
-    </ul><?php }
-					} ?>
-    <?php if ($wrapperField == 'homepage') {
-				if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['homepage']); ?>">
-      <?php echo esc_attr($wrapperLinkText) ?>
-    </a> <?php } else {
-							echo esc_attr($objectData['homepage']);
-						}
-					} ?>
-    <?php if ($wrapperField == 'download_link') {
-				if ($wrapperIsLink) { ?>
-    <a href="<?php echo esc_url_raw($objectData['download_link']); ?>">
-      <?php echo esc_attr($wrapperLinkText) ?>
-    </a> <?php } else {
+					<a href="<?php echo esc_url_raw($objectData['download_link']); ?>">
+						<?php echo esc_attr($wrapperLinkText) ?>
+					</a> <?php } else {
 							echo esc_attr($objectData['download_link']);
 						}
 					} ?>
-    <?php if ($wrapperField == 'banners') { ?>
-    <img src="<?php echo $objectData['banners']; ?>" alt="<?php echo $objectData['name']; ?>" />
-    <?php } ?>
+			<?php if ($wrapperField == 'requires') {
+						echo esc_attr($objectData['requires']);
+					} ?>
+			<?php if ($wrapperField == 'requires_php') {
+						echo esc_attr($objectData['requires_php']);
+					} ?>
+			<?php if ($wrapperField == 'external_support_url') {
+						if ($wrapperIsLink) { ?>
+					<a href="<?php echo esc_url_raw($objectData['external_support_url']); ?>">
+						<?php echo esc_attr($wrapperLinkText) ?>
+					</a> <?php } else {
+							echo esc_attr($objectData['external_support_url']);
+						}
+					} ?>
+			<?php if ($wrapperField == 'external_repository_url') {
+						if ($wrapperIsLink) { ?>
+					<a href="<?php echo esc_url_raw($objectData['external_repository_url']); ?>">
+						<?php echo esc_attr($wrapperLinkText) ?>
+					</a> <?php } else {
+							echo esc_attr($objectData['external_repository_url']);
+						}
+					} ?>
+		<?php endif; ?>
+		<?php if ($objectType == 'plugin') : ?>
+			<?php if ($wrapperField == 'name') {
+				echo esc_attr($objectData['name']);
+			} ?>
+			<?php if ($wrapperField == 'version') {
+				echo esc_attr($objectData['version']);
+			} ?>
+			<?php if ($wrapperField == 'author') {
+				echo esc_attr($objectData['author']);
+			} ?>
+			<?php if ($wrapperField == 'author_profile') {
+				echo esc_attr($objectData['author_profile']);
+			} ?>
+			<?php if ($wrapperField == 'contributors') { ?>
+				<ul><?php
+					if (isset($objectData['contributors'])) {
 
-    <?php if ($wrapperField == 'tags') { ?>
-    <ul><?php
-					if (isset($objectData['tags'])) {
-						foreach ($objectData['tags'] as $x => $value) { ?>
-      <li><?php echo $value; ?></li>
-      <?php } ?>
-    </ul><?php }
+						foreach ($objectData['contributors'] as $x => $value) { ?>
+							<li><?php echo $value; ?></li>
+					<?php }
+					} ?>
+				</ul><?php } ?>
+			<?php if ($wrapperField == 'tested') {
+				echo esc_attr($objectData['tested']);
+			} ?>
+			<?php if ($wrapperField == 'requires') {
+				echo esc_attr($objectData['requires']);
+			} ?>
+			<?php if ($wrapperField == 'requires_php') {
+				echo esc_attr($objectData['requires_php']);
+			} ?>
+			<?php if ($wrapperField == 'requires_plugins') {
+				echo esc_attr($objectData['requires_plugins']);
+			} ?>
+			<?php if ($wrapperField == 'rating') {
+				echo esc_attr($objectData['rating']);
+			} ?>
+			<?php if ($wrapperField == 'num_ratings') {
+				echo esc_attr($objectData['num_ratings']);
+			} ?>
+			<?php if ($wrapperField == 'support_threads') {
+				echo esc_attr($objectData['support_threads']);
+			} ?>
+			<?php if ($wrapperField == 'support_threads_resolved') {
+				echo esc_attr($objectData['support_threads_resolved']);
+			} ?>
+			<?php if ($wrapperField == 'active_installs') {
+				echo esc_attr($objectData['active_installs']);
+			} ?>
+			<?php if ($wrapperField == 'last_updated') {
+				echo esc_attr($objectData['last_updated']);
+			} ?>
+			<?php if ($wrapperField == 'added') {
+				echo esc_attr($objectData['added']);
+			} ?>
+			<?php if ($wrapperField == 'ratings') { ?>
+				<ul><?php
+					if (isset($objectData['ratings'])) {
+						foreach ($objectData['ratings'] as $x => $value) { ?>
+							<li><?php echo $x; ?>: <?php echo $value; ?></li>
+						<?php } ?>
+				</ul><?php }
 				} ?>
+		<?php if ($wrapperField == 'homepage') {
+				if ($wrapperIsLink) { ?>
+				<a href="<?php echo esc_url_raw($objectData['homepage']); ?>">
+					<?php echo esc_attr($wrapperLinkText) ?>
+				</a> <?php } else {
+						echo esc_attr($objectData['homepage']);
+					}
+				} ?>
+		<?php if ($wrapperField == 'download_link') {
+				if ($wrapperIsLink) { ?>
+				<a href="<?php echo esc_url_raw($objectData['download_link']); ?>">
+					<?php echo esc_attr($wrapperLinkText) ?>
+				</a> <?php } else {
+						echo esc_attr($objectData['download_link']);
+					}
+				} ?>
+		<?php if ($wrapperField == 'banners') { ?>
+			<img src="<?php echo $objectData['banners']; ?>" alt="<?php echo $objectData['name']; ?>" />
+		<?php } ?>
 
-    <?php endif; ?>
-  </span>
+		<?php if ($wrapperField == 'tags') { ?>
+			<ul><?php
+				if (isset($objectData['tags'])) {
+					foreach ($objectData['tags'] as $x => $value) { ?>
+						<li><?php echo $value; ?></li>
+					<?php } ?>
+			</ul><?php }
+			} ?>
+
+<?php endif; ?>
+			</span>
 
 
 
 
-</<?php echo esc_attr($wrapperTag); ?>>
+		</<?php echo esc_html($wrapperTag); ?>>
 
 
 

@@ -19,65 +19,69 @@ function post_grid_metabox_tabs_content_shortcode($tab, $post_id)
 
 
 
-    <div class="section">
-        <div class="section-title">Shortcodes</div>
-        <p class="description section-description">Simply copy these shortcode and user under content</p>
+<div class="section">
+  <div class="section-title">Shortcodes</div>
+  <p class="description section-description">Simply copy these shortcode and user under content</p>
 
 
-        <?php
+  <?php
 
 
         ob_start();
 
         ?>
 
-        <div class="copy-to-clipboard">
-            <input type="text" value="[post_grid id='<?php echo esc_attr($post_id);  ?>']"> <span class="copied">Copied</span>
-            <p class="description">You can use this shortcode under post content</p>
-        </div>
+  <div class="copy-to-clipboard">
+    <input type="text" value="[post_grid id='<?php echo esc_attr($post_id);  ?>']"> <span class="copied">Copied</span>
+    <p class="description">You can use this shortcode under post content</p>
+  </div>
 
-        <div class="copy-to-clipboard">
-            To avoid conflict:<br>
-            <input type="text" value="[post_grid_pickplugins id='<?php echo esc_attr($post_id);  ?>']"> <span class="copied">Copied</span>
-            <p class="description">To avoid conflict with 3rd party shortcode also used same <code>[post_grid]</code>You can use this shortcode under post content</p>
-        </div>
+  <div class="copy-to-clipboard">
+    To avoid conflict:<br>
+    <input type="text" value="[post_grid_pickplugins id='<?php echo esc_attr($post_id);  ?>']"> <span
+      class="copied">Copied</span>
+    <p class="description">To avoid conflict with 3rd party shortcode also used same <code>[post_grid]</code>You can use
+      this shortcode under post content</p>
+  </div>
 
-        <div class="copy-to-clipboard">
-            <textarea cols="50" rows="1" onClick="this.select();"><?php echo '<?php echo do_shortcode("[post_grid id=';
+  <div class="copy-to-clipboard">
+    <textarea cols="50" rows="1" onClick="this.select();"><?php echo '<?php echo do_shortcode("[post_grid id=';
                                                                     echo "'" . esc_attr($post_id) . "']";
-                                                                    echo '"); ?>'; ?></textarea> <span class="copied">Copied</span>
-            <p class="description">PHP Code, you can use under theme .php files.</p>
-        </div>
+                                                                    echo '"); ?>'; ?></textarea> <span
+      class="copied">Copied</span>
+    <p class="description">PHP Code, you can use under theme .php files.</p>
+  </div>
 
-        <div class="copy-to-clipboard">
-            <textarea cols="50" rows="1" onClick="this.select();"><?php echo '<?php echo do_shortcode("[post_grid_pickplugins id=';
+  <div class="copy-to-clipboard">
+    <textarea cols="50" rows="1" onClick="this.select();"><?php echo '<?php echo do_shortcode("[post_grid_pickplugins id=';
                                                                     echo "'" . esc_attr($post_id) . "']";
-                                                                    echo '"); ?>'; ?></textarea> <span class="copied">Copied</span>
-            <p class="description">To avoid conflict, PHP code you can use under theme .php files.</p>
-        </div>
+                                                                    echo '"); ?>'; ?></textarea> <span
+      class="copied">Copied</span>
+    <p class="description">To avoid conflict, PHP code you can use under theme .php files.</p>
+  </div>
 
-        <style type="text/css">
-            .copy-to-clipboard {}
+  <style type="text/css">
+  .copy-to-clipboard {}
 
-            .copy-to-clipboard .copied {
-                display: none;
-                background: #e5e5e5;
-                padding: 4px 10px;
-                line-height: normal;
-            }
-        </style>
+  .copy-to-clipboard .copied {
+    display: none;
+    background: #e5e5e5;
+    padding: 4px 10px;
+    line-height: normal;
+  }
+  </style>
 
-        <script>
-            jQuery(document).ready(function($) {
-                $(document).on('click', '.copy-to-clipboard input, .copy-to-clipboard textarea', function() {
-                    $(this).focus();
-                    $(this).select();
-                    document.execCommand('copy');
-                    $(this).parent().children('.copied').fadeIn().fadeOut(2000);
-                })
-            })
-        </script>
-        <?php
+  <script>
+  jQuery(document).ready(function($) {
+    $(document).on('click', '.copy-to-clipboard input, .copy-to-clipboard textarea', function() {
+      $(this).focus();
+      $(this).select();
+      document.execCommand('copy');
+      $(this).parent().children('.copied').fadeIn().fadeOut(2000);
+    })
+  })
+  </script>
+  <?php
         $html = ob_get_clean();
         $args = array(
             'id'        => 'post_grid_shortcodes',
@@ -90,7 +94,7 @@ function post_grid_metabox_tabs_content_shortcode($tab, $post_id)
 
 
         ?>
-    </div>
+</div>
 <?php
 }
 
@@ -117,11 +121,11 @@ function post_grid_metabox_tabs_content_general($tab, $post_id)
 
 
 ?>
-    <div class="section">
-        <div class="section-title"><?php echo __('Lazy load', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose lazy load options.', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('Lazy load', 'post-grid'); ?></div>
+  <p class="description section-description"><?php echo __('Choose lazy load options.', 'post-grid'); ?></p>
 
-        <?php
+  <?php
 
 
         $args = array(
@@ -198,13 +202,13 @@ function post_grid_metabox_tabs_content_general($tab, $post_id)
         ?>
 
 
-    </div>
+</div>
 
-    <div class="section">
-        <div class="section-title"><?php echo __('Container settings', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose container options.', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('Container settings', 'post-grid'); ?></div>
+  <p class="description section-description"><?php echo __('Choose container options.', 'post-grid'); ?></p>
 
-        <?php
+  <?php
 
 
         $args = array(
@@ -249,13 +253,13 @@ function post_grid_metabox_tabs_content_general($tab, $post_id)
 
         ?>
 
-    </div>
+</div>
 
-    <div class="section">
-        <div class="section-title"><?php echo __('Items wrapper settings', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose items wrapper options.', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('Items wrapper settings', 'post-grid'); ?></div>
+  <p class="description section-description"><?php echo __('Choose items wrapper options.', 'post-grid'); ?></p>
 
-        <?php
+  <?php
 
         $args = array(
             'id'        => 'text_align',
@@ -277,7 +281,7 @@ function post_grid_metabox_tabs_content_general($tab, $post_id)
         ?>
 
 
-    </div>
+</div>
 
 <?php
 
@@ -337,12 +341,12 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
 
 
 
-    <div class="section">
-        <div class="section-title">Query Post</div>
-        <p class="description section-description">Set the option for display and query posts.</p>
+<div class="section">
+  <div class="section-title">Query Post</div>
+  <p class="description section-description">Set the option for display and query posts.</p>
 
 
-        <?php
+  <?php
         $args = array(
             'id'        => 'post_types',
             'parent'        => 'post_grid_meta_options',
@@ -362,11 +366,11 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
 
 
         ?>
-        <div class="setting-field">
-            <div class="field-lable">Post Taxonomies & terms</div>
-            <div class="field-input">
-                <div class="expandable" id="taxonomies-terms">
-                    <?php
+  <div class="setting-field">
+    <div class="field-lable">Post Taxonomies & terms</div>
+    <div class="field-input">
+      <div class="expandable" id="taxonomies-terms">
+        <?php
                     if (!empty($post_taxonomies_arr)) :
                         foreach ($post_taxonomies_arr as $taxonomyIndex => $taxonomy) {
 
@@ -386,17 +390,20 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
                                 }
                             $taxonomy_term_arr = !empty($taxonomy_term_arr) ? $taxonomy_term_arr : array();
                     ?>
-                            <div class="item">
-                                <div class="header">
-                                    <span class="expand  ">
-                                        <i class="fas fa-expand"></i>
-                                        <i class="fas fa-compress"></i>
-                                    </span>
-                                    <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?> name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]" value="<?php echo esc_attr($taxonomy); ?>" /> </label>
-                                    <span class="header-text expand  "><?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</span>
-                                </div>
-                                <div class="options <?php echo ($taxonomy == 'category') ? 'active' : ''; ?>">
-                                    <?php
+        <div class="item">
+          <div class="header">
+            <span class="expand  ">
+              <i class="fas fa-expand"></i>
+              <i class="fas fa-compress"></i>
+            </span>
+            <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?>
+                name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]"
+                value="<?php echo esc_attr($taxonomy); ?>" /> </label>
+            <span
+              class="header-text expand  "><?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</span>
+          </div>
+          <div class="options <?php echo ($taxonomy == 'category') ? 'active' : ''; ?>">
+            <?php
 
                                     $args = array(
                                         'id'        => 'terms',
@@ -434,20 +441,20 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
 
                                     $settings_tabs_field->generate_field($args, $post_id);
                                     ?>
-                                </div>
-                            </div>
-                    <?php
+          </div>
+        </div>
+        <?php
                         }
                     else :
                         echo __('Please choose at least one post types. save/update post grid', 'post-grid');
                     endif;
                     ?>
-                </div>
-                <p class="description"><?php echo __('Select post categories & terms.', 'post-grid'); ?></p>
-            </div>
-        </div>
+      </div>
+      <p class="description"><?php echo __('Select post categories & terms.', 'post-grid'); ?></p>
+    </div>
+  </div>
 
-        <?php
+  <?php
         $args = array(
             'id'        => 'categories_relation',
             'parent'        => 'post_grid_meta_options',
@@ -627,7 +634,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
 
         $settings_tabs_field->generate_field($args, $post_id);
         ?>
-    </div>
+</div>
 
 <?php
 
@@ -655,12 +662,12 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
     ////var_dump($import_layouts);
 
 ?>
-    <div class="section">
-        <div class="section-title"><?php echo __('Layouts', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose item layouts.', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('Layouts', 'post-grid'); ?></div>
+  <p class="description section-description"><?php echo __('Choose item layouts.', 'post-grid'); ?></p>
 
 
-        <?php
+  <?php
 
         $layout_convert_url = get_permalink($post_id) . '?post_grid_layout_convert=true';
         $layout_convert_url = wp_nonce_url($layout_convert_url, 'post_grid_layout_convert');
@@ -669,16 +676,21 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
         ob_start();
 
         ?>
-        <span><a target="_blank" class="button" href="<?php echo esc_url(admin_url() . 'post-new.php?post_type=post_grid_layout'); ?>"><?php echo __('Create layout', 'post-grid'); ?></a> </span>
-        <span><a target="_blank" class="button" href="<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid_layout'); ?>"><?php echo __('Manage layouts', 'post-grid'); ?></a> </span>
+  <span><a target="_blank" class="button"
+      href="<?php echo esc_url(admin_url() . 'post-new.php?post_type=post_grid_layout'); ?>"><?php echo __('Create layout', 'post-grid'); ?></a>
+  </span>
+  <span><a target="_blank" class="button"
+      href="<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid_layout'); ?>"><?php echo __('Manage layouts', 'post-grid'); ?></a>
+  </span>
 
-        <?php
+  <?php
         //if ($import_layouts != 'done') :
 
 
         ?>
-        <span><a target="_blank" href="<?php echo esc_url(admin_url() . 'admin.php?page=import_layouts'); ?>" class="button import-default-layouts"><?php echo __('Layouts library', 'post-grid'); ?></a> </span>
-        <?php
+  <span><a target="_blank" href="<?php echo esc_url(admin_url() . 'admin.php?page=import_layouts'); ?>"
+      class="button import-default-layouts"><?php echo __('Layouts library', 'post-grid'); ?></a> </span>
+  <?php
         // endif;
 
 
@@ -752,7 +764,7 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
 
 
         ?>
-    </div>
+</div>
 <?php
 
 
@@ -778,10 +790,10 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
     $skin = !empty($post_grid_meta_options['skin']) ? $post_grid_meta_options['skin'] : 'flat';
 
 ?>
-    <div class="section">
-        <div class="section-title">Slin & Layout</div>
-        <p class="description section-description">Choose skin and customize layout.</p>
-        <?php
+<div class="section">
+  <div class="section-title">Slin & Layout</div>
+  <p class="description section-description">Choose skin and customize layout.</p>
+  <?php
 
 
 
@@ -789,11 +801,11 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
         ob_start();
 
         ?>
-        <div class="layout-list">
-            <div class="idle  ">
-                <div class="name">
-                    <select class="select-layout-content" name="post_grid_meta_options[layout][content]">
-                        <?php
+  <div class="layout-list">
+    <div class="idle  ">
+      <div class="name">
+        <select class="select-layout-content" name="post_grid_meta_options[layout][content]">
+          <?php
 
                         $post_grid_layout_content = get_option('post_grid_layout_content');
                         if (empty($post_grid_layout_content)) {
@@ -810,35 +822,39 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
 
                         foreach ($layout_content_list as $layout_key => $layout_info) {
                         ?>
-                            <option <?php if ($layout_content == $layout_key) echo 'selected'; ?> value="<?php echo esc_attr($layout_key); ?>"><?php echo esc_html($layout_key); ?></option>
-                        <?php
+          <option <?php if ($layout_content == $layout_key) echo 'selected'; ?>
+            value="<?php echo esc_attr($layout_key); ?>"><?php echo esc_html($layout_key); ?></option>
+          <?php
 
                         }
                         ?>
-                    </select>
-                    <a target="_blank" class="edit-layout button" href="<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid&page=layout_editor&layout_content=' . $layout_content); ?>"><?php echo __('Edit', 'post-grid'); ?></a>
-                </div>
+        </select>
+        <a target="_blank" class="edit-layout button"
+          href="<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid&page=layout_editor&layout_content=' . $layout_content); ?>"><?php echo __('Edit', 'post-grid'); ?></a>
+      </div>
 
-                <script>
-                    jQuery(document).ready(function($) {
-                        $(document).on('change', '.select-layout-content', function() {
-
-
-                            var layout = $(this).val();
-
-                            $('.edit-layout').attr('href', '<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid&page=layout_editor&layout_content='); ?>' + layout);
-                        })
-
-                    })
-                </script>
+      <script>
+      jQuery(document).ready(function($) {
+        $(document).on('change', '.select-layout-content', function() {
 
 
+          var layout = $(this).val();
+
+          $('.edit-layout').attr('href',
+            '<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid&page=layout_editor&layout_content='); ?>' +
+            layout);
+        })
+
+      })
+      </script>
 
 
 
 
 
-                <?php
+
+
+      <?php
 
                 if (empty($layout_content)) {
                     $layout_content = 'flat-left';
@@ -848,9 +864,9 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
                 ?>
 
 
-                <div class="layer-content">
-                    <div class="<?php echo esc_attr($layout_content); ?>">
-                        <?php
+      <div class="layer-content">
+        <div class="<?php echo esc_attr($layout_content); ?>">
+          <?php
                         $post_grid_layout_content = get_option('post_grid_layout_content');
 
                         if (empty($post_grid_layout_content)) {
@@ -876,26 +892,28 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
                         ?>
 
 
-                            <div class="item <?php echo esc_attr($item_key); ?>" style=" <?php echo esc_attr($item_info['css']); ?> ">
+          <div class="item <?php echo esc_attr($item_key); ?>" style=" <?php echo esc_attr($item_info['css']); ?> ">
 
-                                <?php
+            <?php
 
                                 if ($item_key == 'thumb') {
 
                                 ?>
-                                    <img style="width:100%; height:auto;" src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" />
-                                <?php
+            <img style="width:100%; height:auto;"
+              src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" />
+            <?php
                                 } elseif ($item_key == 'title') {
 
                                 ?>
-                                    Lorem Ipsum is simply
+            Lorem Ipsum is simply
 
-                                <?php
+            <?php
                                 } elseif ($item_key == 'excerpt') {
 
                                 ?>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                                <?php
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text
+            <?php
                                 } else {
 
                                     echo esc_html($item_info['name']);
@@ -905,48 +923,48 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
 
 
 
-                            </div>
-                        <?php
+          </div>
+          <?php
                         }
 
 
                         ?>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <style type="text/css">
-            #post-grid .layout-list .idle,
-            #post-grid .layout-list .hover {
-                display: inline-block;
-                height: auto;
-                margin: 0 10px;
-                vertical-align: top;
-                width: 400px;
-            }
+      </div>
+    </div>
 
-            #post-grid .layout-list .hover {
-                display: none;
-            }
+  </div>
+  <style type="text/css">
+  #post-grid .layout-list .idle,
+  #post-grid .layout-list .hover {
+    display: inline-block;
+    height: auto;
+    margin: 0 10px;
+    vertical-align: top;
+    width: 400px;
+  }
 
-            #post-grid .layout-list .idle .name,
-            #post-grid .layout-list .hover .name {
-                background: rgb(240, 240, 240) none repeat scroll 0 0;
-                border-bottom: 1px solid rgb(153, 153, 153);
-                font-size: 20px;
-                line-height: normal;
-                padding: 5px 0;
-                text-align: center;
-            }
+  #post-grid .layout-list .hover {
+    display: none;
+  }
 
-            #post-grid .layout-list .idle .name .edit-layout {
-                background: #ddd none repeat scroll 0 0;
-                padding: 2px 10px;
-                text-decoration: none;
-            }
-        </style>
-        <?php
+  #post-grid .layout-list .idle .name,
+  #post-grid .layout-list .hover .name {
+    background: rgb(240, 240, 240) none repeat scroll 0 0;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    font-size: 20px;
+    line-height: normal;
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  #post-grid .layout-list .idle .name .edit-layout {
+    background: #ddd none repeat scroll 0 0;
+    padding: 2px 10px;
+    text-decoration: none;
+  }
+  </style>
+  <?php
 
 
         $html = ob_get_clean();
@@ -971,23 +989,23 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
 
         ?>
 
-        <div class="setting-field">
-            <div class="field-lable">Skins</div>
-            <p class="description">Select grid skins</p>
-            <div class="field-input">
+  <div class="setting-field">
+    <div class="field-lable">Skins</div>
+    <p class="description">Select grid skins</p>
+    <div class="field-input">
 
 
-            </div>
-        </div>
+    </div>
+  </div>
 
-        <div class="skin-list">
-            <?php
+  <div class="skin-list">
+    <?php
 
             if (!empty($skins))
                 foreach ($skins as $skin_slug => $skin_info) {
             ?>
-                <div class="skin-container">
-                    <?php
+    <div class="skin-container">
+      <?php
 
                     if ($skin == $skin_slug) {
                         $checked = 'checked';
@@ -997,21 +1015,24 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
                         $selected_skin = '';
                     }
                     ?>
-                    <div class="header <?php echo esc_attr($selected_skin); ?>">
-                        <!--                            <span class="edit-link"><a href="#">Edit</a></span>-->
-                        <label><input <?php echo esc_attr($checked); ?> type="radio" name="post_grid_meta_options[skin]" value="<?php echo esc_attr($skin_slug); ?>"><?php echo esc_html($skin_info['name']); ?></label>
-                    </div>
-                    <div class="skin <?php echo esc_attr($skin_slug); ?>">
-                        <div class="layer-media">
-                            <div class="thumb "><img src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" /></div>
-                        </div>
-                        <div class="layer-content">
-                            <div class="title "> title</div>
-                            <div class="content ">There are many variations of passages of Lorem Ipsum available, but the majority have</div>
-                        </div>
-                    </div>
-                </div>
-            <?php
+      <div class="header <?php echo esc_attr($selected_skin); ?>">
+        <!--                            <span class="edit-link"><a href="#">Edit</a></span>-->
+        <label><input <?php echo esc_attr($checked); ?> type="radio" name="post_grid_meta_options[skin]"
+            value="<?php echo esc_attr($skin_slug); ?>"><?php echo esc_html($skin_info['name']); ?></label>
+      </div>
+      <div class="skin <?php echo esc_attr($skin_slug); ?>">
+        <div class="layer-media">
+          <div class="thumb "><img
+              src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" /></div>
+        </div>
+        <div class="layer-content">
+          <div class="title "> title</div>
+          <div class="content ">There are many variations of passages of Lorem Ipsum available, but the majority have
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php
 
                 }
 
@@ -1019,76 +1040,76 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
 
 
 
-        </div>
+  </div>
 
-        <style type="text/css">
-            #post-grid .skin-list {
-                text-align: center;
-            }
-
-
-            #post-grid .skin-list .skin-container {
-                display: inline-block;
-                margin: 10px;
-                width: 310px;
-                overflow: hidden;
-                vertical-align: top;
-                padding: 15px;
-            }
-
-            #post-grid .skin-list .skin-container .header {
-                background: rgb(252, 110, 60) none repeat scroll 0 0;
-                padding: 3px 10px;
-                text-align: left;
-            }
-
-            #post-grid .skin-list .skin-container .header.selected {
-                background: rgb(58, 212, 127) none repeat scroll 0 0;
-            }
-
-            #post-grid .skin-list .edit-link {
-                float: right;
-            }
-
-            #post-grid .skin-list .edit-link a {
-                color: #fff;
-                text-decoration: none;
-            }
-
-            #post-grid .skin-list .skin-container label {
-                color: rgb(255, 255, 255);
-            }
-
-            #post-grid .skin-list .skin {
-                display: inline-block;
-                overflow: hidden;
-                vertical-align: top;
-            }
-
-            #post-grid .skin-list .skin .thumb img {
-                height: auto;
-                width: 100%;
-            }
-
-            #post-grid .skin-list .skin .title {
-                font-size: 16px;
-                line-height: normal;
-                padding: 5px 0;
-            }
-
-            #post-grid .skin-list .skin .content {
-                font-size: 13px;
-                line-height: normal;
-                padding: 5px 0;
-            }
-
-            #post-grid .skin-list .layer-content>div {
-                padding: 5px 15px !important;
-            }
-        </style>
+  <style type="text/css">
+  #post-grid .skin-list {
+    text-align: center;
+  }
 
 
-        <?php
+  #post-grid .skin-list .skin-container {
+    display: inline-block;
+    margin: 10px;
+    width: 310px;
+    overflow: hidden;
+    vertical-align: top;
+    padding: 15px;
+  }
+
+  #post-grid .skin-list .skin-container .header {
+    background: rgb(252, 110, 60) none repeat scroll 0 0;
+    padding: 3px 10px;
+    text-align: left;
+  }
+
+  #post-grid .skin-list .skin-container .header.selected {
+    background: rgb(58, 212, 127) none repeat scroll 0 0;
+  }
+
+  #post-grid .skin-list .edit-link {
+    float: right;
+  }
+
+  #post-grid .skin-list .edit-link a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  #post-grid .skin-list .skin-container label {
+    color: rgb(255, 255, 255);
+  }
+
+  #post-grid .skin-list .skin {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  #post-grid .skin-list .skin .thumb img {
+    height: auto;
+    width: 100%;
+  }
+
+  #post-grid .skin-list .skin .title {
+    font-size: 16px;
+    line-height: normal;
+    padding: 5px 0;
+  }
+
+  #post-grid .skin-list .skin .content {
+    font-size: 13px;
+    line-height: normal;
+    padding: 5px 0;
+  }
+
+  #post-grid .skin-list .layer-content>div {
+    padding: 5px 15px !important;
+  }
+  </style>
+
+
+  <?php
 
         //            $html = ob_get_clean();
         //
@@ -1114,15 +1135,22 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
         ob_start();
 
         ?>
-        <label><input <?php if ($items_media_height_style == 'auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[media_height][style]" value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
-        <label><input <?php if ($items_media_height_style == 'fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[media_height][style]" value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
-        <label><input <?php if ($items_media_height_style == 'max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[media_height][style]" value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
+  <label><input <?php if ($items_media_height_style == 'auto_height') echo 'checked'; ?> type="radio"
+      name="post_grid_meta_options[media_height][style]"
+      value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
+  <label><input <?php if ($items_media_height_style == 'fixed_height') echo 'checked'; ?> type="radio"
+      name="post_grid_meta_options[media_height][style]"
+      value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
+  <label><input <?php if ($items_media_height_style == 'max_height') echo 'checked'; ?> type="radio"
+      name="post_grid_meta_options[media_height][style]"
+      value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
 
-        <div class="">
+  <div class="">
 
-            <input type="text" name="post_grid_meta_options[media_height][fixed_height]" value="<?php echo esc_attr($items_media_fixed_height); ?>" />
-        </div>
-        <?php
+    <input type="text" name="post_grid_meta_options[media_height][fixed_height]"
+      value="<?php echo esc_attr($items_media_fixed_height); ?>" />
+  </div>
+  <?php
 
         $html = ob_get_clean();
 
@@ -1180,7 +1208,7 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
 
 
         ?>
-        <?php
+  <?php
         if (empty($media_source)) {
 
             $media_source = $class_post_grid_functions->media_source();
@@ -1192,36 +1220,42 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
 
         ?>
 
-        <div class="media-source-list expandable">
-            <?php
+  <div class="media-source-list expandable">
+    <?php
             foreach ($media_source as $source_key => $source_info) {
             ?>
-                <div class="item">
-                    <div class="header">
-                        <span class="move" title="<?php echo __('Move', 'post-grid'); ?>"><i class="fas fa-bars"></i></span>
-                        <input type="hidden" name="post_grid_meta_options[media_source][<?php echo esc_attr($source_info['id']); ?>][id]" value="<?php echo esc_attr($source_info['id']); ?>" />
-                        <input type="hidden" name="post_grid_meta_options[media_source][<?php echo esc_attr($source_info['id']); ?>][title]" value="<?php echo esc_attr($source_info['title']); ?>" />
-                        <label>
-                            <input <?php if (!empty($source_info['checked'])) echo 'checked'; ?> type="checkbox" name="post_grid_meta_options[media_source][<?php echo esc_attr($source_info['id']); ?>][checked]" value="yes" /><?php echo esc_html($source_info['title']); ?>
-                        </label>
-                    </div>
-                </div>
-            <?php
+    <div class="item">
+      <div class="header">
+        <span class="move" title="<?php echo __('Move', 'post-grid'); ?>"><i class="fas fa-bars"></i></span>
+        <input type="hidden"
+          name="post_grid_meta_options[media_source][<?php echo esc_attr($source_info['id']); ?>][id]"
+          value="<?php echo esc_attr($source_info['id']); ?>" />
+        <input type="hidden"
+          name="post_grid_meta_options[media_source][<?php echo esc_attr($source_info['id']); ?>][title]"
+          value="<?php echo esc_attr($source_info['title']); ?>" />
+        <label>
+          <input <?php if (!empty($source_info['checked'])) echo 'checked'; ?> type="checkbox"
+            name="post_grid_meta_options[media_source][<?php echo esc_attr($source_info['id']); ?>][checked]"
+            value="yes" /><?php echo esc_html($source_info['title']); ?>
+        </label>
+      </div>
+    </div>
+    <?php
             }
             ?>
-        </div>
+  </div>
 
-        <script>
-            jQuery(document).ready(function($) {
-                $(".media-source-list").sortable({
-                    revert: "invalid",
-                    handle: '.move'
-                });
+  <script>
+  jQuery(document).ready(function($) {
+    $(".media-source-list").sortable({
+      revert: "invalid",
+      handle: '.move'
+    });
 
-            })
-        </script>
+  })
+  </script>
 
-        <?php
+  <?php
 
 
 
@@ -1241,7 +1275,7 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id)
         $settings_tabs_field->generate_field($args);
 
         ?>
-    </div>
+</div>
 <?php
 
 }
@@ -1270,62 +1304,83 @@ function post_grid_metabox_tabs_content_item_style($tab, $post_id)
 
 
 ?>
-    <div class="section">
-        <div class="section-title">Item style settings</div>
-        <p class="description section-description">Customize item style</p>
+<div class="section">
+  <div class="section-title">Item style settings</div>
+  <p class="description section-description">Customize item style</p>
 
-        <?php
+  <?php
 
 
         ob_start();
 
         ?>
-        <table>
-            <tr>
-                <td style="padding: 0 20px 0  0">
+  <table>
+    <tr>
+      <td style="padding: 0 20px 0  0">
 
-                    <div class="">
-                        <p><b>Desktop:</b>(min-width:1024px)</p>
-                        <label><input <?php if ($items_height_style == 'auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
-                        <label><input <?php if ($items_height_style == 'fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
-                        <label><input <?php if ($items_height_style == 'max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
+        <div class="">
+          <p><b>Desktop:</b>(min-width:1024px)</p>
+          <label><input <?php if ($items_height_style == 'auto_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style]"
+              value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
+          <label><input <?php if ($items_height_style == 'fixed_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style]"
+              value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
+          <label><input <?php if ($items_height_style == 'max_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style]"
+              value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
 
-                        <input type="text" name="post_grid_meta_options[item_height][fixed_height]" value="<?php echo esc_attr($items_fixed_height); ?>" />
+          <input type="text" name="post_grid_meta_options[item_height][fixed_height]"
+            value="<?php echo esc_attr($items_fixed_height); ?>" />
 
-                    </div>
+        </div>
 
 
-                </td>
-            </tr>
-            <tr>
-                <td style="padding:  0 20px 0  0">
-                    <div class="">
-                        <p><b>Tablet:</b>( min-width:768px )</p>
-                        <label><input <?php if ($items_height_style_tablet == 'auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
-                        <label><input <?php if ($items_height_style_tablet == 'fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
-                        <label><input <?php if ($items_height_style_tablet == 'max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:  0 20px 0  0">
+        <div class="">
+          <p><b>Tablet:</b>( min-width:768px )</p>
+          <label><input <?php if ($items_height_style_tablet == 'auto_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style_tablet]"
+              value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
+          <label><input <?php if ($items_height_style_tablet == 'fixed_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style_tablet]"
+              value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
+          <label><input <?php if ($items_height_style_tablet == 'max_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style_tablet]"
+              value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
 
-                        <input type="text" name="post_grid_meta_options[item_height][fixed_height_tablet]" value="<?php echo esc_attr($items_fixed_height_tablet); ?>" />
+          <input type="text" name="post_grid_meta_options[item_height][fixed_height_tablet]"
+            value="<?php echo esc_attr($items_fixed_height_tablet); ?>" />
 
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 0 20px 0  0">
-                    <div class="">
-                        <p><b>Mobile:</b>( min-width : 320px, )</p>
-                        <label><input <?php if ($items_height_style_mobile == 'auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
-                        <label><input <?php if ($items_height_style_mobile == 'fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
-                        <label><input <?php if ($items_height_style_mobile == 'max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0 20px 0  0">
+        <div class="">
+          <p><b>Mobile:</b>( min-width : 320px, )</p>
+          <label><input <?php if ($items_height_style_mobile == 'auto_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style_mobile]"
+              value="auto_height" /><?php _e('Auto height', 'post-grid'); ?></label><br />
+          <label><input <?php if ($items_height_style_mobile == 'fixed_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style_mobile]"
+              value="fixed_height" /><?php _e('Fixed height', 'post-grid'); ?></label><br />
+          <label><input <?php if ($items_height_style_mobile == 'max_height') echo 'checked'; ?> type="radio"
+              name="post_grid_meta_options[item_height][style_mobile]"
+              value="max_height" /><?php _e('Max height', 'post-grid'); ?></label><br />
 
-                        <input type="text" name="post_grid_meta_options[item_height][fixed_height_mobile]" value="<?php echo esc_attr($items_fixed_height_mobile); ?>" />
+          <input type="text" name="post_grid_meta_options[item_height][fixed_height_mobile]"
+            value="<?php echo esc_attr($items_fixed_height_mobile); ?>" />
 
-                    </div>
-                </td>
-            </tr>
+        </div>
+      </td>
+    </tr>
 
-        </table>
-        <?php
+  </table>
+  <?php
 
         $html = ob_get_clean();
 
@@ -1401,7 +1456,7 @@ function post_grid_metabox_tabs_content_item_style($tab, $post_id)
 
 
         ?>
-    </div>
+</div>
 <?php
 
 
@@ -1441,11 +1496,11 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id)
 
 
 ?>
-    <div class="section">
-        <div class="section-title">Grid settings</div>
-        <p class="description section-description">Customize the grid options</p>
+<div class="section">
+  <div class="section-title">Grid settings</div>
+  <p class="description section-description">Customize the grid options</p>
 
-        <?php
+  <?php
 
 
 
@@ -1453,21 +1508,24 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id)
         ob_start();
 
         ?>
-        <div class="">
-            Desktop:(min-width:1024px)<br>
-            <input placeholder="250px or 30% or column number(3)" type="text" name="post_grid_meta_options[width][desktop]" value="<?php echo esc_attr($items_width_desktop); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Tablet:( min-width: 768px and max-width: 1023px )<br>
-            <input placeholder="250px or 30% or column number(3)" type="text" name="post_grid_meta_options[width][tablet]" value="<?php echo esc_attr($items_width_tablet); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Mobile:( max-width : 767px, )<br>
-            <input placeholder="250px or 30% or column number(3)" type="text" name="post_grid_meta_options[width][mobile]" value="<?php echo esc_attr($items_width_mobile); ?>" />
-        </div>
-        <?php
+  <div class="">
+    Desktop:(min-width:1024px)<br>
+    <input placeholder="250px or 30% or column number(3)" type="text" name="post_grid_meta_options[width][desktop]"
+      value="<?php echo esc_attr($items_width_desktop); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Tablet:( min-width: 768px and max-width: 1023px )<br>
+    <input placeholder="250px or 30% or column number(3)" type="text" name="post_grid_meta_options[width][tablet]"
+      value="<?php echo esc_attr($items_width_tablet); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Mobile:( max-width : 767px, )<br>
+    <input placeholder="250px or 30% or column number(3)" type="text" name="post_grid_meta_options[width][mobile]"
+      value="<?php echo esc_attr($items_width_mobile); ?>" />
+  </div>
+  <?php
 
         $html = ob_get_clean();
 
@@ -1501,7 +1559,7 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id)
 
 
 
-    </div>
+</div>
 
 <?php
 
@@ -1520,17 +1578,17 @@ function post_grid_metabox_tabs_content_grid($tab, $post_id)
 
 
 ?>
-    <div class="section">
-        <div class="section-title">Grid Settings</div>
-        <p class="description section-description">Customize the Grid.</p>
+<div class="section">
+  <div class="section-title">Grid Settings</div>
+  <p class="description section-description">Customize the Grid.</p>
 
 
-        <?php
+  <?php
 
         ?>
 
 
-    </div>
+</div>
 
 <?php
 
@@ -1559,11 +1617,11 @@ function post_grid_metabox_tabs_content_pagination($tab, $post_id)
 
 
 ?>
-    <div class="section">
-        <div class="section-title">Pagination Settings</div>
-        <p class="description section-description">Customize the pagination.</p>
+<div class="section">
+  <div class="section-title">Pagination Settings</div>
+  <p class="description section-description">Customize the pagination.</p>
 
-        <?php
+  <?php
 
 
         $pagination_types = apply_filters(
@@ -1693,7 +1751,7 @@ function post_grid_metabox_tabs_content_pagination($tab, $post_id)
 
 
 
-    </div>
+</div>
 
 <?php
 
@@ -1725,11 +1783,11 @@ function post_grid_metabox_tabs_content_search($tab, $post_id)
     $query_orderby = !empty($post_grid_meta_options['nav_top']['query_orderby']) ? $post_grid_meta_options['nav_top']['query_orderby'] : array('date');
 
 ?>
-    <div class="section">
-        <div class="section-title">Search Settings</div>
-        <p class="description section-description">Choose option for search.</p>
+<div class="section">
+  <div class="section-title">Search Settings</div>
+  <p class="description section-description">Choose option for search.</p>
 
-        <?php
+  <?php
 
         $args = array(
             'id'        => 'action_type',
@@ -1848,7 +1906,7 @@ function post_grid_metabox_tabs_content_search($tab, $post_id)
 
         ?>
 
-    </div>
+</div>
 
 <?php
 
@@ -1876,34 +1934,37 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
 
 
 ?>
-    <div class="section">
-        <div class="section-title">Masonry Settings</div>
-        <p class="description section-description">Customize the masonry.</p>
+<div class="section">
+  <div class="section-title">Masonry Settings</div>
+  <p class="description section-description">Customize the masonry.</p>
 
 
 
-        <?php
+  <?php
 
 
 
         ob_start();
 
         ?>
-        <div class="">
-            Desktop:(min-width:1024px)<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[masonry][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Tablet:( min-width: 768px and max-width: 1023px )<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[masonry][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Mobile:( max-width : 767px, )<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[masonry][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
-        </div>
-        <?php
+  <div class="">
+    Desktop:(min-width:1024px)<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[masonry][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Tablet:( min-width: 768px and max-width: 1023px )<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[masonry][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Mobile:( max-width : 767px, )<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[masonry][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
+  </div>
+  <?php
 
         $html = ob_get_clean();
 
@@ -1951,7 +2012,7 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
 
 
 
-    </div>
+</div>
 
 <?php
 
@@ -1981,34 +2042,37 @@ function post_grid_metabox_tabs_content_tiles($tab, $post_id)
 
 
 ?>
-    <div class="section">
-        <div class="section-title">Tiles Settings</div>
-        <p class="description section-description">Customize the tiles.</p>
+<div class="section">
+  <div class="section-title">Tiles Settings</div>
+  <p class="description section-description">Customize the tiles.</p>
 
 
 
-        <?php
+  <?php
 
 
 
         ob_start();
 
         ?>
-        <div class="">
-            Desktop:(min-width:1024px)<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[tiles][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Tablet:( min-width: 768px and max-width: 1023px )<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[tiles][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Mobile:( max-width : 767px, )<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[tiles][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
-        </div>
-        <?php
+  <div class="">
+    Desktop:(min-width:1024px)<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[tiles][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Tablet:( min-width: 768px and max-width: 1023px )<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[tiles][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Mobile:( max-width : 767px, )<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[tiles][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
+  </div>
+  <?php
 
         $html = ob_get_clean();
 
@@ -2057,7 +2121,7 @@ function post_grid_metabox_tabs_content_tiles($tab, $post_id)
 
 
 
-    </div>
+</div>
 
 <?php
 
@@ -2085,13 +2149,13 @@ function post_grid_metabox_tabs_content_justified($tab, $post_id)
     $columns_mobile = !empty($justified['columns']['mobile']) ? $justified['columns']['mobile'] : '1';
 
 ?>
-    <div class="section">
-        <div class="section-title">Justified Settings</div>
-        <p class="description section-description">Customize the justified.</p>
+<div class="section">
+  <div class="section-title">Justified Settings</div>
+  <p class="description section-description">Customize the justified.</p>
 
 
 
-        <?php
+  <?php
 
 
 
@@ -2099,21 +2163,24 @@ function post_grid_metabox_tabs_content_justified($tab, $post_id)
         ob_start();
 
         ?>
-        <div class="">
-            Desktop:(min-width:1024px)<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[justified][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Tablet:( min-width: 768px and max-width: 1023px )<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[justified][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
-        </div>
-        <br>
-        <div class="">
-            Mobile:( max-width : 767px, )<br>
-            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[justified][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
-        </div>
-        <?php
+  <div class="">
+    Desktop:(min-width:1024px)<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[justified][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Tablet:( min-width: 768px and max-width: 1023px )<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[justified][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
+  </div>
+  <br>
+  <div class="">
+    Mobile:( max-width : 767px, )<br>
+    <input placeholder="250px or 30% or column number(3)" type="number"
+      name="post_grid_meta_options[justified][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
+  </div>
+  <?php
 
         $html = ob_get_clean();
 
@@ -2179,7 +2246,7 @@ function post_grid_metabox_tabs_content_justified($tab, $post_id)
 
 
 
-    </div>
+</div>
 
 <?php
 
@@ -2210,15 +2277,15 @@ function post_grid_metabox_tabs_content_custom_scripts($tab, $post_id)
     $custom_css = !empty($post_grid_meta_options['custom_css']) ? $post_grid_meta_options['custom_css'] : '';
 
 ?>
-    <div class="section">
-        <div class="section-title">Custom Scripts & CSS</div>
-        <p class="description section-description">Write your custom Scripts and CSS here.</p>
+<div class="section">
+  <div class="section-title">Custom Scripts & CSS</div>
+  <p class="description section-description">Write your custom Scripts and CSS here.</p>
 
 
 
 
 
-        <?php
+  <?php
         $args = array(
             'id'        => 'custom_js',
             'parent'        => 'post_grid_meta_options',
@@ -2233,7 +2300,7 @@ function post_grid_metabox_tabs_content_custom_scripts($tab, $post_id)
         $settings_tabs_field->generate_field($args, $post_id);
         ?>
 
-        <?php
+  <?php
         $args = array(
             'id'        => 'custom_css',
             'parent'        => 'post_grid_meta_options',
@@ -2248,8 +2315,8 @@ function post_grid_metabox_tabs_content_custom_scripts($tab, $post_id)
         $settings_tabs_field->generate_field($args, $post_id);
         ?>
 
-    </div>
-    <?php
+</div>
+<?php
 
 
 }
@@ -2308,16 +2375,19 @@ function post_grid_update_taxonomies_terms_by_posttypes()
                 $taxonomy_term_arr = !empty($taxonomy_term_arr) ? $taxonomy_term_arr : array();
 
     ?>
-                <div class="item">
-                    <div class="header">
-                        <span class="expand">
-                            <i class="fas fa-expand"></i>
-                            <i class="fas fa-compress"></i>
-                        </span>
-                        <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?> name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]" value="<?php echo esc_attr($taxonomy); ?>" /> <?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</label>
-                    </div>
-                    <div class="options">
-                        <?php
+<div class="item">
+  <div class="header">
+    <span class="expand">
+      <i class="fas fa-expand"></i>
+      <i class="fas fa-compress"></i>
+    </span>
+    <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?>
+        name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]"
+        value="<?php echo esc_attr($taxonomy); ?>" />
+      <?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</label>
+  </div>
+  <div class="options">
+    <?php
 
                         $args = array(
                             'id'        => 'terms',
@@ -2363,8 +2433,8 @@ function post_grid_update_taxonomies_terms_by_posttypes()
 
                         ?>
 
-                    </div>
-                </div>
+  </div>
+</div>
 <?php
 
             }

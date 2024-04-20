@@ -175,6 +175,7 @@ class PGBlockPostGrid
 
 
     $postGridScriptData[$blockId]['lazyLoad']['enable'] = $lazyLoadEnable;
+    $postGridScriptData[$blockId]['_wpnonce'] = wp_create_nonce('wp_rest');
 
     $layout_id = isset($layout['id']) ? $layout['id'] : '';
     $layout_id = apply_filters('pgb_post_grid_post_layout_id', $layout_id);

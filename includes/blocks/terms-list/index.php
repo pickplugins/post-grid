@@ -271,7 +271,7 @@ class PGBlockTermsList
 ?>
 
 
-    <<?php echo esc_attr($wrapperTag); ?> class="
+    <<?php echo esc_html($wrapperTag); ?> class="
                                         <?php echo $blockId; ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
@@ -439,7 +439,7 @@ class PGBlockTermsList
       <?php endif; ?>
 
 
-    </<?php echo esc_attr($wrapperTag); ?>>
+    </<?php echo esc_html($wrapperTag); ?>>
 
 
 

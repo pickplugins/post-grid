@@ -34,16 +34,16 @@ function post_grid_layout_element_option_page_visit_counter($parameters){
 
 
     ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Page Visit Counter','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="expand"><?php echo __('Page Visit Counter','post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'		=> 'wrapper_html',
@@ -149,8 +149,9 @@ function post_grid_layout_element_option_page_visit_counter($parameters){
 
             ob_start();
             ?>
-            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -167,9 +168,9 @@ function post_grid_layout_element_option_page_visit_counter($parameters){
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -196,10 +197,11 @@ function post_grid_layout_element_page_visit_counter($args){
     $html = sprintf($wrapper_html, do_shortcode("[pvcp_1 postid=$post_id]"));
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> page_visit_counter ">
-        <?php echo esc_html($html); ?>
-    </div>
-    <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> page_visit_counter ">
+  <?php echo esc_html($html); ?>
+</div>
+<?php
     // endif;
 
 }
@@ -223,30 +225,38 @@ function post_grid_layout_element_css_page_visit_counter($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo esc_attr($color); ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo esc_attr($font_size); ?>;
-        <?php endif; ?>
+<style type="text/css">
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo esc_attr($margin); ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo esc_attr($text_align); ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo esc_attr($css); ?>
-        <?php endif; ?>
-        }
-        <?php if(!empty($css_hover)): ?>
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover{
-        <?php echo esc_attr($css_hover); ?>
-        }
-        <?php endif; ?>
-    </style>
-    <?php
+?> {
+  <?php if( !empty($color)): ?> color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($font_size)): ?> font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($margin)): ?> margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($text_align)): ?> text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($css)): ?> <?php echo esc_attr($css);
+  ?><?php endif;
+  ?>
+}
+
+<?php if( !empty($css_hover)): ?>.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
+
+?>:hover {
+  <?php echo esc_attr($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
+<?php
 }

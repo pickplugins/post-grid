@@ -17,13 +17,14 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 <div class="wrap">
 
-	<div id="icon-tools" class="icon32"><br></div><?php echo "<h2>".esc_html(sprintf(__('%s - Data Update', 'post-grid'), post_grid_plugin_name))."</h2>";?>
+  <div id="icon-tools" class="icon32"><br></div>
+  <?php echo "<h2>".esc_html(sprintf(__('%s - Data Update', 'post-grid'), post_grid_plugin_name))."</h2>";?>
 
 
-    <div class=" post-grid-settings">
+  <div class=" post-grid-settings">
 
 
-        <?php
+    <?php
 
         $default_query_args['post_type'] = array('post_grid');
         $default_query_args['post_status'] = array('any');
@@ -32,8 +33,8 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
         if ( $post_grid_wp_query->have_posts() ) :
             ?>
-            <ul>
-            <?php
+    <ul>
+      <?php
             while ( $post_grid_wp_query->have_posts() ) : $post_grid_wp_query->the_post();
 
                 $post_id = get_the_id();
@@ -81,13 +82,13 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
                 update_post_meta($post_id, 'post_grid_meta_options', $post_grid_meta_options);
 
                 ?>
-                <li><?php echo esc_html(get_the_title()); ?></li>
-            <?php
+      <li><?php echo esc_html(get_the_title()); ?></li>
+      <?php
 
             endwhile;
             ?>
-           </ul>
-        <?php
+    </ul>
+    <?php
         endif;
 
 
@@ -98,10 +99,10 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
         ?>
-		
 
-        
-    </div>
+
+
+  </div>
 
 
 

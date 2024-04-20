@@ -252,7 +252,7 @@ class PGBlocArchiveDescription
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo esc_attr($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
+			<<?php echo esc_html($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
 				<?php if ($iconPosition == 'beforePrefix') : ?>
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
@@ -313,7 +313,7 @@ class PGBlocArchiveDescription
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
 
-			</<?php echo esc_attr($wrapperTag); ?>>
+			</<?php echo esc_html($wrapperTag); ?>>
 		<?php
 
 		endif;

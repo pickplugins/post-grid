@@ -41,16 +41,16 @@ function post_grid_layout_element_option_yith_add_to_wishlist($parameters){
 
 
     ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('YITH - Wishlist','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="expand"><?php echo __('YITH - Wishlist','post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -143,8 +143,9 @@ function post_grid_layout_element_option_yith_add_to_wishlist($parameters){
 
             ob_start();
             ?>
-            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -161,9 +162,9 @@ function post_grid_layout_element_option_yith_add_to_wishlist($parameters){
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -186,10 +187,11 @@ function post_grid_layout_element_yith_add_to_wishlist($args){
    // if(!empty($acf_value)):
 
         ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> yith_add_to_wishlist ">
-            <?php echo do_shortcode("[yith_wcwl_add_to_wishlist product_id='".esc_attr($post_id)."' ]"); ?>
-        </div>
-        <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> yith_add_to_wishlist ">
+  <?php echo do_shortcode("[yith_wcwl_add_to_wishlist product_id='".esc_attr($post_id)."' ]"); ?>
+</div>
+<?php
    // endif;
 
 }
@@ -213,40 +215,51 @@ function post_grid_layout_element_css_yith_add_to_wishlist($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo esc_attr($color); ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo esc_attr($font_size); ?>;
-        <?php endif; ?>
+<style type="text/css">
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo esc_attr($margin); ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo esc_attr($text_align); ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo esc_attr($css); ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo esc_attr($color); ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo esc_attr($font_size); ?>;
-        <?php endif; ?>
-        }
-        <?php if(!empty($css_hover)): ?>
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover{
-        <?php echo esc_attr($css_hover); ?>
-        }
-        <?php endif; ?>
-    </style>
-    <?php
+?> {
+  <?php if( !empty($color)): ?> color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($font_size)): ?> font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($margin)): ?> margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($text_align)): ?> text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($css)): ?> <?php echo esc_attr($css);
+  ?><?php endif;
+  ?>
 }
 
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
+?>a {
+  <?php if( !empty($color)): ?> color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if( !empty($font_size)): ?> font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?>
+}
+
+<?php if( !empty($css_hover)): ?>.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
+
+?>:hover {
+  <?php echo esc_attr($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
+<?php
+}

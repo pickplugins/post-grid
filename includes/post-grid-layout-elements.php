@@ -23,19 +23,19 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
 
 
 ?>
-    <div class="item wrapper_link_start">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item wrapper_link_start">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand  "><?php echo __('Wrapper Link start', 'post-grid'); ?></span>
+    <span class="header-text expand  "><?php echo __('Wrapper Link start', 'post-grid'); ?></span>
 
-            <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
+    <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
 
-        </div>
-        <div class="element-options options">
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'wrapper_id',
@@ -108,8 +108,9 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -126,8 +127,8 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -150,10 +151,11 @@ function post_grid_layout_element_wrapper_link_start($args)
 
 
 ?>
-    <a class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>" id="<?php echo esc_attr($wrapper_id); ?>" href="<?php echo esc_url_raw(get_permalink($post_id)); ?>">
+<a class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>"
+  id="<?php echo esc_attr($wrapper_id); ?>" href="<?php echo esc_url_raw(get_permalink($post_id)); ?>">
 
 
-    <?php
+  <?php
 
 }
 
@@ -172,17 +174,17 @@ function post_grid_layout_element_option_wrapper_link_end($parameters)
     $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
 
     ?>
-        <div class="item wrapper_link_end">
-            <div class="element-title header ">
-                <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-                <span class="sort"><i class="fas fa-sort"></i></span>
+  <div class="item wrapper_link_end">
+    <div class="element-title header ">
+      <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+      <span class="sort"><i class="fas fa-sort"></i></span>
 
-                <span class="header-text expand"><?php echo __('Wrapper Link end', 'post-grid'); ?></span>
-                <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
-            </div>
-            <div class="element-options options">
+      <span class="header-text expand"><?php echo __('Wrapper Link end', 'post-grid'); ?></span>
+      <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
+    </div>
+    <div class="element-options options">
 
-                <?php
+      <?php
 
                 $args = array(
                     'id'        => 'wrapper_id',
@@ -204,9 +206,9 @@ function post_grid_layout_element_option_wrapper_link_end($parameters)
 
                 ?>
 
-            </div>
-        </div>
-    <?php
+    </div>
+  </div>
+  <?php
 
 }
 
@@ -218,7 +220,7 @@ function post_grid_layout_element_wrapper_link_end($args)
 
 
     ?>
-    </a>
+</a>
 <?php
 
 }
@@ -248,19 +250,19 @@ function post_grid_layout_element_option_wrapper_start($parameters)
 
 
 ?>
-    <div class="item wrapper_start">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item wrapper_start">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Wrapper start', 'post-grid'); ?></span>
+    <span class="header-text expand"><?php echo __('Wrapper start', 'post-grid'); ?></span>
 
-            <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
+    <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
 
-        </div>
-        <div class="element-options options">
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'wrapper_id',
@@ -333,8 +335,9 @@ function post_grid_layout_element_option_wrapper_start($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -351,8 +354,8 @@ function post_grid_layout_element_option_wrapper_start($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -374,8 +377,9 @@ function post_grid_layout_element_wrapper_start($args)
 
 
 ?>
-    <div class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>" id="<?php echo esc_attr($wrapper_id); ?>">
-    <?php
+<div class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>"
+  id="<?php echo esc_attr($wrapper_id); ?>">
+  <?php
 
 }
 
@@ -399,23 +403,43 @@ function post_grid_layout_element_css_wrapper_start($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-        <style type="text/css">
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-                <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-                <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-                <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-                <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-                <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-            }
+  <style type="text/css">
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
 
-            <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-                <?php echo wp_strip_all_tags($css_hover); ?>
-            }
+  ?> {
+    <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+    ?>;
+    <?php endif;
+    ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+    ?>;
+    <?php endif;
+    ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+    ?>;
+    <?php endif;
+    ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+    ?>;
+    <?php endif;
+    ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+    ?>;
+    <?php endif;
+    ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+    ?><?php endif;
+    ?>
+  }
 
-            <?php endif; ?>
-        </style>
-    <?php
+  <?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?>:hover {
+    <?php echo wp_strip_all_tags($css_hover);
+    ?>
+  }
+
+  <?php endif;
+  ?>
+  </style>
+  <?php
 }
 
 
@@ -436,17 +460,17 @@ function post_grid_layout_element_option_wrapper_end($parameters)
     $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
 
     ?>
-        <div class="item wrapper_end">
-            <div class="element-title header ">
-                <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-                <span class="sort"><i class="fas fa-sort"></i></span>
+  <div class="item wrapper_end">
+    <div class="element-title header ">
+      <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+      <span class="sort"><i class="fas fa-sort"></i></span>
 
-                <span class="header-text expand"><?php echo __('Wrapper end', 'post-grid'); ?></span>
-                <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
-            </div>
-            <div class="element-options options">
+      <span class="header-text expand"><?php echo __('Wrapper end', 'post-grid'); ?></span>
+      <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
+    </div>
+    <div class="element-options options">
 
-                <?php
+      <?php
 
                 $args = array(
                     'id'        => 'wrapper_id',
@@ -468,9 +492,9 @@ function post_grid_layout_element_option_wrapper_end($parameters)
 
                 ?>
 
-            </div>
-        </div>
-    <?php
+    </div>
+  </div>
+  <?php
 
 }
 
@@ -482,7 +506,7 @@ function post_grid_layout_element_wrapper_end($args)
 
 
     ?>
-    </div>
+</div>
 <?php
 
 }
@@ -515,16 +539,16 @@ function post_grid_layout_element_option_custom_text($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Custom text', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Custom text', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -659,8 +683,9 @@ function post_grid_layout_element_option_custom_text($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -677,8 +702,8 @@ function post_grid_layout_element_option_custom_text($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -701,9 +726,9 @@ function post_grid_layout_element_custom_text($args)
     $text = isset($element['text']) ?  $element['text'] : '';
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
-        <?php echo esc_html($text); ?>
-    </div>
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
+  <?php echo esc_html($text); ?>
+</div>
 <?php
 }
 
@@ -728,22 +753,42 @@ function post_grid_layout_element_css_custom_text($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -777,16 +822,16 @@ function post_grid_layout_element_option_title($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Post title', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Post title', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -968,9 +1013,9 @@ function post_grid_layout_element_option_title($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -987,8 +1032,8 @@ function post_grid_layout_element_option_title($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -1032,25 +1077,27 @@ function post_grid_layout_element_title($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
-        <?php if ($link_to == 'post_link') : ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
+  <?php if ($link_to == 'post_link') : ?>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
 
-        <?php elseif ($link_to == 'custom_link') :
+  <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
 
-        <?php else : ?>
-            <?php echo wp_kses_post($title); ?>
-        <?php endif; ?>
+  <?php else : ?>
+  <?php echo wp_kses_post($title); ?>
+  <?php endif; ?>
 
 
-    </div>
+</div>
 <?php
 }
 
@@ -1073,29 +1120,64 @@ function post_grid_layout_element_css_title($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -1133,16 +1215,16 @@ function post_grid_layout_element_option_title_link($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Post title with link', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Post title with link', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -1322,9 +1404,9 @@ function post_grid_layout_element_option_title_link($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
 <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -1341,8 +1423,8 @@ function post_grid_layout_element_option_title_link($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -1381,20 +1463,22 @@ function post_grid_layout_element_title_link($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
-        <?php if ($link_to == 'post_link') : ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
-        <?php elseif ($link_to == 'custom_link') :
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
+  <?php if ($link_to == 'post_link') : ?>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
+  <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
-        <?php else : ?>
-            <?php echo wp_kses_post($title); ?>
-        <?php endif; ?>
-    </div>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
+  <?php else : ?>
+  <?php echo wp_kses_post($title); ?>
+  <?php endif; ?>
+</div>
 <?php
 }
 
@@ -1419,27 +1503,56 @@ function post_grid_layout_element_css_title_link($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -1467,16 +1580,16 @@ function post_grid_layout_element_option_content($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Content', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Content', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -1567,9 +1680,9 @@ function post_grid_layout_element_option_content($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -1587,8 +1700,8 @@ function post_grid_layout_element_option_content($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -1625,9 +1738,9 @@ function post_grid_layout_element_content($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
-        <?php echo $post_content; ?>
-    </div>
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
+  <?php echo $post_content; ?>
+</div>
 <?php
 }
 
@@ -1663,16 +1776,16 @@ function post_grid_layout_element_option_excerpt($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Post excerpt', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Post excerpt', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -1887,9 +2000,9 @@ function post_grid_layout_element_option_excerpt($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -1906,8 +2019,8 @@ function post_grid_layout_element_option_excerpt($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -1987,16 +2100,17 @@ function post_grid_layout_element_excerpt($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
-        <?php echo wp_kses_post($post_excerpt); ?>
-        <?php
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
+  <?php echo wp_kses_post($post_excerpt); ?>
+  <?php
         if (!empty($read_more_text)) :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($read_more_text); ?></a>
-        <?php
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($read_more_text); ?></a>
+  <?php
         endif;
         ?>
-    </div>
+</div>
 <?php
 }
 
@@ -2019,27 +2133,56 @@ function post_grid_layout_element_css_excerpt($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -2074,16 +2217,16 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Excerpt read more', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Excerpt read more', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -2258,9 +2401,9 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -2277,8 +2420,8 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -2347,11 +2490,13 @@ function post_grid_layout_element_excerpt_read_more($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
-        <?php echo $post_excerpt; ?>
-        <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
+  <?php echo $post_excerpt; ?>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
 
-    </div>
+</div>
 <?php
 }
 
@@ -2379,27 +2524,56 @@ function post_grid_layout_element_css_excerpt_read_more($args)
 
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -2435,16 +2609,16 @@ function post_grid_layout_element_option_read_more($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Read more', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Read more', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -2604,9 +2778,9 @@ function post_grid_layout_element_option_read_more($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -2623,8 +2797,8 @@ function post_grid_layout_element_option_read_more($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -2654,20 +2828,23 @@ function post_grid_layout_element_read_more($args)
 
     $title = get_the_title($post_id);
 ?>
-    <?php if ($link_to == 'post_link') : ?>
-        <a class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more " target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
-    <?php elseif ($link_to == 'custom_link') :
+<?php if ($link_to == 'post_link') : ?>
+<a class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more "
+  target="<?php echo esc_attr($link_target); ?>"
+  href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+<?php elseif ($link_to == 'custom_link') :
 
         $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
         $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
     ?>
-        <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
-    <?php else : ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
-            <?php echo esc_html($read_more_text); ?>
-        </div>
-    <?php endif; ?>
+<a target="<?php echo esc_attr($link_target); ?>"
+  href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
+<?php else : ?>
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
+  <?php echo esc_html($read_more_text); ?>
+</div>
+<?php endif; ?>
 
 <?php
 }
@@ -2692,31 +2869,60 @@ function post_grid_layout_element_css_read_more($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?> !important;
-            ;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?> !important;
+  ;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?> !important;
-            ;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?> !important;
-            ;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?> !important;
-            ;
-            <?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?> !important;
+  ;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?> !important;
+  ;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?> !important;
+  ;
+  <?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -2756,14 +2962,14 @@ function post_grid_layout_element_option_media($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-            <span class="header-text expand"><?php echo __('Media', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-            <?php
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
+    <span class="header-text expand"><?php echo __('Media', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
+    <?php
 
 
             $args = array(
@@ -2796,8 +3002,8 @@ function post_grid_layout_element_option_media($parameters)
                 $media_sources_new = array_replace($media_source_new, $media_sources_list);
                 $media_sources_new = (!empty($media_sources_new)) ? $media_sources_new : $media_sources_list;
             ?>
-                <div class="expandable sortable">
-                    <?php
+    <div class="expandable sortable">
+      <?php
 
                     if (!empty($media_sources_new))
                         foreach ($media_sources_new as $source_id => $source_name) {
@@ -2813,28 +3019,28 @@ function post_grid_layout_element_option_media($parameters)
                             $media_source_options['source_data'] = $source_data;
 
                     ?>
-                        <div class="item">
-                            <div class="element-title header ">
-                                <span class="sort"><i class="fas fa-sort"></i></span>
-                                <?php
+      <div class="item">
+        <div class="element-title header ">
+          <span class="sort"><i class="fas fa-sort"></i></span>
+          <?php
                                 if ($source_enable == 'yes') :
                                 ?><i class="fas fa-check"></i><?php
                                                             else :
                                                                 ?><i class="fas fa-times"></i><?php
                                                                                             endif; ?>
-                                <span class="header-text expand"><?php echo esc_html($source_name); ?></span>
-                            </div>
-                            <div class="element-options options">
-                                <?php
+          <span class="header-text expand"><?php echo esc_html($source_name); ?></span>
+        </div>
+        <div class="element-options options">
+          <?php
                                 do_action('media_source_options_' . $source_id, $media_source_options);
                                 ?>
-                            </div>
-                        </div>
-                    <?php
+        </div>
+      </div>
+      <?php
                         }
                     ?>
-                </div>
-            <?php
+    </div>
+    <?php
             }
 
             $html = ob_get_clean();
@@ -3001,9 +3207,9 @@ function post_grid_layout_element_option_media($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -3021,8 +3227,8 @@ function post_grid_layout_element_option_media($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -3051,8 +3257,9 @@ function post_grid_layout_element_media($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> element-media ">
-        <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> element-media ">
+  <?php
 
         $html_media = '';
 
@@ -3086,7 +3293,7 @@ function post_grid_layout_element_media($args)
         ?>
 
 
-    </div>
+</div>
 <?php
 }
 
@@ -3115,50 +3322,92 @@ function post_grid_layout_element_css_media($args)
 
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($padding)) : ?>padding: <?php echo esc_attr($padding);  ?>;
-            <?php endif; ?>overflow: hidden;
-            <?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index) . ' img'; ?> {
-            max-width: 100%;
-            height: auto;
-        }
+?> {
+  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($padding)): ?>padding: <?php echo esc_attr($padding);
+  ?>;
+  <?php endif;
+  ?>overflow: hidden;
+  <?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index) . ' img';
 
-        <?php endif; ?>@media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if ($height_large_type == 'auto_height') :  ?>height: auto;
-                <?php elseif ($height_large_type == 'fixed_height') : ?><?php if (!empty($thumb_height_large)) : ?>height: <?php echo esc_attr($thumb_height_large); ?>;
-                <?php endif; ?><?php elseif ($height_large_type == 'max_height') : ?><?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo esc_attr($thumb_height_large); ?>;
-                <?php endif; ?><?php endif; ?>
-            }
-        }
+?> {
+  max-width: 100%;
+  height: auto;
+}
 
-        @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if ($height_medium_type == 'auto_height') :  ?>height: auto;
-                <?php elseif ($height_medium_type == 'fixed_height') : ?><?php if (!empty($thumb_height_medium)) : ?>height: <?php echo esc_attr($thumb_height_medium); ?>;
-                <?php endif; ?><?php elseif ($height_medium_type == 'max_height') : ?><?php if (!empty($thumb_height_medium)) : ?>max-height: <?php echo esc_attr($thumb_height_medium); ?>;
-                <?php endif; ?><?php endif; ?>
-            }
-        }
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if ($height_small_type == 'auto_height') :  ?>height: auto;
-                <?php elseif ($height_small_type == 'fixed_height') : ?><?php if (!empty($thumb_height_small)) : ?>height: <?php echo esc_attr($thumb_height_small); ?>;
-                <?php endif; ?><?php elseif ($height_small_type == 'max_height') : ?><?php if (!empty($thumb_height_small)) : ?>max-height: <?php echo esc_attr($thumb_height_small); ?>;
-                <?php endif; ?><?php endif; ?>
-            }
-        }
-    </style>
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+
+?>@media only screen and (min-width: 1024px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ($height_large_type=='auto_height'): ?>height: auto;
+    <?php elseif ($height_large_type=='fixed_height'): ?><?php if ( !empty($thumb_height_large)): ?>height: <?php echo esc_attr($thumb_height_large);
+    ?>;
+    <?php endif;
+    ?><?php elseif ($height_large_type=='max_height'): ?><?php if ( !empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
+    ?>;
+    <?php endif;
+    ?><?php endif;
+    ?>
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ($height_medium_type=='auto_height'): ?>height: auto;
+    <?php elseif ($height_medium_type=='fixed_height'): ?><?php if ( !empty($thumb_height_medium)): ?>height: <?php echo esc_attr($thumb_height_medium);
+    ?>;
+    <?php endif;
+    ?><?php elseif ($height_medium_type=='max_height'): ?><?php if ( !empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
+    ?>;
+    <?php endif;
+    ?><?php endif;
+    ?>
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ($height_small_type=='auto_height'): ?>height: auto;
+    <?php elseif ($height_small_type=='fixed_height'): ?><?php if ( !empty($thumb_height_small)): ?>height: <?php echo esc_attr($thumb_height_small);
+    ?>;
+    <?php endif;
+    ?><?php elseif ($height_small_type=='max_height'): ?><?php if ( !empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
+    ?>;
+    <?php endif;
+    ?><?php endif;
+    ?>
+  }
+}
+</style>
 <?php
 }
 
@@ -3196,16 +3445,16 @@ function post_grid_layout_element_option_thumb($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Thumbnail', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Thumbnail', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -3393,9 +3642,9 @@ function post_grid_layout_element_option_thumb($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -3413,8 +3662,8 @@ function post_grid_layout_element_option_thumb($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -3454,37 +3703,33 @@ function post_grid_layout_element_thumb($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
-        <?php
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
+  <?php
         if ($link_to == 'post_link') :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img alt="php" 
-src="<?php echo esc_url($thumb_url); ?>"
-alt="<?php echo esc_attr($alt_text); ?>"
-
-></a>
-        <?php elseif ($link_to == 'custom_link') :
+  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img alt="php"
+      src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($alt_text); ?>"></a>
+  <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img alt="<?php echo esc_attr($alt_text); ?>"
- src="<?php echo esc_url($thumb_url); ?>"></a>
+  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img
+      alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
 
-        <?php
+  <?php
         else :
         ?>
-            <img alt="<?php echo esc_attr($alt_text); ?>"
- src="<?php echo esc_url($thumb_url); ?>">
-        <?php
+  <img alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>">
+  <?php
 
         endif;
         ?>
 
 
-    </div>
+</div>
 <?php
 }
 
@@ -3511,39 +3756,62 @@ function post_grid_layout_element_css_thumb($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            overflow: hidden;
-            <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index) . ' img'; ?> {
-            max-width: 100%;
-            height: auto;
-        }
+?> {
+  overflow: hidden;
+  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?>
+}
 
-        @media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo esc_attr($thumb_height_large); ?>;
-                <?php endif; ?>
-            }
-        }
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index) . ' img';
 
-        @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if (!empty($thumb_height_medium)) : ?>max-height: <?php echo esc_attr($thumb_height_medium); ?>;
-                <?php endif; ?>
-            }
-        }
+?> {
+  max-width: 100%;
+  height: auto;
+}
 
-        @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if (!empty($thumb_height_small)) : ?>max-height: <?php echo esc_attr($thumb_height_small); ?>;
-                <?php endif; ?>
-            }
-        }
-    </style>
+@media only screen and (min-width: 1024px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ( !empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
+    ?>;
+    <?php endif;
+    ?>
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ( !empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
+    ?>;
+    <?php endif;
+    ?>
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ( !empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
+    ?>;
+    <?php endif;
+    ?>
+  }
+}
+</style>
 <?php
 }
 
@@ -3579,16 +3847,16 @@ function post_grid_layout_element_option_thumb_link($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Thumbnail with link', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Thumbnail with link', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -3774,9 +4042,9 @@ function post_grid_layout_element_option_thumb_link($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -3794,8 +4062,8 @@ function post_grid_layout_element_option_thumb_link($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -3835,36 +4103,35 @@ function post_grid_layout_element_thumb_link($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
-        <?php
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
+  <?php
         if ($link_to == 'post_link') :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img alt="<?php echo esc_attr($alt_text); ?>"
- src="<?php echo esc_url($thumb_url); ?>"></a>
+  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img
+      alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
 
-        <?php elseif ($link_to == 'custom_link') :
+  <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img alt="<?php echo esc_attr($alt_text); ?>"
- src="<?php echo esc_url($thumb_url); ?>"></a>
+  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img
+      alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
 
 
-        <?php
+  <?php
         else :
         ?>
-            <img alt="<?php echo esc_attr($alt_text); ?>"
- src="<?php echo esc_url($thumb_url); ?>">
-        <?php
+  <img alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>">
+  <?php
 
         endif;
         ?>
 
 
-    </div>
+</div>
 <?php
 }
 
@@ -3887,39 +4154,62 @@ function post_grid_layout_element_css_thumb_link($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            overflow: hidden;
-            <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index) . ' img'; ?> {
-            max-width: 100%;
-            height: auto;
-        }
+?> {
+  overflow: hidden;
+  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?>
+}
 
-        @media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo esc_attr($thumb_height_large); ?>;
-                <?php endif; ?>
-            }
-        }
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index) . ' img';
 
-        @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if (!empty($thumb_height_medium)) : ?>max-height: <?php echo esc_attr($thumb_height_medium); ?>;
-                <?php endif; ?>
-            }
-        }
+?> {
+  max-width: 100%;
+  height: auto;
+}
 
-        @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-                <?php if (!empty($thumb_height_small)) : ?>max-height: <?php echo esc_attr($thumb_height_small); ?>;
-                <?php endif; ?>
-            }
-        }
-    </style>
+@media only screen and (min-width: 1024px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ( !empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
+    ?>;
+    <?php endif;
+    ?>
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ( !empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
+    ?>;
+    <?php endif;
+    ?>
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  <?php echo esc_attr('.layout-'. $layout_id);
+  ?><?php echo esc_attr(' .element_'. $index);
+
+  ?> {
+    <?php if ( !empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
+    ?>;
+    <?php endif;
+    ?>
+  }
+}
+</style>
 <?php
 }
 
@@ -3960,16 +4250,16 @@ function post_grid_layout_element_option_post_date($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Post date', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Post date', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -4139,9 +4429,9 @@ function post_grid_layout_element_option_post_date($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -4158,8 +4448,8 @@ function post_grid_layout_element_option_post_date($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 }
 
@@ -4192,31 +4482,33 @@ function post_grid_layout_element_post_date($args)
     $post_date = sprintf($wrapper_html, $post_date);
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
-        <?php
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
+  <?php
         if ($link_to == 'post_link') :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_date); ?></a>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_date); ?></a>
 
-        <?php elseif ($link_to == 'custom_link') :
+  <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_date); ?></a>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_date); ?></a>
 
 
-        <?php
+  <?php
         else :
         ?>
-            <?php echo esc_html($post_date); ?>
-        <?php
+  <?php echo esc_html($post_date); ?>
+  <?php
         endif;
         ?>
 
-    </div>
+</div>
 <?php
 }
 
@@ -4238,27 +4530,56 @@ function post_grid_layout_element_css_post_date($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -4290,16 +4611,16 @@ function post_grid_layout_element_option_author($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Author name', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Author name', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -4443,9 +4764,9 @@ function post_grid_layout_element_option_author($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -4462,8 +4783,8 @@ function post_grid_layout_element_option_author($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -4499,40 +4820,43 @@ function post_grid_layout_element_author($args)
     $post_author = sprintf($wrapper_html, $post_author);
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
-        <?php
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
+  <?php
         if ($link_to == 'post_link') :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
 
-        <?php elseif ($link_to == 'custom_link') :
+  <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
 
 
 
 
-        <?php
+  <?php
         elseif ($link_to == 'author_posts_link') :
             $post_author_link = get_author_posts_url(get_the_author_meta('ID'));
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
-        <?php
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
+  <?php
 
         else :
         ?>
-            <?php echo esc_html($post_author); ?>
-        <?php
+  <?php echo esc_html($post_author); ?>
+  <?php
         endif;
         ?>
 
-    </div>
+</div>
 <?php
 }
 
@@ -4555,27 +4879,56 @@ function post_grid_layout_element_css_author($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -4606,16 +4959,16 @@ function post_grid_layout_element_option_author_link($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Author name with link', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Author name with link', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -4756,9 +5109,9 @@ function post_grid_layout_element_option_author_link($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -4774,8 +5127,8 @@ function post_grid_layout_element_option_author_link($parameters)
             $settings_tabs_field->generate_field($args);
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -4808,40 +5161,43 @@ function post_grid_layout_element_author_link($args)
     $post_author = sprintf($wrapper_html, $post_author);
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author_link ">
-        <?php
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author_link ">
+  <?php
         if ($link_to == 'post_link') :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
 
 
-        <?php elseif ($link_to == 'custom_link') :
+  <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
 
 
 
-        <?php
+  <?php
         elseif ($link_to == 'author_posts_link') :
             $post_author_link = get_author_posts_url(get_the_author_meta('ID'));
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
-        <?php
+  <a target="<?php echo esc_attr($link_target); ?>"
+    href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
+  <?php
 
         else :
         ?>
-            <?php echo esc_html($post_author); ?>
-        <?php
+  <?php echo esc_html($post_author); ?>
+  <?php
         endif;
         ?>
 
-    </div>
+</div>
 <?php
 }
 
@@ -4862,27 +5218,56 @@ function post_grid_layout_element_css_author_link($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
+
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+</style>
 <?php
 }
 
@@ -4919,16 +5304,16 @@ function post_grid_layout_element_option_categories($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Post categories', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Post categories', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -5113,9 +5498,9 @@ function post_grid_layout_element_option_categories($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -5132,8 +5517,8 @@ function post_grid_layout_element_option_categories($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -5184,9 +5569,9 @@ function post_grid_layout_element_categories($args)
 
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
-        <?php echo sprintf($wrapper_html, $categories_html); ?>
-    </div>
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
+  <?php echo sprintf($wrapper_html, $categories_html); ?>
+</div>
 <?php
 }
 
@@ -5210,29 +5595,58 @@ function post_grid_layout_element_css_categories($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($text_color)) : ?>color: <?php echo esc_attr($text_color);  ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
+?> {
+  <?php if ( !empty($text_color)): ?>color: <?php echo esc_attr($text_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
 
-        <?php endif; ?>
-    </style>
+?> {
+  <?php if ( !empty($link_color)): ?>color: <?php echo esc_attr($link_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -5267,16 +5681,16 @@ function post_grid_layout_element_option_tags($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Post tag', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Post tag', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -5426,9 +5840,9 @@ function post_grid_layout_element_option_tags($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -5445,8 +5859,8 @@ function post_grid_layout_element_option_tags($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -5495,9 +5909,9 @@ function post_grid_layout_element_tags($args)
         }
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
-        <?php echo sprintf($wrapper_html, $categories_html); ?>
-    </div>
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+  <?php echo sprintf($wrapper_html, $categories_html); ?>
+</div>
 <?php
 }
 
@@ -5522,29 +5936,58 @@ function post_grid_layout_element_css_tags($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($text_color)) : ?>color: <?php echo esc_attr($text_color);  ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
-        }
+?> {
+  <?php if ( !empty($text_color)): ?>color: <?php echo esc_attr($text_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
 
-        <?php endif; ?>
-    </style>
+?> {
+  <?php if ( !empty($link_color)): ?>color: <?php echo esc_attr($link_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?>
+}
+
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -5573,16 +6016,16 @@ function post_grid_layout_element_option_comments_count($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Comment count', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Comment count', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -5718,8 +6161,9 @@ function post_grid_layout_element_option_comments_count($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -5737,9 +6181,9 @@ function post_grid_layout_element_option_comments_count($parameters)
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -5776,10 +6220,10 @@ function post_grid_layout_element_comments_count($args)
         }
 
     ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
-            <?php echo sprintf($wrapper_html, $comments_count_html); ?>
-        </div>
-    <?php
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+  <?php echo sprintf($wrapper_html, $comments_count_html); ?>
+</div>
+<?php
 
     }
 }
@@ -5804,22 +6248,42 @@ function post_grid_layout_element_css_comments_count($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -5851,16 +6315,16 @@ function post_grid_layout_element_option_share_button($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Share button', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Share button', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -5951,9 +6415,9 @@ function post_grid_layout_element_option_share_button($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-            <?php
+    <?php
 
             $html = ob_get_clean();
 
@@ -5969,8 +6433,8 @@ function post_grid_layout_element_option_share_button($parameters)
             $settings_tabs_field->generate_field($args);
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -6014,9 +6478,10 @@ function post_grid_layout_element_share_button($args)
     $share_button_html = apply_filters('post_grid_share_buttons', $share_button_html, $args);
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
-        <?php echo sprintf($wrapper_html, $share_button_html); ?>
-    </div>
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
+  <?php echo sprintf($wrapper_html, $share_button_html); ?>
+</div>
 <?php
 }
 
@@ -6055,28 +6520,55 @@ function post_grid_layout_element_css_share_button($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color);  ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($wrapper_margin)) : ?>margin: <?php echo esc_attr($wrapper_margin);  ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index . ' a'); ?> {
-            <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color);  ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($icon_margin)) : ?>margin: <?php echo esc_attr($icon_margin);  ?>;
-            <?php endif; ?>
-        }
+?> {
+  <?php if ( !empty($icon_color)): ?>color: <?php echo esc_attr($icon_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($wrapper_margin)): ?>margin: <?php echo esc_attr($wrapper_margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index . ' a');
 
-        <?php endif; ?>
-    </style>
+?> {
+  <?php if ( !empty($icon_color)): ?>color: <?php echo esc_attr($icon_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($icon_margin)): ?>margin: <?php echo esc_attr($icon_margin);
+  ?>;
+  <?php endif;
+  ?>
+}
+
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -6102,16 +6594,16 @@ function post_grid_layout_element_option_hr($parameters)
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Horizontal line', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Horizontal line', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -6199,8 +6691,9 @@ function post_grid_layout_element_option_hr($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -6218,8 +6711,8 @@ function post_grid_layout_element_option_hr($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -6244,8 +6737,8 @@ function post_grid_layout_element_hr($args)
 
 
 ?>
-    <hr class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr ">
-    </hr>
+<hr class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr ">
+</hr>
 <?php
 }
 
@@ -6266,20 +6759,36 @@ function post_grid_layout_element_css_hr($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($background_color)) : ?>background-color: <?php echo esc_attr($background_color);  ?>;
-            <?php endif; ?><?php if (!empty($height)) : ?>padding: <?php echo esc_attr($height);  ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($background_color)): ?>background-color: <?php echo esc_attr($background_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($height)): ?>padding: <?php echo esc_attr($height);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -6307,16 +6816,16 @@ function post_grid_layout_element_option_five_star($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="header-text expand"><?php echo __('Five star', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="header-text expand"><?php echo __('Five star', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
             $args = array(
                 'id'        => 'custom_class',
@@ -6418,8 +6927,9 @@ function post_grid_layout_element_option_five_star($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -6436,8 +6946,8 @@ function post_grid_layout_element_option_five_star($parameters)
 
             ?>
 
-        </div>
-    </div>
+  </div>
+</div>
 <?php
 
 }
@@ -6488,9 +6998,9 @@ function post_grid_layout_element_five_star($args)
     }
 
 ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
-        <?php echo sprintf($wrapper_html, $five_star_html); ?>
-    </div>
+<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
+  <?php echo sprintf($wrapper_html, $five_star_html); ?>
+</div>
 <?php
 }
 
@@ -6515,20 +7025,38 @@ function post_grid_layout_element_css_five_star($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
 
-        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id); ?><?php echo esc_attr(' .element_' . $index); ?>:hover {
-            <?php echo wp_strip_all_tags($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
+?><?php echo esc_attr(' .element_'. $index);
+
+?>:hover {
+  <?php echo wp_strip_all_tags($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }

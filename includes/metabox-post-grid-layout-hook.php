@@ -22,12 +22,13 @@ if (!function_exists('post_grid_layout_metabox_content_custom_scripts')) {
 
 
 ?>
-        <div class="section">
-            <div class="section-title"><?php echo __('Custom scripts', 'post-grid'); ?></div>
-            <p class="description section-description"><?php echo __('Write custom scripts to override CSS and scripts.', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('Custom scripts', 'post-grid'); ?></div>
+  <p class="description section-description">
+    <?php echo __('Write custom scripts to override CSS and scripts.', 'post-grid'); ?></p>
 
 
-            <?php
+  <?php
             $args = array(
                 'id'        => 'custom_css',
                 'parent'        => 'custom_scripts',
@@ -73,8 +74,8 @@ if (!function_exists('post_grid_layout_metabox_content_custom_scripts')) {
 
 
             ?>
-        </div>
-    <?php
+</div>
+<?php
 
 
     }
@@ -104,12 +105,12 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
 
 
     ?>
-        <div class="section">
-            <div class="section-title"><?php echo __('Layout Editor', 'post-grid'); ?></div>
-            <p class="description section-description"><?php echo __('Customize layout settings.', 'post-grid'); ?></p>
-            <div class="setting-field ">
+<div class="section">
+  <div class="section-title"><?php echo __('Layout Editor', 'post-grid'); ?></div>
+  <p class="description section-description"><?php echo __('Customize layout settings.', 'post-grid'); ?></p>
+  <div class="setting-field ">
 
-                <?php
+    <?php
 
 
 
@@ -182,31 +183,31 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
 
                 ?>
 
-                <script>
-                    jQuery(document).ready(function($) {
-                        layout_elements_option = <?php echo wp_json_encode($layout_elements_option); ?>;
+    <script>
+    jQuery(document).ready(function($) {
+      layout_elements_option = <?php echo wp_json_encode($layout_elements_option); ?>;
 
-                        $(document).on('click', '.layout-tags .element_index', function() {
-                            tag_id = $(this).attr('tag_id');
-                            input_name = $(this).attr('input_name');
-                            id = $.now();
-
-
-                            tag_options_html = layout_elements_option[tag_id];
-                            var res = tag_options_html.replace(/{input_name}/g, input_name + '[' + id + ']');
-
-                            $('.layout-elements').append(res);
-
-                        })
-                    })
-                </script>
-
-                <div class="layout-builder">
-                    <div class="layout-tags expandable">
+      $(document).on('click', '.layout-tags .element_index', function() {
+        tag_id = $(this).attr('tag_id');
+        input_name = $(this).attr('input_name');
+        id = $.now();
 
 
+        tag_options_html = layout_elements_option[tag_id];
+        var res = tag_options_html.replace(/{input_name}/g, input_name + '[' + id + ']');
 
-                        <?php
+        $('.layout-elements').append(res);
+
+      })
+    })
+    </script>
+
+    <div class="layout-builder">
+      <div class="layout-tags expandable">
+
+
+
+        <?php
 
                         if (!empty($elements_group))
                             foreach ($elements_group as $group_index => $element_group) :
@@ -217,30 +218,31 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
 
                                 if (empty($group_items)) continue;
                         ?>
-                            <div class="item">
-                                <div class="element-title header ">
-                                    <span class="expand"><i class="fas fa-expand"></i><i class="fas fa-compress"></i></span>
-                                    <span class="header-text expand  "><?php echo esc_html($group_title); ?></span>
-                                </div>
-                                <div class="element-options options">
-                                    <?php
+        <div class="item">
+          <div class="element-title header ">
+            <span class="expand"><i class="fas fa-expand"></i><i class="fas fa-compress"></i></span>
+            <span class="header-text expand  "><?php echo esc_html($group_title); ?></span>
+          </div>
+          <div class="element-options options">
+            <?php
                                     foreach ($group_items as $elementIndex => $element) :
                                         $element_name = isset($element['name']) ? $element['name'] : '';
                                     ?>
-                                        <span class="element_index" input_name="<?php echo 'layout_elements_data'; ?>" tag_id="<?php echo esc_attr($elementIndex); ?>"><?php echo esc_html($element_name); ?></span>
-                                    <?php
+            <span class="element_index" input_name="<?php echo 'layout_elements_data'; ?>"
+              tag_id="<?php echo esc_attr($elementIndex); ?>"><?php echo esc_html($element_name); ?></span>
+            <?php
                                     endforeach;
                                     ?>
-                                </div>
-                            </div>
-                        <?php
+          </div>
+        </div>
+        <?php
                             endforeach;
                         ?>
-                    </div>
+      </div>
 
-                    <div class="layout-elements expandable sortable">
+      <div class="layout-elements expandable sortable">
 
-                        <?php
+        <?php
 
                         if (!empty($layout_elements_data)) :
                             foreach ($layout_elements_data as $index => $item_data) {
@@ -252,83 +254,83 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
                             }
                         else :
                         ?>
-                            <div class="empty-element">
-                                <?php echo sprintf(__('%s Click to add tags.', 'post-grid'), '<i class="far fa-hand-point-up"></i>') ?>
-                            </div>
-                        <?php
+        <div class="empty-element">
+          <?php echo sprintf(__('%s Click to add tags.', 'post-grid'), '<i class="far fa-hand-point-up"></i>') ?>
+        </div>
+        <?php
                         endif;
 
                         ?>
 
-                    </div>
+      </div>
 
 
-                </div>
+    </div>
 
-                <style type="text/css">
-                    .layout-builder {
-                        clear: both;
-                    }
+    <style type="text/css">
+    .layout-builder {
+      clear: both;
+    }
 
 
-                    .layout-builder .layout-elements .item {}
+    .layout-builder .layout-elements .item {}
 
-                    .layout-tags {
-                        margin-bottom: 20px;
-                        position: sticky;
-                        top: 32px;
-                        z-index: 999;
-                        background: #fff;
-                        padding: 5px 5px;
-                        display: inline-block;
-                        width: 360px;
-                        float: left;
-                    }
+    .layout-tags {
+      margin-bottom: 20px;
+      position: sticky;
+      top: 32px;
+      z-index: 999;
+      background: #fff;
+      padding: 5px 5px;
+      display: inline-block;
+      width: 360px;
+      float: left;
+    }
 
-                    .layout-tags .element_index {
-                        background: #fff;
-                        padding: 3px 7px;
-                        display: inline-block;
-                        margin: 2px 2px;
-                        border-radius: 3px;
-                        border: 1px solid #616161;
-                        cursor: pointer;
-                        font-size: 13px;
-                    }
+    .layout-tags .element_index {
+      background: #fff;
+      padding: 3px 7px;
+      display: inline-block;
+      margin: 2px 2px;
+      border-radius: 3px;
+      border: 1px solid #616161;
+      cursor: pointer;
+      font-size: 13px;
+    }
 
-                    .layout-tags .element_index:hover {
-                        background: #e0e0e0;
+    .layout-tags .element_index:hover {
+      background: #e0e0e0;
 
-                    }
+    }
 
-                    .layout-elements {
-                        margin-left: 390px;
-                    }
+    .layout-elements {
+      margin-left: 390px;
+    }
 
-                    @media (max-width: 1550px) {
-                        .layout-elements {
-                            margin-left: 0px;
-                        }
+    @media (max-width: 1550px) {
+      .layout-elements {
+        margin-left: 0px;
+      }
 
-                        .layout-tags {
-                            display: block;
-                            width: 100%;
-                            float: none;
-                        }
-                    }
-                </style>
+      .layout-tags {
+        display: block;
+        width: 100%;
+        float: none;
+      }
+    }
+    </style>
 
-            </div>
-            <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
 
-            <?php
+  <?php
 
 
             ob_start();
 
             ?>
 
-            <?php
+  <?php
 
             $html = ob_get_clean();
 
@@ -370,10 +372,10 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
             $args['layout_id'] = $layout_id;
 
             ?>
-            <div class="layout-preview">
+  <div class="layout-preview">
 
-                <div class="elements-wrapper layout-<?php echo esc_attr($layout_id); ?>">
-                    <?php
+    <div class="elements-wrapper layout-<?php echo esc_attr($layout_id); ?>">
+      <?php
                     if (!empty($layout_elements_data))
                         foreach ($layout_elements_data as $elementGroupIndex => $elementGroupData) {
                             foreach ($elementGroupData as $elementIndex => $elementData) {
@@ -390,7 +392,7 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
 
 
                     ?>
-                </div>
+    </div>
 
 
 
@@ -398,9 +400,9 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
 
 
 
-            </div>
+  </div>
 
-            <?php
+  <?php
 
             if (!empty($layout_elements_data))
                 foreach ($layout_elements_data as $elementGroupIndex => $elementGroupData) {
@@ -418,28 +420,28 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
             $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
 
             ?>
-            <style type="text/css">
-                .layout-preview {
-                    background: url(<?php echo esc_url(post_grid_plugin_url . 'assets/images/tile.png'); ?>);
-                    padding: 20px;
-                }
+  <style type="text/css">
+  .layout-preview {
+    background: url(<?php echo esc_url(post_grid_plugin_url . 'assets/images/tile.png');
+    ?>);
+    padding: 20px;
+  }
 
-                .layout-preview .elements-wrapper {
-                    width: 400px;
-                    overflow: hidden;
-                    margin: 0 auto;
-                }
+  .layout-preview .elements-wrapper {
+    width: 400px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
 
-                .layout-preview img {
-                    width: 100%;
-                    height: auto;
-                }
+  .layout-preview img {
+    width: 100%;
+    height: auto;
+  }
 
-                <?php
-                echo esc_attr(str_replace('__ID__', 'layout-' . $layout_id, $custom_css));
-                ?>
-            </style>
-            <?php
+  <?php echo esc_attr(str_replace('__ID__', 'layout-'. $layout_id, $custom_css));
+  ?>
+  </style>
+  <?php
 
             $html = ob_get_clean();
 
@@ -458,7 +460,7 @@ if (!function_exists('post_grid_layout_metabox_content_layout_builder')) {
 
 
             ?>
-        </div>
+</div>
 <?php
 
 

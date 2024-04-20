@@ -228,12 +228,12 @@ class PGBlockPostAuthor
     ?>
 
 
-    <<?php echo esc_attr($wrapperTag); ?> class="
+    <<?php echo esc_html($wrapperTag); ?> class="
           <?php echo esc_attr($wrapperClass); ?>
           <?php echo $blockId; ?>">
       <?php
       echo $content ?>
-    </<?php echo esc_attr($wrapperTag); ?>>
+    </<?php echo esc_html($wrapperTag); ?>>
 
 
 

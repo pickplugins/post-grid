@@ -94,8 +94,3 @@ if ( is_plugin_active( 'site-reviews/site-reviews.php' ) ) {
 
     require_once( post_grid_plugin_dir . 'includes/layout-elements/site-reviews/layout-elements.php');
 }
-
-
-
-
-

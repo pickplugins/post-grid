@@ -53,9 +53,9 @@ array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tabs);
 <div class="wrap">
 
 
-    <h2><?php echo __('Post Grid - Settings', 'post-grid'); ?></h2><br>
+  <h2><?php echo __('Post Grid - Settings', 'post-grid'); ?></h2><br>
 
-    <?php
+  <?php
 
     if (empty($_POST['post_grid_hidden'])) {
 
@@ -81,11 +81,11 @@ array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tabs);
 
 
     ?>
-            <div class="updated notice  is-dismissible">
-                <p><strong><?php _e('Changes Saved.', 'post-grid'); ?></strong></p>
-            </div>
+  <div class="updated notice  is-dismissible">
+    <p><strong><?php _e('Changes Saved.', 'post-grid'); ?></strong></p>
+  </div>
 
-    <?php
+  <?php
         }
     }
 
@@ -96,14 +96,14 @@ array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tabs);
     ?>
 
 
-    <form method="post" action="<?php echo esc_url(str_replace('%7E', '~', esc_url($_SERVER['REQUEST_URI']))); ?>">
-        <input type="hidden" name="post_grid_hidden" value="Y">
+  <form method="post" action="<?php echo esc_url(str_replace('%7E', '~', esc_url($_SERVER['REQUEST_URI']))); ?>">
+    <input type="hidden" name="post_grid_hidden" value="Y">
 
 
-        <div class="clear clearfix"></div>
-        <div class="settings-tabs vertical">
-            <ul class="tab-navs">
-                <?php
+    <div class="clear clearfix"></div>
+    <div class="settings-tabs vertical">
+      <ul class="tab-navs">
+        <?php
                 foreach ($post_grid_settings_tabs as $tab) {
                     $id = $tab['id'];
                     $title = $tab['title'];
@@ -111,12 +111,13 @@ array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tabs);
                     $data_visible = isset($tab['data_visible']) ? $tab['data_visible'] : '';
                     $hidden = isset($tab['hidden']) ? $tab['hidden'] : false;
                 ?>
-                    <li class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>" data-id="<?php echo esc_attr($id); ?>"><?php echo esc_html($title); ?></li>
-                <?php
+        <li class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>"
+          data-id="<?php echo esc_attr($id); ?>"><?php echo esc_html($title); ?></li>
+        <?php
                 }
                 ?>
-            </ul>
-            <?php
+      </ul>
+      <?php
             foreach ($post_grid_settings_tabs as $tab) {
                 $id = $tab['id'];
                 $title = $tab['title'];
@@ -125,25 +126,25 @@ array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tabs);
 
             ?>
 
-                <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
-                    <?php
+      <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
+        <?php
                     do_action('post_grid_settings_' . $id, $tab);
                     ?>
-                </div>
-            <?php
+      </div>
+      <?php
             }
             ?>
-        </div>
-        <div class="clear clearfix"></div>
+    </div>
+    <div class="clear clearfix"></div>
 
 
 
-        <p class="submit">
-            <?php wp_nonce_field('post_grid_nonce'); ?>
-            <input type="submit" name="submit" value="<?php _e('Update', 'post-grid'); ?>" class="button-primary" />
+    <p class="submit">
+      <?php wp_nonce_field('post_grid_nonce'); ?>
+      <input type="submit" name="submit" value="<?php _e('Update', 'post-grid'); ?>" class="button-primary" />
 
-        </p>
-    </form>
+    </p>
+  </form>
 
 
 

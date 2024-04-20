@@ -213,7 +213,11 @@ class PGBlockProgressBar
               </div>
             <?php endif; ?>
 
-
+            <?php if ($progressLabelPosition == '') : ?>
+              <div class="progress-label">
+                <?php echo wp_kses_post($progressLabelText); ?>
+              </div>
+            <?php endif; ?>
 
             <?php if ($progressCountPosition == 'afterLabel') : ?>
               <div class="progress-count">
@@ -331,7 +335,7 @@ class PGBlockProgressBar
         <?php endif; ?>
 
 
-        </<?php echo esc_attr($wrapperTag); ?>>
+        </<?php echo esc_html($wrapperTag); ?>>
       <?php
 
     endif;

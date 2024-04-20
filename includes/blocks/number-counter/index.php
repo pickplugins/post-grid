@@ -164,7 +164,7 @@ class PGBlockNumberCounter
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo esc_attr($wrapperTag); ?> class=" PGBlockNumberCount 
+			<<?php echo esc_html($wrapperTag); ?> class=" PGBlockNumberCount 
                             <?php echo esc_attr($wrapperClass); ?>
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($blockAlign); ?>" data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
@@ -214,7 +214,7 @@ class PGBlockNumberCounter
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
 
-			</<?php echo esc_attr($wrapperTag); ?>>
+			</<?php echo esc_html($wrapperTag); ?>>
 		<?php
 
 		endif;

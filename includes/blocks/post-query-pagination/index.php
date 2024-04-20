@@ -33,12 +33,10 @@ class PGBlockPostQueryPagination
 
   function front_scripts($attributes)
   {
-    wp_register_script('pgpostquerypagination_front_script', post_grid_plugin_url . 'includes/blocks/post-query/front-scripts.js', []);
     wp_register_style('pgpostquerypagination_front_style', post_grid_plugin_url . 'includes/blocks/post-query-pagination/index.css');
     if (has_block('post-grid/post-query-pagination')) {
       wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/css/fontawesome-old/css/font-awesome-5.css', []);
       wp_enqueue_style('font-awesome-5');
-      //wp_enqueue_script('pgpostquerypagination_front_script');
       //wp_enqueue_style('pgpostquerypagination_front_style');
     }
   }

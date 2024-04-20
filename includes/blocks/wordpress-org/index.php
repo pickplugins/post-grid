@@ -104,17 +104,17 @@ class PGBlockWordpressOrg
 ?>
 
 
-<<?php echo esc_attr($wrapperTag); ?> class="
+			<<?php echo esc_html($wrapperTag); ?> class="
 										<?php echo esc_attr($blockId); ?>
 										<?php echo esc_attr($wrapperClass); ?>">
 
 
-  <?php
+				<?php
 				echo $content ?>
 
 
-</<?php echo esc_attr($wrapperTag); ?>>
-<?php
+			</<?php echo esc_html($wrapperTag); ?>>
+			<?php
 
 
 
@@ -130,7 +130,7 @@ class PGBlockWordpressOrg
 
 
 
-<?php
+		<?php
 
 		endif;
 

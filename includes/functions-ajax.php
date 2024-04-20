@@ -55,15 +55,24 @@ if (!function_exists('post_grid_pagination_ajax_pagination_22032023')) {
             ?>
         </div>
         <style type="text/css">
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .pagination .page-numbers'; ?> {
-                font-size: <?php echo esc_attr($pagination_font_size); ?>;
-                color: <?php echo esc_attr($pagination_font_color); ?>;
-                background: <?php echo esc_attr($pagination_bg_color); ?>;
+            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .pagination .page-numbers';
+
+            ?> {
+                font-size: <?php echo esc_attr($pagination_font_size);
+                            ?>;
+                color: <?php echo esc_attr($pagination_font_color);
+                        ?>;
+                background: <?php echo esc_attr($pagination_bg_color);
+                            ?>;
             }
 
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .pagination .page-numbers:hover'; ?>,
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .pagination .page-numbers.current'; ?> {
-                background: <?php echo esc_attr($pagination_active_bg_color); ?>;
+            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .pagination .page-numbers:hover';
+            ?>,
+            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .pagination .page-numbers.current';
+
+            ?> {
+                background: <?php echo esc_attr($pagination_active_bg_color);
+                            ?>;
             }
         </style>
 <?php
@@ -83,7 +92,7 @@ if (!function_exists('post_grid_paginate_ajax_free')) {
         $formData = isset($_POST['formData']) ? ($_POST['formData']) : '';
         parse_str($formData, $form_data);
 
-        $nonce = isset($_POST['nonce']) ? ($_POST['nonce']) : '';
+        $nonce = isset($_POST['_wpnonce']) ? ($_POST['_wpnonce']) : '';
 
         if (!wp_verify_nonce($nonce, 'post_grid_ajax_nonce')) {
 

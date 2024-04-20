@@ -22,11 +22,11 @@ function post_grid_settings_content_general()
     $posttypes_array = post_grid_posttypes_array();
 
 ?>
-    <div class="section">
-        <div class="section-title"><?php echo __('General', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose some general options.', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('General', 'post-grid'); ?></div>
+  <p class="description section-description"><?php echo __('Choose some general options.', 'post-grid'); ?></p>
 
-        <?php
+  <?php
 
 
 
@@ -78,9 +78,9 @@ function post_grid_settings_content_general()
 
         ?>
 
-    </div>
+</div>
 
-    <?php
+<?php
 
 
 
@@ -110,24 +110,25 @@ if (!function_exists('post_grid_settings_content_help_support')) {
 
 
     ?>
-        <div class="section">
-            <div class="section-title"><?php echo __('Get support', 'post-grid'); ?></div>
-            <p class="description section-description"><?php echo __('Use following to get help and support from our expert team.', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('Get support', 'post-grid'); ?></div>
+  <p class="description section-description">
+    <?php echo __('Use following to get help and support from our expert team.', 'post-grid'); ?></p>
 
-            <?php
+  <?php
 
 
 
             ob_start();
             ?>
-            <ul>
-                <li>Step - 1: Go to Tools > <a href="<?php echo esc_url(admin_url() . 'export.php'); ?>">Export</a> menu.</li>
-                <li>Step - 2: Choose "Layouts" post types from list.</li>
-                <li>Step - 3: Then click to "Download Export File' button.</li>
-                <li>Step - 4: Save the file on your local machine.</li>
-            </ul>
+  <ul>
+    <li>Step - 1: Go to Tools > <a href="<?php echo esc_url(admin_url() . 'export.php'); ?>">Export</a> menu.</li>
+    <li>Step - 2: Choose "Layouts" post types from list.</li>
+    <li>Step - 3: Then click to "Download Export File' button.</li>
+    <li>Step - 4: Save the file on your local machine.</li>
+  </ul>
 
-            <?php
+  <?php
 
             $html = ob_get_clean();
 
@@ -149,20 +150,24 @@ if (!function_exists('post_grid_settings_content_help_support')) {
             ob_start();
             ?>
 
-            <p><?php echo __('Ask question for free on our forum and get quick reply from our expert team members.', 'post-grid'); ?></p>
-            <a class="button" href="https://www.pickplugins.com/create-support-ticket/"><?php echo __('Create support ticket', 'post-grid'); ?></a>
+  <p>
+    <?php echo __('Ask question for free on our forum and get quick reply from our expert team members.', 'post-grid'); ?>
+  </p>
+  <a class="button"
+    href="https://www.pickplugins.com/create-support-ticket/"><?php echo __('Create support ticket', 'post-grid'); ?></a>
 
-            <p><?php echo __('Read our documentation before asking your question.', 'post-grid'); ?></p>
-            <a class="button" href="https://comboblocks.com/documentations/"><?php echo __('Documentation', 'post-grid'); ?></a>
+  <p><?php echo __('Read our documentation before asking your question.', 'post-grid'); ?></p>
+  <a class="button" href="https://comboblocks.com/documentations/"><?php echo __('Documentation', 'post-grid'); ?></a>
 
-            <p><?php echo __('Watch video tutorials.', 'post-grid'); ?></p>
-            <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94Yut5Y0MSVg1wqmqWz0UYpt"><i class="fab fa-youtube"></i> <?php echo __('All tutorials', 'post-grid'); ?></a>
-
-
-
+  <p><?php echo __('Watch video tutorials.', 'post-grid'); ?></p>
+  <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94Yut5Y0MSVg1wqmqWz0UYpt"><i
+      class="fab fa-youtube"></i> <?php echo __('All tutorials', 'post-grid'); ?></a>
 
 
-            <?php
+
+
+
+  <?php
 
             $html = ob_get_clean();
 
@@ -182,12 +187,15 @@ if (!function_exists('post_grid_settings_content_help_support')) {
             ob_start();
             ?>
 
-            <p class="">We wish your 2 minutes to write your feedback about the <b>Post Grid</b> plugin. give us <span style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
+  <p class="">We wish your 2 minutes to write your feedback about the <b>Post Grid</b> plugin. give us <span
+      style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+        class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
 
-            <a target="_blank" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" class="button"><i class="fab fa-wordpress"></i> Write a review</a>
+  <a target="_blank" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" class="button"><i
+      class="fab fa-wordpress"></i> Write a review</a>
 
 
-            <?php
+  <?php
 
             $html = ob_get_clean();
 
@@ -208,8 +216,8 @@ if (!function_exists('post_grid_settings_content_help_support')) {
             ?>
 
 
-        </div>
-    <?php
+</div>
+<?php
 
 
     }
@@ -229,11 +237,12 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
 
         $disable_blocks = isset($post_grid_settings['disable_blocks']) ? $post_grid_settings['disable_blocks'] : [];
     ?>
-        <div class="section">
-            <div class="section-title"><?php echo __('Disable/Enable Blocks', 'post-grid'); ?></div>
-            <p class="description section-description text-lg"><?php echo __('Choose blocks to enable or disable', 'post-grid'); ?></p>
+<div class="section">
+  <div class="section-title"><?php echo __('Disable/Enable Blocks', 'post-grid'); ?></div>
+  <p class="description section-description text-lg">
+    <?php echo __('Choose blocks to enable or disable', 'post-grid'); ?></p>
 
-            <?php
+  <?php
 
             $blocks_list = [
 
@@ -354,7 +363,7 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
             ?>
 
 
-        </div>
+</div>
 <?php
 
 

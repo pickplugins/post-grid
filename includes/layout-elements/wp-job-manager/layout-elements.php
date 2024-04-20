@@ -50,16 +50,16 @@ function post_grid_layout_element_option_wpjobmanager_location($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Location', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="expand"><?php echo __('Location', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -180,8 +180,9 @@ function post_grid_layout_element_option_wpjobmanager_location($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -198,9 +199,9 @@ function post_grid_layout_element_option_wpjobmanager_location($parameters)
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -231,10 +232,11 @@ function post_grid_layout_element_wpjobmanager_location($args)
         $meta_value = sprintf($wrapper_html, $meta_value);
 
     ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_location ">
-            <?php echo esc_html($meta_value); ?>
-        </div>
-    <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_location ">
+  <?php echo esc_html($meta_value); ?>
+</div>
+<?php
     endif;
 }
 
@@ -259,22 +261,42 @@ function post_grid_layout_element_css_wpjobmanager_location($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo esc_attr($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?>:hover {
-            <?php echo esc_attr($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
+
+?>:hover {
+  <?php echo esc_attr($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -304,16 +326,16 @@ function post_grid_layout_element_option_wpjobmanager_company_name($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Company Name', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="expand"><?php echo __('Company Name', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -434,8 +456,9 @@ function post_grid_layout_element_option_wpjobmanager_company_name($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -452,9 +475,9 @@ function post_grid_layout_element_option_wpjobmanager_company_name($parameters)
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -485,10 +508,11 @@ function post_grid_layout_element_wpjobmanager_company_name($args)
         $meta_value = sprintf($wrapper_html, $meta_value);
 
     ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_company_name ">
-            <?php echo esc_html($meta_value); ?>
-        </div>
-    <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_company_name ">
+  <?php echo esc_html($meta_value); ?>
+</div>
+<?php
     endif;
 }
 
@@ -513,22 +537,42 @@ function post_grid_layout_element_css_wpjobmanager_company_name($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo esc_attr($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?>:hover {
-            <?php echo esc_attr($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
+
+?>:hover {
+  <?php echo esc_attr($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -557,16 +601,16 @@ function post_grid_layout_element_option_wpjobmanager_company_website($parameter
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Company website', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="expand"><?php echo __('Company website', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -687,8 +731,9 @@ function post_grid_layout_element_option_wpjobmanager_company_website($parameter
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -705,9 +750,9 @@ function post_grid_layout_element_option_wpjobmanager_company_website($parameter
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -738,10 +783,11 @@ function post_grid_layout_element_wpjobmanager_company_website($args)
         $meta_value = sprintf($wrapper_html, $meta_value, $meta_value);
 
     ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_company_website ">
-            <?php echo esc_html($meta_value); ?>
-        </div>
-    <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_company_website ">
+  <?php echo esc_html($meta_value); ?>
+</div>
+<?php
     endif;
 }
 
@@ -766,22 +812,42 @@ function post_grid_layout_element_css_wpjobmanager_company_website($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo esc_attr($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?>:hover {
-            <?php echo esc_attr($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
+
+?>:hover {
+  <?php echo esc_attr($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -811,16 +877,16 @@ function post_grid_layout_element_option_wpjobmanager_company_tagline($parameter
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Company tagline', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="expand"><?php echo __('Company tagline', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -941,8 +1007,9 @@ function post_grid_layout_element_option_wpjobmanager_company_tagline($parameter
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -959,9 +1026,9 @@ function post_grid_layout_element_option_wpjobmanager_company_tagline($parameter
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -992,10 +1059,11 @@ function post_grid_layout_element_wpjobmanager_company_tagline($args)
         $meta_value = sprintf($wrapper_html, $meta_value);
 
     ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_company_tagline ">
-            <?php echo esc_html($meta_value); ?>
-        </div>
-    <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_company_tagline ">
+  <?php echo esc_html($meta_value); ?>
+</div>
+<?php
     endif;
 }
 
@@ -1020,22 +1088,42 @@ function post_grid_layout_element_css_wpjobmanager_company_tagline($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo esc_attr($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?>:hover {
-            <?php echo esc_attr($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
+
+?>:hover {
+  <?php echo esc_attr($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }
 
@@ -1065,16 +1153,16 @@ function post_grid_layout_element_option_wpjobmanager_job_expires($parameters)
 
 
 ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
+<div class="item">
+  <div class="element-title header ">
+    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+    <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Job expire date', 'post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
+    <span class="expand"><?php echo __('Job expire date', 'post-grid'); ?></span>
+  </div>
+  <div class="element-options options">
 
-            <?php
+    <?php
 
 
             $args = array(
@@ -1195,8 +1283,9 @@ function post_grid_layout_element_option_wpjobmanager_job_expires($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-            <?php
+    <textarea readonly type="text"
+      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+    <?php
 
             $html = ob_get_clean();
 
@@ -1213,9 +1302,9 @@ function post_grid_layout_element_option_wpjobmanager_job_expires($parameters)
 
             ?>
 
-        </div>
-    </div>
-    <?php
+  </div>
+</div>
+<?php
 
 }
 
@@ -1248,10 +1337,11 @@ function post_grid_layout_element_wpjobmanager_job_expires($args)
         $meta_value = sprintf($wrapper_html, $meta_value);
 
     ?>
-        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_job_expires ">
-            <?php echo esc_html($meta_value); ?>
-        </div>
-    <?php
+<div
+  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wpjobmanager_job_expires ">
+  <?php echo esc_html($meta_value); ?>
+</div>
+<?php
     endif;
 }
 
@@ -1276,21 +1366,41 @@ function post_grid_layout_element_css_wpjobmanager_job_expires($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo esc_attr($css); ?><?php endif; ?>
-        }
+<style type="text/css">
+.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?>.element_<?php echo esc_attr($index); ?>:hover {
-            <?php echo esc_attr($css_hover); ?>
-        }
+?> {
+  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
+  ?><?php endif;
+  ?>
+}
 
-        <?php endif; ?>
-    </style>
+<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+?>.element_<?php echo esc_attr($index);
+
+?>:hover {
+  <?php echo esc_attr($css_hover);
+  ?>
+}
+
+<?php endif;
+?>
+</style>
 <?php
 }

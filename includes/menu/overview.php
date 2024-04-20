@@ -12,7 +12,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
 
 ?>
-<div class="wrap pg-overview font-lato text-color bg-[linear-gradient(101deg,_rgba(238,_255,_251,_0.83)_0%,_rgba(235,_235,_235,_0.44)_50%,_rgb(255,_253,_238)_100%)]
+<div class="wrap pg-overview font-lato text-color bg-[linear-gradient(101deg,_rgba(238,_255,_251,_0.83)_0%,_rgba(235,_235,_235,_0.44)_50%,_rgb(255,_253,_238)_100%)] w-full
    ">
 
 
@@ -160,7 +160,8 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
               with just
               one click using our
               blocks.</p>
-            <a href="https://comboblocks.com/server/css-library/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See CSS Layouts</span></a>
+            <a href="https://comboblocks.com/server/css-library/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See CSS
+                Layouts</span></a>
           </div>
         </div>
 
@@ -175,7 +176,8 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
               Simply select the
               sections you want
               to use.</p>
-            <a href="https://comboblocks.com/server/sections-templates/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See Page Sections</span></a>
+            <a href="https://comboblocks.com/server/sections-templates/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See Page
+                Sections</span></a>
           </div>
           <div class="w-full md:w-[60%] p-5 bg-white ">
             <img src="https://comboblocks.com/wp-content/uploads/2023/11/page-sections.png" alt="Page Sections Library" srcset="">
@@ -451,7 +453,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
               tags, or custom taxonomies.</p>
           </div>
           <div class="w-full md:w-[60%] p-5 bg-white">
-            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Terms Query Builder" srcset="">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/04/terms-query-args.png" alt="Terms Query Builder" srcset="">
           </div>
         </div>
 
@@ -459,7 +461,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
 
         <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
           <div class="w-full md:w-[60%] p-5 bg-white">
-            <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Post Query Builder" srcset="">
+            <img src="https://comboblocks.com/wp-content/uploads/2024/04/post-query-block-query-args.png" alt="Post Query Builder" srcset="">
           </div>
           <div class="flex-1 pr-5 flex flex-col gap-5 pl-5 pb-7 md:pl-0 ">
             <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Post Query Builder
@@ -478,7 +480,8 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
             <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Third Party
               Integration</h4>
-            <p class="text-lg md:text-xl">We have added some well-known WordPress plugins such as WooCommerce and ACF to
+            <p class="text-lg md:text-xl ">We have added some well-known WordPress plugins such as WooCommerce and ACF
+              to
               our
               blocks to enhance
               their capabilities.
@@ -514,5 +517,64 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
     </div>
   </div>
 
+
+  <div class="flex items-center justify-center  w-full bg-[#c4dcc2] text-white">
+    <div class="px-5 py-24">
+
+      <div class="w-full text-center mb-8">
+        <h2 class="text-color !my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">3rd
+          Party Plugins Support</h2>
+        <p class="text-color font-lato text-lg md:text-xl max-w-[600px] mx-auto">We have added some well-known WordPress
+          plugins such as WooCommerce and ACF to our blocks to enhance their capabilities. This allows you to create
+          more
+          intricate and dynamic layouts.</p>
+      </div>
+      <div class="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-2 gap-4 text-black">
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md grid place-items-center ">
+          WooCommerce</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          Advanced Custom Fields(ACF)</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          Easy Digital Download(EDD)</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          CMB2</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          Custom Field Suite</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          Rank Math</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          Yoast SEO</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          AIO SEO</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          SEOPress</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          WP Meta SEO</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          The SEO Framework</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          SEO SIMPLE PACK</h4>
+        <h4 class="!m-0 text-[#393b41] text-2xl font-lato font-bold tracking-[1.2px] text-center bg-white shadow-[0_0_4px_1px_#8db3ff66] p-5 rounded-md  ">
+          FluentCRM</h4>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center justify-center p-6 w-full bg-[#4c5eea] text-white">
+
+    <div class="px-5 py-24 bg-[url(https://comboblocks.com/wp-content/uploads/2023/12/get-started-bg.png)] max-w-[800px] bg-cover rounded-none  ">
+      <div class=" text-center w-full  flex flex-col justify-center items-center gap-8 py-6 ">
+        <h2 class="!my-0 text-2xl md:text-3xl lg:text-[40px] !leading-[50px] font-lato font-bold !text-white tracking-[2.5px]">
+          Get
+          Started
+          Building
+          Fantastic Blogs, News Magazine Websites, and More!</h2>
+        <p class="text-lg md:text-xl block font-lato">Using The Combo Blocks Gutenberg Plugin, You May Create The
+          Websites Of Your
+          Dreams.</p>
+        <a class="pg-bg-color px-10 py-3 text-lg md:text-xl inline-block rounded-md font-lato no-underline" target="_blank" href="https://comboblocks.com/pricing/?utm_source=overview&utm_medium=buttonGetIt&utm_id=comboBlocksUser">Get It Now</a>
+      </div>
+    </div>
+
+  </div>
 
 </div>

@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			rect.top >= 0 &&
 			rect.left >= 0 &&
 			rect.bottom <=
-				(window.innerHeight || document.documentElement.clientHeight) &&
+			(window.innerHeight || document.documentElement.clientHeight) &&
 			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 		);
 	}
@@ -189,6 +189,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 					var queryArgs = post_grid_vars[blockId].queryArgs;
 					var rawData = post_grid_vars[blockId].layout.rawData;
+					var nonce = post_grid_vars[blockId]._wpnonce;
+
+					console.log(nonce);
+
 
 					var pagination = blockargsObj.pagination;
 					var loadMoreText = pagination.loadMoreText;
@@ -211,19 +215,26 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						prevText: prevText,
 						nextText: nextText,
 						maxPageNum: maxPageNum,
-
 						rawData: rawData,
+						_wpnonce: nonce,
 					};
+
+
+
 
 					if (loopLoadingWrap != null) {
 						loopLoadingWrap.innerHTML = loadingIcon + loadingText;
 					}
+
+
+
 
 					fetch(post_grid_vars["siteUrl"] + "/wp-json/post-grid/v2/get_posts", {
 						method: "POST",
 						body: JSON.stringify(data),
 						headers: {
 							"Content-Type": "application/json;charset=utf-8",
+							"X-WP-Nonce": nonce
 						},
 					})
 						.then((response) => {

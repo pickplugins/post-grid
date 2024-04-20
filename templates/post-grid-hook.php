@@ -20,26 +20,29 @@ function post_grid_main_lazy($atts)
 
 
 ?>
-    <?php
+<?php
     if ($lazy_load_enable == 'yes') :
     ?>
-        <div id="post-grid-lazy-<?php echo esc_attr($grid_id); ?>" class="post-grid-lazy"><img alt="<?php echo esc_attr($lazy_load_alt_text); ?>" src="<?php echo esc_url($lazy_load_image_src); ?>" /></div>
-        <script>
-            jQuery('#post-grid-lazy-<?php echo esc_attr($grid_id); ?>').ready(function($) {
-                $('#post-grid-lazy-<?php echo esc_attr($grid_id); ?>').fadeOut();
-                $('#post-grid-<?php echo esc_attr($grid_id); ?>   ').fadeIn();
-            })
-        </script>
-        <style type="text/css">
-            <?php echo esc_attr('#post-grid-' . $grid_id); ?> {
-                display: none;
-            }
+<div id="post-grid-lazy-<?php echo esc_attr($grid_id); ?>" class="post-grid-lazy"><img
+    alt="<?php echo esc_attr($lazy_load_alt_text); ?>" src="<?php echo esc_url($lazy_load_image_src); ?>" /></div>
+<script>
+jQuery('#post-grid-lazy-<?php echo esc_attr($grid_id); ?>').ready(function($) {
+  $('#post-grid-lazy-<?php echo esc_attr($grid_id); ?>').fadeOut();
+  $('#post-grid-<?php echo esc_attr($grid_id); ?>   ').fadeIn();
+})
+</script>
+<style type="text/css">
+<?php echo esc_attr('#post-grid-'. $grid_id);
 
-            .post-grid-lazy {
-                text-align: center;
-            }
-        </style>
-    <?php
+?> {
+  display: none;
+}
+
+.post-grid-lazy {
+  text-align: center;
+}
+</style>
+<?php
     endif;
 }
 
@@ -92,11 +95,12 @@ function post_grid_main_container($atts)
 
 
     ?>
-    <div data-options='<?php echo esc_attr(json_encode($post_grid_js_args)); ?>' id="post-grid-<?php echo esc_attr($grid_id); ?>" class="post-grid <?php echo esc_attr($grid_type); ?>">
-        <?php
+<div data-options='<?php echo esc_attr(json_encode($post_grid_js_args)); ?>'
+  id="post-grid-<?php echo esc_attr($grid_id); ?>" class="post-grid <?php echo esc_attr($grid_type); ?>">
+  <?php
         do_action('post_grid_container', $args);
         ?>
-    </div>
+</div>
 <?php
 
 
@@ -128,17 +132,17 @@ function post_grid_container_search($args)
 
     $page_url = get_permalink(get_the_ID());
 ?>
-    <div class="post-grid-search <?php echo esc_attr($search_action_type); ?>">
-        <form grid_id="<?php echo esc_attr($grid_id); ?>" action="<?php echo esc_url($page_url); ?>" method="get">
-            <?php
+<div class="post-grid-search <?php echo esc_attr($search_action_type); ?>">
+  <form grid_id="<?php echo esc_attr($grid_id); ?>" action="<?php echo esc_url($page_url); ?>" method="get">
+    <?php
 
             do_action('post_grid_search', $args);
 
             ?>
 
-        </form>
+  </form>
 
-    </div>
+</div>
 
 <?php
 
@@ -171,12 +175,14 @@ function post_grid_search_keyword_field($args)
     $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
 
 ?>
-    <div class="field-wrap field-wrap-keyword">
+<div class="field-wrap field-wrap-keyword">
 
-        <span class="search-icon"><?php echo $nav_top_search_icon; ?></span>
-        <input grid_id="<?php echo esc_attr($grid_id); ?>" title="<?php echo __('Press enter to reset', 'post-grid'); ?>" class="search" type="text" name="keyword" placeholder="<?php echo esc_attr($nav_top_search_placeholder); ?>" value="<?php echo esc_attr($keyword); ?>">
+  <span class="search-icon"><?php echo $nav_top_search_icon; ?></span>
+  <input grid_id="<?php echo esc_attr($grid_id); ?>" title="<?php echo __('Press enter to reset', 'post-grid'); ?>"
+    class="search" type="text" name="keyword" placeholder="<?php echo esc_attr($nav_top_search_placeholder); ?>"
+    value="<?php echo esc_attr($keyword); ?>">
 
-    </div>
+</div>
 
 
 <?php
@@ -212,17 +218,17 @@ function post_grid_search_submit_field($args)
 
 
 ?>
-    <div class="field-wrap field-wrap-submit">
+<div class="field-wrap field-wrap-submit">
 
-        <?php wp_nonce_field('post_grid_search_nonce', '_wpnonce', false); ?>
+  <?php wp_nonce_field('post_grid_search_nonce', '_wpnonce', false); ?>
 
-        <input type="submit" value="<?php echo __('Search', 'post-grid'); ?>">
-        <span class="search-loading"><?php echo $search_loading_icon; ?></span>
+  <input type="submit" value="<?php echo __('Search', 'post-grid'); ?>">
+  <span class="search-loading"><?php echo $search_loading_icon; ?></span>
 
-    </div>
+</div>
 
 
-    <?php
+<?php
 
 }
 
@@ -387,8 +393,8 @@ function post_grid_posts_loop($args)
         do_action('post_grid_loop_top', $args);
 
     ?>
-        <div class="<?php echo esc_attr(apply_filters('post_grid_grid_items_class', 'grid-items', $args)); ?>">
-            <?php
+<div class="<?php echo esc_attr(apply_filters('post_grid_grid_items_class', 'grid-items', $args)); ?>">
+  <?php
             do_action('post_grid_before_loop', $args);
 
             while ($post_grid_wp_query->have_posts()) : $post_grid_wp_query->the_post();
@@ -405,20 +411,20 @@ function post_grid_posts_loop($args)
             do_action('post_grid_after_loop', $args);
 
             ?>
-        </div>
-    <?php
+</div>
+<?php
         do_action('post_grid_loop_bottom', $args, $post_grid_wp_query);
 
 
 
     else :
     ?>
-        <div class="no-post-found">
-            <?php
+<div class="no-post-found">
+  <?php
             do_action('post_grid_loop_no_post', $args);
             ?>
-        </div>
-    <?php
+</div>
+<?php
     endif;
 
     wp_reset_query();
@@ -457,9 +463,9 @@ function post_grid_loop_no_post($args)
     $no_post_text = !empty($post_grid_options['no_post_text']) ? $post_grid_options['no_post_text'] : __('No post found', 'post-grid');
 
     ?>
-    <div class="no-post-found">
-        <?php echo apply_filters('post_grid_no_post_text', $no_post_text); ?>
-    </div>
+<div class="no-post-found">
+  <?php echo apply_filters('post_grid_no_post_text', $no_post_text); ?>
+</div>
 <?php
 
 }
@@ -512,11 +518,11 @@ function post_grid_loop($args)
     $item_css_class = implode(' ', $item_css_class);
 
 ?><div class="<?php echo esc_attr($item_css_class); ?> ">
-        <?php
+  <?php
         do_action('post_grid_item_top', $args);
         ?>
-        <div class="layer-wrapper layout-<?php echo esc_attr($layout_id); ?>">
-            <?php
+  <div class="layer-wrapper layout-<?php echo esc_attr($layout_id); ?>">
+    <?php
 
             $layout_args['layout_id'] = !empty($layout_id) ? $layout_id  : $skin;
             $layout_args['post_id'] = $post_id;
@@ -525,8 +531,8 @@ function post_grid_loop($args)
             do_action('post_grid_item_layout', $layout_args);
 
             ?>
-        </div>
-    </div><?php
+  </div>
+</div><?php
         }
 
 
@@ -577,7 +583,7 @@ function post_grid_loop($args)
 
 
             ?>
-    <div class="layer-media"><?php echo $html_media; ?></div>
+<div class="layer-media"><?php echo $html_media; ?></div>
 <?php
 
         }
@@ -617,8 +623,8 @@ function post_grid_loop($args)
             }
 
 ?>
-    <div class="layer-content">
-        <?php
+<div class="layer-content">
+  <?php
             foreach ($layout as $elementIndex => $element) {
                 $element_id = isset($element['key']) ? $element['key'] : '';
 
@@ -634,7 +640,7 @@ function post_grid_loop($args)
             }
 
         ?>
-    </div>
+</div>
 <?php
 
 
@@ -676,64 +682,101 @@ function post_grid_loop($args)
 
 
 ?>
-    <style type="text/css">
-        <?php
-            foreach ($layout as $item_id => $item_info) {
-                $item_css = isset($item_info['css']) ? $item_info['css'] : '';
-                $item_key = isset($item_info['key']) ? $item_info['key'] : '';
+<style type="text/css">
+<?php foreach ($layout as $item_id=> $item_info) {
+  $item_css=isset($item_info['css']) ? $item_info['css']: '';
+  $item_key=isset($item_info['key']) ? $item_info['key']: '';
 
-                if ($item_key == 'categories' || $item_key == 'tags') {
-        ?><?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?>a {
-            <?php echo esc_attr($item_css); ?>
-        }
+  if ($item_key=='categories'|| $item_key=='tags') {
+    ?><?php echo esc_attr('#post-grid-'. $grid_id);
+    ?><?php echo esc_attr(' .element_'. $item_id);
 
-        <?php
-                } elseif ($item_key == 'down_arrow') {
-                    $arrow_size = $item_info['arrow_size'];
-                    $arrow_bg_color = $item_info['arrow_bg_color'];
-        ?><?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
-            <?php echo esc_attr($item_css); ?>
-        }
+    ?>a {
+      <?php echo esc_attr($item_css);
+      ?>
+    }
 
-        <?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
-            border-left: <?php echo esc_attr($arrow_size); ?> solid rgba(0, 0, 0, 0);
-            border-right: <?php echo esc_attr($arrow_size); ?> solid rgba(0, 0, 0, 0);
-            border-top: <?php echo esc_attr($arrow_size); ?> solid <?php echo esc_attr($arrow_bg_color); ?>;
-            height: 0;
-            width: 0;
-        }
+    <?php
+  }
 
-        <?php
-                } elseif ($item_key == 'up_arrow') {
-                    $arrow_size = $item_info['arrow_size'];
-                    $arrow_bg_color = $item_info['arrow_bg_color'];
-        ?><?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
-            <?php echo esc_attr($item_css); ?>
-        }
+  elseif ($item_key=='down_arrow') {
+    $arrow_size=$item_info['arrow_size'];
+    $arrow_bg_color=$item_info['arrow_bg_color'];
+    ?><?php echo esc_attr('#post-grid-'. $grid_id);
+    ?><?php echo esc_attr(' .element_'. $item_id);
 
-        <?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
-            border-bottom: <?php echo esc_attr($arrow_size); ?> solid <?php echo esc_attr($arrow_bg_color); ?>;
-            border-left: <?php echo esc_attr($arrow_size); ?> solid transparent;
-            border-right: <?php echo esc_attr($arrow_size); ?> solid transparent;
-            height: 0;
-            width: 0;
-        }
+    ?> {
+      <?php echo esc_attr($item_css);
+      ?>
+    }
 
-        <?php
-                } else {
-        ?><?php echo esc_attr('#post-grid-' . $grid_id); ?><?php echo esc_attr(' .element_' . $item_id); ?> {
-            <?php echo esc_attr($item_css); ?>
-        }
+    <?php echo esc_attr('#post-grid-'. $grid_id);
+    ?><?php echo esc_attr(' .element_'. $item_id);
 
-        <?php
-                }
-            }
-            foreach ($layout as $item_id => $item_info) {
-                $item_css_hover = $item_info['css_hover'];
-                echo esc_attr('#post-grid-' . $grid_id) . ' .element_' . esc_attr($item_id) . ':hover{' . esc_attr($item_css_hover) . '}';
-            }
-        ?>
-    </style>
+    ?> {
+      border-left: <?php echo esc_attr($arrow_size);
+      ?>solid rgba(0, 0, 0, 0);
+      border-right: <?php echo esc_attr($arrow_size);
+      ?>solid rgba(0, 0, 0, 0);
+      border-top: <?php echo esc_attr($arrow_size);
+      ?>solid <?php echo esc_attr($arrow_bg_color);
+      ?>;
+      height: 0;
+      width: 0;
+    }
+
+    <?php
+  }
+
+  elseif ($item_key=='up_arrow') {
+    $arrow_size=$item_info['arrow_size'];
+    $arrow_bg_color=$item_info['arrow_bg_color'];
+    ?><?php echo esc_attr('#post-grid-'. $grid_id);
+    ?><?php echo esc_attr(' .element_'. $item_id);
+
+    ?> {
+      <?php echo esc_attr($item_css);
+      ?>
+    }
+
+    <?php echo esc_attr('#post-grid-'. $grid_id);
+    ?><?php echo esc_attr(' .element_'. $item_id);
+
+    ?> {
+      border-bottom: <?php echo esc_attr($arrow_size);
+      ?>solid <?php echo esc_attr($arrow_bg_color);
+      ?>;
+      border-left: <?php echo esc_attr($arrow_size);
+      ?>solid transparent;
+      border-right: <?php echo esc_attr($arrow_size);
+      ?>solid transparent;
+      height: 0;
+      width: 0;
+    }
+
+    <?php
+  }
+
+  else {
+    ?><?php echo esc_attr('#post-grid-'. $grid_id);
+    ?><?php echo esc_attr(' .element_'. $item_id);
+
+    ?> {
+      <?php echo esc_attr($item_css);
+      ?>
+    }
+
+    <?php
+  }
+}
+
+foreach ($layout as $item_id=> $item_info) {
+  $item_css_hover=$item_info['css_hover'];
+  echo esc_attr('#post-grid-'. $grid_id) . ' .element_'. esc_attr($item_id) . ':hover{'. esc_attr($item_css_hover) . '}';
+}
+
+?>
+</style>
 <?php
         }
 
@@ -799,11 +842,11 @@ function post_grid_loop($args)
 
 
 ?>
-    <div class="pagination">
-        <?php
+<div class="pagination">
+  <?php
             do_action('post_grid_pagination_' . $pagination_type, $args, $post_grid_wp_query);
         ?>
-    </div>
+</div>
 <?php
 
         }
@@ -838,8 +881,8 @@ function post_grid_loop($args)
             $pagination_active_bg_color = !empty($post_grid_options['pagination']['active_bg_color']) ? $post_grid_options['pagination']['active_bg_color'] : '#4b4b4b';
 
 ?>
-    <div class="paginate">
-        <?php
+<div class="paginate">
+  <?php
             $big = 999999999; // need an unlikely integer
             echo paginate_links(
                 array(
@@ -853,19 +896,28 @@ function post_grid_loop($args)
             );
 
         ?>
-    </div>
-    <style type="text/css">
-        <?php echo esc_attr('#post-grid-' . $grid_id) . ' .pagination .page-numbers'; ?> {
-            font-size: <?php echo esc_attr($pagination_font_size); ?>;
-            color: <?php echo esc_attr($pagination_font_color); ?>;
-            background: <?php echo esc_attr($pagination_bg_color); ?>;
-        }
+</div>
+<style type="text/css">
+<?php echo esc_attr('#post-grid-'. $grid_id) . ' .pagination .page-numbers';
 
-        <?php echo esc_attr('#post-grid-' . $grid_id) . ' .pagination .page-numbers:hover'; ?>,
-        <?php echo esc_attr('#post-grid-' . $grid_id) . ' .pagination .page-numbers.current'; ?> {
-            background: <?php echo esc_attr($pagination_active_bg_color); ?>;
-        }
-    </style>
+?> {
+  font-size: <?php echo esc_attr($pagination_font_size);
+  ?>;
+  color: <?php echo esc_attr($pagination_font_color);
+  ?>;
+  background: <?php echo esc_attr($pagination_bg_color);
+  ?>;
+}
+
+<?php echo esc_attr('#post-grid-'. $grid_id) . ' .pagination .page-numbers:hover';
+?>,
+<?php echo esc_attr('#post-grid-'. $grid_id) . ' .pagination .page-numbers.current';
+
+?> {
+  background: <?php echo esc_attr($pagination_active_bg_color);
+  ?>;
+}
+</style>
 <?php
         }
 
@@ -959,203 +1011,303 @@ function post_grid_loop($args)
 
 
 ?>
-    <style type="text/css">
-        <?php echo esc_attr('#post-grid-' . $grid_id); ?> {
-            <?php if (!empty($container_padding)) : ?>padding: <?php echo esc_attr($container_padding); ?>;
-            <?php endif; ?><?php if (!empty($container_bg_color)) : ?>background-color: <?php echo esc_attr($container_bg_color); ?>;
-            <?php endif; ?><?php if (!empty($container_bg_image)) : ?>background-image: url(<?php echo esc_attr($container_bg_image); ?>);
-            <?php endif; ?><?php if (!empty($container_text_align)) : ?>text-align: <?php echo esc_attr($container_text_align); ?>;
-            <?php endif; ?>
-        }
+<style type="text/css">
+<?php echo esc_attr('#post-grid-'. $grid_id);
 
-        <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
-            <?php if (!empty($item_padding)) : ?>padding: <?php echo esc_attr($item_padding); ?>;
-            <?php endif; ?><?php if ($items_bg_color_type == 'fixed') : ?>background: <?php echo esc_attr($items_bg_color); ?>;
-            <?php endif; ?>
-        }
+?> {
+  <?php if ( !empty($container_padding)): ?>padding: <?php echo esc_attr($container_padding);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($container_bg_color)): ?>background-color: <?php echo esc_attr($container_bg_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($container_bg_image)): ?>background-image: url(<?php echo esc_attr($container_bg_image);
+  ?>);
+  <?php endif;
+  ?><?php if ( !empty($container_text_align)): ?>text-align: <?php echo esc_attr($container_text_align);
+  ?>;
+  <?php endif;
+  ?>
+}
 
-        <?php echo esc_attr('#post-grid-' . $grid_id . ' .item .layer-media'); ?> {
-            <?php
-            if ($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height') {
-                echo 'height:' . esc_attr($items_media_height) . ';';
-            } elseif ($items_media_height_style == 'max_height') {
-                echo 'max-height:' . esc_attr($items_media_height) . ';';
-            } else {
-                echo 'height:' . esc_attr($items_media_height) . ';';
-            }
-            ?>
-        }
+<?php echo esc_attr('#post-grid-'. $grid_id) . ' .item';
 
-        @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo esc_attr('#post-grid-' . $grid_id . ' .grid-items'); ?> {
-                <?php if (is_integer($items_width_mobile)) :
-                    $column_html = '';
-                    for ($i = 1; $i <= $items_width_mobile; $i++) {
-                        $column_html .= '1fr ';
-                    }
-                ?>display: grid;
-                grid-template-columns: <?php echo esc_attr($column_html); ?>;
-                column-gap: <?php echo esc_attr($items_margin); ?>;
-                row-gap: <?php echo esc_attr($items_margin); ?>;
-                <?php
-                else :
-                ?>text-align: <?php echo esc_attr($items_wrapper_text_align); ?>;
-                <?php
-                endif; ?>
-            }
+?> {
+  <?php if ( !empty($item_padding)): ?>padding: <?php echo esc_attr($item_padding);
+  ?>;
+  <?php endif;
+  ?><?php if ($items_bg_color_type=='fixed'): ?>background: <?php echo esc_attr($items_bg_color);
+  ?>;
+  <?php endif;
+  ?>
+}
 
-            <?php echo esc_attr('#post-grid-' . $grid_id . ' .item'); ?> {
-                <?php if (!empty($items_width_mobile) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_mobile);
-                                                                                                        ?>;
-                margin: <?php echo esc_attr($items_margin); ?>;
-                display: inline-block;
-                vertical-align: top;
-                <?php endif; ?><?php
-                                if ($items_height_style == 'fixed_height') {
-                                    echo 'height:' . esc_attr($items_height) . ';';
-                                } elseif ($items_height_style == 'max_height') {
-                                    echo 'max-height:' . esc_attr($items_height) . ';';
-                                } elseif ($items_height_style == 'auto_height') {
-                                    echo 'height:auto;';
-                                } else {
-                                    echo 'height:auto;';
-                                }
-                                ?>
-            }
-        }
+<?php echo esc_attr('#post-grid-'. $grid_id . ' .item .layer-media');
 
-        @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo esc_attr('#post-grid-' . $grid_id . ' .grid-items'); ?> {
-                <?php if (is_integer($items_width_tablet)) :
-                    $column_html = '';
-                    for ($i = 1; $i <= $items_width_tablet; $i++) {
-                        $column_html .= '1fr ';
-                    }
-                ?>display: grid;
-                grid-template-columns: <?php echo esc_attr($column_html); ?>;
-                column-gap: <?php echo esc_attr($items_margin); ?>;
-                row-gap: <?php echo esc_attr($items_margin); ?>;
-                <?php
+?> {
+  <?php if ($items_media_height_style=='fixed_height'|| $items_media_height_style=='auto_height') {
+    echo 'height:'. esc_attr($items_media_height) . ';';
+  }
 
-                else :
+  elseif ($items_media_height_style=='max_height') {
+    echo 'max-height:'. esc_attr($items_media_height) . ';';
+  }
 
-                ?>text-align: <?php echo esc_attr($items_wrapper_text_align); ?>;
-                <?php
-                endif; ?>
-            }
+  else {
+    echo 'height:'. esc_attr($items_media_height) . ';';
+  }
 
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
-                <?php if (!empty($items_width_tablet) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_tablet);
-                                                                                                        ?>;
-                margin: <?php echo esc_attr($items_margin); ?>;
-                display: inline-block;
-                vertical-align: top;
-                <?php endif;
-                if ($items_height_style_tablet == 'fixed_height') {
-                    echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
-                } elseif ($items_height_style_tablet == 'max_height') {
-                    echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
-                } elseif ($items_height_style_tablet == 'auto_height') {
-                    echo 'max-height:auto;';
-                } else {
-                    echo 'height:auto;';
-                }
-                ?>
-            }
-        }
+  ?>
+}
 
-        @media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .grid-items'; ?> {
-                <?php if (is_integer($items_width_desktop)) : ?><?php
-                                                                $column_html = '';
-                                                                for ($i = 1; $i <= $items_width_desktop; $i++) {
-                                                                    $column_html .= '1fr ';
-                                                                }
-                                                                ?>display: grid;
-                grid-template-columns: <?php echo esc_attr($column_html); ?>;
-                column-gap: <?php echo esc_attr($items_margin); ?>;
-                row-gap: <?php echo esc_attr($items_margin); ?>;
-                <?php
-                else :
-                ?>text-align: <?php echo esc_attr($items_wrapper_text_align); ?>;
-                <?php
-                endif; ?>
-            }
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  <?php echo esc_attr('#post-grid-'. $grid_id . ' .grid-items');
 
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
-                <?php if (!empty($items_width_desktop) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_desktop); ?>;
-                display: inline-block;
-                margin: <?php echo esc_attr($items_margin); ?>;
-                vertical-align: top;
-                <?php endif; ?><?php
-                                if ($items_height_style == 'fixed_height') {
-                                    echo 'height:' . esc_attr($items_height) . ';';
-                                } elseif ($items_height_style == 'max_height') {
-                                    echo 'max-height:' . esc_attr($items_height) . ';';
-                                } elseif ($items_height_style == 'auto_height') {
-                                    echo 'height:auto;';
-                                } else {
-                                    echo 'height:auto;';
-                                }
-                                ?>
-            }
-        }
+  ?> {
+    <?php if (is_integer($items_width_mobile)):
+      $column_html='';
 
-        <?php
-            if ($grid_layout_name == 'layout_grid') {
-            } elseif ($grid_layout_name == 'layout_1_N') {
-                $width = intval((int)$items_width_desktop * $grid_layout_col_multi) + intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
-        ?>@media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item:first-child'; ?> {
-                width: <?php echo esc_attr($width); ?>px;
-            }
-        }
+    for ($i=1; $i <=$items_width_mobile; $i++) {
+      $column_html .='1fr ';
+    }
 
-        <?php
-            } elseif ($grid_layout_name == 'layout_N_1') {
-                $width = intval((int)$items_width_desktop * $grid_layout_col_multi) + intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
-        ?>@media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item:last-child'; ?> {
-                width: <?php echo esc_attr($width); ?>px;
-            }
-        }
+    ?>display: grid;
+    grid-template-columns: <?php echo esc_attr($column_html);
+    ?>;
+    column-gap: <?php echo esc_attr($items_margin);
+    ?>;
+    row-gap: <?php echo esc_attr($items_margin);
+    ?>;
+    <?php else : ?>text-align: <?php echo esc_attr($items_wrapper_text_align);
+    ?>;
+    <?php endif;
+    ?>
+  }
 
-        <?php
-            } elseif ($grid_layout_name == 'layout_3') {
-                $width = intval($items_width_desktop) + intval($items_margin);
-        ?>@media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item:first-child'; ?> {
-                float: left;
-            }
+  <?php echo esc_attr('#post-grid-'. $grid_id . ' .item');
 
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item'; ?> {
-                float: right;
-            }
-        }
+  ?> {
+    <?php if ( !empty($items_width_mobile) && !is_integer($items_width_desktop)): ?>width: <?php echo esc_attr($items_width_mobile);
+    ?>;
+    margin: <?php echo esc_attr($items_margin);
+    ?>;
+    display: inline-block;
+    vertical-align: top;
+    <?php endif;
 
-        <?php
-            } elseif ($grid_layout_name == 'layout_L_R') {
-        ?>@media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item.odd .layer-media'; ?> {
-                float: right;
-            }
-        }
+    ?><?php if ($items_height_style=='fixed_height') {
+      echo 'height:'. esc_attr($items_height) . ';';
+    }
 
-        <?php
-            } elseif ($grid_layout_name == 'layout_1_N_1') {
-                $width = intval((int)$items_width_desktop * $grid_layout_col_multi) + intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
-        ?>@media only screen and (min-width: 1024px) {
+    elseif ($items_height_style=='max_height') {
+      echo 'max-height:'. esc_attr($items_height) . ';';
+    }
 
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item:nth-child(1)'; ?>,
-            <?php echo esc_attr('#post-grid-' . $grid_id) . ' .item:nth-child'; ?>(<?php echo esc_attr($grid_layout_col_multi + 2); ?>) {
-                width: <?php echo esc_attr($width); ?>px;
-            }
-        }
+    elseif ($items_height_style=='auto_height') {
+      echo 'height:auto;';
+    }
 
-        <?php
-            }
-        ?>
-    </style>
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  <?php echo esc_attr('#post-grid-'. $grid_id . ' .grid-items');
+
+  ?> {
+    <?php if (is_integer($items_width_tablet)):
+      $column_html='';
+
+    for ($i=1; $i <=$items_width_tablet; $i++) {
+      $column_html .='1fr ';
+    }
+
+    ?>display: grid;
+    grid-template-columns: <?php echo esc_attr($column_html);
+    ?>;
+    column-gap: <?php echo esc_attr($items_margin);
+    ?>;
+    row-gap: <?php echo esc_attr($items_margin);
+    ?>;
+    <?php else : ?>text-align: <?php echo esc_attr($items_wrapper_text_align);
+    ?>;
+    <?php endif;
+    ?>
+  }
+
+  <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item';
+
+  ?> {
+    <?php if ( !empty($items_width_tablet) && !is_integer($items_width_desktop)): ?>width: <?php echo esc_attr($items_width_tablet);
+    ?>;
+    margin: <?php echo esc_attr($items_margin);
+    ?>;
+    display: inline-block;
+    vertical-align: top;
+    <?php endif;
+
+    if ($items_height_style_tablet=='fixed_height') {
+      echo 'height:'. esc_attr($items_fixed_height_tablet) . ';';
+    }
+
+    elseif ($items_height_style_tablet=='max_height') {
+      echo 'max-height:'. esc_attr($items_fixed_height_tablet) . ';';
+    }
+
+    elseif ($items_height_style_tablet=='auto_height') {
+      echo 'max-height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  <?php echo esc_attr('#post-grid-'. $grid_id) . ' .grid-items';
+
+  ?> {
+    <?php if (is_integer($items_width_desktop)): ?><?php $column_html='';
+
+    for ($i=1; $i <=$items_width_desktop; $i++) {
+      $column_html .='1fr ';
+    }
+
+    ?>display: grid;
+    grid-template-columns: <?php echo esc_attr($column_html);
+    ?>;
+    column-gap: <?php echo esc_attr($items_margin);
+    ?>;
+    row-gap: <?php echo esc_attr($items_margin);
+    ?>;
+    <?php else : ?>text-align: <?php echo esc_attr($items_wrapper_text_align);
+    ?>;
+    <?php endif;
+    ?>
+  }
+
+  <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item';
+
+  ?> {
+    <?php if ( !empty($items_width_desktop) && !is_integer($items_width_desktop)): ?>width: <?php echo esc_attr($items_width_desktop);
+    ?>;
+    display: inline-block;
+    margin: <?php echo esc_attr($items_margin);
+    ?>;
+    vertical-align: top;
+    <?php endif;
+
+    ?><?php if ($items_height_style=='fixed_height') {
+      echo 'height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='max_height') {
+      echo 'max-height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='auto_height') {
+      echo 'height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+<?php if ($grid_layout_name=='layout_grid') {}
+
+elseif ($grid_layout_name=='layout_1_N') {
+  $width=intval((int)$items_width_desktop * $grid_layout_col_multi)+intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
+
+  ?>@media only screen and (min-width: 1024px) {
+    <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item:first-child';
+
+    ?> {
+      width: <?php echo esc_attr($width);
+      ?>px;
+    }
+  }
+
+  <?php
+}
+
+elseif ($grid_layout_name=='layout_N_1') {
+  $width=intval((int)$items_width_desktop * $grid_layout_col_multi)+intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
+
+  ?>@media only screen and (min-width: 1024px) {
+    <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item:last-child';
+
+    ?> {
+      width: <?php echo esc_attr($width);
+      ?>px;
+    }
+  }
+
+  <?php
+}
+
+elseif ($grid_layout_name=='layout_3') {
+  $width=intval($items_width_desktop)+intval($items_margin);
+
+  ?>@media only screen and (min-width: 1024px) {
+    <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item:first-child';
+
+    ?> {
+      float: left;
+    }
+
+    <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item';
+
+    ?> {
+      float: right;
+    }
+  }
+
+  <?php
+}
+
+elseif ($grid_layout_name=='layout_L_R') {
+  ?>@media only screen and (min-width: 1024px) {
+    <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item.odd .layer-media';
+
+    ?> {
+      float: right;
+    }
+  }
+
+  <?php
+}
+
+elseif ($grid_layout_name=='layout_1_N_1') {
+  $width=intval((int)$items_width_desktop * $grid_layout_col_multi)+intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
+
+  ?>@media only screen and (min-width: 1024px) {
+
+    <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item:nth-child(1)';
+    ?>,
+    <?php echo esc_attr('#post-grid-'. $grid_id) . ' .item:nth-child';
+
+    ?>(<?php echo esc_attr($grid_layout_col_multi + 2); ?>) {
+      width: <?php echo esc_attr($width);
+      ?>px;
+    }
+  }
+
+  <?php
+}
+
+?>
+</style>
 <?php
         }
 
@@ -1232,143 +1384,199 @@ function post_grid_loop($args)
 
 
 ?>
-    <style type="text/css">
-        <?php echo '#post-grid-' . esc_attr($grid_id); ?> {
-            overflow: hidden;
-            box-sizing: border-box;
-            <?php if (!empty($container_padding)) : ?>padding: <?php echo esc_attr($container_padding); ?>;
-            <?php endif; ?><?php if (!empty($container_bg_color)) : ?>background-color: <?php echo esc_attr($container_bg_color); ?>;
-            <?php endif; ?><?php if (!empty($container_bg_image)) : ?>background-image: url(<?php echo esc_attr($container_bg_image); ?>);
-            <?php endif; ?>
-        }
+<style type="text/css">
+<?php echo '#post-grid-'. esc_attr($grid_id);
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .grid-items'; ?> {
-            box-sizing: border-box;
-        }
+?> {
+  overflow: hidden;
+  box-sizing: border-box;
+  <?php if ( !empty($container_padding)): ?>padding: <?php echo esc_attr($container_padding);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($container_bg_color)): ?>background-color: <?php echo esc_attr($container_bg_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($container_bg_image)): ?>background-image: url(<?php echo esc_attr($container_bg_image);
+  ?>);
+  <?php endif;
+  ?>
+}
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .grid-items';
 
-            margin-bottom: <?php echo esc_attr($masonry_gutter . 'px'); ?>;
-        }
+?> {
+  box-sizing: border-box;
+}
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .layer-wrapper'; ?> {
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
 
-            <?php if ($items_bg_color_type == 'fixed') : ?>background: <?php echo esc_attr($items_bg_color); ?>;
-            <?php endif; ?>padding: <?php echo esc_attr($item_padding); ?>;
+?> {
 
-        }
+  margin-bottom: <?php echo esc_attr($masonry_gutter . 'px');
+  ?>;
+}
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item .layer-media'; ?> {
-            overflow: hidden;
-            <?php
-            if ($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height') {
-                echo 'height:' . esc_attr($items_media_height) . ';';
-            } elseif ($items_media_height_style == 'max_height') {
-                echo 'max-height:' . esc_attr($items_media_height) . ';';
-            } else {
-                echo 'height:' . $items_media_height . ';';
-            }
-            ?>
-        }
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .layer-wrapper';
 
-        @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-                <?php
-                $masonry_gutter_mobile = $masonry_gutter * ($columns_mobile - 1);
-                ?>width: calc((100% - <?php echo $masonry_gutter_mobile; ?>px) / <?php echo esc_attr($columns_mobile); ?>);
-                <?php
-                if ($items_height_style == 'fixed_height') {
-                    echo 'height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'max_height') {
-                    echo 'max-height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'auto_height') {
-                    echo 'height:auto;';
-                } else {
-                    echo 'height:auto;';
-                }
-                ?>
-            }
-        }
+?> {
 
-        @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-                <?php
-                $masonry_gutter_tablet = $masonry_gutter * ($columns_tablet - 1);
+  <?php if ($items_bg_color_type=='fixed'): ?>background: <?php echo esc_attr($items_bg_color);
+  ?>;
+  <?php endif;
+  ?>padding: <?php echo esc_attr($item_padding);
+  ?>;
 
-                ?>width: calc((100% - <?php echo $masonry_gutter_tablet; ?>px) / <?php echo esc_attr($columns_tablet); ?>);
-                <?php
-                if ($items_height_style_tablet == 'fixed_height') {
-                    echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
-                } elseif ($items_height_style_tablet == 'max_height') {
-                    echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
-                } elseif ($items_height_style_tablet == 'auto_height') {
-                    echo 'max-height:auto;';
-                } else {
-                    echo 'height:auto;';
-                }
-                ?>
-            }
-        }
+}
 
-        @media only screen and (min-width: 1024px) {
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-                <?php
-                $masonry_gutter_desktop = $masonry_gutter * ($columns_desktop - 1)
-                ?>width: calc((100% - <?php echo $masonry_gutter_desktop; ?>px) / <?php echo esc_attr($columns_desktop); ?>);
-                <?php
-                if ($items_height_style == 'fixed_height') {
-                    echo 'height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'max_height') {
-                    echo 'max-height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'auto_height') {
-                    echo 'height:auto;';
-                } else {
-                    echo 'height:auto;';
-                }
-                ?>
-            }
-        }
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .item .layer-media';
 
-        <?php
+?> {
+  overflow: hidden;
 
-            $filterable_font_size = !empty($post_grid_options['nav_top']['filterable_font_size']) ? $post_grid_options['nav_top']['filterable_font_size'] : '14px';
-            $filterable_navs_margin = !empty($post_grid_options['nav_top']['filterable_navs_margin']) ? $post_grid_options['nav_top']['filterable_navs_margin'] : '5px';
+  <?php if ($items_media_height_style=='fixed_height'|| $items_media_height_style=='auto_height') {
+    echo 'height:'. esc_attr($items_media_height) . ';';
+  }
 
-            $filterable_font_color = !empty($post_grid_options['nav_top']['filterable_font_color']) ? $post_grid_options['nav_top']['filterable_font_color'] : '#999';
-            $filterable_bg_color = !empty($post_grid_options['nav_top']['filterable_bg_color']) ? $post_grid_options['nav_top']['filterable_bg_color'] : '#fff';
-            $filterable_active_bg_color = !empty($post_grid_options['nav_top']['filterable_active_bg_color']) ? $post_grid_options['nav_top']['filterable_active_bg_color'] : '#ddd';
-        ?><?php echo '#post-grid-' . esc_attr($grid_id) . ' .nav-filter .filter'; ?> {
-            font-size: <?php echo esc_attr($filterable_font_size); ?>;
-            color: <?php echo esc_attr($filterable_font_color); ?>;
-            background: <?php echo esc_attr($filterable_bg_color); ?>;
-            margin: <?php echo esc_attr($filterable_navs_margin); ?>;
-        }
+  elseif ($items_media_height_style=='max_height') {
+    echo 'max-height:'. esc_attr($items_media_height) . ';';
+  }
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .nav-filter .filter:hover'; ?>,
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .nav-filter .filter.mixitup-control-active'; ?> {
-            background: <?php echo esc_attr($filterable_active_bg_color); ?>;
-        }
+  else {
+    echo 'height:'. $items_media_height . ';';
+  }
 
-        .post-grid .grid-nav-top .nav-filter {
-            text-align: center;
-            padding: 20px 0;
-        }
+  ?>
+}
 
-        .filter-group {
-            display: inline-block;
-            margin: 10px;
-        }
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  <?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
 
-        .post-grid .nav-filter .filter {
-            background: rgba(220, 220, 220, 0.3) none repeat scroll 0 0;
-            color: #333;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 14px;
-            margin: 5px 5px;
-            padding: 3px 15px;
-        }
-    </style>
+  ?> {
+    <?php $masonry_gutter_mobile=$masonry_gutter * ($columns_mobile - 1);
+    ?>width: calc((100% - <?php echo $masonry_gutter_mobile; ?>px) / <?php echo esc_attr($columns_mobile); ?>);
+
+    <?php if ($items_height_style=='fixed_height') {
+      echo 'height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='max_height') {
+      echo 'max-height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='auto_height') {
+      echo 'height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  <?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
+
+  ?> {
+    <?php $masonry_gutter_tablet=$masonry_gutter * ($columns_tablet - 1);
+
+    ?>width: calc((100% - <?php echo $masonry_gutter_tablet; ?>px) / <?php echo esc_attr($columns_tablet); ?>);
+
+    <?php if ($items_height_style_tablet=='fixed_height') {
+      echo 'height:'. esc_attr($items_fixed_height_tablet) . ';';
+    }
+
+    elseif ($items_height_style_tablet=='max_height') {
+      echo 'max-height:'. esc_attr($items_fixed_height_tablet) . ';';
+    }
+
+    elseif ($items_height_style_tablet=='auto_height') {
+      echo 'max-height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  <?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
+
+  ?> {
+    <?php $masonry_gutter_desktop=$masonry_gutter * ($columns_desktop - 1) ?>width: calc((100% - <?php echo $masonry_gutter_desktop; ?>px) / <?php echo esc_attr($columns_desktop); ?>);
+
+    <?php if ($items_height_style=='fixed_height') {
+      echo 'height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='max_height') {
+      echo 'max-height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='auto_height') {
+      echo 'height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+<?php $filterable_font_size= !empty($post_grid_options['nav_top']['filterable_font_size']) ? $post_grid_options['nav_top']['filterable_font_size'] : '14px';
+$filterable_navs_margin= !empty($post_grid_options['nav_top']['filterable_navs_margin']) ? $post_grid_options['nav_top']['filterable_navs_margin'] : '5px';
+
+$filterable_font_color= !empty($post_grid_options['nav_top']['filterable_font_color']) ? $post_grid_options['nav_top']['filterable_font_color'] : '#999';
+$filterable_bg_color= !empty($post_grid_options['nav_top']['filterable_bg_color']) ? $post_grid_options['nav_top']['filterable_bg_color'] : '#fff';
+$filterable_active_bg_color= !empty($post_grid_options['nav_top']['filterable_active_bg_color']) ? $post_grid_options['nav_top']['filterable_active_bg_color'] : '#ddd';
+?><?php echo '#post-grid-'. esc_attr($grid_id) . ' .nav-filter .filter';
+
+?> {
+  font-size: <?php echo esc_attr($filterable_font_size);
+  ?>;
+  color: <?php echo esc_attr($filterable_font_color);
+  ?>;
+  background: <?php echo esc_attr($filterable_bg_color);
+  ?>;
+  margin: <?php echo esc_attr($filterable_navs_margin);
+  ?>;
+}
+
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .nav-filter .filter:hover';
+?>,
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .nav-filter .filter.mixitup-control-active';
+
+?> {
+  background: <?php echo esc_attr($filterable_active_bg_color);
+  ?>;
+}
+
+.post-grid .grid-nav-top .nav-filter {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.filter-group {
+  display: inline-block;
+  margin: 10px;
+}
+
+.post-grid .nav-filter .filter {
+  background: rgba(220, 220, 220, 0.3) none repeat scroll 0 0;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  margin: 5px 5px;
+  padding: 3px 15px;
+}
+</style>
 <?php
 
 
@@ -1454,148 +1662,202 @@ function post_grid_loop($args)
 
 
 ?>
-    <style type="text/css">
-        <?php echo '#post-grid-' . esc_attr($grid_id); ?> {
-            overflow: hidden;
-            box-sizing: border-box;
-            <?php if (!empty($container_padding)) : ?>padding: <?php echo esc_attr($container_padding); ?>;
-            <?php endif; ?><?php if (!empty($container_bg_color)) : ?>background-color: <?php echo esc_attr($container_bg_color); ?>;
-            <?php endif; ?><?php if (!empty($container_bg_image)) : ?>background-image: url(<?php echo esc_attr($container_bg_image); ?>);
-            <?php endif; ?>
-        }
+<style type="text/css">
+<?php echo '#post-grid-'. esc_attr($grid_id);
 
-        .post-grid .layer-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
+?> {
+  overflow: hidden;
+  box-sizing: border-box;
+  <?php if ( !empty($container_padding)): ?>padding: <?php echo esc_attr($container_padding);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($container_bg_color)): ?>background-color: <?php echo esc_attr($container_bg_color);
+  ?>;
+  <?php endif;
+  ?><?php if ( !empty($container_bg_image)): ?>background-image: url(<?php echo esc_attr($container_bg_image);
+  ?>);
+  <?php endif;
+  ?>
+}
 
-        .post-grid .layer-wrapper:before {
-            padding-top: 100% !important;
-            content: "";
-            box-sizing: inherit;
-            display: block;
-            overflow: hidden;
-        }
+.post-grid .layer-wrapper {
+  position: relative;
+  overflow: hidden;
+}
 
-        .layer-media {
-            overflow: hidden;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100% !important;
-            height: 100% !important;
-        }
+.post-grid .layer-wrapper:before {
+  padding-top: 100% !important;
+  content: "";
+  box-sizing: inherit;
+  display: block;
+  overflow: hidden;
+}
 
-        .element-media,
-        .thumb,
-        .thumb_link {
-            width: 100% !important;
-            height: 100% !important;
-        }
+.layer-media {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
 
-        .post-grid .layer-wrapper img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover;
-        }
+.element-media,
+.thumb,
+.thumb_link {
+  width: 100% !important;
+  height: 100% !important;
+}
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .grid-items'; ?> {
-            box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-        }
+.post-grid .layer-wrapper img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-            padding: <?php echo $tiles_gutter; ?>px;
-        }
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .grid-items';
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .layer-wrapper'; ?> {
-            <?php if ($items_bg_color_type == 'fixed') : ?>background: <?php echo esc_attr($items_bg_color); ?>;
-            <?php endif; ?>
-        }
+?> {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
 
-        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item .layer-media'; ?> {
-            overflow: hidden;
-            <?php
-            if ($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height') {
-                echo 'height:' . esc_attr($items_media_height) . ';';
-            } elseif ($items_media_height_style == 'max_height') {
-                echo 'max-height:' . esc_attr($items_media_height) . ';';
-            } else {
-                echo 'height:' . $items_media_height . ';';
-            }
-            ?>
-        }
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
 
-        @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-                <?php
-                $colDesktop = 100 / $columns_mobile;
-                $parcentWidth = number_format($colDesktop, 0);
-                $masonry_gutter_mobile = $masonry_gutter * ($columns_mobile - 1);
-                ?>width: calc((100% - <?php echo $masonry_gutter_mobile; ?>px) / <?php echo esc_attr($columns_mobile); ?>);
-                flex: 0 0 <?php echo $parcentWidth; ?>%;
-                max-width: <?php echo $parcentWidth; ?>%;
-                <?php
-                if ($items_height_style == 'fixed_height') {
-                    echo 'height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'max_height') {
-                    echo 'max-height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'auto_height') {
-                    echo 'height:auto;';
-                } else {
-                    echo 'height:auto;';
-                }
-                ?>
-            }
-        }
+?> {
+  padding: <?php echo $tiles_gutter;
+  ?>px;
+}
 
-        @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-                <?php
-                $masonry_gutter_tablet = $masonry_gutter * ($columns_tablet - 1);
-                $colDesktop = 100 / $columns_tablet;
-                $parcentWidth = number_format($colDesktop, 0);
-                ?>width: calc((100% - <?php echo $masonry_gutter_tablet; ?>px) / <?php echo esc_attr($columns_tablet); ?>);
-                flex: 0 0 <?php echo $parcentWidth; ?>%;
-                max-width: <?php echo $parcentWidth; ?>%;
-                <?php
-                if ($items_height_style_tablet == 'fixed_height') {
-                    echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
-                } elseif ($items_height_style_tablet == 'max_height') {
-                    echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
-                } elseif ($items_height_style_tablet == 'auto_height') {
-                    echo 'max-height:auto;';
-                } else {
-                    echo 'height:auto;';
-                }
-                ?>
-            }
-        }
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .layer-wrapper';
 
-        @media only screen and (min-width: 1024px) {
-            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-                <?php
-                $masonry_gutter_desktop = $masonry_gutter * ($columns_desktop - 1);
-                $colDesktop = 100 / $columns_desktop;
-                $parcentWidth = number_format($colDesktop, 0);
-                ?>width: calc((100% - <?php echo $masonry_gutter_desktop; ?>px) / <?php echo esc_attr($columns_desktop); ?>);
-                flex: 0 0 <?php echo $parcentWidth; ?>%;
-                max-width: <?php echo $parcentWidth; ?>%;
-                <?php
-                if ($items_height_style == 'fixed_height') {
-                    echo 'height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'max_height') {
-                    echo 'max-height:' . esc_attr($items_height) . ';';
-                } elseif ($items_height_style == 'auto_height') {
-                    echo 'height:auto;';
-                } else {
-                    echo 'height:auto;';
-                }
-                ?>
-            }
-        }
-    </style>
+?> {
+  <?php if ($items_bg_color_type=='fixed'): ?>background: <?php echo esc_attr($items_bg_color);
+  ?>;
+  <?php endif;
+  ?>
+}
+
+<?php echo '#post-grid-'. esc_attr($grid_id) . ' .item .layer-media';
+
+?> {
+  overflow: hidden;
+
+  <?php if ($items_media_height_style=='fixed_height'|| $items_media_height_style=='auto_height') {
+    echo 'height:'. esc_attr($items_media_height) . ';';
+  }
+
+  elseif ($items_media_height_style=='max_height') {
+    echo 'max-height:'. esc_attr($items_media_height) . ';';
+  }
+
+  else {
+    echo 'height:'. $items_media_height . ';';
+  }
+
+  ?>
+}
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  <?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
+
+  ?> {
+    <?php $colDesktop=100 / $columns_mobile;
+    $parcentWidth=number_format($colDesktop, 0);
+    $masonry_gutter_mobile=$masonry_gutter * ($columns_mobile - 1);
+    ?>width: calc((100% - <?php echo $masonry_gutter_mobile; ?>px) / <?php echo esc_attr($columns_mobile); ?>);
+    flex: 0 0 <?php echo $parcentWidth;
+    ?>%;
+    max-width: <?php echo $parcentWidth;
+    ?>%;
+
+    <?php if ($items_height_style=='fixed_height') {
+      echo 'height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='max_height') {
+      echo 'max-height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='auto_height') {
+      echo 'height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  <?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
+
+  ?> {
+    <?php $masonry_gutter_tablet=$masonry_gutter * ($columns_tablet - 1);
+    $colDesktop=100 / $columns_tablet;
+    $parcentWidth=number_format($colDesktop, 0);
+    ?>width: calc((100% - <?php echo $masonry_gutter_tablet; ?>px) / <?php echo esc_attr($columns_tablet); ?>);
+    flex: 0 0 <?php echo $parcentWidth;
+    ?>%;
+    max-width: <?php echo $parcentWidth;
+    ?>%;
+
+    <?php if ($items_height_style_tablet=='fixed_height') {
+      echo 'height:'. esc_attr($items_fixed_height_tablet) . ';';
+    }
+
+    elseif ($items_height_style_tablet=='max_height') {
+      echo 'max-height:'. esc_attr($items_fixed_height_tablet) . ';';
+    }
+
+    elseif ($items_height_style_tablet=='auto_height') {
+      echo 'max-height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  <?php echo '#post-grid-'. esc_attr($grid_id) . ' .item';
+
+  ?> {
+    <?php $masonry_gutter_desktop=$masonry_gutter * ($columns_desktop - 1);
+    $colDesktop=100 / $columns_desktop;
+    $parcentWidth=number_format($colDesktop, 0);
+    ?>width: calc((100% - <?php echo $masonry_gutter_desktop; ?>px) / <?php echo esc_attr($columns_desktop); ?>);
+    flex: 0 0 <?php echo $parcentWidth;
+    ?>%;
+    max-width: <?php echo $parcentWidth;
+    ?>%;
+
+    <?php if ($items_height_style=='fixed_height') {
+      echo 'height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='max_height') {
+      echo 'max-height:'. esc_attr($items_height) . ';';
+    }
+
+    elseif ($items_height_style=='auto_height') {
+      echo 'height:auto;';
+    }
+
+    else {
+      echo 'height:auto;';
+    }
+
+    ?>
+  }
+}
+</style>
 <?php
 
 
@@ -1677,49 +1939,47 @@ function post_grid_loop($args)
 ?>
 
 
-    <?php if (!empty($custom_css)) : ?>
-        <style type="text/css">
-            <?php
-                echo htmlspecialchars_decode($custom_css, ENT_QUOTES);
-            ?>
-        </style>
-    <?php endif; ?>
+<?php if (!empty($custom_css)) : ?>
+<style type="text/css">
+<?php echo htmlspecialchars_decode($custom_css, ENT_QUOTES);
+?>
+</style>
+<?php endif; ?>
 
 
-    <?php if (!empty($layout_custom_css)) : ?>
-        <style type="text/css">
-            <?php
-                echo htmlspecialchars_decode(wp_strip_all_tags(str_replace('__ID__', 'layout-' . esc_attr($layout_id), ($layout_custom_css))), ENT_QUOTES);
-            ?>
-        </style>
-    <?php endif; ?>
-    <script>
-        <?php
+<?php if (!empty($layout_custom_css)) : ?>
+<style type="text/css">
+<?php echo htmlspecialchars_decode(wp_strip_all_tags(str_replace('__ID__', 'layout-'. esc_attr($layout_id), ($layout_custom_css))), ENT_QUOTES);
+?>
+</style>
+<?php endif; ?>
+<script>
+<?php
             if (!empty($custom_js)) : ?>
-            <?php echo wp_kses_post($custom_js); ?>
-        <?php
+<?php echo wp_kses_post($custom_js); ?>
+<?php
             endif;
             $masonry_load = apply_filters('post_grid_masonry_load', true, $args);
             if ($grid_type == 'masonry') :
         ?>
-            jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
-                var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
-                $container.masonry({
-                    itemSelector: '.item',
-                    columnWidth: '.item', //as you wish , you can use numeric
-                    isAnimated: true,
-                    isFitWidth: true,
-                    horizontalOrder: true,
-                    gutter: <?php echo esc_attr($masonry_gutter); ?>,
-                    percentPosition: true,
-                });
-                $container.imagesLoaded().done(function() {
-                    $container.masonry('layout');
-                });
-            })
-        <?php endif; ?>
-        <?php if ($grid_type == 'justified') : ?>
-            <?php
+jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
+  var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
+  $container.masonry({
+    itemSelector: '.item',
+    columnWidth: '.item', //as you wish , you can use numeric
+    isAnimated: true,
+    isFitWidth: true,
+    horizontalOrder: true,
+    gutter: <?php echo esc_attr($masonry_gutter); ?>,
+    percentPosition: true,
+  });
+  $container.imagesLoaded().done(function() {
+    $container.masonry('layout');
+  });
+})
+<?php endif; ?>
+<?php if ($grid_type == 'justified') : ?>
+<?php
                 $justified = !empty($post_grid_options['justified']) ? $post_grid_options['justified'] : [];
                 $justified_gutter = isset($justified['gutter']) ? $justified['gutter'] : 20;
                 $maxHeight = isset($justified['maxHeight']) ? $justified['maxHeight'] : 180;
@@ -1727,18 +1987,18 @@ function post_grid_loop($args)
                 wp_enqueue_script('justifiedGallery');
                 wp_enqueue_style('justifiedGallery');
             ?>
-            jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
-                var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
-                $container.imagesLoaded().done(function() {
-                    $container.justifiedGallery({
-                        rowHeight: <?php echo esc_attr($maxHeight); ?>,
-                        margins: <?php echo esc_attr($justified_gutter); ?>,
-                    });
-                });
-            })
-        <?php endif; ?>
-    </script>
-    <?php
+jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
+  var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
+  $container.imagesLoaded().done(function() {
+    $container.justifiedGallery({
+      rowHeight: <?php echo esc_attr($maxHeight); ?>,
+      margins: <?php echo esc_attr($justified_gutter); ?>,
+    });
+  });
+})
+<?php endif; ?>
+</script>
+<?php
 
         }
 
@@ -1920,8 +2180,11 @@ function post_grid_loop($args)
             if ($layout_converted) {
 
     ?>
-        <p>Layout converted successfully, please go <a href="<?php echo esc_url(get_edit_post_link($new_layout_id)); ?>">#<?php echo esc_attr($new_layout_id); ?></a> this link to edit layout </p>
-        <p>Please report issue if you found any problem, <a href="https://www.pickplugins.com/forum/">create support ticket</a> </p>
+<p>Layout converted successfully, please go <a
+    href="<?php echo esc_url(get_edit_post_link($new_layout_id)); ?>">#<?php echo esc_attr($new_layout_id); ?></a> this
+  link to edit layout </p>
+<p>Please report issue if you found any problem, <a href="https://www.pickplugins.com/forum/">create support ticket</a>
+</p>
 <?php
             }
         }

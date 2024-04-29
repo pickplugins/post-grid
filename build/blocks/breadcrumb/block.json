@@ -213,7 +213,8 @@
               "iconSrc": ""
             },
             "options": {
-              "showSeparator": true
+              "showSeparator": true,
+              "isLink": false
             },
             "styles": {}
           }

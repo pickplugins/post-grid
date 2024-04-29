@@ -149,7 +149,7 @@ class PGBlockTabs
                                                         <?php
                                                         foreach ($items as $index => $item) {
                                                             ?>
-                                                                        <<?php echo esc_attr($headerTag); ?> class="
+                                                                        <<?php echo esc_html($headerTag); ?> class="
                                                                             <?php echo esc_attr($headerOptions['class']); ?>
                                                                             <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" index=<?php echo esc_attr($index); ?>
                                                                             data-id=<?php echo esc_attr($blockId . $index); ?> panelId=<?php echo esc_attr($blockId . $index); ?>>
@@ -172,7 +172,7 @@ class PGBlockTabs
                                                                                                 </span>
                                                                                             </span>
                                                                             <?php endif; ?>
-                                                                        </<?php echo esc_attr($headerTag); ?>>
+                                                                        </<?php echo esc_html($headerTag); ?>>
                                                                         <?php
                                                         }
                                                         ?>

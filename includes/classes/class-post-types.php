@@ -99,15 +99,16 @@ class class_post_grid_post_types
 			$description = isset($post_type['description']) ? $post_type['description'] : "This is where you can create and manage %s.";
 			$public = isset($post_type['public']) ? $post_type['public'] : true;
 			$show_ui = isset($post_type['show_ui']) ? $post_type['show_ui'] : true;
+			$show_in_rest = isset($post_type['show_in_rest']) ? $post_type['show_in_rest'] : false;
 			$capability_type = isset($post_type['capability_type']) ? $post_type['capability_type'] : "post";
 
-			$publish_posts = isset($post_type['capabilities']['publish_posts']) ? $post_type['labels']['publish_posts'] : "publish_" . $slug . "s";
-			$edit_posts = isset($post_type['capabilities']['edit_posts']) ? $post_type['labels']['edit_posts'] : "edit_" . $slug . "s";
-			$edit_others_posts = isset($post_type['capabilities']['edit_others_posts']) ? $post_type['labels']['edit_others_posts'] : "edit_others_" . $slug . "s";
-			$read_private_posts = isset($post_type['capabilities']['read_private_posts']) ? $post_type['labels']['read_private_posts'] : "read_private_" . $plural;
-			$edit_post = isset($post_type['capabilities']['edit_post']) ? $post_type['labels']['edit_post'] : "edit_" . $slug;
-			$delete_post = isset($post_type['capabilities']['delete_post']) ? $post_type['labels']['delete_post'] : "delete_" . $slug;
-			$read_post = isset($post_type['capabilities']['read_post']) ? $post_type['labels']['read_post'] : "read_" . $slug;
+			// $publish_posts = isset($post_type['capabilities']['publish_posts']) ? $post_type['labels']['publish_posts'] : "publish_" . $slug . "s";
+			// $edit_posts = isset($post_type['capabilities']['edit_posts']) ? $post_type['labels']['edit_posts'] : "edit_" . $slug . "s";
+			// $edit_others_posts = isset($post_type['capabilities']['edit_others_posts']) ? $post_type['labels']['edit_others_posts'] : "edit_others_" . $slug . "s";
+			// $read_private_posts = isset($post_type['capabilities']['read_private_posts']) ? $post_type['labels']['read_private_posts'] : "read_private_" . $plural;
+			// $edit_post = isset($post_type['capabilities']['edit_post']) ? $post_type['labels']['edit_post'] : "edit_" . $slug;
+			// $delete_post = isset($post_type['capabilities']['delete_post']) ? $post_type['labels']['delete_post'] : "delete_" . $slug;
+			// $read_post = isset($post_type['capabilities']['read_post']) ? $post_type['labels']['read_post'] : "read_" . $slug;
 
 			$map_meta_cap = isset($post_type['map_meta_cap']) ? $post_type['map_meta_cap'] : true;
 			$publicly_queryable = isset($post_type['publicly_queryable']) ? $post_type['publicly_queryable'] : true;
@@ -163,6 +164,7 @@ class class_post_grid_post_types
 			$post_type_args['description'] = $description;
 			$post_type_args['public'] = (bool) $public;
 			$post_type_args['show_ui'] = (bool) $show_ui;
+			$post_type_args['show_in_rest'] = (bool) $show_in_rest;
 			$post_type_args['map_meta_cap'] = (bool) $map_meta_cap;
 			$post_type_args['publicly_queryable'] = (bool) $publicly_queryable;
 			$post_type_args['exclude_from_search'] = (bool) $exclude_from_search;

@@ -51,7 +51,7 @@ class PGBlockPostAuthor
     $post_data = get_post($post_ID);
 
     $post_url = get_the_permalink($post_ID);
-    $post_author_id = $post_data->post_author;
+    $post_author_id = isset($post_data->post_author) ? $post_data->post_author : '';
     //$author_data = get_user_by('ID', $post_author_id);
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';

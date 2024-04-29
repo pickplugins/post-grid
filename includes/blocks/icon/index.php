@@ -62,7 +62,7 @@ class PGBlockIcon
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $post_url = get_the_permalink($post_ID);
     $the_post = get_post($post_ID);
-    $post_author_id = $the_post->post_author;
+    $post_author_id = isset($the_post->post_author) ? $the_post->post_author : '';
     $post_excerpt = '';
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';

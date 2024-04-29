@@ -276,6 +276,22 @@ class BlockPostGridRest
 				},
 			)
 		);
+		register_rest_route(
+			'post-grid/v2',
+			'/get_site_data',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_site_data'),
+				'permission_callback' => '__return_true',
+
+				// 'permission_callback' => function () {
+				// 	return current_user_can('manage_options');
+				// },
+			)
+		);
+
+
+
 
 
 		register_rest_route(
@@ -2523,6 +2539,114 @@ class BlockPostGridRest
 
 		die(wp_json_encode($response));
 	}
+
+
+	/**
+	 * Return get_site_data.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $tax_data The tax data.
+	 */
+	public function get_site_data($request)
+	{
+		$response = [];
+
+
+		// if (!current_user_can('manage_options')) {
+		// 	die(wp_json_encode($response));
+		// }
+
+
+
+		$admin_email = get_option('admin_email');
+		$siteurl = get_option('siteurl');
+		$siteAdminurl = admin_url();
+		$adminData = get_user_by('email', $admin_email);
+
+
+		$response['admin_email'] = $admin_email;
+		$response['admin_name'] = isset($adminData->display_name) ? $adminData->display_name : '';
+
+		$response['siteurl'] = $siteurl;
+		$response['siteAdminurl'] = $siteAdminurl;
+
+		global $wp_roles;
+
+		$roles = [];
+
+		if ($wp_roles && property_exists($wp_roles, 'roles')) {
+
+			$rolesAll = isset($wp_roles->roles) ? $wp_roles->roles : [];
+
+			foreach ($rolesAll as $roleIndex => $role) {
+
+				$roles[$roleIndex] = $role['name'];
+			}
+		}
+
+		$response['roles'] = $roles;
+
+
+		global $wp_post_types;
+		$post_types = [];
+
+
+		$post_types_all = get_post_types('', 'names');
+		foreach ($post_types_all as $post_type) {
+
+			$obj = $wp_post_types[$post_type];
+			$post_types[$post_type] = $obj->labels->singular_name;
+		}
+
+
+		$response['post_types'] = $post_types;
+
+
+		$postTypes = [];
+
+		$post_types_all = get_post_types('', 'names');
+		foreach ($post_types_all as $post_type) {
+
+			$obj = $wp_post_types[$post_type];
+			$postTypes[] = $post_type;
+		}
+
+		$taxonomies = get_object_taxonomies($postTypes);
+		$taxonomiesArr = [];
+
+
+
+		foreach ($taxonomies as $taxonomy) {
+
+			$taxDetails = get_taxonomy($taxonomy);
+
+			$taxonomiesArr[] = ['label' => $taxDetails->label, 'id' => $taxonomy];
+		}
+
+
+		$response['taxonomies'] = $taxonomiesArr;
+
+
+		$response['post_statuses'] = get_post_statuses();
+
+
+
+
+		die(wp_json_encode($response));
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	public function email_subscribe($request)

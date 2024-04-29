@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.79
+Version: 2.2.80
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,10 +28,40 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.79');
+      define('post_grid_version', '2.2.80');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
+
+
+
+
+      $postGridCss = [];
+      $postGridCssY = [];
+      $postGridScriptData = [];
+      $postGridFonts = [];
+
+
+      global $postGridCss;
+      global $postGridCustomCss;
+      global $postGridCssY;
+      global $postGridScriptData;
+      global $postGridFonts;
+
+      global $postGridLoaded;
+
+
+      $post_grid_block_editor = get_option('post_grid_block_editor');
+      $blocks = isset($post_grid_block_editor['blocks']) ? $post_grid_block_editor['blocks'] : [];
+      $disabled = isset($blocks['disabled']) ? $blocks['disabled'] : [];
+
+
+      foreach ($disabled as $block) {
+
+        $blockParts = explode("/", $block);
+
+        //var_dump($blockParts[1]);
+      }
 
       require_once(post_grid_plugin_dir . 'includes/blocks/functions-blocks.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/functions-rest.php');
@@ -48,9 +78,7 @@ if (!class_exists('PostGrid')) {
       require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap-item/index.php');
 
-      // require_once(post_grid_plugin_dir . 'includes/blocks/table-of-contents/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/post-title/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-title/patterns.php');
 
 
       require_once(post_grid_plugin_dir . 'includes/blocks/post-excerpt/index.php');
@@ -105,9 +133,7 @@ if (!class_exists('PostGrid')) {
       require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap-item/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/justified-wrap/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/justified-image/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/justified-wrap-item/index.php');
+
       require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap-item/index.php');
 
@@ -139,25 +165,6 @@ if (!class_exists('PostGrid')) {
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
-
-
-
-
-      $postGridCss = [];
-      $postGridCssY = [];
-      $postGridScriptData = [];
-      $postGridFonts = [];
-
-
-      global $postGridCss;
-      global $postGridCustomCss;
-      global $postGridCssY;
-      global $postGridScriptData;
-      global $postGridFonts;
-
-      global $postGridLoaded;
-
-
 
 
       include('includes/classes/class-post-types.php');
@@ -226,6 +233,7 @@ if (!class_exists('PostGrid')) {
     {
       $this->enqueue_scripts();
     }
+
 
     public function _textdomain()
     {

@@ -137,7 +137,7 @@ class PGBlockList
           foreach ($items as $index => $item) {
 
         ?>
-          <<?php echo esc_attr($itemTag); ?> class="
+          <<?php echo esc_html($itemTag); ?> class="
                                   <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
 
 
@@ -164,7 +164,7 @@ class PGBlockList
             <?php endif; ?>
 
 
-          </<?php echo esc_attr($itemTag); ?>>
+          </<?php echo esc_html($itemTag); ?>>
 
 
 

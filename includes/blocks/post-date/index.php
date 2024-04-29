@@ -57,7 +57,7 @@ class PGBlocPostDate
         $post_url = get_the_permalink($post_ID);
         $the_post = get_post($post_ID);
         $post_excerpt = '';
-        $post_date = $the_post->post_date;
+        $post_date = isset($the_post->post_date) ? $the_post->post_date : '';
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';

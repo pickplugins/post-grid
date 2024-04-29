@@ -219,7 +219,7 @@ class PGBlockWooTotalSales
 
 					/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 				?>
-					<<?php echo esc_attr($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+					<<?php echo esc_html($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
 						<?php if ($iconPosition == 'beforeSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
@@ -227,13 +227,13 @@ class PGBlockWooTotalSales
 						<?php if ($iconPosition == 'afterSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
-					</<?php echo esc_attr($skuTag); ?>>
+					</<?php echo esc_html($skuTag); ?>>
 
 				<?php else :
 					/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 				?>
 
-					<<?php echo esc_attr($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>>
+					<<?php echo esc_html($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>>
 						<?php if ($iconPosition == 'beforeSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
@@ -241,7 +241,7 @@ class PGBlockWooTotalSales
 						<?php if ($iconPosition == 'afterSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
-					</<?php echo esc_attr($skuTag); ?>>
+					</<?php echo esc_html($skuTag); ?>>
 
 
 				<?php endif; ?>
@@ -289,7 +289,7 @@ class PGBlockWooTotalSales
 				/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 			?>
 
-				<<?php echo esc_attr($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+				<<?php echo esc_html($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
 					<?php if ($iconPosition == 'beforeSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
@@ -297,9 +297,9 @@ class PGBlockWooTotalSales
 					<?php if ($iconPosition == 'afterSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
-				</<?php echo esc_attr($skuTag); ?>>
+				</<?php echo esc_html($skuTag); ?>>
 			<?php else : ?>
-				<<?php echo esc_attr($skuTag); ?> class='saleCount'>
+				<<?php echo esc_html($skuTag); ?> class='saleCount'>
 					<?php if ($iconPosition == 'beforeSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
@@ -309,7 +309,7 @@ class PGBlockWooTotalSales
 					<?php if ($iconPosition == 'afterSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
-				</<?php echo esc_attr($skuTag); ?>>
+				</<?php echo esc_html($skuTag); ?>>
 			<?php endif; ?>
 
 

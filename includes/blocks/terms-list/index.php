@@ -180,8 +180,8 @@ class PGBlockTermsList
     $query_args = post_grid_parse_query_terms(isset($queryArgs['items']) ? $queryArgs['items'] : []);
 
     $term_ID = isset($block->context['term_id']) ? $block->context['term_id'] : '';
-    $post_parent_value = $query_args['parent'];
-    $post_taxonomy_value = $query_args['taxonomy'];
+    $post_parent_value = isset($query_args['parent']) ? $query_args['parent'] : '';
+    $post_taxonomy_value = isset($query_args['taxonomy']) ? $query_args['taxonomy'] : '';
 
     if ($post_parent_value == '{ID}') {
       // $post_id = get_the_id();

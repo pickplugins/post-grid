@@ -276,7 +276,7 @@ class PGBlocArchiveTitle
 
         <?php else : ?>
 
-          <<?php echo esc_attr($archiveTitleTag); ?> class='archiveTitle' <?php echo ($linkAttrStrarchiveTitle); ?>>
+          <<?php echo esc_html($archiveTitleTag); ?> class='archiveTitle' <?php echo ($linkAttrStrarchiveTitle); ?>>
             <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
@@ -284,7 +284,7 @@ class PGBlocArchiveTitle
             <?php if ($iconPosition == 'afterArchiveTitle') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
-          </<?php echo esc_attr($archiveTitleTag); ?>>
+          </<?php echo esc_html($archiveTitleTag); ?>>
 
 
         <?php endif; ?>
@@ -347,9 +347,9 @@ class PGBlocArchiveTitle
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
           <?php if ($postfixText) : ?>
-            <<?php echo esc_attr($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
+            <<?php echo esc_html($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
               <?php echo $postfixText; ?>
-            </<?php echo esc_attr($archiveTitleTag); ?>>
+            </<?php echo esc_html($archiveTitleTag); ?>>
           <?php endif; ?>
           <?php if ($iconPosition == 'afterPostfix') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
@@ -357,7 +357,7 @@ class PGBlocArchiveTitle
         </a>
       <?php else : ?>
 
-        <<?php echo esc_attr($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> archiveTitle'>
+        <<?php echo esc_html($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> archiveTitle'>
 
           <?php if ($iconPosition == 'beforePrefix') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
@@ -385,15 +385,15 @@ class PGBlocArchiveTitle
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
           <?php if ($postfixText) : ?>
-            <<?php echo esc_attr($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
+            <<?php echo esc_html($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
               <?php echo $postfixText; ?>
-            </<?php echo esc_attr($archiveTitleTag); ?>>
+            </<?php echo esc_html($archiveTitleTag); ?>>
           <?php endif; ?>
           <?php if ($iconPosition == 'afterPostfix') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
 
-        </<?php echo esc_attr($archiveTitleTag); ?>>
+        </<?php echo esc_html($archiveTitleTag); ?>>
 
       <?php endif; ?>
 

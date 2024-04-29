@@ -207,10 +207,10 @@ class PGBlockWooProductInfoItem
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
-      <<?php echo esc_attr($fieldTag); ?> class="  <?php echo esc_attr($fieldClass); ?>">
+      <<?php echo esc_html($fieldTag); ?> class="  <?php echo esc_attr($fieldClass); ?>">
 
 
-        <<?php echo esc_attr($fieldTag); ?> class="<?php echo esc_attr($fieldClass); ?>">
+        <<?php echo esc_html($fieldTag); ?> class="<?php echo esc_attr($fieldClass); ?>">
 
           <?php
           if ($product != null) {
@@ -265,7 +265,7 @@ class PGBlockWooProductInfoItem
 
 
 
-        </<?php echo esc_attr($fieldTag); ?>>
+        </<?php echo esc_html($fieldTag); ?>>
         <?php if ($iconPosition == 'beforePostfix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>

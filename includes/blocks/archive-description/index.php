@@ -55,7 +55,6 @@ class PGBlocArchiveDescription
 		$post_url = get_the_permalink($post_ID);
 		$the_post = get_post($post_ID);
 		$post_excerpt = '';
-		$post_date = $the_post->post_date;
 
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 		$blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
@@ -367,7 +366,7 @@ class PGBlocArchiveDescription
 			<?php else : ?>
 
 
-				<<?php echo esc_attr($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> <?php echo esc_attr($archiveTitleClass); ?>'>
+				<<?php echo esc_html($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> <?php echo esc_attr($archiveTitleClass); ?>'>
 					<?php if ($iconPosition == 'beforePrefix') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?> <?php endif; ?>
 					<?php if ($prefixText) : ?> <span class="<?php echo esc_attr($prefixClass); ?>">
@@ -401,7 +400,7 @@ class PGBlocArchiveDescription
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
 
-				</<?php echo esc_attr($archiveTitleTag); ?>>
+				</<?php echo esc_html($archiveTitleTag); ?>>
 
 			<?php endif; ?>
 

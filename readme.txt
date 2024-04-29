@@ -4,7 +4,7 @@ Donate link: https://comboblocks.com/
 Tags: post grid, form maker, woocommerce blocks, popup maker, post blocks
 Requires at least: 5.0.0
 Tested up to: 6.5
-Stable tag: 2.2.79
+Stable tag: 2.2.80
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Description ==
 
 Post Grid is now Combo Blocks. We have added 45+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
-test
+
 ### Post Grid by [PickPlugins](http://pickplugins.com)
 
 - 👉 [See the Live demo](https://comboblocks.com/)
@@ -389,6 +389,14 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 == Changelog ==
 
+= 2.2.80 =
+- 2024-04-28 - fix - Minor security issue fixed for custom wrapper tag output.
+- 2024-04-28 - fix - Post grid block - No post found issue fixed.
+- 2024-04-28 - add - Added more social share site on Social Share Block.
+- 2024-04-25 - update - Update Text Shadow Component.
+- 2024-04-25 - update - Update Box Shadow Component.
+- 2024-04-03 - update - Variation library component update.
+
 = 2.2.79 =
 - 2024-04-20 - update - Nonce issue in rest API issue fixed.
 - 2024-04-20 - update - CSS library taking screenshot issue fixed
@@ -426,15 +434,3 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 - 2024-03-11 - add - Added wordpress-org-item block as a child block of wordpress-org block.
 - 2024-03-10 - update - Terms Field Block update.
 
-= 2.2.77 =
-- 2024-03-01 - fix - Post Title block postfix and prefix position issue fixed.
-- 2024-03-01 - fix - Post Title block transfer break issue fixed.
-- 2024-03-01 - fix - Global style php error issue fixed.
-
-= 2.2.76 =
-- 2024-02-24 - add - Minor php security issue fixed.
-- 2024-02-19 - add - Add dashboard page for block editor.
-- 2024-02-19 - add - Block editor container width option added
-- 2024-02-19 - add - Block editor width option added
-- 2024-02-19 - add - Custom color added for block editor
-- 2024-02-19 - add - Dashboard - Export/Import options added.

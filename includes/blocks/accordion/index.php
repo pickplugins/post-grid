@@ -157,7 +157,7 @@ class PGBlockAccordion
 
                     ?>
   <div class="ac">
-    <<?php echo esc_attr($headerTag); ?> class="ac-header ac-trigger
+    <<?php echo esc_html($headerTag); ?> class="ac-header ac-trigger
                             <?php echo esc_attr($headerOptions['class']); ?>" index=<?php echo esc_attr($index); ?>
       blockId=<?php echo esc_attr($blockId); ?>>
       <?php if ($iconPosition == 'beforeHeader'): ?>
@@ -182,7 +182,7 @@ class PGBlockAccordion
         </span>
       </span>
       <?php endif; ?>
-    </<?php echo esc_attr($headerTag); ?>>
+    </<?php echo esc_html($headerTag); ?>>
 
     <div class="ac-panel <?php echo esc_attr($contentOptions['class']); ?>"
       id="<?php echo esc_attr($blockId . $index); ?>">

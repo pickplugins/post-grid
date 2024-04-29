@@ -44,7 +44,7 @@ class PGBlockPostTitle
       : "";
     $post_url = get_the_permalink($post_ID);
     $the_post = get_post($post_ID);
-    $post_author_id = $the_post->post_author;
+    $post_author_id = isset($the_post->post_author) ? $the_post->post_author : '';
 
     $blockId = isset($attributes["blockId"]) ? $attributes["blockId"] : "";
     $blockAlign = isset($attributes["align"])
@@ -270,7 +270,7 @@ class PGBlockPostTitle
 
       <?php else : ?>
 
-        <<?php echo esc_attr($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
+        <<?php echo esc_html($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
 
 
           <?php  // * prefix isLink true beforebegin 
@@ -293,7 +293,7 @@ class PGBlockPostTitle
           <?php endif; ?>
 
 
-        </<?php echo esc_attr($postTitleTag); ?>>
+        </<?php echo esc_html($postTitleTag); ?>>
 
       <?php endif; ?>
 

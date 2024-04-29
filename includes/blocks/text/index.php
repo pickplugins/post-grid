@@ -76,6 +76,9 @@ class PGBlockPostText
     $otherOptions = isset($other['options']) ? $other['options'] : [];
     $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
 
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    $rules = isset($visible['rules']) ? $visible['rules'] : [];
+
     $text = isset($attributes['text']) ? $attributes['text'] : [];
     $textOptions = isset($text['options']) ? $text['options'] : [];
     $textClass = isset($textOptions['class']) ? $textOptions['class'] : '';
@@ -113,9 +116,16 @@ class PGBlockPostText
 
     //$textClass = parse_css_class($textClass, $obj);
 
+// //* Visible condition
+if (!empty($visible['rules'])) {
+  $isVisible = post_grid_visible_parse($visible);
 
+  // var_dump($isVisible);
+  
+  if (!$isVisible) return;
+}
 
-    //var_dump($otherCopyObj);
+// //* Visible condition
 
 
     ob_start();
@@ -123,16 +133,21 @@ class PGBlockPostText
 
 
 
+
     if (!empty($wrapperTag)) :
 ?>
-      <<?php echo esc_html($wrapperTag); ?> class="
+
+
+
+<<?php echo esc_html($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
 
                                                                                     if ($otherCopyObj) :
-                                                                                    ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" <?php endif; ?>><?php echo $content; ?>
-      </<?php echo esc_html($wrapperTag); ?>>
-    <?php
+                                                                                    ?>
+  clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" <?php endif; ?>><?php echo $content; ?>
+</<?php echo esc_html($wrapperTag); ?>>
+<?php
 
     endif;
 

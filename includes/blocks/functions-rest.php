@@ -662,6 +662,7 @@ class BlockPostGridRest
 		$transient = unserialize(get_transient($blockId . '_args'));
 		$transientData = get_transient($blockId . '_data');
 
+		if(!isset($transient['slug'])) return [];
 
 
 		if ($objSlug == $transient['slug']) {

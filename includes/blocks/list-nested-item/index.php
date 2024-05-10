@@ -99,8 +99,8 @@ class PGBlockListNestedItem
     ob_start();
 ?>
 
-    <<?php echo esc_html($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>     <?php echo esc_attr($wrapperClass); ?>" <?php //echo esc_attr($wrapperAttrText); 
-                                                                                                                                ?>>
+    <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>     <?php echo esc_attr($wrapperClass); ?>" <?php //echo esc_attr($wrapperAttrText); 
+                                                                                                                                  ?>>
 
 
 
@@ -121,7 +121,7 @@ class PGBlockListNestedItem
 
 
 
-    </<?php echo esc_html($wrapperTag); ?>>
+    </<?php echo tag_escape($wrapperTag); ?>>
 
 
 

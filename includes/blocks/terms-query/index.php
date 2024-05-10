@@ -238,7 +238,7 @@ class PGBlockTermsQuery
 
 
       ?>
-          <<?php echo esc_html($itemWrapTag); ?> class="
+          <<?php echo tag_escape($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php ?>
             <?php if ($itemWrapCounterClass) {
@@ -249,7 +249,7 @@ class PGBlockTermsQuery
             } ?> ">
             <?php echo wp_kses_post($html);
             ?>
-          </<?php echo esc_html($itemWrapTag); ?>>
+          </<?php echo tag_escape($itemWrapTag); ?>>
       <?php
           $counter++;
         }

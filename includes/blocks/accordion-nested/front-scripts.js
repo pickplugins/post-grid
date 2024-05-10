@@ -2,7 +2,11 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 	var accordionHeaders = document.querySelectorAll(".accordion-header");
 
-	// new work start
+	accordionHeaders.forEach((header, index) => {
+		const counter = header.querySelector(".accordion-label-counter");
+		console.log(counter);
+		counter.textContent = `(${index + 1})`; // Adding 1 to start counting from 1
+	});
 
 	accordionHeaders.forEach((accordionHeader) => {
 		var iconToggle = accordionHeader.querySelector(".accordion-icon-toggle");
@@ -153,3 +157,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // 		});
 // 	});
 // });
+
+
+
+

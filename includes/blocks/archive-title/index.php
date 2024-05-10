@@ -244,7 +244,7 @@ class PGBlocArchiveTitle
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo esc_html($wrapperTag); ?> class="
+      <<?php echo tag_escape($wrapperTag); ?> class="
                                 <?php echo esc_attr($blockId); ?>
                                 <?php echo esc_attr($wrapperClass); ?>">
 
@@ -276,7 +276,7 @@ class PGBlocArchiveTitle
 
         <?php else : ?>
 
-          <<?php echo esc_html($archiveTitleTag); ?> class='archiveTitle' <?php echo ($linkAttrStrarchiveTitle); ?>>
+          <<?php echo tag_escape($archiveTitleTag); ?> class='archiveTitle' <?php echo ($linkAttrStrarchiveTitle); ?>>
             <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
@@ -284,7 +284,7 @@ class PGBlocArchiveTitle
             <?php if ($iconPosition == 'afterArchiveTitle') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
-          </<?php echo esc_html($archiveTitleTag); ?>>
+          </<?php echo tag_escape($archiveTitleTag); ?>>
 
 
         <?php endif; ?>
@@ -307,7 +307,7 @@ class PGBlocArchiveTitle
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
 
-      </<?php echo esc_html($wrapperTag); ?>>
+      </<?php echo tag_escape($wrapperTag); ?>>
     <?php
 
     endif;
@@ -347,9 +347,9 @@ class PGBlocArchiveTitle
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
           <?php if ($postfixText) : ?>
-            <<?php echo esc_html($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
+            <<?php echo tag_escape($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
               <?php echo $postfixText; ?>
-            </<?php echo esc_html($archiveTitleTag); ?>>
+            </<?php echo tag_escape($archiveTitleTag); ?>>
           <?php endif; ?>
           <?php if ($iconPosition == 'afterPostfix') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
@@ -357,7 +357,7 @@ class PGBlocArchiveTitle
         </a>
       <?php else : ?>
 
-        <<?php echo esc_html($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> archiveTitle'>
+        <<?php echo tag_escape($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> archiveTitle'>
 
           <?php if ($iconPosition == 'beforePrefix') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
@@ -385,15 +385,15 @@ class PGBlocArchiveTitle
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
           <?php if ($postfixText) : ?>
-            <<?php echo esc_html($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
+            <<?php echo tag_escape($archiveTitleTag); ?> class="<?php echo $postfixClass; ?>">
               <?php echo $postfixText; ?>
-            </<?php echo esc_html($archiveTitleTag); ?>>
+            </<?php echo tag_escape($archiveTitleTag); ?>>
           <?php endif; ?>
           <?php if ($iconPosition == 'afterPostfix') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
 
-        </<?php echo esc_html($archiveTitleTag); ?>>
+        </<?php echo tag_escape($archiveTitleTag); ?>>
 
       <?php endif; ?>
 

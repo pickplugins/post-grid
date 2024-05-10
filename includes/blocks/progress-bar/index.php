@@ -335,7 +335,7 @@ class PGBlockProgressBar
         <?php endif; ?>
 
 
-        </<?php echo esc_html($wrapperTag); ?>>
+        </<?php echo tag_escape($wrapperTag); ?>>
       <?php
 
     endif;
@@ -379,11 +379,11 @@ class PGBlockProgressBar
         <?php endif;
         ?><?php echo esc_attr('.' . $animatename);
 
-    ?> {
+          ?> {
           animation:
             <?php echo esc_attr($animatename);
             ?>ease <?php echo esc_attr($animateDuration);
-            ?>s;
+                    ?>s;
           animation-iteration-count: 1;
 
         }

@@ -132,8 +132,8 @@ class PGBlockLayers
     <?php
 
     } else { ?>
-      <<?php echo esc_html($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-        <?php echo $content ?> </<?php echo esc_html($wrapperTag); ?>>
+      <<?php echo tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+        <?php echo $content ?> </<?php echo tag_escape($wrapperTag); ?>>
 <?php
     }
 

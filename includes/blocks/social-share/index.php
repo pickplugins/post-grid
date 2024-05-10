@@ -112,7 +112,7 @@ class PGBlockSocialShare
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo esc_html($wrapperTag); ?> class="
+			<<?php echo tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($wrapperClass); ?>">
 				<?php
@@ -177,7 +177,7 @@ class PGBlockSocialShare
 
 
 				?>
-			</<?php echo esc_html($wrapperTag); ?>>
+			</<?php echo tag_escape($wrapperTag); ?>>
 
 		<?php
 

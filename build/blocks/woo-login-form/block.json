@@ -1,0 +1,129 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/woo-login-form",
+  "title": "Woo Login Form",
+  "textdomain": "post-grid",
+  "category": "post-grid-woo",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-woo-categories"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "attachment-woocommerce_thumbnail"
+        },
+        "styles": {}
+      }
+    },
+    "count": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "count"
+        },
+        "styles": {}
+      }
+    },
+    "title": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "woocommerce-loop-category__title"
+        },
+        "styles": {}
+      }
+    },
+    "price": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "price"
+        },
+        "styles": {}
+      }
+    },
+    "onSalePrice": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "addToCart": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "button"
+        },
+        "styles": {}
+      }
+    },
+    "shortcodeParam": {
+      "type": "object",
+      "default": {
+        "limit": "",
+        "columns": "",
+        "orderby": "",
+        "order": "",
+        "hideEmpty": "1",
+        "parent ": "",
+        "ids": ""
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "style": "front_style",
+  "script": "front_script",
+  "keywords": [
+    "Woo breadcrumb",
+    "woocommerce breadcrumb",
+    "woocommerce breadcrumbs"
+  ],
+  "description": "woocommerce breadcrumbs block ."
+}

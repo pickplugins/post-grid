@@ -227,11 +227,13 @@ class PGBlockPostTitle
     $postfixText = parse_css_class($postfixText, $obj);
 
     ob_start();
+
+
 ?>
 
 
-    <<?php echo esc_html($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php
-                                                                                    echo esc_attr($wrapperClass); ?>">
+    <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php
+                                                                                      echo esc_attr($wrapperClass); ?>">
 
       <?php // * prefix afterbegin
       ?>
@@ -270,7 +272,7 @@ class PGBlockPostTitle
 
       <?php else : ?>
 
-        <<?php echo esc_html($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
+        <<?php echo tag_escape($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
 
 
           <?php  // * prefix isLink true beforebegin 
@@ -293,7 +295,7 @@ class PGBlockPostTitle
           <?php endif; ?>
 
 
-        </<?php echo esc_html($postTitleTag); ?>>
+        </<?php echo tag_escape($postTitleTag); ?>>
 
       <?php endif; ?>
 
@@ -308,7 +310,7 @@ class PGBlockPostTitle
 
 
 
-    </<?php echo esc_html($wrapperTag); ?>>
+    </<?php echo tag_escape($wrapperTag); ?>>
 
 
 

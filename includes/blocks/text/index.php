@@ -116,16 +116,16 @@ class PGBlockPostText
 
     //$textClass = parse_css_class($textClass, $obj);
 
-// //* Visible condition
-if (!empty($visible['rules'])) {
-  $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-  // var_dump($isVisible);
-  
-  if (!$isVisible) return;
-}
+      // var_dump($isVisible);
 
-// //* Visible condition
+      if (!$isVisible) return;
+    }
+
+    // //* Visible condition
 
 
     ob_start();
@@ -139,15 +139,14 @@ if (!empty($visible['rules'])) {
 
 
 
-<<?php echo esc_html($wrapperTag); ?> class="
+      <<?php echo tag_escape($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
 
                                                                                     if ($otherCopyObj) :
-                                                                                    ?>
-  clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" <?php endif; ?>><?php echo $content; ?>
-</<?php echo esc_html($wrapperTag); ?>>
-<?php
+                                                                                    ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" <?php endif; ?>><?php echo $content; ?>
+      </<?php echo tag_escape($wrapperTag); ?>>
+    <?php
 
     endif;
 

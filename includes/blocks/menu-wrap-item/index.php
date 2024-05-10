@@ -126,7 +126,8 @@ class PGBlockMenuWrapItem
 ?>
 
 
-    <li class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+    <li class="<?php echo esc_attr($wrapperClass);
+                ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 
@@ -134,7 +135,7 @@ class PGBlockMenuWrapItem
         <?php if ($iconPosition == 'beforeLink') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-        <a class=<?php echo esc_attr($linkClass); ?> href="<?php echo esc_url_raw($linkurl); ?>">
+        <a class="<?php echo esc_attr($linkClass); ?>" href="<?php echo esc_url_raw($linkurl); ?>">
           <?php if ($iconPosition == 'beforeLabel') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
@@ -148,7 +149,7 @@ class PGBlockMenuWrapItem
         <?php endif; ?>
       <?php endif; ?>
 
-      <ul class=<?php echo esc_attr($subMenuWrapClass); ?>>
+      <ul class="<?php echo esc_attr($subMenuWrapClass); ?>">
         <?php echo $content ?>
       </ul>
     </li>

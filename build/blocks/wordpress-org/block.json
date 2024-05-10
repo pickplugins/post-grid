@@ -6,7 +6,7 @@
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "providesContext": {
-    "post-grid/WPObject": "object",
+    "post-grid/WPObject": "objectX",
     "post-grid/wordpressORG": "blockId"
   },
   "supports": {
@@ -83,6 +83,15 @@
           "type": "plugin",
           "data": {},
           "slug": "post-grid"
+        }
+      }
+    },
+    "objectX": {
+      "type": "object",
+      "default": {
+        "options": {
+          "type": "plugin",
+          "data": {}
         }
       }
     },

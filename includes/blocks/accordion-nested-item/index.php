@@ -185,7 +185,7 @@ class PGBlockAccordionNestedItem
 		//////var_dump($labelIconSrc);
 		//////var_dump($labelIconOptions);
 
-		//echo '<pre>' . var_export($labelCounterEnable, true) . '</pre>';
+		// echo '<pre>' . var_export($labelCounterEnable, true) . '</pre>';
 		//echo '<pre>' . var_export($count, true) . '</pre>';
 		// echo '<pre>' . //var_export($iconOptions, true) . '</pre>';
 		// echo '<pre>' . //var_export($iconSrc, true) . '</pre>';
@@ -209,7 +209,7 @@ class PGBlockAccordionNestedItem
 			<?php if ($labelIconPosition == 'beforeLabel') : ?>
 				<?php echo wp_kses_post($labelIconHtml); ?>
 			<?php endif; ?>
-			<<?php echo esc_html($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+			<<?php echo tag_escape($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
 				<?php if ($labelIconPosition == 'beforeLabelText') : ?>
 					<?php echo wp_kses_post($labelIconHtml); ?>
 				<?php endif; ?>
@@ -217,7 +217,7 @@ class PGBlockAccordionNestedItem
 				<?php if ($labelIconPosition == 'afterLabelText') : ?>
 					<?php echo wp_kses_post($labelIconHtml); ?>
 				<?php endif; ?>
-			</<?php echo esc_html($headerLabelTag); ?>>
+			</<?php echo tag_escape($headerLabelTag); ?>>
 			<?php if ($labelIconPosition == 'afterLabel') : ?>
 				<?php echo wp_kses_post($labelIconHtml); ?>
 			<?php endif; ?>
@@ -227,11 +227,11 @@ class PGBlockAccordionNestedItem
 					<?php echo wp_kses_post($iconToggleHtml); ?>
 				</span>
 			<?php endif; ?>
-		</<?php echo esc_html($headerTag); ?>>
+		</<?php echo tag_escape($headerTag); ?>>
 
-		<<?php echo esc_html($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>">
+		<<?php echo tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>">
 			<?php echo $content; ?>
-		</<?php echo esc_html($contentWrapperTag); ?>>
+		</<?php echo tag_escape($contentWrapperTag); ?>>
 <?php return ob_get_clean();
 	}
 }

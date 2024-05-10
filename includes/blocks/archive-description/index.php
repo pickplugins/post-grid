@@ -251,7 +251,7 @@ class PGBlocArchiveDescription
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo esc_html($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
+			<<?php echo tag_escape($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
 				<?php if ($iconPosition == 'beforePrefix') : ?>
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
@@ -267,9 +267,9 @@ class PGBlocArchiveDescription
 				<?php endif; ?>
 
 				<?php if (!empty($archiveTitleLinkTo)) : ?>
-					<a class='<?php echo esc_attr($archiveTitleClass); ?>' <?php
-																			/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-																			echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+					<a class="<?php echo esc_attr($archiveTitleClass); ?>" <?php
+																																	/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+																																	echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
 						<?php if ($iconPosition == 'beforeArchiveTitle') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
@@ -312,7 +312,7 @@ class PGBlocArchiveDescription
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
 
-			</<?php echo esc_html($wrapperTag); ?>>
+			</<?php echo tag_escape($wrapperTag); ?>>
 		<?php
 
 		endif;
@@ -400,7 +400,7 @@ class PGBlocArchiveDescription
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
 
-				</<?php echo esc_html($archiveTitleTag); ?>>
+				</<?php echo tag_escape($archiveTitleTag); ?>>
 
 			<?php endif; ?>
 

@@ -239,7 +239,7 @@ class PGBlockTermsQueryItem
 
     <?php if (!empty($wrapperTag)) : ?>
 
-      <<?php echo esc_html($wrapperTag); ?> class="
+      <<?php echo tag_escape($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($wrapperClass); ?>">
         <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
@@ -297,7 +297,7 @@ class PGBlockTermsQueryItem
 
 
 
-      </<?php echo esc_html($wrapperTag); ?>>
+      </<?php echo tag_escape($wrapperTag); ?>>
 
     <?php elseif (empty($wrapperTag)) : ?>
 

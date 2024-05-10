@@ -54,7 +54,7 @@ class PGBlockPostExcerpt
     $post_url = get_the_permalink($post_ID);
     $the_post = get_post($post_ID);
     $post_excerpt = '';
-    $post_author_id = isset($the_post->post_author ) ? $the_post->post_author : '';
+    $post_author_id = isset($the_post->post_author) ? $the_post->post_author : '';
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
@@ -308,7 +308,7 @@ class PGBlockPostExcerpt
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo esc_html($wrapperTag); ?> class="
+      <<?php echo tag_escape($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($wrapperClass); ?>">
         <?php if ($postExcerptLinkTo) : ?>
@@ -356,7 +356,7 @@ class PGBlockPostExcerpt
                 </span>
               <?php endif; ?>
 
-            </<?php echo esc_html($postExcerptTag); ?>>
+            </<?php echo tag_escape($postExcerptTag); ?>>
 
           <?php else : ?>
             <?php if ($postfixText) : ?>
@@ -399,7 +399,7 @@ class PGBlockPostExcerpt
         <?php endif; ?>
 
 
-      </<?php echo esc_html($wrapperTag); ?>>
+      </<?php echo tag_escape($wrapperTag); ?>>
     <?php
 
     endif;
@@ -446,7 +446,7 @@ class PGBlockPostExcerpt
                 </span>
               <?php endif; ?>
 
-            </<?php echo esc_html($postExcerptTag); ?>>
+            </<?php echo tag_escape($postExcerptTag); ?>>
 
           <?php else : ?>
             <?php if ($postfixText) : ?>

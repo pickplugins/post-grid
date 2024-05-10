@@ -177,7 +177,7 @@ class PGBlockWooStarRate
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo esc_html($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>       <?php echo esc_attr($wrapperClass); ?>">
+      <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>       <?php echo esc_attr($wrapperClass); ?>">
 
 
 
@@ -240,7 +240,7 @@ class PGBlockWooStarRate
 
 
 
-      </<?php echo esc_html($wrapperTag); ?>>
+      </<?php echo tag_escape($wrapperTag); ?>>
     <?php
 
     endif;

@@ -794,6 +794,11 @@
   list-style-type: disc;
 }
 
+.columns-3 {
+  -moz-columns: 3;
+       columns: 3;
+}
+
 .\!grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 }

@@ -43,6 +43,7 @@
       "default": {
         "options": {
           "linkTo": "postUrl",
+          "customField": "",
           "linkToMeta": "",
           "linkTarget": "",
           "avatarSize": "",

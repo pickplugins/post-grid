@@ -191,7 +191,7 @@ class PGBlockWooStockQuantity
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo esc_html($wrapperTag); ?> class="
+            <<?php echo tag_escape($wrapperTag); ?> class="
                                         <?php echo esc_attr($blockId); ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
@@ -214,7 +214,7 @@ class PGBlockWooStockQuantity
 
                     /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
                 ?>
-                    <<?php echo esc_html($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                    <<?php echo tag_escape($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforeQuantity') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -222,13 +222,13 @@ class PGBlockWooStockQuantity
                         <?php if ($iconPosition == 'afterQuantity') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
-                    </<?php echo esc_html($skuTag); ?>>
+                    </<?php echo tag_escape($skuTag); ?>>
 
                 <?php else :
                     /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
                 ?>
 
-                    <<?php echo esc_html($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?>>
+                    <<?php echo tag_escape($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?>>
                         <?php if ($iconPosition == 'beforeQuantity') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -236,7 +236,7 @@ class PGBlockWooStockQuantity
                         <?php if ($iconPosition == 'afterQuantity') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
-                    </<?php echo esc_html($skuTag); ?>>
+                    </<?php echo tag_escape($skuTag); ?>>
 
 
                 <?php endif; ?>
@@ -259,7 +259,7 @@ class PGBlockWooStockQuantity
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-            </<?php echo esc_html($wrapperTag); ?>>
+            </<?php echo tag_escape($wrapperTag); ?>>
         <?php
 
         endif;
@@ -284,7 +284,7 @@ class PGBlockWooStockQuantity
                 /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
             ?>
 
-                <<?php echo esc_html($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                <<?php echo tag_escape($skuTag); ?> class='stockQuantity' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforeQuantity') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
@@ -292,14 +292,14 @@ class PGBlockWooStockQuantity
                     <?php if ($iconPosition == 'afterQuantity') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
-                </<?php echo esc_html($skuTag); ?>>
+                </<?php echo tag_escape($skuTag); ?>>
             <?php else : ?>
                 <?php if ($iconPosition == 'beforeQuantity') : ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <<?php echo esc_html($skuTag); ?> class='stockQuantity'>
+                <<?php echo tag_escape($skuTag); ?> class='stockQuantity'>
                     <?php echo wp_kses_post($productStockQuantity); ?>
-                </<?php echo esc_html($skuTag); ?>>
+                </<?php echo tag_escape($skuTag); ?>>
                 <?php if ($iconPosition == 'afterQuantity') : ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>

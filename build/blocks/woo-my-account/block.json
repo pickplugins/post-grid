@@ -1,0 +1,230 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/woo-my-account",
+  "title": "Woo My Account",
+  "textdomain": "post-grid",
+  "category": "post-grid-woo",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-woo-my-account"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "woocommerce": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "woocommerce"
+        },
+        "styles": {}
+      }
+    },
+    "navigation": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "woocommerce-MyAccount-navigation"
+        },
+        "styles": {}
+      }
+    },
+    "navigationItemWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "navigationItem": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "navigationLink": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "content": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "woocommerce-MyAccount-content"
+        },
+        "styles": {}
+      }
+    },
+    "elements": {
+      "type": "object",
+      "default": {
+        "options": {
+          "showLabel": true,
+          "showIcon": false,
+          "iconPosition": "beforeLabel"
+        },
+        "styles": {},
+        "items": [
+          {
+            "id": "dashboard",
+            "label": "Dashboard",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {}
+          },
+          {
+            "id": "orders",
+            "label": "Orders",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {}
+          },
+          {
+            "id": "downloads",
+            "label": "Downloads",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {}
+          },
+          {
+            "id": "addresses",
+            "label": "Addresses",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {}
+          },
+          {
+            "id": "accountDetails",
+            "label": "Account details",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {}
+          },
+          {
+            "id": "logout",
+            "label": "Log out",
+            "customText": "",
+            "url": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {}
+          }
+        ]
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "icon",
+          "position": "beforeLabel"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000 !important"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "margin": {
+            "Desktop": "0px 10px 0px 0px"
+          }
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "style": "front_style",
+  "script": "front_script",
+  "keywords": [
+    "Woo breadcrumb",
+    "woocommerce breadcrumb",
+    "woocommerce breadcrumbs"
+  ],
+  "description": "woocommerce breadcrumbs block ."
+}

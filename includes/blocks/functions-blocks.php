@@ -869,9 +869,9 @@ function post_grid_global_vars()
 
 
 ?>
-<script>
-var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
-</script>
+  <script>
+    var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
+  </script>
 <?php
 }
 add_action('wp_footer', 'post_grid_global_vars', 999);
@@ -1137,10 +1137,10 @@ function post_grid_page_styles()
 ?>
 
 
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
 
 <?php
 
@@ -1320,12 +1320,12 @@ function post_grid_global_styles()
 ?>
 
 
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
 
-<?php
+  <?php
 
 
 
@@ -1498,17 +1498,17 @@ function post_grid_global_cssY()
 
   if (!empty($fonts)) {
   ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
-<?php
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
+  <?php
 
   }
 
   ?>
 
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
 
 <?php
 
@@ -1528,9 +1528,12 @@ function post_grid_font_family()
 
   foreach ($customFonts as $face) {
 
-    $fontFamily = $face['family'];
-    $src = $face['src'][0]['url'];
-    $fontWeight = $face['weight'];
+    $src =
+
+
+      $fontFamily = isset($face['family']) ? $face['family'] : '';
+    $src = isset($face['src'][0]['url']) ? $face['src'][0]['url'] : '';
+    $fontWeight = isset($face['weight']) ? $face['weight'] : '';
 
     $faceStr .= "@font-face {
     font-family: '$fontFamily';
@@ -1539,10 +1542,10 @@ function post_grid_font_family()
   }";
   }
 ?>
-<style>
-<?php echo ($faceStr);
-?>
-</style>
+  <style>
+    <?php echo esc_html($faceStr);
+    ?>
+  </style>
 <?php
 }
 add_action('wp_footer', 'post_grid_font_family', 999);
@@ -2585,7 +2588,8 @@ function post_grid_visible_parse($visible)
         $values = isset($arg['values']) ? explode(",", $arg['values']) : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        $curentYear = date('Y');
+        // $curentYear = date('Y');
+        $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'Y');
 
         if ($compare == '=') {
 
@@ -2667,7 +2671,8 @@ function post_grid_visible_parse($visible)
         $values = isset($arg['values']) ? $arg['values'] : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        $curentYear = date('m');
+        // $curentYear = date('m');
+        $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'm');
 
         if ($compare == '=') {
 
@@ -2749,7 +2754,8 @@ function post_grid_visible_parse($visible)
         $values = isset($arg['values']) ? $arg['values'] : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        $curentYear = date('m');
+        //$curentYear = date('m');
+        $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'm');
 
         if ($compare == '=') {
 
@@ -2831,7 +2837,9 @@ function post_grid_visible_parse($visible)
         $values = isset($arg['values']) ? $arg['values'] : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        $curentYear = date('h');
+        $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'H');
+
+
 
         if ($compare == '=') {
 
@@ -2908,12 +2916,16 @@ function post_grid_visible_parse($visible)
       }
       if ($id == 'isDate') {
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
-        $value = isset($arg['value']) ? (int) $arg['value'] : '';
+        $value = isset($arg['value']) ?  $arg['value'] : '';
 
         $values = isset($arg['values']) ? $arg['values'] : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        $curentYear = date('h');
+        //$curentYear = date('Y-m-d');
+        $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'Y-m-d');
+
+
+
 
         if ($compare == '=') {
 
@@ -3042,7 +3054,7 @@ function post_grid_visible_parse($visible)
 
 
 
-        echo var_export($browesr, true);
+        // echo var_export($browesr, true);
       }
       if ($id == 'isBrowsers') {
         $values = isset($arg['values']) ? $arg['values'] : [];
@@ -3273,4 +3285,39 @@ function post_grid_visible_parse($visible)
 
 
   return $allowAccess;
+}
+
+
+
+add_filter('render_block', function ($block_content, $block) {
+  // Make sure we have the blockName.
+  if (empty($block['blockName'])) {
+    return $block_content;
+  }
+
+  // If this is a pagination block, enqueue the pagination script.
+  if (
+    'post-grid/woo-product-tabs' === $block['blockName']
+  ) {
+    wp_enqueue_script('pg-woo-product-tabs-scripts');
+  }
+
+  // Return the block content.
+  return $block_content;
+}, 10, 2);
+
+
+function generateShortcode($params, $default)
+{
+  $shortcode = '[' . $default;
+
+  foreach ($params as $key => $value) {
+    if (!empty($value)) {
+      $shortcode .= ' ' . $key . '="' . $value . '"';
+    }
+  }
+
+  $shortcode .= ']';
+
+  return $shortcode;
 }

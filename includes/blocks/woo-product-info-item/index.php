@@ -191,7 +191,7 @@ class PGBlockWooProductInfoItem
 ?>
 
 
-    <<?php echo esc_html($wrapperTag); ?> class="
+    <<?php echo tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($wrapperClass); ?>">
 
@@ -207,10 +207,10 @@ class PGBlockWooProductInfoItem
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
-      <<?php echo esc_html($fieldTag); ?> class="  <?php echo esc_attr($fieldClass); ?>">
+      <<?php echo tag_escape($fieldTag); ?> class="  <?php echo esc_attr($fieldClass); ?>">
 
 
-        <<?php echo esc_html($fieldTag); ?> class="<?php echo esc_attr($fieldClass); ?>">
+        <<?php echo tag_escape($fieldTag); ?> class="<?php echo esc_attr($fieldClass); ?>">
 
           <?php
           if ($product != null) {
@@ -242,7 +242,7 @@ class PGBlockWooProductInfoItem
             }
             if ($fieldValue == 'meta') {
               // if ($fieldMetaType == "ID")
-              // var_dump("hello");
+
 
               $finalValue = get_post_meta($POST_ID, $fieldCustomMeta, true);
               // $finalValue = get_field($fieldCustomMeta, $POST_ID);
@@ -265,7 +265,7 @@ class PGBlockWooProductInfoItem
 
 
 
-        </<?php echo esc_html($fieldTag); ?>>
+        </<?php echo tag_escape($fieldTag); ?>>
         <?php if ($iconPosition == 'beforePostfix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
@@ -287,7 +287,7 @@ class PGBlockWooProductInfoItem
 
 
 
-      </<?php echo esc_html($wrapperTag); ?>>
+      </<?php echo tag_escape($wrapperTag); ?>>
 
 
 

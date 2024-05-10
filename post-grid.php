@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.80
+Version: 2.2.81
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.80');
+      define('post_grid_version', '2.2.81');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -165,6 +165,18 @@ if (!class_exists('PostGrid')) {
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-related-products/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale-products/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-best-selling-products/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-top-rated-products/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-products/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-recent-products/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-categories/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-login-form/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/post-comments/index.php');
 
 
       include('includes/classes/class-post-types.php');

@@ -125,7 +125,7 @@ class PGBlockList
     if (!empty($wrapperTag)) :
 ?>
 
-      <<?php echo esc_html($wrapperTag); ?> class="
+      <<?php echo tag_escape($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>
                     <?php echo esc_attr($blockAlign); ?>">
@@ -164,7 +164,7 @@ class PGBlockList
             <?php endif; ?>
 
 
-          </<?php echo esc_html($itemTag); ?>>
+          </<?php echo tag_escape($itemTag); ?>>
 
 
 
@@ -174,7 +174,7 @@ class PGBlockList
           }
 
         ?>
-      </<?php echo esc_html($wrapperTag); ?>>
+      </<?php echo tag_escape($wrapperTag); ?>>
     <?php
 
     endif;

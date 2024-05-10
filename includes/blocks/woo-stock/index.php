@@ -198,7 +198,7 @@ class PGBlockWooStock
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo esc_html($wrapperTag); ?> class="
+      <<?php echo tag_escape($wrapperTag); ?> class="
 				<?php echo esc_attr($blockId); ?>
 				<?php echo esc_attr($wrapperClass); ?>">
 
@@ -325,7 +325,7 @@ class PGBlockWooStock
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
 
-      </<?php echo esc_html($wrapperTag); ?>>
+      </<?php echo tag_escape($wrapperTag); ?>>
     <?php
 
     endif;

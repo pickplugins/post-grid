@@ -156,53 +156,38 @@ class PGBlockJustifiedWrap
 
 
 
-		?>
-		<div id="<?php echo esc_attr($blockId); ?>"
-			class="PGBlockJustifiedWrap <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>"
-			data-justified="<?php echo esc_attr(json_encode($justifiedOptions)) ?>"
-			data-block-id="<?php echo esc_attr(json_encode($dataBlockId)) ?>">
+?>
+		<div id="<?php echo esc_attr($blockId); ?>" class="PGBlockJustifiedWrap <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>" data-justified="<?php echo esc_attr(json_encode($justifiedOptions)) ?>" data-block-id="<?php echo esc_attr(json_encode($dataBlockId)) ?>">
 
-			<div class='aaa'
-				data-src="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-				<img alt="img1"
-					src="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+			<div class='' data-src="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+				<img alt="img1" src="https://images.pexels.com/photos/19049834/pexels-photo-19049834/free-photo-of-surface-of-a-sandstone-wall.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
 			</div>
-			<div class='aaa'
-				data-src="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-				<img alt="img2"
-					src="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+			<div class='' data-src="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+				<img alt="img2" src="https://images.pexels.com/photos/18968224/pexels-photo-18968224/free-photo-of-light.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
 			</div>
-			<div class='aaa'
-				data-src="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-				<img alt="img1"
-					src="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+			<div class='' data-src="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+				<img alt="img1" src="https://images.pexels.com/photos/19042206/pexels-photo-19042206/free-photo-of-model-in-sombrero-and-in-traditional-clothing.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
 			</div>
-			<div class='aaa'
-				data-src="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-				<img alt="img2"
-					src="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+			<div class='' data-src="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+				<img alt="img2" src="https://images.pexels.com/photos/18889183/pexels-photo-18889183/free-photo-of-portrait-of-a-hooded-man-standing-in-rain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
 			</div>
-			<div class='aaa'
-				data-src="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-				<img alt="img1"
-					src="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+			<div class='' data-src="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+				<img alt="img1" src="https://images.pexels.com/photos/18885164/pexels-photo-18885164/free-photo-of-wedding-couple-in-a-park.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
 			</div>
-			<div class='aaa'
-				data-src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
-				<img alt="img2"
-					src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+			<div class='' data-src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load">
+				<img alt="img2" src="https://images.pexels.com/photos/13566084/pexels-photo-13566084.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
 			</div>
 		</div>
 		<style>
-		.pg-justified-wrap-item {
-			display: inline-block;
-		}
+			.pg-justified-wrap-item {
+				display: inline-block;
+			}
 
-		.pg-justified-wrap-item {
-			margin-bottom: 20px;
-		}
+			.pg-justified-wrap-item {
+				margin-bottom: 20px;
+			}
 		</style>
-		<?php
+<?php
 
 		return ob_get_clean();
 	}

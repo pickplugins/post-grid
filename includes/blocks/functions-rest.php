@@ -662,10 +662,11 @@ class BlockPostGridRest
 		$transient = unserialize(get_transient($blockId . '_args'));
 		$transientData = get_transient($blockId . '_data');
 
-		if(!isset($transient['slug'])) return [];
+		// if(!isset($transient['slug'])) return [];
 
+		$saved_slug = isset($transient['slug']) ? $transient['slug'] : '';
 
-		if ($objSlug == $transient['slug']) {
+		if ($objSlug == $saved_slug) {
 
 			if (!empty($transientData)) {
 				$response['data'] = $transientData;

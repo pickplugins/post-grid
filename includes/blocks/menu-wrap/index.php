@@ -87,18 +87,32 @@ class PGBlockMenuWrap
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
-    //////var_dump($blockCssY);
+  //////var_dump($blockCssY);
+
+
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
+
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
 
     ob_start();
 
 
 
 ?>
-    <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-      <ul class="<?php echo esc_attr($menuWrapClass); ?>">
-        <?php echo $content ?>
-      </ul>
-    </div>
+<div
+  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+  <ul class="<?php echo esc_attr($menuWrapClass); ?>">
+    <?php echo $content ?>
+  </ul>
+</div>
 <?php
 
     return ob_get_clean();

@@ -184,6 +184,19 @@ class PGBlockWooProductInfoItem
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
+
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
+
+      // var_dump($isVisible);
+
+      if (!$isVisible) return;
+    }
+
+    // //* Visible condition
+
     ob_start();
 
 
@@ -191,28 +204,28 @@ class PGBlockWooProductInfoItem
 ?>
 
 
-    <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($wrapperClass); ?>">
 
-      <?php if ($iconPosition == 'beforePrefix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-      <?php if (!empty($prefixText)) : ?>
-        <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo wp_kses_post($prefixText); ?>
-        </span>
-      <?php endif; ?>
-      <?php if ($iconPosition == 'afterPrefix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
+  <?php if ($iconPosition == 'beforePrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if (!empty($prefixText)) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
+  <?php if ($iconPosition == 'afterPrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-      <<?php echo tag_escape($fieldTag); ?> class="  <?php echo esc_attr($fieldClass); ?>">
+  <<?php echo tag_escape($fieldTag); ?> class="  <?php echo esc_attr($fieldClass); ?>">
 
 
-        <<?php echo tag_escape($fieldTag); ?> class="<?php echo esc_attr($fieldClass); ?>">
+    <<?php echo tag_escape($fieldTag); ?> class="<?php echo esc_attr($fieldClass); ?>">
 
-          <?php
+      <?php
           if ($product != null) {
             if ($fieldValue == 'weight') {
 
@@ -265,17 +278,17 @@ class PGBlockWooProductInfoItem
 
 
 
-        </<?php echo tag_escape($fieldTag); ?>>
-        <?php if ($iconPosition == 'beforePostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <?php if (!empty($postfixText)) : ?> <span class=" <?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
-        <?php if ($iconPosition == 'afterPostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+    </<?php echo tag_escape($fieldTag); ?>>
+    <?php if ($iconPosition == 'beforePostfix') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php if (!empty($postfixText)) : ?> <span class=" <?php echo esc_attr($postfixClass); ?>">
+      <?php echo wp_kses_post($postfixText); ?>
+    </span>
+    <?php endif; ?>
+    <?php if ($iconPosition == 'afterPostfix') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
 
 
 
@@ -287,7 +300,7 @@ class PGBlockWooProductInfoItem
 
 
 
-      </<?php echo tag_escape($wrapperTag); ?>>
+  </<?php echo tag_escape($wrapperTag); ?>>
 
 
 

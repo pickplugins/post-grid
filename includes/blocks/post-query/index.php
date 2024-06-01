@@ -78,11 +78,13 @@ class PGBlockPostQuery
     $itemsWrapOptions = isset($itemsWrap['options']) ? $itemsWrap['options'] : [];
     $itemsWrapExcluded = isset($itemsWrapOptions['excludedWrapper']) ? $itemsWrapOptions['excludedWrapper'] : false;
 
+
     /*#######itemWrap######*/
     $itemWrap = isset($attributes['itemWrap']) ? $attributes['itemWrap'] : [];
     $itemWrapOptions = isset($itemWrap['options']) ? $itemWrap['options'] : [];
     $itemWrapTag = isset($itemWrapOptions['tag']) ? $itemWrapOptions['tag'] : 'div';
     $itemWrapClass = isset($itemWrapOptions['class']) ? $itemWrapOptions['class'] : 'item';
+    $itemWrapExcluded = isset($itemWrapOptions['excludedWrapper']) ? $itemWrapOptions['excludedWrapper'] : false;
     $itemWrapCounterClass = isset($itemWrapOptions['counterClass']) ? $itemWrapOptions['counterClass'] : false;
     $itemWrapTermsClass = isset($itemWrapOptions['termsClass']) ? $itemWrapOptions['termsClass'] : false;
     $itemWrapOddEvenClass = isset($itemWrapOptions['oddEvenClass']) ? $itemWrapOptions['oddEvenClass'] : false;
@@ -205,7 +207,11 @@ class PGBlockPostQuery
           }
 
       ?>
-          <<?php echo tag_escape($itemWrapTag); ?> class="
+
+          <?php if ($itemWrapExcluded) : ?>
+
+          <?php else : ?>
+            <<?php echo tag_escape($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php if ($itemWrapTermsClass) {
               echo esc_attr($slug);
@@ -216,9 +222,22 @@ class PGBlockPostQuery
             <?php if ($itemWrapOddEvenClass) {
               echo esc_attr($odd_even_class);
             } ?> ">
+            <?php endif; ?>
+
+
+
+
+
             <?php echo wp_kses_post($html);
             ?>
-          </<?php echo tag_escape($itemWrapTag); ?>>
+
+            <?php if ($itemWrapExcluded) : ?>
+
+            <?php else : ?>
+            </<?php echo tag_escape($itemWrapTag); ?>>
+          <?php endif; ?>
+
+
       <?php
           $counter++;
         endwhile;

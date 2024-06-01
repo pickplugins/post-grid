@@ -512,7 +512,7 @@ class BlockPostGridRest
 		$query_args = [];
 
 
-		$nonce = isset($post_data['_wpnonce']) ? $post_data['_wpnonce'] : [];
+		$nonce = isset($post_data['_wpnonce']) ? $post_data['_wpnonce'] : "";
 
 		if (!wp_verify_nonce($nonce, 'wp_rest')) return $query_args;
 
@@ -1707,7 +1707,7 @@ class BlockPostGridRest
 		}
 
 
-		error_log(rwmb_meta($meta_key, [], $postId));
+		// error_log(rwmb_meta($meta_key, [], $postId));
 
 		if ($meta_type == 'mbTaxonomy' || $meta_type == 'mbSelect') {
 			$mb_Value = rwmb_meta($meta_key, [], $postId);

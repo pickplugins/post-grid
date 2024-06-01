@@ -60,6 +60,15 @@
         "styles": {}
       }
     },
+    "navigationItemActive": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "is-active"
+        },
+        "styles": {}
+      }
+    },
     "navigationItemWrap": {
       "type": "object",
       "default": {
@@ -207,6 +216,10 @@
           }
         }
       }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
     },
     "blockId": {
       "type": "string",

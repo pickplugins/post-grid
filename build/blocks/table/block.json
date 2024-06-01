@@ -1,0 +1,211 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/table",
+  "title": "Table",
+  "textdomain": "post-grid",
+  "category": "post-grid-tools",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-table-wrapper",
+          "id": ""
+        },
+        "styles": {}
+      }
+    },
+    "table": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-table",
+          "id": ""
+        },
+        "styles": {
+          "width": {
+            "Desktop": "100%"
+          },
+          "border": {
+            "Desktop": "0px solid gray",
+            "Mobile": "0px solid gray"
+          },
+          "borderCollapse": {
+            "Desktop": "collapse"
+          },
+          "tableLayout": {
+            "Desktop": "fixed"
+          }
+        }
+      }
+    },
+    "tdStyle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": ""
+        },
+        "styles": {
+          "textAlign": {
+            "Desktop": "center",
+            "Mobile": "right"
+          },
+          "padding": {
+            "Desktop": "0.6% 0.6% 0.6% 0.6%"
+          },
+          "borderBottom": {
+            "Mobile": " solid #dddddd"
+          },
+          "display": {
+            "Mobile": "block"
+          },
+          "fontSize": {
+            "Mobile": ".8em"
+          }
+        },
+        "before": {
+          "content": {
+            "Mobile": "attr(data-label)"
+          },
+          "float": {
+            "Mobile": "left"
+          },
+          "fontWeight": {
+            "Mobile": "700"
+          },
+          "textTransform": {
+            "Mobile": "uppercase"
+          }
+        },
+        "last-child": {
+          "borderBottom": {
+            "Mobile": "0px solid gray"
+          }
+        }
+      }
+    },
+    "thStyle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": ""
+        },
+        "styles": {
+          "textAlign": {
+            "Desktop": "center"
+          },
+          "padding": {
+            "Desktop": "0.6% 0.6% 0.6% 0.6%"
+          },
+          "fontSize": {
+            "Desktop": ".85em"
+          },
+          "textTransform": {
+            "Desktop": "uppercase"
+          }
+        }
+      }
+    },
+    "trStyle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": ""
+        },
+        "styles": {
+          "border": {
+            "Desktop": "1px solid gray"
+          },
+          "backgroundColor": {
+            "Desktop": "#f8f8f8"
+          },
+          "padding": {
+            "Desktop": "0.35em 0.35em 0.35em 0.35em"
+          },
+          "borderBottom": {
+            "Mobile": "2px solid #dddddd"
+          },
+          "display": {
+            "Mobile": "block"
+          },
+          "marginBottom": {
+            "Mobile": ".625em"
+          }
+        }
+      }
+    },
+    "caption": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "class": ""
+        },
+        "styles": {
+          "border": {
+            "Desktop": "1px solid gray"
+          },
+          "backgroundColor": {
+            "Desktop": "#f8f8f8"
+          },
+          "padding": {
+            "Desktop": "0.35em 0.35em 0.35em 0.35em"
+          },
+          "borderBottom": {
+            "Mobile": "2px solid #dddddd"
+          },
+          "display": {
+            "Mobile": "block"
+          },
+          "marginBottom": {
+            "Mobile": ".625em"
+          }
+        }
+      }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "layer",
+    "html element",
+    "div element",
+    "div",
+    "html tag",
+    "layer block",
+    "layer for wordpress",
+    "layer block for wordpress"
+  ],
+  "description": "The layer block is an HTML element that can be styled and positioned on a webpage to structure and organize content."
+}

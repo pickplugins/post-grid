@@ -153,7 +153,17 @@ class PGBlockWooSale
         $wrapperClass = parse_css_class($wrapperClass, $obj);
         $prefixText = parse_css_class($prefixText, $obj);
         $postfixText = parse_css_class($postfixText, $obj);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+        $isVisible = post_grid_visible_parse($visible);
 
+        // var_dump($isVisible);
+
+        if (!$isVisible) return;
+    }
+
+    // //* Visible condition
 
         ob_start();
 
@@ -161,77 +171,77 @@ class PGBlockWooSale
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                                                     <?php echo esc_attr($blockId); ?>
                                                     <?php echo esc_attr($wrapperClass); ?>">
 
 
-                <?php if ($iconPosition == 'beforePrefix') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+  <?php if ($iconPosition == 'beforePrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>">
-                        <?php echo wp_kses_post($prefixText); ?>
-                    </span>
-                <?php endif; ?>
+  <?php if ($prefixText) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+  <?php if ($iconPosition == 'afterPrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-                <?php
+  <?php
 
                 if ($product_type != 'variable') :
                     $onSale = ($product != null) ? $product->is_on_sale() : '';
                 ?>
-                    <span class='sale'>
-                        <?php
+  <span class='sale'>
+    <?php
                         if ($onSale) {
                             echo wp_kses_post($saleText);
                         } else {
                             echo wp_kses_post($saleNoSale);
                         }
                         ?>
-                    </span>
-                <?php
+  </span>
+  <?php
                 endif;
                 if ($product_type == 'variable') :
 
                     $onSale = ($product != null) ? $product->is_on_sale() : '';
 
                 ?>
-                    <span class='sale'>
-                        <?php
+  <span class='sale'>
+    <?php
                         if ($onSale) {
                             echo wp_kses_post($saleText);
                         } else {
                             echo wp_kses_post($saleNoSale);
                         }
                         ?>
-                    </span>
+  </span>
 
-                <?php
+  <?php
 
                 endif;
 
                 ?>
 
-                <?php if ($iconPosition == 'beforePostfix') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>">
-                        <?php echo $postfixText; ?>
-                    </span>
-                <?php endif; ?>
+  <?php if ($iconPosition == 'beforePostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if ($postfixText) : ?>
+  <span class="<?php echo $postfixClass; ?>">
+    <?php echo $postfixText; ?>
+  </span>
+  <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+  <?php if ($iconPosition == 'afterPostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-            </<?php echo tag_escape($wrapperTag); ?>>
-        <?php
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
         endif;
 

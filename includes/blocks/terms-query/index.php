@@ -169,6 +169,17 @@ class PGBlockTermsQuery
     ];
 
 
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
+
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
 
 
     ob_start();
@@ -176,15 +187,16 @@ class PGBlockTermsQuery
 ?>
 
 
-    <?php
+<?php
     if (!$itemsWrapExcluded) :
     ?>
-      <div class="loop-loading"></div>
-      <div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-      <?php
+<div class="loop-loading"></div>
+<div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop"
+  id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+  <?php
     endif;
       ?>
-      <?php
+  <?php
       if ($terms) :
 
         $counter = 1;
@@ -238,7 +250,7 @@ class PGBlockTermsQuery
 
 
       ?>
-          <<?php echo tag_escape($itemWrapTag); ?> class="
+  <<?php echo tag_escape($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php ?>
             <?php if ($itemWrapCounterClass) {
@@ -247,10 +259,10 @@ class PGBlockTermsQuery
             <?php if ($itemWrapOddEvenClass) {
               echo esc_attr($odd_even_class);
             } ?> ">
-            <?php echo wp_kses_post($html);
+    <?php echo wp_kses_post($html);
             ?>
-          </<?php echo tag_escape($itemWrapTag); ?>>
-      <?php
+  </<?php echo tag_escape($itemWrapTag); ?>>
+  <?php
           $counter++;
         }
 
@@ -258,10 +270,10 @@ class PGBlockTermsQuery
 
       ?>
 
-      <?php
+  <?php
       if (!$itemsWrapExcluded) : ?>
-      </div>
-    <?php
+</div>
+<?php
       endif; ?>
 <?php return ob_get_clean();
   }

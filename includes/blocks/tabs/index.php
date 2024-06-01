@@ -137,6 +137,18 @@ class PGBlockTabs
         $iconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
         $iconToggleHtml = '<span class="' . $iconToggleClass . ' ' . $iconToggleSrc . '"></span>';
 
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+        $isVisible = post_grid_visible_parse($visible);
+
+        // var_dump($isVisible);
+
+        if (!$isVisible) return;
+    }
+
+    // //* Visible condition
+
 
         ob_start();
 
@@ -144,51 +156,56 @@ class PGBlockTabs
         if (!empty($wrapperTag)) :
 ?>
 
-            <div class="PGBlockTabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-                <div class="tabs-navs">
-                    <?php
+<div class="PGBlockTabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+  <div class="tabs-navs">
+    <?php
                     foreach ($items as $index => $item) {
                     ?>
-                        <<?php echo esc_html($headerTag); ?> class="
+    <<?php echo esc_html($headerTag); ?>
+      class="
                                                                             <?php echo esc_attr($headerOptions['class']); ?>
-                                                                            <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" index=<?php echo esc_attr($index); ?> data-id=<?php echo esc_attr($blockId . $index); ?> panelId=<?php echo esc_attr($blockId . $index); ?>>
-                            <?php if ($iconPosition == 'beforeHeader') : ?>
-                                <span class="icon-idle">
-                                    <?php echo wp_kses_post($iconHtml); ?>
-                                </span>
-                                <span class="icon-toggled">
-                                    <?php echo wp_kses_post($iconToggleHtml); ?>
-                                </span>
-                            <?php endif; ?>
-                            <?php echo $item['headerText']; ?>
-                            <?php if ($iconPosition == 'afterHeader') : ?>
-                                <span class="float-right">
-                                    <span class="icon-idle">
-                                        <?php echo wp_kses_post($iconHtml); ?>
-                                    </span>
-                                    <span class="icon-toggled">
-                                        <?php echo wp_kses_post($iconToggleHtml); ?>
-                                    </span>
-                                </span>
-                            <?php endif; ?>
-                        </<?php echo tag_escape($headerTag); ?>>
-                    <?php
+                                                                            <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>"
+      index=<?php echo esc_attr($index); ?> data-id=<?php echo esc_attr($blockId . $index); ?>
+      panelId=<?php echo esc_attr($blockId . $index); ?>>
+      <?php if ($iconPosition == 'beforeHeader') : ?>
+      <span class="icon-idle">
+        <?php echo wp_kses_post($iconHtml); ?>
+      </span>
+      <span class="icon-toggled">
+        <?php echo wp_kses_post($iconToggleHtml); ?>
+      </span>
+      <?php endif; ?>
+      <?php echo $item['headerText']; ?>
+      <?php if ($iconPosition == 'afterHeader') : ?>
+      <span class="float-right">
+        <span class="icon-idle">
+          <?php echo wp_kses_post($iconHtml); ?>
+        </span>
+        <span class="icon-toggled">
+          <?php echo wp_kses_post($iconToggleHtml); ?>
+        </span>
+      </span>
+      <?php endif; ?>
+    </<?php echo tag_escape($headerTag); ?>>
+    <?php
                     }
                     ?>
-                </div>
-                <div class="tabs-panels">
-                    <?php
+  </div>
+  <div class="tabs-panels">
+    <?php
                     foreach ($items as $index => $item) {
                     ?>
-                        <div class="tabs-panel <?php echo esc_attr($contentOptions['class']); ?> <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" id="<?php echo esc_attr($blockId . $index); ?>">
-                            <?php echo wp_kses_post($item['content']); ?>
-                        </div>
-                    <?php
+    <div
+      class="tabs-panel <?php echo esc_attr($contentOptions['class']); ?> <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>"
+      id="<?php echo esc_attr($blockId . $index); ?>">
+      <?php echo wp_kses_post($item['content']); ?>
+    </div>
+    <?php
                     }
                     ?>
-                </div>
-            </div>
-        <?php
+  </div>
+</div>
+<?php
 
         endif;
 

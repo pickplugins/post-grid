@@ -111,16 +111,29 @@ class PGBlockWooProductInfo
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
+
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
+
     ob_start();
 
 
 
 ?>
-    <<?php echo tag_escape($wrapperTag); ?> class="  <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
+<<?php echo tag_escape($wrapperTag); ?>
+  class="  <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
 
-      <?php
+  <?php
       echo $content ?>
-    </<?php echo tag_escape($wrapperTag); ?>>
+</<?php echo tag_escape($wrapperTag); ?>>
 
 
 

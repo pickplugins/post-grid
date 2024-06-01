@@ -41,11 +41,29 @@
         }
       }
     },
+    "itemsWrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "itemWrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
     "image": {
       "type": "object",
       "default": {
         "options": {
-          "class": "attachment-woocommerce_thumbnail"
+          "class": ""
         },
         "styles": {}
       }
@@ -54,7 +72,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "onsale"
+          "class": "wc-block-components-product-sale-badge"
         },
         "styles": {}
       }
@@ -63,7 +81,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "woocommerce-loop-product__title"
+          "class": ""
         },
         "styles": {}
       }
@@ -72,7 +90,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "price"
+          "class": "wc-block-components-product-price"
         },
         "styles": {}
       }
@@ -90,7 +108,7 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "button"
+          "class": "add_to_cart_button"
         },
         "styles": {}
       }
@@ -111,6 +129,10 @@
         "best_selling": "",
         "top_rated": ""
       }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
     },
     "blockId": {
       "type": "string",

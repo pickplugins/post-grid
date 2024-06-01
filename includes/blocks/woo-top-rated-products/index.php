@@ -73,7 +73,19 @@ class PGBlockWooTopRatedProducts
 
 
 
-		// var_dump($blockAlign);
+	// var_dump($blockAlign);
+
+	// //* Visible condition
+	$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+	if (!empty($visible['rules'])) {
+		$isVisible = post_grid_visible_parse($visible);
+
+		// var_dump($isVisible);
+
+		if (!$isVisible) return;
+	}
+
+    // //* Visible condition
 
 
 		ob_start();
@@ -82,9 +94,10 @@ class PGBlockWooTopRatedProducts
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
+<<?php echo tag_escape($wrapperTag); ?>
+  class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
 
-				<?php
+  <?php
 
 
 				echo do_shortcode(generateShortcode($shortcodeParam, "top_rated_products"));
@@ -92,8 +105,8 @@ class PGBlockWooTopRatedProducts
 
 
 
-			</<?php echo tag_escape($wrapperTag); ?>>
-		<?php
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
 		endif;
 

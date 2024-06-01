@@ -1,10 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
-	const contentElement = document.querySelector('[clickToCopy="1"]');
+	const contentElement = document.querySelector('[clicktocopy="1"]');
+	console.log(contentElement)
 
 	if (contentElement) {
-		contentElement.addEventListener("click", function () {
-			copyToClipboard(contentElement.textContent);
-		});
+		const copyContent = contentElement.getAttribute("copycontent");
+		console.log(copyContent)
+		if (copyContent) {
+			contentElement.addEventListener("click", function () {
+				console.log("first")
+				copyToClipboard(copyContent); 
+			});
+		} else {
+			console.error("Attribute 'copycontent' is missing or empty.");
+		}
 	}
 
 	function copyToClipboard(text) {
@@ -20,3 +28,4 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 	}
 });
+

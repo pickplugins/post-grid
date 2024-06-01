@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.81
+Version: 2.2.82
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,9 +28,8 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.81');
+      define('post_grid_version', '2.2.82');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
-
 
 
 
@@ -51,17 +50,96 @@ if (!class_exists('PostGrid')) {
       global $postGridLoaded;
 
 
+
+      $this->load_blocks();
+
+      require_once(post_grid_plugin_dir . 'addons/elementor/init.php');
+
+
+      include('includes/classes/class-post-types.php');
+      include('includes/classes/class-meta-boxes.php');
+      include('includes/classes/class-functions.php');
+      include('includes/classes/class-shortcodes.php');
+      include('includes/classes/class-settings.php');
+      include('includes/classes/class-settings-tabs.php');
+
+
+      include('includes/classes/class-admin-notices.php');
+
+      include('includes/metabox-post-grid-layout-hook.php');
+      include('includes/metabox-post-grid-hook.php');
+      include('includes/metabox-post-options-hook.php');
+
+      include('includes/settings-hook.php');
+      include('templates/post-grid-hook.php');
+      include('includes/shortcodes/shortcode-today-date.php');
+
+      include('includes/post-grid-layout-elements.php');
+      include('includes/media-source-options.php');
+      include('includes/layout-elements/3rd-party.php');
+      include('includes/functions-layout-api.php');
+      include('includes/functions-ajax.php');
+
+
+      include('includes/functions-data-upgrade.php');
+      //include('includes/functions-single.php');
+
+
+      include('includes/classes/class-post-grid-support.php');
+      include('includes/data-update/class-post-grid-data-update.php');
+
+      include('includes/functions-post-grid.php');
+      include('includes/functions.php');
+      include('includes/shortcodes/shortcode-current_user_id.php');
+      include('includes/duplicate-post.php');
+
+
+      add_action('wp_enqueue_scripts', array($this, '_scripts_front'));
+      add_action('admin_enqueue_scripts', array($this, '_scripts_admin'));
+      add_action('admin_enqueue_scripts', 'wp_enqueue_media');
+
+      add_action('plugins_loaded', array($this, '_textdomain'));
+
+      register_activation_hook(__FILE__, array($this, '_activation'));
+      register_deactivation_hook(__FILE__, array($this, '_deactivation'));
+
+
+      add_action('activated_plugin', array($this, 'redirect_welcome'));
+
+
+      // $args = array(
+      //     'post_types' => array('post_grid', 'post_grid_layout', 'post_grid_template'),
+      // );
+
+      // new PPduplicatePost($args);
+    }
+
+
+
+
+
+    public function init_plugin()
+    {
+      $this->enqueue_scripts();
+    }
+    public function load_blocks()
+    {
+
+
       $post_grid_block_editor = get_option('post_grid_block_editor');
       $blocks = isset($post_grid_block_editor['blocks']) ? $post_grid_block_editor['blocks'] : [];
       $disabled = isset($blocks['disabled']) ? $blocks['disabled'] : [];
 
 
-      foreach ($disabled as $block) {
+      // foreach ($disabled as $block) {
 
-        $blockParts = explode("/", $block);
+      //   $blockParts = explode("/", $block);
 
-        //var_dump($blockParts[1]);
-      }
+      //   //var_dump($blockParts[1]);
+      // }
+
+      //error_log(serialize($disabled));
+
 
       require_once(post_grid_plugin_dir . 'includes/blocks/functions-blocks.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/functions-rest.php');
@@ -165,85 +243,28 @@ if (!class_exists('PostGrid')) {
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-related-products/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale-products/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-best-selling-products/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-top-rated-products/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-products/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-recent-products/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-categories/index.php');
+
+      require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-related-products/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale-products/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-best-selling-products/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-top-rated-products/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-products/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-recent-products/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-categories/index.php');
       // require_once(post_grid_plugin_dir . 'includes/blocks/woo-login-form/index.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/post-comments/index.php');
 
 
-      include('includes/classes/class-post-types.php');
-      include('includes/classes/class-meta-boxes.php');
-      include('includes/classes/class-functions.php');
-      include('includes/classes/class-shortcodes.php');
-      include('includes/classes/class-settings.php');
-      include('includes/classes/class-settings-tabs.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/info-box/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
 
 
-      include('includes/classes/class-admin-notices.php');
-
-      include('includes/metabox-post-grid-layout-hook.php');
-      include('includes/metabox-post-grid-hook.php');
-      include('includes/metabox-post-options-hook.php');
-
-      include('includes/settings-hook.php');
-      include('templates/post-grid-hook.php');
-      include('includes/shortcodes/shortcode-today-date.php');
-
-      include('includes/post-grid-layout-elements.php');
-      include('includes/media-source-options.php');
-      include('includes/layout-elements/3rd-party.php');
-      include('includes/functions-layout-api.php');
-      include('includes/functions-ajax.php');
-
-
-      include('includes/functions-data-upgrade.php');
-      //include('includes/functions-single.php');
-
-
-      include('includes/classes/class-post-grid-support.php');
-      include('includes/data-update/class-post-grid-data-update.php');
-
-      include('includes/functions-post-grid.php');
-      include('includes/functions.php');
-      include('includes/shortcodes/shortcode-current_user_id.php');
-      include('includes/duplicate-post.php');
-
-
-      add_action('wp_enqueue_scripts', array($this, '_scripts_front'));
-      add_action('admin_enqueue_scripts', array($this, '_scripts_admin'));
-      add_action('admin_enqueue_scripts', 'wp_enqueue_media');
-
-      add_action('plugins_loaded', array($this, '_textdomain'));
-
-      register_activation_hook(__FILE__, array($this, '_activation'));
-      register_deactivation_hook(__FILE__, array($this, '_deactivation'));
-
-
-      add_action('activated_plugin', array($this, 'redirect_welcome'));
-
-
-      // $args = array(
-      //     'post_types' => array('post_grid', 'post_grid_layout', 'post_grid_template'),
-      // );
-
-      // new PPduplicatePost($args);
-    }
-
-
-
-
-
-    public function init_plugin()
-    {
-      $this->enqueue_scripts();
+      require_once(post_grid_plugin_dir . 'includes/blocks/table/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/table-td/index.php');
+      require_once(post_grid_plugin_dir . 'includes/blocks/table-tr/index.php');
     }
 
 

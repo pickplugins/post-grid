@@ -149,7 +149,7 @@
           "enable": false,
           "position": "",
           "tag": "div",
-          "class": "label-counter",
+          "class": "accordion-label-counter",
           "overrideChild": true
         },
         "styles": {
@@ -228,6 +228,10 @@
           "enable": true
         }
       }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
     },
     "blockId": {
       "type": "string",

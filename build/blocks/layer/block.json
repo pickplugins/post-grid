@@ -39,6 +39,10 @@
         }
       }
     },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
     "blockId": {
       "type": "string",
       "default": ""

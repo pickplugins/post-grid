@@ -42,6 +42,8 @@
           "linkTarget": "_blank",
           "customUrl": "",
           "linkAttr": [],
+          "triggerName": "",
+          "triggerType": "",
           "class": ""
         },
         "styles": {}
@@ -92,6 +94,10 @@
         "term": "",
         "content": ""
       }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
     },
     "blockId": {
       "type": "string",

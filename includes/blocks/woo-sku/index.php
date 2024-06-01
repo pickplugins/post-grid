@@ -178,7 +178,17 @@ class PGBlockWooSku
 
 
 
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
 
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
 
 
 
@@ -188,90 +198,90 @@ class PGBlockWooSku
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="  <?php echo esc_attr($blockId); ?>">
+<<?php echo tag_escape($wrapperTag); ?> class="  <?php echo esc_attr($blockId); ?>">
 
 
-        <?php if ($iconPosition == 'beforePrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'beforePrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
+  <?php if ($prefixText) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-
-
-
-
-        <span class='sku'>
-          <?php echo wp_kses_post($productSku); ?>
-          <?php if (strlen($productSku) == 0) : ?>
-            <?php echo wp_kses_post($skuText); ?>
-          <?php endif; ?>
-        </span>
+  <?php if ($iconPosition == 'afterPrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
 
 
-        <?php if ($iconPosition == 'beforePostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo $postfixClass; ?>">
-            <?php echo $postfixText; ?>
-          </span>
-        <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <span class='sku'>
+    <?php echo wp_kses_post($productSku); ?>
+    <?php if (strlen($productSku) == 0) : ?>
+    <?php echo wp_kses_post($skuText); ?>
+    <?php endif; ?>
+  </span>
 
-      </<?php echo tag_escape($wrapperTag); ?>>
-    <?php
+
+
+  <?php if ($iconPosition == 'beforePostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if ($postfixText) : ?>
+  <span class="<?php echo $postfixClass; ?>">
+    <?php echo $postfixText; ?>
+  </span>
+  <?php endif; ?>
+
+  <?php if ($iconPosition == 'afterPostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
     endif;
 
     if (empty($wrapperTag)) :
 
     ?>
-      <?php if ($iconPosition == 'beforePrefix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-      <?php if ($prefixText) : ?>
-        <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo $prefixText; ?>
-        </span>
-      <?php endif; ?>
+<?php if ($iconPosition == 'beforePrefix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php if ($prefixText) : ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo $prefixText; ?>
+</span>
+<?php endif; ?>
 
-      <?php if ($iconPosition == 'afterPrefix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
+<?php if ($iconPosition == 'afterPrefix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
 
-      <span class='sku'>
-        <?php echo wp_kses_post($productSku); ?>
-        <?php if (strlen($productSku) == 0) : ?>
-          <?php echo wp_kses_post($skuText); ?>
-        <?php endif; ?>
-      </span>
+<span class='sku'>
+  <?php echo wp_kses_post($productSku); ?>
+  <?php if (strlen($productSku) == 0) : ?>
+  <?php echo wp_kses_post($skuText); ?>
+  <?php endif; ?>
+</span>
 
 
 
-      <?php if ($iconPosition == 'beforePostfix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-      <?php if ($postfixText) : ?>
-        <span class="<?php echo $postfixClass; ?>">
-          <?php echo $postfixText; ?>
-        </span>
-      <?php endif; ?>
-      <?php if ($iconPosition == 'afterPostfix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-    <?php
+<?php if ($iconPosition == 'beforePostfix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php if ($postfixText) : ?>
+<span class="<?php echo $postfixClass; ?>">
+  <?php echo $postfixText; ?>
+</span>
+<?php endif; ?>
+<?php if ($iconPosition == 'afterPostfix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php
 
     endif;
 

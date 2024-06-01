@@ -387,6 +387,18 @@ class PGBlockImage
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
+
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
+
 
     ob_start();
 
@@ -395,29 +407,45 @@ class PGBlockImage
     if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>">
-        <?php if (!empty($featuredImageLinkTo)) : ?>
-          <a <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?> href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+  <?php if (!empty($featuredImageLinkTo)) : ?>
+  <a <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>
+    href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
+    rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>"
+    <?php echo esc_attr($linkAttrStr); ?>>
 
-            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+    <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
+      <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>"
+      <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>"
+      <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>"
+      width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
 
-          </a>
-        <?php else : ?>
+  </a>
+  <?php else : ?>
 
-          <?php if ($lightboxEnable == true) : ?>
-            <a href="<?php if ($lazyLoad == true) : ?><?php echo esc_url_raw($dataSrc); ?><?php endif; ?><?php if ($lazyLoad == false) : ?><?php echo esc_url_raw($attachment_url); ?><?php endif; ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
-              <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
-            </a>
-          <?php else : ?>
+  <?php if ($lightboxEnable == true) : ?>
+  <a href="<?php if ($lazyLoad == true) : ?><?php echo esc_url_raw($dataSrc); ?><?php endif; ?><?php if ($lazyLoad == false) : ?><?php echo esc_url_raw($attachment_url); ?><?php endif; ?>"
+    data-fslightbox="<?php echo esc_attr($galleryId); ?>">
+    <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
+      <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>"
+      <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>"
+      <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>"
+      width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+  </a>
+  <?php else : ?>
 
-            <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
-          <?php endif; ?>
+  <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
+    <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>"
+    <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?>
+    alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>"
+    width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+  <?php endif; ?>
 
-        <?php endif; ?>
-      </<?php echo tag_escape($wrapperTag); ?>>
-    <?php
+  <?php endif; ?>
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
     endif;
 
@@ -425,25 +453,40 @@ class PGBlockImage
 
     ?>
 
-      <?php if (!empty($featuredImageLinkTo)) : ?>
-        <a class=" <?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
+<?php if (!empty($featuredImageLinkTo)) : ?>
+<a class=" <?php echo esc_attr($blockId); ?>"
+  href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
+  rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>"
+  <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
 
 
-          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+  <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
+    <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>"
+    <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?>
+    alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>"
+    width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
 
-        </a>
-      <?php else : ?>
+</a>
+<?php else : ?>
 
-        <?php if ($lightboxEnable == true) : ?>
-          <a class=" <?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" data-fslightbox=" <?php echo esc_attr($galleryId); ?>"> <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title=" <?php echo esc_attr($titleText); ?>" /> </a>
-        <?php else : ?>
-          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+<?php if ($lightboxEnable == true) : ?>
+<a class=" <?php echo esc_attr($blockId); ?>"
+  href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
+  data-fslightbox=" <?php echo esc_attr($galleryId); ?>"> <img <?php echo esc_attr($linkAttrStr); ?>
+    src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>"
+    alt="<?php echo esc_attr($altText); ?>" title=" <?php echo esc_attr($titleText); ?>" /> </a>
+<?php else : ?>
+<img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
+  <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>"
+  <?php endif; ?> <?php if ($lazyLoad == false) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?>
+  alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>"
+  width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
 
-        <?php endif; ?>
+<?php endif; ?>
 
-      <?php endif; ?>
+<?php endif; ?>
 
-    <?php
+<?php
 
     endif;
 
@@ -453,22 +496,24 @@ class PGBlockImage
 
     ?>
 
-      <?php if (!empty($featuredImageLinkTo)) : ?>
-        <a href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-          <<?php echo tag_escape($wrapperTag); ?> class="
+<?php if (!empty($featuredImageLinkTo)) : ?>
+<a href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>"
+  rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>"
+  <?php echo esc_attr($linkAttrStr); ?>>
+  <<?php echo tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>">
 
-          </<?php echo tag_escape($wrapperTag); ?>>
-        </a>
-      <?php else : ?>
+  </<?php echo tag_escape($wrapperTag); ?>>
+</a>
+<?php else : ?>
 
-        <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                           <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-        </<?php echo tag_escape($wrapperTag); ?>>
-      <?php endif; ?>
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php endif; ?>
 
-    <?php
+<?php
 
     endif;
 

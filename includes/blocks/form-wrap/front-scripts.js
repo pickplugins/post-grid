@@ -213,6 +213,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			.then((response) => {
 				if (response.ok && response.status < 400) {
 					response.json().then((data) => {
+
+						console.log(data);
+
+
 						var successArgs = data.success == undefined ? {} : data.success;
 						var errorsArgs = data.errors == undefined ? {} : data.errors;
 

@@ -21,7 +21,8 @@
     ]
   },
   "parent": [
-    "post-grid/accordion-nested"
+    "post-grid/accordion-nested",
+    "post-grid/post-query"
   ],
   "attributes": {
     "content": {
@@ -61,6 +62,8 @@
       "type": "object",
       "default": {
         "options": {
+          "textSrc": "",
+          "textSrcMeta": "",
           "text": "Accordion Header Text",
           "tag": "div",
           "class": "accordion-header-label",
@@ -79,7 +82,7 @@
         "options": {
           "position": "",
           "tag": "div",
-          "class": "accordion-header-counter",
+          "class": "accordion-label-counter",
           "overrideChild": true
         },
         "styles": {}
@@ -125,6 +128,10 @@
         },
         "styles": {}
       }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
     },
     "blockId": {
       "type": "string",

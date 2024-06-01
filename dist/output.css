@@ -294,6 +294,10 @@
   margin-bottom: 0px;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -543,6 +547,10 @@
   width: 50%;
 }
 
+.w-1\/6 {
+  width: 16.666667%;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -670,6 +678,10 @@
 .w-max {
   width: -moz-max-content;
   width: max-content;
+}
+
+.min-w-\[320px\] {
+  min-width: 320px;
 }
 
 .min-w-\[80px\] {

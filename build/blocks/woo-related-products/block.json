@@ -41,6 +41,24 @@
         }
       }
     },
+    "itemsWrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "itemWrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
     "image": {
       "type": "object",
       "default": {
@@ -111,6 +129,10 @@
         "best_selling": "",
         "top_rated": ""
       }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
     },
     "blockId": {
       "type": "string",

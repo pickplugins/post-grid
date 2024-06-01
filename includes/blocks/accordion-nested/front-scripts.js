@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	accordionHeaders.forEach((header, index) => {
 		const counter = header.querySelector(".accordion-label-counter");
-		console.log(counter);
-		counter.textContent = `(${index + 1})`; // Adding 1 to start counting from 1
+		if (counter !== null) {
+			counter.textContent = `${index + 1}`; // Adding 1 to start counting from 1
+		}
 	});
 
 	accordionHeaders.forEach((accordionHeader) => {
@@ -31,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	// 				header: "accordion-icon",    // custom icon class
 	// 				activeHeader: "accordion-icon accordion-icon-toggle" // custom icon class
 	// 			};
-
 
 	// 			var extraPram = {
 	// 				classes: {
@@ -83,13 +83,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				if (accordionHeader.classList.contains("accordion-header-active")) {
 					if (iconToggle != null) {
 						iconToggle.style.display = "inline-block";
-
+					}
+					if (iconIdle != null) {
+						iconIdle.style.display = "none";
 					}
 					content.style.display = "block";
-					iconIdle.style.display = "none";
 					content.style.height = "auto";
 				} else {
-					iconIdle.style.display = "inline-block";
+					if (iconIdle != null) {
+						iconIdle.style.display = "inline-block";
+					}
 					if (iconToggle != null) {
 						iconToggle.style.display = "none";
 					}
@@ -102,12 +105,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 });
 
-
-
 // // * working
-
-
-
 
 // document.addEventListener("DOMContentLoaded", function (event) {
 // 	var accordionHeaders = document.querySelectorAll(".accordion-header");
@@ -157,7 +155,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // 		});
 // 	});
 // });
-
-
-
-

@@ -185,6 +185,10 @@
         }
       }
     },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
     "blockCssY": {
       "type": "object",
       "default": {

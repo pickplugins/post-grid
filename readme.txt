@@ -1,18 +1,18 @@
-=== Post Grid, Form Maker, Popup Maker, WooCommerce Blocks, Post Blocks, Post Carousel - Combo Blocks ===
+=== Gutenberg Blocks, Page Builder - ComboBlocks ===
 Contributors: PickPlugins
 Donate link: https://comboblocks.com/
-Tags: post grid, form maker, woocommerce blocks, popup maker, post blocks
+Tags: Gutenberg Blocks, form maker, woocommerce blocks, popup maker, Page Builder
 Requires at least: 5.0.0
 Tested up to: 6.5
-Stable tag: 2.2.81
+Stable tag: 2.2.82
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-    Combo Blocks for Landing Page Builder, Blog Builder, eCommerce Builder, Niche Site Builder, News Site Builder and More.
+    ComboBlocks for Landing Page Builder, Blog Builder, eCommerce Builder, Niche Site Builder, News Site Builder and More.
 
 == Description ==
 
-Post Grid is now Combo Blocks. We have added 45+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
+Post Grid is now ComboBlocks. We have added 45+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
 
 ### Post Grid by [PickPlugins](http://pickplugins.com)
 
@@ -388,6 +388,31 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 15. Accordion Block
 
 == Changelog ==
+
+
+= 2.2.82 =
+- 2024-05-29 - update - Post Grid Block - Saved layout not loading issue fixed.
+- 2024-05-29 - update - Update Dashboard component.
+- 2024-05-26 - update - Update functions-rest.php file.
+- 2024-05-26 - update - Update Sidebar component.
+- 2024-05-25 - update - Update Style component.
+- 2024-05-20 - added - Added Table block.
+- 2024-05-25 - added - Added Table td block.
+- 2024-05-25 - added - Added Table tr block.
+- 2024-05-21 - added - Added Empty Cells component.
+- 2024-05-22 - added - Added Border Collapse component.
+- 2024-05-21 - added - Added Table Layout component.
+- 2024-05-21 - added - Added Caption Side component.
+- 2024-05-21 - update - Update Icon/Button/Link block.
+- 2024-05-20 - update - Update Form block.
+- 2024-05-20 - update - Update WordPress-org block.
+- 2024-05-18 - update - Update WordPress-org-item block.
+- 2024-05-15 - update - Update Text-Shadow component.
+- 2024-05-14 - update - Update Font-Family component.
+- 2024-05-11 - added - Added visibility to all blocks.
+- 2024-05-11 - added - Elementor support added.
+
+
 
 = 2.2.81 =
 - 2024-05-10 - fix - Fixed security issue Cross-Site Scripting via Block Attribute

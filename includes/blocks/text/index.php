@@ -9,7 +9,7 @@ class PGBlockPostText
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+    // add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -26,6 +26,7 @@ class PGBlockPostText
 
 
 
+
       )
     );
   }
@@ -36,13 +37,17 @@ class PGBlockPostText
 
     if (has_block('post-grid/text')) {
 
-      $other = isset($attributes['other']) ? $attributes['other'] : [];
-      $otherOptions = isset($other['options']) ? $other['options'] : [];
-      $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
+      // $other = isset($attributes['other']) ? $attributes['other'] : [];
+      // $otherOptions = isset($other['options']) ? $other['options'] : [];
+      // $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
+      // $otherCopyContent = isset($otherOptions['copyContent']) ? $otherOptions['copyContent'] : "";
 
-      if ($otherCopyObj) {
-        wp_enqueue_script('pg-text');
-      }
+      var_dump($attributes);
+
+      // var_dump($other);
+      // if ($otherCopyObj) {
+      wp_enqueue_script('pg-text');
+      // }
     }
   }
   function front_style($attributes)
@@ -56,6 +61,22 @@ class PGBlockPostText
 
 
     global $postGridCssY;
+
+
+    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', true);
+
+    if (has_block('post-grid/text')) {
+
+      $other = isset($attributes['other']) ? $attributes['other'] : [];
+      $otherOptions = isset($other['options']) ? $other['options'] : [];
+      $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
+      $otherCopyContent = isset($otherOptions['copyContent']) ? $otherOptions['copyContent'] : "";
+
+
+      if ($otherCopyObj) {
+        wp_enqueue_script('pg-text');
+      }
+    }
 
 
 
@@ -75,7 +96,8 @@ class PGBlockPostText
     $other = isset($attributes['other']) ? $attributes['other'] : [];
     $otherOptions = isset($other['options']) ? $other['options'] : [];
     $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
-
+    $otherCopyContent = isset($otherOptions['copyContent']) ? $otherOptions['copyContent'] : "";
+    // var_dump($other);
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
     $rules = isset($visible['rules']) ? $visible['rules'] : [];
 
@@ -111,6 +133,7 @@ class PGBlockPostText
 
     ////var_dump($obj);
     $textClass = parse_css_class($textClass, $obj);
+    $content = parse_css_class($content, $obj);
 
 
 
@@ -130,8 +153,9 @@ class PGBlockPostText
 
     ob_start();
 
-
-
+    if (empty($wrapperTag)) :
+      echo $content;
+    endif;
 
 
     if (!empty($wrapperTag)) :
@@ -139,12 +163,10 @@ class PGBlockPostText
 
 
 
-      <<?php echo tag_escape($wrapperTag); ?> class="
-        <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
+      <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
 
-                                                                                    if ($otherCopyObj) :
-                                                                                    ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" <?php endif; ?>><?php echo $content; ?>
+                                                                                                                                                                  if ($otherCopyObj) :
+                                                                                                                                                                  ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" copyContent="<?php echo esc_attr($otherCopyContent); ?>" <?php endif; ?>><?php echo $content; ?>
       </<?php echo tag_escape($wrapperTag); ?>>
     <?php
 

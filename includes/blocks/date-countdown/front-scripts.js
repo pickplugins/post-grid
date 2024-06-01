@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		if (timeDifference > 0) {
 			var innerWrap = document.querySelector(".inner");
-			innerWrap.style.display = "none";
+			if (innerWrap !== null) {
+				innerWrap.style.display = "none";
+			}
 		}
 
 		document.addEventListener("pgDateCountdownExpired", (event) => {});
@@ -95,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			dataVisible.forEach((item) => {
 				var countdownExpiredArg = item.getAttribute("countdown-expired-arg");
 				var countdownExpiredArgObject = JSON.parse(countdownExpiredArg);
-
 
 				var dateCountdownId = item.getAttribute("date-countdown-id");
 
@@ -141,14 +142,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							countdownWrap.style.display = "none";
 						}
 						if (conditionId == "showExpiredMsg") {
-							document.addEventListener(
-								"pgDateCountdownExpired",
-								(event) => {
-
-									var innerWrap = document.querySelector(".inner");
-									innerWrap.style.display = "block";
-								}
-							);
+							document.addEventListener("pgDateCountdownExpired", (event) => {
+								var innerWrap = document.querySelector(".inner");
+								innerWrap.style.display = "block";
+							});
 						}
 						if (conditionId == "showElement") {
 							value = conditions.value;
@@ -244,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				const d = new Date();
 				d.setTime(d.getTime() + days);
 				// d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-				
+
 				const expires = "expires=" + d.toUTCString();
 				// const expires = "expires=" + days.toUTCString();
 				document.cookie =
@@ -264,7 +261,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				// Calculate the end time (everEnd) based on your logic
 				const everEnd = everStart + totalTime; // Calculate the end time as needed
 
-				
 				let everDuration = everEnd - everStart;
 				everDurationX = everDuration;
 

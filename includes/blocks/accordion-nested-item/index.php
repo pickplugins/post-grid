@@ -82,6 +82,7 @@ class PGBlockAccordionNestedItem
 		$headerLabelText = isset($headerLabelOptions['text']) ? $headerLabelOptions['text'] : "";
 		$headerLabelSlug = isset($headerLabelOptions['slug']) ? $headerLabelOptions['slug'] : "";
 		$headerLabelTag = isset($headerLabelOptions['tag']) ? $headerLabelOptions['tag'] : "";
+		$headerLabelTextSrc = isset($headerLabelOptions['textSrc']) ? $headerLabelOptions['textSrc'] : "";
 
 		// //var_dump($headerTag);
 		////var_dump($headerLabelTag);
@@ -118,7 +119,6 @@ class PGBlockAccordionNestedItem
 
 		$labelCounter = isset($attributes['labelCounter']) ? $attributes['labelCounter'] : '';
 		$labelCounterOptions = isset($labelCounter['options']) ? $labelCounter['options'] : [];
-
 		$labelCounterEnable = isset($labelCounterOptions['enable']) ? $labelCounterOptions['enable'] : false;
 
 
@@ -189,6 +189,32 @@ class PGBlockAccordionNestedItem
 		//echo '<pre>' . var_export($count, true) . '</pre>';
 		// echo '<pre>' . //var_export($iconOptions, true) . '</pre>';
 		// echo '<pre>' . //var_export($iconSrc, true) . '</pre>';
+
+		// //* Visible condition
+		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+		if (!empty($visible['rules'])) {
+			$isVisible = post_grid_visible_parse($visible);
+
+			// var_dump($isVisible);
+
+			if (!$isVisible) return;
+		}
+
+
+
+		if ($headerLabelTextSrc == 'post_title') {
+
+			$post_id = get_the_id();
+
+
+
+			$headerLabelText = get_the_title($post_id);
+		} else if ($headerLabelTextSrc == 'term_title') {
+		} else if ($headerLabelTextSrc == 'term_title') {
+		}
+
+
+		// //* Visible condition
 
 		ob_start();
 

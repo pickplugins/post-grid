@@ -17,8 +17,9 @@ class PGBlockIcon
   {
 
     if (has_block('post-grid/icon')) {
+      wp_register_script('pgicon_front_script', post_grid_plugin_url . 'includes/blocks/icon/front-scripts.js', [], '', true);
 
-      //wp_enqueue_script('pgicon_front_script');
+      wp_enqueue_script('pgicon_front_script');
     }
   }
 
@@ -90,6 +91,9 @@ class PGBlockIcon
     $textCustomUrl = isset($textOptions['customUrl']) ? $textOptions['customUrl'] : '';
     $textLinkAttr = isset($textOptions['linkAttr']) ? $textOptions['linkAttr'] : [];
     $textRel = isset($textOptions['rel']) ? $textOptions['rel'] : '';
+
+    $triggerName = isset($textOptions['triggerName']) ? $textOptions['triggerName'] : '';
+    $triggerType = isset($textOptions['triggerType']) ? $textOptions['triggerType'] : '';
 
 
     $utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
@@ -192,9 +196,9 @@ class PGBlockIcon
     ) {
       $post_url = $textCustomUrl;
     } else if ($textLinkTo == 'authorMeta') {
-      $post_url = get_user_meta($post_author_id, $textLinkToAuthorMeta, true);
+      $post_url = get_the_author_meta($textLinkToAuthorMeta, $post_author_id);
     } else if ($textLinkTo == 'customField') {
-      $post_url = get_post_meta($post_author_id, $textLinkToCustomMeta, true);
+      $post_url = get_post_meta($post_ID, $textLinkToAuthorMeta, true);
     }
 
 
@@ -239,6 +243,25 @@ class PGBlockIcon
     $prefixText = parse_css_class($prefixText, $obj);
     $postfixText = parse_css_class($postfixText, $obj);
 
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
+
+      // var_dump($isVisible);
+
+      if (!$isVisible) return;
+    }
+
+    // //* Visible condition
+
+    $dataAtts = [
+      "triggerName" => $triggerName,
+      "triggerType" => $triggerType,
+      "blockId" => $blockId,
+    ];
+
+
     ob_start();
 
 
@@ -246,86 +269,90 @@ class PGBlockIcon
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                                   <?php echo esc_attr($blockId); ?>
-                                  <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
+                                  <?php echo esc_attr($wrapperClass); ?>"
+  data-trigger="<?php echo esc_attr(json_encode($dataAtts)) ?>"
+  <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
 
 
-        <?php if ($iconPosition == 'beforePrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'beforePrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
+  <?php if ($prefixText) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <?php if (!empty($textLinkTo)) :
+  <?php if ($iconPosition == 'afterPrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if (!empty($textLinkTo)) :
           /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
         ?>
-          <?php if ($iconPosition == 'beforeLink') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
-          <a class='text' <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
-            <?php if ($iconPosition == 'beforeText') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
+  <?php if ($iconPosition == 'beforeLink') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <a class='text' <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>"
+    rel="<?php echo esc_attr($textRel); ?>"
+    href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+    <?php if ($iconPosition == 'beforeText') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
 
-            <?php if ($textEnable) : ?>
-              <span>
-                <?php echo wp_kses_post($textText); ?>
-              </span>
-            <?php endif; ?>
-
-
-            <?php if ($iconPosition == 'afterText') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-          </a>
-          <?php if ($iconPosition == 'afterLink') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
-
-        <?php else : ?>
-          <?php if ($iconPosition == 'beforeText') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
+    <?php if ($textEnable) : ?>
+    <span>
+      <?php echo wp_kses_post($textText); ?>
+    </span>
+    <?php endif; ?>
 
 
-          <?php if ($textEnable) : ?>
-            <span class="text">
-              <?php echo wp_kses_post($textText); ?>
-            </span>
-          <?php endif; ?>
+    <?php if ($iconPosition == 'afterText') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+  </a>
+  <?php if ($iconPosition == 'afterLink') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+
+  <?php else : ?>
+  <?php if ($iconPosition == 'beforeText') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
 
-          <?php if ($iconPosition == 'afterText') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
-        <?php endif; ?>
+  <?php if ($textEnable) : ?>
+  <span class="text">
+    <?php echo wp_kses_post($textText); ?>
+  </span>
+  <?php endif; ?>
+
+
+  <?php if ($iconPosition == 'afterText') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php endif; ?>
 
 
 
 
-        <?php if ($iconPosition == 'beforePostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'beforePostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if ($postfixText) : ?>
+  <span class="<?php echo esc_attr($postfixClass); ?>">
+    <?php echo wp_kses_post($postfixText); ?>
+  </span>
+  <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'afterPostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-      </<?php echo tag_escape($wrapperTag); ?>>
-    <?php
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
     endif;
 
@@ -334,78 +361,80 @@ class PGBlockIcon
     ?>
 
 
-      <?php if (empty($textLinkTo)) : ?>
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
+<?php if (empty($textLinkTo)) : ?>
+<?php if ($prefixText) : ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo wp_kses_post($prefixText); ?>
+</span>
+<?php endif; ?>
 
 
-        <?php if ($iconPosition == 'beforeText') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+<?php if ($iconPosition == 'beforeText') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
 
 
-        <?php if ($textEnable) : ?>
-          <span class="text">
-            <?php echo wp_kses_post($textText); ?>
-          </span>
-        <?php endif; ?>
+<?php if ($textEnable) : ?>
+<span class="text">
+  <?php echo wp_kses_post($textText); ?>
+</span>
+<?php endif; ?>
 
 
-        <?php if ($iconPosition == 'afterText') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+<?php if ($iconPosition == 'afterText') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
 
 
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
-      <?php else :
+<?php if ($postfixText) : ?>
+<span class="<?php echo esc_attr($postfixClass); ?>">
+  <?php echo wp_kses_post($postfixText); ?>
+</span>
+<?php endif; ?>
+<?php else :
         /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
       ?>
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
-        <?php if ($iconPosition == 'beforeLink') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+<?php if ($prefixText) : ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo wp_kses_post($prefixText); ?>
+</span>
+<?php endif; ?>
+<?php if ($iconPosition == 'beforeLink') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrText); ?>
+  target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
+  href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 
-          <?php if ($iconPosition == 'beforeText') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
-
-
-          <?php if ($textEnable) : ?>
-            <span class='text'>
-              <?php echo wp_kses_post($textText); ?>
-            </span>
-          <?php endif; ?>
+  <?php if ($iconPosition == 'beforeText') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
 
-          <?php if ($iconPosition == 'afterText') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
-
-        </a>
-        <?php if ($iconPosition == 'afterLink') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
-      <?php endif; ?>
+  <?php if ($textEnable) : ?>
+  <span class='text'>
+    <?php echo wp_kses_post($textText); ?>
+  </span>
+  <?php endif; ?>
 
 
-    <?php
+  <?php if ($iconPosition == 'afterText') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+
+</a>
+<?php if ($iconPosition == 'afterLink') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php if ($postfixText) : ?>
+<span class="<?php echo esc_attr($postfixClass); ?>">
+  <?php echo wp_kses_post($postfixText); ?>
+</span>
+<?php endif; ?>
+<?php endif; ?>
+
+
+<?php
 
     endif;
 

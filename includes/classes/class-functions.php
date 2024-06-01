@@ -15,6 +15,35 @@ class class_post_grid_functions
     }
 
 
+    function get_posts_list($args)
+    {
+
+
+        $posts = [];
+        $posts[''] = __("- Select -", 'post-grid');
+
+        //$args = array('post_type' => 'post_grid_template');
+        $the_query = new \WP_Query($args);
+        if ($the_query->have_posts()) {
+            while ($the_query->have_posts()) {
+                $the_query->the_post();
+
+                $post_id = get_the_ID();
+                $post_title = get_the_title();
+
+                $posts[$post_id] = $post_title;
+            }
+            wp_reset_postdata();
+        }
+
+
+        return $posts;
+    }
+
+
+
+
+
     function get_query_orderby()
     {
 

@@ -41,6 +41,24 @@
         }
       }
     },
+    "itemsWrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "itemWrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
     "image": {
       "type": "object",
       "default": {
@@ -106,6 +124,10 @@
         "parent ": "",
         "ids": ""
       }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
     },
     "blockId": {
       "type": "string",

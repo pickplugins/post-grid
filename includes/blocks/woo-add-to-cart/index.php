@@ -175,81 +175,100 @@ class PGBlockWooAddToCart
     $prefixText = parse_css_class($prefixText, $obj);
     $postfixText = parse_css_class($postfixText, $obj);
 
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
+
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
+
     ob_start();
 
 
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                                               <?php echo esc_attr($blockId); ?>
                                               <?php echo esc_attr($wrapperClass); ?>">
 
 
-        <?php if ($iconPosition == 'beforePrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'beforePrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
+  <?php if ($prefixText) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'afterPrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-        <?php
+  <?php
 
         if ($productType == 'simple') :
         ?>
-          <?php if ($quantityWrapEnable) : ?>
-            <div class='quantity-wrap' data-blockid="<?php echo esc_attr($blockId); ?>">
-              <span class='quantity-decrease'>-</span>
-              <input class='quantity-input' size="3" type="text" inputmode="numeric" value="<?php echo esc_attr($quantityInputQuantity); ?>" />
-              <span class='quantity-increase'>+</span>
-            </div>
-          <?php endif; ?>
-          <a class='<?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn' data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>" data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
-            <?php if ($iconPosition == 'beforeCartText') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php echo wp_kses_post($cartBtnText); ?>
-            <?php if ($iconPosition == 'afterCartText') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-          </a>
-        <?php else : ?>
-          <a class='cartBtn' aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
-            <?php if ($iconPosition == 'beforeCartText') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php echo wp_kses_post($cartBtnText); ?>
-            <?php if ($iconPosition == 'afterCartText') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-          </a>
-        <?php endif; ?>
+  <?php if ($quantityWrapEnable) : ?>
+  <div class='quantity-wrap' data-blockid="<?php echo esc_attr($blockId); ?>">
+    <span class='quantity-decrease'>-</span>
+    <input class='quantity-input' size="3" type="text" inputmode="numeric"
+      value="<?php echo esc_attr($quantityInputQuantity); ?>" />
+    <span class='quantity-increase'>+</span>
+  </div>
+  <?php endif; ?>
+  <a class='<?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn'
+    data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>"
+    data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>"
+    aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>"
+    href="<?php echo esc_attr($cartUrl); ?>">
+    <?php if ($iconPosition == 'beforeCartText') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php echo wp_kses_post($cartBtnText); ?>
+    <?php if ($iconPosition == 'afterCartText') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+  </a>
+  <?php else : ?>
+  <a class='cartBtn' aria-label="<?php echo esc_attr($cartBtnRel); ?>"
+    aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>"
+    href="<?php echo esc_attr($cartUrl); ?>">
+    <?php if ($iconPosition == 'beforeCartText') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php echo wp_kses_post($cartBtnText); ?>
+    <?php if ($iconPosition == 'afterCartText') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+  </a>
+  <?php endif; ?>
 
 
 
 
-        <?php if ($iconPosition == 'beforePostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo $postfixClass; ?>">
-            <?php echo $postfixText; ?>
-          </span>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'beforePostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if ($postfixText) : ?>
+  <span class="<?php echo $postfixClass; ?>">
+    <?php echo $postfixText; ?>
+  </span>
+  <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'afterPostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-      </<?php echo tag_escape($wrapperTag); ?>>
-    <?php
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
     endif;
 

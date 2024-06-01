@@ -142,6 +142,9 @@ class PGBlockPostTitle
       : [];
     $postGridCssY[] = isset($blockCssY["items"]) ? $blockCssY["items"] : [];
 
+    
+
+
     if ($postTitleLinkTo == 'postUrl') {
       $post_url = get_permalink($post_ID);
     } else if ($postTitleLinkTo == 'homeUrl') {
@@ -158,9 +161,9 @@ class PGBlockPostTitle
     } else if ($postTitleLinkTo == 'customUrl') {
       $post_url = $customUrl;
     } else if ($postTitleLinkTo == 'authorMeta') {
-      $post_url = get_user_meta($post_author_id, $postTitleLinkToAuthorMeta, true);
+      $post_url = get_the_author_meta($postTitleLinkToAuthorMeta, $post_author_id);
     } else if ($postTitleLinkTo == 'customField') {
-      $post_url = get_post_meta($post_author_id, $postTitleLinkToCustomMeta, true);
+      $post_url = get_post_meta($post_ID, $postTitleLinkToAuthorMeta, true);
     }
 
     $linkAttrStr = "";
@@ -193,28 +196,27 @@ class PGBlockPostTitle
     } else {
       $post_title = wp_trim_words($post_title, $limitCount, "");
     }
-
-
+    
     if ($utmTrackingEnable == true) {
       $utmValue = [];
-
+      
       if (!empty($utmTrackingID))
-        $utmValue['utm_id'] = $utmTrackingID;
-      if (!empty($utmTrackingSource))
-        $utmValue['utm_source'] = $utmTrackingSource;
-      if (!empty($utmTrackingMedium))
-        $utmValue['utm_medium'] = $utmTrackingMedium;
-      if (!empty($utmTrackingCampaign))
-        $utmValue['utm_campaign'] = $utmTrackingCampaign;
-      if (!empty($utmTrackingTerm))
-        $utmValue['utm_term'] = $utmTrackingTerm;
-      if (!empty($utmTrackingContent))
-        $utmValue['utm_content'] = $utmTrackingContent;
+      $utmValue['utm_id'] = $utmTrackingID;
+    if (!empty($utmTrackingSource))
+    $utmValue['utm_source'] = $utmTrackingSource;
+  if (!empty($utmTrackingMedium))
+  $utmValue['utm_medium'] = $utmTrackingMedium;
+if (!empty($utmTrackingCampaign))
+$utmValue['utm_campaign'] = $utmTrackingCampaign;
+if (!empty($utmTrackingTerm))
+$utmValue['utm_term'] = $utmTrackingTerm;
+if (!empty($utmTrackingContent))
+$utmValue['utm_content'] = $utmTrackingContent;
 
-      $utmUrl = add_query_arg($utmValue, $customUrl);
+$utmUrl = add_query_arg($utmValue, $post_url);
 
-      $customUrl = $utmUrl;
-    }
+      $post_url = $utmUrl;
+}
 
 
 
@@ -226,91 +228,106 @@ class PGBlockPostTitle
     $prefixText = parse_css_class($prefixText, $obj);
     $postfixText = parse_css_class($postfixText, $obj);
 
+
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
+
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
+
     ob_start();
 
 
 ?>
 
 
-    <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php
+<<?php echo tag_escape($wrapperTag); ?>
+  class="<?php echo esc_attr($blockId); ?> <?php
                                                                                       echo esc_attr($wrapperClass); ?>">
 
-      <?php // * prefix afterbegin
+  <?php // * prefix afterbegin
       ?>
 
-      <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
-        <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo wp_kses_post($prefixText); ?>
-        </span>
-      <?php endif; ?>
+  <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
 
-      <?php if ($postTitleIsLink) : ?>
+  <?php if ($postTitleIsLink) : ?>
 
-        <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
+  <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo esc_url_raw($post_url); ?>"
+    rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
 
-          <?php  // * prefix isLink true beforebegin 
+    <?php  // * prefix isLink true beforebegin 
           ?>
-          <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
-            <span class="<?php echo esc_attr($prefixClass); ?>">
-              <?php echo wp_kses_post($prefixText); ?>
-            </span>
-          <?php endif; ?>
+    <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
+    <span class="<?php echo esc_attr($prefixClass); ?>">
+      <?php echo wp_kses_post($prefixText); ?>
+    </span>
+    <?php endif; ?>
 
-          <?php echo wp_kses_post($post_title); ?>
+    <?php echo wp_kses_post($post_title); ?>
 
 
-          <?php  // * postfix isLink true afterend 
+    <?php  // * postfix isLink true afterend 
           ?>
-          <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
-            <span class="<?php echo esc_attr($postfixClass); ?>">
-              <?php echo wp_kses_post($postfixText); ?>
-            </span>
-          <?php endif; ?>
+    <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
+    <span class="<?php echo esc_attr($postfixClass); ?>">
+      <?php echo wp_kses_post($postfixText); ?>
+    </span>
+    <?php endif; ?>
 
-        </a>
+  </a>
 
-      <?php else : ?>
+  <?php else : ?>
 
-        <<?php echo tag_escape($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
+  <<?php echo tag_escape($postTitleTag); ?> class="<?php echo esc_attr($postTitleClass); ?>">
 
 
-          <?php  // * prefix isLink true beforebegin 
+    <?php  // * prefix isLink true beforebegin 
           ?>
-          <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
-            <span class="<?php echo esc_attr($prefixClass); ?>">
-              <?php echo wp_kses_post($prefixText); ?>
-            </span>
-          <?php endif; ?>
+    <?php if (!empty($prefixText)  && ($prefixPosition == "beforebegin")) : ?>
+    <span class="<?php echo esc_attr($prefixClass); ?>">
+      <?php echo wp_kses_post($prefixText); ?>
+    </span>
+    <?php endif; ?>
 
-          <?php echo wp_kses_post($post_title); ?>
+    <?php echo wp_kses_post($post_title); ?>
 
 
-          <?php  // * postfix isLink true afterend 
+    <?php  // * postfix isLink true afterend 
           ?>
-          <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
-            <span class="<?php echo esc_attr($postfixClass); ?>">
-              <?php echo wp_kses_post($postfixText); ?>
-            </span>
-          <?php endif; ?>
+    <?php if (!empty($postfixText) && ($postfixPosition == "afterend")) : ?>
+    <span class="<?php echo esc_attr($postfixClass); ?>">
+      <?php echo wp_kses_post($postfixText); ?>
+    </span>
+    <?php endif; ?>
 
 
-        </<?php echo tag_escape($postTitleTag); ?>>
+  </<?php echo tag_escape($postTitleTag); ?>>
 
-      <?php endif; ?>
+  <?php endif; ?>
 
 
-      <?php  // * postfix isLink true beforeend 
+  <?php  // * postfix isLink true beforeend 
       ?>
-      <?php if (!empty($postfixText) && ($postfixPosition == "beforeend")) : ?>
-        <span class="<?php echo esc_attr($postfixClass); ?>">
-          <?php echo wp_kses_post($postfixText); ?>
-        </span>
-      <?php endif; ?>
+  <?php if (!empty($postfixText) && ($postfixPosition == "beforeend")) : ?>
+  <span class="<?php echo esc_attr($postfixClass); ?>">
+    <?php echo wp_kses_post($postfixText); ?>
+  </span>
+  <?php endif; ?>
 
 
 
-    </<?php echo tag_escape($wrapperTag); ?>>
+</<?php echo tag_escape($wrapperTag); ?>>
 
 
 

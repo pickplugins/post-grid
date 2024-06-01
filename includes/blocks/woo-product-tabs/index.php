@@ -117,6 +117,18 @@ class PGBlockWooProductTabs
 
     //var_dump($blockAlign);
 
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
+
+      // var_dump($isVisible);
+
+      if (!$isVisible) return;
+    }
+
+    // //* Visible condition
+
 
     ob_start();
 
@@ -129,7 +141,11 @@ class PGBlockWooProductTabs
         <?php
 
         //echo do_shortcode( "[woocommerce_my_account]" );
-        woocommerce_output_product_data_tabs();
+
+        if (function_exists('woocommerce_output_product_data_tabs')) :
+          woocommerce_output_product_data_tabs();
+        endif;
+
         ?>
 
 

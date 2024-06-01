@@ -143,35 +143,48 @@ class PGBlockPostAuthor
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
+  // //* Visible condition
+  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+  if (!empty($visible['rules'])) {
+    $isVisible = post_grid_visible_parse($visible);
+
+    // var_dump($isVisible);
+
+    if (!$isVisible) return;
+  }
+
+    // //* Visible condition
+
 
     ob_start();
 ?>
 
 
 
-    <?php
+<?php
     $htmlGroups['name'] = ob_get_clean();
 
 
     ob_start();
     ?>
 
-    <div class="<?php echo esc_attr($descriptionClass); ?>">
-      <?php echo wp_kses_post(get_the_author_meta('description', $post_author_id)); ?>
-    </div>
+<div class="<?php echo esc_attr($descriptionClass); ?>">
+  <?php echo wp_kses_post(get_the_author_meta('description', $post_author_id)); ?>
+</div>
 
-    <?php
+<?php
     $htmlGroups['description'] = ob_get_clean();
 
 
     ob_start();
     ?>
 
-    <div class="<?php echo esc_attr($avatarClass); ?>">
-      <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>" alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
-    </div>
+<div class="<?php echo esc_attr($avatarClass); ?>">
+  <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>"
+    alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
+</div>
 
-    <?php
+<?php
     $htmlGroups['avatar'] = ob_get_clean();
 
 
@@ -194,12 +207,12 @@ class PGBlockPostAuthor
     ?>
 
 
-    <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
           <?php echo esc_attr($wrapperClass); ?>
           <?php echo $blockId; ?>">
-      <?php
+  <?php
       echo $content ?>
-    </<?php echo tag_escape($wrapperTag); ?>>
+</<?php echo tag_escape($wrapperTag); ?>>
 
 
 

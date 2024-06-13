@@ -103,8 +103,8 @@ class PGBlockWooMyAccount
 
     foreach ($items as $item) {
 
-      $siteIcon = $item['siteIcon'];
-      $iconLibrary = $siteIcon['library'];
+      $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
+      $iconLibrary = isset($item['library']) ? $item['library'] : '';
 
       if ($iconLibrary == 'fontAwesome') {
         wp_enqueue_style('fontawesome-icons');
@@ -117,17 +117,17 @@ class PGBlockWooMyAccount
 
 
 
-  //var_dump($blockAlign);
+    //var_dump($blockAlign);
 
-  // //* Visible condition
-  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
+      // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
 
@@ -138,19 +138,17 @@ class PGBlockWooMyAccount
     if (!empty($wrapperTag)) :
 
 ?>
-<<?php echo tag_escape($wrapperTag); ?>
-  class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>"
-  blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+      <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
 
-  <?php
+        <?php
 
         echo do_shortcode("[woocommerce_my_account]");
         //woocommerce_output_product_data_tabs();
         ?>
 
 
-</<?php echo tag_escape($wrapperTag); ?>>
-<?php
+      </<?php echo tag_escape($wrapperTag); ?>>
+    <?php
 
     endif;
 

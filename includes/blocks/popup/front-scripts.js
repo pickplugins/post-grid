@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			rect.top >= 0 &&
 			rect.left >= 0 &&
 			rect.bottom <=
-				(window.innerHeight || document.documentElement.clientHeight) &&
+			(window.innerHeight || document.documentElement.clientHeight) &&
 			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 		);
 	}
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			((document.documentElement.scrollTop + document.body.scrollTop) /
 				(document.documentElement.scrollHeight -
 					document.documentElement.clientHeight)) *
-				100
+			100
 		);
 	}
 
@@ -84,14 +84,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		if (match) return match[2];
 	}
 
-	function checkReferrer() {}
+	function checkReferrer() { }
 
 	function popupDelay() {
-		var dataVisible = document.querySelectorAll("[pgpopup-visible]");
+		var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
 
 		if (dataVisible != null) {
 			dataVisible.forEach((item) => {
-				var attr = item.getAttribute("pgpopup-visible");
+				var attr = item.getAttribute("pgpopup-trigger");
 				var attrObj = JSON.parse(attr);
 				var popupId = item.getAttribute("popup-id");
 				var popupPrams = item.getAttribute("data-prams");
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
 							}, 3000);
-							
+
 						}
 
 						if (conditionId == "cookieExist") {
@@ -255,48 +255,68 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	//     e.returnValue = '';
 	// });
 
-	window.addEventListener("beforeunload", function (e) {
-		var dataVisible = document.querySelectorAll("[pgpopup-visible]");
+	function addEvent(obj, evt, fn) {
+		if (obj.addEventListener) {
+			obj.addEventListener(evt, fn, false);
+		} else if (obj.attachEvent) {
+			obj.attachEvent("on" + evt, fn);
+		}
+	}
 
-		if (dataVisible != null) {
-			dataVisible.forEach((item) => {
-				var attr = item.getAttribute("pgpopup-visible");
-				var attrObj = JSON.parse(attr);
-				var popupId = item.getAttribute("popup-id");
-				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
+	addEvent(document, 'mouseout', function (e) {
+		if (e.toElement == null && e.relatedTarget == null) {
 
-				Object.entries(attrObj).map((group) => {
-					var groupData = group[1];
-					var groupLogic = groupData.logic;
-					var groupArgs = groupData.args;
 
-					groupArgs.map((conditions) => {
-						var conditionId = conditions.id;
-						if (conditionId == "onExit") {
-							popupWrap.style.display = "block";
+			if (dataVisible != null) {
+				dataVisible.forEach((item) => {
+					var attr = item.getAttribute("pgpopup-trigger");
+					var attrObj = JSON.parse(attr);
+					var popupId = item.getAttribute("popup-id");
+					var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
 
-							if (conditions.value) {
-								var confirmationMessage = "tab close";
+					Object.entries(attrObj).map((group) => {
+						var groupData = group[1];
+						var groupLogic = groupData.logic;
+						var groupArgs = groupData.args;
 
-								(e || window.event).returnValue = confirmationMessage; //Gecko + IE
-								sendkeylog(confirmationMessage);
-								return confirmationMessage;
+						groupArgs.map((conditions) => {
+							var conditionId = conditions.id;
+							if (conditionId == "onExit") {
+								popupWrap.style.display = "block";
+
+								console.log('onExit');
+								console.log(conditions.value);
+								e.preventDefault();
+								e.defaultPrevented;
+
+								if (conditions.value) {
+									var confirmationMessage = "tab close";
+
+									e.preventDefault();
+									//return "Are you sure you want to exit?";
+
+									//(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+
+									return confirmationMessage;
+								}
 							}
-						}
+						});
 					});
 				});
-			});
-		}
+			}
 
-		//Webkit, Safari, Chrome etc.
+
+
+		};
 	});
 
+
 	window.oncontextmenu = function (event) {
-		var dataVisible = document.querySelectorAll("[pgpopup-visible]");
+		var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
 
 		if (dataVisible != null) {
 			dataVisible.forEach((item) => {
-				var attr = item.getAttribute("pgpopup-visible");
+				var attr = item.getAttribute("pgpopup-trigger");
 				var attrObj = JSON.parse(attr);
 				var popupId = item.getAttribute("popup-id");
 				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
@@ -310,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var conditionId = conditions.id;
 						if (conditionId == "clickRight") {
 							popupWrap.style.display = "block";
-							
+
 
 							if (conditions.value) {
 								event.preventDefault();
@@ -340,11 +360,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		var scrollPercentage = getScrollPercentage();
 		var scrollAmount = getScrollAmount();
 
-		var dataVisible = document.querySelectorAll("[pgpopup-visible]");
+		var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
 
 		if (dataVisible != null) {
 			dataVisible.forEach((item) => {
-				var attr = item.getAttribute("pgpopup-visible");
+				var attr = item.getAttribute("pgpopup-trigger");
 				var attrObj = JSON.parse(attr);
 				var popupId = item.getAttribute("popup-id");
 				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
@@ -448,11 +468,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	document.addEventListener("click", function (e) {
 		popupActions.clickCount += 1;
-		var dataVisible = document.querySelectorAll("[pgpopup-visible]");
+		var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
 
 		if (dataVisible != null) {
 			dataVisible.forEach((item) => {
-				var attr = item.getAttribute("pgpopup-visible");
+				var attr = item.getAttribute("pgpopup-trigger");
 				var attrObj = JSON.parse(attr);
 				var popupId = item.getAttribute("popup-id");
 				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
@@ -506,11 +526,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		}
 	});
 
-	var dataVisible = document.querySelectorAll("[pgpopup-visible]");
+	var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
 
 	if (dataVisible != null) {
 		dataVisible.forEach((item) => {
-			var attr = item.getAttribute("pgpopup-visible");
+			var attr = item.getAttribute("pgpopup-trigger");
 			var attrObj = JSON.parse(attr);
 			var popupId = item.getAttribute("popup-id");
 			var popupPrams = item.getAttribute("data-prams");

@@ -255,7 +255,17 @@
     },
     "sliderOptions": {
       "type": "object",
-      "default": {}
+      "default": {
+        "perPage": "3",
+        "perMove": "1",
+        "autoplay": "1",
+        "gap": "1em",
+        "pagination": "1",
+        "drag": "1",
+        "arrows": "1",
+        "pauseOnHover": "1",
+        "speed": "400"
+      }
     },
     "sliderOptionsRes": {
       "type": "object",

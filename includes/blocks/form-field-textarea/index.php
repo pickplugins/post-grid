@@ -110,8 +110,6 @@ class PGBlockFormFieldTextarea
 
 
 
-    //////var_dump($labelEnable);
-    //////var_dump($labelText);
 
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';

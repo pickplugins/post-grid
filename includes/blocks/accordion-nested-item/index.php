@@ -84,8 +84,7 @@ class PGBlockAccordionNestedItem
 		$headerLabelTag = isset($headerLabelOptions['tag']) ? $headerLabelOptions['tag'] : "";
 		$headerLabelTextSrc = isset($headerLabelOptions['textSrc']) ? $headerLabelOptions['textSrc'] : "";
 
-		// //var_dump($headerTag);
-		////var_dump($headerLabelTag);
+
 
 		$icon = isset($attributes['icon']) ? $attributes['icon'] : $parentIcon;
 		$iconOptions = isset($icon['options']) ? $icon['options'] : [];
@@ -137,7 +136,6 @@ class PGBlockAccordionNestedItem
 		$labelIconHtml = !empty($labelIconSrc) ? '<span class="accordion-label-icon ' . $labelIconClass . ' ' . $labelIconSrc . '"></span>' : '';
 
 		$contentWrapper = isset($attributes['content']) ? $attributes['content'] : $parentContent;
-		// //var_dump($contentWrapper);
 		$contentOptions = isset($contentWrapper['options']) ? $contentWrapper['options'] : [];
 		$parentContentOptions = isset($contentWrapper['options']) ? $contentWrapper['options'] : [];
 		$contentWrapperTag = !empty($contentOptions['tag']) ? $contentOptions['tag'] : $parentContentOptions['tag'];
@@ -182,20 +180,14 @@ class PGBlockAccordionNestedItem
 		}
 
 
-		//////var_dump($labelIconSrc);
-		//////var_dump($labelIconOptions);
 
-		// echo '<pre>' . var_export($labelCounterEnable, true) . '</pre>';
-		//echo '<pre>' . var_export($count, true) . '</pre>';
-		// echo '<pre>' . //var_export($iconOptions, true) . '</pre>';
-		// echo '<pre>' . //var_export($iconSrc, true) . '</pre>';
+
 
 		// //* Visible condition
 		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
 		if (!empty($visible['rules'])) {
 			$isVisible = post_grid_visible_parse($visible);
 
-			// var_dump($isVisible);
 
 			if (!$isVisible) return;
 		}

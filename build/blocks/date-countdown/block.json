@@ -591,6 +591,10 @@
         }
       }
     },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
     "editMode": {
       "type": "boolean",
       "default": true

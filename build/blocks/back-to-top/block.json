@@ -1,0 +1,148 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/back-to-top",
+  "title": "Back To Top",
+  "textdomain": "post-grid",
+  "category": "post-grid-tools",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-back-to-top",
+          "showAfter": "300",
+          "offsetTop": "0",
+          "attr": []
+        },
+        "styles": {
+          "position": {
+            "Desktop": "fixed"
+          },
+          "right": {
+            "Desktop": "50px"
+          },
+          "bottom": {
+            "Desktop": "50px"
+          }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "default": {
+        "options": {
+          "imgSrcType": "media",
+          "imgSrcImgId": "",
+          "srcUrl": "",
+          "srcId": "",
+          "position": "",
+          "enable": "",
+          "class": "back-to-top-image",
+          "size": {
+            "Desktop": "full",
+            "Tablet": "full",
+            "Mobile": "full"
+          }
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "maxWidth": {
+            "Desktop": "40px"
+          },
+          "height": {
+            "Desktop": "auto"
+          }
+        }
+      }
+    },
+    "text": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": false,
+          "text": "",
+          "src": "",
+          "linkTo": "",
+          "linkToAuthorMeta": "",
+          "linkToCustomMeta": "",
+          "linkTarget": "_blank",
+          "customUrl": "",
+          "linkAttr": [],
+          "triggerName": "",
+          "triggerType": "",
+          "class": "back-to-top-text"
+        },
+        "styles": {}
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-check-circle",
+          "position": "beforeText",
+          "class": "back-to-top-icon"
+        },
+        "styles": {}
+      }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "linkAttr": {
+      "type": "array",
+      "default": []
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "editorStyle": "font-awesome-5",
+  "style": "front_style",
+  "script": "front_script",
+  "keywords": [
+    "icon",
+    "icons",
+    "button",
+    "buttons",
+    "link",
+    "icon block",
+    "button block",
+    "icon button link",
+    "link block",
+    "icon block for wordpress",
+    "button block for wordpress",
+    "icon button link block for wordpress",
+    "multi-functional button",
+    "call-to-action button",
+    "button"
+  ],
+  "description": "The icon/button/link block is a clickable element that typically contains an icon or text, serving as a visual cue for actions like navigation, downloads, or interactions on a website."
+}

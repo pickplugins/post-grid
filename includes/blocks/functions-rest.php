@@ -1189,6 +1189,7 @@ class BlockPostGridRest
 	{
 		$response = [];
 
+		error_log('process_form_data');
 
 		$formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
@@ -1227,6 +1228,8 @@ class BlockPostGridRest
 
 			$formFields[$formField] = $formFieldValue;
 		}
+
+		error_log($formType);
 
 
 		if (empty($errors)) {
@@ -1707,13 +1710,11 @@ class BlockPostGridRest
 		}
 
 
-		// error_log(rwmb_meta($meta_key, [], $postId));
 
 		if ($meta_type == 'mbTaxonomy' || $meta_type == 'mbSelect') {
 			$mb_Value = rwmb_meta($meta_key, [], $postId);
-			// error_log(gettype($mb_Value));
+
 			if (gettype($mb_Value) == 'object') {
-				error_log(serialize($mb_Value));
 			}
 			if (gettype($mb_Value) == 'array') {
 				$singleArray = $this->nestedToSingle($mb_Value);
@@ -1743,7 +1744,6 @@ class BlockPostGridRest
 			}
 		} else if ($meta_type == 'mbButton') {
 			$mb_Value = rwmb_meta($meta_key, [], $postId);
-			// error_log(gettype($mb_Value));
 			$singleArray = ['{metaValue}' => $mb_Value];
 			$response->args = $singleArray;
 			$response->html = strtr($template, (array) $singleArray);
@@ -1947,7 +1947,6 @@ class BlockPostGridRest
 
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
-		error_log(serialize($queryArgs));
 		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
 		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
 

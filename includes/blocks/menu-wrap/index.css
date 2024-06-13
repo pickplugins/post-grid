@@ -1,16 +1,16 @@
 .pg-menu-wrap {}
 
-.pg-menu-wrap .menu {}
+.pg-menu-wrap .pg-menu {}
 
-.pg-menu-wrap .menu li {
+.pg-menu-wrap .pg-menu li {
     position: relative;
 }
 
-.pg-menu-wrap .menu li:hover {}
+.pg-menu-wrap .pg-menu li:hover {}
 
 
 
-.pg-menu-wrap .menu li .subMenu {
+.pg-menu-wrap .pg-menu li .pg-sub-menu {
 
     visibility: hidden;
     position: absolute;
@@ -19,8 +19,8 @@
     opacity: 0.4;
 }
 
-.pg-menu-wrap .menu li:hover>.subMenu,
-.pg-menu-wrap .menu li.active>.subMenu {
+.pg-menu-wrap .pg-menu li:hover>.pg-sub-menu,
+.pg-menu-wrap .pg-menu li.active>.pg-sub-menu {
     display: block;
     top: 100%;
     visibility: visible;
@@ -30,8 +30,37 @@
 
 
 
-.pg-menu-wrap .subMenu .subMenu {
+.pg-menu-wrap .pg-sub-menu .pg-sub-menu {
     position: absolute;
     top: 0;
     left: 100%;
+}
+
+.pg-menu-wrap .mobile-toggle {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .pg-menu-wrap {
+        position: relative;
+        justify-content: end !important;
+    }
+
+    .pg-menu-wrap .pg-menu {
+        display: none !important;
+    }
+
+    .pg-menu-wrap .mobile-toggle {
+        display: block;
+    }
+
+    .pg-menu-wrap .pg-menu li {}
+
+    .pg-menu-wrap .pg-menu li .pg-sub-menu {
+        visibility: visible;
+        position: relative;
+        opacity: 1;
+        padding: 0 0 0 20px;
+    }
+
 }

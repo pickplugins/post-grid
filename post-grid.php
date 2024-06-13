@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.82
+Version: 2.2.83
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.82');
+      define('post_grid_version', '2.2.83');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -131,122 +131,406 @@ if (!class_exists('PostGrid')) {
       $disabled = isset($blocks['disabled']) ? $blocks['disabled'] : [];
 
 
-      // foreach ($disabled as $block) {
 
-      //   $blockParts = explode("/", $block);
 
-      //   //var_dump($blockParts[1]);
-      // }
-
-      //error_log(serialize($disabled));
 
 
       require_once(post_grid_plugin_dir . 'includes/blocks/functions-blocks.php');
       require_once(post_grid_plugin_dir . 'includes/blocks/functions-rest.php');
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-grid/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-query/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-query-pagination/index.php');
 
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org-item/index.php');
 
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap-item/index.php');
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-title/index.php');
+      if (!in_array('post-grid/text', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/text/index.php');
+      }
+      if (!in_array('post-grid/icon', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/icon/index.php');
+      }
+      if (!in_array('post-grid/post-grid', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-grid/index.php');
+      }
+      if (!in_array('post-grid/post-query', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-query/index.php');
+      }
+      if (!in_array('post-grid/post-query-pagination', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-query-pagination/index.php');
+      }
+      if (!in_array('post-grid/wordpress-org', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org/index.php');
+      }
+      if (!in_array('post-grid/wordpress-org-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org-item/index.php');
+      }
+      if (!in_array('post-grid/menu-wrap', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap/index.php');
+      }
+      if (!in_array('post-grid/menu-wrap-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap-item/index.php');
+      }
+      if (!in_array('post-grid/post-title', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-title/index.php');;
+      }
+      if (!in_array('post-grid/post-excerpt', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-excerpt/index.php');
+      }
+      if (!in_array('post-grid/read-more', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/read-more/index.php');
+      }
+      if (!in_array('post-grid/post-featured-image', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-featured-image/index.php');
+      }
+      if (!in_array('post-grid/post-categories', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-categories/index.php');
+      }
+      if (!in_array('post-grid/post-tags', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-tags/index.php');
+      }
+      if (!in_array('post-grid/post-author', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-author/index.php');
+      }
+      if (!in_array('post-grid/post-taxonomies', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-taxonomies/index.php');
+      }
+      if (!in_array('post-grid/post-author-fields', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-author-fields/index.php');
+      }
+      if (!in_array('post-grid/post-date', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-date/index.php');
+      }
+      if (!in_array('post-grid/accordion', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/accordion/index.php');
+      }
+      if (!in_array('post-grid/tabs-nested', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested/index.php');
+      }
+      if (!in_array('post-grid/tabs-nested-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested-item/index.php');
+      }
+      if (!in_array('post-grid/terms-list', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/terms-list/index.php');
+      }
+      if (!in_array('post-grid/layers', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/layers/index.php');
+      }
+      if (!in_array('post-grid/layer', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/layer/index.php');
+      }
+      if (!in_array('post-grid/image', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/image/index.php');
+      }
+      if (!in_array('post-grid/list-nested', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/list-nested/index.php');
+      }
+      if (!in_array('post-grid/list-nested-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/list-nested-item/index.php');
+      }
+      if (!in_array('post-grid/number-counter', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/number-counter/index.php');
+      }
+      if (!in_array('post-grid/date-countdown', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/date-countdown/index.php');
+      }
+      if (!in_array('post-grid/popup', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/popup/index.php');
+      }
+      if (!in_array('post-grid/progress-bar', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/progress-bar/index.php');
+      }
+      if (!in_array('post-grid/list', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/list/index.php');
+      }
+      if (!in_array('post-grid/image-gallery', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery/index.php');
+      }
+      if (!in_array('post-grid/image-gallery-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery-item/index.php');
+      }
+      if (!in_array('post-grid/content-slider', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/content-slider/index.php');
+      }
+      if (!in_array('post-grid/content-slider-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/content-slider-item/index.php');
+      }
+      if (!in_array('post-grid/post-meta', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-meta/index.php');
+      }
+      if (!in_array('post-grid/post-grid-filterable', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable/index.php');
+      }
+      if (!in_array('post-grid/post-grid-filterable-nav', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable-nav/index.php');
+      }
+      if (!in_array('post-grid/shortcode', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/shortcode/index.php');
+      }
+      if (!in_array('post-grid/social-share', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/social-share/index.php');
+      }
+      if (!in_array('post-grid/breadcrumb', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/breadcrumb/index.php');
+      }
+      if (!in_array('post-grid/archive-title', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/archive-title/index.php');
+      }
+      if (!in_array('post-grid/archive-description', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/archive-description/index.php');
+      }
+      if (!in_array('post-grid/post-comment-count', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-comment-count/index.php');
+      }
+      if (!in_array('post-grid/star-rate', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/star-rate/index.php');
+      }
+      if (!in_array('post-grid/accordion-nested', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested/index.php');
+      }
+      if (!in_array('post-grid/accordion-nested-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested-item/index.php');
+      }
+      if (!in_array('post-grid/flex-wrap', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap/index.php');
+      }
+      if (!in_array('post-grid/flex-wrap-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap-item/index.php');
+      }
+      if (!in_array('post-grid/masonry-wrap', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap/index.php');
+      }
+      if (!in_array('post-grid/masonry-wrap-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap-item/index.php');
+      }
+      if (!in_array('post-grid/grid-wrap', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap/index.php');
+      }
+      if (!in_array('post-grid/grid-wrap-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap-item/index.php');
+      }
+      if (!in_array('post-grid/back-to-top', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/back-to-top/index.php');
+      }
+      if (!in_array('post-grid/form-wrap', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/index.php');
+      }
+      if (!in_array('post-grid/form-wrap', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/functions.php');
+      }
+      if (!in_array('post-grid/form-field-input', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-input/index.php');
+      }
+      if (!in_array('post-grid/form-field-file-multi', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file-multi/index.php');
+      }
+      if (!in_array('post-grid/form-field-file', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file/index.php');
+      }
+      if (!in_array('post-grid/form-field-submit', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-submit/index.php');
+      }
+
+      if (!in_array('post-grid/form-field-recaptcha', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-recaptcha/index.php');
+      }
+
+      if (!in_array('post-grid/form-field-checkbox', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-checkbox/index.php');
+      }
+      if (!in_array('post-grid/form-field-radio', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-radio/index.php');
+      }
+      if (!in_array('post-grid/form-field-select', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-select/index.php');
+      }
+      if (!in_array('post-grid/form-field-textarea', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-textarea/index.php');
+      }
+
+      if (!in_array('post-grid/terms-query', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/terms-query/index.php');
+      }
+      if (!in_array('post-grid/terms-query-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/terms-query-item/index.php');
+      }
+
+      if (!in_array('post-grid/woo-sku', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-sku/index.php');
+      }
+      if (!in_array('post-grid/woo-total-sales', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-total-sales/index.php');
+      }
+      if (!in_array('post-grid/woo-stock-quantity', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock-quantity/index.php');
+      }
+      if (!in_array('post-grid/woo-product-info', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info/index.php');
+      }
+      if (!in_array('post-grid/woo-product-info-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info-item/index.php');
+      }
+      if (!in_array('post-grid/woo-price', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-price/index.php');
+      }
+      if (!in_array('post-grid/woo-add-to-cart', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-add-to-cart/index.php');
+      }
+      if (!in_array('post-grid/woo-star-rate', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
+      }
+      if (!in_array('post-grid/woo-sale', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
+      }
+      if (!in_array('post-grid/woo-stock', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
+      }
+      if (!in_array('post-grid/woo-my-account', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
+      }
+      if (!in_array('post-grid/woo-product-tabs', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
+      }
+      if (!in_array('post-grid/woo-breadcrumb', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
+      }
+      if (!in_array('post-grid/post-comments', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-comments/index.php');
+      }
+      if (!in_array('post-grid/info-box', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/info-box/index.php');
+      }
+      if (!in_array('post-grid/table', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/table/index.php');
+      }
+      if (!in_array('post-grid/table-td', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/table-td/index.php');
+      }
+      if (!in_array('post-grid/table-tr', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/table-tr/index.php');
+      }
 
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-excerpt/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/text/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/read-more/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-featured-image/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-categories/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-tags/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-author/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-taxonomies/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-author-fields/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-date/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/accordion/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested-item/index.php');
-
-      require_once(post_grid_plugin_dir . 'includes/blocks/terms-list/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/layers/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/layer/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/image/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/list-nested/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/list-nested-item/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/number-counter/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/date-countdown/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/popup/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/progress-bar/index.php');
-
-      require_once(post_grid_plugin_dir . 'includes/blocks/list/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery-item/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/content-slider/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/content-slider-item/index.php');
 
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/icon/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-meta/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable-nav/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/shortcode/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/social-share/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/breadcrumb/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/archive-title/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/archive-description/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-comment-count/index.php');
+      // if (!in_array('post-grid/woo-related-products', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-related-products/index.php');
+      // }
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/star-rate/index.php');
+      // if (!in_array('post-grid/woo-sale-products', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale-products/index.php');
+      // }
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested-item/index.php');
+      // if (!in_array('post-grid/woo-sale-products', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale-products/index.php');
+      // }
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap-item/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap-item/index.php');
+      // if (!in_array('post-grid/woo-best-selling-products', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-best-selling-products/index.php');
+      // }
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap-item/index.php');
+      // if (!in_array('post-grid/woo-top-rated-products', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-top-rated-products/index.php');
+      // }
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/functions.php');
+      // if (!in_array('post-grid/woo-products', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-products/index.php');
+      // }
+
+      // if (!in_array('post-grid/woo-recent-products', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-recent-products/index.php');
+      // }
+
+      // if (!in_array('post-grid/woo-categories', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-categories/index.php');
+      // }
+      // if (!in_array('post-grid/woo-login-form', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-login-form/index.php');
+      // }
+      // if (!in_array('post-grid/business-hours', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
+      // }
 
 
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-input/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file-multi/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-submit/index.php');
 
-
-      require_once(post_grid_plugin_dir . 'includes/blocks/terms-query/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/terms-query-item/index.php');
-
-
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-checkbox/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-radio/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-select/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/form-field-textarea/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-sku/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-total-sales/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock-quantity/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info-item/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-price/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-add-to-cart/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
-
-      require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-grid/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-query/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-query-pagination/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-title/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-excerpt/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/read-more/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-featured-image/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-categories/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-tags/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-author/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-taxonomies/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-author-fields/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-date/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/accordion/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/terms-list/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/layers/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/layer/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/image/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/list-nested/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/list-nested-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/number-counter/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/date-countdown/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/popup/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/progress-bar/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/list/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/content-slider/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/content-slider-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-meta/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable-nav/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/shortcode/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/social-share/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/breadcrumb/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/archive-title/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/archive-description/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/post-comment-count/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/star-rate/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/back-to-top/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/functions.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-input/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file-multi/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-submit/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/terms-query/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/terms-query-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-checkbox/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-radio/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-select/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-textarea/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-sku/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-total-sales/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock-quantity/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info-item/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-price/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-add-to-cart/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
       // require_once(post_grid_plugin_dir . 'includes/blocks/woo-related-products/index.php');
       // require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale-products/index.php');
       // require_once(post_grid_plugin_dir . 'includes/blocks/woo-best-selling-products/index.php');
@@ -255,16 +539,12 @@ if (!class_exists('PostGrid')) {
       // require_once(post_grid_plugin_dir . 'includes/blocks/woo-recent-products/index.php');
       // require_once(post_grid_plugin_dir . 'includes/blocks/woo-categories/index.php');
       // require_once(post_grid_plugin_dir . 'includes/blocks/woo-login-form/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/post-comments/index.php');
-
-
-      require_once(post_grid_plugin_dir . 'includes/blocks/info-box/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
-
-
-      require_once(post_grid_plugin_dir . 'includes/blocks/table/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/table-td/index.php');
-      require_once(post_grid_plugin_dir . 'includes/blocks/table-tr/index.php');
+      //require_once(post_grid_plugin_dir . 'includes/blocks/post-comments/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/info-box/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/table/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/table-td/index.php');
+      // require_once(post_grid_plugin_dir . 'includes/blocks/table-tr/index.php');
     }
 
 

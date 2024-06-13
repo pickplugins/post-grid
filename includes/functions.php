@@ -137,13 +137,11 @@ function post_grid_posts_shortcode_display($column, $post_id)
 {
     if ($column == 'shortcode') {
 ?>
-<input style="background:#bfefff" type="text" onClick="this.select();"
-  value="[post_grid <?php echo 'id=&quot;' . esc_attr($post_id) . '&quot;'; ?>]" /><br />
-<textarea cols="50" rows="1" style="background:#bfefff"
-  onClick="this.select();"><?php echo '<?php echo do_shortcode("[post_grid id=';
+        <input style="background:#bfefff" type="text" onClick="this.select();" value="[post_grid <?php echo 'id=&quot;' . esc_attr($post_id) . '&quot;'; ?>]" /><br />
+        <textarea cols="50" rows="1" style="background:#bfefff" onClick="this.select();"><?php echo '<?php echo do_shortcode("[post_grid id=';
                                                                                             echo "'" . esc_attr($post_id) . "']";
                                                                                             echo '"); ?>'; ?></textarea>
-<?php
+    <?php
 
     }
 }
@@ -389,7 +387,6 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
         //$post_type = $post->post_type;
         $post_type = isset($post->post_type) ? $post->post_type : '';
 
-        ////var_dump($post_type);
 
         if ($post_type == 'page') {
             $content = '';
@@ -438,7 +435,6 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
         }
     } elseif ($media_source == 'custom_video') {
 
-        ////var_dump($post_grid_post_settings);
 
         $video_html = '';
 
@@ -615,40 +611,40 @@ function post_grid_media($post_id, $args)
         }
 
         $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*?>/i', $output, $matches);
-if ($output = '0') {
-$output = preg_match_all('/?<img src=[\'"]([^\'"]+)[\'"].*?>/i', $output, $matches);
-}
-if (!empty($matches[1][0])) {
-$first_img = isset($matches[1][0]) ? $matches[1][0] : '';
+        if ($output = '0') {
+            $output = preg_match_all('/?<img src=[\'"]([^\'"]+)[\'"].*?>/i', $output, $matches);
+        }
+        if (!empty($matches[1][0])) {
+            $first_img = isset($matches[1][0]) ? $matches[1][0] : '';
 
-$last_char = $first_img[strlen($first_img) - 1]; // Check to see if a slash is at the end of the line
-if ($last_char == '\\') {
-$first_img = substr($first_img, 0, -1);
-}
-}
+            $last_char = $first_img[strlen($first_img) - 1]; // Check to see if a slash is at the end of the line
+            if ($last_char == '\\') {
+                $first_img = substr($first_img, 0, -1);
+            }
+        }
 
 
-if (empty($first_img)) {
-$html_thumb .= '';
-} else {
+        if (empty($first_img)) {
+            $html_thumb .= '';
+        } else {
 
-if ($link_to == 'post_link') {
-$html_thumb .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($item_post_permalink) . '"><img
+            if ($link_to == 'post_link') {
+                $html_thumb .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($item_post_permalink) . '"><img
     src="' . esc_url($first_img) . '" /></a>';
-} else {
-$html_thumb .= '<img src="' . esc_url($first_img) . '" />';
-}
-}
-} else {
-do_action('post_grid_media', $post_id, $args);
-}
+            } else {
+                $html_thumb .= '<img src="' . esc_url($first_img) . '" />';
+            }
+        }
+    } else {
+        do_action('post_grid_media', $post_id, $args);
+    }
 
 
-echo $html_thumb;
+    echo $html_thumb;
 
-$html_thumb = ob_get_clean();
+    $html_thumb = ob_get_clean();
 
-return $html_thumb;
+    return $html_thumb;
 }
 
 
@@ -668,25 +664,25 @@ function post_grid_term_slug_list($post_id)
 {
 
 
-$term_slug_list = '';
+    $term_slug_list = '';
 
-$post_taxonomies = get_post_taxonomies($post_id);
+    $post_taxonomies = get_post_taxonomies($post_id);
 
-foreach ($post_taxonomies as $taxonomy) {
+    foreach ($post_taxonomies as $taxonomy) {
 
-$term_list[] = wp_get_post_terms($post_id, $taxonomy, array("fields" => "all"));
-}
+        $term_list[] = wp_get_post_terms($post_id, $taxonomy, array("fields" => "all"));
+    }
 
-if (!empty($term_list)) {
-foreach ($term_list as $term_key => $term) {
-foreach ($term as $term_id => $term) {
-$term_slug_list .= $term->slug . ' ';
-}
-}
-}
+    if (!empty($term_list)) {
+        foreach ($term_list as $term_key => $term) {
+            foreach ($term as $term_id => $term) {
+                $term_slug_list .= $term->slug . ' ';
+            }
+        }
+    }
 
 
-return $term_slug_list;
+    return $term_slug_list;
 }
 
 
@@ -701,134 +697,134 @@ return $term_slug_list;
 function post_grid_layout_content_ajax()
 {
 
-if (current_user_can('manage_options')) {
+    if (current_user_can('manage_options')) {
 
 
-$layout_key = sanitize_text_field($_POST['layout']);
+        $layout_key = sanitize_text_field($_POST['layout']);
 
-$class_post_grid_functions = new class_post_grid_functions();
-$post_grid_layout_content = get_option('post_grid_layout_content');
+        $class_post_grid_functions = new class_post_grid_functions();
+        $post_grid_layout_content = get_option('post_grid_layout_content');
 
-if (empty($post_grid_layout_content)) {
-$layout = $class_post_grid_functions->layout_content($layout_key);
-} else {
-$layout = $post_grid_layout_content[$layout_key];
-}
+        if (empty($post_grid_layout_content)) {
+            $layout = $class_post_grid_functions->layout_content($layout_key);
+        } else {
+            $layout = $post_grid_layout_content[$layout_key];
+        }
 
 
 
-?>
-<div class="<?php echo esc_attr($layout_key); ?>">
-  <?php
+    ?>
+        <div class="<?php echo esc_attr($layout_key); ?>">
+            <?php
 
             foreach ($layout as $item_key => $item_info) {
                 $item_key = $item_info['key'];
             ?>
-  <div class="item <?php echo esc_attr($item_key); ?>" style=" <?php echo esc_attr($item_info['css']); ?> ">
+                <div class="item <?php echo esc_attr($item_key); ?>" style=" <?php echo esc_attr($item_info['css']); ?> ">
 
-    <?php
+                    <?php
 
                     if ($item_key == 'thumb') {
 
                     ?>
-    <img src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" />
-    <?php
+                        <img src="<?php echo esc_url(post_grid_plugin_url . 'assets/images/placeholder.png'); ?>" />
+                    <?php
                     } elseif ($item_key == 'title') {
 
                     ?>
-    Lorem Ipsum is simply
+                        Lorem Ipsum is simply
 
-    <?php
+                    <?php
                     } elseif ($item_key == 'excerpt') {
 
                     ?>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text
-    <?php
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                        standard dummy text
+                    <?php
                     } elseif ($item_key == 'excerpt_read_more') {
 
                     ?>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text <a href="#">Read more</a>
-    <?php
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                        standard dummy text <a href="#">Read more</a>
+                    <?php
                     } elseif ($item_key == 'read_more') {
 
                     ?>
-    <a href="#">Read more</a>
-    <?php
+                        <a href="#">Read more</a>
+                    <?php
                     } elseif ($item_key == 'post_date') {
 
                     ?>
-    18/06/2015
-    <?php
+                        18/06/2015
+                    <?php
                     } elseif ($item_key == 'author') {
 
                     ?>
-    PickPlugins
-    <?php
+                        PickPlugins
+                    <?php
                     } elseif ($item_key == 'categories') {
 
                     ?>
-    <a hidden="#">Category 1</a> <a hidden="#">Category 2</a>
-    <?php
+                        <a hidden="#">Category 1</a> <a hidden="#">Category 2</a>
+                    <?php
                     } elseif ($item_key == 'tags') {
 
                     ?>
-    <a hidden="#">Tags 1</a> <a hidden="#">Tags 2</a>
-    <?php
+                        <a hidden="#">Tags 1</a> <a hidden="#">Tags 2</a>
+                    <?php
                     } elseif ($item_key == 'comments_count') {
 
                     ?>
-    3 Comments
-    <?php
+                        3 Comments
+                    <?php
                     }
 
                     // WooCommerce
                     elseif ($item_key == 'wc_full_price') {
 
                     ?>
-    <del>$45</del> - <ins>$40</ins>
-    <?php
+                        <del>$45</del> - <ins>$40</ins>
+                    <?php
                     } elseif ($item_key == 'wc_sale_price') {
 
                     ?>
-    $45
-    <?php
+                        $45
+                    <?php
                     } elseif ($item_key == 'wc_regular_price') {
 
                     ?>
-    $45
-    <?php
+                        $45
+                    <?php
                     } elseif ($item_key == 'wc_add_to_cart') {
 
                     ?>
-    Add to Cart
-    <?php
+                        Add to Cart
+                    <?php
                     } elseif ($item_key == 'wc_rating_star') {
 
                     ?>
-    *****
-    <?php
+                        *****
+                    <?php
                     } elseif ($item_key == 'wc_rating_text') {
 
                     ?>
-    2 Reviews
-    <?php
+                        2 Reviews
+                    <?php
                     } elseif ($item_key == 'wc_categories') {
 
                     ?>
-    <a hidden="#">Category 1</a> <a hidden="#">Category 2</a>
-    <?php
+                        <a hidden="#">Category 1</a> <a hidden="#">Category 2</a>
+                    <?php
                     } elseif ($item_key == 'wc_tags') {
 
                     ?>
-    <a hidden="#">Tags 1</a> <a hidden="#">Tags 2</a>
-    <?php
+                        <a hidden="#">Tags 1</a> <a hidden="#">Tags 2</a>
+                    <?php
                     } elseif ($item_key == 'edd_price') {
 
                     ?>
-    $45
-    <?php
+                        $45
+                    <?php
                     } else {
 
                         echo esc_html($item_info['name']);
@@ -838,12 +834,12 @@ $layout = $post_grid_layout_content[$layout_key];
 
 
 
-  </div>
-  <?php
+                </div>
+            <?php
             }
 
             ?>
-</div>
+        </div>
 <?php
 
     }

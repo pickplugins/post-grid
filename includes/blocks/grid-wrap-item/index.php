@@ -83,7 +83,6 @@ class PGBlockGridWrapItem
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
 
       if (!$isVisible) return;
     }
@@ -93,10 +92,9 @@ class PGBlockGridWrapItem
     ob_start();
 
 ?>
-<div
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-  <?php echo $content ?>
-</div>
+    <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+      <?php echo $content ?>
+    </div>
 <?php
     return ob_get_clean();
   }

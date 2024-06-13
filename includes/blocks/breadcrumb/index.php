@@ -77,7 +77,6 @@ class PGBlockBreadcrumb
 		$showIcon = isset($elementsOptions['showIcon']) ? $elementsOptions['showIcon'] : true;
 		$showSeparator = isset($elementsOptions['showSeparator']) ? $elementsOptions['showSeparator'] : false;
 
-		// //var_dump($elementsItems);
 
 
 		$utmTracking = isset($attributes['utmTracking']) ? $attributes['utmTracking'] : '';
@@ -124,7 +123,7 @@ class PGBlockBreadcrumb
 
 
 
-<?php
+		<?php
 
 
 
@@ -771,7 +770,7 @@ class PGBlockBreadcrumb
 
 
 		?>
-<?php
+		<?php
 				$i++;
 			}
 
@@ -791,17 +790,16 @@ class PGBlockBreadcrumb
 
 		$wrapperClass = parse_css_class($wrapperClass, $obj);
 
-	// //* Visible condition
-	$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-	if (!empty($visible['rules'])) {
-		$isVisible = post_grid_visible_parse($visible);
+		// //* Visible condition
+		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+		if (!empty($visible['rules'])) {
+			$isVisible = post_grid_visible_parse($visible);
 
-		// var_dump($isVisible);
 
-		if (!$isVisible) return;
-	}
+			if (!$isVisible) return;
+		}
 
-    // //* Visible condition
+		// //* Visible condition
 
 
 		ob_start();
@@ -809,21 +807,20 @@ class PGBlockBreadcrumb
 		if (!empty($wrapperTag)) :
 
 		?>
-<!-- <<?php //echo tag_escape($wrapperTag); 
+			<!-- <<?php //echo tag_escape($wrapperTag); 
 						?> class="
 				<?php //echo esc_attr($blockId); 
 				?>
 				<?php //echo esc_attr($wrapperClass); 
 				?>"> -->
-<ol class="
+			<ol class="
 				<?php echo esc_attr($blockId); ?>
 				<?php echo esc_attr($wrapperClass); ?>">
-  <?php
+				<?php
 				$i = 1;
 				$j = 0;
 				if (!empty($links))
 					foreach ($links as $index => $item) {
-						// //var_dump($item['icon']);
 						$item_link = isset($item['link']) ? $item['link'] : '';
 
 
@@ -836,70 +833,70 @@ class PGBlockBreadcrumb
 
 
 				?>
-  <li class="<?php echo esc_attr('item item-' . $index); ?>">
-    <?php if (!empty($item_link)) : ?>
-    <a href="<?php echo esc_url_raw($item_link); ?>">
-      <?php if ($showIcon) : ?>
-      <?php //echo wp_kses_post($item['icon']);	
+					<li class="<?php echo esc_attr('item item-' . $index); ?>">
+						<?php if (!empty($item_link)) : ?>
+							<a href="<?php echo esc_url_raw($item_link); ?>">
+								<?php if ($showIcon) : ?>
+									<?php //echo wp_kses_post($item['icon']);	
 									?>
-      <?php endif; ?>
-      <?php if ($showLabel) : ?>
-      <span class='label'>
-        <?php echo wp_kses_post($item['label']); ?>
-      </span>
-      <?php endif; ?>
+								<?php endif; ?>
+								<?php if ($showLabel) : ?>
+									<span class='label'>
+										<?php echo wp_kses_post($item['label']); ?>
+									</span>
+								<?php endif; ?>
 
-    </a>
-    <?php if ($showSeparator && $total > $i) : ?>
-    <span class="separator">
-      <?php echo esc_html($separatorText); ?>
-    </span>
-    <?php endif; ?>
+							</a>
+							<?php if ($showSeparator && $total > $i) : ?>
+								<span class="separator">
+									<?php echo esc_html($separatorText); ?>
+								</span>
+							<?php endif; ?>
 
-    <?php else : ?>
+						<?php else : ?>
 
-    <span>
-      <?php if ($showIcon) : ?>
-      <?php //echo wp_kses_post($item['icon']); 	
+							<span>
+								<?php if ($showIcon) : ?>
+									<?php //echo wp_kses_post($item['icon']); 	
 									?>
-      <?php endif; ?>
-      <?php if ($showLabel) : ?>
-      <span class='label'>
-        <?php echo wp_kses_post($item['label']); ?>
-      </span>
-      <?php endif; ?>
-      <?php if ($showSeparator && $total > $i) : ?>
-      <span class="separator">
-        <?php echo esc_html($separatorText); ?>
-      </span>
-      <?php endif; ?>
-    </span>
-    <?php endif; ?>
+								<?php endif; ?>
+								<?php if ($showLabel) : ?>
+									<span class='label'>
+										<?php echo wp_kses_post($item['label']); ?>
+									</span>
+								<?php endif; ?>
+								<?php if ($showSeparator && $total > $i) : ?>
+									<span class="separator">
+										<?php echo esc_html($separatorText); ?>
+									</span>
+								<?php endif; ?>
+							</span>
+						<?php endif; ?>
 
-  </li>
-  <?php
+					</li>
+				<?php
 						$i++;
 					}
 
 
 				?>
-</ol>
-<!-- </<?php //echo tag_escape($wrapperTag); 
+			</ol>
+			<!-- </<?php //echo tag_escape($wrapperTag); 
 							?>> -->
 
 
 
 
-<?php
+			<?php
 			if ($schemaEnable) :
 			?>
-<script type="application/ld+json">
-<?php echo wp_unslash(json_encode($json)); ?>
-</script>
-<?php
+				<script type="application/ld+json">
+					<?php echo wp_unslash(json_encode($json)); ?>
+				</script>
+			<?php
 			endif;
 			?>
-<?php
+		<?php
 
 		endif;
 

@@ -104,7 +104,6 @@ class PGBlockFormFieldSubmit
 
 
 
-    //////var_dump($content);
 
 
     $obj['id'] = $post_ID;

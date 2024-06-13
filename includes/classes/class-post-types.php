@@ -179,10 +179,8 @@ class class_post_grid_post_types
 				//$post_type_args['show_in_menu'] = $show_in_menu;
 			}
 
-			//error_log(serialize($post_type_args));
 
 
-			//echo "<pre>" . var_export($post_types, true) . "</pre>";
 
 
 			register_post_type(

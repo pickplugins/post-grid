@@ -90,7 +90,7 @@ class PGBlockContentSlider
 
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 		$blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-		
+
 
 
 		$sliderOptions = isset($attributes['sliderOptions']) ? $attributes['sliderOptions'] : [];
@@ -204,99 +204,96 @@ class PGBlockContentSlider
 
 
 
-	// //* Visible condition
-	$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-	if (!empty($visible['rules'])) {
-		$isVisible = post_grid_visible_parse($visible);
+		// //* Visible condition
+		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+		if (!empty($visible['rules'])) {
+			$isVisible = post_grid_visible_parse($visible);
 
-		// var_dump($isVisible);
 
-		if (!$isVisible) return;
-	}
+			if (!$isVisible) return;
+		}
 
-    // //* Visible condition
+		// //* Visible condition
 
 
 		ob_start();
 
 
 
-		?>
+?>
 
 
-<div
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+		<div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
-  <div class="splide" id="splide-<?php echo esc_attr($blockId); ?>"
-    data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
+			<div class="splide" id="splide-<?php echo esc_attr($blockId); ?>" data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 
 
-    <div class="splide__arrows">
-      <div class='prev splide__arrow splide__arrow--prev'>
+				<div class="splide__arrows">
+					<div class='prev splide__arrow splide__arrow--prev'>
 
-        <?php if ($prevIconPosition == 'before'): ?>
-        <span class='icon'>
-          <?php echo wp_kses_post($prevIconHtml); ?>
-        </span>
-        <?php endif; ?>
+						<?php if ($prevIconPosition == 'before') : ?>
+							<span class='icon'>
+								<?php echo wp_kses_post($prevIconHtml); ?>
+							</span>
+						<?php endif; ?>
 
-        <?php if (!empty($prevText)): ?>
-        <span>
-          <?php echo $prevText; ?>
-        </span>
-        <?php endif; ?>
-
-
-
-        <?php if ($prevIconPosition == 'after'): ?>
-        <span class='icon'>
-          <?php echo wp_kses_post($prevIconHtml); ?>
-        </span>
-        <?php endif; ?>
-
-      </div>
-      <div class='next splide__arrow splide__arrow--next'>
+						<?php if (!empty($prevText)) : ?>
+							<span>
+								<?php echo $prevText; ?>
+							</span>
+						<?php endif; ?>
 
 
 
-        <?php if ($nextIconPosition == 'before'): ?>
-        <span class='icon'>
-          <?php echo wp_kses_post($nextIconHtml); ?>
-        </span>
-        <?php endif; ?>
-        <?php if (!empty($nextText)): ?>
-        <span>
-          <?php echo $nextText; ?>
-        </span>
-        <?php endif; ?>
+						<?php if ($prevIconPosition == 'after') : ?>
+							<span class='icon'>
+								<?php echo wp_kses_post($prevIconHtml); ?>
+							</span>
+						<?php endif; ?>
+
+					</div>
+					<div class='next splide__arrow splide__arrow--next'>
 
 
 
-        <?php if ($nextIconPosition == 'after'): ?>
-        <span class='icon'>
-          <?php echo wp_kses_post($nextIconHtml); ?>
-        </span>
-        <?php endif; ?>
-      </div>
-    </div>
+						<?php if ($nextIconPosition == 'before') : ?>
+							<span class='icon'>
+								<?php echo wp_kses_post($nextIconHtml); ?>
+							</span>
+						<?php endif; ?>
+						<?php if (!empty($nextText)) : ?>
+							<span>
+								<?php echo $nextText; ?>
+							</span>
+						<?php endif; ?>
 
-    <div class="splide__track">
-      <ul class="splide__list">
-        <?php echo $content ?>
-      </ul>
-    </div>
+
+
+						<?php if ($nextIconPosition == 'after') : ?>
+							<span class='icon'>
+								<?php echo wp_kses_post($nextIconHtml); ?>
+							</span>
+						<?php endif; ?>
+					</div>
+				</div>
+
+				<div class="splide__track">
+					<ul class="splide__list">
+						<?php echo $content ?>
+					</ul>
+				</div>
 
 
 
 
-    <ul class="splide__pagination "></ul>
+				<ul class="splide__pagination "></ul>
 
 
-  </div>
-</div>
+			</div>
+		</div>
 <?php
 
-						return ob_get_clean();
+		return ob_get_clean();
 	}
 }
 

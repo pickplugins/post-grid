@@ -41,9 +41,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 					var onsubmitObj = JSON.parse(onsubmitprams);
 
+					console.log(onsubmitObj);
+
+
 					var formargs = formByID.getAttribute("formargs");
 					var formargsObj = JSON.parse(formargs);
 					var fieldInfo = formargsObj.fieldInfo;
+
+					console.log(formargsObj);
+
 
 					var onprocessargsObj = JSON.parse(onprocessargs);
 
@@ -62,8 +68,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 					var onsubmitProceed = false;
 
-					onsubmitObj.map((action) => {
+					Object.entries(onsubmitObj).map((args) => {
+
+						var action = args[1];
 						var actionId = action.id;
+
+						console.log(actionId);
+
 
 						if (actionId == "validation") {
 							var errors = validateFormFields(formId, formData, fieldInfo);
@@ -100,10 +111,60 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								onsubmitProceed = false;
 							}
 						}
+						if (actionId == "recaptchaValidation") {
+
+							var errors = {};
+							let queryString = new URLSearchParams(formData).toString();
+
+							let params = new URLSearchParams(queryString);
+							var recaptchaResponse = params.get("g-recaptcha-response"); // "foo"
+
+							//let recaptchaResponse = queryString.includes("g-recaptcha-response");
+
+							if (recaptchaResponse.length == 0) {
+								onsubmitProceed = false;
+
+
+								var showOnResponse = action.showOnResponse;
+								var successMessage = action.successMessage;
+								var errorMessage = action.errorMessage;
+
+
+
+								if (showOnResponse) {
+									var responseHtml = "";
+
+									//var html = x[1];
+									responseHtml += '<div class="error">';
+									responseHtml += errorMessage;
+									responseHtml += "</div>";
+
+									responsesWrap.innerHTML = responseHtml;
+									responsesWrap.style.display = "block";
+								}
+
+
+								throw errors;
+								//processSubmit(formId, formData);
+							} else {
+								onsubmitProceed = true;
+
+
+							}
+
+
+						}
+
+
+
+
+
+
 						if (actionId == "loading") {
 
 						}
 					});
+
 
 
 					if (!onsubmitProceed) {
@@ -132,8 +193,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	function validateFormFields(formId, formData, fieldInfo) {
 		var errorData = {};
 
+		console.log(fieldInfo);
+
+
 		Object.entries(fieldInfo).map((field) => {
 			var fieldId = field[0];
+
+			console.log(fieldId);
+
 
 			var args = field[1];
 
@@ -194,8 +261,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var inputName = pair[0];
 			var inputValue = pair[1];
 
-			// console.log(inputName);
-			// console.log(inputValue);
+
 
 
 			formFieldNames.push(inputName);
@@ -214,7 +280,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				if (response.ok && response.status < 400) {
 					response.json().then((data) => {
 
-						console.log(data);
 
 
 						var successArgs = data.success == undefined ? {} : data.success;
@@ -225,7 +290,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 						aftersubmitargsObj.map((action) => {
 							var actionId = action.id;
-							console.log(actionId);
 
 
 							if (actionId == "showResponse") {
@@ -258,20 +322,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							if (actionId == "filterPosts") {
 								//var url = action.url;
 								//location.href = url;
-								console.log();
 								var pageUrl = window.location.href.split("?")[0];
 
 								var url = window.location;
-								//console.log(formByID);
 								formData.delete('formType');
 								formData.delete('onprocessargs');
 								formData.delete('formFieldNames');
 
 
 								let queryString = new URLSearchParams(formData).toString();
-								console.log(queryString);
 								location.href = pageUrl + "?" + queryString;
-								//console.log("filterPosts");
 
 							}
 
@@ -312,9 +372,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 							if (actionId == "hidePopup") {
 								var popupId = formargsObj.popupId;
-								var popupWrap = document.querySelector("." + popupId);
+								var delay = parseInt(action.delay);
 
-								popupWrap.style.display = "none";
+
+								setTimeout(() => {
+									var popupWrap = document.querySelector("." + popupId);
+									popupWrap.style.display = "none";
+								}, delay)
+
+
 							}
 
 							if (actionId == "clearForm") {

@@ -76,16 +76,16 @@ function post_grid_layout_element_option_wck_text($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -205,9 +205,8 @@ function post_grid_layout_element_option_wck_text($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -224,9 +223,9 @@ function post_grid_layout_element_option_wck_text($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -249,17 +248,17 @@ function post_grid_layout_element_wck_text($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_text ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_text ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -284,42 +283,42 @@ function post_grid_layout_element_css_wck_text($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -351,16 +350,16 @@ function post_grid_layout_element_option_wck_textarea($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Textarea', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Textarea', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -480,9 +479,8 @@ function post_grid_layout_element_option_wck_textarea($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -499,9 +497,9 @@ function post_grid_layout_element_option_wck_textarea($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -524,18 +522,17 @@ function post_grid_layout_element_wck_textarea($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_textarea ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_textarea ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -560,42 +557,42 @@ function post_grid_layout_element_css_wck_textarea($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -627,16 +624,16 @@ function post_grid_layout_element_option_wck_number($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Number', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Number', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -756,9 +753,8 @@ function post_grid_layout_element_option_wck_number($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -775,9 +771,9 @@ function post_grid_layout_element_option_wck_number($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -800,17 +796,17 @@ function post_grid_layout_element_wck_number($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_number ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_number ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -835,42 +831,42 @@ function post_grid_layout_element_css_wck_number($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -901,16 +897,16 @@ function post_grid_layout_element_option_wck_email($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Email', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Email', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -1045,9 +1041,8 @@ function post_grid_layout_element_option_wck_email($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -1064,9 +1059,9 @@ function post_grid_layout_element_option_wck_email($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -1090,7 +1085,7 @@ function post_grid_layout_element_wck_email($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -1098,10 +1093,10 @@ function post_grid_layout_element_wck_email($args)
         $wck_value = sprintf($wrapper_html, $wck_value);
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_email ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_email ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -1126,42 +1121,42 @@ function post_grid_layout_element_css_wck_email($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -1191,16 +1186,16 @@ function post_grid_layout_element_option_wck_url($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK URL', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK URL', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -1335,9 +1330,8 @@ function post_grid_layout_element_option_wck_url($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -1354,9 +1348,9 @@ function post_grid_layout_element_option_wck_url($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -1380,7 +1374,7 @@ function post_grid_layout_element_wck_url($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -1389,10 +1383,10 @@ function post_grid_layout_element_wck_url($args)
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_url ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_url ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -1417,42 +1411,42 @@ function post_grid_layout_element_css_wck_url($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -1482,16 +1476,16 @@ function post_grid_layout_element_option_wck_range($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Range', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Range', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -1626,9 +1620,8 @@ function post_grid_layout_element_option_wck_range($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -1645,9 +1638,9 @@ function post_grid_layout_element_option_wck_range($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -1671,7 +1664,7 @@ function post_grid_layout_element_wck_range($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -1680,10 +1673,10 @@ function post_grid_layout_element_wck_range($args)
         $wck_value = sprintf($wrapper_html, $wck_value);
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_range ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_range ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -1708,42 +1701,42 @@ function post_grid_layout_element_css_wck_range($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -1773,16 +1766,16 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Wysiwyg', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Wysiwyg', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -1902,9 +1895,8 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -1921,9 +1913,9 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -1950,15 +1942,15 @@ function post_grid_layout_element_wck_wysiwyg($args)
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    ////var_dump($wck_value);
+
 
     if (!empty($wck_value)) :
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_wysiwyg ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_wysiwyg ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -1983,42 +1975,42 @@ function post_grid_layout_element_css_wck_wysiwyg($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -2048,16 +2040,16 @@ function post_grid_layout_element_option_wck_upload($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Image', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Image', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -2191,9 +2183,8 @@ function post_grid_layout_element_option_wck_upload($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -2210,9 +2201,9 @@ function post_grid_layout_element_option_wck_upload($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -2237,7 +2228,7 @@ function post_grid_layout_element_wck_upload($args)
 
 
 
-    ////var_dump($wck_value);
+
 
     $attachment_id = get_post_meta($post_id, $wck_key, true);
 
@@ -2290,10 +2281,10 @@ function post_grid_layout_element_wck_upload($args)
 
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_file ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_file ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -2318,42 +2309,42 @@ function post_grid_layout_element_css_wck_upload($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -2383,16 +2374,16 @@ function post_grid_layout_element_option_wck_file($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK File', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK File', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -2527,9 +2518,8 @@ function post_grid_layout_element_option_wck_file($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -2546,9 +2536,9 @@ function post_grid_layout_element_option_wck_file($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -2572,7 +2562,7 @@ function post_grid_layout_element_wck_file($args)
 
 
 
-    ////var_dump($wck_value);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -2620,10 +2610,10 @@ function post_grid_layout_element_wck_file($args)
 
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_file ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_file ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -2648,42 +2638,42 @@ function post_grid_layout_element_css_wck_file($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -2714,16 +2704,16 @@ function post_grid_layout_element_option_wck_select($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Select', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Select', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -2873,9 +2863,8 @@ function post_grid_layout_element_option_wck_select($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -2892,9 +2881,9 @@ function post_grid_layout_element_option_wck_select($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -2919,11 +2908,11 @@ function post_grid_layout_element_wck_select($args)
 
 
 
-    ////var_dump($wck_key);
-    ////var_dump($item_wrapper_html);
+
+
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    ////var_dump($wck_value);
+
 
     $html = '';
 
@@ -2931,7 +2920,6 @@ function post_grid_layout_element_wck_select($args)
 
         if (is_array($wck_value)) {
             foreach ($wck_value as $_items) {
-                ////var_dump($_items);
                 $html .= sprintf($item_wrapper_html, $_items);
             }
         } else {
@@ -2942,10 +2930,10 @@ function post_grid_layout_element_wck_select($args)
         $html = sprintf($wrapper_html, $html);
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_select ">
-  <?php echo esc_html($html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_select ">
+            <?php echo esc_html($html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -2970,42 +2958,42 @@ function post_grid_layout_element_css_wck_select($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -3036,16 +3024,16 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Checkbox', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Checkbox', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -3195,9 +3183,8 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -3214,9 +3201,9 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -3242,8 +3229,8 @@ function post_grid_layout_element_wck_checkbox($args)
 
 
 
-    ////var_dump($wck_key);
-    ////var_dump($item_wrapper_html);
+
+
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     $html = '';
@@ -3252,7 +3239,6 @@ function post_grid_layout_element_wck_checkbox($args)
 
         if (is_array($wck_value)) {
             foreach ($wck_value as $_items) {
-                ////var_dump($_items);
                 $html .= sprintf($item_wrapper_html, $_items);
             }
         } else {
@@ -3263,11 +3249,10 @@ function post_grid_layout_element_wck_checkbox($args)
         $html = sprintf($wrapper_html, $html);
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_checkbox ">
-  <?php echo esc_html($html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_checkbox ">
+            <?php echo esc_html($html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -3292,42 +3277,42 @@ function post_grid_layout_element_css_wck_checkbox($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -3359,16 +3344,16 @@ function post_grid_layout_element_option_wck_radio($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Radio', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Radio', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -3518,9 +3503,8 @@ function post_grid_layout_element_option_wck_radio($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -3537,9 +3521,9 @@ function post_grid_layout_element_option_wck_radio($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -3565,11 +3549,11 @@ function post_grid_layout_element_wck_radio($args)
 
 
 
-    ////var_dump($wck_key);
-    ////var_dump($item_wrapper_html);
+
+
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    ////var_dump($wck_value);
+
 
     $html = '';
 
@@ -3595,10 +3579,10 @@ function post_grid_layout_element_wck_radio($args)
         $html = sprintf($wrapper_html, $html);
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_radio ">
-  <?php echo esc_html($html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_radio ">
+            <?php echo esc_html($html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -3623,42 +3607,42 @@ function post_grid_layout_element_css_wck_radio($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -3690,16 +3674,16 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Button group', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Button group', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -3849,9 +3833,8 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -3868,9 +3851,9 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -3896,11 +3879,11 @@ function post_grid_layout_element_wck_buttongroup($args)
 
 
 
-    ////var_dump($wck_key);
-    ////var_dump($item_wrapper_html);
+
+
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    ////var_dump($wck_value);
+
 
     $html = '';
 
@@ -3926,11 +3909,10 @@ function post_grid_layout_element_wck_buttongroup($args)
         $html = sprintf($wrapper_html, $html);
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_buttongroup ">
-  <?php echo esc_html($html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_buttongroup ">
+            <?php echo esc_html($html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -3955,42 +3937,42 @@ function post_grid_layout_element_css_wck_buttongroup($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -4021,16 +4003,16 @@ function post_grid_layout_element_option_wck_page_link($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Page link', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Page link', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -4180,9 +4162,8 @@ function post_grid_layout_element_option_wck_page_link($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -4199,9 +4180,9 @@ function post_grid_layout_element_option_wck_page_link($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -4226,11 +4207,11 @@ function post_grid_layout_element_wck_page_link($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    ////var_dump($wck_value);
+
 
     if (!empty($wck_value)) :
         $html = '';
@@ -4250,11 +4231,10 @@ function post_grid_layout_element_wck_page_link($args)
 
         $html = sprintf($wrapper_html, $html);
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_page_link ">
-  <?php echo esc_html($html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_page_link ">
+            <?php echo esc_html($html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -4279,42 +4259,42 @@ function post_grid_layout_element_css_wck_page_link($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -4346,16 +4326,16 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Taxonomy', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Taxonomy', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -4506,9 +4486,8 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -4525,9 +4504,9 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -4551,18 +4530,17 @@ function post_grid_layout_element_wck_taxonomy($args)
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    ////var_dump($item_wrapper_html);
+
 
     if (!empty($wck_value)) :
-        ////var_dump($wck_value);
+
         $term_html = '';
         foreach ($wck_value as $term) {
 
-            ////var_dump('#########');
             //echo esc_html($item_wrapper_html);
 
             if (is_object($term)) {
@@ -4589,11 +4567,10 @@ function post_grid_layout_element_wck_taxonomy($args)
 
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_taxonomy ">
-  <?php echo esc_html($html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_taxonomy ">
+            <?php echo esc_html($html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -4618,42 +4595,42 @@ function post_grid_layout_element_css_wck_taxonomy($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -4684,16 +4661,16 @@ function post_grid_layout_element_option_wck_user($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK User', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK User', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -4828,9 +4805,8 @@ function post_grid_layout_element_option_wck_user($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -4847,9 +4823,9 @@ function post_grid_layout_element_option_wck_user($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -4873,12 +4849,12 @@ function post_grid_layout_element_wck_user($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
 
-    ////var_dump($wck_value);
+
 
     if (!empty($wck_value)) :
 
@@ -4904,10 +4880,10 @@ function post_grid_layout_element_wck_user($args)
         }
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_user ">
-  <?php echo esc_html($html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_user ">
+            <?php echo esc_html($html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -4932,42 +4908,42 @@ function post_grid_layout_element_css_wck_user($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -4999,16 +4975,16 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Date picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Date picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -5142,9 +5118,8 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -5161,9 +5136,9 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -5187,18 +5162,17 @@ function post_grid_layout_element_wck_date_picker($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_date_picker ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_date_picker ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -5223,42 +5197,42 @@ function post_grid_layout_element_css_wck_date_picker($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -5291,16 +5265,16 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Time picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Time picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -5435,9 +5409,8 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -5454,9 +5427,9 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -5480,7 +5453,7 @@ function post_grid_layout_element_wck_time_picker($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -5488,11 +5461,10 @@ function post_grid_layout_element_wck_time_picker($args)
         $wck_value = sprintf($wrapper_html, $wck_value);
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_time_picker ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_time_picker ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -5517,42 +5489,42 @@ function post_grid_layout_element_css_wck_time_picker($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -5584,17 +5556,17 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Datetime picker', 'post-grid'); ?> -
-      <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Datetime picker', 'post-grid'); ?> -
+                <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -5729,9 +5701,8 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -5748,9 +5719,9 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -5774,7 +5745,7 @@ function post_grid_layout_element_wck_datetime_picker($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -5782,11 +5753,10 @@ function post_grid_layout_element_wck_datetime_picker($args)
         $wck_value = sprintf($wrapper_html, $wck_value);
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_datetime_picker ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_datetime_picker ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -5811,42 +5781,42 @@ function post_grid_layout_element_css_wck_datetime_picker($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -5875,16 +5845,16 @@ function post_grid_layout_element_option_wck_google_map($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Google map', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Google map', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -6004,9 +5974,8 @@ function post_grid_layout_element_option_wck_google_map($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -6023,9 +5992,9 @@ function post_grid_layout_element_option_wck_google_map($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -6048,18 +6017,17 @@ function post_grid_layout_element_wck_google_map($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_google_map ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_google_map ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -6084,42 +6052,42 @@ function post_grid_layout_element_css_wck_google_map($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -6150,16 +6118,16 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Color picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Color picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -6279,9 +6247,8 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -6298,9 +6265,9 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -6323,18 +6290,17 @@ function post_grid_layout_element_wck_colorpicker($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_colorpicker ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_colorpicker ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -6359,42 +6325,42 @@ function post_grid_layout_element_css_wck_colorpicker($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -6425,16 +6391,16 @@ function post_grid_layout_element_option_wck_link($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Link', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Link', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -6569,9 +6535,8 @@ function post_grid_layout_element_option_wck_link($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -6588,9 +6553,9 @@ function post_grid_layout_element_option_wck_link($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -6614,11 +6579,10 @@ function post_grid_layout_element_wck_link($args)
 
 
 
-    ////var_dump($wrapper_html);
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
-    ////var_dump($wck_value);
+
 
     if (!empty($wck_value)) :
 
@@ -6634,10 +6598,10 @@ function post_grid_layout_element_wck_link($args)
         $wck_value = sprintf($wrapper_html, $wck_value);
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_link ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_link ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -6662,42 +6626,42 @@ function post_grid_layout_element_css_wck_link($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -6726,16 +6690,16 @@ function post_grid_layout_element_option_wck_post_object($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -6855,9 +6819,8 @@ function post_grid_layout_element_option_wck_post_object($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -6874,9 +6837,9 @@ function post_grid_layout_element_option_wck_post_object($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -6899,18 +6862,17 @@ function post_grid_layout_element_wck_post_object($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_post_object ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_post_object ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -6935,42 +6897,42 @@ function post_grid_layout_element_css_wck_post_object($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -6999,16 +6961,16 @@ function post_grid_layout_element_option_wck_oembed($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -7128,9 +7090,8 @@ function post_grid_layout_element_option_wck_oembed($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -7147,9 +7108,9 @@ function post_grid_layout_element_option_wck_oembed($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -7172,17 +7133,17 @@ function post_grid_layout_element_wck_oembed($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
     if (!empty($wck_value)) :
 
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_oembed ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_oembed ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -7207,42 +7168,42 @@ function post_grid_layout_element_css_wck_oembed($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -7272,16 +7233,16 @@ function post_grid_layout_element_option_wck_password($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -7417,9 +7378,8 @@ function post_grid_layout_element_option_wck_password($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -7436,9 +7396,9 @@ function post_grid_layout_element_option_wck_password($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -7462,7 +7422,7 @@ function post_grid_layout_element_wck_password($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -7470,11 +7430,10 @@ function post_grid_layout_element_wck_password($args)
         $wck_value = sprintf($wrapper_html, $wck_value);
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_password ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_password ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -7499,42 +7458,42 @@ function post_grid_layout_element_css_wck_password($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -7565,16 +7524,16 @@ function post_grid_layout_element_option_wck_relationship($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Relationship', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Relationship', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -7723,9 +7682,8 @@ function post_grid_layout_element_option_wck_relationship($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -7742,9 +7700,9 @@ function post_grid_layout_element_option_wck_relationship($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -7768,7 +7726,7 @@ function post_grid_layout_element_wck_relationship($args)
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -7809,11 +7767,10 @@ function post_grid_layout_element_wck_relationship($args)
         $post_html = sprintf($wrapper_html, $post_html);
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_relationship ">
-  <?php echo esc_html($post_html); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_relationship ">
+            <?php echo esc_html($post_html); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -7838,42 +7795,42 @@ function post_grid_layout_element_css_wck_relationship($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
 
@@ -7904,16 +7861,16 @@ function post_grid_layout_element_option_wck_true_false($parameters)
 
 
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
 
-    <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
-  </div>
-  <div class="element-options options">
+            <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
+        </div>
+        <div class="element-options options">
 
-    <?php
+            <?php
 
             $args = array(
                 'id'        => 'wck_key',
@@ -8049,9 +8006,8 @@ function post_grid_layout_element_option_wck_true_false($parameters)
 
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
-    <?php
+            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <?php
 
             $html = ob_get_clean();
 
@@ -8068,9 +8024,9 @@ function post_grid_layout_element_option_wck_true_false($parameters)
 
             ?>
 
-  </div>
-</div>
-<?php
+        </div>
+    </div>
+    <?php
 
 }
 
@@ -8096,7 +8052,7 @@ function post_grid_layout_element_wck_true_false($args)
 
 
 
-    ////var_dump($wck_key);
+
 
     $wck_value = get_post_meta($post_id, $wck_key, true);
 
@@ -8104,11 +8060,10 @@ function post_grid_layout_element_wck_true_false($args)
         $wck_value = sprintf($wrapper_html, $wck_value);
 
     ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_true_false ">
-  <?php echo esc_html($wck_value); ?>
-</div>
-<?php
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_true_false ">
+            <?php echo esc_html($wck_value); ?>
+        </div>
+    <?php
     endif;
 }
 
@@ -8133,41 +8088,41 @@ function post_grid_layout_element_css_wck_true_false($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-<style type="text/css">
-.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+    <style type="text/css">
+        .layout-<?php echo esc_attr($layout_id);
+                ?>.element_<?php echo esc_attr($index);
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo esc_attr($css);
-  ?><?php endif;
-  ?>
-}
+                            ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($css)) : ?><?php echo esc_attr($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
-?>.element_<?php echo esc_attr($index);
+        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
+                                                    ?>.element_<?php echo esc_attr($index);
 
-?>:hover {
-  <?php echo esc_attr($css_hover);
-  ?>
-}
+                                                                ?>:hover {
+            <?php echo esc_attr($css_hover);
+            ?>
+        }
 
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }

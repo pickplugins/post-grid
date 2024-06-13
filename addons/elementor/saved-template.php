@@ -56,7 +56,6 @@ class Elementor_Combo_Blocks_Saved_Template extends \Elementor\Widget_Base
             ]
         );
 
-        //error_log(serialize($class_post_grid_functions->get_posts_list(['post_type' => 'post_grid_template'])));
 
 
 
@@ -99,7 +98,6 @@ class Elementor_Combo_Blocks_Saved_Template extends \Elementor\Widget_Base
         $body_class = get_body_class();
         $id = $settings['saved_template'];
 
-        //var_dump($id);
 
         if ($id) {
             echo '<div class="saved-template" data-postid="' . esc_attr($id) . '">';
@@ -115,7 +113,7 @@ class Elementor_Combo_Blocks_Saved_Template extends \Elementor\Widget_Base
             echo '</div>';
         } else {
             if (isset($_GET['action']) && $_GET['action'] == 'elementor') { // phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended	
-                echo '<p style="text-align:center;">' . sprintf(esc_html__('Pick a Template from your saved ones. Or create a template from: %s.', 'post-grid') . ' ', '<strong><i>' . esc_html('Dashboard > PostX > Saved Templates', 'post-grid') . '</i></strong>') . '</p>';
+                echo '<p style="text-align:center;">' . sprintf(esc_html__('Pick a Template from your saved ones. Or create a template from: %s.', 'post-grid') . ' ', '<strong><i>' . esc_html('Combo Blocks > All Saved Templates', 'post-grid') . '</i></strong>') . '</p>';
             }
         }
     }
@@ -126,9 +124,9 @@ class Elementor_Combo_Blocks_Saved_Template extends \Elementor\Widget_Base
     {
 ?>
         <# if ( ''===settings.saved_template ) { return; } #>
-            <p class="saved-template">
+            <div class="saved-template">
                 Combo Blocks Saved Template: Live Preview Not Available.
-            </p>
+            </div>
     <?php
     }
 }

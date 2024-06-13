@@ -146,13 +146,12 @@ class PGBlockAccordionNested
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
 
@@ -165,18 +164,17 @@ class PGBlockAccordionNested
 ?>
 
 
-<div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-  data-accordion="<?php echo esc_attr(json_encode($accOptions)) ?>">
-  <?php echo $content; ?>
-</div>
+    <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-accordion="<?php echo esc_attr(json_encode($accOptions)) ?>">
+      <?php echo $content; ?>
+    </div>
 
-<?php
+    <?php
     if ($schemaEnable) :
     ?>
-<script type="application/ld+json">
-<?php echo wp_unslash(json_encode($json)); ?>
-</script>
-<?php
+      <script type="application/ld+json">
+        <?php echo wp_unslash(json_encode($json)); ?>
+      </script>
+    <?php
     endif;
     ?>
 

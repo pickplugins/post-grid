@@ -73,7 +73,6 @@ class PGBlockWordpressOrgItem
 		$wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'ul';
 		$wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 		$wrapperField = isset($wrapperOptions['field']) ? $wrapperOptions['field'] : 'name';
-		// var_dump($wrapperField);
 		$wrapperPrefix = isset($wrapperOptions['prefix']) ? $wrapperOptions['prefix'] : '';
 		$wrapperThumbSize = isset($wrapperOptions['thumbSize']) ? $wrapperOptions['thumbSize'] : 'low';
 		$wrapperDateFormat = isset($wrapperOptions['dateFormat']) ? $wrapperOptions['dateFormat'] : 'low';
@@ -108,9 +107,6 @@ class PGBlockWordpressOrgItem
 
 		$formattedCreationDate = date($wrapperDateFormat, strtotime($creationDate));
 
-		// var_dump($formattedCreationDate);
-		// var_dump($formattedLastUpdateDate);
-
 
 		if ($iconLibrary == 'fontAwesome') {
 			wp_enqueue_style('fontawesome-icons');
@@ -136,7 +132,6 @@ class PGBlockWordpressOrgItem
 		if (!empty($visible['rules'])) {
 			$isVisible = post_grid_visible_parse($visible);
 
-			// var_dump($isVisible);
 
 			if (!$isVisible) return;
 		}

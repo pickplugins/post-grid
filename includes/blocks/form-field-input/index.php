@@ -155,11 +155,9 @@ class PGBlockFormFieldInput
                 $inputValue = isset($currentUser->user_nicename) ? $currentUser->user_nicename : '';
             } else if ($inputValueSource == 'GET') {
                 $inputValue = isset($_GET[$inputName]) ? sanitize_text_field($_GET[$inputName]) : "";
-                ////var_dump($_GET[$inputName]);
             }
         }
 
-        ////var_dump($inputName);
 
 
         $obj['id'] = $post_ID;

@@ -869,9 +869,9 @@ function post_grid_global_vars()
 
 
 ?>
-<script>
-var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
-</script>
+  <script>
+    var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
+  </script>
 <?php
 }
 add_action('wp_footer', 'post_grid_global_vars', 999);
@@ -1137,10 +1137,10 @@ function post_grid_page_styles()
 ?>
 
 
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
 
 <?php
 
@@ -1320,12 +1320,12 @@ function post_grid_global_styles()
 ?>
 
 
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
 
-<?php
+  <?php
 
 
 
@@ -1367,7 +1367,6 @@ function post_grid_global_cssY()
 
                   if (is_string($val)) {
                     $reponsiveCssGroups[$device][$selector][$att] = str_replace("u0022", '"', $val);
-                    ////var_dump($val);
                   }
                 }
             }
@@ -1496,26 +1495,26 @@ function post_grid_global_cssY()
 
   //echo '###############';
 
+
   if (!empty($fonts)) {
   ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
-<?php
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
+  <?php
 
   }
 
   ?>
 
-<style>
-<?php echo ($reponsiveCss);
-?>
-</style>
+  <style>
+    <?php echo ($reponsiveCss);
+    ?>
+  </style>
 
 <?php
 
 }
 add_action('wp_footer', 'post_grid_global_cssY', 99);
-
-
+add_action('elementor/editor/init', 'post_grid_global_cssY');
 
 
 function post_grid_font_family()
@@ -1542,15 +1541,16 @@ function post_grid_font_family()
   }";
   }
 ?>
-<style>
-<?php echo esc_html($faceStr);
-?>
-</style>
+  <style>
+    <?php echo esc_html($faceStr);
+    ?>
+  </style>
 <?php
 }
 add_action('wp_footer', 'post_grid_font_family', 999);
 
 
+add_action('elementor/editor/init', 'post_grid_font_family');
 
 
 
@@ -1790,7 +1790,6 @@ function pgb_post_query_prams($query_args, $prams)
     $post_status = isset($_GET["post_status"]) ? sanitize_text_field($_GET["post_status"]) : [];
     $posts_per_page = isset($_GET["posts_per_page"]) ? sanitize_text_field($_GET["posts_per_page"]) : "";
 
-    ////var_dump($post_status);
 
 
     if (!empty($keyword)) {
@@ -2578,8 +2577,6 @@ function post_grid_visible_parse($visible)
         } else {
           $conditions[$i]['args'][$j] = $isAccess;
         }
-
-        //var_dump($isAccess);
       }
       if ($id == 'isYears') {
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
@@ -2671,11 +2668,8 @@ function post_grid_visible_parse($visible)
         $values = isset($arg['values']) ? $arg['values'] : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        // var_dump($value, $values, $compare);
 
-        // echo var_export($value);
-        // echo var_export($values);
-        // echo var_export($compare);
+
 
         // $curentYear = date('m');
         $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'm');
@@ -2760,16 +2754,12 @@ function post_grid_visible_parse($visible)
         $values = isset($arg['values']) ? $arg['values'] : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        // var_dump($value, $values, $compare);
-        // echo var_export($value);
-        // echo var_export($values);
-        // echo var_export($compare);
+
 
         //$curentYear = date('m');
         $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'w');
 
-        // var_dump($curentYear);
-        // var_dump(in_array($curentYear, $values));
+
 
         if ($compare == '=') {
 
@@ -2853,9 +2843,6 @@ function post_grid_visible_parse($visible)
 
         $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'H');
 
-        // var_dump($value);
-        // var_dump($curentYear);
-        // var_dump($value == $curentYear);
 
 
 
@@ -2939,7 +2926,6 @@ function post_grid_visible_parse($visible)
         $values = isset($arg['values']) ? $arg['values'] : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        // var_dump($values);
 
         // $curentYears = date('Y-m-d');
         $curentYear = get_date_from_gmt(date("Y-m-d H:i:s"), 'Y-m-d');
@@ -3092,7 +3078,6 @@ function post_grid_visible_parse($visible)
 
 
 
-        echo var_export($browesr, true);
 
 
         if (in_array($name, $values)) {
@@ -3104,7 +3089,7 @@ function post_grid_visible_parse($visible)
       }
       if ($id == 'isCountries') {
         //echo var_export($_SERVER['REMOTE_ADDR'], true);
-        echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'])));
+        //echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'])));
       }
       if ($id == 'postsIds') {
 

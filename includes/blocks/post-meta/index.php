@@ -105,9 +105,7 @@ class BlockPostMeta
 
 
 		$metaValue = '';
-		// var_dump($metaKeyType);
-		// var_dump(get_post_meta($post_ID, $metaKey, true));
-		// var_dump(rwmb_meta($metaKey));
+
 
 		if ($metaKeyType != 'string') {
 
@@ -118,13 +116,13 @@ class BlockPostMeta
 			if ($metaKeyType == 'acfDateTime') {
 
 				$metaValue = get_field($metaKey, $post_ID);
-				// var_dump($metaValue);
 			}
 			if ($metaKeyType == 'mbTaxonomy' || $metaKeyType == 'mbSelect') {
 
 				// $metaValue = get_post_meta($post_ID, $metaKey, true);
-				$metaValue = rwmb_meta($metaKey, [], $post_ID);
-				// var_dump($metaValue);
+				if (function_exists("rwmb_meta")) {
+					$metaValue = rwmb_meta($metaKey, [], $post_ID);
+				}
 			}
 
 
@@ -166,7 +164,7 @@ class BlockPostMeta
 			if (!$isVisible) return;
 		}
 
-    // //* Visible condition
+		// //* Visible condition
 
 
 		ob_start();
@@ -177,18 +175,18 @@ class BlockPostMeta
 		//echo strtr($templateFront, $vars);
 
 
-
+		//echo '<pre>' . var_export(get_registered_meta_keys('post'), true) . '</pre>';
 
 
 
 
 		if (!empty($wrapperTag)) :
 ?>
-<<?php echo tag_escape($wrapperTag); ?> class="
+			<<?php echo tag_escape($wrapperTag); ?> class="
                 <?php echo esc_attr($blockId); ?>
                 <?php echo esc_attr($wrapperClass); ?>">
 
-  <?php
+				<?php
 
 
 				// if (gettype($metaValue) == 'array' || gettype($metaValue) == 'object') {
@@ -257,7 +255,7 @@ class BlockPostMeta
 				?>
 
 
-</<?php echo tag_escape($wrapperTag); ?>>
+			</<?php echo tag_escape($wrapperTag); ?>>
 
 <?php
 

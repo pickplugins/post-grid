@@ -69,6 +69,8 @@ class PGBlockPopup
 
 
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    $trigger = isset($attributes['trigger']) ? $attributes['trigger'] : [];
+    $triggerRules = isset($trigger['rules']) ? $trigger['rules'] : [];
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -147,21 +149,34 @@ class PGBlockPopup
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
+    // //* Visible condition
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
+
+      // var_dump($isVisible);
+
+      if (!$isVisible) return;
+    }
+
+    // //* Visible condition
+
 
     ob_start();
 
 
 
-    ?>
-        <div class="<?php echo esc_attr($wrapperClass); ?>   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" entrance-animation="<?php echo esc_attr($entranceWrapAnimation); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
-          <div class='inner'>
-            <span class='close' popup-id="<?php echo esc_attr($blockId); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
-              <?php echo $closeIconHtml; ?>
-            </span>
-            <?php echo $content ?>
-          </div>
-        </div>
-    <?php
+
+?>
+    <div class="<?php echo esc_attr($wrapperClass); ?>   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" entrance-animation="<?php echo esc_attr($entranceWrapAnimation); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-trigger="<?php echo esc_attr(json_encode($triggerRules)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
+      <div class='inner'>
+        <span class='close' popup-id="<?php echo esc_attr($blockId); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
+          <?php echo $closeIconHtml; ?>
+        </span>
+        <?php echo $content ?>
+      </div>
+    </div>
+
+<?php
 
     return ob_get_clean();
   }

@@ -43,6 +43,7 @@ function form_wrap_process_postSubmitForm($formFields, $onprocessargs)
   $currentUser = wp_get_current_user();
 
 
+
   // Collect entry data
   $entryData['id'] = 'postSubmit';
   $entryData['formFields'] = $formFields;
@@ -295,7 +296,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
       $id = isset($arg->id) ? $arg->id : "";
 
-      error_log($id);
 
 
       if ($id == 'sendMail') {
@@ -588,21 +588,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
 
 
-
-
-
-        // if (!class_exists("Mailpicker_Subscribers")) {
-        //     $response['errors']['mailpickerAddContactFailed'] = __("Mail Picker plugin not active", "");
-        //     continue;
-        // }
-
-
-        //return;
-
         $brevoApiKeys = isset($apiKeys['brevo']['args']['apikey']) ? $apiKeys['brevo']['args']['apikey'] : "";
-
-        error_log($brevoApiKeys);
-
 
 
         $url = 'https://api.brevo.com/v3/contacts';
@@ -611,7 +597,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
           "api-key: $brevoApiKeys",
           'content-type: application/json'
         );
-        error_log(serialize($headers));
 
         $data = array(
           "email" => $email,
@@ -627,7 +612,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
           "smtpBlacklistSender" => array()
         );
 
-        error_log(json_encode($data));
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -644,25 +628,376 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
           $curl_response = json_decode($curl_response);
 
-          error_log($curl_response->code);
           if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
-            error_log($curl_response->code);
 
             $response['errors']['brevoAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
           }
           if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
-            error_log($curl_response->code);
 
             $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
           }
           if (isset($curl_response->code) && $curl_response->code == 'invalid_parameter') {
-            error_log($curl_response->code);
 
             $response['errors']['brevoAddContactExist'] = empty($errorMessage) ? $curl_response['message'] : $errorMessage;
           }
 
           if (isset($curl_response->id)) {
             $response['success']['brevoAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+      if ($id == 'mailjetAddContact') {
+
+        $lists = isset($arg->lists) ? $arg->lists : '';
+        $lists = explode(',', $lists);
+        $lists = array_map('intval', $lists);
+
+        //$tags = isset($arg->tags) ? $arg->tags : [];
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKeyPublic = isset($apiKeys['mailjet']['args']['apikeyPublic']) ? $apiKeys['mailjet']['args']['apikeyPublic'] : "";
+        $apiKeyPrivate = isset($apiKeys['mailjet']['args']['apikeyPrivate']) ? $apiKeys['mailjet']['args']['apikeyPrivate'] : "";
+
+
+
+        $url = 'https://api.mailjet.com/v3/REST/contact';
+        $data = array(
+          'Name' => $first_name,
+          'Email' => $email
+        );
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_USERPWD, "$apiKeyPublic:$apiKeyPrivate");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $curl_response = curl_exec($ch);
+
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+
+          $curl_response = json_decode($curl_response);
+
+
+
+          // if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
+
+          //   $response['errors']['brevoAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
+          // }
+          // if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
+
+          //   $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+          // }
+          if (isset($curl_response->ErrorInfo)) {
+
+            $response['errors']['brevoAddContactExist'] = empty($errorMessage) ? $curl_response->ErrorMessage : $errorMessage;
+          }
+
+          if (isset($curl_response->Data)) {
+            $response['success']['brevoAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+      if ($id == 'mailchimpAddContact') {
+
+        $dc = isset($arg->dc) ? $arg->dc : '';
+        $status = isset($arg->status) ? $arg->status : 'subscribed';
+        $lists = isset($arg->lists) ? $arg->lists : '';
+
+
+        $tags = isset($arg->tags) ? $arg->tags : '';
+        $tags = explode(',', $tags);
+
+
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKey = isset($apiKeys['mailchimp']['args']['apikey']) ? $apiKeys['mailchimp']['args']['apikey'] : "";
+
+
+        // Initialize a cURL session
+        $ch = curl_init();
+
+        // Set the URL for the cURL request
+        $url = 'https://' . $dc . '.api.mailchimp.com/3.0/lists/' . $lists . '/members?skip_merge_validation=1';
+
+
+
+        // Create the data array
+        $data = [
+          "email_address" => $email,
+          "status" => $status,
+          "tags" => $tags
+        ];
+
+        // Convert the data array to JSON format
+        $jsonData = json_encode($data);
+
+
+        // Set the cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_USERPWD, 'key:' . $apiKey);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Content-Type: application/json'
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $curl_response = curl_exec($ch);
+
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+
+          $curl_response = json_decode($curl_response);
+
+
+
+          // if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
+
+          //   $response['errors']['brevoAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
+          // }
+          // if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
+
+          //   $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+          // }
+          if (isset($curl_response->status) && $curl_response->status == '404') {
+
+            $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $curl_response->detail : $errorMessage;
+          }
+          if (isset($curl_response->status) && $curl_response->status == '400') {
+
+            $response['errors']['brevoAddContactExist'] = empty($errorMessage) ? $curl_response->detail : $existMessage;
+          }
+
+          if (isset($curl_response->id)) {
+            $response['success']['brevoAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+      if ($id == 'mailmodoAddContact') {
+
+        $lists = isset($arg->lists) ? $arg->lists : '';
+
+        // $lists = explode(',', $lists);
+        // $lists = array_map('intval', $lists);
+
+        //$tags = isset($arg->tags) ? $arg->tags : [];
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKey = isset($apiKeys['mailmodo']['args']['apikey']) ? $apiKeys['mailmodo']['args']['apikey'] : "";
+
+        //https://www.mailmodo.com/developers/f1669952fdba0-add-contact-to-a-list/
+
+        $url = "https://api.mailmodo.com/api/v1/addToList";
+
+        $data = [
+          "email" => $email,
+          "data" => [
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+          ],
+          "listName" => $lists,
+
+        ];
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          "Accept: application/json, application/xml",
+          "Content-Type: application/json",
+          "mmApiKey: $apiKey"
+        ]);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $curl_response = curl_exec($ch);
+
+
+
+
+        if ($curl_response === false) {
+          $error = curl_error($ch);
+          $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : $error;
+
+
+          curl_close($ch);
+          die('Curl error: ' . $error);
+        } else {
+
+
+
+          $curl_response = json_decode($curl_response);
+
+
+
+
+          // if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
+
+          //   $response['errors']['brevoAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
+          // }
+          if (isset($curl_response->error) && $curl_response->error == 'ValidationError') {
+            $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->message;
+          }
+
+
+
+          // if (isset($curl_response->ErrorInfo)) {
+
+          //   $response['errors']['brevoAddContactExist'] = empty($errorMessage) ? $curl_response->ErrorMessage : $errorMessage;
+          // }
+
+          if (isset($curl_response->success)) {
+            $response['success']['brevoAddContactSuccess'] = empty($errorMessage) ? $curl_response->message : $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+
+
+
+
+
+
+
+
+
+
+      if ($id == 'dripAddContact') {
+
+        $lists = isset($arg->lists) ? $arg->lists : '';
+        $lists = explode(',', $lists);
+        $lists = array_map('intval', $lists);
+
+        //$tags = isset($arg->tags) ? $arg->tags : [];
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKey = isset($apiKeys['drip']['args']['apikey']) ? $apiKeys['drip']['args']['apikey'] : "";
+        $accountId = isset($apiKeys['drip']['args']['accountId']) ? $apiKeys['drip']['args']['accountId'] : "";
+
+
+
+        $url = "https://api.getdrip.com/v2/{$accountId}/subscribers";
+
+        $data = array(
+          "subscribers" => array(
+            array(
+              "email" => $email,
+              "first_name" => $first_name,
+              "last_name" => $last_name,
+
+            )
+          )
+        );
+
+        $data_string = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+          'User-Agent: Your App Name (www.yourapp.com)',
+          'Content-Type: application/json',
+          'Authorization: Basic ' . base64_encode($apiKey . ":")
+        ));
+
+        //$result = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+        }
+
+
+        $curl_response = curl_exec($ch);
+
+
+
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['dripAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+          $curl_response = json_decode($curl_response);
+
+
+          // if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
+
+          //   $response['errors']['dripAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
+          // }
+          if (isset($curl_response->errors) && $curl_response->errors[0]->code == 'authentication_error') {
+
+            $response['errors']['dripAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->errors[0]->message;
+          }
+          if (isset($curl_response->errors) && $curl_response->errors[0]->code == 'email_error') {
+
+            $response['errors']['dripAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->errors[0]->message;
+          }
+
+
+
+          if (isset($curl_response->subscribers)) {
+            $response['success']['dripAddContactSuccess'] = $successMessage;
           }
 
 
@@ -698,11 +1033,20 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
         //     }
         // }
       }
+
+
+
+
+
+
+
+
       if ($id == 'klaviyoAddContact') {
 
         $lists = isset($arg->lists) ? $arg->lists : '';
-        $lists = explode(',', $lists);
-        $lists = array_map('intval', $lists);
+        // $lists = explode(',', $lists);
+        // $lists = array_map('intval', $lists);
+
 
         //$tags = isset($arg->tags) ? $arg->tags : [];
         $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
@@ -715,42 +1059,37 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
 
 
-        // if (!class_exists("Mailpicker_Subscribers")) {
-        //     $response['errors']['mailpickerAddContactFailed'] = __("Mail Picker plugin not active", "");
-        //     continue;
-        // }
 
 
-        //return;
+
+
 
         $klaviyoApiKeys = isset($apiKeys['klaviyo']['args']['apikey']) ? $apiKeys['klaviyo']['args']['apikey'] : "";
 
-        error_log($klaviyoApiKeys);
 
 
 
-        $url = 'https://a.klaviyo.com/api/v2/list/LIST_ID/members?api_key=' . $klaviyoApiKeys;
+        $url = "https://a.klaviyo.com/api/v2/list/" . $lists . "/members?api_key=" . $klaviyoApiKeys;
+
+
+
+
+
         $headers = array(
           'accept: application/json',
           'content-type: application/json'
         );
-        error_log(serialize($headers));
-
+        //https://developers.klaviyo.com/en/v1-2/reference/get-profile
         $data = array(
-          "email" => $email,
-          "ext_id" => "",
-          "attributes" => array(
-            "FNAME" => $first_name,
-            "LNAME" => $last_name
-          ),
-          "emailBlacklisted" => false,
-          "smsBlacklisted" => false,
-          "listIds" => $lists,
-          "updateEnabled" => false,
-          "smtpBlacklistSender" => array()
+
+          "profiles" => [
+            "email" => $email,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+          ],
+
         );
 
-        error_log(json_encode($data));
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -767,24 +1106,24 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
           $curl_response = json_decode($curl_response);
 
-          error_log($curl_response->code);
-          if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
-            error_log($curl_response->code);
 
-            $response['errors']['klaviyoAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
-          }
-          if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
-            error_log($curl_response->code);
+
+
+
+          // if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
+
+          //   $response['errors']['klaviyoAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
+          // }
+          if (isset($curl_response->errors)) {
 
             $response['errors']['klaviyoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
           }
-          if (isset($curl_response->code) && $curl_response->code == 'invalid_parameter') {
-            error_log($curl_response->code);
+          // if (isset($curl_response->errors)) {
 
-            $response['errors']['klaviyoAddContactExist'] = empty($errorMessage) ? $curl_response['message'] : $errorMessage;
-          }
+          //   $response['errors']['klaviyoAddContactExist'] = empty($errorMessage) ? $curl_response['message'] : $errorMessage;
+          // }
 
-          if (isset($curl_response->id)) {
+          if (($curl_response[0]->email == $email)) {
             $response['success']['klaviyoAddContactSuccess'] = $successMessage;
           }
 
@@ -838,44 +1177,37 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
 
 
-        // if (!class_exists("Mailpicker_Subscribers")) {
-        //     $response['errors']['mailpickerAddContactFailed'] = __("Mail Picker plugin not active", "");
-        //     continue;
-        // }
 
 
-        //return;
+
+
 
         $mailerliteApiKeys = isset($apiKeys['mailerlite']['args']['apikey']) ? $apiKeys['mailerlite']['args']['apikey'] : "";
 
-        error_log($mailerliteApiKeys);
 
-// curl -v https://api.mailerlite.com/api/v2/subscribers \
-// -H "X-MailerLite-ApiKey: fc7b8c5b32067bcd47cafb5f475d2fe9"
+        // curl -v https://api.mailerlite.com/api/v2/subscribers \
+        // -H "X-MailerLite-ApiKey: fc7b8c5b32067bcd47cafb5f475d2fe9"
 
-        $url = 'https://api.mailerlite.com/api/v2/subscribers';
+        $url = 'https://connect.mailerlite.com/api/subscribers';
         $headers = array(
           'accept: application/json',
-        'x-mailerlite-apikey: $mailerliteApiKeys',
+          'Authorization: Bearer ' . $mailerliteApiKeys,
           'content-type: application/json'
         );
-        error_log(serialize($headers));
 
         $data = array(
           "email" => $email,
           "ext_id" => "",
-          "attributes" => array(
-            "FNAME" => $first_name,
-            "LNAME" => $last_name
+          "fields" => array(
+            "name" => $first_name,
+            "last_name" => $last_name
           ),
-          "emailBlacklisted" => false,
-          "smsBlacklisted" => false,
-          "listIds" => $lists,
-          "updateEnabled" => false,
-          "smtpBlacklistSender" => array()
+          "groups" => $lists,
+
         );
 
-        error_log(json_encode($data));
+
+
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -885,6 +1217,8 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
         $curl_response = curl_exec($ch);
 
+
+
         if ($curl_response === false) {
           //echo 'Error: ' . curl_error($ch);
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
@@ -892,24 +1226,141 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
           $curl_response = json_decode($curl_response);
 
-          error_log($curl_response->code);
-          if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
-            error_log($curl_response->code);
+          // if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
 
-            $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
-          }
-          if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
-            error_log($curl_response->code);
+          //   $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
+          // }
+          // if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
 
-            $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
-          }
-          if (isset($curl_response->code) && $curl_response->code == 'invalid_parameter') {
-            error_log($curl_response->code);
+          //   $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->message;
+          // }
+          if (isset($curl_response->errors)) {
 
-            $response['errors']['mailerliteAddContactExist'] = empty($errorMessage) ? $curl_response['message'] : $errorMessage;
+            $response['errors']['mailerliteAddContactExist'] = empty($errorMessage) ? $curl_response['message'] : $curl_response->message;
           }
 
-          if (isset($curl_response->id)) {
+          if (isset($curl_response->data->email) && $curl_response->data->email == $email) {
+            $response['success']['mailerliteAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+
+
+
+
+
+
+
+
+
+        // if ($showOnResponse) {
+
+
+        //     if (isset($mpResponse['status']) && $mpResponse['status'] == 'exist') {
+        //         $response['errors']['mailpickerAddContactExist'] = $existMessage;
+        //     }
+
+        //     if (isset($mpResponse['status']) && $mpResponse['status'] == 'fail') {
+        //         $response['errors']['mailpickerAddContactFailed'] = $errorMessage;
+        //     }
+
+
+
+        //     if (isset($mpResponse['status']) && $mpResponse['status'] == 'success') {
+        //         $response['success']['mailpickerAddContactSuccess'] = $successMessage;
+        //     }
+        // }
+      }
+      if ($id == 'sendgridAddContact') {
+
+        $lists = isset($arg->lists) ? $arg->lists : '';
+        $lists = explode(',', $lists);
+
+
+        //$lists = array_map('intval', $lists);
+
+        //$tags = isset($arg->tags) ? $arg->tags : [];
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+
+
+
+
+
+
+
+
+        $sendgridApiKeys = isset($apiKeys['sendgrid']['args']['apikey']) ? $apiKeys['sendgrid']['args']['apikey'] : "";
+
+
+
+        // Initialize a cURL session
+        $ch = curl_init();
+
+        // Set the URL for the cURL request
+        $url = "https://api.sendgrid.com/v3/marketing/contacts";
+
+        // Create the data array
+        $contacts = [
+          [
+            "email" => $email,
+            "first_name" => $first_name,
+            "last_name" => $last_name
+
+          ],
+        ];
+
+        $data = array('contacts' => $contacts, 'list_ids' => $lists);
+
+
+        // Convert the data array to JSON format
+        $jsonData = json_encode($data);
+
+        // Set the cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Content-Type: application/json',
+          'Authorization: Bearer ' . $sendgridApiKeys // Replace with your SendGrid API key
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $curl_response = curl_exec($ch);
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+
+          $curl_response = json_decode($curl_response);
+
+          // if (isset($curl_response->code) && $curl_response->code == 'duplicate_parameter') {
+
+          //   $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response['message'] : $existMessage;
+          // }
+          // if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
+
+          //   $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->message;
+          // }
+          if (isset($curl_response->errors)) {
+
+            $response['errors']['mailerliteAddContactExist'] = empty($errorMessage) ? $curl_response['message'] : $curl_response->errors[0]->message;
+          }
+
+          if (isset($curl_response->data->email) && $curl_response->data->email == $email) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
 
@@ -947,6 +1398,445 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
         // }
       }
 
+      if ($id == 'emailoctopusAddContact') {
+
+        $lists = isset($arg->lists) ? $arg->lists : '';
+        //$lists = explode(',', $lists);
+
+        $tags = isset($arg->tags) ? $arg->tags : '';
+        $tags = explode(',', $tags);
+
+
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+
+
+
+
+
+
+
+
+        $apiKey = isset($apiKeys['emailoctopus']['args']['apikey']) ? $apiKeys['emailoctopus']['args']['apikey'] : "";
+
+
+
+        // Initialize a cURL session
+        $ch = curl_init();
+
+        // Set the URL for the cURL request
+        $url = "https://emailoctopus.com/api/1.6/lists/" . $lists . "/contacts";
+
+        // Create the data array
+        $data = [
+          "api_key" => $apiKey,
+          "email_address" => $email,
+          "fields" => [
+            "FirstName" => $first_name,
+            "LastName" => $last_name,
+          ],
+          "tags" => $tags,
+
+        ];
+
+
+
+        // Convert the data array to JSON format
+        $jsonData = json_encode($data);
+
+        // Set the cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Content-Type: application/json',
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $curl_response = curl_exec($ch);
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+          $curl_response = json_decode($curl_response);
+
+
+          // if (isset($curl_response->code) && $curl_response->code == 'unauthorized') {
+
+          //   $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->message;
+          // }
+          if (isset($curl_response->error)) {
+
+
+
+            if (isset($curl_response->error->code) && $curl_response->error->code == 'MEMBER_EXISTS_WITH_EMAIL_ADDRESS') {
+
+              $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response->error->message : $existMessage;
+            }
+          }
+
+          if (isset($curl_response->id) && $curl_response->email_address == $email) {
+            $response['success']['mailerliteAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+
+      if ($id == 'senderAddContact') {
+
+        $groups  = isset($arg->groups) ? $arg->groups  : '';
+        $groups  = explode(',', $groups);
+
+        $tags = isset($arg->tags) ? $arg->tags : '';
+        $tags = explode(',', $tags);
+
+
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKey = isset($apiKeys['sender']['args']['apikey']) ? $apiKeys['sender']['args']['apikey'] : "";
+
+
+
+        // Initialize a cURL session
+        $ch = curl_init();
+
+        // Set the URL for the cURL request
+        $url = "https://api.sender.net/v2/subscribers";
+
+        // Create the data array
+        $data = [
+          "email" => $email,
+          "firstname" => $first_name,
+          "lastname" => $last_name,
+          "groups" => $groups
+        ];
+
+        // Convert the data array to JSON format
+        $jsonData = json_encode($data);
+
+        // Set the cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Content-Type: application/json',
+          'Authorization: Bearer ' . $apiKey
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $curl_response = curl_exec($ch);
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+          $curl_response = json_decode($curl_response);
+
+
+          if (isset($curl_response->message) && $curl_response->message == 'Unauthenticated.') {
+
+            $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->message;
+          }
+          //if (isset($curl_response->error)) {
+
+          // if (isset($curl_response->error->code) && $curl_response->error->code == 'MEMBER_EXISTS_WITH_EMAIL_ADDRESS') {
+
+          //   $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response->error->message : $existMessage;
+          // }
+          // }
+
+          if (isset($curl_response->success) && $curl_response->data->email == $email) {
+            $response['success']['mailerliteAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+      if ($id == 'moosendAddContact') {
+
+        $lists = isset($arg->lists) ? $arg->lists : '';
+
+        $tags = isset($arg->tags) ? $arg->tags : '';
+        $tags = explode(',', $tags);
+
+
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKey = isset($apiKeys['moosend']['args']['apikey']) ? $apiKeys['moosend']['args']['apikey'] : "";
+
+
+        // Initialize a cURL session
+        $ch = curl_init();
+
+        // Set the URL for the cURL request
+        $url = "https://api.moosend.com/v3/subscribers/" . $lists . "/subscribe.json?apikey=" . $apiKey;
+
+
+        // Create the data array
+        $data = [
+          "Name" => $first_name,
+          "Email" => $email,
+          "Tags" => $tags
+        ];
+
+        // Convert the data array to JSON format
+        $jsonData = json_encode($data);
+
+        // Set the cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Content-Type: application/json',
+          'Accept: application/json'
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $curl_response = curl_exec($ch);
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+          $curl_response = json_decode($curl_response);
+
+
+          if (isset($curl_response->Error) && $curl_response->Error != null) {
+
+            $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->Error;
+          }
+          //if (isset($curl_response->error)) {
+
+          // if (isset($curl_response->error->code) && $curl_response->error->code == 'MEMBER_EXISTS_WITH_EMAIL_ADDRESS') {
+
+          //   $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response->error->message : $existMessage;
+          // }
+          // }
+
+          if (isset($curl_response->Code) && $curl_response->Code == null) {
+            $response['success']['mailerliteAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+
+
+      if ($id == 'getresponseAddContact') {
+
+        $lists = isset($arg->lists) ? $arg->lists : '';
+
+        $tags = isset($arg->tags) ? $arg->tags : '';
+        $tags = explode(',', $tags);
+
+
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKey = isset($apiKeys['getresponse']['args']['apikey']) ? $apiKeys['getresponse']['args']['apikey'] : "";
+
+
+        // Initialize a cURL session
+        $ch = curl_init();
+
+        // Set the URL for the cURL request
+        $url = "https://api.getresponse.com/v3/contacts/" . $lists . "/subscribe.json?apikey=" . $apiKey;
+
+
+        // Create the data array
+        $data = [
+          "Name" => $first_name,
+          "Email" => $email,
+          "Tags" => $tags
+        ];
+
+        // Convert the data array to JSON format
+        $jsonData = json_encode($data);
+
+        // Set the cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Content-Type: application/json',
+          'Accept: application/json'
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $curl_response = curl_exec($ch);
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+          $curl_response = json_decode($curl_response);
+
+
+          if (isset($curl_response->Error) && $curl_response->Error != null) {
+
+            $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->Error;
+          }
+          //if (isset($curl_response->error)) {
+
+          // if (isset($curl_response->error->code) && $curl_response->error->code == 'MEMBER_EXISTS_WITH_EMAIL_ADDRESS') {
+
+          //   $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response->error->message : $existMessage;
+          // }
+          // }
+
+          if (isset($curl_response->Code) && $curl_response->Code == null) {
+            $response['success']['mailerliteAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+      if ($id == 'activecampaignAddContact') {
+
+        // $lists = isset($arg->lists) ? $arg->lists : '';
+
+        // $tags = isset($arg->tags) ? $arg->tags : '';
+        // $tags = explode(',', $tags);
+
+
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :        "";
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : "";
+        $existMessage = isset($arg->existMessage) ? $arg->existMessage : "";
+
+
+
+        $apiKey = isset($apiKeys['activecampaign']['args']['apikey']) ? $apiKeys['activecampaign']['args']['apikey'] : "";
+        $accountName = isset($apiKeys['activecampaign']['args']['accountName']) ? $apiKeys['activecampaign']['args']['accountName'] : "";
+
+
+        // Initialize a cURL session
+        $ch = curl_init();
+
+        // Set the URL for the cURL request
+        $url = "https://" . $accountName . ".api-us1.com/api/3/contacts";
+
+
+        // Create the data array
+        $data = [
+          "contact" => [
+            "email" => "johndoe@example.com",
+            "firstName" => "John",
+            "lastName" => "Doe",
+            "phone" => "7223224241",
+            "fieldValues" => [
+              [
+                "field" => "1",
+                "value" => "The Value for First Field"
+              ],
+              [
+                "field" => "6",
+                "value" => "2008-01-20"
+              ]
+            ]
+          ]
+        ];
+
+        // Convert the data array to JSON format
+        $jsonData = json_encode($data);
+
+
+        // Set the cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Api-Token: ' . $apiKey,
+          'Accept: application/json',
+          'Content-Type: application/json'
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Execute the cURL request and get the response
+        $curl_response = curl_exec($ch);
+
+
+        if ($curl_response === false) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
+        } else {
+
+
+          $curl_response = json_decode($curl_response);
+
+
+          if (isset($curl_response->Error) && $curl_response->Error != null) {
+
+            $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : $curl_response->Error;
+          }
+          //if (isset($curl_response->error)) {
+
+          // if (isset($curl_response->error->code) && $curl_response->error->code == 'MEMBER_EXISTS_WITH_EMAIL_ADDRESS') {
+
+          //   $response['errors']['mailerliteAddContactExist'] = empty($existMessage) ? $curl_response->error->message : $existMessage;
+          // }
+          // }
+
+          if (isset($curl_response->Code) && $curl_response->Code == null) {
+            $response['success']['mailerliteAddContactSuccess'] = $successMessage;
+          }
+
+
+
+          //echo $curl_response;
+        }
+
+        curl_close($ch);
+      }
+
 
 
 
@@ -976,6 +1866,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
         }
       }
     }
+
 
   return $response;
 }
@@ -1602,6 +2493,7 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
   $email = isset($formFields['email']) ? sanitize_email($formFields['email']) : '';
   $message = isset($formFields['message']) ? wp_kses_post($formFields['message']) : '';
   $subject = isset($formFields['subject']) ? wp_kses_post($formFields['subject']) : '';
+  $recaptchaResponse = isset($formFields['g-recaptcha-response']) ? wp_kses_post($formFields['g-recaptcha-response']) : '';
 
   $extraFields = $formFields;
 
@@ -1780,6 +2672,29 @@ function form_wrap_process_contactForm($formFields, $onprocessargs)
         }
       }
     }
+
+    error_log($id);
+
+    if ($id == 'recaptchaValidation') {
+
+
+      error_log($recaptchaResponse);
+
+      $status = '';
+      $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : false;
+      $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+        __('Create entry success', 'post-grid');
+      $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+        __('Create entry failed', 'post-grid');
+
+      if ($showOnResponse) {
+        if (!empty($recaptchaResponse)) {
+          $response['success']['createEntry'] = $successMessage;
+        } else {
+          $response['errors']['createEntry'] = $errorMessage;
+        }
+      }
+    }
   }
 
 
@@ -1827,7 +2742,6 @@ function form_wrap_process_send_email($email_data)
   $headers = apply_filters('post_grid_mail_headers', $headers);
 
 
-  //////var_dump($headers);
 
   $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 

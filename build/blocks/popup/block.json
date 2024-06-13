@@ -50,6 +50,8 @@
           "animation": "",
           "library": "fontAwesome",
           "srcType": "class",
+          "triggerName": "",
+          "closeAfter": "",
           "iconSrc": "fas fa-chevron-right"
         },
         "styles": {}
@@ -70,6 +72,10 @@
       }
     },
     "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "trigger": {
       "type": "object",
       "default": {}
     },

@@ -1,10 +1,10 @@
 === Gutenberg Blocks, Page Builder - ComboBlocks ===
-Contributors: PickPlugins
+Contributors: PickPlugins, nafismahmudayon
 Donate link: https://comboblocks.com/
 Tags: Gutenberg Blocks, form maker, woocommerce blocks, popup maker, Page Builder
 Requires at least: 5.0.0
 Tested up to: 6.5
-Stable tag: 2.2.82
+Stable tag: 2.2.83
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -388,6 +388,31 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 15. Accordion Block
 
 == Changelog ==
+
+
+= 2.2.83 =
+- 2024-06-12 - update - Update WordPress org Item Block.
+- 2024-06-12 - update - Update Date Countdown Block.
+- 2024-06-11 - update - Update Dashboard Component.
+- 2024-06-10 - create - Create Popup Visible component.
+- 2024-06-10 - update - Update Menu Wrap Item Block.
+- 2024-06-09 - update - Update Content Slider Block.
+- 2024-06-09 - update - Update Popup Block.
+- 2024-06-06 - update - Update Dropdown Component.
+- 2024-06-06 - update - Update Post Meta Block.
+- 2024-06-05 - update - Update Post Title Block.
+- 2024-06-04 - update - Update Social Share Block.
+- 2024-06-03 - create - Create Back to Top Block.
+- 2024-06-03 - update - Update Color Component.
+- 2024-06-03 - update - Update Background Color Component.
+- 2024-06-03 - update - Update Opacity Component.
+- 2024-06-02 - update - Update Form Maker Block.
+- 2024-06-02 - update - Update Post Term Block.
+- 2024-06-02 - update - Update Post Author Field Block.
+- 2024-06-02 - update - Update Sidebar Component.
+- 2024-06-02 - update - Update Post Tag Block.
+- 2024-06-02 - update - Update Table Block.
+- 2024-05-30 - added - Added API Keys Component.
 
 
 = 2.2.82 =

@@ -121,50 +121,55 @@ class PGBlockMenuWrapItem
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
-  // //* Visible condition
-  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
+      // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
+
+    // var_dump($content);
 
     ob_start();
 
 ?>
 
 
-<li class="<?php echo esc_attr($wrapperClass);
+    <li class="<?php echo esc_attr($wrapperClass);
                 ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 
-  <?php if (!empty($linktext)) : ?>
-  <?php if ($iconPosition == 'beforeLink') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-  <a class="<?php echo esc_attr($linkClass); ?>" href="<?php echo esc_url_raw($linkurl); ?>">
-    <?php if ($iconPosition == 'beforeLabel') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-    <?php echo esc_html($linktext) ?>
-    <?php if ($iconPosition == 'afterLabel') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-  </a>
-  <?php if ($iconPosition == 'afterLink') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-  <?php endif; ?>
+      <?php if (!empty($linktext)) : ?>
+        <?php if ($iconPosition == 'beforeLink') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
+        <a class="<?php echo esc_attr($linkClass); ?>" href="<?php echo esc_url_raw($linkurl); ?>">
+          <?php if ($iconPosition == 'beforeLabel') : ?>
+            <?php echo wp_kses_post($fontIconHtml); ?>
+          <?php endif; ?>
+          <span><?php echo esc_html($linktext) ?></span>
+          <?php if ($iconPosition == 'afterLabel') : ?>
+            <?php echo wp_kses_post($fontIconHtml); ?>
+          <?php endif; ?>
+        </a>
+        <?php if ($iconPosition == 'afterLink') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
+      <?php endif; ?>
 
-  <ul class="<?php echo esc_attr($subMenuWrapClass); ?>">
-    <?php echo $content ?>
-  </ul>
-</li>
+      <?php if (!empty($content)) : ?>
+        <ul class="<?php echo esc_attr($subMenuWrapClass); ?> ">
+          <?php echo $content ?>
+        </ul>
+      <?php endif; ?>
+
+    </li>
 
 
 <?php

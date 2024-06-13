@@ -101,8 +101,8 @@ class PGBlockWooProductTabs
 
     foreach ($items as $item) {
 
-      $siteIcon = $item['siteIcon'];
-      $iconLibrary = $siteIcon['library'];
+      $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
+      $iconLibrary = isset($item['library']) ? $item['library'] : '';
 
       if ($iconLibrary == 'fontAwesome') {
         wp_enqueue_style('fontawesome-icons');

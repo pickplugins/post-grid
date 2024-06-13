@@ -34,20 +34,13 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 
     <div class="wp-filter">
       <ul class="filter-links">
-        <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=latest"
-            class="<?php if ($tabs == 'latest') echo 'current'; ?>"
-            aria-current="page"><?php _e('Latest', 'post-grid'); ?></a> </li>
-        <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=free"
-            class="<?php if ($tabs == 'free') echo 'current'; ?>"
-            aria-current="page"><?php _e('Free', 'post-grid'); ?></a> </li>
-        <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=pro"
-            class="<?php if ($tabs == 'pro') echo 'current'; ?>"
-            aria-current="page"><?php _e('Premium', 'post-grid'); ?></a> </li>
+        <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=latest" class="<?php if ($tabs == 'latest') echo 'current'; ?>" aria-current="page"><?php _e('Latest', 'post-grid'); ?></a> </li>
+        <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=free" class="<?php if ($tabs == 'free') echo 'current'; ?>" aria-current="page"><?php _e('Free', 'post-grid'); ?></a> </li>
+        <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=pro" class="<?php if ($tabs == 'pro') echo 'current'; ?>" aria-current="page"><?php _e('Premium', 'post-grid'); ?></a> </li>
       </ul>
       <form class="block-search-form">
         <span class="loading"></span>
-        <input id="block-keyword" type="search" placeholder="<?php _e('Start typing...', 'wp-block-hub'); ?>"
-          value="<?php echo esc_attr($keyword); ?>">
+        <input id="block-keyword" type="search" placeholder="<?php _e('Start typing...', 'wp-block-hub'); ?>" value="<?php echo esc_attr($keyword); ?>">
       </form>
     </div>
 
@@ -72,12 +65,12 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     if (is_wp_error($response)) {
 
     ?>
-    <div class="return-empty">
-      <ul>
-        <li><?php echo __("Unexpected Error! The query returned with an error.", 'post-grid'); ?></li>
-        <li><?php echo __("Make sure your internet connection is up.", 'post-grid'); ?></li>
-      </ul>
-    </div>
+      <div class="return-empty">
+        <ul>
+          <li><?php echo __("Unexpected Error! The query returned with an error.", 'post-grid'); ?></li>
+          <li><?php echo __("Make sure your internet connection is up.", 'post-grid'); ?></li>
+        </ul>
+      </div>
     <?php
 
 
@@ -94,7 +87,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     <div class="block-list-items">
       <?php
 
-      // //var_dump($post_data);
 
 
       if (!empty($post_data)) :
@@ -102,7 +94,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
         foreach ($post_data as $item_index => $item) :
 
 
-          ////var_dump($item);
 
           $post_id      = isset($item->post_id) ? $item->post_id : '';
           $block_title        = isset($item->title) ? $item->title : __('No title', 'post-grid');
@@ -119,46 +110,45 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 
       ?>
 
-      <div class="item">
-        <div class="item-top-area">
+          <div class="item">
+            <div class="item-top-area">
 
-          <?php if (!empty($layout_preview_img)) : ?>
-          <div class="block-thumb">
-            <img src="<?php echo esc_url($layout_preview_img); ?>">
-          </div>
-          <?php endif; ?>
+              <?php if (!empty($layout_preview_img)) : ?>
+                <div class="block-thumb">
+                  <img src="<?php echo esc_url($layout_preview_img); ?>">
+                </div>
+              <?php endif; ?>
 
 
-          <div class="block-content">
-            <div class="block-name"><?php echo esc_html($block_title); ?></div>
+              <div class="block-content">
+                <div class="block-name"><?php echo esc_html($block_title); ?></div>
 
-          </div>
-          <div class="actions">
+              </div>
+              <div class="actions">
 
-            <?php
+                <?php
                 if ($is_pro == 'yes' && empty($license_key)) {
                 } else {
                 ?>
-            <span class="button  import-layout" post_id="<?php echo esc_attr($post_id); ?>"><i
-                class="fas fa-download"></i> Import (<?php echo esc_html($download_count); ?>)</span>
-            <?php
+                  <span class="button  import-layout" post_id="<?php echo esc_attr($post_id); ?>"><i class="fas fa-download"></i> Import (<?php echo esc_html($download_count); ?>)</span>
+                <?php
                 }
 
                 ?>
 
 
-            <?php if ($is_pro == 'yes') : ?>
-            <span title="Enter license key to import" class="is_pro button"><i class="fas fa-crown"></i> Pro</span>
-            <?php else : ?>
-            <span class="is_free button"><i class="far fa-lightbulb"></i> Free</span>
-            <?php endif; ?>
+                <?php if ($is_pro == 'yes') : ?>
+                  <span title="Enter license key to import" class="is_pro button"><i class="fas fa-crown"></i> Pro</span>
+                <?php else : ?>
+                  <span class="is_free button"><i class="far fa-lightbulb"></i> Free</span>
+                <?php endif; ?>
 
 
 
+              </div>
+            </div>
+            <div class="clear"></div>
           </div>
-        </div>
-        <div class="clear"></div>
-      </div>
       <?php
         endforeach;
 
@@ -181,7 +171,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
       //$max_num_pages = 4;
 
 
-      ////var_dump(get_pagenum_link( $big ));
 
       echo paginate_links(
         array(
@@ -207,218 +196,216 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 </div>
 
 <script>
-jQuery(document).ready(function($) {
+  jQuery(document).ready(function($) {
 
-  var delay = (function() {
-    var timer = 0;
-    return function(callback, ms) {
-      clearTimeout(timer);
-      timer = setTimeout(callback, ms);
-    };
-  })();
-
-
-  $(document).on('keyup', '#block-keyword', function() {
-    _this = this;
-    keyword = $(this).val();
-
-    url = window.location.href
-    //console.log();
-    var url = new URL(url);
+    var delay = (function() {
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
 
 
-    delay(function() {
-      $(_this).parent().children('.loading').addClass('button updating-message');
+    $(document).on('keyup', '#block-keyword', function() {
+      _this = this;
+      keyword = $(this).val();
 
-      url.searchParams.append('keyword', keyword);
-      url.searchParams.delete('paged');
-      window.location.href = url.href;
-
-    }, 1000);
+      url = window.location.href
+      //console.log();
+      var url = new URL(url);
 
 
+      delay(function() {
+        $(_this).parent().children('.loading').addClass('button updating-message');
+
+        url.searchParams.append('keyword', keyword);
+        url.searchParams.delete('paged');
+        window.location.href = url.href;
+
+      }, 1000);
+
+
+    })
   })
-})
 </script>
 
 <style type="text/css">
-.block-search-form {
-  float: right;
-  padding: 10px;
-}
-
-.block-search-form input[type="search"] {
-  width: 225px;
-  padding: 0 10px;
-}
-
-.block-list-items {}
-
-.block-list-items a {
-  text-decoration: none
-}
-
-.block-list-items .item {
-  display: inline-block;
-  vertical-align: top;
-  width: 18%;
-  background: #fff;
-  margin: 10px;
-}
-
-@media (max-width: 1199.98px) {
-
-  .block-list-items .item {
-    width: 46%;
-
-  }
-}
-
-@media (max-width: 767.98px) {
-
-  .block-list-items .item {
-    width: 46%;
-
+  .block-search-form {
+    float: right;
+    padding: 10px;
   }
 
-}
+  .block-search-form input[type="search"] {
+    width: 225px;
+    padding: 0 10px;
+  }
 
-@media (max-width: 575.98px) {
+  .block-list-items {}
+
+  .block-list-items a {
+    text-decoration: none
+  }
+
   .block-list-items .item {
-    width: 95%;
+    display: inline-block;
+    vertical-align: top;
+    width: 18%;
+    background: #fff;
+    margin: 10px;
+  }
+
+  @media (max-width: 1199.98px) {
+
+    .block-list-items .item {
+      width: 46%;
+
+    }
+  }
+
+  @media (max-width: 767.98px) {
+
+    .block-list-items .item {
+      width: 46%;
+
+    }
 
   }
-}
 
+  @media (max-width: 575.98px) {
+    .block-list-items .item {
+      width: 95%;
 
+    }
+  }
 
 
 
-.block-list-items .item-top-area {}
 
-.block-list-items .block-thumb {
-  /* float: left; */
-  overflow: hidden;
-  /* margin-right: 15px; */
-  height: 280px;
-  border-bottom: 1px solid #ddd;
-}
 
-.block-list-items .block-thumb img {
-  width: 100%;
-}
+  .block-list-items .item-top-area {}
 
-.block-list-items .block-name {
-  font-weight: 600;
-  font-size: 18px;
-}
+  .block-list-items .block-thumb {
+    /* float: left; */
+    overflow: hidden;
+    /* margin-right: 15px; */
+    height: 280px;
+    border-bottom: 1px solid #ddd;
+  }
 
-.block-list-items .block-content {
-  padding: 15px;
-}
+  .block-list-items .block-thumb img {
+    width: 100%;
+  }
 
-.item .actions {
-  margin: 10px;
-}
+  .block-list-items .block-name {
+    font-weight: 600;
+    font-size: 18px;
+  }
 
-.item .is_pro {
-  background: #3f51b5;
-  color: #fff;
-}
+  .block-list-items .block-content {
+    padding: 15px;
+  }
 
-.item .is_free {
-  background: #449862;
-  color: #fff;
-}
+  .item .actions {
+    margin: 10px;
+  }
 
-.block-save {}
+  .item .is_pro {
+    background: #3f51b5;
+    color: #fff;
+  }
 
-.block-save.saved {
-  color: #00a04f;
-}
+  .item .is_free {
+    background: #449862;
+    color: #fff;
+  }
 
-.block-save span {
-  line-height: normal;
-  display: inline-block;
-}
+  .block-save {}
 
-.block-list-items .demo-wrap {}
+  .block-save.saved {
+    color: #00a04f;
+  }
 
-.block-list-items .block-action {
-  float: right;
-  display: inline-block;
-  padding: 15px;
-  text-align: right;
-}
+  .block-save span {
+    line-height: normal;
+    display: inline-block;
+  }
 
-.plugin-required {}
+  .block-list-items .demo-wrap {}
 
-.plugin-required a {
-  text-decoration: none;
-}
+  .block-list-items .block-action {
+    float: right;
+    display: inline-block;
+    padding: 15px;
+    text-align: right;
+  }
 
+  .plugin-required {}
 
-.plugin-required .installed {
-  color: #00a04f;
-}
+  .plugin-required a {
+    text-decoration: none;
+  }
 
-.plugin-required .not-installed {
-  color: #e02102;
-}
 
+  .plugin-required .installed {
+    color: #00a04f;
+  }
 
+  .plugin-required .not-installed {
+    color: #e02102;
+  }
 
-.block-list-items .item-bottom-area {
-  padding: 10px;
-  background: #f7f7f7;
-  border-top: 1px solid #ddd;
-}
 
-.item-bottom-area .col-left {
-  width: 49%;
-  display: inline-block;
-  vertical-align: top;
-}
 
-.item-bottom-area .col-right {
-  width: 49%;
-  display: inline-block;
-  text-align: right;
-}
+  .block-list-items .item-bottom-area {
+    padding: 10px;
+    background: #f7f7f7;
+    border-top: 1px solid #ddd;
+  }
 
-.item-bottom-area .col-left .star-rate {
-  margin-bottom: 10px;
-}
+  .item-bottom-area .col-left {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+  }
 
-.item-bottom-area .col-left .star-rate .dashicons {
-  color: #ffb900;
-}
+  .item-bottom-area .col-right {
+    width: 49%;
+    display: inline-block;
+    text-align: right;
+  }
 
-.item-bottom-area .col-left .download-count {}
+  .item-bottom-area .col-left .star-rate {
+    margin-bottom: 10px;
+  }
 
-.item-bottom-area .col-right .author-link {
-  margin-bottom: 10px;
-}
+  .item-bottom-area .col-left .star-rate .dashicons {
+    color: #ffb900;
+  }
 
+  .item-bottom-area .col-left .download-count {}
 
+  .item-bottom-area .col-right .author-link {
+    margin-bottom: 10px;
+  }
 
-.paginate {
-  text-align: center;
-  margin: 40px;
-}
 
-.paginate .page-numbers {
-  background: #f7f7f7;
-  padding: 10px 15px;
-  margin: 5px;
-  text-decoration: none;
-}
 
-.paginate .page-numbers.current {
-  background: #e4e4e4;
-}
+  .paginate {
+    text-align: center;
+    margin: 40px;
+  }
 
+  .paginate .page-numbers {
+    background: #f7f7f7;
+    padding: 10px 15px;
+    margin: 5px;
+    text-decoration: none;
+  }
 
+  .paginate .page-numbers.current {
+    background: #e4e4e4;
+  }
 
 
 
@@ -428,131 +415,133 @@ jQuery(document).ready(function($) {
 
 
 
-/*wpblockhub-import-container*/
 
-.wpblockhub-import-container {
-  position: relative;
-}
 
-.wpblockhub-import-btn {}
+  /*wpblockhub-import-container*/
 
-.wpblockhub-import-container button {
-  background: #3f51b5;
-  color: #fff;
-}
+  .wpblockhub-import-container {
+    position: relative;
+  }
 
-.wpblockhub-import-container .item-list-wrap.active {
-  display: block;
-}
+  .wpblockhub-import-btn {}
 
-.item-list-wrap {
-  position: absolute;
-  width: 300px;
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 10px;
-  box-shadow: 0px 4px 6px 0px rgba(210, 210, 210, 0.4);
-  left: -188px;
-  max-height: 400px;
-  overflow: hidden;
-  overflow-y: scroll;
-  margin-top: 9px;
-  display: none;
-}
+  .wpblockhub-import-container button {
+    background: #3f51b5;
+    color: #fff;
+  }
 
+  .wpblockhub-import-container .item-list-wrap.active {
+    display: block;
+  }
 
+  .item-list-wrap {
+    position: absolute;
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0px 4px 6px 0px rgba(210, 210, 210, 0.4);
+    left: -188px;
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin-top: 9px;
+    display: none;
+  }
 
 
 
-.item-list-wrap .item {
-  position: relative;
-  transition: ease all 1s;
-}
 
-.item-list-wrap .item img {}
 
-.item-list-wrap .item:hover img {}
+  .item-list-wrap .item {
+    position: relative;
+    transition: ease all 1s;
+  }
 
-/*.item-list-wrap .item img:before {*/
-/*    transition: ease all 1s;*/
-/*    content: "";*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    background: #1d1d1d78;*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    display: none;*/
-/*    transform: scale(.5);*/
-/*}*/
+  .item-list-wrap .item img {}
 
-/*.item-list-wrap .item:hover img:before {*/
+  .item-list-wrap .item:hover img {}
 
-/*    display: block;*/
-/*    transform: scale(1);*/
-/*}*/
+  /*.item-list-wrap .item img:before {*/
+  /*    transition: ease all 1s;*/
+  /*    content: "";*/
+  /*    width: 100%;*/
+  /*    height: 100%;*/
+  /*    background: #1d1d1d78;*/
+  /*    position: absolute;*/
+  /*    top: 0;*/
+  /*    left: 0;*/
+  /*    display: none;*/
+  /*    transform: scale(.5);*/
+  /*}*/
 
-.item-list-wrap .item .item-import {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-  z-index: 99999;
-}
+  /*.item-list-wrap .item:hover img:before {*/
 
-.item-list-wrap .item:hover .item-import {
+  /*    display: block;*/
+  /*    transform: scale(1);*/
+  /*}*/
 
-  display: block;
-}
+  .item-list-wrap .item .item-import {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 99999;
+  }
 
-.item-list-wrap .item img {
-  transition: ease all 1s;
-}
+  .item-list-wrap .item:hover .item-import {
 
-.item-list-wrap .item:hover img {
-  opacity: 0.3;
-}
+    display: block;
+  }
 
-.item-list-wrap .item.loading {}
+  .item-list-wrap .item img {
+    transition: ease all 1s;
+  }
 
-.item-list-wrap .item.loading:before {
-  content: "Loading...";
-}
+  .item-list-wrap .item:hover img {
+    opacity: 0.3;
+  }
 
-.item-list-wrap .categories {
-  width: 100%;
-  margin-bottom: 10px;
-}
+  .item-list-wrap .item.loading {}
 
-.item-list-wrap .keyword,
-.item-list-wrap .loading {
-  width: 100%;
-}
+  .item-list-wrap .item.loading:before {
+    content: "Loading...";
+  }
 
+  .item-list-wrap .categories {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
+  .item-list-wrap .keyword,
+  .item-list-wrap .loading {
+    width: 100%;
+  }
 
-.item-list-wrap .load-more {
-  width: 100%;
-  text-align: center;
-}
 
 
-.item-list-wrap .plugins-required {}
+  .item-list-wrap .load-more {
+    width: 100%;
+    text-align: center;
+  }
 
-.item-list-wrap .plugins-required a {
-  text-decoration: none;
-}
 
+  .item-list-wrap .plugins-required {}
 
+  .item-list-wrap .plugins-required a {
+    text-decoration: none;
+  }
 
-/*Sidebar .wpblockhub-import-wrap*/
 
-.wpblockhub-import-wrap {}
 
-.wpblockhub-import-header-wrap {
-  padding: 15px;
-}
+  /*Sidebar .wpblockhub-import-wrap*/
 
-.wpblockhub-import-header {}
+  .wpblockhub-import-wrap {}
+
+  .wpblockhub-import-header-wrap {
+    padding: 15px;
+  }
+
+  .wpblockhub-import-header {}
 </style>

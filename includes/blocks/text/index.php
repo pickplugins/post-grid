@@ -42,9 +42,7 @@ class PGBlockPostText
       // $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
       // $otherCopyContent = isset($otherOptions['copyContent']) ? $otherOptions['copyContent'] : "";
 
-      var_dump($attributes);
 
-      // var_dump($other);
       // if ($otherCopyObj) {
       wp_enqueue_script('pg-text');
       // }
@@ -97,7 +95,6 @@ class PGBlockPostText
     $otherOptions = isset($other['options']) ? $other['options'] : [];
     $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
     $otherCopyContent = isset($otherOptions['copyContent']) ? $otherOptions['copyContent'] : "";
-    // var_dump($other);
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
     $rules = isset($visible['rules']) ? $visible['rules'] : [];
 
@@ -131,7 +128,6 @@ class PGBlockPostText
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
 
-    ////var_dump($obj);
     $textClass = parse_css_class($textClass, $obj);
     $content = parse_css_class($content, $obj);
 
@@ -143,7 +139,6 @@ class PGBlockPostText
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
 
       if (!$isVisible) return;
     }

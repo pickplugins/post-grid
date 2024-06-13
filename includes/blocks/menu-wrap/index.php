@@ -87,18 +87,18 @@ class PGBlockMenuWrap
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
-  //////var_dump($blockCssY);
+    //////var_dump($blockCssY);
 
 
-  // //* Visible condition
-  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
+      // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
 
@@ -107,12 +107,15 @@ class PGBlockMenuWrap
 
 
 ?>
-<div
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-  <ul class="<?php echo esc_attr($menuWrapClass); ?>">
-    <?php echo $content ?>
-  </ul>
-</div>
+    <nav class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+      <ul class="<?php echo esc_attr($menuWrapClass); ?>">
+        <?php echo $content ?>
+      </ul>
+
+
+
+      <div class="mobile-toggle">Icon</div>
+    </nav>
 <?php
 
     return ob_get_clean();

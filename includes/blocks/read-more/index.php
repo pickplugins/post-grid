@@ -126,7 +126,10 @@ class PGBlockReadmore
 
       $linkUrl = get_permalink($post_ID);
     } else if ($readMoreLinkTo == 'customField') {
-      $linkUrl = get_post_meta($post_ID, $readMoreLinkToMetaKey, true);
+
+      if (!empty($readMoreLinkToMetaKey)) {
+        $linkUrl = get_post_meta($post_ID, $readMoreLinkToMetaKey, true);
+      }
     } else if ($readMoreLinkTo == 'authorUrl') {
       $author_id = get_post_field('post_author', $post_ID);
       $user = get_user_by('ID', $author_id);
@@ -213,99 +216,93 @@ class PGBlockReadmore
     $prefixText = parse_css_class($prefixText, $obj);
     $postfixText = parse_css_class($postfixText, $obj);
 
-  // //* Visible condition
-  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
 
 
     ob_start();
 
-    // ////var_dump($iconPosition);
-    // ////var_dump($iconClass);
-    // ////var_dump($iconSrc);
-    // ////var_dump($fontIconHtml);
 
 
     if (!empty($wrapperTag)) :
 
 ?>
-<<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo tag_escape($wrapperTag); ?> class="
                                   <?php echo esc_attr($blockId); ?>
                                   <?php echo esc_attr($wrapperClass); ?>">
 
 
-  <?php if ($iconPosition == 'beforePrefix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+        <?php if ($iconPosition == 'beforePrefix') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
 
-  <?php if ($prefixText) : ?>
-  <span class="<?php echo esc_attr($prefixClass); ?>">
-    <?php echo wp_kses_post($prefixText); ?>
-  </span>
-  <?php endif; ?>
+        <?php if ($prefixText) : ?>
+          <span class="<?php echo esc_attr($prefixClass); ?>">
+            <?php echo wp_kses_post($prefixText); ?>
+          </span>
+        <?php endif; ?>
 
-  <?php if ($iconPosition == 'afterPrefix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+        <?php if ($iconPosition == 'afterPrefix') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
 
-  <?php
+        <?php
         /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
         ?>
-  <?php if (!empty($readMoreLinkTo)) : ?>
+        <?php if (!empty($readMoreLinkTo)) : ?>
 
 
-  <a class='readmore' <?php echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>"
-    rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
-    <?php if ($iconPosition == 'beforeReadmore') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-    <?php echo $readMoreText; ?>
-    <?php if ($iconPosition == 'afterReadmore') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-  </a>
+          <a class='readmore' <?php echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
+            <?php if ($iconPosition == 'beforeReadmore') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php echo $readMoreText; ?>
+            <?php if ($iconPosition == 'afterReadmore') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+          </a>
 
-  <?php else : ?>
-  <div class='readmore' <?php echo ($linkAttrStrReadmore); ?>>
-    <?php if ($iconPosition == 'beforeReadmore') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-    <?php echo $readMoreText; ?>
-    <?php if ($iconPosition == 'afterReadmore') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-  </div>
-  <?php endif; ?>
-
-
+        <?php else : ?>
+          <div class='readmore' <?php echo ($linkAttrStrReadmore); ?>>
+            <?php if ($iconPosition == 'beforeReadmore') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php echo $readMoreText; ?>
+            <?php if ($iconPosition == 'afterReadmore') : ?>
+              <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
 
 
 
 
 
-  <?php if ($iconPosition == 'beforePostfix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-  <?php if ($postfixText) : ?>
-  <span class="<?php echo esc_attr($postfixClass); ?>">
-    <?php echo wp_kses_post($postfixText); ?>
-  </span>
-  <?php endif; ?>
 
-  <?php if ($iconPosition == 'afterPostfix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
 
-</<?php echo tag_escape($wrapperTag); ?>>
-<?php
+        <?php if ($iconPosition == 'beforePostfix') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
+        <?php if ($postfixText) : ?>
+          <span class="<?php echo esc_attr($postfixClass); ?>">
+            <?php echo wp_kses_post($postfixText); ?>
+          </span>
+        <?php endif; ?>
+
+        <?php if ($iconPosition == 'afterPostfix') : ?>
+          <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php endif; ?>
+
+      </<?php echo tag_escape($wrapperTag); ?>>
+    <?php
 
     endif;
 
@@ -313,42 +310,40 @@ class PGBlockReadmore
       /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
     ?>
 
-<?php if (!empty($readMoreLinkTo)) : ?>
-<a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrReadmore); ?>
-  target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>"
-  href="<?php echo esc_url_raw($linkUrl); ?>">
-  <?php if ($prefixText) : ?>
-  <span class="<?php echo esc_attr($prefixClass); ?>">
-    <?php echo wp_kses_post($prefixText); ?>
-  </span>
-  <?php endif; ?>
-  <?php echo wp_kses_post($readMoreText); ?>
-  <?php if ($postfixText) : ?>
-  <span class="<?php echo esc_attr($postfixClass); ?>">
-    <?php echo wp_kses_post($postfixText); ?>
-  </span>
-  <?php endif; ?>
-</a>
-<?php else : ?>
-<div class="<?php echo esc_attr($blockId); ?>">
-  <?php if ($prefixText) : ?>
-  <span class="<?php echo esc_attr($prefixClass); ?>">
-    <?php echo wp_kses_post($prefixText); ?>
-  </span>
-  <?php endif; ?>
-  <?php echo wp_kses_post($readMoreText); ?>
-  <?php if ($postfixText) : ?>
-  <span class="<?php echo esc_attr($postfixClass); ?>">
-    <?php echo wp_kses_post($postfixText); ?>
-  </span>
-  <?php endif; ?>
-</div>
-<?php endif; ?>
+      <?php if (!empty($readMoreLinkTo)) : ?>
+        <a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
+          <?php if ($prefixText) : ?>
+            <span class="<?php echo esc_attr($prefixClass); ?>">
+              <?php echo wp_kses_post($prefixText); ?>
+            </span>
+          <?php endif; ?>
+          <?php echo wp_kses_post($readMoreText); ?>
+          <?php if ($postfixText) : ?>
+            <span class="<?php echo esc_attr($postfixClass); ?>">
+              <?php echo wp_kses_post($postfixText); ?>
+            </span>
+          <?php endif; ?>
+        </a>
+      <?php else : ?>
+        <div class="<?php echo esc_attr($blockId); ?>">
+          <?php if ($prefixText) : ?>
+            <span class="<?php echo esc_attr($prefixClass); ?>">
+              <?php echo wp_kses_post($prefixText); ?>
+            </span>
+          <?php endif; ?>
+          <?php echo wp_kses_post($readMoreText); ?>
+          <?php if ($postfixText) : ?>
+            <span class="<?php echo esc_attr($postfixClass); ?>">
+              <?php echo wp_kses_post($postfixText); ?>
+            </span>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
 
 
 
 
-<?php
+    <?php
 
     endif;
 

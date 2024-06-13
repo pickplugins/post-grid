@@ -81,27 +81,26 @@ class PGBlockFlexWrap
 		$wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
-	// //* Visible condition
-	$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-	if (!empty($visible['rules'])) {
-		$isVisible = post_grid_visible_parse($visible);
+		// //* Visible condition
+		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+		if (!empty($visible['rules'])) {
+			$isVisible = post_grid_visible_parse($visible);
 
-		// var_dump($isVisible);
+			// ($isVisible);
 
-		if (!$isVisible) return;
-	}
+			if (!$isVisible) return;
+		}
 
-    // //* Visible condition
+		// //* Visible condition
 
 		ob_start();
 
 
 
 ?>
-<div
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
-  <?php echo $content ?>
-</div>
+		<div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
+			<?php echo $content ?>
+		</div>
 <?php
 
 		return ob_get_clean();

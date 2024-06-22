@@ -2568,7 +2568,6 @@ function post_grid_visible_parse($visible)
         $user = wp_get_current_user();
         $user_role = (array) $user->roles;
 
-        // var_dump(array_intersect($user_role, $roles));
 
         if ($compare == 'include') {
           $roleExist = !empty(array_intersect($user_role, $roles));
@@ -3106,10 +3105,6 @@ function post_grid_visible_parse($visible)
         //$ua = post_grid_getBrowser();
         $browesr = wp_check_browser_version();
         $name = $browesr['name'];
-
-
-
-        // echo var_export($browesr, true);
       }
       if ($id == 'isBrowsers') {
         $values = isset($arg['values']) ? $arg['values'] : [];
@@ -3136,8 +3131,6 @@ function post_grid_visible_parse($visible)
         }
       }
       if ($id == 'isCountries') {
-        //echo var_export($_SERVER['REMOTE_ADDR'], true);
-        //echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR'])));
       }
       if ($id == 'postsIds') {
 
@@ -3184,7 +3177,6 @@ function post_grid_visible_parse($visible)
         );
         $comments_count = get_comments($args);
 
-        var_dump($comments_count);
 
         $value = isset($arg['value']) ? $arg['value'] : '';
         $compare = isset($arg['compare']) ? $arg['compare'] : '=';
@@ -3491,7 +3483,6 @@ function post_grid_visible_parse($visible)
         $user = wp_get_current_user();
         $currentUserId = isset($user->ID) ? $user->ID : '';
 
-        // var_dump($capability);
 
         if (user_can($currentUserId, $capability[0], $args)) {
           $isAccess = true;
@@ -3975,7 +3966,6 @@ function post_grid_visible_parse($visible)
         $value = isset($arg['value']) ? $arg['value'] : '';
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
-        //var_dump($_COOKIE[$cookieName]);
 
 
 
@@ -4092,22 +4082,11 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
-
-
-
-      // sdf
-
-
-
-
-
-
-
     }
   }
 
 
-  //echo "<pre>" . var_export($conditions, true) . "</pre>";
+
 
   $allowAccess = false;
   $allowAccessArr = [];
@@ -4119,13 +4098,8 @@ function post_grid_visible_parse($visible)
     $groupRelation = isset($conditionGroup['relation']) ? $conditionGroup['relation'] : 'OR';
     $args = isset($conditionGroup['args']) ? $conditionGroup['args'] : [];
 
-    //echo "<pre>" . var_export($groupRelation, true) . "</pre>";
     $res = array_unique($args);
 
-    // echo '$res';
-    // echo "<pre>" . var_export($res, true) . "</pre>";
-    // echo 'count($res)';
-    // echo "<pre>" . var_export(count($res), true) . "</pre>";
 
     if ($groupRelation == "AND") {
 
@@ -4166,8 +4140,6 @@ function post_grid_visible_parse($visible)
     }
   }
 
-  // echo "<pre>" . var_export($allowAccessArr, true) . "</pre>";
-  //echo "<pre>" . var_export($allowAccess, true) . "</pre>";
 
 
   return $allowAccess;

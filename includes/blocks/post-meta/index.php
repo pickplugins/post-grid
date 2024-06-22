@@ -159,7 +159,7 @@ class BlockPostMeta
 		if (!empty($visible['rules'])) {
 			$isVisible = post_grid_visible_parse($visible);
 
-			// var_dump($isVisible);
+
 
 			if (!$isVisible) return;
 		}
@@ -175,7 +175,6 @@ class BlockPostMeta
 		//echo strtr($templateFront, $vars);
 
 
-		//echo '<pre>' . var_export(get_registered_meta_keys('post'), true) . '</pre>';
 
 
 

@@ -127,7 +127,6 @@ class PGBlockPostQuery
 
     $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
 
-    //echo var_export($query_args, true);
 
 
     if (array_key_exists('post_parent', $query_args)) {

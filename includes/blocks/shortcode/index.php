@@ -108,12 +108,12 @@ class BlockPostShortcode
 		if (!empty($visible['rules'])) {
 			$isVisible = post_grid_visible_parse($visible);
 
-			// var_dump($isVisible);
+
 
 			if (!$isVisible) return;
 		}
 
-    // //* Visible condition
+		// //* Visible condition
 
 		ob_start();
 
@@ -138,14 +138,14 @@ class BlockPostShortcode
 			}
 
 
-		//////var_dump($shortcodePrams);
 
 
 		if (!empty($wrapperTag)) :
 
+			if (!empty($shortcodeKey)) {
+				echo do_shortcode('[' . $shortcodeKey . ' ' . $shortcodeAtts . ']');
+			}
 
-
-			echo do_shortcode('[' . $shortcodeKey . ' ' . $shortcodeAtts . ']');
 
 		endif;
 

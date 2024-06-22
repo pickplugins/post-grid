@@ -105,36 +105,35 @@ class PGBlockTabsNestedItem
 			wp_enqueue_style('bootstrap-icons');
 		}
 
-			// $obj['id'] = $post_ID;
-			// $obj['type'] = 'post';
+		// $obj['id'] = $post_ID;
+		// $obj['type'] = 'post';
 
 
 
-			// $wrapperClass = parse_css_class($wrapperClass, $obj);
+		// $wrapperClass = parse_css_class($wrapperClass, $obj);
 
 
-			// //* Visible condition
-			$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-			if (!empty($visible['rules'])) {
-				$isVisible = post_grid_visible_parse($visible);
+		// //* Visible condition
+		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+		if (!empty($visible['rules'])) {
+			$isVisible = post_grid_visible_parse($visible);
 
-				// var_dump($isVisible);
 
-				if (!$isVisible) return;
-			}
 
-    // //* Visible condition
+			if (!$isVisible) return;
+		}
+
+		// //* Visible condition
 
 		ob_start();
 
 
-		?>
-<div class="pg-tabs-panel  <?php echo ($uid == $activeTab) ? '' : '' ?>" data-tab-id="<?php echo esc_attr($uid); ?>"
-  hidden="true">
+?>
+		<div class="pg-tabs-panel  <?php echo ($uid == $activeTab) ? '' : '' ?>" data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true">
 
-  <?php echo $content; ?>
+			<?php echo $content; ?>
 
-</div>
+		</div>
 
 
 

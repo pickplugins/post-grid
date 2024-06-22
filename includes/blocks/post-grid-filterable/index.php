@@ -270,18 +270,18 @@ class PGBlockPostGridFilterable
 
     $containerClass = parse_css_class($containerClass, $obj);
 
-  // //* Visible condition
-  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
-    
+
     ob_start();
 
 
@@ -290,10 +290,9 @@ class PGBlockPostGridFilterable
 
 
 
-<div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?>
-  class="<?php echo esc_attr($blockId); ?> ">
-  <?php echo $content ?>
-</div>
+    <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> ">
+      <?php echo $content ?>
+    </div>
 <?php
 
     return ob_get_clean();

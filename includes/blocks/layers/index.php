@@ -112,7 +112,7 @@ class PGBlockLayers
       $linkUrl = $wrapperCustomUrl;
     }
 
-    //////var_dump($blockAlign);
+
 
 
     $obj['id'] = $post_ID;

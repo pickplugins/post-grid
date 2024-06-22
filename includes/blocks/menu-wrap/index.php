@@ -147,7 +147,7 @@ class PGBlockMenuWrap
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
-    //////var_dump($blockCssY);
+
 
 
     // //* Visible condition
@@ -155,7 +155,7 @@ class PGBlockMenuWrap
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
+
 
       if (!$isVisible) return;
     }

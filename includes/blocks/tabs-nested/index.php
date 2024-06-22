@@ -156,15 +156,15 @@ class PGBlockTabs
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
-  // //* Visible condition
-  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
 
@@ -173,63 +173,60 @@ class PGBlockTabs
 
 
 ?>
-<div id="<?php echo esc_attr($blockId); ?>"
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-  data-tabData="<?php echo esc_attr(json_encode($tabData)); ?>">
-  <div class="navs-wrapper">
-    <?php
+    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-tabData="<?php echo esc_attr(json_encode($tabData)); ?>">
+      <div class="navs-wrapper">
+        <?php
 
         foreach ($tabs as $tab) {
 
           $uid = isset($tab['uid']) ? $tab['uid'] : '';
 
         ?>
-    <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>"
-      class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="0">
+          <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>" class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="0">
 
 
-      <?php if ($iconPosition == 'before') : ?>
+            <?php if ($iconPosition == 'before') : ?>
 
 
-      <?php echo wp_kses_post($iconHtml); ?>
+              <?php echo wp_kses_post($iconHtml); ?>
 
 
 
-      <?php echo wp_kses_post($iconToggleHtml); ?>
+              <?php echo wp_kses_post($iconToggleHtml); ?>
 
 
-      <?php endif; ?>
+            <?php endif; ?>
 
 
-      <div class="nav-label">
-        <?php echo isset($tab['title']) ? wp_kses_post($tab['title']) : ""; ?>
-      </div>
-      <?php if ($iconPosition == 'after') : ?>
-      <div class='nav-icon'>
-        <?php echo wp_kses_post($iconHtml); ?>
-      </div>
-      <?php endif; ?>
+            <div class="nav-label">
+              <?php echo isset($tab['title']) ? wp_kses_post($tab['title']) : ""; ?>
+            </div>
+            <?php if ($iconPosition == 'after') : ?>
+              <div class='nav-icon'>
+                <?php echo wp_kses_post($iconHtml); ?>
+              </div>
+            <?php endif; ?>
 
-    </div>
+          </div>
 
-    <?php
+        <?php
 
         }
 
         ?>
 
 
-  </div>
-  <div class='panels-wrap'>
-    <?php echo $content; ?>
-  </div>
-</div>
+      </div>
+      <div class='panels-wrap'>
+        <?php echo $content; ?>
+      </div>
+    </div>
 
 
 
 
 
-<?php
+    <?php
 
 
 

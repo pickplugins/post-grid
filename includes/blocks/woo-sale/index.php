@@ -156,7 +156,7 @@ class PGBlockWooSale
         if (!empty($visible['rules'])) {
             $isVisible = post_grid_visible_parse($visible);
 
-            // var_dump($isVisible);
+
 
             if (!$isVisible) return;
         }

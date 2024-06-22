@@ -112,7 +112,6 @@ class PGBlockMenuWrapItem
 
 
     $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
-    //////var_dump($link);
 
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
@@ -126,14 +125,13 @@ class PGBlockMenuWrapItem
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
+
 
       if (!$isVisible) return;
     }
 
     // //* Visible condition
 
-    // var_dump($content);
 
     ob_start();
 

@@ -189,17 +189,17 @@ class PGBlockWooTotalSales
 		$prefixText = parse_css_class($prefixText, $obj);
 		$postfixText = parse_css_class($postfixText, $obj);
 
-	// //* Visible condition
-	$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-	if (!empty($visible['rules'])) {
-		$isVisible = post_grid_visible_parse($visible);
+		// //* Visible condition
+		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+		if (!empty($visible['rules'])) {
+			$isVisible = post_grid_visible_parse($visible);
 
-		// var_dump($isVisible);
 
-		if (!$isVisible) return;
-	}
 
-    // //* Visible condition
+			if (!$isVisible) return;
+		}
+
+		// //* Visible condition
 
 
 		ob_start();
@@ -208,140 +208,136 @@ class PGBlockWooTotalSales
 		if (!empty($wrapperTag)) :
 
 ?>
-<<?php echo tag_escape($wrapperTag); ?> class="
+			<<?php echo tag_escape($wrapperTag); ?> class="
                                         <?php echo esc_attr($blockId); ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
 
-  <?php if ($iconPosition == 'beforePrefix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+				<?php if ($iconPosition == 'beforePrefix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
 
-  <?php if ($prefixText) : ?>
-  <span class="<?php echo esc_attr($prefixClass); ?>">
-    <?php echo wp_kses_post($prefixText); ?>
-  </span>
-  <?php endif; ?>
+				<?php if ($prefixText) : ?>
+					<span class="<?php echo esc_attr($prefixClass); ?>">
+						<?php echo wp_kses_post($prefixText); ?>
+					</span>
+				<?php endif; ?>
 
-  <?php if ($iconPosition == 'afterPrefix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+				<?php if ($iconPosition == 'afterPrefix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
 
-  <?php if (!empty($skuLinkTo)) :
+				<?php if (!empty($skuLinkTo)) :
 
 					/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 				?>
-  <<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>
-    target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>"
-    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-    <?php if ($iconPosition == 'beforeSaleCount') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-    <?php echo wp_kses_post($productSaleCount); ?>
-    <?php if ($iconPosition == 'afterSaleCount') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-  </<?php echo tag_escape($skuTag); ?>>
+					<<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+						<?php if ($iconPosition == 'beforeSaleCount') : ?>
+							<?php echo wp_kses_post($fontIconHtml); ?>
+						<?php endif; ?>
+						<?php echo wp_kses_post($productSaleCount); ?>
+						<?php if ($iconPosition == 'afterSaleCount') : ?>
+							<?php echo wp_kses_post($fontIconHtml); ?>
+						<?php endif; ?>
+					</<?php echo tag_escape($skuTag); ?>>
 
-  <?php else :
+				<?php else :
 					/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 				?>
 
-  <<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>>
-    <?php if ($iconPosition == 'beforeSaleCount') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-    <?php echo wp_kses_post($productSaleCount); ?>
-    <?php if ($iconPosition == 'afterSaleCount') : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
-  </<?php echo tag_escape($skuTag); ?>>
+					<<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>>
+						<?php if ($iconPosition == 'beforeSaleCount') : ?>
+							<?php echo wp_kses_post($fontIconHtml); ?>
+						<?php endif; ?>
+						<?php echo wp_kses_post($productSaleCount); ?>
+						<?php if ($iconPosition == 'afterSaleCount') : ?>
+							<?php echo wp_kses_post($fontIconHtml); ?>
+						<?php endif; ?>
+					</<?php echo tag_escape($skuTag); ?>>
 
 
-  <?php endif; ?>
-
-
-
+				<?php endif; ?>
 
 
 
-  <?php if ($iconPosition == 'beforePostfix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-  <?php if ($postfixText) : ?>
-  <span class="<?php echo $postfixClass; ?>">
-    <?php echo $postfixText; ?>
-  </span>
-  <?php endif; ?>
 
-  <?php if ($iconPosition == 'afterPostfix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
 
-</<?php echo tag_escape($wrapperTag); ?>>
-<?php
+
+				<?php if ($iconPosition == 'beforePostfix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
+				<?php if ($postfixText) : ?>
+					<span class="<?php echo $postfixClass; ?>">
+						<?php echo $postfixText; ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ($iconPosition == 'afterPostfix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
+
+			</<?php echo tag_escape($wrapperTag); ?>>
+		<?php
 
 		endif;
 
 		if (empty($wrapperTag)) :
 
 		?>
-<?php if ($iconPosition == 'beforePrefix') : ?>
-<?php echo wp_kses_post($fontIconHtml); ?>
-<?php endif; ?>
-<?php if ($prefixText) : ?>
-<span class="<?php echo esc_attr($prefixClass); ?>">
-  <?php echo $prefixText; ?>
-</span>
-<?php endif; ?>
+			<?php if ($iconPosition == 'beforePrefix') : ?>
+				<?php echo wp_kses_post($fontIconHtml); ?>
+			<?php endif; ?>
+			<?php if ($prefixText) : ?>
+				<span class="<?php echo esc_attr($prefixClass); ?>">
+					<?php echo $prefixText; ?>
+				</span>
+			<?php endif; ?>
 
-<?php if ($iconPosition == 'afterPrefix') : ?>
-<?php echo wp_kses_post($fontIconHtml); ?>
-<?php endif; ?>
+			<?php if ($iconPosition == 'afterPrefix') : ?>
+				<?php echo wp_kses_post($fontIconHtml); ?>
+			<?php endif; ?>
 
-<?php if (!empty($skuLinkTo)) :
+			<?php if (!empty($skuLinkTo)) :
 				/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 			?>
 
-<<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>
-  target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>"
-  href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-  <?php if ($iconPosition == 'beforeSaleCount') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-  <?php echo wp_kses_post($productSaleCount); ?>C
-  <?php if ($iconPosition == 'afterSaleCount') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-</<?php echo tag_escape($skuTag); ?>>
-<?php else : ?>
-<<?php echo tag_escape($skuTag); ?> class='saleCount'>
-  <?php if ($iconPosition == 'beforeSaleCount') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+				<<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+					<?php if ($iconPosition == 'beforeSaleCount') : ?>
+						<?php echo wp_kses_post($fontIconHtml); ?>
+					<?php endif; ?>
+					<?php echo wp_kses_post($productSaleCount); ?>C
+					<?php if ($iconPosition == 'afterSaleCount') : ?>
+						<?php echo wp_kses_post($fontIconHtml); ?>
+					<?php endif; ?>
+				</<?php echo tag_escape($skuTag); ?>>
+			<?php else : ?>
+				<<?php echo tag_escape($skuTag); ?> class='saleCount'>
+					<?php if ($iconPosition == 'beforeSaleCount') : ?>
+						<?php echo wp_kses_post($fontIconHtml); ?>
+					<?php endif; ?>
 
-  <?php echo wp_kses_post($productSaleCount); ?>
+					<?php echo wp_kses_post($productSaleCount); ?>
 
-  <?php if ($iconPosition == 'afterSaleCount') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-</<?php echo tag_escape($skuTag); ?>>
-<?php endif; ?>
+					<?php if ($iconPosition == 'afterSaleCount') : ?>
+						<?php echo wp_kses_post($fontIconHtml); ?>
+					<?php endif; ?>
+				</<?php echo tag_escape($skuTag); ?>>
+			<?php endif; ?>
 
 
 
-<?php if ($iconPosition == 'beforePostfix') : ?>
-<?php echo wp_kses_post($fontIconHtml); ?>
-<?php endif; ?>
-<?php if ($postfixText) : ?>
-<span class="<?php echo $postfixClass; ?>">
-  <?php echo $postfixText; ?>
-</span>
-<?php endif; ?>
-<?php if ($iconPosition == 'afterPostfix') : ?>
-<?php echo wp_kses_post($fontIconHtml); ?>
-<?php endif; ?>
-<?php
+			<?php if ($iconPosition == 'beforePostfix') : ?>
+				<?php echo wp_kses_post($fontIconHtml); ?>
+			<?php endif; ?>
+			<?php if ($postfixText) : ?>
+				<span class="<?php echo $postfixClass; ?>">
+					<?php echo $postfixText; ?>
+				</span>
+			<?php endif; ?>
+			<?php if ($iconPosition == 'afterPostfix') : ?>
+				<?php echo wp_kses_post($fontIconHtml); ?>
+			<?php endif; ?>
+		<?php
 
 		endif;
 

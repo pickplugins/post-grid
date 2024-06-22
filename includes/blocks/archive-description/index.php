@@ -131,7 +131,6 @@ class PGBlocArchiveDescription
 
 			$queried_object = get_queried_object();
 
-			//echo //var_export($queried_object);
 
 			$term_name = $queried_object->description;
 			$archive_title = $term_name;

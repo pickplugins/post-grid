@@ -106,27 +106,27 @@ class PGBlockSocialShare
 
 		$wrapperClass = parse_css_class($wrapperClass, $obj);
 
-	// //* Visible condition
-	$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-	if (!empty($visible['rules'])) {
-		$isVisible = post_grid_visible_parse($visible);
+		// //* Visible condition
+		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+		if (!empty($visible['rules'])) {
+			$isVisible = post_grid_visible_parse($visible);
 
-		// var_dump($isVisible);
 
-		if (!$isVisible) return;
-	}
 
-    // //* Visible condition
+			if (!$isVisible) return;
+		}
+
+		// //* Visible condition
 
 		ob_start();
 
 		if (!empty($wrapperTag)) :
 
 ?>
-<<?php echo tag_escape($wrapperTag); ?> class="
+			<<?php echo tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($wrapperClass); ?>">
-  <?php
+				<?php
 				if (!empty($elementsItems))
 					foreach ($elementsItems as $index => $item) {
 						$label = isset($item['label']) ? $item['label'] : '';
@@ -139,7 +139,6 @@ class PGBlockSocialShare
 						$iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
 						$iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
 
-						//echo //var_export($url, true);
 
 
 						if ($iconLibrary == 'fontAwesome') {
@@ -158,39 +157,39 @@ class PGBlockSocialShare
 
 
 				?>
-  <a href="<?php echo esc_url_raw($url); ?>" class="<?php echo esc_attr('media-item item-' . $index); ?>">
+					<a href="<?php echo esc_url_raw($url); ?>" class="<?php echo esc_attr('media-item item-' . $index); ?>">
 
-    <?php if ($showIcon && $iconPosition == "beforeLabel") : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
+						<?php if ($showIcon && $iconPosition == "beforeLabel") : ?>
+							<?php echo wp_kses_post($fontIconHtml); ?>
+						<?php endif; ?>
 
-    <?php if ($showLabel) : ?>
-    <span class='media-label'>
-      <?php echo esc_html($label); ?>
+						<?php if ($showLabel) : ?>
+							<span class='media-label'>
+								<?php echo esc_html($label); ?>
 
-    </span>
-    <?php endif; ?>
+							</span>
+						<?php endif; ?>
 
-    <?php if ($showIcon && $iconPosition == "afterLabel") : ?>
-    <?php echo wp_kses_post($fontIconHtml); ?>
-    <?php endif; ?>
+						<?php if ($showIcon && $iconPosition == "afterLabel") : ?>
+							<?php echo wp_kses_post($fontIconHtml); ?>
+						<?php endif; ?>
 
-    <?php if ($showCount) : ?>
-    <span class="media-count">(
-      <?php echo esc_html($count); ?>)
-    </span>
-    <?php endif; ?>
+						<?php if ($showCount) : ?>
+							<span class="media-count">(
+								<?php echo esc_html($count); ?>)
+							</span>
+						<?php endif; ?>
 
-  </a>
-  <?php
+					</a>
+				<?php
 
 					}
 
 
 				?>
-</<?php echo tag_escape($wrapperTag); ?>>
+			</<?php echo tag_escape($wrapperTag); ?>>
 
-<?php
+		<?php
 
 		endif;
 

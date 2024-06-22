@@ -112,7 +112,7 @@ class PGBlockTable
       $linkUrl = $wrapperCustomUrl;
     }
 
-    //////var_dump($blockAlign);
+
 
 
     $obj['id'] = $post_ID;
@@ -128,7 +128,7 @@ class PGBlockTable
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
+
 
       if (!$isVisible) return;
     }
@@ -139,16 +139,15 @@ class PGBlockTable
 
 
 ?>
-<<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>"
-  <?php //echo esc_attr($wrapperAttrText); ?>>
-  <table id="<?php echo esc_attr($wrapperID); ?>"
-    class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-    <?php echo $content ?> </table>
+    <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" <?php //echo esc_attr($wrapperAttrText); 
+                                                                                                                              ?>>
+      <table id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+        <?php echo $content ?> </table>
 
-</<?php echo tag_escape($wrapperTag); ?>>
+    </<?php echo tag_escape($wrapperTag); ?>>
 <?php
-  return ob_get_clean();
+    return ob_get_clean();
   }
-  }
+}
 
-  $BlockPostGrid = new PGBlockTable();
+$BlockPostGrid = new PGBlockTable();

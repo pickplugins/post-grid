@@ -112,7 +112,7 @@ class PGBlockTableRow
       $linkUrl = $wrapperCustomUrl;
     }
 
-    //////var_dump($blockAlign);
+
 
 
     $obj['id'] = $post_ID;
@@ -128,7 +128,7 @@ class PGBlockTableRow
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
+
 
       if (!$isVisible) return;
     }

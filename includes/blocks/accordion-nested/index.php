@@ -110,7 +110,6 @@ class PGBlockAccordionNested
 
 
 
-    //echo '<pre>' . //var_export($iconOptions, true) . '</pre>';
 
 
     if ($iconLibrary == 'fontAwesome') {

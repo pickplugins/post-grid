@@ -201,7 +201,6 @@ class PGBlockPostGrid
 
 
 
-    //echo var_export($query_args, true);
 
 
     if (get_query_var('paged')) {
@@ -287,19 +286,19 @@ class PGBlockPostGrid
     $containerClass = parse_css_class($containerClass, $obj);
 
 
-  // //* Visible condition
-  $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
-  if (!empty($visible['rules'])) {
-    $isVisible = post_grid_visible_parse($visible);
+    // //* Visible condition
+    $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
 
-    // var_dump($isVisible);
 
-    if (!$isVisible) return;
-  }
+
+      if (!$isVisible) return;
+    }
 
     // //* Visible condition
 
-    
+
     ob_start();
 
 
@@ -308,10 +307,9 @@ class PGBlockPostGrid
 
 
 
-<div
-  class="pg-post-grid <?php echo esc_attr($containerClass); ?> <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($blockAlign); ?>">
-  <?php echo $content ?>
-</div>
+    <div class="pg-post-grid <?php echo esc_attr($containerClass); ?> <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($blockAlign); ?>">
+      <?php echo $content ?>
+    </div>
 <?php
 
     return ob_get_clean();

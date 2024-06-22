@@ -198,7 +198,7 @@ class PGBlockProgressBar
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
+
 
       if (!$isVisible) return;
     }
@@ -211,146 +211,144 @@ class PGBlockProgressBar
     if (!empty($wrapperTag)) :
 
 ?>
-<div
-  class="PGBlockProgressBar <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockAlign); ?>"
-  data-progress-bar="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+      <div class="PGBlockProgressBar <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockAlign); ?>" data-progress-bar="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
-  <?php if ($progressInfoPosition == 'beforeBar') : ?>
-  <div class="progress-info">
+        <?php if ($progressInfoPosition == 'beforeBar') : ?>
+          <div class="progress-info">
 
-    <?php if ($progressCountPosition == 'beforeLabel') : ?>
-    <div class="progress-count">
-      <?php echo wp_kses_post($progressCountPrefix); ?>
-      <?php echo wp_kses_post($fill); ?>
-      <?php echo wp_kses_post($progressCountPostfix); ?>
-    </div>
-    <?php endif; ?>
+            <?php if ($progressCountPosition == 'beforeLabel') : ?>
+              <div class="progress-count">
+                <?php echo wp_kses_post($progressCountPrefix); ?>
+                <?php echo wp_kses_post($fill); ?>
+                <?php echo wp_kses_post($progressCountPostfix); ?>
+              </div>
+            <?php endif; ?>
 
-    <?php if ($progressLabelPosition == '') : ?>
-    <div class="progress-label">
-      <?php echo wp_kses_post($progressLabelText); ?>
-    </div>
-    <?php endif; ?>
+            <?php if ($progressLabelPosition == '') : ?>
+              <div class="progress-label">
+                <?php echo wp_kses_post($progressLabelText); ?>
+              </div>
+            <?php endif; ?>
 
-    <?php if ($progressCountPosition == 'afterLabel') : ?>
-    <div class="progress-count">
-      <?php echo wp_kses_post($progressCountPrefix); ?>
-      <?php echo wp_kses_post($fill); ?>
-      <?php echo wp_kses_post($progressCountPostfix); ?>
-    </div>
-    <?php endif; ?>
+            <?php if ($progressCountPosition == 'afterLabel') : ?>
+              <div class="progress-count">
+                <?php echo wp_kses_post($progressCountPrefix); ?>
+                <?php echo wp_kses_post($fill); ?>
+                <?php echo wp_kses_post($progressCountPostfix); ?>
+              </div>
+            <?php endif; ?>
 
-  </div>
-  <?php endif; ?>
-
-
-  <?php if ($progressLabelPosition == 'beforeBar') : ?>
-  <div class="progress-label">
-    <?php echo wp_kses_post($progressLabelText); ?>
-  </div>
-  <?php endif; ?>
+          </div>
+        <?php endif; ?>
 
 
-  <?php if ($progressCountPosition == 'beforeBar') : ?>
-  <div class="progress-count">
-    <?php echo wp_kses_post($progressCountPrefix); ?>
-    <?php echo wp_kses_post($fill); ?>
-    <?php echo wp_kses_post($progressCountPostfix); ?>
-  </div>
-  <?php endif; ?>
+        <?php if ($progressLabelPosition == 'beforeBar') : ?>
+          <div class="progress-label">
+            <?php echo wp_kses_post($progressLabelText); ?>
+          </div>
+        <?php endif; ?>
 
-  <div class='progress-bar'>
 
-    <?php if ($progressLabelPosition == 'beforeFill') : ?>
-    <div class="progress-label">
-      <?php echo wp_kses_post($progressLabelText); ?>
-    </div>
-    <?php endif; ?>
-    <?php if ($progressCountPosition == 'beforeFill') : ?>
-    <div class="progress-count">
-      <?php echo wp_kses_post($progressCountPrefix); ?>
-      <?php echo wp_kses_post($fill); ?>
-      <?php echo wp_kses_post($progressCountPostfix); ?>
-    </div>
-    <?php endif; ?>
+        <?php if ($progressCountPosition == 'beforeBar') : ?>
+          <div class="progress-count">
+            <?php echo wp_kses_post($progressCountPrefix); ?>
+            <?php echo wp_kses_post($fill); ?>
+            <?php echo wp_kses_post($progressCountPostfix); ?>
+          </div>
+        <?php endif; ?>
 
-    <div class="progress-fill">
+        <div class='progress-bar'>
 
-      <?php if ($progressLabelPosition == 'insideFill') : ?>
-      <div class="progress-label">
-        <?php echo wp_kses_post($progressLabelText); ?>
-      </div>
-      <?php endif; ?>
-      <?php if ($progressCountPosition == 'insideFill') : ?>
-      <div class="progress-count">
-        <?php echo wp_kses_post($progressCountPrefix); ?>
-        <?php echo wp_kses_post($fill); ?>
-        <?php echo wp_kses_post($progressCountPostfix); ?>
-      </div>
-      <?php endif; ?>
+          <?php if ($progressLabelPosition == 'beforeFill') : ?>
+            <div class="progress-label">
+              <?php echo wp_kses_post($progressLabelText); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($progressCountPosition == 'beforeFill') : ?>
+            <div class="progress-count">
+              <?php echo wp_kses_post($progressCountPrefix); ?>
+              <?php echo wp_kses_post($fill); ?>
+              <?php echo wp_kses_post($progressCountPostfix); ?>
+            </div>
+          <?php endif; ?>
+
+          <div class="progress-fill">
+
+            <?php if ($progressLabelPosition == 'insideFill') : ?>
+              <div class="progress-label">
+                <?php echo wp_kses_post($progressLabelText); ?>
+              </div>
+            <?php endif; ?>
+            <?php if ($progressCountPosition == 'insideFill') : ?>
+              <div class="progress-count">
+                <?php echo wp_kses_post($progressCountPrefix); ?>
+                <?php echo wp_kses_post($fill); ?>
+                <?php echo wp_kses_post($progressCountPostfix); ?>
+              </div>
+            <?php endif; ?>
 
 
 
 
-    </div>
+          </div>
 
-    <?php if ($progressLabelPosition == 'afterFill') : ?>
-    <div class="progress-label">
-      <?php echo wp_kses_post($progressLabelText); ?>
-    </div>
-    <?php endif; ?>
-    <?php if ($progressCountPosition == 'afterFill') : ?>
-    <div class="progress-count">
-      <?php echo wp_kses_post($progressCountPrefix); ?>
-      <?php echo wp_kses_post($fill); ?>
-      <?php echo wp_kses_post($progressCountPostfix); ?>
-    </div>
-    <?php endif; ?>
-
-
-  </div>
+          <?php if ($progressLabelPosition == 'afterFill') : ?>
+            <div class="progress-label">
+              <?php echo wp_kses_post($progressLabelText); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($progressCountPosition == 'afterFill') : ?>
+            <div class="progress-count">
+              <?php echo wp_kses_post($progressCountPrefix); ?>
+              <?php echo wp_kses_post($fill); ?>
+              <?php echo wp_kses_post($progressCountPostfix); ?>
+            </div>
+          <?php endif; ?>
 
 
-  <?php if ($progressLabelPosition == 'afterBar') : ?>
-  <div class="progress-label">
-    <?php echo wp_kses_post($progressLabelText); ?>
-  </div>
-  <?php endif; ?>
+        </div>
 
 
-  <?php if ($progressCountPosition == 'afterBar') : ?>
-  <div class="progress-count">
-    <?php echo wp_kses_post($progressCountPrefix); ?>
-    <?php echo wp_kses_post($fill); ?>
-    <?php echo wp_kses_post($progressCountPostfix); ?>
-  </div>
-  <?php endif; ?>
-
-  <?php if ($progressInfoPosition == 'afterBar') : ?>
-  <div class="progress-info">
-    <?php if ($progressCountPosition == 'beforeLabel') : ?>
-    <div class="progress-count">
-      <?php echo wp_kses_post($progressCountPrefix); ?>
-      <?php echo wp_kses_post($fill); ?>
-      <?php echo wp_kses_post($progressCountPostfix); ?>
-    </div>
-    <?php endif; ?>
+        <?php if ($progressLabelPosition == 'afterBar') : ?>
+          <div class="progress-label">
+            <?php echo wp_kses_post($progressLabelText); ?>
+          </div>
+        <?php endif; ?>
 
 
-    <?php if ($progressCountPosition == 'afterLabel') : ?>
-    <div class="progress-count">
-      <?php echo wp_kses_post($progressCountPrefix); ?>
-      <?php echo wp_kses_post($fill); ?>
-      <?php echo wp_kses_post($progressCountPostfix); ?>
-    </div>
-    <?php endif; ?>
-  </div>
-  <?php endif; ?>
+        <?php if ($progressCountPosition == 'afterBar') : ?>
+          <div class="progress-count">
+            <?php echo wp_kses_post($progressCountPrefix); ?>
+            <?php echo wp_kses_post($fill); ?>
+            <?php echo wp_kses_post($progressCountPostfix); ?>
+          </div>
+        <?php endif; ?>
+
+        <?php if ($progressInfoPosition == 'afterBar') : ?>
+          <div class="progress-info">
+            <?php if ($progressCountPosition == 'beforeLabel') : ?>
+              <div class="progress-count">
+                <?php echo wp_kses_post($progressCountPrefix); ?>
+                <?php echo wp_kses_post($fill); ?>
+                <?php echo wp_kses_post($progressCountPostfix); ?>
+              </div>
+            <?php endif; ?>
 
 
-  </<?php echo tag_escape($wrapperTag); ?>>
-  <?php
+            <?php if ($progressCountPosition == 'afterLabel') : ?>
+              <div class="progress-count">
+                <?php echo wp_kses_post($progressCountPrefix); ?>
+                <?php echo wp_kses_post($fill); ?>
+                <?php echo wp_kses_post($progressCountPostfix); ?>
+              </div>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
+
+
+        </<?php echo tag_escape($wrapperTag); ?>>
+      <?php
 
     endif;
 
@@ -361,47 +359,47 @@ class PGBlockProgressBar
 
 
 
-  <style>
-  <?php if ($type=='horizontal') : $animatename="animateWidthProgress";
+      <style>
+        <?php if ($type == 'horizontal') : $animatename = "animateWidthProgress";
 
-  ?>@keyframes animateWidthProgress {
-    0% {
-      width: 0px;
-    }
+        ?>@keyframes animateWidthProgress {
+          0% {
+            width: 0px;
+          }
 
-    100% {
-      width:
-        <?php echo esc_attr($fill);
-      ?>%;
-    }
-  }
+          100% {
+            width:
+              <?php echo esc_attr($fill);
+              ?>%;
+          }
+        }
 
-  <?php elseif ($type=='vertical') : $animatename="animateHeightProgress";
+        <?php elseif ($type == 'vertical') : $animatename = "animateHeightProgress";
 
-  ?>@keyframes animateHeightProgress {
-    0% {
-      height: 0px;
-    }
+        ?>@keyframes animateHeightProgress {
+          0% {
+            height: 0px;
+          }
 
-    100% {
-      height:
-        <?php echo esc_attr($fill);
-      ?>%;
-    }
-  }
+          100% {
+            height:
+              <?php echo esc_attr($fill);
+              ?>%;
+          }
+        }
 
-  <?php endif;
-  ?><?php echo esc_attr('.'. $animatename);
+        <?php endif;
+        ?><?php echo esc_attr('.' . $animatename);
 
-  ?> {
-    animation:
-      <?php echo esc_attr($animatename);
-    ?>ease <?php echo esc_attr($animateDuration);
-    ?>s;
-    animation-iteration-count: 1;
+    ?> {
+          animation:
+            <?php echo esc_attr($animatename);
+            ?>ease <?php echo esc_attr($animateDuration);
+            ?>s;
+          animation-iteration-count: 1;
 
-  }
-  </style>
+        }
+      </style>
 
 
 

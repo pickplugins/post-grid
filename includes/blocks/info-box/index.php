@@ -112,7 +112,7 @@ class PGBlockInfoBox
       $linkUrl = $wrapperCustomUrl;
     }
 
-    //////var_dump($blockAlign);
+
 
 
     $obj['id'] = $post_ID;
@@ -122,13 +122,13 @@ class PGBlockInfoBox
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
-    
+
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
     if (!empty($visible['rules'])) {
       $isVisible = post_grid_visible_parse($visible);
 
-      // var_dump($isVisible);
+
 
       if (!$isVisible) return;
     }
@@ -139,18 +139,14 @@ class PGBlockInfoBox
 
 
     if ($wrapperTag == 'a') { ?>
-<a id="<?php echo esc_attr($wrapperID); ?>"
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-  target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>"
-  href="<?php echo esc_url_raw($linkUrl); ?>">
-  <?php echo $content ?>
-</a>
-<?php
+      <a id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
+        <?php echo $content ?>
+      </a>
+    <?php
 
     } else { ?>
-<<?php echo tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>"
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-  <?php echo $content ?> </<?php echo tag_escape($wrapperTag); ?>>
+      <<?php echo tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+        <?php echo $content ?> </<?php echo tag_escape($wrapperTag); ?>>
 <?php
     }
 

@@ -1,21 +1,20 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    jQuery(document).ready(function ($) {
+    var mobileToggle = document.querySelector(".mobile-menu-toggle");
+    var mobileMenuWrap = document.querySelector(".mobile-menu-wrap");
+    var mobileMenuClose = document.querySelector(".mobile-menu-close");
 
-        $(function () {
-            $(".wp-block-post-grid-accordions").accordion({
-                active: 999,
-                collapsible: true,
-                event: 'click',
-                heightStyle: 'content',
-                icons: {
-                    "header": "",
-                    "activeHeader": ""
-                }
+    mobileToggle.addEventListener("click", (event) => {
 
-            });
-        });
+        mobileMenuWrap.toggleAttribute("active");
+
+
+    });
+    mobileMenuClose.addEventListener("click", (event) => {
+
+        mobileMenuWrap.toggleAttribute("active");
+
 
     });
 

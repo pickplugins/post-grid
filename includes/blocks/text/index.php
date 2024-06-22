@@ -56,7 +56,11 @@ class PGBlockPostText
   function theHTML($attributes, $content, $block)
   {
 
+    // global $wp_query;
+    // //var_dump($wp_query->get_queried_object());
+    // $taxterm = get_queried_object();
 
+    // echo "<pre>" . var_export($wp_query->get_queried_object(), true) . "</pre>";
 
     global $postGridCssY;
 

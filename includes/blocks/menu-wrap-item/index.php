@@ -157,6 +157,11 @@ class PGBlockMenuWrapItem
           <?php if ($iconPosition == 'afterLabel') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
+
+          <?php if (!empty($content)) : ?>
+            <span class="has-child-menu">↓</span>
+          <?php endif; ?>
+
         </a>
         <?php if ($iconPosition == 'afterLink') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>

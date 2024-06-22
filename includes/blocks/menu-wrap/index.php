@@ -16,9 +16,12 @@ class PGBlockMenuWrap
   function front_scripts($attributes)
   {
     wp_register_style('pgmenu_wrap_style', post_grid_plugin_url . 'includes/blocks/menu-wrap/index.css');
+    wp_register_script('pgmenu_wrap_front_script', post_grid_plugin_url . 'includes/blocks/menu-wrap/front-scripts.js', [], '', true);
+
 
     if (has_block('post-grid/menu-wrap')) {
       wp_enqueue_style('pgmenu_wrap_style');
+      wp_enqueue_script('pgmenu_wrap_front_script');
     }
   }
   // loading src files in the gutenberg editor screen
@@ -80,6 +83,63 @@ class PGBlockMenuWrap
     $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
+    $mobileMenuToggle = isset($attributes['mobileMenuToggle']) ? $attributes['mobileMenuToggle'] : [];
+    $mobileMenuToggleOptions = isset($mobileMenuToggle['options']) ? $mobileMenuToggle['options'] : [];
+
+    $mobileMenuToggleLibrary = isset($mobileMenuToggleOptions['library']) ? $mobileMenuToggleOptions['library'] : '';
+    $mobileMenuToggleSrcType = isset($mobileMenuToggleOptions['srcType']) ? $mobileMenuToggleOptions['srcType'] : '';
+    $mobileMenuToggleSrc = isset($mobileMenuToggleOptions['iconSrc']) ? $mobileMenuToggleOptions['iconSrc'] : '';
+    $mobileMenuTogglePosition = isset($mobileMenuToggleOptions['position']) ? $mobileMenuToggleOptions['position'] : '';
+    $mobileMenuToggleClass = isset($mobileMenuToggleOptions['class']) ? $mobileMenuToggleOptions['class'] : '';
+
+
+
+
+
+
+
+
+    if ($mobileMenuToggleLibrary == 'fontAwesome') {
+      wp_enqueue_style('fontawesome-icons');
+    } else if ($mobileMenuToggleLibrary == 'iconFont') {
+      wp_enqueue_style('icofont-icons');
+    } else if ($mobileMenuToggleLibrary == 'bootstrap') {
+      wp_enqueue_style('bootstrap-icons');
+    }
+
+    $mobileMenuToggleHtml = '<span class=" ' . $mobileMenuToggleSrc . '"></span>';
+
+
+
+    $mobileMenuClose = isset($attributes['mobileMenuClose']) ? $attributes['mobileMenuClose'] : [];
+    $mobileMenuCloseOptions = isset($mobileMenuClose['options']) ? $mobileMenuClose['options'] : [];
+
+    $mobileMenuCloseLibrary = isset($mobileMenuCloseOptions['library']) ? $mobileMenuCloseOptions['library'] : '';
+    $mobileMenuCloseSrcType = isset($mobileMenuCloseOptions['srcType']) ? $mobileMenuCloseOptions['srcType'] : '';
+    $mobileMenuCloseSrc = isset($mobileMenuCloseOptions['iconSrc']) ? $mobileMenuCloseOptions['iconSrc'] : '';
+    $mobileMenuClosePosition = isset($mobileMenuCloseOptions['position']) ? $mobileMenuCloseOptions['position'] : '';
+    $mobileMenuCloseClass = isset($mobileMenuCloseOptions['class']) ? $mobileMenuCloseOptions['class'] : '';
+
+
+    if ($mobileMenuCloseLibrary == 'fontAwesome') {
+      wp_enqueue_style('fontawesome-icons');
+    } else if ($mobileMenuCloseLibrary == 'iconFont') {
+      wp_enqueue_style('icofont-icons');
+    } else if ($mobileMenuCloseLibrary == 'bootstrap') {
+      wp_enqueue_style('bootstrap-icons');
+    }
+
+
+    $mobileMenuCloseIconHtml = '<span class="' .  $mobileMenuCloseClass . ' ' .  $mobileMenuCloseSrc . '"></span>';
+
+
+
+
+
+
+
+
+
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
 
@@ -107,15 +167,27 @@ class PGBlockMenuWrap
 
 
 ?>
-    <nav class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-      <ul class="<?php echo esc_attr($menuWrapClass); ?>">
-        <?php echo $content ?>
-      </ul>
+    <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+      <nav>
+        <ul class="<?php echo esc_attr($menuWrapClass); ?>">
+          <?php echo $content ?>
+        </ul>
+        <div class="mobile-menu-toggle">
+          <?php echo wp_kses_post($mobileMenuToggleHtml); ?>
+        </div>
+      </nav>
 
 
-
-      <div class="mobile-toggle">Icon</div>
-    </nav>
+      <div class="mobile-menu-wrap">
+        <div class="mobile-menu-close">
+          <?php echo wp_kses_post($mobileMenuCloseIconHtml); ?>
+        </div>
+        <ul class="<?php echo esc_attr($menuWrapClass);
+                    ?>">
+          <?php echo $content ?>
+        </ul>
+      </div>
+    </div>
 <?php
 
     return ob_get_clean();

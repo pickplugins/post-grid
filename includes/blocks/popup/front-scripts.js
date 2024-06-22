@@ -572,6 +572,79 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							}, 3000);
 						});
 					}
+					if (conditionId == "mouseOutElement") {
+
+						if (conditions.value.length == 0) return;
+
+						var clickHandle = document.querySelector(conditions.value);
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+						clickHandle.addEventListener("mouseout", function (e) {
+
+							console.log("mouseout");
+
+
+							event.preventDefault();
+							event.stopPropagation();
+
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var entranceAnimation =
+								popupWrap.getAttribute("entrance-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + entranceAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + entranceAnimation);
+								// popup.style.display = "none";
+							}, 3000);
+						});
+					}
+					if (conditionId == "mouseOverElement") {
+						console.log("mouseOverElement");
+						console.log(conditions.value);
+
+						if (conditions.value.length == 0) return;
+
+						var clickHandle = document.querySelector(conditions.value);
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+						clickHandle.addEventListener("mouseover", function (e) {
+
+							console.log("mousein");
+
+
+							event.preventDefault();
+							event.stopPropagation();
+
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var entranceAnimation =
+								popupWrap.getAttribute("entrance-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + entranceAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + entranceAnimation);
+								// popup.style.display = "none";
+							}, 3000);
+						});
+					}
+
+
+
+
+
+
+
 
 					if (conditionId == "dateCountdownExpired") {
 						var isOnce = conditions.once;

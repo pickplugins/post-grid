@@ -271,7 +271,7 @@ function parse_css_class($classStr, $obj)
         preg_match('/\["(.*?)\"]/s', $item, $matches);
         $key = wp_kses_stripslashes($matches[1]);
         $postmeta = get_post_meta($objId, $key);
-        $newArr[$index] = $postmeta[0];
+        $newArr[$index] = isset($postmeta[0]) ? $postmeta[0] : '';
       } elseif (strpos($item, 'separator') !== false) {
 
         $matches = [];
@@ -536,7 +536,7 @@ function parse_css_classX($classStr, $obj)
       $prams = explode(',', $prams);
       $key = wp_kses_stripslashes($prams[0]);
       $postmeta = get_post_meta($objId, $key);
-      $newArr[$index] = $postmeta[0];
+      $newArr[$index] = isset($postmeta[0]) ? $postmeta[0] : '';
     } elseif (strpos($item, 'separator') !== false) {
       $prams = str_replace(['separator[\'', '\']'], '', $item);
       $prams = explode(',', $prams);
@@ -2540,6 +2540,18 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
+      if ($id == 'isUserLoggedIn') {
+
+        if (is_user_logged_in()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+
       if ($id == 'userNotLogged') {
 
         if (!is_user_logged_in()) {
@@ -2551,32 +2563,68 @@ function post_grid_visible_parse($visible)
       }
       if ($id == 'userRoles') {
         $roles = isset($arg['roles']) ? $arg['roles'] : [];
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
         $user = wp_get_current_user();
-        $role = (array) $user->roles;
-        $roleExist = !empty(array_intersect($role, $roles));
+        $user_role = (array) $user->roles;
 
-        if ($roleExist) {
-          $isAccess = true;
-          $conditions[$i]['args'][$j] = $isAccess;
-        } else {
-          $conditions[$i]['args'][$j] = $isAccess;
+        // var_dump(array_intersect($user_role, $roles));
+
+        if ($compare == 'include') {
+          $roleExist = !empty(array_intersect($user_role, $roles));
+          if ($roleExist) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == 'exclude') {
+          $roleExist = empty(array_intersect($user_role, $roles));
+          if ($roleExist) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
         }
       }
       if ($id == 'userIds') {
         $user = wp_get_current_user();
-        $currentUserId = isset($user->ID) ? $user->ID : '';
+        $currentUserId = isset($user->ID) ? [$user->ID] : [];
         $value = isset($arg['value']) ? $arg['value'] : '';
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
         $userIds = explode(",", $value);
+        $userIds = array_map(function ($a) {
+          return (int)$a[0];
+        }, $userIds);
 
 
-        if (in_array($currentUserId, $userIds)) {
-          $isAccess = true;
-          $conditions[$i]['args'][$j] = $isAccess;
-        } else {
-          $conditions[$i]['args'][$j] = $isAccess;
+        if ($compare == 'include') {
+          $roleExist = !empty(array_intersect($currentUserId, $userIds));
+
+
+          if ($roleExist) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
         }
+        if ($compare == 'exclude') {
+          $roleExist = empty(array_intersect($currentUserId, $userIds));
+          if ($roleExist) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+
+
+        // if (in_array($currentUserId, $userIds)) {
+        //   $isAccess = true;
+        //   $conditions[$i]['args'][$j] = $isAccess;
+        // } else {
+        //   $conditions[$i]['args'][$j] = $isAccess;
+        // }
       }
       if ($id == 'isYears') {
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
@@ -3097,13 +3145,21 @@ function post_grid_visible_parse($visible)
           $post_id = get_the_ID();
         }
       }
+      if ($id == 'reviewXProducts') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $post_id = get_the_ID();
+
+        $comments_count = wp_count_comments($post_id);
+      }
+
+
+
       if ($id == 'termIds') {
 
         $value = isset($arg['value']) ? $arg['value'] : '';
         $ids = explode(',', $value);
         if (is_tax()) {
           $queried_object = get_queried_object();
-          $term_name = $queried_object->name;
           $term_id = $queried_object->term_id;
 
           if (in_array($term_id, $ids)) {
@@ -3114,6 +3170,120 @@ function post_grid_visible_parse($visible)
           }
         }
       }
+
+
+
+
+
+      if ($id == 'hasPostComments') {
+
+        $post_id = get_the_ID();
+        $args = array(
+          'post_id' => $post_id,   // Use post_id, not post_ID
+          'count'   => true // Return only the count
+        );
+        $comments_count = get_comments($args);
+
+        var_dump($comments_count);
+
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $compare = isset($arg['compare']) ? $arg['compare'] : '=';
+
+        if ($compare == '=') {
+        }
+        if ($compare == '!=') {
+        }
+        if ($compare == '>') {
+        }
+        if ($compare == '<') {
+        }
+        if ($compare == '>=') {
+        }
+        if ($compare == '<=') {
+        }
+
+
+
+        if ($comments_count > 0) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasPostTerms') {
+
+        $post_id = get_the_ID();
+
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (has_term($ids,  $post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+
+
+
+
+
+
+      if ($id == 'hasPostCategories') {
+
+        $post_id = get_the_ID();
+
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (has_category($ids,  $post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasPostTags') {
+
+        $post_id = get_the_ID();
+
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (has_tag($ids,  $post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasPostFormat') {
+
+        $post_id = get_the_ID();
+
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (has_post_format($ids,  $post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+
+
+
+
+
+
+
       if ($id == 'authorIds') {
         $value = isset($arg['value']) ? $arg['value'] : '';
         $ids = explode(',', $value);
@@ -3131,7 +3301,7 @@ function post_grid_visible_parse($visible)
           }
         }
       }
-      if ($id == 'homePage') {
+      if ($id == 'isHome') {
 
 
         if (is_home()) {
@@ -3141,7 +3311,7 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
-      if ($id == 'frontPage') {
+      if ($id == 'isFrontPage') {
 
         if (is_front_page()) {
           $isAccess = true;
@@ -3150,7 +3320,7 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
-      if ($id == 'postsPage') {
+      if ($id == 'isBlog') {
 
         if (is_front_page() && is_home()) {
           $isAccess = true;
@@ -3159,6 +3329,9 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
+
+
+
       if ($id == 'is404') {
         if (is_404()) {
           $isAccess = true;
@@ -3167,6 +3340,188 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
+      if ($id == 'hasMeta') {
+
+        $post_id = get_the_ID();
+
+        if (has_meta($post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasTermMeta') {
+
+        $term_id  = get_the_ID();
+
+        if (has_term_meta($term_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+      if ($id == 'hasSiteIcon') {
+
+        $blog_id = get_current_blog_id();
+
+        if (has_site_icon($blog_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasCustomLogo') {
+
+        $blog_id = get_current_blog_id();
+
+        if (has_custom_logo($blog_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasHeaderImage') {
+
+
+        if (has_header_image()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasHeaderVideo') {
+
+
+        if (has_header_video()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasCustomHeader') {
+
+
+        if (has_custom_header()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+
+
+      if ($id == 'hasBlock') {
+        $blockName = isset($arg['blockName']) ? $arg['blockName'] : '';
+
+        $post_id = get_the_ID();
+
+        if (has_block($blockName, $post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasBlocks') {
+
+        $post_id = get_the_ID();
+
+        if (has_blocks($post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+      if ($id == 'hasAction') {
+        $hookName = isset($arg['hookName']) ? $arg['hookName'] : '';
+        $callback = isset($arg['callback']) ? $arg['callback'] : '';
+
+        $post_id = get_the_ID();
+
+        if (has_action($hookName, $callback)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+      if ($id == 'hasFilter') {
+        $hookName = isset($arg['hookName']) ? $arg['hookName'] : '';
+        $callback = isset($arg['callback']) ? $arg['callback'] : '';
+
+        $post_id = get_the_ID();
+
+        if (has_filter($hookName, $callback)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasShortcode') {
+        $tag = isset($arg['tag']) ? $arg['tag'] : '';
+
+        $post_id = get_the_ID();
+        $post_content = get_the_content($post_id);
+
+        if (has_shortcode($post_content, $tag)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'userCan' || $id == 'authorCan') {
+        $capability = isset($arg['values']) ? $arg['values'] : [];
+        $args = isset($arg['args']) ? $arg['args'] : '';
+        $user = wp_get_current_user();
+        $currentUserId = isset($user->ID) ? $user->ID : '';
+
+        // var_dump($capability);
+
+        if (user_can($currentUserId, $capability[0], $args)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'authorCan') {
+        $capability = isset($arg['capability']) ? $arg['capability'] : '';
+        $args = isset($arg['args']) ? $arg['args'] : '';
+        $user = wp_get_current_user();
+        $currentUserId = isset($user->ID) ? $user->ID : '';
+
+
+        if (author_can($currentUserId, $capability, $args)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+
+
+
+
+
+
       if ($id == 'wcAccount') {
 
         if (function_exists('wc_get_page_id')) {
@@ -3215,7 +3570,234 @@ function post_grid_visible_parse($visible)
 
 
 
-      if ($id == 'searchPage') {
+      if ($id == 'isSearch') {
+
+
+        if (is_search()) {
+          $value = isset($arg['value']) ? $arg['value'] : '';
+          $compare = isset($arg['compare']) ? $arg['compare'] : '';
+
+          $query = get_search_query();
+
+          if ($compare == '=' && $query == $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+          if ($compare == '!=' && $query != $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+          if ($compare == 'contain' && str_contains($query, $value)) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+          if ($compare == 'notContain' && !str_contains($query, $value)) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+          if ($compare == 'endWith' && str_ends_with($query, $value)) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+          if ($compare == 'startWith' && str_starts_with($query, $value)) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isSingle') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (is_single($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isSticky') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        //$ids = explode(',', $value);
+
+        if (is_sticky($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isPostHierarchical') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        //$ids = explode(',', $value);
+
+        if (is_post_type_hierarchical($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isPostArchive') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        //$ids = explode(',', $value);
+
+        if (is_post_type_archive($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isCommentsOpen') {
+        $post_id = get_the_ID();
+
+        if (comments_open($post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isPage') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+        if (is_page($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isPageTemplate') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        if (is_page_template($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isCategory') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (is_category($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isTag') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (is_tag($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isTax') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (is_tax($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isAuthor') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (is_author($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isMultiAuthor') {
+
+        if (is_multi_author()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isDate') {
+
+        if (is_date()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isYear') {
+
+        if (is_year()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isMonth') {
+
+        if (is_month()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isDay') {
+
+        if (is_day()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isTime') {
+
+        if (is_time()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isNewDay') {
+
+        if (is_new_day()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isArchive') {
+
+        if (is_archive()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isSearch') {
+
         if (is_search()) {
           $isAccess = true;
           $conditions[$i]['args'][$j] = $isAccess;
@@ -3223,6 +3805,304 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
+      if ($id == 'is404') {
+
+        if (is_404()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isAttachment') {
+
+        if (is_attachment()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isSingular') {
+        $values = isset($arg['values']) ? $arg['values'] : '';
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
+
+        if ($compare == 'include') {
+          if (is_singular($ids)) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == 'exclude') {
+          if (!is_singular($ids)) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+      }
+      if ($id == 'hasTerm') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $ids = explode(',', $value);
+
+        if (has_term($ids)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isTaxonomyHierarchical') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+
+        if (is_taxonomy_hierarchical($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'taxonomyExists') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+
+        if (taxonomy_exists($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasPostParent') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $post_id = get_the_ID();
+
+        if (has_post_parent($post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasPostFormat') {
+        $format = isset($arg['format']) ? $arg['format'] : '';
+        $post_id = get_the_ID();
+
+        if (has_post_format($format, $post_id)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+
+
+
+      if ($id == 'isMainQuery') {
+
+        if (is_main_query()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isFeed') {
+
+        if (is_feed()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isTrackback') {
+
+        if (is_trackback()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isPreview') {
+
+        if (is_preview()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasExcerpt') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+
+        if (has_excerpt($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasNavMenu') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+
+        if (has_nav_menu($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+      if ($id == 'isRtl') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+
+        if (is_rtl($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'hasCookie') {
+        $cookieName = isset($arg['cookieName']) ? $arg['cookieName'] : '';
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
+
+        //var_dump($_COOKIE[$cookieName]);
+
+
+
+        if ($compare == '=') {
+          $value = (int) $value;
+          if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] == $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == '!=') {
+          $value = (int) $value;
+
+          if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] != $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == '>') {
+          $value = (int) $value;
+
+          if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] > $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == '<') {
+          $value = (int) $value;
+
+          if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] < $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == '>=') {
+          $value = (int) $value;
+
+          if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] >= $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == '<=') {
+          $value = (int) $value;
+
+          if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] <= $value) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+
+
+
+
+
+
+
+
+
+
+        if ($compare == 'exist') {
+
+          if (isset($_COOKIE[$cookieName])) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+
+        if ($compare == 'notExist') {
+
+          if (!isset($_COOKIE[$cookieName])) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+      }
+
+
+
+      if ($id == 'hasPostThumbnail') {
+        $value = isset($arg['value']) ? $arg['value'] : '';
+
+        if (has_post_thumbnail($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'isMainSite') {
+        $siteId = isset($arg['siteId']) ? $arg['siteId'] : '';
+        $networkId = isset($arg['networkId']) ? $arg['networkId'] : '';
+
+        if (is_main_site($siteId, $networkId)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+
+
+
+      // sdf
+
+
+
+
+
+
+
     }
   }
 

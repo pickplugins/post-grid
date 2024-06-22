@@ -122,10 +122,9 @@ class BlockPostGridRest
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'fluentcrm_lists'),
-				// 'permission_callback' => function () {
-				// 	return current_user_can('manage_options');
-				// },
-				'permission_callback' => '__return_true',
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
 
 
 			)
@@ -282,11 +281,9 @@ class BlockPostGridRest
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'get_site_data'),
-				'permission_callback' => '__return_true',
-
-				// 'permission_callback' => function () {
-				// 	return current_user_can('manage_options');
-				// },
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
 			)
 		);
 

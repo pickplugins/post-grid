@@ -63,7 +63,7 @@ class BlockPostMeta
 	function theHTML($attributes, $content, $block)
 	{
 
-
+		global $postGridCssY;
 
 
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -102,6 +102,11 @@ class BlockPostMeta
 		$metaKeyType = isset($metaOptions['type']) ? $metaOptions['type'] : '';
 
 		$templateFront = isset($attributes['templateFront']) ? $attributes['templateFront'] : '';
+
+		$blockCssY = isset($attributes["blockCssY"])
+		? $attributes["blockCssY"]
+		: [];
+		$postGridCssY[] = isset($blockCssY["items"]) ? $blockCssY["items"] : [];
 
 
 		$metaValue = '';
@@ -181,11 +186,11 @@ class BlockPostMeta
 
 		if (!empty($wrapperTag)) :
 ?>
-			<<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                 <?php echo esc_attr($blockId); ?>
                 <?php echo esc_attr($wrapperClass); ?>">
 
-				<?php
+  <?php
 
 
 				// if (gettype($metaValue) == 'array' || gettype($metaValue) == 'object') {
@@ -254,7 +259,7 @@ class BlockPostMeta
 				?>
 
 
-			</<?php echo tag_escape($wrapperTag); ?>>
+</<?php echo tag_escape($wrapperTag); ?>>
 
 <?php
 

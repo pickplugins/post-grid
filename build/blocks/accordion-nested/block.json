@@ -6,6 +6,15 @@
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "usesContext": [],
+  "providesContext": {
+    "post-grid/accordionNestedIcon": "icon",
+    "post-grid/accordionNestedIconToggle": "iconToggle",
+    "post-grid/accordionNestedLabelIcon": "labelIcon",
+    "post-grid/accordionNestedContent": "content",
+    "post-grid/accordionNestedHeader": "header",
+    "post-grid/accordionNestedHeaderLabel": "headerLabel",
+    "post-grid/accordionNestedLabelCounter": "labelCounter"
+  },
   "supports": {
     "align": [
       "wide",
@@ -243,15 +252,6 @@
         "items": {}
       }
     }
-  },
-  "providesContext": {
-    "post-grid/accordionNestedIcon": "icon",
-    "post-grid/accordionNestedIconToggle": "iconToggle",
-    "post-grid/accordionNestedLabelIcon": "labelIcon",
-    "post-grid/accordionNestedContent": "content",
-    "post-grid/accordionNestedHeader": "header",
-    "post-grid/accordionNestedHeaderLabel": "headerLabel",
-    "post-grid/accordionNestedLabelCounter": "labelCounter"
   },
   "script": "front_script",
   "keywords": [

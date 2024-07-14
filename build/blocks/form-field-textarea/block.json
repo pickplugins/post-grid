@@ -54,6 +54,7 @@
           "name": "",
           "required": false,
           "disabled": false,
+          "objMap": "",
           "minLength": null,
           "maxLength": null,
           "readonly": false,

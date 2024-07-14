@@ -2,6 +2,16 @@
 if (!defined('ABSPATH'))
   exit; // if direct access
 
+
+
+
+
+
+
+
+
+
+
 register_meta('post', 'pgc_meta', [
   'type' => 'string',
   'single' => true,
@@ -1813,15 +1823,104 @@ function pgb_post_query_prams($query_args, $prams)
 }
 
 
+
+
+
+function post_grid_upload_file($data)
+{
+
+  $upload_dir       = wp_upload_dir();
+
+  error_log(serialize($data));
+
+  //HANDLE UPLOADED FILE
+  if (!function_exists('wp_handle_sideload')) {
+
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+  }
+
+  // Without that I'm getting a debug error!?
+  if (!function_exists('wp_get_current_user')) {
+
+    require_once(ABSPATH . 'wp-includes/pluggable.php');
+  }
+
+  // @new
+  $file             = array();
+  $file['error']    = $data['error'];
+  $file['tmp_name'] = $data['tmp_name'];
+  $file['name']     = $data['name'];
+  $file['type']     = $data['type'];
+  $file['size']     = filesize($data['tmp_name']);
+
+  // upload file to server
+  // @new use $file instead of $image_upload
+  $file_return      = wp_handle_sideload($file, array('test_form' => false));
+
+  $filename = $file_return['file'];
+  $attachment = array(
+    'post_mime_type' => $file_return['type'],
+    'post_title' => preg_replace('/\.[^.]+$/', '', basename($filename)),
+    'post_content' => '',
+    'post_status' => 'inherit',
+    'guid' => esc_url_raw($upload_dir['url']) . '/' . basename($filename)
+  );
+
+  $attach_id = wp_insert_attachment($attachment, $filename, 289);
+  require_once(ABSPATH . 'wp-admin/includes/image.php');
+  $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
+  wp_update_attachment_metadata($attach_id, $attach_data);
+  $attach_url = wp_get_attachment_url($attach_id);
+
+  $jsonReturn = array(
+    'id'  =>  $attach_id,
+    'url'  =>  $attach_url,
+  );
+
+
+
+  return $jsonReturn;
+}
+
+
+function post_grid_upload_file_x($data)
+{
+
+
+
+  if (!function_exists('wp_handle_upload')) {
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+  }
+
+
+  $upload_overrides = array('test_form' => false);
+
+  // $files = $_FILES['my_files'];
+
+
+  $uploadedfile = array(
+    'name'     => $data['name'],
+    'type'     => $data['type'],
+    'tmp_name' => $data['tmp_name'],
+    'error'    => $data['error'],
+    'size'     => $data['size']
+  );
+  $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+}
+
+
 function post_grid_generate_input_prams($inputargsSrc)
 {
 
   $argsSrc = isset($inputargsSrc['src']) ? $inputargsSrc['src'] : "";
   $srcPrams = isset($inputargsSrc['srcPrams']) ? $inputargsSrc['srcPrams'] : "";
   $argsSrcTaxonomy = isset($srcPrams['taxonomy']) ? $srcPrams['taxonomy'] : "";
+  $argsSrcField = isset($srcPrams['field']) ? $srcPrams['field'] : "";
   $argsSrcPostType = isset($srcPrams['postType']) ? $srcPrams['postType'] : "";
   $argsSrcUserRole = isset($srcPrams['role']) ? $srcPrams['role'] : "";
 
+
+  $inputArgs = [];
 
   if ($argsSrc == "taxonomy") {
 
@@ -1830,14 +1929,19 @@ function post_grid_generate_input_prams($inputargsSrc)
       'hide_empty' => false,
     ));
 
+
     if (!empty($terms) && !is_wp_error($terms)) {
 
-      $inputArgs = [];
+
 
       foreach ($terms as $term) {
+
+        $value = ($argsSrcField == 'ID') ? $term->term_id : $term->slug;
+
+
         $inputArgs[] = [
           'label' => $term->name,
-          'value' => $term->slug,
+          'value' => $value,
         ];
       }
     }
@@ -2593,6 +2697,10 @@ function post_grid_visible_parse($visible)
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
         $userIds = explode(",", $value);
+
+
+
+
         $userIds = array_map(function ($a) {
           return (int)$a[0];
         }, $userIds);
@@ -2629,7 +2737,7 @@ function post_grid_visible_parse($visible)
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
         $value = isset($arg['value']) ? (int) $arg['value'] : '';
 
-        $values = isset($arg['values']) ? explode(",", $arg['values']) : [];
+        $values = isset($arg['value']) ? explode(",", $arg['value']) : [];
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
         // $curentYear = date('Y');
@@ -2691,6 +2799,9 @@ function post_grid_visible_parse($visible)
         if ($compare == 'between') {
           $min = isset($values[0]) ? $values[0] : '';
           $max = isset($values[1]) ? $values[1] : '';
+
+
+
 
           if (($min <= $curentYear) && ($curentYear <= $max)) {
             $isAccess = true;
@@ -3077,6 +3188,35 @@ function post_grid_visible_parse($visible)
           $conditions[$i]['args'][$j] = $isAccess;
         }
       }
+      if ($id == 'urlString') {
+
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
+
+        if ($compare == 'contain') {
+          if (strpos($_SERVER['REQUEST_URI'], $value) !== false) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == 'notContain') {
+          if (strpos($_SERVER['REQUEST_URI'], $value) !== false) {
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $isAccess = true;
+
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+      }
+
+
+
+
+
+
       if ($id == 'referrerExist') {
 
         $value = isset($arg['value']) ? $arg['value'] : '';
@@ -3296,7 +3436,7 @@ function post_grid_visible_parse($visible)
       if ($id == 'isHome') {
 
 
-        if (is_home()) {
+        if (is_front_page() && is_home()) {
           $isAccess = true;
           $conditions[$i]['args'][$j] = $isAccess;
         } else {
@@ -3314,7 +3454,11 @@ function post_grid_visible_parse($visible)
       }
       if ($id == 'isBlog') {
 
-        if (is_front_page() && is_home()) {
+
+
+        if (is_home()) {
+
+
           $isAccess = true;
           $conditions[$i]['args'][$j] = $isAccess;
         } else {
@@ -3513,13 +3657,13 @@ function post_grid_visible_parse($visible)
 
 
 
-      if ($id == 'wcAccount') {
+      if ($id == 'wcisAccountPage') {
 
-        if (function_exists('wc_get_page_id')) {
+        if (function_exists('is_account_page')) {
           $account_id = wc_get_page_id('myaccount');
           $post_id = get_the_ID();
 
-          if ($account_id == $post_id) {
+          if (is_account_page()) {
             $isAccess = true;
             $conditions[$i]['args'][$j] = $isAccess;
           } else {
@@ -3529,11 +3673,11 @@ function post_grid_visible_parse($visible)
       }
       if ($id == 'wcShop') {
 
-        if (function_exists('wc_get_page_id')) {
+        if (function_exists('is_shop')) {
           $shop_id = wc_get_page_id('shop');
           $post_id = get_the_ID();
 
-          if ($shop_id == $post_id) {
+          if (is_shop()) {
             $isAccess = true;
             $conditions[$i]['args'][$j] = $isAccess;
           } else {
@@ -3541,18 +3685,266 @@ function post_grid_visible_parse($visible)
           }
         }
       }
-      if ($id == 'wcCart') {
+      if ($id == 'wcisCart') {
 
-        if (function_exists('wc_get_page_id')) {
+        if (function_exists('is_cart')) {
           $cart_id = wc_get_page_id('cart');
           $post_id = get_the_ID();
 
-          if ($cart_id == $post_id) {
+          if (is_cart()) {
             $isAccess = true;
             $conditions[$i]['args'][$j] = $isAccess;
           } else {
             $conditions[$i]['args'][$j] = $isAccess;
           }
+        }
+      }
+      if ($id == 'wcisCheckout') {
+
+        if (function_exists('is_checkout')) {
+          $cart_id = wc_get_page_id('cart');
+          $post_id = get_the_ID();
+
+          if (is_checkout()) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+      }
+      if ($id == 'wcisOnSale') {
+        $product_id = get_the_ID();
+        $product = new WC_Product($product_id);
+
+
+        if ($product->is_on_sale()) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'wcisInStock') {
+        //if (!is_singular('product')) return;
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
+
+
+
+
+        $product_id = get_the_ID();
+        $product = new WC_Product($product_id);
+
+
+        if ($compare == 'inStock') {
+          if ($product->is_in_stock()) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == 'outOfStock') {
+          if (!$product->is_in_stock()) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+        if ($compare == 'onBackorder') {
+          if ($product->is_on_backorder()) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+      }
+      if ($id == 'wcproductType') {
+        if (!is_singular('product')) return;
+        $product_id = get_the_ID();
+        $product = new WC_Product($product_id);
+        $value = isset($arg['value']) ? $arg['value'] : '';
+
+
+        if ($product->get_type() == $value) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
+        }
+      }
+      if ($id == 'wchasUpSells') {
+        if (!is_singular('product')) return;
+
+        $product_id = get_the_ID();
+
+        if (empty($product_id)) return;
+        $product = new WC_Product($product_id);
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $values = explode(',', $value);
+        $upsell_ids = $product->get_upsell_ids();
+
+
+        if ($compare == "noUpsells") {
+          if (empty($upsell_ids)) {
+
+            if (!empty($upsell_ids)) {
+
+              $isAccess = true;
+              $conditions[$i]['args'][$j] = $isAccess;
+            } else {
+              $conditions[$i]['args'][$j] = $isAccess;
+            }
+          }
+        }
+        if ($compare == "hasUpsells") {
+
+          if (!empty($upsell_ids)) {
+
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+
+        if (!empty($value)) {
+          if ($compare == 'exist') {
+            $upsellExist = !empty(array_intersect($values, $upsell_ids));
+
+            if ($upsellExist) {
+
+              $isAccess = true;
+              $conditions[$i]['args'][$j] = $isAccess;
+            } else {
+              $conditions[$i]['args'][$j] = $isAccess;
+            }
+          }
+          if ($compare == 'notExist') {
+            $upsellExist = !empty(array_intersect($values, $upsell_ids));
+
+            if (!$upsellExist) {
+              $isAccess = true;
+              $conditions[$i]['args'][$j] = $isAccess;
+            } else {
+
+
+              $conditions[$i]['args'][$j] = $isAccess;
+            }
+          }
+        }
+      }
+      if ($id == 'wchasCrossSells') {
+        if (!is_singular('product')) return;
+
+        $product_id = get_the_ID();
+
+        if (empty($product_id)) return;
+        $product = new WC_Product($product_id);
+        $compare = isset($arg['compare']) ? $arg['compare'] : '';
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $values = explode(',', $value);
+        $upsell_ids = $product->get_cross_sell_ids();
+
+
+        if ($compare == "noCrossSells") {
+          if (empty($upsell_ids)) {
+
+            if (!empty($upsell_ids)) {
+
+              $isAccess = true;
+              $conditions[$i]['args'][$j] = $isAccess;
+            } else {
+              $conditions[$i]['args'][$j] = $isAccess;
+            }
+          }
+        }
+        if ($compare == "hasCrossSells") {
+
+          if (!empty($upsell_ids)) {
+
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+
+        if (!empty($value)) {
+          if ($compare == 'exist') {
+            $upsellExist = !empty(array_intersect($values, $upsell_ids));
+
+            if ($upsellExist) {
+
+              $isAccess = true;
+              $conditions[$i]['args'][$j] = $isAccess;
+            } else {
+              $conditions[$i]['args'][$j] = $isAccess;
+            }
+          }
+          if ($compare == 'notExist') {
+            $upsellExist = !empty(array_intersect($values, $upsell_ids));
+
+            if (!$upsellExist) {
+              $isAccess = true;
+              $conditions[$i]['args'][$j] = $isAccess;
+            } else {
+
+
+              $conditions[$i]['args'][$j] = $isAccess;
+            }
+          }
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      if ($id == 'hasPMproLevels') {
+
+        $values = isset($arg['values']) ? $arg['values'] : [];
+
+        if (function_exists('pmpro_hasMembershipLevel')) {
+          if (pmpro_hasMembershipLevel($values)) {
+            $isAccess = true;
+            $conditions[$i]['args'][$j] = $isAccess;
+          } else {
+            $conditions[$i]['args'][$j] = $isAccess;
+          }
+        }
+      }
+      if ($id == 'hasMeprMemberships') {
+
+        $value = isset($arg['value']) ? $arg['value'] : '';
+        $user_id = get_current_user_id();
+        $mepr_user = new MeprUser($user_id);
+
+        $mepr_user->is_already_subscribed_to($value); // true or false
+
+
+
+        if ($mepr_user->is_already_subscribed_to($value)) {
+          $isAccess = true;
+          $conditions[$i]['args'][$j] = $isAccess;
+        } else {
+          $conditions[$i]['args'][$j] = $isAccess;
         }
       }
 
@@ -3967,10 +4359,7 @@ function post_grid_visible_parse($visible)
         $compare = isset($arg['compare']) ? $arg['compare'] : '';
 
 
-
-
         if ($compare == '=') {
-          $value = (int) $value;
           if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] == $value) {
             $isAccess = true;
             $conditions[$i]['args'][$j] = $isAccess;
@@ -3979,7 +4368,6 @@ function post_grid_visible_parse($visible)
           }
         }
         if ($compare == '!=') {
-          $value = (int) $value;
 
           if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] != $value) {
             $isAccess = true;
@@ -4139,7 +4527,6 @@ function post_grid_visible_parse($visible)
       $allowAccess = false;
     }
   }
-
 
 
   return $allowAccess;

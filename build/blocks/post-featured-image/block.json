@@ -23,8 +23,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "pg-post-featured-image",
-          "useAsBackground": "no"
+          "class": "pg-post-featured-image"
         },
         "styles": {
           "width": {

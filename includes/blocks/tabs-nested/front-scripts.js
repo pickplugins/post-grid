@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	var pgTabs = document.querySelectorAll(".pg-tabs");
 	var tabData = document.querySelectorAll("[data-tabData]");
 
+	console.log('Hello asd');
+
+
 	if (tabData != null) {
 		tabData.forEach((item) => {
 			var tabDataX = item.getAttribute("data-tabData");
@@ -52,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}
 
 			item.addEventListener("click", function (event) {
+
+				console.log(event);
+
+
 				navItems.forEach((tab) => {
 					tab.classList.remove("nav-item-active");
 					tab.classList.add("nav-item");
@@ -59,6 +66,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 				// hide all tab panels
 				tabPanels.forEach((panel) => {
+
+
+
+					console.log(panel);
+
 					// panel.hidden = true;
 					panel.classList.remove("pg-tabs-panel-active");
 				});
@@ -94,6 +106,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			});
 		});
 	});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 });

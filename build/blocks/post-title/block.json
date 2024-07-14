@@ -40,7 +40,7 @@
       "type": "object",
       "default": {
         "options": {
-          "tag": "",
+          "tag": "span",
           "limitBy": "",
           "limitCount": 99,
           "isLink": true,

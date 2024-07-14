@@ -66,6 +66,7 @@
           "multiple": false,
           "autofocus": null,
           "readonly": false,
+          "objMap": "",
           "args": {
             "0": {
               "label": "Option 1",

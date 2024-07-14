@@ -46,7 +46,7 @@
       "type": "object",
       "default": {
         "options": {
-          "tag": "li",
+          "tag": "div",
           "field": "name",
           "prefix": "",
           "isLink": "",
@@ -55,6 +55,9 @@
           "linkToPlug": "false",
           "linkText": "",
           "urlPrefix": "",
+          "limit": "1",
+          "enableAvatar": "",
+          "enableName": "true",
           "class": "pg-wordpress-org-item"
         },
         "styles": {}
@@ -67,7 +70,7 @@
           "library": "fontAwesome",
           "srcType": "class",
           "iconSrc": "far fa-calendar-alt",
-          "position": "beforePrefix",
+          "position": "",
           "class": "icon"
         },
         "styles": {

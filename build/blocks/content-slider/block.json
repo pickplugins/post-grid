@@ -34,6 +34,16 @@
         }
       }
     },
+    "itemsWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": "pg-content-slider-item"
+        },
+        "styles": {}
+      }
+    },
     "item": {
       "type": "object",
       "default": {

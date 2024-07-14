@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.84
+Version: 2.2.85
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.84');
+      define('post_grid_version', '2.2.85');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -210,6 +210,9 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/terms-list', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/terms-list/index.php');
       }
+      if (!in_array('post-grid/flip-box', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/flip-box/index.php');
+      }
       if (!in_array('post-grid/layers', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/layers/index.php');
       }
@@ -332,6 +335,10 @@ if (!class_exists('PostGrid')) {
         require_once(post_grid_plugin_dir . 'includes/blocks/form-field-recaptcha/index.php');
       }
 
+      if (!in_array('post-grid/form-field-hcaptcha', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-hcaptcha/index.php');
+      }
+
       if (!in_array('post-grid/form-field-checkbox', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/form-field-checkbox/index.php');
       }
@@ -397,6 +404,9 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/info-box', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/info-box/index.php');
       }
+      if (!in_array('post-grid/info-box-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/info-box-item/index.php');
+      }
       if (!in_array('post-grid/table', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/table/index.php');
       }
@@ -444,9 +454,9 @@ if (!class_exists('PostGrid')) {
       // if (!in_array('post-grid/woo-login-form', $disabled)) {
       //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-login-form/index.php');
       // }
-      // if (!in_array('post-grid/business-hours', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
-      // }
+      if (!in_array('post-grid/business-hours', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
+      }
 
 
 
@@ -670,6 +680,7 @@ if (!class_exists('PostGrid')) {
       wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/css/fontawesome-old/css/font-awesome-5.css');
       wp_register_style('pg-admin-g-fonts', 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+      wp_enqueue_style('pg-admin-g-fonts');
       wp_enqueue_style('font-awesome-5');
 
 

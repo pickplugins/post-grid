@@ -41,14 +41,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 					var onsubmitObj = JSON.parse(onsubmitprams);
 
-					console.log(onsubmitObj);
 
 
 					var formargs = formByID.getAttribute("formargs");
 					var formargsObj = JSON.parse(formargs);
 					var fieldInfo = formargsObj.fieldInfo;
 
-					console.log(formargsObj);
 
 
 					var onprocessargsObj = JSON.parse(onprocessargs);
@@ -66,18 +64,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-					var onsubmitProceed = false;
+					var onsubmitProceed = true;
 
 					Object.entries(onsubmitObj).map((args) => {
 
 						var action = args[1];
 						var actionId = action.id;
 
-						console.log(actionId);
 
 
 						if (actionId == "validation") {
 							var errors = validateFormFields(formId, formData, fieldInfo);
+
+
 
 							responsesWrap.innerHTML = "";
 
@@ -96,15 +95,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								responsesWrap.style.display = "block";
 
 								// loadingWrap.style.display = "none";
-								onsubmitProceed = true;
+								//onsubmitProceed = true;
 								throw errors;
 							}
 						}
 
 						if (actionId == "submitConfirm") {
+
+
+
+
 							if (confirm("Are you confirmed?")) {
-								onsubmitProceed = true;
-								processSubmit(formId, formData);
+
+
+
+								//onsubmitProceed = true;
+								//processSubmit(formId, formData);
 
 								document.dispatchEvent(pgFormSubmitted);
 							} else {
@@ -121,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 							//let recaptchaResponse = queryString.includes("g-recaptcha-response");
 
-							if (recaptchaResponse.length == 0) {
+							if (recaptchaResponse == null || recaptchaResponse.length == 0) {
 								onsubmitProceed = false;
 
 
@@ -146,10 +152,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 								throw errors;
 								//processSubmit(formId, formData);
-							} else {
-								onsubmitProceed = true;
-
-
 							}
 
 
@@ -158,16 +160,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-
-
-						if (actionId == "loading") {
-
-						}
 					});
 
 
 
-					if (!onsubmitProceed) {
+
+					if (onsubmitProceed) {
 						processSubmit(formId, formData);
 						document.dispatchEvent(pgFormSubmitted);
 					}
@@ -184,24 +182,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		if (e !== BreakException) throw e;
 	}
 
-	const sleep = async (milliseconds) => {
-		await new Promise((resolve) => {
-			return setTimeout(resolve, milliseconds);
-		});
-	};
+
 
 	function validateFormFields(formId, formData, fieldInfo) {
 		var errorData = {};
 
-		console.log(fieldInfo);
 
 
 		Object.entries(fieldInfo).map((field) => {
 			var fieldId = field[0];
-
-			console.log(fieldId);
-
-
 			var args = field[1];
 
 			var inputName = args.inputName;
@@ -214,6 +203,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				required: required,
 			};
 		});
+
+
 
 		var errors = {};
 
@@ -240,7 +231,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		return errors;
 	}
 
+
+
 	function processSubmit(formId, formData) {
+
+
 
 		var formByID = document.querySelector(`[formid="${formId}"]`);
 
@@ -250,6 +245,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		var aftersubmitargs = formByID.getAttribute("aftersubmitargs");
 		var aftersubmitargsObj = JSON.parse(aftersubmitargs);
+
+
 
 		var formargs = formByID.getAttribute("formargs");
 		var formargsObj = JSON.parse(formargs);
@@ -262,10 +259,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var inputValue = pair[1];
 
 
+			console.log(inputName);
+			//	console.log(inputValue);
 
 
 			formFieldNames.push(inputName);
 		}
+
+
+
+
 
 		formData.append("formFieldNames", formFieldNames);
 
@@ -286,10 +289,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var errorsArgs = data.errors == undefined ? {} : data.errors;
 
 
-						if (aftersubmitargsObj == null) return;
 
-						aftersubmitargsObj.map((action) => {
+						if (aftersubmitargsObj == null) return;
+						for (var i = 0; i < aftersubmitargsObj.length; i++) {
+
+							var action = aftersubmitargsObj[i];
+
+
 							var actionId = action.id;
+
 
 
 							if (actionId == "showResponse") {
@@ -315,10 +323,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								responsesWrap.innerHTML = responseHtml;
 							}
 
+
+
+
+							if (Object.entries(errorsArgs).length > 0) {
+								break;
+							};
+
+
+
 							if (actionId == "redirectToURL") {
 								var url = action.url;
 								location.href = url;
 							}
+
+
+
+
+
 							if (actionId == "filterPosts") {
 								//var url = action.url;
 								//location.href = url;
@@ -387,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 								formByID.reset();
 							}
-						});
+						};
 
 						loadingWrap.style.display = "none";
 
@@ -399,586 +421,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			.catch((error) => { });
 	}
 
-	/*Form Visiblity*/
 
-	function popupDelay() {
-		var dataVisible = document.querySelectorAll("[data-pgfw-visible]");
 
 
-		if (dataVisible != null) {
-			dataVisible.forEach((item) => {
-				var attr = item.getAttribute("data-pgfw-visible");
-				var attrObj = JSON.parse(attr);
-				var formId = item.getAttribute("formid");
-				var formargs = item.getAttribute("formargs");
-				var formargsObj = JSON.parse(formargs);
-
-				var isLogged = formargsObj.isLogged;
-				var userId = formargsObj.userId;
-				var currentUserRoles = formargsObj.userRoles;
-				var popupId = formargsObj.popupId;
-
-				var popupWrap = document.querySelector('[formid="' + formId + '"]');
-
-				Object.entries(attrObj).map((group) => {
-					var groupData = group[1];
-					var groupLogic = groupData.logic;
-					var groupArgs = groupData.args;
-
-					groupArgs.map((conditions) => {
-						var conditionId = conditions.id;
-
-						if (conditionId == "userLogged") {
-							if (isLogged) {
-								popupWrap.style.display = "block";
-							} else {
-								popupWrap.style.display = "none";
-							}
-						}
-
-						if (conditionId == "userNotLogged") {
-							if (isLogged) {
-								popupWrap.style.display = "none";
-							} else {
-								popupWrap.style.display = "block";
-							}
-						}
-
-						if (conditionId == "isYears") {
-							var compare = conditions.compare;
-							var from = conditions.from;
-
-							var dateObj = getDate();
-							var currentYear = dateObj.year;
-
-							if (compare == "=") {
-								if (parseInt(from) == currentYear) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "!=") {
-								if (parseInt(from) != currentYear) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">") {
-								if (currentYear > parseInt(from)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<") {
-								if (currentYear < parseInt(from)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">=") {
-								if (currentYear >= parseInt(from)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<=") {
-								if (currentYear <= parseInt(from)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "exist") {
-								var years = from.split(",");
-								var yearsX = years.map((x) => {
-									return parseInt(x);
-								});
-
-								if (yearsX.includes(currentYear)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "between") {
-								var years = from.split(",");
-								var yearsX = years.map((x) => {
-									return parseInt(x);
-								});
-
-								var yearsFrom = yearsX[0] == undefined ? "" : yearsX[0];
-								var yearsTo = yearsX[1] == undefined ? "" : yearsX[1];
-
-								if (currentYear >= yearsFrom && currentYear <= yearsTo) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-						}
-
-						if (conditionId == "isMonths") {
-							var compare = conditions.compare;
-							var value = conditions.value;
-							var values = conditions.values;
-
-
-							var dateObj = getDate();
-							var currentMonth = dateObj.month;
-
-
-							if (compare == "=") {
-								if (parseInt(value) == currentMonth) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "!=") {
-								if (parseInt(value) != currentMonth) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">") {
-								if (currentMonth > parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<") {
-								if (currentMonth < parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">=") {
-								if (currentMonth >= parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<=") {
-								if (currentMonth <= parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "exist") {
-								var months = values;
-								var monthsX = months.map((x) => {
-									return parseInt(x);
-								});
-
-								if (monthsX.includes(currentMonth)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "between") {
-								var months = values;
-								var monthsX = months.map((x) => {
-									return parseInt(x);
-								});
-
-								var monthsFrom = monthsX[0] == undefined ? "" : monthsX[0];
-								var monthsTo = monthsX[1] == undefined ? "" : monthsX[1];
-
-								if (currentMonth >= monthsFrom && currentMonth <= monthsTo) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-						}
-
-						if (conditionId == "weekDays") {
-							var compare = conditions.compare;
-							var value = conditions.value;
-							var values = conditions.values;
-
-
-							var dateObj = getDate();
-							var currentDay = dateObj.weekday;
-
-
-							if (compare == "=") {
-								if (parseInt(value) == currentDay) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "!=") {
-								if (parseInt(value) != currentDay) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">") {
-								if (currentDay > parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<") {
-								if (currentDay < parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">=") {
-								if (currentDay >= parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<=") {
-								if (currentDay <= parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "exist") {
-								var days = values;
-								var daysX = days.map((x) => {
-									return parseInt(x);
-								});
-
-								if (daysX.includes(currentDay)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "between") {
-								var days = values;
-								var daysX = days.map((x) => {
-									return parseInt(x);
-								});
-
-								var daysFrom = daysX[0] == undefined ? "" : daysX[0];
-								var daysTo = daysX[1] == undefined ? "" : daysX[1];
-
-								if (currentDay >= daysFrom && currentDay <= daysTo) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-						}
-
-						if (conditionId == "isHours") {
-							var compare = conditions.compare;
-							var value = conditions.value;
-							var values = conditions.values;
-
-							var dateObj = getDate();
-							var currentisHour = dateObj.day;
-
-							if (compare == "=") {
-								if (parseInt(value) == currentisHour) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "!=") {
-								if (parseInt(value) != currentisHour) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">") {
-								if (currentisHour > parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<") {
-								if (currentisHour < parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">=") {
-								if (currentisHour >= parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<=") {
-								if (currentisHour <= parseInt(value)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "exist") {
-								var hours = values;
-								var hoursX = hours.map((x) => {
-									return parseInt(x);
-								});
-
-								if (hoursX.includes(currentisHour)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "between") {
-								var hours = values;
-								var hoursX = hours.map((x) => {
-									return parseInt(x);
-								});
-
-								var hoursFrom = hoursX[0] == undefined ? "" : hoursX[0];
-								var hoursTo = hoursX[1] == undefined ? "" : hoursX[1];
-
-								if (currentisHour >= hoursFrom && currentisHour <= hoursTo) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-						}
-
-						if (conditionId == "isDate") {
-							var compare = conditions.compare;
-							var value = conditions.value;
-							var values = conditions.values;
-
-							var time = new Date(value).getTime();
-
-							var dateObj = getDate();
-							var currentDate = dateObj.date;
-							var currentTime = dateObj.time;
-
-							if (compare == "=") {
-								if (value == currentDate) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "!=") {
-								if (value != currentDate) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">") {
-								if (currentTime > time) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<") {
-								if (currentTime < time) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == ">=") {
-								if (currentTime >= time) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "<=") {
-								if (currentTime <= time) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "exist") {
-								var dates = values;
-
-								if (dates.includes(currentDate)) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-
-							if (compare == "between") {
-								var dates = values;
-								var hoursX = dates.map((x) => {
-									return x;
-								});
-
-								var hoursFrom =
-									hoursX[0] == undefined ? "" : new Date(hoursX[0]).getTime();
-								var hoursTo =
-									hoursX[1] == undefined ? "" : new Date(hoursX[1]).getTime();
-
-								if (currentTime >= hoursFrom && currentTime <= hoursTo) {
-									popupWrap.style.display = "block";
-								} else {
-									popupWrap.style.display = "none";
-								}
-							}
-						}
-
-						if (conditionId == "delay") {
-							setTimeout(() => {
-								popupWrap.style.display = "block";
-							}, parseInt(conditions.value));
-						}
-
-						if (conditionId == "initial") {
-							popupWrap.style.display = "block";
-						}
-
-						if (conditionId == "cookieExist") {
-							var cookieExist = hasCookie(conditions.value);
-
-							if (cookieExist) {
-								popupWrap.style.display = "block";
-							}
-						}
-
-						if (conditionId == "cookieNotExist") {
-							var cookieExist = hasCookie(conditions.value);
-
-							if (cookieExist == undefined) {
-								popupWrap.style.display = "block";
-							}
-						}
-
-						if (conditionId == "userRoles") {
-							var roleExist = false;
-							var userRoles = conditions.roles;
-
-							var currentUserRolesX = Object.entries(currentUserRoles).map(
-								(x) => {
-									var index = x[0];
-									var role = x[1];
-
-									return role;
-								}
-							);
-
-
-							let intersection = userRoles.filter((x) =>
-								currentUserRolesX.includes(x)
-							);
-
-							if (intersection.length > 0) {
-								popupWrap.style.display = "block";
-							} else {
-								popupWrap.style.display = "none";
-							}
-						}
-
-						if (conditionId == "userId") {
-							var userIds = conditions.value.split(",");
-							var userIdsX = userIds.map((x) => parseInt(x));
-							if (userIdsX.includes(parseInt(userId))) {
-								popupWrap.style.display = "block";
-							}
-						}
-
-						if (conditionId == "urlPrams") {
-							var urlPrams = conditions.value.split(",");
-							urlPrams.map((x) => {
-								if (hasUrlPrams(x)) {
-									popupWrap.style.display = "block";
-								}
-							});
-						}
-					});
-				});
-			});
-		}
-	}
-
-	popupDelay();
 });
 
-function getDate() {
-	const dateFull = new Date();
-
-	var dateObj = {};
-
-	let day = dateFull.getDate();
-	let month = dateFull.getMonth() + 1;
-	let year = dateFull.getFullYear();
-	let hour = dateFull.getHours();
-	let minute = dateFull.getMinutes();
-	let weekday = dateFull.getDay();
-	let date = dateFull.getFullYear() + "-" + parseInt(month) + "-" + day;
-	let isoDate = dateFull.toISOString();
-	let time = dateFull.getTime();
-
-	dateObj.day = day;
-	dateObj.month = month;
-	dateObj.year = year;
-	dateObj.hour = hour;
-	dateObj.minute = minute;
-	dateObj.weekday = weekday;
-	dateObj.date = date;
-	dateObj.isoDate = isoDate;
-	dateObj.time = time;
-
-	return dateObj;
-}

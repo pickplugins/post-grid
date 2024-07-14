@@ -1,10 +1,10 @@
 === Gutenberg Blocks, Page Builder - ComboBlocks ===
-Contributors: PickPlugins, nafismahmudayon
+Contributors: PickPlugins, NafisMahmudAyon
 Donate link: https://comboblocks.com/
 Tags: Gutenberg Blocks, form maker, woocommerce blocks, popup maker, Page Builder
 Requires at least: 5.0.0
 Tested up to: 6.5
-Stable tag: 2.2.84
+Stable tag: 2.2.85
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -389,6 +389,53 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 == Changelog ==
 
+
+= 2.2.85 =
+- 2024-07-09 - update - Update Accordion Block.
+- 2024-07-09 - update - Update Progress Bar Block.
+- 2024-07-09 - update - Update Image Block.
+- 2024-07-09 - update - Update List Block.
+- 2024-07-08 - update - Update Text Block.
+- 2024-07-08 - update - Update Featured Image Block.
+- 2024-07-08 - update - Update List Nested Block.
+- 2024-07-08 - update - Update Add to Cart Block.
+- 2024-07-08 - update - Update Total Sale Block.
+- 2024-07-08 - update - Update In Sale Block.
+- 2024-07-08 - update - Update On Sale Block.
+- 2024-07-08 - update - Update Product Price Block.
+- 2024-07-08 - update - Update Product SKU Block.
+- 2024-07-08 - update - Update Star Rate Block.
+- 2024-07-08 - update - Update Stock Quantity Block.
+- 2024-07-08 - update - Update Woo Product Tabs Block.
+- 2024-07-08 - update - Update Woo My Account Block.
+- 2024-07-07 - update - Update Post Author Field Block.
+- 2024-07-07 - update - Update Post Author Block.
+- 2024-07-07 - update - Update Post Date Block.
+- 2024-07-07 - update - Update Image Galley Block.
+- 2024-07-06 - update - Update Number Counter Block.
+- 2024-07-06 - update - Update Post Title Block.
+- 2024-07-06 - update - Update Block Variation Component.
+- 2024-07-06 - update - Update Variation Picker Component.
+- 2024-07-06 - update - New block -  Flip Info Box Item Block added.
+- 2024-07-06 - update - New block -  Flip Box Back Block added.
+- 2024-07-06 - update - New block -  Flip Box Front Block added.
+- 2024-07-04 - update - Update Back to Top Block.
+- 2024-07-03 - update - Update Masonry Block.
+- 2024-07-03 - update - Update WordPress org Block.
+- 2024-07-03 - update - Update WordPress org Item Block.
+- 2024-07-03 - update - Update Form Field Textarea Block.
+- 2024-07-03 - update - Update Form Maker Block.
+- 2024-07-02 - update - Update Terms Query Item Block.
+- 2024-07-01 - update - Update Content Slider Block.
+- 2024-06-29 - update - Update Image Block.
+- 2024-06-26 - update - Update Table Row Block.
+- 2024-06-26 - update - New block - Form field hCaptcha added.
+- 2024-06-26 - update - New block - Flip Box added.
+- 2024-06-25 - update - Update Post Meta Block.
+- 2024-06-25 - update - Update Date Countdown Block.
+- 2024-06-24 - update - Update Form Field Input Block.
+- 2024-06-23 - update - Update Dashboard Component.
+- 2024-06-23 - update - Update Popup Block.
 
 = 2.2.84 =
 - 2024-06-22 - update - New block - Form field reCaptcha added.

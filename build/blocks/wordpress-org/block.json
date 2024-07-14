@@ -38,7 +38,7 @@
       "type": "object",
       "default": {
         "options": {
-          "tag": "ul",
+          "tag": "div",
           "class": "pg-wordpress-org"
         },
         "styles": {}
@@ -103,7 +103,7 @@
           "library": "fontAwesome",
           "srcType": "class",
           "iconSrc": "far fa-calendar-alt",
-          "position": "beforePrefix",
+          "position": "",
           "class": "icon",
           "overrideChild": true
         },

@@ -119,6 +119,7 @@ class PGBlockAccordionNestedItem
 		$labelCounter = isset($attributes['labelCounter']) ? $attributes['labelCounter'] : '';
 		$labelCounterOptions = isset($labelCounter['options']) ? $labelCounter['options'] : [];
 		$labelCounterEnable = isset($labelCounterOptions['enable']) ? $labelCounterOptions['enable'] : false;
+		$labelCounterPosition = isset($labelCounterOptions['position']) ? $labelCounterOptions['position'] : '';
 
 
 
@@ -219,7 +220,7 @@ class PGBlockAccordionNestedItem
 				</span>
 			<?php endif; ?>
 
-			<?php if ($labelCounterEnable) : ?>
+			<?php if ($labelCounterPosition == 'left') : ?>
 				<span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
 					<?php echo wp_kses_post($count); ?>
 				</span>
@@ -228,6 +229,14 @@ class PGBlockAccordionNestedItem
 				<?php echo wp_kses_post($labelIconHtml); ?>
 			<?php endif; ?>
 			<<?php echo tag_escape($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+
+
+				<?php if ($labelCounterPosition == 'beforeLabelText') : ?>
+					<span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
+						<?php echo wp_kses_post($count); ?>
+					</span>
+				<?php endif; ?>
+
 				<?php if ($labelIconPosition == 'beforeLabelText') : ?>
 					<?php echo wp_kses_post($labelIconHtml); ?>
 				<?php endif; ?>
@@ -235,6 +244,14 @@ class PGBlockAccordionNestedItem
 				<?php if ($labelIconPosition == 'afterLabelText') : ?>
 					<?php echo wp_kses_post($labelIconHtml); ?>
 				<?php endif; ?>
+
+				<?php if ($labelCounterPosition == 'afterLabelText') : ?>
+					<span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
+						<?php echo wp_kses_post($count); ?>
+					</span>
+				<?php endif; ?>
+
+
 			</<?php echo tag_escape($headerLabelTag); ?>>
 			<?php if ($labelIconPosition == 'afterLabel') : ?>
 				<?php echo wp_kses_post($labelIconHtml); ?>

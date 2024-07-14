@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		clickCount: 0,
 		scrollEnd: false,
 		scrollPercent: 0,
-		scrollFixed: 500,
+		scrollFixed: 2000,
 	};
 
 	var popupClose = document.querySelectorAll(".close");
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					popup.classList.remove("animate__animated");
 					popup.classList.remove("animate__" + closeAnimation);
 					popup.style.display = "none";
-				}, 3000);
+				}, 2000);
 			});
 		});
 	}
@@ -124,14 +124,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									popup.classList.remove("animate__animated");
 									popup.classList.remove("animate__" + entranceAnimation);
 									// popup.style.display = "none";
-								}, 3000);
+								}, 2000);
 							}, parseInt(conditions.value));
 						}
 
 						if (conditionId == "initial") {
 							popupWrap.style.display = "block";
 							var popup = document.querySelector("." + popupId);
-							var entranceAnimation = popupWrap.getAttribute("entrance-animation");
+							var entranceAnimation =
+								popupWrap.getAttribute("entrance-animation");
 
 							popup.classList.add("animate__animated");
 							popup.classList.add("animate__" + entranceAnimation);
@@ -140,8 +141,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
-
+							}, 2000);
 						}
 
 						if (conditionId == "cookieExist") {
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									popup.classList.remove("animate__animated");
 									popup.classList.remove("animate__" + entranceAnimation);
 									// popup.style.display = "none";
-								}, 3000);
+								}, 2000);
 							}
 						}
 
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									popup.classList.remove("animate__animated");
 									popup.classList.remove("animate__" + entranceAnimation);
 									// popup.style.display = "none";
-								}, 3000);
+								}, 2000);
 							}
 						}
 
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									popup.classList.remove("animate__animated");
 									popup.classList.remove("animate__" + entranceAnimation);
 									// popup.style.display = "none";
-								}, 3000);
+								}, 2000);
 							}
 						}
 
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									popup.classList.remove("animate__animated");
 									popup.classList.remove("animate__" + entranceAnimation);
 									// popup.style.display = "none";
-								}, 3000);
+								}, 2000);
 							}
 						}
 
@@ -238,9 +238,53 @@ document.addEventListener("DOMContentLoaded", function (event) {
 										popup.classList.remove("animate__animated");
 										popup.classList.remove("animate__" + entranceAnimation);
 										// popup.style.display = "none";
-									}, 3000);
+									}, 2000);
 								}
 							});
+						}
+					});
+				});
+			});
+		}
+
+		var closeTrigger = document.querySelectorAll("[pgpopup-close-trigger]");
+
+		if (closeTrigger != null) {
+			closeTrigger.forEach((item) => {
+				var attr = item.getAttribute("pgpopup-close-trigger");
+				var attrObj = JSON.parse(attr);
+				var popupId = item.getAttribute("popup-id");
+				var popupPrams = item.getAttribute("data-prams");
+				var popupPramsObj = JSON.parse(popupPrams);
+
+				var isLogged = popupPramsObj.isLogged;
+				var userId = popupPramsObj.userId;
+
+				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
+
+				Object.entries(attrObj).map((group) => {
+					var groupData = group[1];
+					var groupLogic = groupData.logic;
+					var groupArgs = groupData.args;
+
+					groupArgs.map((conditions) => {
+						var conditionId = conditions.id;
+
+						if (conditionId == "delay") {
+							setTimeout(() => {
+								//popupWrap.style.display = "block";
+								var popup = document.querySelector("." + popupId);
+								var closeAnimation = popupWrap.getAttribute("close-animation");
+
+								popup.classList.add("animate__animated");
+								popup.classList.add("animate__" + closeAnimation);
+
+								setTimeout(() => {
+									popup.classList.remove("animate__animated");
+									popup.classList.remove("animate__" + closeAnimation);
+									popup.style.display = "none";
+								}, 2000);
+							}, parseInt(conditions.value));
 						}
 					});
 				});
@@ -263,16 +307,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		}
 	}
 
-	addEvent(document, 'mouseout', function (e) {
+	addEvent(document, "mouseout", function (e) {
 		if (e.toElement == null && e.relatedTarget == null) {
-
-
 			if (dataVisible != null) {
 				dataVisible.forEach((item) => {
 					var attr = item.getAttribute("pgpopup-trigger");
 					var attrObj = JSON.parse(attr);
 					var popupId = item.getAttribute("popup-id");
-					var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
+					var popupWrap = document.querySelector(
+						'[popup-id="' + popupId + '"]'
+					);
 
 					Object.entries(attrObj).map((group) => {
 						var groupData = group[1];
@@ -284,8 +328,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							if (conditionId == "onExit") {
 								popupWrap.style.display = "block";
 
-								console.log('onExit');
-								console.log(conditions.value);
 								e.preventDefault();
 								e.defaultPrevented;
 
@@ -304,12 +346,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 				});
 			}
-
-
-
-		};
+		}
 	});
-
 
 	window.oncontextmenu = function (event) {
 		var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
@@ -331,7 +369,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						if (conditionId == "clickRight") {
 							popupWrap.style.display = "block";
 
-
 							if (conditions.value) {
 								event.preventDefault();
 								var popup = document.querySelector("." + popupId);
@@ -345,7 +382,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									popup.classList.remove("animate__animated");
 									popup.classList.remove("animate__" + entranceAnimation);
 									// popup.style.display = "none";
-								}, 3000);
+								}, 2000);
 							}
 						}
 					});
@@ -379,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var conditionId = conditions.id;
 
 						if (
-							conditionId == "scrollParcent" &&
+							conditionId == "scrollPercent" &&
 							parseInt(conditions.min) <= scrollPercentage &&
 							parseInt(conditions.max) >= scrollPercentage
 						) {
@@ -395,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
 						}
 
 						if (
@@ -415,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
 						}
 
 						if (
@@ -435,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
 						}
 
 						if (conditionId == "scrollElement") {
@@ -457,7 +494,115 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									popup.classList.remove("animate__animated");
 									popup.classList.remove("animate__" + entranceAnimation);
 									// popup.style.display = "none";
-								}, 3000);
+								}, 2000);
+							}
+						}
+					});
+				});
+			});
+		}
+	});
+
+	document.addEventListener("scroll", function (e) {
+		//popupActions.scrollStart = true;
+
+		var scrollPercentage = getScrollPercentage();
+		var scrollAmount = getScrollAmount();
+
+		var closeTrigger = document.querySelectorAll("[pgpopup-close-trigger]");
+
+		if (closeTrigger != null) {
+			closeTrigger.forEach((item) => {
+				var attr = item.getAttribute("pgpopup-close-trigger");
+				var attrObj = JSON.parse(attr);
+				var popupId = item.getAttribute("popup-id");
+				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
+
+				Object.entries(attrObj).map((group) => {
+					var groupId = group[0];
+					var groupData = group[1];
+					var groupLogic = groupData.logic;
+					var groupArgs = groupData.args;
+
+					groupArgs.map((conditions) => {
+						var conditionId = conditions.id;
+
+						if (
+							conditionId == "scrollPercent" &&
+							parseInt(conditions.min) <= scrollPercentage &&
+							parseInt(conditions.max) >= scrollPercentage
+						) {
+							//popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+						}
+
+						if (
+							conditionId == "scrollFixed" &&
+							parseInt(conditions.min) <= scrollAmount &&
+							parseInt(conditions.max) >= scrollAmount
+						) {
+							//popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+						}
+
+						if (
+							conditionId == "scrollEnd" &&
+							95 <= scrollPercentage &&
+							100 >= scrollPercentage
+						) {
+							//popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+						}
+
+						if (conditionId == "scrollElement") {
+							var elementHandle = conditions.value;
+							const target = document.querySelector(elementHandle);
+
+							var isViewport = isInViewport(target);
+
+							if (isViewport) {
+								//popupWrap.style.display = "block";
+								var popup = document.querySelector("." + popupId);
+								var closeAnimation = popupWrap.getAttribute("close-animation");
+
+								popup.classList.add("animate__animated");
+								popup.classList.add("animate__" + closeAnimation);
+
+								setTimeout(() => {
+									popup.classList.remove("animate__animated");
+									popup.classList.remove("animate__" + closeAnimation);
+									popup.style.display = "none";
+								}, 2000);
 							}
 						}
 					});
@@ -499,7 +644,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
 						}
 
 						if (
@@ -518,7 +663,159 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
+						}
+					});
+				});
+			});
+		}
+	});
+
+	document.addEventListener("keydown", function (e) {
+		var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
+		if (dataVisible != null) {
+			dataVisible.forEach((item) => {
+				var attr = item.getAttribute("pgpopup-trigger");
+				var attrObj = JSON.parse(attr);
+				var popupId = item.getAttribute("popup-id");
+				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
+
+				Object.entries(attrObj).map((group) => {
+					var groupId = group[0];
+					var groupData = group[1];
+					var groupLogic = groupData.logic;
+					var groupArgs = groupData.args;
+
+					groupArgs.map((conditions) => {
+						var conditionId = conditions.id;
+
+						var keyCode = e.key;
+
+						if (conditionId == "keyPress") {
+							if (conditions.values.includes(keyCode)) {
+								popupWrap.style.display = "block";
+								var popup = document.querySelector("." + popupId);
+								var entranceAnimation =
+									popupWrap.getAttribute("entrance-animation");
+
+								popup.classList.add("animate__animated");
+								popup.classList.add("animate__" + entranceAnimation);
+
+								setTimeout(() => {
+									popup.classList.remove("animate__animated");
+									popup.classList.remove("animate__" + entranceAnimation);
+									// popup.style.display = "none";
+								}, 2000);
+							}
+						}
+					});
+				});
+			});
+		}
+	});
+
+	document.addEventListener("keydown", function (e) {
+
+		var closeTrigger = document.querySelectorAll("[pgpopup-close-trigger]");
+
+		if (closeTrigger != null) {
+			closeTrigger.forEach((item) => {
+				var attr = item.getAttribute("pgpopup-close-trigger");
+				var attrObj = JSON.parse(attr);
+				var popupId = item.getAttribute("popup-id");
+				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
+
+				Object.entries(attrObj).map((group) => {
+					var groupId = group[0];
+					var groupData = group[1];
+					var groupLogic = groupData.logic;
+					var groupArgs = groupData.args;
+
+					groupArgs.map((conditions) => {
+						var conditionId = conditions.id;
+
+						if (conditionId == "keyPress") {
+
+
+
+
+							if (
+								(conditions.value == "esc" && e.key === "Escape") ||
+								(conditions.value == "enter" && e.key === "Enter") ||
+								(conditions.value == "backspace" && e.key === "Backspace")
+							) {
+								var popup = document.querySelector("." + popupId);
+								var closeAnimation = popupWrap.getAttribute("close-animation");
+
+								popup.classList.add("animate__animated");
+								popup.classList.add("animate__" + closeAnimation);
+
+								setTimeout(() => {
+									popup.classList.remove("animate__animated");
+									popup.classList.remove("animate__" + closeAnimation);
+									popup.style.display = "none";
+								}, 2000);
+							}
+
+							// You can add more key conditions here if needed
+						}
+					});
+				});
+			});
+		}
+	});
+
+	document.addEventListener("click", function (e) {
+		popupActions.clickCount += 1;
+		var closeTrigger = document.querySelectorAll("[pgpopup-close-trigger]");
+
+		if (closeTrigger != null) {
+			closeTrigger.forEach((item) => {
+				var attr = item.getAttribute("pgpopup-close-trigger");
+				var attrObj = JSON.parse(attr);
+				var popupId = item.getAttribute("popup-id");
+				var popupWrap = document.querySelector('[popup-id="' + popupId + '"]');
+
+				Object.entries(attrObj).map((group) => {
+					var groupId = group[0];
+					var groupData = group[1];
+					var groupLogic = groupData.logic;
+					var groupArgs = groupData.args;
+
+					groupArgs.map((conditions) => {
+						var conditionId = conditions.id;
+
+						if (conditionId == "clickFirst" && popupActions.clickCount == 1) {
+							//popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+						}
+
+						if (
+							conditionId == "clickCount" &&
+							popupActions.clickCount == parseInt(conditions.value)
+						) {
+							//popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
 						}
 					});
 				});
@@ -527,6 +824,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	});
 
 	var dataVisible = document.querySelectorAll("[pgpopup-trigger]");
+	var closeTrigger = document.querySelectorAll("[pgpopup-close-trigger]");
 
 	if (dataVisible != null) {
 		dataVisible.forEach((item) => {
@@ -569,11 +867,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
 						});
 					}
 					if (conditionId == "mouseOutElement") {
-
 						if (conditions.value.length == 0) return;
 
 						var clickHandle = document.querySelector(conditions.value);
@@ -582,10 +879,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						);
 
 						clickHandle.addEventListener("mouseout", function (e) {
-
-							console.log("mouseout");
-
-
 							event.preventDefault();
 							event.stopPropagation();
 
@@ -601,13 +894,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
 						});
 					}
 					if (conditionId == "mouseOverElement") {
-						console.log("mouseOverElement");
-						console.log(conditions.value);
-
 						if (conditions.value.length == 0) return;
 
 						var clickHandle = document.querySelector(conditions.value);
@@ -616,8 +906,35 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						);
 
 						clickHandle.addEventListener("mouseover", function (e) {
+							event.preventDefault();
+							event.stopPropagation();
 
-							console.log("mousein");
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var entranceAnimation =
+								popupWrap.getAttribute("entrance-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + entranceAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + entranceAnimation);
+								// popup.style.display = "none";
+							}, 2000);
+						});
+					}
+					if (conditionId == "wooAddToCart") {
+						if (conditions.value.length == 0) return;
+
+						var clickHandle = document.querySelector('.ajax_add_to_cart');
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+
+						clickHandle.addEventListener("click", function (e) {
+
 
 
 							event.preventDefault();
@@ -635,9 +952,226 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								popup.classList.remove("animate__animated");
 								popup.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 3000);
+							}, 2000);
 						});
 					}
+
+
+
+
+
+
+
+					if (conditionId == "dateCountdownExpired") {
+						var isOnce = conditions.once;
+						var count = 0;
+						var popupWrap = document.querySelector(".pg-popup");
+
+
+						document.addEventListener("pgDateCountdownExpired", function (e) {
+
+
+							if (isOnce) {
+								if (count < 1) {
+									popupWrap.style.display = "block";
+									var popup = document.querySelector("." + popupId);
+									var entranceAnimation =
+										popupWrap.getAttribute("entrance-animation");
+
+									popup.classList.add("animate__animated");
+									popup.classList.add("animate__" + entranceAnimation);
+
+									setTimeout(() => {
+										popup.classList.remove("animate__animated");
+										popup.classList.remove("animate__" + entranceAnimation);
+										// popup.style.display = "none";
+									}, 2000);
+								}
+							} else {
+								popupWrap.style.display = "block";
+								var popup = document.querySelector("." + popupId);
+								var entranceAnimation =
+									popupWrap.getAttribute("entrance-animation");
+
+								popup.classList.add("animate__animated");
+								popup.classList.add("animate__" + entranceAnimation);
+
+								setTimeout(() => {
+									popup.classList.remove("animate__animated");
+									popup.classList.remove("animate__" + entranceAnimation);
+									// popup.style.display = "none";
+								}, 2000);
+							}
+							count += 1;
+						});
+					}
+				});
+			});
+		});
+	}
+
+	if (closeTrigger != null) {
+		closeTrigger.forEach((item) => {
+			var attr = item.getAttribute("pgpopup-close-trigger");
+			var attrObj = JSON.parse(attr);
+			var popupId = item.getAttribute("popup-id");
+			var popupPrams = item.getAttribute("data-prams");
+			var popupPramsObj = JSON.parse(popupPrams);
+
+			var isLogged = popupPramsObj.isLogged;
+			var userId = popupPramsObj.userId;
+
+			Object.entries(attrObj).map((group) => {
+				var groupData = group[1];
+				var groupLogic = groupData.logic;
+				var groupArgs = groupData.args;
+
+				groupArgs.map((conditions) => {
+					var conditionId = conditions.id;
+
+					if (conditionId == "clickElement") {
+						var clickHandle = document.querySelector(conditions.value);
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+						clickHandle.addEventListener("click", function (e) {
+							event.preventDefault();
+							event.stopPropagation();
+
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+						});
+					}
+					if (conditionId == "mouseOutElement") {
+						if (conditions.value.length == 0) return;
+
+						var clickHandle = document.querySelector(conditions.value);
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+						clickHandle.addEventListener("mouseout", function (e) {
+							event.preventDefault();
+							event.stopPropagation();
+
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+						});
+					}
+					if (conditionId == "mouseOverElement") {
+						if (conditions.value.length == 0) return;
+
+						var clickHandle = document.querySelector(conditions.value);
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+						clickHandle.addEventListener("mouseover", function (e) {
+							event.preventDefault();
+							event.stopPropagation();
+
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+						});
+					}
+
+
+					if (conditionId == "fluentformSubmission") {
+
+
+
+						//if (conditions.value.length == 0) return;
+
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+						document.addEventListener("fluentform_submission_success", function (e) {
+
+
+
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+
+						})
+
+
+
+					}
+					if (conditionId == "formidableformsSubmission") {
+
+
+
+						//if (conditions.value.length == 0) return;
+
+						var popupWrap = document.querySelector(
+							'[popup-id="' + popupId + '"]'
+						);
+
+						document.addEventListener("frmFormComplete", function (e) {
+
+
+
+							popupWrap.style.display = "block";
+							var popup = document.querySelector("." + popupId);
+							var closeAnimation = popupWrap.getAttribute("close-animation");
+
+							popup.classList.add("animate__animated");
+							popup.classList.add("animate__" + closeAnimation);
+
+							setTimeout(() => {
+								popup.classList.remove("animate__animated");
+								popup.classList.remove("animate__" + closeAnimation);
+								popup.style.display = "none";
+							}, 2000);
+
+						})
+
+
+
+					}
+
 
 
 
@@ -656,32 +1190,31 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								if (count < 1) {
 									popupWrap.style.display = "block";
 									var popup = document.querySelector("." + popupId);
-									var entranceAnimation =
-										popupWrap.getAttribute("entrance-animation");
+									var closeAnimation =
+										popupWrap.getAttribute("close-animation");
 
 									popup.classList.add("animate__animated");
-									popup.classList.add("animate__" + entranceAnimation);
+									popup.classList.add("animate__" + closeAnimation);
 
 									setTimeout(() => {
 										popup.classList.remove("animate__animated");
-										popup.classList.remove("animate__" + entranceAnimation);
-										// popup.style.display = "none";
-									}, 3000);
+										popup.classList.remove("animate__" + closeAnimation);
+										popup.style.display = "none";
+									}, 2000);
 								}
 							} else {
 								popupWrap.style.display = "block";
 								var popup = document.querySelector("." + popupId);
-								var entranceAnimation =
-									popupWrap.getAttribute("entrance-animation");
+								var closeAnimation = popupWrap.getAttribute("close-animation");
 
 								popup.classList.add("animate__animated");
-								popup.classList.add("animate__" + entranceAnimation);
+								popup.classList.add("animate__" + closeAnimation);
 
 								setTimeout(() => {
 									popup.classList.remove("animate__animated");
-									popup.classList.remove("animate__" + entranceAnimation);
-									// popup.style.display = "none";
-								}, 3000);
+									popup.classList.remove("animate__" + closeAnimation);
+									popup.style.display = "none";
+								}, 2000);
 							}
 							count += 1;
 						});
@@ -691,21 +1224,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

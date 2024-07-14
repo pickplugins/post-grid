@@ -51,7 +51,6 @@
           "library": "fontAwesome",
           "srcType": "class",
           "triggerName": "",
-          "closeAfter": "",
           "iconSrc": "fas fa-chevron-right"
         },
         "styles": {}
@@ -78,6 +77,12 @@
     "trigger": {
       "type": "object",
       "default": {}
+    },
+    "closeTrigger": {
+      "type": "object",
+      "default": {
+        "rules": []
+      }
     },
     "editMode": {
       "type": "boolean",

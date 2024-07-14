@@ -25,8 +25,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "pg-image",
-          "useAsBackground": "no"
+          "class": "pg-image"
         },
         "styles": {
           "width": {
@@ -47,7 +46,8 @@
           "imgSrcMetaKeyType": "ID",
           "imgSrcImgId": "",
           "srcUrl": "",
-          "lazy": true,
+          "srcsetEnable": true,
+          "lazy": false,
           "lazySrc": "",
           "lazySrcId": "",
           "lazySrcType": "media",

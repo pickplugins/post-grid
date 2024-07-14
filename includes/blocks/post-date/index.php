@@ -75,6 +75,7 @@ class PGBlocPostDate
 
     $postDateLinkTarget = isset($postDateOptions['linkTarget']) ? $postDateOptions['linkTarget'] : '_blank';
     $postDateCustomUrl = isset($postDateOptions['customUrl']) ? $postDateOptions['customUrl'] : '';
+    $postDateTag = isset($postDateOptions['tag']) ? $postDateOptions['tag'] : '';
     $postDateLinkAttr = isset($postDateOptions['linkAttr']) ? $postDateOptions['linkAttr'] : [];
     $postDateRel = isset($postDateOptions['rel']) ? $postDateOptions['rel'] : '';
     $dateFormat = isset($postDateOptions['dateFormat']) ? $postDateOptions['dateFormat'] : 'dateFormat';
@@ -204,134 +205,138 @@ class PGBlocPostDate
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                                                                 <?php echo esc_attr($blockId); ?>
                                                                 <?php echo esc_attr($wrapperClass); ?>">
 
 
-        <?php if ($iconPosition == 'beforePrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'beforePrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
+  <?php if ($prefixText) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPrefix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
+  <?php if ($iconPosition == 'afterPrefix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-        <?php if (!empty($postDateLinkTo)) :
+  <?php if (!empty($postDateLinkTo)) :
 
           /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
         ?>
-          <a class='postdate-text' <?php echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>" rel="<?php echo esc_attr($postDateRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-            <?php if ($iconPosition == 'beforePostDate') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php echo wp_kses_post($formatedPostDate); ?>
-            <?php if ($iconPosition == 'afterPostDate') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-          </a>
+  <a class='postdate-text' <?php echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>"
+    rel="<?php echo esc_attr($postDateRel); ?>"
+    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+    <?php if ($iconPosition == 'beforePostDate') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php echo wp_kses_post($formatedPostDate); ?>
+    <?php if ($iconPosition == 'afterPostDate') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+  </a>
 
-        <?php else :
+  <?php else :
           /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
         ?>
 
-          <span class='postdate-text' <?php echo ($linkAttrStrpostDate); ?>>
-            <?php if ($iconPosition == 'beforePostDate') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php echo wp_kses_post($formatedPostDate); ?>
-            <?php if ($iconPosition == 'afterPostDate') : ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-          </span>
+  <<?php echo tag_escape($postDateTag); ?> class='postdate-text' <?php echo ($linkAttrStrpostDate); ?>>
+    <?php if ($iconPosition == 'beforePostDate') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php echo wp_kses_post($formatedPostDate); ?>
+    <?php if ($iconPosition == 'afterPostDate') : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+  </<?php echo tag_escape($postDateTag); ?>>
 
 
-        <?php endif; ?>
-
-
-
+  <?php endif; ?>
 
 
 
-        <?php if ($iconPosition == 'beforePostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo $postfixClass; ?>">
-            <?php echo $postfixText; ?>
-          </span>
-        <?php endif; ?>
 
-        <?php if ($iconPosition == 'afterPostfix') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
 
-      </<?php echo tag_escape($wrapperTag); ?>>
-    <?php
+
+  <?php if ($iconPosition == 'beforePostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if ($postfixText) : ?>
+  <span class="<?php echo $postfixClass; ?>">
+    <?php echo $postfixText; ?>
+  </span>
+  <?php endif; ?>
+
+  <?php if ($iconPosition == 'afterPostfix') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
     endif;
 
     if (empty($wrapperTag)) :
 
     ?>
-      <?php if ($iconPosition == 'beforePrefix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-      <?php if ($prefixText) : ?>
-        <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo $prefixText; ?>
-        </span>
-      <?php endif; ?>
+<?php if ($iconPosition == 'beforePrefix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php if ($prefixText) : ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo $prefixText; ?>
+</span>
+<?php endif; ?>
 
-      <?php if ($iconPosition == 'afterPrefix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
+<?php if ($iconPosition == 'afterPrefix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
 
-      <?php if (!empty($postDateLinkTo)) :
+<?php if (!empty($postDateLinkTo)) :
         /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
       ?>
 
-        <a class='postdate-text' <?php echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>" rel="<?php echo esc_attr($postDateRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-          <?php if ($iconPosition == 'beforePostDate') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
-          <?php echo wp_kses_post($formatedPostDate); ?>C
-          <?php if ($iconPosition == 'afterPostDate') : ?>
-            <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php endif; ?>
-        </a>
-      <?php else : ?>
-        <?php if ($iconPosition == 'beforePostDate') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-        <span class='postdate-text'>
-          <?php echo wp_kses_post($formatedPostDate); ?>
-        </span>
-        <?php if ($iconPosition == 'afterPostDate') : ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php endif; ?>
-      <?php endif; ?>
+<a class='postdate-text' <?php echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>"
+  rel="<?php echo esc_attr($postDateRel); ?>"
+  href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+  <?php if ($iconPosition == 'beforePostDate') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php echo wp_kses_post($formatedPostDate); ?>C
+  <?php if ($iconPosition == 'afterPostDate') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+</a>
+<?php else : ?>
+<?php if ($iconPosition == 'beforePostDate') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<span class='postdate-text'>
+  <?php echo wp_kses_post($formatedPostDate); ?>
+</span>
+<?php if ($iconPosition == 'afterPostDate') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php endif; ?>
 
 
 
-      <?php if ($iconPosition == 'beforePostfix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-      <?php if ($postfixText) : ?>
-        <span class="<?php echo $postfixClass; ?>">
-          <?php echo $postfixText; ?>
-        </span>
-      <?php endif; ?>
-      <?php if ($iconPosition == 'afterPostfix') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-    <?php
+<?php if ($iconPosition == 'beforePostfix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php if ($postfixText) : ?>
+<span class="<?php echo $postfixClass; ?>">
+  <?php echo $postfixText; ?>
+</span>
+<?php endif; ?>
+<?php if ($iconPosition == 'afterPostfix') : ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php endif; ?>
+<?php
 
     endif;
 

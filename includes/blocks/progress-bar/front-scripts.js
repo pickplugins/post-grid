@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				document.addEventListener("scroll", function (e) {
 					const target = document.querySelector(wrapHandle);
 					var isInView = isInViewport(target);
+					console.log(isInView)
 
 					var animateName = "animateWidthProgress";
 					if (type == "horizontal") {

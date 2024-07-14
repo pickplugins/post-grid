@@ -35,6 +35,8 @@
         "options": {
           "tag": "div",
           "class": "pg-table",
+          "columnCount": 0,
+          "rowCount": 0,
           "id": ""
         },
         "styles": {
@@ -67,10 +69,10 @@
             "Mobile": "right"
           },
           "padding": {
-            "Desktop": "0.6% 0.6% 0.6% 0.6%"
+            "Desktop": "10px 10px 10px 10px"
           },
-          "borderBottom": {
-            "Mobile": " solid #dddddd"
+          "border": {
+            "Desktop": "1px solid gray"
           },
           "display": {
             "Mobile": "block"
@@ -131,9 +133,6 @@
           "class": ""
         },
         "styles": {
-          "border": {
-            "Desktop": "1px solid gray"
-          },
           "backgroundColor": {
             "Desktop": "#f8f8f8"
           },

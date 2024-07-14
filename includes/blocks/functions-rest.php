@@ -53,6 +53,28 @@ class BlockPostGridRest
 				},
 			)
 		);
+		register_rest_route(
+			'post-grid/v2',
+			'/pmpro_membership_levels',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'pmpro_membership_levels'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'post-grid/v2',
+			'/mepr_memberships',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'mepr_memberships'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 
@@ -843,6 +865,73 @@ class BlockPostGridRest
 	}
 
 
+	/**
+	 * Return pmpro_membership_levels
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function pmpro_membership_levels($request)
+	{
+		$response = [];
+
+
+		if (function_exists('pmpro_getAllLevels')) {
+			$levels = pmpro_getAllLevels(false, true);
+
+
+			foreach ($levels as $level) {
+				$response[] = ["id" => $level->id, "name" => $level->name];
+			}
+		}
+
+
+
+
+
+		//$response['status'] = $status;
+		//$response['message'] = $message;
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return mepr_memberships
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function mepr_memberships($request)
+	{
+		$response = [];
+
+
+		$name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
+		$value = isset($request['value']) ? post_grid_recursive_sanitize_arr($request['value']) : '';
+
+		//$levels = pmpro_getAllLevels(false, true);
+		$args = array(
+			'numberposts' => -1,
+			'post_type'   => 'memberpressproduct'
+		);
+
+		$latest_books = get_posts($args);
+
+
+
+		foreach ($latest_books as $level) {
+			$response[] = ["value" => $level->ID, "label" => $level->post_title];
+		}
+
+
+
+		//$response['status'] = $status;
+		//$response['message'] = $message;
+
+		die(wp_json_encode($response));
+	}
+
+
 
 
 
@@ -1186,11 +1275,10 @@ class BlockPostGridRest
 	{
 		$response = [];
 
-		error_log('process_form_data');
-
-		$formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
 		$data = $request->get_body();
+
+
 
 		$formFieldNames = $request->get_param('formFieldNames');
 		$form_wrap_nonce = $request->get_param('form_wrap_nonce');
@@ -1226,12 +1314,14 @@ class BlockPostGridRest
 			$formFields[$formField] = $formFieldValue;
 		}
 
-		error_log($formType);
 
 
 		if (empty($errors)) {
 
-			$process_form = apply_filters('form_wrap_process_' . $formType, $formFields, $onprocessargs);
+
+
+
+			$process_form = apply_filters('form_wrap_process_' . $formType, $formFields, $onprocessargs, $request);
 
 
 			$response = $process_form;
@@ -1393,12 +1483,12 @@ class BlockPostGridRest
 		// $response['login'] = $user->user_login;
 		//$response['nicename'] = $user->user_nicename;
 		//$response['email'] = $user->user_email;
-		$response['url'] = $user->user_url;
-		$response['registered'] = $user->user_registered;
-		$response['display_name'] = $user->display_name;
-		$response['first_name'] = $user->first_name;
-		$response['last_name'] = $user->last_name;
-		$response['description'] = $user->description;
+		$response['url'] = isset($user->user_url) ? $user->user_url : '';
+		$response['registered'] = isset($user->user_registered) ? $user->user_registered : '';
+		$response['display_name'] = isset($user->display_name) ? $user->display_name : '';
+		$response['first_name'] = isset($user->first_name) ? $user->first_name : '';
+		$response['last_name'] = isset($user->last_name) ? $user->last_name : '';
+		$response['description'] = isset($user->description) ? $user->description : '';
 
 		$response['avatar_url'] = get_avatar_url($id);
 		$response['posts_url'] = get_author_posts_url($id);
@@ -1937,6 +2027,7 @@ class BlockPostGridRest
 
 
 		$nonce = isset($post_data['_wpnonce']) ? $post_data['_wpnonce'] : "";
+
 
 
 		if (!wp_verify_nonce($nonce, 'wp_rest')) return $query_args;

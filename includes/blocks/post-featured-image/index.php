@@ -108,8 +108,6 @@ class PGBlockFeaturedImage
     // $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
 
 
-    // //var_dump($custom_logo_id);
-    // //var_dump($logo);
 
     $linkAttrStr = '';
 
@@ -128,9 +126,12 @@ class PGBlockFeaturedImage
 
     $thumb_id = get_post_thumbnail_id($post_ID);
     $image_srcs = wp_get_attachment_image_src($thumb_id, $size);
+
+
     $image_src_url = isset($image_srcs[0]) ? $image_srcs[0] : '';
     $image_src_w = isset($image_srcs[1]) ? $image_srcs[1] : '';
     $image_src_h = isset($image_srcs[2]) ? $image_srcs[2] : '';
+
 
     $attachment_url = wp_get_attachment_url($thumb_id);
     $attachment_post = get_post($thumb_id);

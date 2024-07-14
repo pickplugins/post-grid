@@ -61,10 +61,8 @@
         "options": {
           "tag": "",
           "field": "name",
-          "metaKey": "product_cat_thumbnail_id",
+          "metaKey": "thumbnail_id",
           "metaKeyType": "ID",
-          "limitBy": "",
-          "limitCount": 99,
           "isLink": true,
           "linkTo": "termUrl",
           "linkToAuthorMeta": "",

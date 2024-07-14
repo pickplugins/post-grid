@@ -57,7 +57,7 @@ class PGBlockFormWrap
   function theHTML($attributes, $content, $block)
   {
 
-    
+
 
     global $postGridCssY;
 
@@ -79,6 +79,8 @@ class PGBlockFormWrap
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
 
+    $rules = isset($visible['rules']) ? $visible['rules'] : [];
+
 
 
     $onSubmit = isset($attributes['onSubmit']) ? $attributes['onSubmit'] : '';
@@ -91,6 +93,9 @@ class PGBlockFormWrap
     $formClass = isset($formOptions['class']) ? $formOptions['class'] : '';
 
     $formType = isset($formOptions['type']) ? $formOptions['type'] : '';
+
+
+
 
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
     $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
@@ -106,10 +111,10 @@ class PGBlockFormWrap
 
 
     $formArgs['type'] = $formType;
-    $formArgs['isLogged'] = !empty($user_id) ? true : false;
-    $formArgs['userId'] = $user_id;
-    $formArgs['userRoles'] = $roles;
-    $formArgs['userHasCapabilities'] = false;
+    //$formArgs['isLogged'] = !empty($user_id) ? true : false;
+    //$formArgs['userId'] = $user_id;
+    // $formArgs['userRoles'] = $roles;
+    //$formArgs['userHasCapabilities'] = false;
     $formArgs['fieldInfo'] = isset($PGFormProps[$blockId]) ? $PGFormProps[$blockId] : '';
     $formArgs['popupId'] = $popupId;
 
@@ -125,6 +130,16 @@ class PGBlockFormWrap
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
 
+    // //* Visible condition
+    if (!empty($visible['rules'])) {
+      $isVisible = post_grid_visible_parse($visible);
+
+
+      if (!$isVisible) return;
+    }
+
+    // //* Visible condition
+
     ob_start();
 
 
@@ -134,26 +149,19 @@ class PGBlockFormWrap
 
 ?>
 
-<div
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+    <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 
 
 
-  <form class="<?php echo esc_attr($formClass); ?> " formId="<?php echo esc_attr($blockId); ?>" method="GET"
-    onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>'
-    formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)) : ?>
-    onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?>
-    <?php if (!empty($afterSubmit)) : ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>'
-    <?php endif; ?> <?php if (!empty($visible)) : ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>'
-    <?php endif; ?>>
-    <?php echo $content ?>
-    <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
-  </form>
-  <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
-  <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
-</div>
+      <form class="<?php echo esc_attr($formClass); ?> " formId="<?php echo esc_attr($blockId); ?>" method="GET" onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)) : ?> onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?> <?php if (!empty($afterSubmit)) : ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?> <?php if (!empty($visible)) : ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
+        <?php echo $content ?>
+        <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
+      </form>
+      <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
+      <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
+    </div>
 
 <?php
 

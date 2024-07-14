@@ -64,11 +64,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		if (timeDifference > 0) {
 			var innerWrap = document.querySelector(".inner");
 			if (innerWrap !== null) {
-				innerWrap.style.display = "none";
+				//innerWrap.style.display = "none";
 			}
 		}
 
-		document.addEventListener("pgDateCountdownExpired", (event) => {});
+		document.addEventListener("pgDateCountdownExpired", (event) => {
+
+			console.log("Hello pgDateCountdownExpired");
+
+		});
 
 		const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 

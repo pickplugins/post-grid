@@ -70,6 +70,7 @@
           "name": "",
           "required": false,
           "disabled": false,
+          "objMap": "",
           "size": false,
           "minLength": null,
           "maxLength": null,

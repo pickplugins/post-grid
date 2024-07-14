@@ -53,6 +53,7 @@ class PGBlockStarRate
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $post_url = get_the_permalink($post_ID);
     $the_post = get_post($post_ID);
+    $post_author_id = isset($the_post->post_author) ? $the_post->post_author : '';
     $post_excerpt = '';
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -88,11 +89,17 @@ class PGBlockStarRate
     $iconOptions = isset($icon['options']) ? $icon['options'] : [];
 
     $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
+    $iconLinkTo = isset($iconOptions['linkTo']) ? $iconOptions['linkTo'] : '';
     $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : '';
     $iconSrc = isset($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : '';
     $iconPosition = isset($iconOptions['position']) ? $iconOptions['position'] : '';
     // $iconText = isset($iconOptions['rating']) ?(float) $iconOptions['rating'] : '';
     $iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : '';
+    $customUrl = isset($iconOptions["customUrl"])
+    ? $iconOptions["customUrl"]
+    : "";
+
+    $postTitleLinkToAuthorMeta = isset($iconOptions['linkToAuthorMeta']) ? $iconOptions['linkToAuthorMeta'] : '';
 
     $textIsLink = isset($iconOptions['isLink']) ? $iconOptions['isLink'] : true;
     $textLinkTarget = isset($iconOptions['linkTarget']) ? $iconOptions['linkTarget'] : '_blank';
@@ -150,6 +157,28 @@ class PGBlockStarRate
       wp_enqueue_style('icofont-icons');
     } else if ($iconLibrary == 'bootstrap') {
       wp_enqueue_style('bootstrap-icons');
+    }
+
+
+    if ($iconLinkTo == 'postUrl') {
+      $post_url = get_permalink($post_ID);
+    } else if ($iconLinkTo == 'homeUrl') {
+      $post_url = get_home_url();
+    } else if ($iconLinkTo == 'authorUrl') {
+      $user = get_user_by('ID', $post_author_id);
+      $post_url = $user->user_url;
+    } else if ($iconLinkTo == 'authorMail') {
+      $user = get_user_by('ID', $post_author_id);
+
+      $post_url = $user->user_email;
+    } else if ($iconLinkTo == 'authorLink') {
+      $post_url = get_author_posts_url($post_author_id);
+    } else if ($iconLinkTo == 'customUrl') {
+      $post_url = $customUrl;
+    } else if ($iconLinkTo == 'authorMeta') {
+      $post_url = get_the_author_meta($postTitleLinkToAuthorMeta, $post_author_id);
+    } else if ($iconLinkTo == 'customField') {
+      $post_url = get_post_meta($post_ID, $postTitleLinkToAuthorMeta, true);
     }
 
     $linkAttrStr = '';
@@ -217,97 +246,100 @@ class PGBlockStarRate
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+<<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>"
+  <?php echo esc_attr($wrapperAttrText); ?>>
 
 
 
 
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
+  <?php if ($prefixText) : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
 
-        <?php if ($textIsLink) : ?>
-          <a class='text-icon' <?php
+  <?php if ($textIsLink) : ?>
+  <a class='text-icon' <?php
                                 /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
-            <!-- <div class="text-icon"> -->
-            <div class="icons-idle">
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <div class="icons-filled" style="width:<?php echo esc_attr($filled_width) . '%'; ?>">
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              </div>
-            </div>
+                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>"
+    rel="<?php echo esc_attr($textRel); ?>"
+    href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+    <!-- <div class="text-icon"> -->
+    <div class="icons-idle">
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <div class="icons-filled" style="width:<?php echo esc_attr($filled_width) . '%'; ?>">
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      </div>
+    </div>
 
-            <!-- </div> -->
+    <!-- </div> -->
 
 
-          </a>
-          <?php if (!empty($summarytypeCustom)) : ?>
-            <div class="summary">
-              <?php
+  </a>
+  <?php if (!empty($summarytypeCustom)) : ?>
+  <div class="summary">
+    <?php
               echo wp_kses_post(strtr($summarytypeCustom, $summaryVars));
               ?>
-            </div>
-          <?php endif; ?>
+  </div>
+  <?php endif; ?>
 
-          <?php if (empty($summarytypeCustom)) : ?>
+  <?php if (empty($summarytypeCustom)) : ?>
 
-            <?php if (!empty($summaryType)) : ?>
-              <div class="summary">
-                <?php
+  <?php if (!empty($summaryType)) : ?>
+  <div class="summary">
+    <?php
                 echo wp_kses_post(strtr($summaryType, $summaryVars));
                 ?>
-              </div>
-            <?php endif; ?>
-          <?php endif; ?>
+  </div>
+  <?php endif; ?>
+  <?php endif; ?>
 
-        <?php else : ?>
+  <?php else : ?>
 
-          <div class="text-icon">
-            <div class="icons-idle">
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-              <div class="icons-filled" style="width:<?php echo esc_attr($filled_width) . '%'; ?>">
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-              </div>
-            </div>
-          </div>
-
-
-        <?php endif; ?>
+  <div class="text-icon">
+    <div class="icons-idle">
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <?php echo wp_kses_post($fontIconHtml); ?>
+      <div class="icons-filled" style="width:<?php echo esc_attr($filled_width) . '%'; ?>">
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+        <?php echo wp_kses_post($fontIconHtml); ?>
+      </div>
+    </div>
+  </div>
 
 
+  <?php endif; ?>
 
 
 
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
+
+
+  <?php if ($postfixText) : ?>
+  <span class="<?php echo esc_attr($postfixClass); ?>">
+    <?php echo wp_kses_post($postfixText); ?>
+  </span>
+  <?php endif; ?>
 
 
 
-      </<?php echo tag_escape($wrapperTag); ?>>
-    <?php
+</<?php echo tag_escape($wrapperTag); ?>>
+<?php
 
     endif;
 
@@ -316,60 +348,62 @@ class PGBlockStarRate
     ?>
 
 
-      <?php if (!$textIsLink) : ?>
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
+<?php if (!$textIsLink) : ?>
+<?php if ($prefixText) : ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo wp_kses_post($prefixText); ?>
+</span>
+<?php endif; ?>
 
 
 
-        <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
+<?php echo wp_kses_post($fontIconHtml); ?>
 
 
 
 
 
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
-      <?php else : ?>
-        <?php if ($prefixText) : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
-        <a class='text' <?php
+<?php if ($postfixText) : ?>
+<span class="<?php echo esc_attr($postfixClass); ?>">
+  <?php echo wp_kses_post($postfixText); ?>
+</span>
+<?php endif; ?>
+<?php else : ?>
+<?php if ($prefixText) : ?>
+<span class="<?php echo esc_attr($prefixClass); ?>">
+  <?php echo wp_kses_post($prefixText); ?>
+</span>
+<?php endif; ?>
+<a class='text' <?php
                         /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                        echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+                        echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>"
+  rel="<?php echo esc_attr($textRel); ?>"
+  href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 
 
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
-          <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
 
 
 
 
-        </a>
-        <?php if ($postfixText) : ?>
-          <span class="<?php echo esc_attr($postfixClass); ?>">
-            <?php echo wp_kses_post($postfixText); ?>
-          </span>
-        <?php endif; ?>
-      <?php endif; ?>
+</a>
+<?php if ($postfixText) : ?>
+<span class="<?php echo esc_attr($postfixClass); ?>">
+  <?php echo wp_kses_post($postfixText); ?>
+</span>
+<?php endif; ?>
+<?php endif; ?>
 
 
-    <?php
+<?php
 
     endif;
 

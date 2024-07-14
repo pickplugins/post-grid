@@ -67,6 +67,19 @@
         "styles": {}
       }
     },
+    "responsesMsgWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "enable": true,
+          "text": "",
+          "position": "afterInput",
+          "class": "error-wrap"
+        },
+        "styles": {}
+      }
+    },
     "blockId": {
       "type": "string",
       "default": ""

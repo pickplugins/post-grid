@@ -19,11 +19,11 @@ class PGBlockPopup
     wp_register_style('pgpopup_animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
 
 
-    if (has_block('post-grid/popup')) {
+    // if (has_block('post-grid/popup')) {
 
-      wp_enqueue_style('pgpopup_animate');
-      wp_enqueue_script('pgpopup_front_script');
-    }
+    wp_enqueue_style('pgpopup_animate');
+    wp_enqueue_script('pgpopup_front_script');
+    // }
   }
   // loading src files in the gutenberg editor screen
   function register_scripts()
@@ -71,6 +71,8 @@ class PGBlockPopup
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
     $trigger = isset($attributes['trigger']) ? $attributes['trigger'] : [];
     $triggerRules = isset($trigger['rules']) ? $trigger['rules'] : [];
+    $closeTrigger = isset($attributes['closeTrigger']) ? $attributes['closeTrigger'] : [];
+    $closeTriggerRules = isset($closeTrigger['rules']) ? $closeTrigger['rules'] : [];
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -167,7 +169,7 @@ class PGBlockPopup
 
 
 ?>
-    <div class="<?php echo esc_attr($wrapperClass); ?>   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" entrance-animation="<?php echo esc_attr($entranceWrapAnimation); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-trigger="<?php echo esc_attr(json_encode($triggerRules)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
+    <div class="<?php echo esc_attr($wrapperClass); ?>   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" entrance-animation="<?php echo esc_attr($entranceWrapAnimation); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-trigger="<?php echo esc_attr(json_encode($triggerRules)) ?>" pgpopup-close-trigger="<?php echo esc_attr(json_encode($closeTriggerRules)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
       <div class='inner'>
         <span class='close' popup-id="<?php echo esc_attr($blockId); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
           <?php echo $closeIconHtml; ?>

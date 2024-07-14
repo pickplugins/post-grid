@@ -74,11 +74,40 @@ class PGBlockFormFieldCheckbox
     $inputRequired = isset($inputOptions['required']) ? $inputOptions['required'] : false;
     $inputDisabled = isset($inputOptions['disabled']) ? $inputOptions['disabled'] : false;
     $inputReadonly = isset($inputOptions['readonly']) ? $inputOptions['readonly'] : false;
+    $inputObjMap = isset($inputOptions['objMap']) ? $inputOptions['objMap'] : "";
     $inputArgs = isset($inputOptions['args']) ? $inputOptions['args'] : [];
 
     $inputargsSrc = isset($inputOptions['argsSrc']) ? $inputOptions['argsSrc'] : [];
     $argsSrc = isset($inputargsSrc['src']) ? $inputargsSrc['src'] : "";
-    $inputName = $inputName . '[]';
+    $argsSrcPrams = isset($inputargsSrc['srcPrams']) ? $inputargsSrc['srcPrams'] : [];
+
+
+
+    if ($inputObjMap == 'postTerm') {
+
+      if ($argsSrc == 'taxonomy') {
+        $tax = isset($argsSrcPrams['taxonomy']) ? $argsSrcPrams['taxonomy'] : '';
+        $inputName =  'post_term[' . $tax . '][]';
+      }
+    }
+
+    if ($inputObjMap == 'postMeta') {
+      $inputName =  'post_meta[' . $inputName . ']';
+    }
+
+    if ($inputObjMap == 'commentMeta') {
+      $inputName =  'comment_meta[' . $inputName . ']';
+    }
+    if ($inputObjMap == 'termMeta') {
+      $inputName =  'term_meta[' . $inputName . ']';
+    }
+    if ($inputObjMap == 'userMeta') {
+      $inputName =  'user_meta[' . $inputName . ']';
+    }
+
+
+    //comment
+
 
     $inputWrap = isset($attributes['inputWrap']) ? $attributes['inputWrap'] : [];
     $inputWrapOptions = isset($inputWrap['options']) ? $inputWrap['options'] : [];
@@ -98,6 +127,7 @@ class PGBlockFormFieldCheckbox
 
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
     $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
+
 
     if (!empty($argsSrc)) {
       $inputArgs = post_grid_generate_input_prams($inputargsSrc);

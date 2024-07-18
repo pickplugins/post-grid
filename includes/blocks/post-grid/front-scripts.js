@@ -16,6 +16,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 
+
+	document.addEventListener("pgFormChanged", (event) => {
+		var detail = event.detail;
+		var formId = detail.formId;
+
+		var pgForm = document.getElementById(formId);
+		const formData = new FormData(pgForm);
+		let queryString = new URLSearchParams(formData).toString();
+		let params = new URLSearchParams(queryString);
+
+
+
+
+	});
+
+
+
+
+
+
+
+
+
 	function isInViewport(el) {
 		const rect = el.getBoundingClientRect();
 		return (
@@ -301,6 +324,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			var queryArgs = post_grid_vars[blockId].queryArgs;
 			var rawData = post_grid_vars[blockId].layout.rawData;
+			var nonce = post_grid_vars[blockId]._wpnonce;
 
 			var pagination = blockargsObj.pagination;
 			var loadMoreText = pagination.loadMoreText;
@@ -343,13 +367,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				let data = {
 					queryArgs: queryArgsX,
 					rawData: rawData,
+					_wpnonce: nonce,
+
 				};
+
 
 				fetch(post_grid_vars["siteUrl"] + "/wp-json/post-grid/v2/get_posts", {
 					method: "POST",
 					body: JSON.stringify(data),
 					headers: {
 						"Content-Type": "application/json;charset=utf-8",
+						"X-WP-Nonce": nonce
+
 					},
 				})
 					.then((response) => {
@@ -365,6 +394,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									posts.map((x) => {
 										html += '<div className="item">' + x.html + "</div>";
 									});
+
+									console.log(html);
+
 
 									itemsLoopWrap.insertAdjacentHTML("beforeend", html);
 									loadMorewrap.scrollIntoView({

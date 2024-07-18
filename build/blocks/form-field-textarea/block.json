@@ -51,6 +51,7 @@
           "type": "text",
           "placeholder": "Write your name",
           "value": "",
+          "valueSource": "",
           "name": "",
           "required": false,
           "disabled": false,

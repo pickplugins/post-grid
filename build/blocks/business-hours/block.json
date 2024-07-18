@@ -24,12 +24,7 @@
         "options": {
           "tag": "div",
           "class": "pg-business-hours",
-          "id": "",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "linkToCustomMeta": "",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "id": ""
         },
         "styles": {
           "backgroundColor": {
@@ -88,12 +83,7 @@
         "options": {
           "tag": "div",
           "class": "label",
-          "id": "",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "linkToCustomMeta": "",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "id": ""
         },
         "styles": {
           "marginRight": {
@@ -108,12 +98,7 @@
         "options": {
           "tag": "div",
           "class": "times-wrap",
-          "id": "",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "linkToCustomMeta": "",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "id": ""
         },
         "styles": {
           "marginLeft": {
@@ -138,12 +123,7 @@
           "tag": "div",
           "class": "start-time",
           "id": "",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "linkToCustomMeta": "",
-          "start": "10:00",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "start": "10:00"
         },
         "styles": {
           "display": {
@@ -162,12 +142,7 @@
           "tag": "div",
           "class": "end-time",
           "id": "",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "end": "17:00",
-          "linkToCustomMeta": "",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "end": "17:00"
         },
         "styles": {
           "display": {
@@ -185,12 +160,7 @@
         "options": {
           "separator": "-",
           "class": "separator",
-          "id": "",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "linkToCustomMeta": "",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "id": ""
         },
         "styles": {
           "display": {
@@ -209,12 +179,7 @@
           "label": "div",
           "class": "closed",
           "id": "",
-          "closeText": "Closed",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "linkToCustomMeta": "",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "closeText": "Closed"
         },
         "styles": {
           "color": {

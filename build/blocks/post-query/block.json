@@ -70,6 +70,7 @@
     "queryArgs": {
       "type": "object",
       "default": {
+        "overideGET": true,
         "items": []
       }
     },

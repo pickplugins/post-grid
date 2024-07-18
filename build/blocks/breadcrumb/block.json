@@ -168,57 +168,7 @@
             "Desktop": "inline-block"
           }
         },
-        "items": [
-          {
-            "id": "text",
-            "label": "Text",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {
-              "text": "You are here: ",
-              "showSeparator": true,
-              "isLink": false
-            },
-            "styles": {}
-          },
-          {
-            "id": "homePage",
-            "label": "Home Page Link",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {
-              "showSeparator": true,
-              "isLink": true
-            },
-            "styles": {}
-          },
-          {
-            "id": "postTitle",
-            "label": "Post Title",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {
-              "showSeparator": true,
-              "isLink": false
-            },
-            "styles": {}
-          }
-        ]
+        "items": []
       }
     },
     "utmTracking": {

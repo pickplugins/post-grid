@@ -213,7 +213,7 @@ class PGBlockAccordionNestedItem
 
 
 ?>
-		<<?php echo esc_html($headerTag); ?> class="<?php echo esc_attr($headerClass); ?>">
+		<<?php echo esc_html($headerTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>">
 			<?php if ($iconPosition == 'left') : ?>
 				<span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
 					<?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>

@@ -74,6 +74,7 @@ class PGBlockPostQuery
     $containerClass = isset($containerOptions['class']) ? $containerOptions['class'] : '';
 
 
+
     $itemsWrap = isset($attributes['itemsWrap']) ? $attributes['itemsWrap'] : [];
     $itemsWrapOptions = isset($itemsWrap['options']) ? $itemsWrap['options'] : [];
     $itemsWrapExcluded = isset($itemsWrapOptions['excludedWrapper']) ? $itemsWrapOptions['excludedWrapper'] : false;
@@ -108,12 +109,12 @@ class PGBlockPostQuery
 
 
     $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
+    $overideGET = isset($queryArgs['overideGET']) ? $queryArgs['overideGET'] : false;
 
 
 
     $parsed_block = isset($block->parsed_block) ? $block->parsed_block : [];
     $innerBlocks = isset($parsed_block['innerBlocks']) ? $parsed_block['innerBlocks'] : [];
-
 
 
 
@@ -123,9 +124,31 @@ class PGBlockPostQuery
 
 
     $query_args = post_grid_parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
-    $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
+
+
+
+    if ($overideGET) {
+
+      if (!empty($query_args)) {
+
+        foreach ($query_args as $query_key => $query_arg) {
+
+
+          if (isset($_GET[$query_key])) {
+            $query_args[$query_key] = $_GET[$query_key];
+          } else {
+            $query_args[$query_key] = $query_arg;
+          }
+        }
+      }
+    }
+
+
+
 
     $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
+
+    // echo "<pre>" . var_export($query_args, true) . "</pre>";
 
 
 

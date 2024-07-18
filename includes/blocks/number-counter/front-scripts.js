@@ -49,12 +49,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var onScroll = numberCountArgsObj.onScroll;
 			var source = numberCountArgsObj.source;
 			var saleCount = numberCountArgsObj.saleCount;
+			var metaValue = numberCountArgsObj.metaValue;
 			var end = "";
 			if (source.length > 0) {
-				end = saleCount;
+				if (source == "post_meta") {
+					end = metaValue;
+				} else {
+					end = saleCount;
+				}
 			} else {
 				end = endX;
 			}
+
+			console.log(end)
 
 			var wrapHandle = "." + blockId + " .number-count";
 
@@ -73,3 +80,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
+

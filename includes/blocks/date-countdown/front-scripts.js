@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var conditionId = conditions.id;
 
 						if (conditionId == "redirectURL") {
-							value = conditions.value;
+							value = conditions.url;
 							delay = conditions.delay;
 							if (value == "") {
 							} else {

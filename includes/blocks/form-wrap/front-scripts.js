@@ -28,6 +28,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		if (pgForms != null) {
 			pgForms.forEach((form) => {
 				var formId = form.getAttribute("formId");
+				const pgFormChanged = new CustomEvent("pgFormChanged", { detail: { formId: formId } });
+
+
+
+				form.addEventListener('change', function () {
+					document.dispatchEvent(pgFormChanged);
+
+
+				});
+
 
 				form.addEventListener("submit", (event) => {
 
@@ -242,10 +252,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		var responsesWrap = document.querySelector("." + formId + "-responses");
 		var loadingWrap = document.querySelector("." + formId + "-loading");
 		responsesWrap.style.display = "none";
+		var onprocessargs = formByID.getAttribute("onprocessargs");
+		var onprocessargsObj = JSON.parse(onprocessargs);
+
+
 
 		var aftersubmitargs = formByID.getAttribute("aftersubmitargs");
 		var aftersubmitargsObj = JSON.parse(aftersubmitargs);
 
+
+		//var postGridId = aftersubmitargsObj[1].postGridId;
+
+
+
+		// var queryArgs = post_grid_vars[blockId].queryArgs;
+		// var rawData = post_grid_vars[blockId].layout.rawData;
+		// var nonce = post_grid_vars[blockId]._wpnonce;
 
 
 		var formargs = formByID.getAttribute("formargs");
@@ -259,8 +281,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var inputValue = pair[1];
 
 
-			console.log(inputName);
-			//	console.log(inputValue);
 
 
 			formFieldNames.push(inputName);
@@ -291,6 +311,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 						if (aftersubmitargsObj == null) return;
+
+
 						for (var i = 0; i < aftersubmitargsObj.length; i++) {
 
 							var action = aftersubmitargsObj[i];
@@ -341,7 +363,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-							if (actionId == "filterPosts") {
+							if (actionId == "buildGETRequest") {
 								//var url = action.url;
 								//location.href = url;
 								var pageUrl = window.location.href.split("?")[0];
@@ -350,6 +372,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								formData.delete('formType');
 								formData.delete('onprocessargs');
 								formData.delete('formFieldNames');
+								formData.delete('_wp_http_referer');
 
 
 								let queryString = new URLSearchParams(formData).toString();

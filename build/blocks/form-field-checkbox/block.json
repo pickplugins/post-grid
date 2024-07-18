@@ -79,6 +79,7 @@
       "default": {
         "options": {
           "value": null,
+          "valueSource": "",
           "name": "",
           "required": false,
           "disabled": false,
@@ -86,18 +87,18 @@
           "autofocus": null,
           "readonly": false,
           "objMap": "",
-          "args": {
-            "0": {
+          "args": [
+            {
               "label": "Option 1",
               "value": "option1",
               "readonly": false
             },
-            "1": {
+            {
               "label": "Option 2",
               "value": "option2",
               "readonly": false
             }
-          },
+          ],
           "argsSrc": {
             "src": "",
             "srcPrams": {}

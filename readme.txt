@@ -3,8 +3,8 @@ Contributors: PickPlugins, NafisMahmudAyon
 Donate link: https://comboblocks.com/
 Tags: Gutenberg Blocks, form maker, woocommerce blocks, popup maker, Page Builder
 Requires at least: 5.0.0
-Tested up to: 6.5
-Stable tag: 2.2.85
+Tested up to: 6.6
+Stable tag: 2.2.86
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -389,6 +389,17 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 == Changelog ==
 
+
+= 2.2.86 =
+- 2024-07-17 - update - Update Form Field Checkbox Block.
+- 2024-07-17 - fix - Google reCaptcha issue fixed.
+- 2024-07-17 - update - Update Form Field Radio Block.
+- 2024-07-17 - update - Update Form Field Select Block.
+- 2024-07-17 - update - Update Form Field Textarea Block.
+- 2024-07-16 - update - Update Breadcrumb Block.
+- 2024-07-14 - update - Update Number Counter Block.
+- 2024-07-13 - update - Update Form Wrap Block.
+- 2024-07-11 - update - New block -  Business hours Block added.
 
 = 2.2.85 =
 - 2024-07-09 - update - Update Accordion Block.

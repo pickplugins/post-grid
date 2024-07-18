@@ -41,6 +41,7 @@
           "end": 0,
           "duration": 1000,
           "source": "",
+          "key": "",
           "class": "number-count"
         },
         "styles": {

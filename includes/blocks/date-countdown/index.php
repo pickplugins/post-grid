@@ -90,7 +90,7 @@ class PGBlockDateCountdown
     $expiredArg = isset($attributes['expiredArg']) ? $attributes['expiredArg'] : [];
     $scheduleTime = isset($attributes['scheduleTime']) ? $attributes['scheduleTime'] : [];
 
-
+    $expiredArg = post_grid_recursive_sanitize_arr($expiredArg);
 
     $second = isset($attributes['second']) ? $attributes['second'] : [];
     $secondOptions = isset($second['options']) ? $second['options'] : [];

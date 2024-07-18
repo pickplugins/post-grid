@@ -14,9 +14,26 @@ class PGBlockFormFieldRecaptcha
 
   function front_scripts($attributes)
   {
-    wp_register_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js');
 
     if (has_block('post-grid/form-field-recaptcha')) {
+
+      $post_grid_block_editor = get_option('post_grid_block_editor');
+      $apiKeys = isset($post_grid_block_editor['apiKeys']) ? $post_grid_block_editor['apiKeys'] : [];
+      $recaptcha = isset($apiKeys['recaptcha']['args']) ? $apiKeys['recaptcha']['args'] : [];
+      $site_key = isset($recaptcha['site_key']) ? $recaptcha['site_key'] : "";
+      $secret_key = isset($recaptcha['secret_key']) ? $recaptcha['secret_key'] : "";
+      $version = isset($recaptcha['version']) ? $recaptcha['version'] : "v2Checkbox";
+
+      if ($version == 'v3') {
+        if (!empty($site_key)) {
+          wp_register_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . $site_key . '&ver=3.0');
+        }
+      } else {
+        if (!empty($site_key)) {
+          wp_register_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js');
+        }
+      }
+
 
       wp_enqueue_script('google-recaptcha');
     }

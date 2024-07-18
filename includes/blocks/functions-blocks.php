@@ -642,9 +642,6 @@ function post_grid_parse_query_prams($queryArgs)
 
         $query_args['date_query'] = $date_query;
       } elseif ($id == 'year') {
-
-
-
         $query_args['year'] = $val;
       } elseif ($id == 'monthnum') {
         $query_args['monthnum'] = $val;
@@ -696,6 +693,8 @@ function post_grid_parse_query_prams($queryArgs)
         $query_args['tax_query'] = isset($val[0]) ? $val[0] : $val;
       } elseif ($id == 'p') {
         $query_args['p'] = $val;
+      } elseif ($id == 's') {
+        $query_args['s'] = $val;
       } elseif ($id == 'name') {
         $query_args['name'] = $val;
       } elseif ($id == 'pageId') {
@@ -774,6 +773,8 @@ function post_grid_parse_query_prams($queryArgs)
 
   if (!empty($paged))
     $query_args['paged'] = $paged;
+
+
 
 
   return $query_args;

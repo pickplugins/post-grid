@@ -58,7 +58,8 @@
       "type": "object",
       "default": {
         "options": {
-          "value": null,
+          "value": "",
+          "valueSource": "",
           "placeholder": "-Select-",
           "name": "",
           "required": false,
@@ -67,20 +68,16 @@
           "autofocus": null,
           "readonly": false,
           "objMap": "",
-          "args": {
-            "0": {
+          "args": [
+            {
               "label": "Option 1",
               "value": "option1"
             },
-            "1": {
+            {
               "label": "Option 2",
               "value": "option2"
-            },
-            "2": {
-              "label": "Option 3",
-              "value": "option3"
             }
-          },
+          ],
           "argsSrc": {
             "src": "",
             "srcPrams": {}

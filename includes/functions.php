@@ -110,10 +110,19 @@ function post_grid_recursive_sanitize_arr($array)
 {
 
     foreach ($array as $key => &$value) {
+
+
+
         if (is_array($value)) {
             $value = post_grid_recursive_sanitize_arr($value);
         } else {
-            $value = wp_kses_post($value);
+
+            if ($key == 'url') {
+
+                $value = esc_url_raw($value);
+            } else {
+                $value = wp_kses_post($value);
+            }
         }
     }
 

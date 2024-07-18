@@ -3243,6 +3243,124 @@ function form_wrap_process_appointmentForm($formFields, $onprocessargs, $request
 }
 
 
+add_filter('form_wrap_process_postsFilter', 'form_wrap_process_postsFilter', 99, 3);
+
+function form_wrap_process_postsFilter($formFields, $onprocessargs, $request)
+{
+
+  error_log("form_wrap_process_postsFilter");
+
+  $response = [];
+  $entryData = [];
+
+  //$post_title = isset($formFields['post_title']) ? sanitize_text_field($formFields['post_title']) : '';
+
+
+  if (!empty($response['errors'])) {
+    return $response;
+  }
+
+
+  error_log(serialize($formFields));
+
+
+
+  // Collect entry data
+  $entryData['id'] = 'postSubmit';
+  $entryData['formFields'] = $formFields;
+
+
+
+  if (!empty($onprocessargs))
+    foreach ($onprocessargs as $arg) {
+
+      $id = $arg->id;
+
+      error_log($id);
+
+      if ($id == 'queryPosts') {
+      }
+
+      if ($id == 'doAction') {
+
+        $actionName = isset($arg->actionName) ? $arg->actionName : '';
+        do_action($actionName, $request);
+      }
+
+
+      if ($id == 'webhookRequest') {
+
+        $url = isset($arg->url) ? $arg->url : '';
+        $requestHeader = isset($arg->requestHeader) ? $arg->requestHeader : true;
+        $method = isset($arg->method) ? $arg->method : 'POST';
+        $format = isset($arg->format) ? $arg->format : '';
+        $fields = isset($arg->fields) ? $arg->fields : [];
+
+        $requestPrams =  $request->get_params();
+
+        unset($requestPrams['onprocessargs']);
+        unset($requestPrams['formFieldNames']);
+
+
+        // Encode the data as JSON
+        $payload = json_encode($requestPrams);
+
+        // Prepare headers
+        $headers = [
+          'Content-Type: application/json',
+          'Content-Length: ' . strlen($payload)
+        ];
+
+        // Initialize curl session
+        $ch = curl_init($url);
+
+        // Set curl options
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        // Execute curl session
+        $response = curl_exec($ch);
+
+        // Check for errors
+        if (curl_errno($ch)) {
+          echo 'Webhook delivery failed: ' . curl_error($ch);
+        } else {
+          echo 'Webhook sent successfully. Response: ' . $response;
+        }
+
+        // Close curl session
+        curl_close($ch);
+      }
+
+
+
+
+
+      if ($id == 'createEntry') {
+        $status = form_wrap_process_create_entry($entryData);
+
+
+        if ($status) {
+          $response['success']['createEntry'] = __('Create entry success', 'post-grid');
+        } else {
+          $response['errors']['createEntry'] = __('Create entry failed', 'post-grid');
+        }
+      }
+    }
+
+
+
+
+
+
+
+
+
+  return $response;
+}
+
 
 
 add_filter('form_wrap_process_contactForm', 'form_wrap_process_contactForm', 99, 3);
@@ -3564,4 +3682,13 @@ function form_wrap_process_send_email($email_data)
   $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 
   return $status;
+}
+
+
+add_action("retrieve_password_key", "retrieve_password_xxx", 90, 2);
+
+function retrieve_password_xxx($user_login,  $key)
+{
+
+  error_log($key);
 }

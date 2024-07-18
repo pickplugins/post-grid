@@ -52,12 +52,10 @@ jQuery(document).ready(function ($) {
 
                 if (view_type == "masonry") {
 
-                    console.log(view_type);
 
 
                     var $container = $('#post-grid-' + grid_id + ' .grid-items');
 
-                    console.log($container);
 
 
                     $container.masonry({

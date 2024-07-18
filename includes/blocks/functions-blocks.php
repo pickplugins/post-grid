@@ -1832,7 +1832,6 @@ function post_grid_upload_file($data)
 
   $upload_dir       = wp_upload_dir();
 
-  error_log(serialize($data));
 
   //HANDLE UPLOADED FILE
   if (!function_exists('wp_handle_sideload')) {

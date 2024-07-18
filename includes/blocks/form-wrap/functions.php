@@ -322,8 +322,6 @@ function form_wrap_process_termSubmitForm($formFields, $onprocessargs, $request)
         $new_term_id = isset($new_term['term_id']) ? $new_term['term_id'] : '';
         $thumbnail_id = isset($request->get_file_params()['thumbnail_id']) ? $request->get_file_params()['thumbnail_id'] : "";
 
-        error_log(serialize($new_term));
-        error_log($new_term_id);
 
 
         if ($thumbnail_id) {
@@ -2491,7 +2489,6 @@ function form_wrap_process_passwordResetFrom($formFields, $onprocessargs, $reque
 
   $username = isset($formFields['username']) ? sanitize_text_field($formFields['username']) : '';
 
-  error_log($username);
 
 
   $email_data = [];
@@ -2625,7 +2622,6 @@ function form_wrap_process_passwordUpdateFrom($formFields, $onprocessargs, $requ
 
   $username = isset($formFields['username']) ? sanitize_text_field($formFields['username']) : '';
 
-  error_log($username);
 
 
   $email_data = [];
@@ -3248,7 +3244,6 @@ add_filter('form_wrap_process_postsFilter', 'form_wrap_process_postsFilter', 99,
 function form_wrap_process_postsFilter($formFields, $onprocessargs, $request)
 {
 
-  error_log("form_wrap_process_postsFilter");
 
   $response = [];
   $entryData = [];
@@ -3261,7 +3256,6 @@ function form_wrap_process_postsFilter($formFields, $onprocessargs, $request)
   }
 
 
-  error_log(serialize($formFields));
 
 
 
@@ -3276,7 +3270,6 @@ function form_wrap_process_postsFilter($formFields, $onprocessargs, $request)
 
       $id = $arg->id;
 
-      error_log($id);
 
       if ($id == 'queryPosts') {
       }
@@ -3682,13 +3675,4 @@ function form_wrap_process_send_email($email_data)
   $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 
   return $status;
-}
-
-
-add_action("retrieve_password_key", "retrieve_password_xxx", 90, 2);
-
-function retrieve_password_xxx($user_login,  $key)
-{
-
-  error_log($key);
 }

@@ -2024,7 +2024,6 @@ class BlockPostGridRest
 	public function get_posts($post_data)
 	{
 
-		error_log("get_posts");
 
 
 		$query_args = [];
@@ -2032,7 +2031,6 @@ class BlockPostGridRest
 
 		$nonce = isset($post_data['_wpnonce']) ? $post_data['_wpnonce'] : "";
 
-		error_log($nonce);
 
 		if (!wp_verify_nonce($nonce, 'wp_rest')) return $query_args;
 

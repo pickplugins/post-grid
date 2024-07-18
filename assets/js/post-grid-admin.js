@@ -40,7 +40,6 @@ jQuery(document).ready(function ($) {
 					post_types = data['post_types'];
 
 
-					console.log(post_types);
 
 					$('#taxonomies-terms').html(html);
 					$('#taxonomies-terms .select2').select2({

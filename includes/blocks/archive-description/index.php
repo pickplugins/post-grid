@@ -375,7 +375,7 @@ class PGBlocArchiveDescription
 			<?php else : ?>
 
 
-				<<?php echo esc_html($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> <?php echo esc_attr($archiveTitleClass); ?>'>
+				<<?php echo tag_escape($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> <?php echo esc_attr($archiveTitleClass); ?>'>
 					<?php if ($iconPosition == 'beforePrefix') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?> <?php endif; ?>
 					<?php if ($prefixText) : ?> <span class="<?php echo esc_attr($prefixClass); ?>">

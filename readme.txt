@@ -4,7 +4,7 @@ Donate link: https://comboblocks.com/
 Tags: Gutenberg Blocks, form maker, woocommerce blocks, popup maker, Page Builder
 Requires at least: 5.0.0
 Tested up to: 6.6
-Stable tag: 2.2.86
+Stable tag: 2.2.87
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Post Grid is now ComboBlocks. We have added 45+ blocks to enhance the page editing experience with Block Editor. Previously our Post Grid plugin only served to display different types of grids for the post loop, but now we have extended our plugin to work with the block editor for creating page content and post grid layouts.
+Post Grid is now ComboBlocks. ComboBlocks addresses common limitations such as styling, features, and ease of use. Our research team discovered that most popular page builders and block plugins suffer from significant styling and customization limitations, static elements, and an list of unnecessary blocks and elements. We aimed to resolve these issues and found that our 7 blocks can effectively perform the tasks of 22 blocks from other plugins. This means you can eliminate 15 unnecessary blocks from your list and achieve the same functionality with just our 7 blocks.
+
 
 ### Post Grid by [PickPlugins](http://pickplugins.com)
 
@@ -20,255 +21,121 @@ Post Grid is now ComboBlocks. We have added 45+ blocks to enhance the page editi
 - 👉 [Buy Premium](https://comboblocks.com/pricing/)
 - 👉 [Documentation](https://comboblocks.com/documentations/)
 - 👉 [Support](https://www.pickplugins.com/support/)
-- 👉 [Tutorials](https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6)
+- 👉 [Tutorials](https://www.youtube.com/@ComboBlocks/playlists)
 
-### CSS Library
 
-Our CSS library contains ready CSS for buttons, links, text, images, borders, border radius, box shadows, text shadows, text style, etc. With the CSS library, you can apply a style to any element with one click. And it is also possible to apply CSS for pseudo-class like hover, after, before, etc.
 
-[👉 Checkout CSS Library](https://comboblocks.com/css-library/)
+# 1000+ Block variations
 
-### CSS Library Submission
+For no coder, we have thousand plus block variations, you can get started with these block variation with ease. our team is continuously adding new block variations.
 
-User can submit their generated CSS to our CSS library. For example, once users have made a unique design for a button, they can submit the CSS for the button to our library so that others can use it on their websites.
+[youtube https://www.youtube.com/watch?v=eWLcEXBS0GY&list=PLEShP0qxmZdTNDGbFRSJJ98urtnoj23vV&pp=gAQBiAQB]
 
-### Full Page Templates Library
 
-Our Full Page Library items contain full-page templates for your site. You can import these page templates with one click and customize them if you need. We have more than 200 ready full-page templates for you.
+# Advance Form Maker
 
-[👉 Checkout Full Page Library](https://comboblocks.com/full-page-templates/)
+Contact form, opt-in form, post submit form, login form, register form, term submit from, post comment form, 10+ popular email services integration for opt-in form, fluentcrm integration. Form also has post meta, term meta, taxonomy, user meta, comment meta support
 
-### Sections Templates Library
+# Opt-in Form Service Integrations
 
-Section templates are a small part of a full page. You can import a section to use on your page template to design a page. We have a categorized sections template that lets you find quickly and use them with one click.
+* mailjet
+* mailerlite
+* moosend
+* mailmodo
+* sender dot net
+* brevo
+* mailchimp
+* emailoctopus
+* klaviyo
 
-[👉 Checkout Sections Templates](https://comboblocks.com/sections-templates/)
+# Advance Post Meta Block
 
-### Post Layouts Library
+Not just another post meta block, you can display array, object type data by our post meta block, there is also ACF, Pods, Custom field suite, CMB2, meta box support available
 
-Post Layouts are templates library for Post Grid and could be used to design post archives or post loops. Post Layouts are responsive and easy to customize. With just one click, you can import post layouts to apply on the post grid or archives.
 
-[👉 Checkout Post Layouts Library](https://comboblocks.com/post-layouts/)
+[youtube https://www.youtube.com/watch?v=5H5ZIoket8g&list=PLEShP0qxmZdSo2UHLRTsP-lQvhBTOmS1J&pp=gAQBiAQB]
 
-### Grid Layouts Library
 
-Creating advanced and complex grids could be painful for everyone, so we make this easy by creating a library for grid layouts. You can click to import grid layouts to apply to your grid.
+# Popup maker
 
-### Style Components
+90+ visibility conditions, 20+ Triggers, 40+ Popup Block Variations, 15+ close triggers, 70+ In and out animations
 
-Style components are robust and advanced to generate CSS. We have added 150+ CSS properties. Also, we have a plan to integrate with 3rd party CSS framework to enable class-based CSS generation. With zero CSS knowledge, you can design any element. With a dropdown selector, you can pick from 150+ available CSS properties.
 
-### Responsive Components
+[youtube https://www.youtube.com/watch?v=qeEWfjwX4B8&list=PLEShP0qxmZdSy1hpDnOGhsdPKcmOoarrf&pp=gAQBiAQB]
 
-Responsive components allow you to enable preview on responsive devices available by block editor ex, Mobile, Tablet, and Desktop. You can select the targeted device with a dropdown selector to enable the preview.
 
-[youtube https://www.youtube.com/watch?v=QaoMrdgkyKw]
+# Content slider
 
-[youtube https://www.youtube.com/watch?v=KCi-41Qf1PE]
+You can create post slider, product slider, any post type slider, logo slider, post category and custom terms slider, testimonials slider, team members slider, services slider, video slider, Vertical Slider
 
-## Available Blocks
+# Advanced taxonomy & terms query block.
 
-### Post Title Block
+Query any taxonomy terms, dynamic query support
 
-Post Title Blocks provide the advanced customizing feature of the post title. You can display the post title with the link, without the link, with a prefix, with a postfix, or with a custom wrapper. Also, a word limit and character limit option is available to trim post-title text.
+# Style Component
 
-[👉 Checkout Post Title Block](https://comboblocks.com/blocks/post-title/)
+If you facing styling limitation with your existing page builder, then i would recommend to use our ComboBlocks, you will feel real freedom of CSS styling, we have added very possible CSS properties, If you have CSS knowledge you will feel like sky is the limit. there is also pseudo selection available which make our style component next level style engine or CSS processor.
 
-### Post Excerpt Block
+# Masonry layouts
 
-Our post excerpt blocks are advanced enough to display post excerpts from various sources like post content, post meta fields, SEO plugins, meta fields, etc. There are customizable read-more elements you can link to post titles or custom URLs. There is also prefix and postfix for post excerpt you can display.
+Masonry post grid, Masonry image gallery, Masonry layouts for any content
 
-[👉 Checkout Post Excerpt Block](https://comboblocks.com/blocks/post-excerpt/)
 
-### Post Author Block
+[youtube https://www.youtube.com/watch?v=Njd7jNf1qnk&list=PLEShP0qxmZdQrasFGqErxe-3Nsz-QJt61&pp=gAQBiAQB]
 
-Post Author Blocks display post names, avatars, and author descriptions. You can sort their positions by dragging, and each element has styling options for a customized look and style.
+# Accordion
 
-[👉 Checkout Post Author Block ](https://comboblocks.com/blocks/post-author/)
+post accordion, category accordion, nested accordion, label counter, icon position, 20+ ready templates,
 
-### Author Fields Block
 
-Post Author Fields Blocks display post author meta fields, like ID, Login, Nick Name, Email, URL, Display Name, First Name, Last Name, Descriptions, etc, You can also display these elements with icons and front text. There is also custom wrapper support available.
+# Tabs
 
-[👉 Checkout Author Fields Block](https://comboblocks.com/blocks/author-fields/)
+Nested tabs, 20+ ready templates
 
-### Featured Image Block
+# Icon/button/link
 
-Our Featured Image Blocks are advanced enough to display post thumbnails. You can wrap featured images with a custom wrapper tag, link with a post title or custom URL. There are advanced alt-text sources for the featured image. You can choose from image titles, image descriptions, post titles, image captions, etc.
+100+ ready buttons, utm tracking, custom icon, prefix, postfix, dynamic text source, dynamic link source
 
-[👉 Checkout Featured Image Block](https://comboblocks.com/blocks/featured-image/)
 
-### Image Block
+# Advanced post query block
 
-We added Image Blocks to display advanced images from different types of sources like Media, Custom Fields, Post Meta, etc., You can set custom thumbnail size for displaying on front-end, and there are different types of link sources you can wrap images to a link, like Home URL, Post URL, Author URL, AUthor Mail, Custom fields, Custom URL, etc.
+Query post was never easy before, with no code you can query any post types, by custom meta fields, by authors, taxonomy & terms and date query and all possible query arguments that wp_query class supported.
 
-[👉 Checkout Image Block](https://comboblocks.com/blocks/image/)
+# Advance Post Grid builder
 
-### Post Categories Block
+You can create post grid, product grid, post archive, search archive, dynamic archive, Listing Grid item layout customizer,
 
-Post category blocks are specially designed for displaying post categories. You can display the post category with a link or without a link, with custom separator text, or with front text. Also, an icons option is available to display on various positions like the beginning of items, the front of each item, after each item, etc.
+# Full page library
 
-[👉 Checkout Post Categories Block](https://comboblocks.com/blocks/post-categories/)
+Full page library to make any type of page by one click. we have added many landing page, portfolio page, cv templates, blog and ecommerce templates and our team is continuously adding new templates on every week.
 
-### Post Tags Block
+# Icon library
 
-Post tags blocks are specially designed for displaying post tags. You can display post tags with a link or without a link, with custom separator text, or with front text. Also, an icons option is available to display on various positions like the beginning of items, front of each item, after of each item, etc.
+We have font-awesome, font-icons, bootstrap icons in our icon block, so that you can use any of these icon on your page.
 
-[👉 Checkout Post Tags Block](https://comboblocks.com/blocks/post-tags/)
+# Third Party plugin support
 
-### Post Taxonomy/Terms block
+WooCommerce, Advanced Custom Fields(ACF), CMB2, Custom Field Suite, Rank Math, Yoast SEO, AIO SEO, SEOPress, WP Meta SEO, The SEO Framework, SEO SIMPLE PACK, FluentCRM
 
-Post-category blocks are specially designed for displaying custom taxonomy and terms. You can display post terms with a link or without a link, with custom separator text, or with front text. Also, an icons option is available to display on various positions like the beginning of items, front of each item, after of each item, etc.
+# Advanced visibility conditions
 
-[👉 Checkout Taxonomy/Terms Block](https://comboblocks.com/blocks/post-terms/)
+90+ visibility condition added, not just playing hide and seek, full control on your hand and kick out unusual user to access your content. there is also Memberpress and Paid membership pro integration available.
 
-### Post Date Block
+# Google Fonts and Custom fonts
 
-Post Date block is designed to display post dates in various formats. You can choose a date format from a predefined dropdown picker or input your date format. There is an icon feature to display before or after post-date text.
+We have added all google fonts with our style component font family picker, so its up to you which font you want to use, there is also custom font support available.
 
-[👉 Checkout Post Date Block](https://comboblocks.com/blocks/post-date/)
+# Custom Post Type Creating
 
-### Read More Block
+Still using custom plugin or coding to creating custom post types? we have added visual post type maker in our dashboard, just you need to give your post type name and fill condition, post type will generate immediately.
 
-Read more block is one of the popular blocks used to link post URLs with text. Our Read More block is advanced to display icons, prefixes, and postfix text. There is a variety of link to options available to link to read more text to post URL, Home URL, Author URL, etc.
 
-[👉 Checkout Read More Block](https://comboblocks.com/blocks/read-more)
 
-### Advance Text Block
 
-The advanced text allows you to display custom text anywhere on your page. Our advanced text block is easy to customize and apply CS. You can display your text by wrapping tags like H1, H2, H3, DIV, SPAN, etc.
 
-[👉 Checkout Advance Text Block](https://comboblocks.com/blocks/text/)
 
-### Post Grid Block
 
-[👉 Checkout Post Grid Block](https://comboblocks.com/blocks/post-grid)
 
-### Post Grid Filterable Block
-
-[👉 Checkout Post Grid Filterable Block](https://comboblocks.com/blocks/post-grid-filterable/)
-
-
-### List Nested Block
-Create Beautiful Lists with Gutenberg, Best WordPress List Block, Responsive List Block, Accessibility-Friendly List Listings, and More.
-
-[👉 Checkout List Block](https://comboblocks.com/blocks/list)
-
-### Icon/Button/Link Block
-
-We have done three tasks with a specific block icon/button/link, which means you can generate Icon, Button, and link with one block. You can mix with icons before or after the text and wrap with a link. There is a variety of link to options available to link to read more text to post URL, Home URL, Author URL, etc.
-
-[👉 Checkout Icon/Button/Link Block](https://comboblocks.com/blocks/icon/)
-
-### Layers Block
-
-Layer blocks are helpful for designing sections with multiple child and parent elements. You can insert child elements inside layers elements and style your own.
-
-[👉 Checkout Layers Block ](https://comboblocks.com/blocks/layers/)
-
-### Layer Block
-
-Layer blocks are specially designed for layers blocks as child elements.
-
-[👉 Checkout Layer Block ](https://comboblocks.com/blocks/layer/)
-
-### Accordion Block
-
-Accordion blocks are beneficial for displaying collapsible content. Our accordion block is powerful for designing a variety of styles. We have added many variations to get started with your accordion quickly.
-
-[👉 Checkout Accordion Block](https://comboblocks.com/blocks/accordion/)
-
-### Tabs Block
-
-Tabs are a great way to display significant content with tab-viewed content. Our tabs block is powerful for designing a variety of styles. We have added many variations to get your tabs started quickly.
-
-[👉 Checkout Tabs Block](https://comboblocks.com/blocks/tabs/)
-
-### Number Counter Block
-
-Number Counters are usually displayed to count down numbers with animation, which is very useful for displaying stats, achievements, customer numbers, order numbers, revenue gr, growth and many more.
-
-[👉 Checkout Number Counter](https://comboblocks.com/blocks/number-counter/)
-
-### Flex Maker Block
-
-Flex Maker block is powerful to generate a flex-wrap. It has a child block flex-wrap item to use as a child item of flex wrapper. You can customize the flex-wrap or items as you want.
-
-[👉 Checkout Flex Maker](https://comboblocks.com/blocks/flex-wrap/)
-
-### Grid Maker Block
-
-Grid Maker is another powerful block to generate a CSS grid. It has a child block grid-wrap-item. We have provided many variations to get started quickly.
-
-[👉 Checkout Grid Maker](https://comboblocks.com/blocks/grid-wrap/)
-
-### Image Gallery Block
-
-Image gallery specially designed to display gallery images,
-
-[👉 Checkout Image Gallery Block](https://comboblocks.com/blocks/image-gallery/)
-
-### Content Slider Block
-
-A content slider is another powerful block to display content in a slider. You can keep any content inside slider items. It has various options to customize slider speed, transition, nav position, rewind, loop, etc.
-
-[👉 Checkout Content Slider Block](https://comboblocks.com/blocks/flex-wrap/)
-
-### Popup Block
-
-Popups are a great way to get attention from visitors. It is very useful for displaying various offers, promotions, tracking, email subscription form, notice, etc. It has many valuable options to display popups conditionally. With our Style component, you can design the pop-up beautifully.
-
-[👉 Checkout Popup Block ](https://comboblocks.com/blocks/popup/)
-
-### Progress Bar Block
-
-Progress Bars are exciting elements on a website. They can display stats, achievements, growth, and skill with a lively bar. We have provided many ready variations to get started quickly. With our Style component, you can design the Progress Bar beautifully.
-
-[👉 Checkout Progress Bar Block](https://comboblocks.com/blocks/progressbar/)
-
-### Form Block
-
-Form block is another powerful block to generate forms. We have provided such a powerful tool to generate essential to advanced forms. With many ready variations, you can get started quickly with the login form, registration form, post-submission form, contact form, term submission form, post-comment form, etc. You can display forms conditionally with advanced options.
-
-[👉 Checkout Form Maker Block](https://comboblocks.com/blocks/form-wrap/)
-
-### Breadcrumb Block
-
-Breadcrumb blocks are handy for displaying a path to the current page, And it has SEO value. Our Breadcrumb block is SEO Optimized and followed by schema.org setup.
-
-[👉 Checkout Breadcrumb Block](https://comboblocks.com/blocks/breadcrumb/)
-
-### Star Rate Block
-
-[👉 Checkout Star Rate Block](https://comboblocks.com/blocks/star-rate/)
-
-### Social Share Block
-
-[👉 Checkout Social Share Block](https://comboblocks.com/blocks/social-share/)
-
-### Shortcode Block
-
-[👉 Checkout Shortcode Block](https://comboblocks.com/blocks/shortcode/)
-
-### Term List Block
-
-[👉 Checkout Term List Block](https://comboblocks.com/blocks/terms-list/)
-
-### Archive Title Block
-
-Archive Title blocks are used to display terms page title text. You can display your archive title text by wrapping tags like H1, H2, H3, DIV, SPAN, etc. There is a variety of link to options available to link to read more text to post URL, Home URL, Author URL, etc.
-[👉 Checkout Archive Title Block](https://comboblocks.com/blocks/archive-title/)
-
-### Archive Description Block
-
-Archive Description blocks are used to display the term's page description text. You can display your archive description text by wrapping tags like H1, H2, H3, DIV, SPAN, etc. There is a variety of link to options available to link to read more text to post URL, Home URL, Author URL, etc.
-[👉 Checkout Archive Description Block](https://comboblocks.com/blocks/archive-description/)
-
-### Post Comment Count Block
-
-Post comment counts are dynamic blocks to display a post comment number. You can use this block with icons and prefix text. You can also display comment count by comment status. There is a variety of link to options available to link to read more text to post URL, Home URL, Author URL, etc.
-
-[👉 Checkout Post Comment Count Block](https://comboblocks.com/blocks/post-comment-count/)
 
 ## 3rd-party Integrations
 
@@ -389,6 +256,15 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 == Changelog ==
 
+
+= 2.2.87 =
+- 2024-08-02 - fix - Security issue fixed.
+- 2024-08-02 - add -New block Gallery images added
+- 2024-08-02 - fix - New block Gallery images field
+- 2024-08-02 - fix - New block Info box item
+- 2024-08-02 - fix - New block Flip box front
+- 2024-08-02 - fix - New block Flip box back
+- 2024-08-02 - update - Breadcrumb block updated
 
 = 2.2.86 =
 - 2024-07-17 - update - Update Form Field Checkbox Block.

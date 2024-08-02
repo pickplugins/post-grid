@@ -76,6 +76,7 @@ class PGBlockBreadcrumb
 		$showLabel = isset($elementsOptions['showLabel']) ? $elementsOptions['showLabel'] : false;
 		$showIcon = isset($elementsOptions['showIcon']) ? $elementsOptions['showIcon'] : true;
 		$showSeparator = isset($elementsOptions['showSeparator']) ? $elementsOptions['showSeparator'] : false;
+		$elementSource = isset($elementsOptions['elementSource']) ? $elementsOptions['elementSource'] : '';
 
 
 
@@ -131,462 +132,53 @@ class PGBlockBreadcrumb
 
 		$links = [];
 
-		$i = 1;
 
-		if (!empty($elementsItems))
-			foreach ($elementsItems as $index => $item) {
-				$id = isset($item['id']) ? $item['id'] : '';
 
-				$label = isset($item['label']) ? $item['label'] : '';
-				$customText = isset($item['customText']) ? $item['customText'] : '%s';
+		if ($elementSource == 'dynamic') {
+			$links = post_grid_breadcrumb_dynamic_links();
+		} else {
 
-				$separator = isset($item['separator']) ? $item['separator'] : '»';
-				$custom_url = isset($item['url']) ? $item['url'] : '#';
 
-				$siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
+			$i = 1;
 
-				$iconLibrary = isset($siteIcon['library']) ? $siteIcon['library'] : '';
-				$iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
-				$iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
+			if (!empty($elementsItems))
+				foreach ($elementsItems as $index => $item) {
+					$id = isset($item['id']) ? $item['id'] : '';
 
-				$linkData = [];
+					$label = isset($item['label']) ? $item['label'] : '';
+					$customText = isset($item['customText']) ? $item['customText'] : '%s';
 
+					$separator = isset($item['separator']) ? $item['separator'] : '»';
+					$custom_url = isset($item['url']) ? $item['url'] : '#';
 
-				if ($id == 'text') :
+					$siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
 
-					$links[] = [
-						'label' => (!empty($customText)) ? $customText : __('You are here: ', 'post-grid'),
-						'link' => $custom_url
-					];
+					$iconLibrary = isset($siteIcon['library']) ? $siteIcon['library'] : '';
+					$iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
+					$iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
 
-				elseif ($id == 'homePage') :
-					$home_url = get_bloginfo('url');
+					$linkData = [];
 
-					$links[] = [
-						'label' => !empty($customText) ? $customText : __('Home', 'post-grid'),
-						'link' => !empty($custom_url) ? $custom_url : $home_url
-					];
 
-
-
-				elseif ($id == 'frontPage') :
-					$post_id = get_option('page_on_front');
-
-					$post_url = get_permalink($post_id);
-					$post_title = get_the_title($post_id);
-					$customText = !empty($customText) ? $customText : '%s';
-
-
-					$links[] = [
-						'label' => sprintf($customText, $post_title),
-						'link' => !empty($custom_url) ? $custom_url : $post_url
-					];
-
-
-
-
-				elseif ($id == 'postsPage') :
-					$post_id = get_option('page_for_posts');
-
-					$post_url = get_permalink($post_id);
-					$post_title = get_the_title($post_id);
-					$customText = !empty($customText) ? $customText : '%s';
-
-
-					$links[] = [
-						'label' => sprintf($customText, $post_title),
-						'link' => !empty($custom_url) ? $custom_url : $post_url
-					];
-
-
-				elseif ($id == 'postTitle') :
-					$post_id = get_the_ID();
-					$post_url = get_permalink($post_id);
-					$post_title = get_the_title($post_id);
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $post_title),
-						'link' => !empty($custom_url) ? $custom_url : $post_url
-					];
-
-
-				elseif ($id == 'postAuthor') :
-
-					$post_id = get_the_ID();
-					$post = get_post($post_id);
-					$author_id = $post->post_author;
-					$author_posts_url = get_author_posts_url($author_id);
-					$author_name = get_the_author_meta('display_name', $author_id);
-
-					$links[] = [
-						'label' => !empty($customText) ? $customText : $author_name,
-						'link' => !empty($custom_url) ? $custom_url : $author_posts_url
-					];
-
-
-				elseif ($id == 'postDate') :
-
-					$format = !empty($item['options']['format']) ? $item['options']['format'] : 'Y-m-d';
-					$post_date = get_the_time($format);
-
-
-					$post_date_year = get_the_time('Y');
-					$post_date_month = get_the_time('m');
-					$post_date_day = get_the_time('d');
-
-					$get_month_link = get_month_link($post_date_year, $post_date_month);
-					$get_year_link = get_year_link($post_date_year);
-					$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
-
-
-					$links[] = [
-						'label' => sprintf($customText, $post_date),
-						'link' => !empty($custom_url) ? $custom_url : $get_day_link
-					];
-
-
-				elseif ($id == 'postDay') :
-
-					$post_date_year = get_the_time('Y');
-					$post_date_month = get_the_time('m');
-					$post_date_day = get_the_time('d');
-
-					$get_month_link = get_month_link($post_date_year, $post_date_month);
-					$get_year_link = get_year_link($post_date_year);
-					$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
-
-
-					$links[] = [
-						'label' => sprintf($customText, $post_date_day),
-						'link' => !empty($custom_url) ? $custom_url : $get_day_link
-					];
-
-
-				elseif ($id == 'postMonth') :
-
-					$post_date_year = get_the_time('Y');
-					$post_date_month = get_the_time('m');
-					$post_date_day = get_the_time('d');
-
-					$get_month_link = get_month_link($post_date_year, $post_date_month);
-					$get_year_link = get_year_link($post_date_year);
-					$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
-
-
-					$links[] = [
-						'label' => sprintf($customText, $post_date_month),
-						'link' => !empty($custom_url) ? $custom_url : $get_month_link
-					];
-
-				elseif ($id == 'postYear') :
-
-					$post_date_year = get_the_time('Y');
-					$post_date_month = get_the_time('m');
-					$post_date_day = get_the_time('d');
-
-					$get_month_link = get_month_link($post_date_year, $post_date_month);
-					$get_year_link = get_year_link($post_date_year);
-					$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
-
-
-					$links[] = [
-						'label' => sprintf($customText, $post_date_year),
-						'link' => !empty($custom_url) ? $custom_url : $get_year_link
-					];
-
-
-				elseif ($id == 'postAncestors') :
-
-					$count = !empty($item['options']['count']) ? (int) $item['options']['count'] : 0;
-
-					$post_id = get_the_ID();
-					$front_page_id = get_option('page_on_front');
-					$post = get_post($post_id);
-
-
-					$ancestors = isset($post->ancestors) ? $post->ancestors : [];
-					$ancestors = array_reverse($ancestors);
-
-					if ($count > 0) {
-						$ancestors = array_slice($ancestors, 0, $count);
-					} else {
-						$ancestors = array_slice($ancestors, $count);
-					}
-
-
-
-					foreach ($ancestors as $ancestor) {
+					if ($id == 'text') :
 
 						$links[] = [
-							'label' => sprintf($customText, get_the_title($ancestor)),
-							'link' => !empty($custom_url) ? $custom_url : get_permalink($ancestor)
+							'label' => (!empty($customText)) ? $customText : __('You are here: ', 'post-grid'),
+							'link' => $custom_url
 						];
-					}
 
-
-
-				elseif ($id == 'postId') :
-
-					$post_id = get_the_ID();
-					$post_url = get_permalink($post_id);
-
-
-					$links[] = [
-						'label' => sprintf($customText, $post_id),
-						'link' => !empty($custom_url) ? $custom_url : $post_url
-					];
-
-				elseif ($id == 'postCategory') :
-
-					$taxonomy = 'category';
-					$post_id = get_the_ID();
-					$term_obj_list = get_the_terms($post_id, $taxonomy);
-
-
-					if ($term_obj_list == false)
-						continue;
-
-					$term_id = isset($term_obj_list[0]->term_id) ? $term_obj_list[0]->term_id : '';
-					$term_title = isset($term_obj_list[0]->name) ? $term_obj_list[0]->name : '';
-
-
-					$term_link = get_term_link($term_id, $taxonomy);
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$linkData['label'] = sprintf($customText, $term_title);
-					$linkData['link'] = $term_link;
-
-					$links[] = [
-						'label' => sprintf($customText, $term_title),
-						'link' => !empty($custom_url) ? $custom_url : $term_link
-					];
-
-				elseif ($id == 'postTag') :
-
-
-					$taxonomy = 'post_tag';
-					$post_id = get_the_ID();
-					$term_obj_list = get_the_terms($post_id, $taxonomy);
-
-
-					if ($term_obj_list == false)
-						continue;
-
-					$term_id = isset($term_obj_list[0]->term_id) ? $term_obj_list[0]->term_id : '';
-					$term_title = isset($term_obj_list[0]->name) ? $term_obj_list[0]->name : '';
-
-
-					$term_link = get_term_link($term_id, $taxonomy);
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $term_title),
-						'link' => !empty($custom_url) ? $custom_url : $term_link
-					];
-
-
-				elseif ($id == 'postCategories') :
-
-					$taxonomy = 'category';
-					$post_id = get_the_ID();
-					$term_obj_list = get_the_terms($post_id, $taxonomy);
-
-
-					if ($term_obj_list == false)
-						continue;
-
-					if (!empty($term_obj_list)) :
-						foreach ($term_obj_list as $term) {
-
-							$term_id = isset($term->term_id) ? $term->term_id : '';
-							$term_title = isset($term->name) ? $term->name : '';
-
-
-							$term_link = get_term_link($term_id, $taxonomy);
-							$customText = !empty($customText) ? $customText : '%s';
-
-							$linkData['label'] = sprintf($customText, $term_title);
-							$linkData['link'] = $term_link;
-
-							$links[] = [
-								'label' => sprintf($customText, $term_title),
-								'link' => !empty($custom_url) ? $custom_url : $term_link
-							];
-						}
-					endif;
-
-
-
-
-
-
-
-
-				elseif ($id == 'postTags') :
-
-
-					$taxonomy = 'post_tag';
-					$post_id = get_the_ID();
-					$term_obj_list = get_the_terms($post_id, $taxonomy);
-
-
-					if ($term_obj_list == false)
-						continue;
-
-					if (!empty($term_obj_list)) :
-						foreach ($term_obj_list as $term) {
-
-							$term_id = isset($term->term_id) ? $term->term_id : '';
-							$term_title = isset($term->name) ? $term->name : '';
-
-
-							$term_link = get_term_link($term_id, $taxonomy);
-							$customText = !empty($customText) ? $customText : '%s';
-
-							$linkData['label'] = sprintf($customText, $term_title);
-							$linkData['link'] = !empty($custom_url) ? $custom_url : $term_link;
-
-							$links[] = [
-								'label' => sprintf($customText, $term_title),
-								'link' => !empty($custom_url) ? $custom_url : $term_link
-							];
-						}
-					endif;
-
-
-
-
-				elseif ($id == 'postTerm') :
-
-
-					$taxonomy = !empty($item['options']['taxonomy']) ? $item['options']['taxonomy'] : '';
-					$post_id = get_the_ID();
-					$term_obj_list = get_the_terms($post_id, $taxonomy);
-
-
-					if ($term_obj_list == false)
-						continue;
-
-					if (!empty($term_obj_list)) :
-						foreach ($term_obj_list as $term) {
-
-							$term_id = isset($term->term_id) ? $term->term_id : '';
-							$term_title = isset($term->name) ? $term->name : '';
-
-
-							$term_link = get_term_link($term_id, $taxonomy);
-							$customText = !empty($customText) ? $customText : '%s';
-
-							$linkData['label'] = sprintf($customText, $term_title);
-							$linkData['link'] = !empty($custom_url) ? $custom_url : $term_link;
-
-							$links[] = [
-								'label' => sprintf($customText, $term_title),
-								'link' => !empty($custom_url) ? $custom_url : $term_link
-							];
-						}
-					endif;
-
-
-				elseif ($id == 'postTerms') :
-
-					$taxonomy = !empty($item['options']['taxonomy']) ? $item['options']['taxonomy'] : '';
-
-					if (empty($taxonomy))
-						continue;
-
-					//$taxonomy = 'post_tag';
-					$post_id = get_the_ID();
-					$term_obj_list = get_the_terms($post_id, $taxonomy);
-
-
-					if ($term_obj_list == false)
-						continue;
-
-					if (!empty($term_obj_list)) :
-						foreach ($term_obj_list as $term) {
-
-							$term_id = isset($term->term_id) ? $term->term_id : '';
-							$term_title = isset($term->name) ? $term->name : '';
-
-
-							$term_link = get_term_link($term_id, $taxonomy);
-							$customText = !empty($customText) ? $customText : '%s';
-
-							$linkData['label'] = sprintf($customText, $term_title);
-							$linkData['link'] = $term_link;
-
-							$links[] = [
-								'label' => sprintf($customText, $term_title),
-								'link' => !empty($custom_url) ? $custom_url : $term_link
-							];
-						}
-					endif;
-
-
-
-				elseif ($id == 'termParents') :
-					$count = !empty($item['options']['count']) ? (int) $item['options']['count'] : 0;
-
-
-					$queried_object = get_queried_object();
-					$term_name = $queried_object->name;
-					$term_id = $queried_object->term_id;
-
-
-					$taxonomy = $queried_object->taxonomy;
-					$term_link = get_term_link($term_id, $taxonomy);
-					$parent_terms = get_ancestors($term_id, $taxonomy);
-					$parent_terms = array_reverse($parent_terms);
-
-
-					if ($count > 0) {
-						$parent_terms = array_slice($parent_terms, 0, $count);
-					} else {
-						$parent_terms = array_slice($parent_terms, $count);
-					}
-
-
-					foreach ($parent_terms as $id) {
-
-						$parent_term_link = get_term_link($id, $taxonomy);
-						$paren_term_name = get_term_by('id', $id, $taxonomy);
+					elseif ($id == 'homePage') :
+						$home_url = get_bloginfo('url');
 
 						$links[] = [
-							'label' => sprintf($customText, $paren_term_name->name),
-							'link' => !empty($custom_url) ? $custom_url : $parent_term_link
+							'label' => !empty($customText) ? $customText : __('Home', 'post-grid'),
+							'link' => !empty($custom_url) ? $custom_url : $home_url
 						];
-					}
 
 
 
-				elseif ($id == 'termTitle') :
-
-					$queried_object = get_queried_object();
-					$term_name = $queried_object->name;
-					$term_id = $queried_object->term_id;
-					$taxonomy = $queried_object->taxonomy;
-					$term_link = get_term_link($term_id, $taxonomy);
-
-
-					$archive_title = $term_name;
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $archive_title),
-						'link' => !empty($custom_url) ? $custom_url : $term_link
-					];
-
-
-
-				elseif ($id == 'termAncestors') :
-				elseif ($id == 'wcShop') :
-
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
-
-						$post_id = wc_get_page_id('shop');
-
+					elseif ($id == 'frontPage') :
+						$post_id = get_option('page_on_front');
 
 						$post_url = get_permalink($post_id);
 						$post_title = get_the_title($post_id);
@@ -599,17 +191,10 @@ class PGBlockBreadcrumb
 						];
 
 
-					endif;
 
 
-
-
-
-
-				elseif ($id == 'wcAccount') :
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
-						$post_id = wc_get_page_id('myaccount');
-
+					elseif ($id == 'postsPage') :
+						$post_id = get_option('page_for_posts');
 
 						$post_url = get_permalink($post_id);
 						$post_title = get_the_title($post_id);
@@ -621,158 +206,578 @@ class PGBlockBreadcrumb
 							'link' => !empty($custom_url) ? $custom_url : $post_url
 						];
 
-					endif;
 
-
-				elseif ($id == 'wcCart') :
-
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
-						$post_id = wc_get_page_id('cart');
-
-
+					elseif ($id == 'postTitle') :
+						$post_id = get_the_ID();
 						$post_url = get_permalink($post_id);
 						$post_title = get_the_title($post_id);
 						$customText = !empty($customText) ? $customText : '%s';
 
-
 						$links[] = [
 							'label' => sprintf($customText, $post_title),
 							'link' => !empty($custom_url) ? $custom_url : $post_url
 						];
 
-					endif;
+
+					elseif ($id == 'postAuthor') :
+
+						$post_id = get_the_ID();
+						$post = get_post($post_id);
+						$author_id = $post->post_author;
+						$author_posts_url = get_author_posts_url($author_id);
+						$author_name = get_the_author_meta('display_name', $author_id);
+
+						$links[] = [
+							'label' => !empty($customText) ? $customText : $author_name,
+							'link' => !empty($custom_url) ? $custom_url : $author_posts_url
+						];
+
+
+					elseif ($id == 'postDate') :
+
+						$format = !empty($item['options']['format']) ? $item['options']['format'] : 'Y-m-d';
+						$post_date = get_the_time($format);
+
+
+						$post_date_year = get_the_time('Y');
+						$post_date_month = get_the_time('m');
+						$post_date_day = get_the_time('d');
+
+						$get_month_link = get_month_link($post_date_year, $post_date_month);
+						$get_year_link = get_year_link($post_date_year);
+						$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
+
+
+						$links[] = [
+							'label' => sprintf($customText, $post_date),
+							'link' => !empty($custom_url) ? $custom_url : $get_day_link
+						];
+
+
+					elseif ($id == 'postDay') :
+
+						$post_date_year = get_the_time('Y');
+						$post_date_month = get_the_time('m');
+						$post_date_day = get_the_time('d');
+
+						$get_month_link = get_month_link($post_date_year, $post_date_month);
+						$get_year_link = get_year_link($post_date_year);
+						$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
+
+
+						$links[] = [
+							'label' => sprintf($customText, $post_date_day),
+							'link' => !empty($custom_url) ? $custom_url : $get_day_link
+						];
+
+
+					elseif ($id == 'postMonth') :
+
+						$post_date_year = get_the_time('Y');
+						$post_date_month = get_the_time('m');
+						$post_date_day = get_the_time('d');
+
+						$get_month_link = get_month_link($post_date_year, $post_date_month);
+						$get_year_link = get_year_link($post_date_year);
+						$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
+
+
+						$links[] = [
+							'label' => sprintf($customText, $post_date_month),
+							'link' => !empty($custom_url) ? $custom_url : $get_month_link
+						];
+
+					elseif ($id == 'postYear') :
+
+						$post_date_year = get_the_time('Y');
+						$post_date_month = get_the_time('m');
+						$post_date_day = get_the_time('d');
+
+						$get_month_link = get_month_link($post_date_year, $post_date_month);
+						$get_year_link = get_year_link($post_date_year);
+						$get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
+
+
+						$links[] = [
+							'label' => sprintf($customText, $post_date_year),
+							'link' => !empty($custom_url) ? $custom_url : $get_year_link
+						];
+
+
+					elseif ($id == 'postAncestors') :
+
+						$count = !empty($item['options']['count']) ? (int) $item['options']['count'] : 0;
+
+						$post_id = get_the_ID();
+						$front_page_id = get_option('page_on_front');
+						$post = get_post($post_id);
+
+
+						$ancestors = isset($post->ancestors) ? $post->ancestors : [];
+						$ancestors = array_reverse($ancestors);
+
+						if ($count > 0) {
+							$ancestors = array_slice($ancestors, 0, $count);
+						} else {
+							$ancestors = array_slice($ancestors, $count);
+						}
 
 
 
+						foreach ($ancestors as $ancestor) {
 
-				elseif ($id == 'wcCheckout') :
+							$links[] = [
+								'label' => sprintf($customText, get_the_title($ancestor)),
+								'link' => !empty($custom_url) ? $custom_url : get_permalink($ancestor)
+							];
+						}
 
-					if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
-						$post_url = wc_get_checkout_url();
-						$post_title = 'Checkout';
+
+
+					elseif ($id == 'postId') :
+
+						$post_id = get_the_ID();
+						$post_url = get_permalink($post_id);
+
+
+						$links[] = [
+							'label' => sprintf($customText, $post_id),
+							'link' => !empty($custom_url) ? $custom_url : $post_url
+						];
+
+					elseif ($id == 'postCategory') :
+
+						$taxonomy = 'category';
+						$post_id = get_the_ID();
+						$term_obj_list = get_the_terms($post_id, $taxonomy);
+
+
+						if ($term_obj_list == false)
+							continue;
+
+						$term_id = isset($term_obj_list[0]->term_id) ? $term_obj_list[0]->term_id : '';
+						$term_title = isset($term_obj_list[0]->name) ? $term_obj_list[0]->name : '';
+
+
+						$term_link = get_term_link($term_id, $taxonomy);
 						$customText = !empty($customText) ? $customText : '%s';
 
+						$linkData['label'] = sprintf($customText, $term_title);
+						$linkData['link'] = $term_link;
 
 						$links[] = [
-							'label' => sprintf($customText, $post_title),
-							'link' => !empty($custom_url) ? $custom_url : $post_url
+							'label' => sprintf($customText, $term_title),
+							'link' => !empty($custom_url) ? $custom_url : $term_link
 						];
+
+					elseif ($id == 'postTag') :
+
+
+						$taxonomy = 'post_tag';
+						$post_id = get_the_ID();
+						$term_obj_list = get_the_terms($post_id, $taxonomy);
+
+
+						if ($term_obj_list == false)
+							continue;
+
+						$term_id = isset($term_obj_list[0]->term_id) ? $term_obj_list[0]->term_id : '';
+						$term_title = isset($term_obj_list[0]->name) ? $term_obj_list[0]->name : '';
+
+
+						$term_link = get_term_link($term_id, $taxonomy);
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $term_title),
+							'link' => !empty($custom_url) ? $custom_url : $term_link
+						];
+
+
+					elseif ($id == 'postCategories') :
+
+						$taxonomy = 'category';
+						$post_id = get_the_ID();
+						$term_obj_list = get_the_terms($post_id, $taxonomy);
+
+
+						if ($term_obj_list == false)
+							continue;
+
+						if (!empty($term_obj_list)) :
+							foreach ($term_obj_list as $term) {
+
+								$term_id = isset($term->term_id) ? $term->term_id : '';
+								$term_title = isset($term->name) ? $term->name : '';
+
+
+								$term_link = get_term_link($term_id, $taxonomy);
+								$customText = !empty($customText) ? $customText : '%s';
+
+								$linkData['label'] = sprintf($customText, $term_title);
+								$linkData['link'] = $term_link;
+
+								$links[] = [
+									'label' => sprintf($customText, $term_title),
+									'link' => !empty($custom_url) ? $custom_url : $term_link
+								];
+							}
+						endif;
+
+
+
+
+
+
+
+
+					elseif ($id == 'postTags') :
+
+
+						$taxonomy = 'post_tag';
+						$post_id = get_the_ID();
+						$term_obj_list = get_the_terms($post_id, $taxonomy);
+
+
+						if ($term_obj_list == false)
+							continue;
+
+						if (!empty($term_obj_list)) :
+							foreach ($term_obj_list as $term) {
+
+								$term_id = isset($term->term_id) ? $term->term_id : '';
+								$term_title = isset($term->name) ? $term->name : '';
+
+
+								$term_link = get_term_link($term_id, $taxonomy);
+								$customText = !empty($customText) ? $customText : '%s';
+
+								$linkData['label'] = sprintf($customText, $term_title);
+								$linkData['link'] = !empty($custom_url) ? $custom_url : $term_link;
+
+								$links[] = [
+									'label' => sprintf($customText, $term_title),
+									'link' => !empty($custom_url) ? $custom_url : $term_link
+								];
+							}
+						endif;
+
+
+
+
+					elseif ($id == 'postTerm') :
+
+
+						$taxonomy = !empty($item['options']['taxonomy']) ? $item['options']['taxonomy'] : '';
+						$post_id = get_the_ID();
+						$term_obj_list = get_the_terms($post_id, $taxonomy);
+
+
+						if ($term_obj_list == false)
+							continue;
+
+						if (!empty($term_obj_list)) :
+							foreach ($term_obj_list as $term) {
+
+								$term_id = isset($term->term_id) ? $term->term_id : '';
+								$term_title = isset($term->name) ? $term->name : '';
+
+
+								$term_link = get_term_link($term_id, $taxonomy);
+								$customText = !empty($customText) ? $customText : '%s';
+
+								$linkData['label'] = sprintf($customText, $term_title);
+								$linkData['link'] = !empty($custom_url) ? $custom_url : $term_link;
+
+								$links[] = [
+									'label' => sprintf($customText, $term_title),
+									'link' => !empty($custom_url) ? $custom_url : $term_link
+								];
+							}
+						endif;
+
+
+					elseif ($id == 'postTerms') :
+
+						$taxonomy = !empty($item['options']['taxonomy']) ? $item['options']['taxonomy'] : '';
+
+						if (empty($taxonomy))
+							continue;
+
+						//$taxonomy = 'post_tag';
+						$post_id = get_the_ID();
+						$term_obj_list = get_the_terms($post_id, $taxonomy);
+
+
+						if ($term_obj_list == false)
+							continue;
+
+						if (!empty($term_obj_list)) :
+							foreach ($term_obj_list as $term) {
+
+								$term_id = isset($term->term_id) ? $term->term_id : '';
+								$term_title = isset($term->name) ? $term->name : '';
+
+
+								$term_link = get_term_link($term_id, $taxonomy);
+								$customText = !empty($customText) ? $customText : '%s';
+
+								$linkData['label'] = sprintf($customText, $term_title);
+								$linkData['link'] = $term_link;
+
+								$links[] = [
+									'label' => sprintf($customText, $term_title),
+									'link' => !empty($custom_url) ? $custom_url : $term_link
+								];
+							}
+						endif;
+
+
+
+					elseif ($id == 'termParents') :
+						$count = !empty($item['options']['count']) ? (int) $item['options']['count'] : 0;
+
+
+						$queried_object = get_queried_object();
+						$term_name = $queried_object->name;
+						$term_id = $queried_object->term_id;
+
+
+						$taxonomy = $queried_object->taxonomy;
+						$term_link = get_term_link($term_id, $taxonomy);
+						$parent_terms = get_ancestors($term_id, $taxonomy);
+						$parent_terms = array_reverse($parent_terms);
+
+
+						if ($count > 0) {
+							$parent_terms = array_slice($parent_terms, 0, $count);
+						} else {
+							$parent_terms = array_slice($parent_terms, $count);
+						}
+
+
+						foreach ($parent_terms as $id) {
+
+							$parent_term_link = get_term_link($id, $taxonomy);
+							$paren_term_name = get_term_by('id', $id, $taxonomy);
+
+							$links[] = [
+								'label' => sprintf($customText, $paren_term_name->name),
+								'link' => !empty($custom_url) ? $custom_url : $parent_term_link
+							];
+						}
+
+
+
+					elseif ($id == 'termTitle') :
+
+						$queried_object = get_queried_object();
+						$term_name = $queried_object->name;
+						$term_id = $queried_object->term_id;
+						$taxonomy = $queried_object->taxonomy;
+						$term_link = get_term_link($term_id, $taxonomy);
+
+
+						$archive_title = $term_name;
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $archive_title),
+							'link' => !empty($custom_url) ? $custom_url : $term_link
+						];
+
+
+
+					elseif ($id == 'termAncestors') :
+					elseif ($id == 'wcShop') :
+
+						if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
+
+							$post_id = wc_get_page_id('shop');
+
+
+							$post_url = get_permalink($post_id);
+							$post_title = get_the_title($post_id);
+							$customText = !empty($customText) ? $customText : '%s';
+
+
+							$links[] = [
+								'label' => sprintf($customText, $post_title),
+								'link' => !empty($custom_url) ? $custom_url : $post_url
+							];
+
+
+						endif;
+
+
+
+
+
+
+					elseif ($id == 'wcAccount') :
+						if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
+							$post_id = wc_get_page_id('myaccount');
+
+
+							$post_url = get_permalink($post_id);
+							$post_title = get_the_title($post_id);
+							$customText = !empty($customText) ? $customText : '%s';
+
+
+							$links[] = [
+								'label' => sprintf($customText, $post_title),
+								'link' => !empty($custom_url) ? $custom_url : $post_url
+							];
+
+						endif;
+
+
+					elseif ($id == 'wcCart') :
+
+						if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
+							$post_id = wc_get_page_id('cart');
+
+
+							$post_url = get_permalink($post_id);
+							$post_title = get_the_title($post_id);
+							$customText = !empty($customText) ? $customText : '%s';
+
+
+							$links[] = [
+								'label' => sprintf($customText, $post_title),
+								'link' => !empty($custom_url) ? $custom_url : $post_url
+							];
+
+						endif;
+
+
+
+
+					elseif ($id == 'wcCheckout') :
+
+						if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) :
+							$post_url = wc_get_checkout_url();
+							$post_title = 'Checkout';
+							$customText = !empty($customText) ? $customText : '%s';
+
+
+							$links[] = [
+								'label' => sprintf($customText, $post_title),
+								'link' => !empty($custom_url) ? $custom_url : $post_url
+							];
+
+						endif;
+
+
+
+
+					elseif ($id == 'searchText') :
+						$current_query = sanitize_text_field(get_query_var('s'));
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $current_query),
+							'link' => !empty($custom_url) ? $custom_url : '#'
+						];
+
+
+					elseif ($id == 'archiveTitle') :
+
+						$archive_title = get_the_archive_title();
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $archive_title),
+							'link' => !empty($custom_url) ? $custom_url : '#'
+						];
+
+					elseif ($id == '404Text') :
+
+						$archive_title = get_the_archive_title();
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $archive_title),
+							'link' => !empty($custom_url) ? $custom_url : '#'
+						];
+
+					elseif ($id == 'dateText') :
+
+
+
+						$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
+
+						$date = get_the_date($format);
+
+						$archive_title = !empty($format) ? $date : get_the_archive_title();
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $archive_title),
+							'link' => !empty($custom_url) ? $custom_url : '#'
+						];
+
+					elseif ($id == 'monthText') :
+
+						$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
+
+						$date = get_the_date($format);
+
+						$archive_title = !empty($format) ? $date : get_the_archive_title();
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $archive_title),
+							'link' => !empty($custom_url) ? $custom_url : '#'
+						];
+
+
+					elseif ($id == 'yearText') :
+						$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
+
+						$date = get_the_date($format);
+
+						$archive_title = !empty($format) ? $date : get_the_archive_title();
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $archive_title),
+							'link' => !empty($custom_url) ? $custom_url : '#'
+						];
+
+					elseif ($id == 'authorName') :
+
+						$archive_title = get_the_author();
+						$customText = !empty($customText) ? $customText : '%s';
+
+						$links[] = [
+							'label' => sprintf($customText, $archive_title),
+							'link' => !empty($custom_url) ? $custom_url : get_author_posts_url(get_the_author_meta("ID")),
+						];
+
+
 
 					endif;
 
 
 
 
-				elseif ($id == 'searchText') :
-					$current_query = sanitize_text_field(get_query_var('s'));
-					$customText = !empty($customText) ? $customText : '%s';
+					if ($iconLibrary == 'fontAwesome') {
+						wp_enqueue_style('fontawesome-icons');
+					} else if ($iconLibrary == 'iconFont') {
+						wp_enqueue_style('icofont-icons');
+					} else if ($iconLibrary == 'bootstrap') {
+						wp_enqueue_style('bootstrap-icons');
+					}
 
-					$links[] = [
-						'label' => sprintf($customText, $current_query),
-						'link' => !empty($custom_url) ? $custom_url : '#'
-					];
+					$fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
 
+					$pramsArr = ['{URL}' => $post_url, '{TITLE}' => $post_title, '{IMAGE}' => $post_thumb_url,];
+					$url = strtr($custom_url, (array) $pramsArr);
 
-				elseif ($id == 'archiveTitle') :
-
-					$archive_title = get_the_archive_title();
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $archive_title),
-						'link' => !empty($custom_url) ? $custom_url : '#'
-					];
-
-				elseif ($id == '404Text') :
-
-					$archive_title = get_the_archive_title();
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $archive_title),
-						'link' => !empty($custom_url) ? $custom_url : '#'
-					];
-
-				elseif ($id == 'dateText') :
-
-
-
-					$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
-
-					$date = get_the_date($format);
-
-					$archive_title = !empty($format) ? $date : get_the_archive_title();
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $archive_title),
-						'link' => !empty($custom_url) ? $custom_url : '#'
-					];
-
-				elseif ($id == 'monthText') :
-
-					$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
-
-					$date = get_the_date($format);
-
-					$archive_title = !empty($format) ? $date : get_the_archive_title();
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $archive_title),
-						'link' => !empty($custom_url) ? $custom_url : '#'
-					];
-
-
-				elseif ($id == 'yearText') :
-					$format = !empty($item['options']['format']) ? $item['options']['format'] : '';
-
-					$date = get_the_date($format);
-
-					$archive_title = !empty($format) ? $date : get_the_archive_title();
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $archive_title),
-						'link' => !empty($custom_url) ? $custom_url : '#'
-					];
-
-				elseif ($id == 'authorName') :
-
-					$archive_title = get_the_author();
-					$customText = !empty($customText) ? $customText : '%s';
-
-					$links[] = [
-						'label' => sprintf($customText, $archive_title),
-						'link' => !empty($custom_url) ? $custom_url : get_author_posts_url(get_the_author_meta("ID")),
-					];
-
-
-
-				endif;
-
-
-
-
-				if ($iconLibrary == 'fontAwesome') {
-					wp_enqueue_style('fontawesome-icons');
-				} else if ($iconLibrary == 'iconFont') {
-					wp_enqueue_style('icofont-icons');
-				} else if ($iconLibrary == 'bootstrap') {
-					wp_enqueue_style('bootstrap-icons');
+					$i++;
 				}
-
-				$fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
-
-				$pramsArr = ['{URL}' => $post_url, '{TITLE}' => $post_title, '{IMAGE}' => $post_thumb_url,];
-				$url = strtr($custom_url, (array) $pramsArr);
-
-
-
-		?>
-		<?php
-				$i++;
-			}
+		}
 
 
 

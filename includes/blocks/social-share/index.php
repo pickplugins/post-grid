@@ -63,6 +63,8 @@ class PGBlockSocialShare
 
 		$wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
 		$wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
+		$wrapperType = isset($wrapperOptions['type']) ? $wrapperOptions['type'] : '';
+
 
 		$elements = isset($attributes['elements']) ? $attributes['elements'] : [];
 		$elementsOptions = isset($elements['options']) ? $elements['options'] : [];
@@ -123,15 +125,16 @@ class PGBlockSocialShare
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo tag_escape($wrapperTag); ?> class="
+<<?php echo tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($wrapperClass); ?>">
-				<?php
+  <?php
 				if (!empty($elementsItems))
 					foreach ($elementsItems as $index => $item) {
 						$label = isset($item['label']) ? $item['label'] : '';
 						$count = isset($item['count']) ? $item['count'] : '';
 						$url = isset($item['url']) ? $item['url'] : '';
+
 
 						$siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
 
@@ -152,44 +155,53 @@ class PGBlockSocialShare
 						$fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
 
 						$pramsArr = ['{URL}' => $post_url, '{TITLE}' => $post_title, '{IMAGE}' => $post_thumb_url,];
-						$url = strtr($url, (array) $pramsArr);
 
+
+						if ($wrapperType == 'share') {
+							$url = strtr($url, (array) $pramsArr);
+						} else {
+							$url = isset($item['profileLink']) ? $item['profileLink'] : '';
+						}
+
+						// var_dump($wrapperType);
+						// var_dump($url);
+						// var_dump($profileLink);
 
 
 				?>
-					<a href="<?php echo esc_url_raw($url); ?>" class="<?php echo esc_attr('media-item item-' . $index); ?>">
+  <a href="<?php echo esc_url_raw($url); ?>" class="<?php echo esc_attr('media-item item-' . $index); ?>">
 
-						<?php if ($showIcon && $iconPosition == "beforeLabel") : ?>
-							<?php echo wp_kses_post($fontIconHtml); ?>
-						<?php endif; ?>
+    <?php if ($showIcon && $iconPosition == "beforeLabel") : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
 
-						<?php if ($showLabel) : ?>
-							<span class='media-label'>
-								<?php echo esc_html($label); ?>
+    <?php if ($showLabel) : ?>
+    <span class='media-label'>
+      <?php echo esc_html($label); ?>
 
-							</span>
-						<?php endif; ?>
+    </span>
+    <?php endif; ?>
 
-						<?php if ($showIcon && $iconPosition == "afterLabel") : ?>
-							<?php echo wp_kses_post($fontIconHtml); ?>
-						<?php endif; ?>
+    <?php if ($showIcon && $iconPosition == "afterLabel") : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
 
-						<?php if ($showCount) : ?>
-							<span class="media-count">(
-								<?php echo esc_html($count); ?>)
-							</span>
-						<?php endif; ?>
+    <?php if ($showCount) : ?>
+    <span class="media-count">(
+      <?php echo esc_html($count); ?>)
+    </span>
+    <?php endif; ?>
 
-					</a>
-				<?php
+  </a>
+  <?php
 
 					}
 
 
 				?>
-			</<?php echo tag_escape($wrapperTag); ?>>
+</<?php echo tag_escape($wrapperTag); ?>>
 
-		<?php
+<?php
 
 		endif;
 

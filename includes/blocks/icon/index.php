@@ -177,8 +177,14 @@ class PGBlockIcon
     // $utmGeneratedText = "utm_medium=".$utmTrackingMedium. "&utm_source=". $utmTrackingSource . "&utm_content=" . $utmTrackingContent . "&utm_term=" . $utmTrackingTerm;
 
 
+
+
     if ($textLinkTo == 'postUrl') {
       $post_url = get_permalink($post_ID);
+    } else if ($textLinkTo == 'nextPostUrl') {
+      $post_url = get_next_post_link();
+    } else if ($textLinkTo == 'previousPostUrl') {
+      $post_url = get_previous_post_link();
     } else if ($textLinkTo == 'homeUrl') {
       $post_url = get_home_url();
     } else if ($textLinkTo == 'authorUrl') {

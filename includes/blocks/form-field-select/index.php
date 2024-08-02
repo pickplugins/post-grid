@@ -70,8 +70,12 @@ class PGBlockFormFieldSelect
     $inputOptions = isset($input['options']) ? $input['options'] : [];
     $inputType = isset($inputOptions['type']) ? $inputOptions['type'] : 'text';
     $inputPlaceholder = isset($inputOptions['placeholder']) ? $inputOptions['placeholder'] : '';
+    $inputValueSource = isset($inputOptions['valueSource']) ? $inputOptions['valueSource'] : '';
+
     $inputValue = isset($inputOptions['value']) ? $inputOptions['value'] : '';
     $inputName = !empty($inputOptions['name']) ? $inputOptions['name'] : $blockId;
+    $inputNameOriginal = $inputName;
+
     $inputRequired = isset($inputOptions['required']) ? $inputOptions['required'] : false;
     $inputDisabled = isset($inputOptions['disabled']) ? $inputOptions['disabled'] : false;
     $inputReadonly = isset($inputOptions['readonly']) ? $inputOptions['readonly'] : false;
@@ -84,7 +88,6 @@ class PGBlockFormFieldSelect
 
     $inputargsSrc = isset($inputOptions['argsSrc']) ? $inputOptions['argsSrc'] : [];
     $argsSrc = isset($inputargsSrc['src']) ? $inputargsSrc['src'] : "";
-    //$inputName = $inputName . '[]';
     $argsSrcPrams = isset($inputargsSrc['srcPrams']) ? $inputargsSrc['srcPrams'] : [];
 
     $inputWrap = isset($attributes['inputWrap']) ? $attributes['inputWrap'] : [];
@@ -113,27 +116,9 @@ class PGBlockFormFieldSelect
     }
 
 
-    if ($inputObjMap == 'postTerm') {
+    $inputName = form_wrap_input_name($inputOptions, ["blockId" => $blockId]);
+    $inputValue = form_wrap_input_default_value($inputOptions, ["post_ID" => $post_ID, "blockId" => $blockId]);
 
-      if ($argsSrc == 'taxonomy') {
-        $tax = isset($argsSrcPrams['taxonomy']) ? $argsSrcPrams['taxonomy'] : '';
-        $inputName =  'post_term[' . $tax . '][]';
-      }
-    }
-
-    if ($inputObjMap == 'postMeta') {
-      $inputName =  'post_meta[' . $inputName . ']';
-    }
-
-    if ($inputObjMap == 'commentMeta') {
-      $inputName =  'comment_meta[' . $inputName . ']';
-    }
-    if ($inputObjMap == 'termMeta') {
-      $inputName =  'term_meta[' . $inputName . ']';
-    }
-    if ($inputObjMap == 'userMeta') {
-      $inputName =  'user_meta[' . $inputName . ']';
-    }
 
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';

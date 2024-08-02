@@ -38,6 +38,38 @@
         "styles": {}
       }
     },
+    "quiz": {
+      "type": "object",
+      "default": {
+        "options": {
+          "answers": {},
+          "grades": [
+            {
+              "label": "A",
+              "max": 90,
+              "min": 70
+            },
+            {
+              "label": "B",
+              "max": 69,
+              "min": 60
+            },
+            {
+              "label": "C",
+              "max": 59,
+              "min": 50
+            },
+            {
+              "label": "D",
+              "max": 49,
+              "min": 40
+            }
+          ],
+          "shuffle": false
+        },
+        "styles": {}
+      }
+    },
     "visible": {
       "type": "object",
       "default": {}
@@ -53,6 +85,42 @@
     "afterSubmit": {
       "type": "object",
       "default": {}
+    },
+    "input": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-layer"
+        },
+        "styles": {}
+      }
+    },
+    "textarea": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-layer"
+        },
+        "styles": {}
+      }
+    },
+    "selectInput": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-layer"
+        },
+        "styles": {}
+      }
+    },
+    "label": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-layer"
+        },
+        "styles": {}
+      }
     },
     "errorWrap": {
       "type": "object",

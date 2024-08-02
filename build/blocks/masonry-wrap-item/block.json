@@ -5,9 +5,6 @@
   "title": "Masonry Grid Item",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
-  "parent": [
-    "post-grid/masonry-wrap"
-  ],
   "usesContext": [
     "postId",
     "loopIndex",

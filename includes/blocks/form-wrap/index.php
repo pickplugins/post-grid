@@ -157,7 +157,7 @@ class PGBlockFormWrap
 
       <form class="<?php echo esc_attr($formClass); ?> " id="<?php echo esc_attr($blockId); ?>" formId="<?php echo esc_attr($blockId); ?>" method="GET" onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)) : ?> onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?> <?php if (!empty($afterSubmit)) : ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?> <?php if (!empty($visible)) : ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
         <?php echo $content ?>
-        <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
+        <?php wp_nonce_field('wp_rest', '_wpnonce'); ?>
       </form>
       <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
       <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>

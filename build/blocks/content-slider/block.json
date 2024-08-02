@@ -5,6 +5,9 @@
   "title": "Content Slider",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
+  "providesContext": {
+    "parentBlock": "123"
+  },
   "usesContext": [
     "postId",
     "loopIndex",

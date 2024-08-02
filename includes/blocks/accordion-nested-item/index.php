@@ -213,7 +213,7 @@ class PGBlockAccordionNestedItem
 
 
 ?>
-		<<?php echo esc_html($headerTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>">
+		<<?php echo tag_escape($headerTag); ?> id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>">
 			<?php if ($iconPosition == 'left') : ?>
 				<span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
 					<?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
@@ -228,7 +228,11 @@ class PGBlockAccordionNestedItem
 			<?php if ($labelIconPosition == 'beforeLabel') : ?>
 				<?php echo wp_kses_post($labelIconHtml); ?>
 			<?php endif; ?>
-			<<?php echo tag_escape($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+			<<?php echo tag_escape($headerLabelTag); ?> index="" <?php if ($headerLabelTag == 'a') :
+																															$link = strtolower($headerLabelText);
+																															$link = str_replace(" ", "-", $link);
+
+																														?> href="#<?php echo esc_attr($link); ?>" <?php endif; ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
 
 
 				<?php if ($labelCounterPosition == 'beforeLabelText') : ?>

@@ -350,7 +350,7 @@ class PGBlockPostExcerpt
 
 
           <?php if (!empty($postExcerptTag)) : ?>
-            <<?php echo esc_html($postExcerptTag); ?> class="
+            <<?php echo tag_escape($postExcerptTag); ?> class="
               <?php echo esc_attr($postExcerptclass); ?>
               ">
               <?php if ($postfixText) : ?>
@@ -442,7 +442,7 @@ class PGBlockPostExcerpt
         <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($postExcerptclass); ?>">
 
           <?php if (!empty($postExcerptTag)) : ?>
-            <<?php echo esc_html($postExcerptTag); ?> class="excerpt-text">
+            <<?php echo tag_escape($postExcerptTag); ?> class="excerpt-text">
               <?php if ($postfixText) : ?>
                 <span class="<?php echo esc_attr($prefixClass); ?>">
                   <?php echo wp_kses_post($prefixText); ?>

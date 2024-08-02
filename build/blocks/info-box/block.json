@@ -41,6 +41,22 @@
         }
       }
     },
+    "item": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-info-box-item"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "backgroundColor": {
+            "Desktop": "#F1F7F9"
+          }
+        }
+      }
+    },
     "visible": {
       "type": "object",
       "default": {}

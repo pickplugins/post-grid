@@ -148,8 +148,23 @@ class PGBlockTabs
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
 
+    $navsIndex = [];
+
+    if (!empty($tabs))
+      foreach ($tabs as $i => $tab) {
+
+        $navsIndex[$i] = $tab["uid"];
+      }
+
+
+
+
+
+
     $tabData = [
+      "id" => $blockId,
       "activeTab" => $activeTab,
+      "navsIndex" => $navsIndex,
     ];
 
 
@@ -168,21 +183,25 @@ class PGBlockTabs
 
     // //* Visible condition
 
+
     ob_start();
 
 
 
 ?>
-    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-tabData="<?php echo esc_attr(json_encode($tabData)); ?>">
+    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-pgTabs="<?php echo esc_attr(json_encode($tabData)); ?>">
+
       <div class="navs-wrapper">
         <?php
 
-        foreach ($tabs as $tab) {
+        foreach ($tabs as $index => $tab) {
 
           $uid = isset($tab['uid']) ? $tab['uid'] : '';
+          $tablink = strtolower($tab['title']);
+          $tablink = str_replace(" ", "-", $tablink);
 
         ?>
-          <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>" class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="0">
+          <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>" class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="<?php echo esc_attr($index); ?>">
 
 
             <?php if ($iconPosition == 'before') : ?>
@@ -198,9 +217,10 @@ class PGBlockTabs
             <?php endif; ?>
 
 
-            <div class="nav-label">
+            <a href="#<?php echo  esc_attr($tablink) ?>" class="nav-label" index="<?php echo esc_attr($index); ?>">
+              <span class="label-counter"><?php echo esc_html($index + 1); ?></span>
               <?php echo isset($tab['title']) ? wp_kses_post($tab['title']) : ""; ?>
-            </div>
+            </a>
             <?php if ($iconPosition == 'after') : ?>
               <div class='nav-icon'>
                 <?php echo wp_kses_post($iconHtml); ?>
@@ -220,6 +240,11 @@ class PGBlockTabs
       <div class='panels-wrap'>
         <?php echo $content; ?>
       </div>
+
+      <div class="progress">
+        <div class="progress-fill"></div>
+      </div>
+
     </div>
 
 

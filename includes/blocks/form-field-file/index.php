@@ -95,6 +95,9 @@ class PGBlockFormFieldFile
 
 
 
+    $string = 'a:5:{s:4:"name";a:2:{s:9:"cb_avatar";s:15:"popup-maker.png";s:10:"cb_profile";s:14:"form-maker.png";}s:4:"type";a:2:{s:9:"cb_avatar";s:9:"image/png";s:10:"cb_profile";s:9:"image/png";}s:8:"tmp_name";a:2:{s:9:"cb_avatar";s:24:"C:\xampp\tmp\php188B.tmp";s:10:"cb_profile";s:24:"C:\xampp\tmp\php188C.tmp";}s:5:"error";a:2:{s:9:"cb_avatar";i:0;s:10:"cb_profile";i:0;}s:4:"size";a:2:{s:9:"cb_avatar";i:329826;s:10:"cb_profile";i:318138;}}';
+
+    $user_meta_files = unserialize($string);
 
 
 
@@ -105,6 +108,7 @@ class PGBlockFormFieldFile
 
 
     $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $inputName = form_wrap_input_name($inputOptions, ["blockId" => $blockId]);
 
 
 

@@ -5,12 +5,6 @@
   "title": "Image Gallery",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
-  "usesContext": [
-    "postId",
-    "loopIndex",
-    "postType",
-    "queryId"
-  ],
   "providesContext": {
     "post-grid/galleryId": "blockId",
     "post-grid/lightbox": "lightbox"
@@ -55,10 +49,18 @@
       "default": {
         "options": {
           "tag": "div",
-          "class": "pg-masonry-wrap-item"
+          "class": "pg-image-gallery-item"
         },
         "styles": {}
       }
+    },
+    "nthItemStyle": {
+      "type": "array",
+      "default": [
+        {
+          "styles": {}
+        }
+      ]
     },
     "visible": {
       "type": "object",

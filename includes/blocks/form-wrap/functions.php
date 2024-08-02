@@ -79,11 +79,6 @@ function form_wrap_process_postSubmitForm($formFields, $onprocessargs, $request)
         $post_meta = $request->get_param('post_meta');
         //$metaFields = isset($arg->metaFields) ? $arg->metaFields :  ['email'];
 
-
-
-
-
-
         $postParent = (!empty($post_parent)) ? $post_parent : $postParent;
         $menuOrder = (!empty($menu_order)) ? $menu_order : $menuOrder;
         $postPassword = (!empty($post_password)) ? $post_password : $postPassword;
@@ -136,6 +131,39 @@ function form_wrap_process_postSubmitForm($formFields, $onprocessargs, $request)
                 update_post_meta($new_post_id, $key, $metaValue);
             }
           }
+
+          ////////################///////////////
+          $post_meta_files = $request->get_file_params()['post_meta'];
+
+          $files = [];
+          if (!empty($post_meta_files)) {
+            $i = 0;
+            foreach ($post_meta_files as $index => $data) {
+
+              foreach ($data as $metaKey => $fileInfo) {
+                $files[$metaKey][$index] = $fileInfo;
+              }
+            }
+          }
+
+          if (!empty($files)) {
+            foreach ($files as $metaKey => $metavalue) {
+
+              $file_response = post_grid_upload_file($metavalue);
+
+              if ($file_response['id']) {
+                update_post_meta($new_post_id, $metaKey, $file_response['id']);
+              }
+            }
+          }
+
+
+          ///////////##################//////////
+
+
+
+
+
 
 
 
@@ -342,6 +370,49 @@ function form_wrap_process_termSubmitForm($formFields, $onprocessargs, $request)
         }
 
 
+
+        ///////////##############///////////////////
+
+        $term_meta_files = isset($request->get_file_params()['term_meta']) ? $request->get_file_params()['term_meta'] : [];
+
+        $files = [];
+        if (!empty($term_meta_files)) {
+          $i = 0;
+          foreach ($term_meta_files as $index => $data) {
+
+            foreach ($data as $metaKey => $fileInfo) {
+              $files[$metaKey][$index] = $fileInfo;
+            }
+          }
+        }
+
+        if (!empty($files)) {
+          foreach ($files as $metaKey => $metavalue) {
+
+            $file_response = post_grid_upload_file($metavalue);
+
+            if ($file_response['id']) {
+              update_term_meta($new_term_id, $metaKey, $file_response['id']);
+            }
+          }
+        }
+
+
+
+        ///////////##############///////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
         if ($showOnResponse) {
           if (is_wp_error($new_term_id)) {
             $error_string = $new_term_id->get_error_message();
@@ -506,6 +577,27 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
             $response['success']['sendMail'] = $successMessage;
           } else {
             $response['errors']['sendMail'] = $errorMessage;
+          }
+        }
+      }
+
+      if ($id == 'createWCOrder') {
+
+        $showOnResponse = isset($arg->showOnResponse) ? $arg->showOnResponse : true;
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage :
+          __('Send mail success', 'post-grid');
+        $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage :
+          __('Send mail failed', 'post-grid');
+
+
+
+        $status = form_wrap_process_create_wc_order($arg, $request);
+
+        if ($showOnResponse) {
+          if ($status) {
+            $response['success']['createWCOrder'] = $successMessage;
+          } else {
+            $response['errors']['createWCOrder'] = $errorMessage;
           }
         }
       }
@@ -2202,11 +2294,49 @@ function form_wrap_process_commentSubmit($formFields, $onprocessargs, $request)
           $comment_meta = $request->get_param('comment_meta');
 
 
-          foreach ($comment_meta as $metaKey => $fieldValue) {
+          if (!empty($comment_meta))
+            foreach ($comment_meta as $metaKey => $fieldValue) {
+              update_comment_meta($status, $metaKey, $fieldValue);
+            }
 
-            //$fieldValue = isset($formFields[$metaField]) ? $formFields[$metaField] : '';
-            update_comment_meta($status, $metaKey, $fieldValue);
+
+
+          ////////################///////////////
+          $comment_meta_files = isset($request->get_file_params()['comment_meta']) ? $request->get_file_params()['comment_meta'] : [];
+
+
+          $files = [];
+          if (!empty($comment_meta_files)) {
+            $i = 0;
+            foreach ($comment_meta_files as $index => $data) {
+
+              foreach ($data as $metaKey => $fileInfo) {
+                $files[$metaKey][$index] = $fileInfo;
+              }
+            }
           }
+
+          if (!empty($files)) {
+            foreach ($files as $metaKey => $metavalue) {
+
+
+              if (!empty($metavalue['name'])) {
+                $file_response = post_grid_upload_file($metavalue);
+
+                if ($file_response['id']) {
+                  update_comment_meta($status, $metaKey, $file_response['id']);
+                }
+              }
+            }
+          }
+
+
+          ///////////##################//////////
+
+
+
+
+
 
 
           $response['success']['loggedInUser'] = __('Comment Submitted', 'post-grid');
@@ -2767,6 +2897,265 @@ function form_wrap_process_passwordUpdateFrom($formFields, $onprocessargs, $requ
 
 
 
+add_filter('form_wrap_process_userProfileUpdate', 'form_wrap_process_userProfileUpdate', 99, 3);
+
+function form_wrap_process_userProfileUpdate($formFields, $onprocessargs, $request)
+{
+
+
+  $response = [];
+
+  $first_name = $request->get_param('first_name');
+  $last_name = $request->get_param('last_name');
+  $display_name = $request->get_param('display_name');
+  $user_url = $request->get_param('user_url');
+  $description = $request->get_param('description');
+  $nickname = $request->get_param('nickname');
+  $locale = $request->get_param('locale');
+  $rich_editing = $request->get_param('rich_editing');
+  $syntax_highlighting = $request->get_param('syntax_highlighting');
+  $admin_color = $request->get_param('admin_color');
+  $admin_bar_front = $request->get_param('admin_bar_front');
+  $user_login = $request->get_param('user_login');
+  $user_email = $request->get_param('user_email');
+  $pass1 = $request->get_param('pass1');
+  $pass2 = $request->get_param('pass2');
+
+
+
+
+
+  $currentUser = wp_get_current_user();
+  $currentUserId = ($currentUser->ID) ? $currentUser->ID : 0;
+
+
+
+
+  if (!$currentUserId) {
+    $response['errors']['registerUserConfirm'] = __('Please login first', 'post-grid');
+
+    return $response;
+  }
+
+
+
+
+  $email_data = [];
+
+
+  foreach ($onprocessargs as $arg) {
+
+    $id = $arg->id;
+
+
+    if ($id == 'updateUserProfile') {
+
+      $user_new_data = [];
+      $user_new_data["ID"] = $currentUserId;
+
+      if (!empty($first_name)) {
+        $user_new_data["first_name"] = $first_name;
+      }
+      if (!empty($last_name)) {
+        $user_new_data["last_name"] = $last_name;
+      }
+      if (!empty($display_name)) {
+        $user_new_data["display_name"] = $display_name;
+      }
+      if (!empty($user_url)) {
+        $user_new_data["user_url"] = $user_url;
+      }
+      if (!empty($description)) {
+        $user_new_data["description"] = $description;
+      }
+      if (!empty($nickname)) {
+        $user_new_data["nickname"] = $nickname;
+      }
+      if (!empty($locale)) {
+        $user_new_data["locale"] = $locale;
+      }
+      if (!empty($rich_editing)) {
+        $user_new_data["rich_editing"] = $rich_editing;
+      }
+      if (!empty($syntax_highlighting)) {
+        $user_new_data["syntax_highlighting"] = $syntax_highlighting;
+      }
+      if (!empty($admin_color)) {
+        $user_new_data["admin_color"] = $admin_color;
+      }
+      if (!empty($admin_bar_front)) {
+        $user_new_data["admin_bar_front"] = $admin_bar_front;
+      }
+
+
+
+      if (!empty($user_email)) {
+        $currentUserEmail = ($currentUser->user_email) ? $currentUser->user_email : 0;
+
+        if ($user_email != $currentUserEmail) {
+
+          $user = get_user_by('email', $user_email);
+
+          if ($user) {
+            $response['errors']['userEmailExist'] = __('User email exist, Please try another.', 'post-grid');
+            return $response;
+          } else {
+
+            $user_new_data["user_email"] = $user_email;
+            $response['success']['userEmailUpdateSuccess'] = __('Email update request sent.', 'post-grid');
+          }
+        }
+      }
+      // if (!empty($pass1)) {
+      //   $user_new_data["pass1"] = $pass1;
+      // }
+
+
+      if (isset($response['errors'])) {
+
+        return $response;
+      }
+
+
+
+
+      $user_update = wp_update_user($user_new_data);
+
+
+
+      $user_meta = $request->get_param('user_meta');
+
+
+
+      if (!empty($user_meta)) {
+        foreach ($user_meta as $metaKey => $metavalue) {
+          update_user_meta($currentUserId, $metaKey, $metavalue);
+        }
+      }
+
+      $user_meta_files = $request->get_file_params()['user_meta'];
+
+
+
+      $files = [];
+      if (!empty($user_meta_files)) {
+        $i = 0;
+        foreach ($user_meta_files as $index => $data) {
+
+          foreach ($data as $metaKey => $fileInfo) {
+            $files[$metaKey][$index] = $fileInfo;
+          }
+        }
+      }
+
+      if (!empty($files)) {
+        foreach ($files as $metaKey => $metavalue) {
+
+          $file_response = post_grid_upload_file($metavalue);
+
+          if ($file_response['id']) {
+            update_user_meta($currentUserId, $metaKey, $file_response['id']);
+          }
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+      if (!is_wp_error($user_update)) {
+        $response['success']['profileUpdateSuccess'] = __('User profile update success', 'post-grid');
+      } else {
+        $response['errors']['profileUpdateSuccess'] = __('User profile update failed', 'post-grid');
+      }
+    }
+
+
+    if ($id == 'doAction') {
+
+      $actionName = isset($arg->actionName) ? $arg->actionName : '';
+      do_action($actionName, $request);
+    }
+
+
+    if ($id == 'webhookRequest') {
+
+      $url = isset($arg->url) ? $arg->url : '';
+      $requestHeader = isset($arg->requestHeader) ? $arg->requestHeader : true;
+      $method = isset($arg->method) ? $arg->method : 'POST';
+      $format = isset($arg->format) ? $arg->format : '';
+      $fields = isset($arg->fields) ? $arg->fields : [];
+
+      $requestPrams =  $request->get_params();
+
+      unset($requestPrams['onprocessargs']);
+      unset($requestPrams['formFieldNames']);
+
+
+      // Encode the data as JSON
+      $payload = json_encode($requestPrams);
+
+      // Prepare headers
+      $headers = [
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($payload)
+      ];
+
+      // Initialize curl session
+      $ch = curl_init($url);
+
+      // Set curl options
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+      // Execute curl session
+      $response = curl_exec($ch);
+
+      // Check for errors
+      if (curl_errno($ch)) {
+        echo 'Webhook delivery failed: ' . curl_error($ch);
+      } else {
+        echo 'Webhook sent successfully. Response: ' . $response;
+      }
+
+      // Close curl session
+      curl_close($ch);
+    }
+
+
+
+    if ($id == 'createEntry') {
+      $status = form_wrap_process_create_entry($email_data);
+
+
+      if ($status) {
+        //$response['createEntry'] = 'createEntry Success';
+        $response['success']['createEntry'] = __('Create entry success', 'post-grid');
+      } else {
+        //$response['createEntry'] = 'createEntry Failed';
+        $response['errors']['createEntry'] = __('Create entry failed', 'post-grid');
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+  return $response;
+}
+
 
 
 
@@ -2845,11 +3234,44 @@ function form_wrap_process_registerForm($formFields, $onprocessargs, $request)
       }
 
 
+
+      $user_meta_files = $request->get_file_params()['user_meta'];
+
+      $files = [];
+      if (!empty($user_meta_files)) {
+        $i = 0;
+        foreach ($user_meta_files as $index => $data) {
+
+          foreach ($data as $metaKey => $fileInfo) {
+            $files[$metaKey][$index] = $fileInfo;
+          }
+        }
+      }
+
+      if (!empty($files)) {
+        foreach ($files as $metaKey => $metavalue) {
+
+          $file_response = post_grid_upload_file($metavalue);
+
+          if ($file_response['id']) {
+            update_user_meta($new_user_id, $metaKey, $file_response['id']);
+          }
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+
       if ($new_user_id) {
-        //$response['registerUser'] = 'User register Success';
         $response['success']['registerUserExist'] = __('User register Success', 'post-grid');
       } else {
-        // $response['registerUser'] = 'User register Failed';
         $response['errors']['registerUserExist'] = __('User register Failed', 'post-grid');
       }
     }
@@ -3314,13 +3736,301 @@ function form_wrap_process_postsFilter($formFields, $onprocessargs, $request)
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         // Execute curl session
-        $response = curl_exec($ch);
+        $curl_response = curl_exec($ch);
 
         // Check for errors
         if (curl_errno($ch)) {
           echo 'Webhook delivery failed: ' . curl_error($ch);
         } else {
-          echo 'Webhook sent successfully. Response: ' . $response;
+          echo 'Webhook sent successfully. Response: ' . $curl_response;
+        }
+
+        // Close curl session
+        curl_close($ch);
+      }
+
+
+
+
+
+      if ($id == 'createEntry') {
+        $status = form_wrap_process_create_entry($entryData);
+
+
+        if ($status) {
+          $response['success']['createEntry'] = __('Create entry success', 'post-grid');
+        } else {
+          $response['errors']['createEntry'] = __('Create entry failed', 'post-grid');
+        }
+      }
+    }
+
+
+
+
+
+
+
+
+
+  return $response;
+}
+add_filter('form_wrap_process_customForm', 'form_wrap_process_customForm', 99, 3);
+
+function form_wrap_process_customForm($formFields, $onprocessargs, $request)
+{
+
+
+  $response = [];
+  $entryData = [];
+
+  $post_grid_block_editor = get_option("post_grid_block_editor");
+
+  $apiKeys = isset($post_grid_block_editor['apiKeys']) ? $post_grid_block_editor['apiKeys'] : [];
+
+
+  // if (!empty($response['errors'])) {
+  //   return $response;
+  // }
+
+
+
+
+
+  // Collect entry data
+  $entryData['id'] = 'customForm';
+  $entryData['formFields'] = $formFields;
+
+
+
+  if (!empty($onprocessargs))
+    foreach ($onprocessargs as $arg) {
+
+      $id = $arg->id;
+
+
+      if ($id == 'doAction') {
+
+        $actionName = isset($arg->actionName) ? $arg->actionName : '';
+
+        do_action($actionName, $request);
+      }
+      if ($id == 'droboxUpload') {
+
+        $accessToken = isset($apiKeys['dropbox']['args']['accessToken']) ? $apiKeys['dropbox']['args']['accessToken'] : "";
+
+        if (empty($accessToken)) {
+          $response['errors']['dropboxUpload'] = __("Access token is empty.");
+
+          return $response;
+        }
+
+
+
+
+        $path = isset($arg->path) ? $arg->path : '';
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage : '';
+        $failedMessage = isset($arg->failedMessage) ? $arg->failedMessage : '';
+
+        $files = $request->get_file_params();
+
+
+        $file_response = [];
+
+        foreach ($files as $fileIndex => $file) {
+
+          $file_temp_name = isset($file['tmp_name']) ? $file['tmp_name'] : '';
+          $file_name = isset($file['name']) ? $file['name'] : '';
+
+
+          $dropboxPath = $path . '/' . $file_name;
+          $localFilePath = $file_temp_name;
+          $headers = [
+            'Authorization: Bearer ' . $accessToken,
+            'Dropbox-API-Arg: {"path": "' . $dropboxPath . '","mode": "add","autorename": true,"mute": false,"strict_conflict": false}',
+            'Content-Type: application/octet-stream',
+          ];
+
+          $ch = curl_init('https://content.dropboxapi.com/2/files/upload');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+          curl_setopt($ch, CURLOPT_POST, true);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, file_get_contents($localFilePath));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+          $curl_response = curl_exec($ch);
+
+          $curl_response_obj = json_decode($curl_response);
+
+
+          if (!isset($curl_response_obj->id)) {
+            $file_response['errors'][$fileIndex] = __("File Upload failed", 'post-grid');
+          }
+        }
+
+
+        if (isset($file_response['errors'])) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['dropboxUpload'] = empty($errorMessage) ? $failedMessage : curl_error($ch);
+        } else {
+          $response['success']['dropboxUpload'] = $successMessage;
+        }
+
+
+
+        curl_close($ch);
+      }
+      if ($id == 'googleDriveUpload') {
+        $accessToken = "ya29.a0AcM612x9N943zfeq3Rl_0j61mEEC-4VmsDezl9cbOWgn2kvY1yr2YcKibi0iVLnFN8lDQhGxfNloaQwUK-mnjSgiSWrd1s4gXTMUFuwL3z-BMcte8D1zt01xBm-0ECxYNvbSDFoIaPtPP8bZgp4HBgWObzwD6UA6dyA8aCgYKATQSARMSFQHGX2MiwbgUmArTs1cY6zgrqfeUXA0171";
+        //$accessToken = isset($apiKeys['googleDrive']['args']['accessToken']) ? $apiKeys['googleDrive']['args']['accessToken'] : "";
+
+        if (empty($accessToken)) {
+          $response['errors']['googleDriveUpload'] = __("Access token is empty.");
+
+          return $response;
+        }
+
+
+
+
+        $path = isset($arg->path) ? $arg->path : '';
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage : '';
+        $failedMessage = isset($arg->failedMessage) ? $arg->failedMessage : '';
+
+        $files = $request->get_file_params();
+
+
+        $file_response = [];
+
+        foreach ($files as $fileIndex => $file) {
+
+          $file_temp_name = isset($file['tmp_name']) ? $file['tmp_name'] : '';
+          $file_name = isset($file['name']) ? $file['name'] : '';
+
+          if (empty($file_name)) continue;
+
+          $dropboxPath = $path . '/' . $file_name;
+          //$localFilePath = $file_temp_name;
+          // $fileName = 'example.txt'; // Desired file name in Google Drive
+          $localFilePath = $file_temp_name; // Local file path
+          //$mimeType = 'text/plain'; // MIME type of the file
+          $mimeType = mime_content_type($file_temp_name); // MIME type of the file
+
+          $metadata = [
+            'name' => $file_name
+          ];
+
+          $boundary = uniqid();
+          $delimiter = '-------------' . $boundary;
+
+          $postData = "--{$delimiter}\r\n" .
+            "Content-Type: application/json; charset=UTF-8\r\n\r\n" .
+            json_encode($metadata) . "\r\n" .
+            "--{$delimiter}\r\n" .
+            "Content-Type: {$mimeType}\r\n\r\n" .
+            file_get_contents($localFilePath) . "\r\n" .
+            "--{$delimiter}--";
+
+          $headers = [
+            "Authorization: Bearer $accessToken",
+            "Content-Type: multipart/related; boundary={$delimiter}",
+            "Content-Length: " . strlen($postData)
+          ];
+
+          $ch = curl_init('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart');
+          curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+          curl_setopt($ch, CURLOPT_POST, true);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          $curl_response = curl_exec($ch);
+
+          $curl_response_obj = json_decode($curl_response);
+
+
+          if (!isset($curl_response_obj->id)) {
+            $file_response['errors'][$fileIndex] = __("File Upload failed", 'post-grid');
+          }
+        }
+
+
+        if (isset($file_response['errors'])) {
+          //echo 'Error: ' . curl_error($ch);
+          $response['errors']['dropboxUpload'] = empty($errorMessage) ? $failedMessage : curl_error($ch);
+        } else {
+          $response['success']['dropboxUpload'] = $successMessage;
+        }
+
+
+
+        curl_close($ch);
+      }
+
+
+
+      if ($id == 'applyFilters') {
+
+        $filterName = isset($arg->filterName) ? $arg->filterName : '';
+        $successMessage = isset($arg->successMessage) ? $arg->successMessage : '';
+        $failedMessage = isset($arg->failedMessage) ? $arg->failedMessage : '';
+
+        $return = false;
+        $filter = apply_filters($filterName, $return, $request);
+
+
+        if ($filter) {
+          $response['success']['createEntry'] = $successMessage;
+        } else {
+          $response['errors']['createEntry'] = $failedMessage;
+        }
+      }
+
+
+      if ($id == 'webhookRequest') {
+
+        $url = isset($arg->url) ? $arg->url : '';
+        $requestHeader = isset($arg->requestHeader) ? $arg->requestHeader : true;
+        $method = isset($arg->method) ? $arg->method : 'POST';
+        $format = isset($arg->format) ? $arg->format : '';
+        $fields = isset($arg->fields) ? $arg->fields : [];
+
+        $requestPrams =  $request->get_params();
+
+        unset($requestPrams['onprocessargs']);
+        unset($requestPrams['formFieldNames']);
+
+
+        // Encode the data as JSON
+        $payload = json_encode($requestPrams);
+
+
+
+        // Prepare headers
+        $headers = [
+          'Content-Type: application/json',
+          'Content-Length: ' . strlen($payload)
+        ];
+
+        // Initialize curl session
+        $ch = curl_init($url);
+
+        // Set curl options
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+        // Execute curl session
+        $curl_response = curl_exec($ch);
+
+        // Check for errors
+        if (curl_errno($ch)) {
+          $failedMessage = 'Webhook delivery failed: ' . curl_error($ch);
+          $response['errors']['createEntry'] = $failedMessage;
+        } else {
+          $successMessage =  'Webhook sent successfully. Response: ' . $curl_response;
+          $response['success']['createEntry'] = $successMessage;
         }
 
         // Close curl session
@@ -3365,7 +4075,7 @@ function form_wrap_process_contactForm($formFields, $onprocessargs, $request)
 
   $full_name = isset($formFields['full_name']) ? sanitize_text_field($formFields['full_name']) : '';
   $email = isset($formFields['email']) ? sanitize_email($formFields['email']) : '';
-  $message = isset($formFields['message']) ? wp_kses_post($formFields['message']) : '';
+  $mail_message = isset($formFields['message']) ? wp_kses_post($formFields['message']) : '';
   $subject = isset($formFields['subject']) ? wp_kses_post($formFields['subject']) : '';
   $recaptchaResponse = isset($formFields['g-recaptcha-response']) ? wp_kses_post($formFields['g-recaptcha-response']) : '';
 
@@ -3388,6 +4098,11 @@ function form_wrap_process_contactForm($formFields, $onprocessargs, $request)
 
     $id = $arg->id;
 
+
+
+
+
+
     if ($id == 'sendMail') {
       $fromEmail = $email;
       $fromName = $full_name;
@@ -3408,7 +4123,7 @@ function form_wrap_process_contactForm($formFields, $onprocessargs, $request)
       $email_data['email_from'] = $email;
       $email_data['email_from_name'] = $full_name;
       $email_data['subject'] = $subject;
-      $email_data['html'] = $message . $footer;
+      $email_data['html'] = $mail_message . $footer;
       $email_data['attachments'] = [];
 
 
@@ -3445,7 +4160,7 @@ function form_wrap_process_contactForm($formFields, $onprocessargs, $request)
       $email_data['reply_to'] = $replyTo;
       $email_data['reply_to_name'] = $replyToName;
       $email_data['subject'] = $subject;
-      $email_data['html'] = $message . $footer;
+      $email_data['html'] = $mail_message . $footer;
       $email_data['attachments'] = [];
 
       $status = form_wrap_process_send_email($email_data);
@@ -3481,7 +4196,7 @@ function form_wrap_process_contactForm($formFields, $onprocessargs, $request)
       $email_data['reply_to'] = $replyTo;
       $email_data['reply_to_name'] = $replyToName;
       $email_data['subject'] = $subject;
-      $email_data['html'] = $message . $footer;
+      $email_data['html'] = $mail_message . $footer;
       $email_data['attachments'] = [];
 
 
@@ -3516,7 +4231,7 @@ function form_wrap_process_contactForm($formFields, $onprocessargs, $request)
       $email_data['reply_to'] = $replyTo;
       $email_data['reply_to_name'] = $replyToName;
       $email_data['subject'] = $subject;
-      $email_data['html'] = $message . $footer;
+      $email_data['html'] = $mail_message . $footer;
       $email_data['attachments'] = [];
 
       $status = form_wrap_process_send_email($email_data);
@@ -3529,6 +4244,231 @@ function form_wrap_process_contactForm($formFields, $onprocessargs, $request)
         }
       }
     }
+
+
+
+
+
+
+    if ($id == 'validatedField') {
+
+      $conditions = isset($arg->conditions) ? $arg->conditions : [];
+      $field = isset($arg->field) ? $arg->field : "";
+      $errorMessage = isset($arg->errorMessage) ? $arg->errorMessage : '';
+
+
+      $fieldValue = $request->get_param($field);
+
+
+
+      $valid = true;
+
+      if (!empty($conditions)) {
+
+        foreach ($conditions as $index => $condition) {
+
+          $compare = isset($condition->compare) ? $condition->compare : '';
+          $relation = isset($condition->relation) ? $condition->relation : 'OR';
+
+          $value = isset($condition->value) ? $condition->value : '';
+          $values = isset($condition->values) ? $condition->values : '';
+          $message = isset($condition->message) ? $condition->message : '';
+
+
+
+          if ($compare == "equal") {
+            if ($fieldValue != $value) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+
+          if ($compare == "notEqual") {
+            if ($fieldValue == $value) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+
+          if ($compare == "greaterThan") {
+            $isGreater = ((int)$fieldValue > (int) $value) ? true : false;
+            if (!$isGreater) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+          if ($compare == "GreaterThanEqual") {
+            $isGreater = ((int)$fieldValue >= (int) $value) ? true : false;
+            if (!$isGreater) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+
+
+          if ($compare == "lessThan") {
+            $isLess = ((int)$fieldValue < (int) $value) ? true : false;
+            if (!$isLess) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+          if ($compare == "lessThanEqual") {
+            $isLess = ((int)$fieldValue <= (int) $value) ? true : false;
+            if (!$isLess) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+
+
+
+
+
+
+
+          if ($compare == "empty") {
+            if (!empty($fieldValue)) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+          if ($compare == "notEmpty") {
+            if (empty($fieldValue)) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+          if ($compare == "contains") {
+
+            if (!empty($values)) {
+
+              foreach ($values as $valueX) {
+                $status = preg_match("/$valueX/", $fieldValue);
+
+
+                if ($status == 0) {
+                  $response['errors']['validFailed' . $index] = $message;
+                  return $response;
+                }
+              }
+            }
+          }
+          if ($compare == "notContains") {
+
+
+            if (!empty($values)) {
+
+              foreach ($values as $valueX) {
+                $status = preg_match("/$valueX/", $fieldValue);
+                if ($status == 1) {
+                  $response['errors']['validFailed' . $index] = $message;
+                  return $response;
+                }
+              }
+            }
+          }
+          if ($compare == "startsWith") {
+            if (!empty($values)) {
+
+              foreach ($values as $valueX) {
+                $status = preg_match("/^$valueX/", $fieldValue);
+
+
+                if ($status == 0) {
+                  $response['errors']['validFailed' . $index] = $message;
+                  return $response;
+                }
+              }
+            }
+          }
+          if ($compare == "endsWith") {
+            if (!empty($values)) {
+
+              foreach ($values as $valueX) {
+                $status = preg_match("/$valueX$/", $fieldValue);
+
+                if ($status == 0) {
+                  $response['errors']['validFailed' . $index] = $message;
+                  return $response;
+                }
+              }
+            }
+          }
+          if ($compare == "regex") {
+
+            if (!empty($values)) {
+
+
+              if ($relation == "AND") {
+
+                $regexValid = true;
+
+                foreach ($values as $valueX) {
+                  $status = preg_match("/$valueX/", $fieldValue);
+
+
+
+                  if ($status == 0) {
+                    $regexValid = false;
+                    $response['errors']['validFailed' . $index] = $message;
+
+                    break;
+                  }
+                }
+
+                if (!$regexValid) return $response;
+              } else {
+                $regexValid = false;
+
+                foreach ($values as $valueX) {
+                  $status = preg_match("/$valueX/", $fieldValue);
+
+
+
+                  if ($status == 1) {
+                    $regexValid = true;
+
+
+                    break;
+                  }
+                }
+
+
+
+                if (!$regexValid) {
+                  $response['errors']['validFailed'] = $message;
+                  return $response;
+                }
+              }
+            }
+          }
+          if ($compare == "between") {
+
+            $min = isset($values[0]) ? $values[0] : '';
+            $max = isset($values[1]) ? $values[1] : '';
+
+            $isBetween = ($min <= $fieldValue) && ($fieldValue <= $max) ? true : false;
+
+            if (!$isBetween) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+          if ($compare == "exist") {
+
+            if (!in_array($fieldValue, $values)) {
+              $response['errors']['validFailed' . $index] = $message;
+              return $response;
+            }
+          }
+        }
+      }
+    }
+
+
+
+
 
 
 
@@ -3646,6 +4586,78 @@ function form_wrap_process_create_entry($email_data)
 
 
 
+function form_wrap_process_create_wc_order($arg, $request)
+{
+
+  $orderStatus = isset($arg->orderStatus) ? $arg->orderStatus : '';
+  $orderStatus = !empty($orderStatus) ? $orderStatus : 'completed';
+  $orderNote = isset($arg->orderNote) ? $arg->orderNote : '';
+  $paymentMethod = isset($arg->paymentMethod) ? $arg->paymentMethod : 'ComboBlockForm';
+  $paymentMethodTitle = isset($arg->paymentMethodTitle) ? $arg->paymentMethodTitle : 'ComboBlockForm';
+
+
+
+
+  $order = wc_create_order();
+
+  $product_id = (int) $request->get_param("product_id");
+
+
+  $first_name = $request->get_param("first_name");
+  $last_name = $request->get_param("last_name");
+  $company = $request->get_param("company");
+  $email = $request->get_param("email");
+  $phone = $request->get_param("phone");
+  $address_1 = $request->get_param("address_1");
+  $address_2 = $request->get_param("address_2");
+  $city = $request->get_param("city");
+  $state = $request->get_param("state");
+  $postcode = $request->get_param("postcode");
+  $country = $request->get_param("country");
+  $coupon_code = $request->get_param("coupon_code");
+
+  $user_id =  email_exists($email);
+
+  $product = wc_get_product($product_id);
+
+  $downloads = $product->get_downloads();
+  $product->set_downloads($downloads);
+
+  $order->add_product($product);
+  $order->calculate_totals();
+  $order->apply_coupon($coupon_code);
+
+
+
+  $address = array(
+    'first_name' => $first_name,
+    'last_name'  => $last_name,
+    'company'    => $company,
+    'email'      => $email,
+    'phone'      => $phone,
+    'address_1'  => $address_1,
+    'address_2'  => $address_2,
+    'city'       => $city,
+    'state'      => $state,
+    'postcode'   => $postcode,
+    'country'    => $country
+  );
+  $order->set_address($address, 'billing');
+  $order->set_customer_id($user_id);
+
+  $order->set_payment_method($paymentMethod);
+  $order->set_payment_method_title($paymentMethodTitle);
+
+  $order->add_order_note($orderNote);
+
+
+  $order->update_status($orderStatus);
+
+  $order->save();
+  $order_id = $order->get_id();
+
+  return $order_id;
+}
 
 
 function form_wrap_process_send_email($email_data)
@@ -3675,4 +4687,129 @@ function form_wrap_process_send_email($email_data)
   $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 
   return $status;
+}
+
+
+function form_wrap_input_name($inputOptions, $args)
+{
+
+  $blockId = isset($args['blockId']) ? $args['blockId'] : '';
+
+
+  $inputObjMap = isset($inputOptions['objMap']) ? $inputOptions['objMap'] : "";
+  $inputName = !empty($inputOptions['name']) ? $inputOptions['name'] : $blockId;
+  $inputMultiple = isset($inputOptions['multiple']) ? $inputOptions['multiple'] : false;
+  $inputName = ($inputMultiple) ? $inputName . '[]' : $inputName;
+
+
+  if ($inputObjMap == 'postTerm') {
+    $inputName =  'post_term[' . $inputName . ']';
+  }
+
+  if ($inputObjMap == 'postMeta') {
+    $inputName =  'post_meta[' . $inputName . ']';
+  }
+  if ($inputObjMap == 'commentMeta') {
+    $inputName =  'comment_meta[' . $inputName . ']';
+  }
+  if ($inputObjMap == 'termMeta') {
+    $inputName =  'term_meta[' . $inputName . ']';
+  }
+  if ($inputObjMap == 'userMeta') {
+    $inputName =  'user_meta[' . $inputName . ']';
+  }
+
+  return $inputName;
+}
+
+function form_wrap_input_default_value($inputOptions, $args)
+{
+
+
+  $post_ID = isset($args['post_ID']) ? $args['post_ID'] : '';
+  $blockId = isset($args['blockId']) ? $args['blockId'] : '';
+
+  $currentUser = wp_get_current_user();
+
+  $global_post = get_post($post_ID);
+
+  $inputType = !empty($inputOptions['type']) ? $inputOptions['type'] : "";
+  $inputName = !empty($inputOptions['name']) ? $inputOptions['name'] : $blockId;
+  $inputValueSource = isset($inputOptions['valueSource']) ? $inputOptions['valueSource'] : '';
+  $inputValue = isset($inputOptions['value']) ? $inputOptions['value'] : '';
+
+
+
+
+  if (!empty($inputValueSource)) {
+    if ($inputValueSource == 'postID') {
+
+      $inputValue = $post_ID;
+    } else if ($inputValueSource == 'postSlug') {
+      $inputValue = isset($global_post->post_name) ? $global_post->post_name : "";
+    } else if ($inputValueSource == 'postTitle') {
+
+      $inputValue = isset($global_post->post_title) ? $global_post->post_title : "";
+    } else if ($inputValueSource == 'postContent') {
+
+      $inputValue = isset($global_post->post_content) ? $global_post->post_content : "";
+    } else if ($inputValueSource == 'postExcerpt') {
+
+      $inputValue = isset($global_post->post_excerpt) ? $global_post->post_excerpt : "";
+    } else if ($inputValueSource == 'postDate') {
+
+      $inputValue = isset($global_post->post_date) ? $global_post->post_date : "";
+    } else if ($inputValueSource == 'postAuthorID') {
+
+      $inputValue = isset($global_post->post_author) ? $global_post->post_author : 0;
+    } else if ($inputValueSource == 'postTags') {
+      $inputValue = '';
+    } else if ($inputValueSource == 'postTagsIds') {
+      $inputValue = '';
+    } else if ($inputValueSource == 'postCategoryIds') {
+      $inputValue = '';
+    } else if ($inputValueSource == 'postCategorySlugs') {
+      $inputValue = '';
+    } else if ($inputValueSource == 'userId') {
+
+
+      $inputValue = isset($currentUser->ID) ? $currentUser->ID : 0;
+    } else if ($inputValueSource == 'userEmail') {
+
+      $inputValue = isset($currentUser->user_email) ? $currentUser->user_email : '';
+    } else if ($inputValueSource == 'userDisplayName') {
+      $inputValue = isset($currentUser->display_name) ? $currentUser->display_name : '';
+    } else if ($inputValueSource == 'userFirstName') {
+      $inputValue = isset($currentUser->first_name) ? $currentUser->first_name : '';
+    } else if ($inputValueSource == 'userLastName') {
+
+
+
+      $inputValue = isset($currentUser->last_name) ? $currentUser->last_name : '';
+    } else if ($inputValueSource == 'userDescription') {
+      $inputValue = isset($currentUser->description) ? $currentUser->description : '';
+    } else if ($inputValueSource == 'userUrl') {
+      $inputValue = isset($currentUser->user_url) ? $currentUser->user_url : '';
+    } else if ($inputValueSource == 'userLogin') {
+      $inputValue = isset($currentUser->user_login) ? $currentUser->user_login : '';
+    } else if ($inputValueSource == 'userNicename') {
+      $inputValue = isset($currentUser->user_nicename) ? $currentUser->user_nicename : '';
+    } else if ($inputValueSource == 'GET') {
+      $inputValue = isset($_GET[$inputName]) ? sanitize_text_field($_GET[$inputName]) : "";
+    } else if ($inputValueSource == 'postMeta') {
+      $inputValue = get_post_meta($post_ID, $inputName, true);
+    } else if ($inputValueSource == 'termMeta') {
+
+      $currentUserId = isset($currentUser->ID) ? $currentUser->ID : 0;
+      $inputValue = get_term_meta($currentUserId, $inputName, true);
+
+      $inputValue = isset($_GET[$inputName]) ? sanitize_text_field($_GET[$inputName]) : "";
+    } else if ($inputValueSource == 'userMeta') {
+      $currentUserId = isset($currentUser->ID) ? $currentUser->ID : 0;
+      $inputValue = get_user_meta($currentUserId, $inputName, true);
+    }
+  }
+
+
+  return $inputValue;
 }

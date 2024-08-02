@@ -179,6 +179,73 @@
         }
       }
     },
+    "progressWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "progress "
+        },
+        "styles": {}
+      }
+    },
+    "progressFill": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "progress-fill "
+        },
+        "styles": {}
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pagination ",
+          "type": "normal",
+          "prevText": "Previous",
+          "nextText": "Next"
+        },
+        "styles": {}
+      }
+    },
+    "paginationItem": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "page-numbers "
+        },
+        "styles": {}
+      }
+    },
+    "next": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeText",
+          "class": "next"
+        },
+        "styles": {}
+      }
+    },
+    "previous": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeText",
+          "class": "previous"
+        },
+        "styles": {}
+      }
+    },
     "tabs": {
       "type": "array",
       "default": []

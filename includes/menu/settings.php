@@ -14,12 +14,12 @@ $post_grid_settings_tab[] = array(
 );
 
 
-$post_grid_settings_tab[] = array(
-  'id' => 'disable_blocks',
-  'title' => sprintf(__('%s Disable Blocks', 'post-grid'), '<i class="fas fa-list-ul"></i>'),
-  'priority' => 10,
-  'active' => ($current_tab == 'disable_blocks') ? true : false,
-);
+// $post_grid_settings_tab[] = array(
+//   'id' => 'disable_blocks',
+//   'title' => sprintf(__('%s Disable Blocks', 'post-grid'), '<i class="fas fa-list-ul"></i>'),
+//   'priority' => 10,
+//   'active' => ($current_tab == 'disable_blocks') ? true : false,
+// );
 
 $post_grid_settings_tab = apply_filters('post_grid_settings_tabs', $post_grid_settings_tab);
 
@@ -137,8 +137,8 @@ $post_grid_settings = get_option('post_grid_settings');
             <?php
             if ($is_pro) :
             ?><span class="pro-feature"><?php echo esc_html($pro_text); ?></span> <?php
-                                                                                            endif;
-                                                                                              ?>
+                                                                                endif;
+                                                                                  ?>
           </li>
         <?php
           }

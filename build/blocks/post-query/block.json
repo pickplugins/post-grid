@@ -5,11 +5,6 @@
   "title": "Post Query",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
-  "parent": [
-    "post-grid/post-grid",
-    "post-grid/accordion-nested",
-    "post-grid/post-grid-filterable"
-  ],
   "usesContext": [
     "post-grid/queryArgs",
     "post-grid/layout",
@@ -71,7 +66,38 @@
       "type": "object",
       "default": {
         "overideGET": true,
-        "items": []
+        "items": [
+          {
+            "val": [
+              "post"
+            ],
+            "id": "postType"
+          },
+          {
+            "val": [
+              "publish"
+            ],
+            "id": "postStatus"
+          },
+          {
+            "val": "DESC",
+            "id": "order"
+          },
+          {
+            "val": [
+              "date"
+            ],
+            "id": "orderby"
+          },
+          {
+            "val": 3,
+            "id": "postsPerPage"
+          },
+          {
+            "val": 1,
+            "id": "paged"
+          }
+        ]
       }
     },
     "blockId": {

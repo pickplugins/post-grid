@@ -46,11 +46,20 @@ class PGBlockFormFieldInput
 
         global $postGridCssY;
         global $PGFormProps;
+        global $post;
+
+        //var_dump($post);
 
         $formId = isset($block->context['post-grid/formId']) ? $block->context['post-grid/formId'] : '';
 
-        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+        $global_post_id = isset($post->ID) ? $post->ID : 0;
 
+        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : $global_post_id;
+        $global_post = get_post($post_ID);
+        $currentUser = wp_get_current_user();
+
+
+        //var_dump($global_post);
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
@@ -74,6 +83,7 @@ class PGBlockFormFieldInput
         $inputValueSource = isset($inputOptions['valueSource']) ? $inputOptions['valueSource'] : '';
 
         $inputName = !empty($inputOptions['name']) ? $inputOptions['name'] : $blockId;
+        $inputNameOriginal = $inputName;
         $inputRequired = isset($inputOptions['required']) ? $inputOptions['required'] : false;
         $inputDisabled = isset($inputOptions['disabled']) ? $inputOptions['disabled'] : false;
         $inputReadonly = isset($inputOptions['readonly']) ? $inputOptions['readonly'] : false;
@@ -106,76 +116,12 @@ class PGBlockFormFieldInput
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
-        //var_dump($inputObjType);
-
-
-
-        if ($inputObjMap == 'postTerm') {
-            $inputName =  'post_term[' . $inputName . ']';
-        }
-
-        if ($inputObjMap == 'postMeta') {
-            $inputName =  'post_meta[' . $inputName . ']';
-        }
-        if ($inputObjMap == 'commentMeta') {
-            $inputName =  'comment_meta[' . $inputName . ']';
-        }
-        if ($inputObjMap == 'termMeta') {
-            $inputName =  'term_meta[' . $inputName . ']';
-        }
-        if ($inputObjMap == 'userMeta') {
-            $inputName =  'user_meta[' . $inputName . ']';
-        }
 
 
         $PGFormProps[$formId][$blockId] = ['errorText' => $errorWrapText, 'inputName' => $inputName, 'includeMail' => $includeMailBody, 'labelText' => $labelText, 'required' => $inputRequired];
 
-
-        if (!empty($inputValueSource)) {
-
-            if ($inputValueSource == 'postID') {
-
-                global $post;
-                $inputValue = isset($post->ID) ? $post->ID : 0;
-            } else if ($inputValueSource == 'postSlug') {
-                global $post;
-                $inputValue = isset($post->post_name) ? $post->post_name : 0;
-            } else if ($inputValueSource == 'postTitle') {
-
-                global $post;
-                $inputValue = isset($post->post_title) ? $post->post_title : 0;
-            } else if ($inputValueSource == 'postAuthorID') {
-
-                global $post;
-                $inputValue = isset($post->post_author) ? $post->post_author : 0;
-            } else if ($inputValueSource == 'postTags') {
-                $inputValue = '';
-            } else if ($inputValueSource == 'postCategoryIds') {
-                $inputValue = '';
-            } else if ($inputValueSource == 'postCategorySlugs') {
-                $inputValue = '';
-            } else if ($inputValueSource == 'userId') {
-
-                $currentUser = wp_get_current_user();
-
-                $inputValue = isset($currentUser->ID) ? $currentUser->ID : 0;
-            } else if ($inputValueSource == 'userEmail') {
-
-                $currentUser = wp_get_current_user();
-                $inputValue = isset($currentUser->user_email) ? $currentUser->user_email : '';
-            } else if ($inputValueSource == 'userDisplayName') {
-                $currentUser = wp_get_current_user();
-                $inputValue = isset($currentUser->display_name) ? $currentUser->display_name : '';
-            } else if ($inputValueSource == 'userLogin') {
-                $currentUser = wp_get_current_user();
-                $inputValue = isset($currentUser->user_login) ? $currentUser->user_login : '';
-            } else if ($inputValueSource == 'userNicename') {
-                $currentUser = wp_get_current_user();
-                $inputValue = isset($currentUser->user_nicename) ? $currentUser->user_nicename : '';
-            } else if ($inputValueSource == 'GET') {
-                $inputValue = isset($_GET[$inputName]) ? sanitize_text_field($_GET[$inputName]) : "";
-            }
-        }
+        $inputName = form_wrap_input_name($inputOptions, ["blockId" => $blockId]);
+        $inputValue = form_wrap_input_default_value($inputOptions, ["post_ID" => $post_ID, "blockId" => $blockId]);
 
 
 
@@ -188,6 +134,7 @@ class PGBlockFormFieldInput
 
 
         ob_start();
+
 
 ?>
 

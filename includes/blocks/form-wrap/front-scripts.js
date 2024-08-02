@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					);
 
 
-					loadingWrap.style.display = "block";
 
 
 
@@ -81,7 +80,34 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var action = args[1];
 						var actionId = action.id;
 
+						console.log(actionId);
 
+
+						if (actionId == "simpleMath") {
+
+							var simpleMathInput = document.querySelector('input[name="simple_math"]');
+
+							console.log(simpleMathInput.value);
+							console.log(window.pgSimpleMath);
+
+							if (window.pgSimpleMath.result != simpleMathInput.value) {
+								onsubmitProceed = false;
+
+								var responseHtml = "";
+								responseHtml += '<div class="error">';
+								responseHtml += "Math challenge failed.";
+								responseHtml += "</div>";
+								responsesWrap.innerHTML = responseHtml;
+								responsesWrap.style.display = "block";
+
+							} else {
+
+								responsesWrap.innerHTML = "";
+
+							}
+
+
+						}
 
 						if (actionId == "validation") {
 							var errors = validateFormFields(formId, formData, fieldInfo);
@@ -173,9 +199,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 
 
+					console.log(onsubmitProceed);
 
 
 					if (onsubmitProceed) {
+						loadingWrap.style.display = "block";
+
 						processSubmit(formId, formData);
 						document.dispatchEvent(pgFormSubmitted);
 					}
@@ -184,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-					setTimeout(() => { }, 3000);
+
 				});
 			});
 		}
@@ -308,6 +337,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var successArgs = data.success == undefined ? {} : data.success;
 						var errorsArgs = data.errors == undefined ? {} : data.errors;
 
+						console.log(successArgs);
+						console.log(errorsArgs);
 
 
 						if (aftersubmitargsObj == null) return;
@@ -316,6 +347,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						for (var i = 0; i < aftersubmitargsObj.length; i++) {
 
 							var action = aftersubmitargsObj[i];
+
+							console.log(action);
 
 
 							var actionId = action.id;
@@ -345,6 +378,37 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								responsesWrap.innerHTML = responseHtml;
 							}
 
+							if (actionId == "showText") {
+								var successMessage = action.successMessage;
+								var failedMessage = action.failedMessage;
+
+								responsesWrap.style.display = "block";
+
+								var responseHtml = "";
+
+
+								if (Object.entries(errorsArgs).length == 0) {
+									responseHtml += '<div class="success">';
+									responseHtml += successMessage;
+									responseHtml += "</div>";
+								} else {
+									responseHtml += '<div class="error">';
+									responseHtml += failedMessage;
+									responseHtml += "</div>";
+								}
+
+
+
+
+
+
+
+
+								responsesWrap.innerHTML = responseHtml;
+							}
+
+
+
 
 
 
@@ -358,6 +422,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								var url = action.url;
 								location.href = url;
 							}
+
 
 
 
@@ -400,7 +465,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									"/wp-json/post-grid/v2/loggedout_current_user",
 									{
 										method: "POST",
-										body: { nonce: formFieldNames.form_wrap_nonce },
+										body: { nonce: formFieldNames._wpnonce },
 									}
 								)
 									.then((response) => {

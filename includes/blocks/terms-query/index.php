@@ -200,6 +200,8 @@ class PGBlockTermsQuery
 
 
         $the_query = new WP_Term_Query($query_args);
+
+
         foreach ($the_query->get_terms() as $term) {
 
 

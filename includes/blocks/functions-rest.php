@@ -20,18 +20,10 @@ class BlockPostGridRest
 			'pgc_meta',
 			array(
 				'get_callback' => function () {
-
-
-
 					$metaValue = get_post_meta(get_the_ID(), 'pgc_meta', true);
-
-
 					return $metaValue;
 				},
 				'update_callback' => function ($value, $object, $field_name) {
-
-
-
 					return update_post_meta($object->ID, 'pgc_meta', $value);
 				},
 			)
@@ -448,6 +440,19 @@ class BlockPostGridRest
 
 			)
 		);
+		register_rest_route(
+			'post-grid/v2',
+			'/get_users',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_users'),
+				'permission_callback' => '__return_true',
+
+			)
+		);
+
+
+
 
 		register_rest_route(
 			'post-grid/v2',
@@ -1269,7 +1274,7 @@ class BlockPostGridRest
 	 * Return process_form_data
 	 *
 	 * @since 1.0.0
-	 * @param WP_REST_Request $post_data Post data.
+	 * @param WP_REST_Request $request Post data.
 	 */
 	public function process_form_data($request)
 	{
@@ -1281,7 +1286,7 @@ class BlockPostGridRest
 
 
 		$formFieldNames = $request->get_param('formFieldNames');
-		$form_wrap_nonce = $request->get_param('form_wrap_nonce');
+		$_wpnonce = $request->get_param('_wpnonce');
 		$_wp_http_referer = $request->get_param('_wp_http_referer');
 		$formType = $request->get_param('formType');
 		$onprocessargs = $request->get_param('onprocessargs');
@@ -1289,7 +1294,7 @@ class BlockPostGridRest
 
 
 
-		if (!wp_verify_nonce($form_wrap_nonce, 'form_wrap_nonce')) {
+		if (!wp_verify_nonce($_wpnonce, 'wp_rest')) {
 
 			$response['errors']['nonce_check_failed'] = __('Security Check Failed', 'post-grid');
 
@@ -1304,7 +1309,7 @@ class BlockPostGridRest
 
 		foreach ($formFieldArr as $formField) {
 
-			if ($formField == 'formType' || $formField == 'onprocessargs' || $formField == '_wp_http_referer' || $formField == 'form_wrap_nonce') {
+			if ($formField == 'formType' || $formField == 'onprocessargs' || $formField == '_wp_http_referer' || $formField == '_wpnonce') {
 				continue;
 			}
 
@@ -1395,11 +1400,11 @@ class BlockPostGridRest
 		$formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
 
-		$form_wrap_nonce = $request->get_param('_wpnonce');
+		$_wpnonce = $request->get_param('_wpnonce');
 
 
 
-		if (!wp_verify_nonce($form_wrap_nonce, 'form_wrap_nonce')) {
+		if (!wp_verify_nonce($_wpnonce, 'wp_rest')) {
 
 			$response['errors']['nonce_check_failed'] = __('Security Check Failed', 'post-grid');
 
@@ -2482,6 +2487,176 @@ class BlockPostGridRest
 				// $term->html = $html;
 
 				$posts[] = $term;
+
+
+
+
+			endforeach;
+
+
+
+
+
+
+
+
+			$responses['posts'] = $posts;
+
+
+		else :
+			$responses['noPosts'] = true;
+
+		endif;
+
+
+		die(wp_json_encode($responses));
+	}
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function get_users($post_data)
+	{
+
+
+
+		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
+		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
+		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
+
+		$prevText = !empty($post_data['prevText']) ? $post_data['prevText'] : "";
+		$nextText = !empty($post_data['nextText']) ? $post_data['nextText'] : "";
+		$maxPageNum = !empty($post_data['maxPageNum']) ? $post_data['maxPageNum'] : 0;
+
+
+		$paged = 1;
+
+		$query_args = [];
+
+		if (is_array($queryArgs))
+			foreach ($queryArgs as $item) {
+
+
+
+				$id = isset($item['id']) ? $item['id'] : '';
+				$val = isset($item['val']) ? $item['val'] : '';
+
+
+
+				if ($val) {
+					if ($id == 'taxonomy') {
+						$query_args['taxonomy'] = $val;
+					} elseif ($id == 'orderby') {
+						$query_args['orderby'] = $val;
+					} elseif ($id == 'order') {
+						$query_args['order'] = $val;
+					} elseif ($id == 'hide_empty') {
+						$query_args['hide_empty'] = $val;
+					} elseif ($id == 'include') {
+						$query_args['include'] =
+							!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'exclude') {
+						$query_args['exclude'] =
+							!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'exclude_tree') {
+						$query_args['exclude_tree'] =
+							!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'number') {
+						$query_args['number'] = $val;
+					} elseif ($id == 'count') {
+						$query_args['count'] = $val;
+					} elseif ($id == 'offset') {
+						$query_args['offset'] = $val;
+					} elseif ($id == 'name') {
+						$query_args['name'] =
+							!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'slug') {
+						$query_args['slug'] =
+							!empty($val) ? explode(',', $val) : [];
+					} elseif ($id == 'hierarchical') {
+						$query_args['hierarchical'] = $val;
+					} elseif ($id == 'search') {
+						$query_args['search'] = $val;
+					} elseif ($id == 'name__like') {
+						$query_args['name__like'] = $val;
+					} elseif ($id == 'description__like') {
+						$query_args['description__like'] = $val;
+					} elseif ($id == 'pad_counts') {
+						$query_args['pad_counts'] = $val;
+					} elseif ($id == 'get') {
+						$query_args['get'] = $val;
+					} elseif ($id == 'parent') {
+						$query_args['parent'] = $val;
+					} elseif ($id == 'childless') {
+						$query_args['childless'] = $val;
+					} elseif ($id == 'child_of') {
+						$query_args['child_of'] = $val;
+					} elseif ($id == 'cache_domain') {
+						$query_args['cache_domain'] = $val;
+					} elseif ($id == 'update_term_meta_cache') {
+						$query_args['update_term_meta_cache'] = $val;
+					} elseif ($id == 'meta_key') {
+						$query_args['meta_key'] = $val;
+					} elseif ($id == 'meta_value') {
+						$query_args['meta_value'] = $val;
+					}
+				}
+			}
+
+
+		$posts = [];
+		$responses = [];
+
+
+		$terms = get_users($query_args);
+
+
+
+		if ($terms) :
+
+			$responses['noPosts'] = false;
+
+
+			foreach ($terms as  $term) :
+
+				$user_data = new stdClass();
+
+				$user_data->ID = $term->ID;
+				$user_data->user_login = $term->user_login;
+				$user_data->user_nicename = $term->user_nicename;
+				$user_data->user_email = $term->user_email;
+				$user_data->registered = $term->user_registered;
+				$user_data->user_status = $term->user_status;
+				$user_data->description = $term->description;
+				$user_data->display_name = $term->display_name;
+				$user_data->first_name = $term->first_name;
+				$user_data->last_name = $term->last_name;
+				$user_data->roles = $term->roles;
+				$user_data->caps = $term->caps;
+				$user_data->url = $term->user_url;
+				$user_data->avatar = get_avatar_url($term->ID);
+				//$user_data->ID = $term->ID;
+
+				// $term_id = $term->term_id;
+				// $term_taxonomy = $term->taxonomy;
+				// $term->link = get_term_link($term_id, $term_taxonomy);
+
+
+				// $blocks = parse_blocks($rawData);
+
+				// $html = '';
+
+				// foreach ($blocks as $block) {
+				// 	//look to see if your block is in the post content -> if yes continue past it if no then render block as normal
+				// 	$html .= render_block($block);
+				// }
+
+				// $term->html = $html;
+
+				$posts[] = $user_data;
 
 
 

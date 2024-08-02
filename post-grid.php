@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.86
+Version: 2.2.87
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.86');
+      define('post_grid_version', '2.2.87');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -213,6 +213,26 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/flip-box', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/flip-box/index.php');
       }
+      if (!in_array('post-grid/flip-box-back', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/flip-box-back/index.php');
+      }
+      if (!in_array('post-grid/flip-box-front', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/flip-box-front/index.php');
+      }
+      if (!in_array('post-grid/user-query', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/user-query/index.php');
+      }
+      if (!in_array('post-grid/user-query-pagination', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/user-query-pagination/index.php');
+      }
+
+
+      if (!in_array('post-grid/user-fields', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/user-fields/index.php');
+      }
+
+
+
       if (!in_array('post-grid/layers', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/layers/index.php');
       }
@@ -234,6 +254,12 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/date-countdown', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/date-countdown/index.php');
       }
+      // if (!in_array('post-grid/before-start-wrap', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/before-start-wrap/index.php');
+      // }
+      // if (!in_array('post-grid/after-expired-wrap', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/after-expired-wrap/index.php');
+      // }
       if (!in_array('post-grid/popup', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/popup/index.php');
       }
@@ -317,6 +343,22 @@ if (!class_exists('PostGrid')) {
       }
       if (!in_array('post-grid/form-wrap', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/functions.php');
+      }
+
+
+
+
+      if (!in_array('post-grid/gallery-images', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/gallery-images/index.php');
+      }
+      if (!in_array('post-grid/gallery-images-field', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/gallery-images-field/index.php');
+      }
+
+
+
+      if (!in_array('post-grid/form-field-simple-math', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/form-field-simple-math/index.php');
       }
       if (!in_array('post-grid/form-field-input', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/form-field-input/index.php');

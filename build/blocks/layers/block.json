@@ -31,6 +31,15 @@
           "linkTarget": "_blank",
           "customUrl": ""
         },
+        "styles": {}
+      }
+    },
+    "item": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "pg-layer"
+        },
         "styles": {
           "display": {
             "Desktop": "block"

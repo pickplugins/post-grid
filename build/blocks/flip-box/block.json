@@ -41,7 +41,7 @@
         }
       }
     },
-    "fontItem": {
+    "front": {
       "type": "object",
       "default": {
         "options": {
@@ -64,7 +64,7 @@
         }
       }
     },
-    "backItem": {
+    "back": {
       "type": "object",
       "default": {
         "options": {

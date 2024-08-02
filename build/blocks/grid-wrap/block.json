@@ -48,6 +48,14 @@
         "styles": {}
       }
     },
+    "nthItemStyle": {
+      "type": "array",
+      "default": [
+        {
+          "styles": {}
+        }
+      ]
+    },
     "visible": {
       "type": "object",
       "default": {}

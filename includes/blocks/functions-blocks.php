@@ -814,7 +814,7 @@ function post_grid_parse_query_terms($queryArgs)
       $query_args['exclude_tree'] =
         !empty($val) ? explode(',', $val) : [];
     } elseif ($id == 'number') {
-      $query_args['number'] = $val;
+      $query_args['number'] = (int)$val;
     } elseif ($id == 'count') {
       $query_args['count'] = $val;
     } elseif ($id == 'offset') {
@@ -1774,6 +1774,10 @@ function cssAttrParse($key)
     $cssProp = 'transition';
   } else if ($key == 'transform') {
     $cssProp = 'transform';
+  } else if ($key == 'transformOrigin') {
+    $cssProp = 'transform-origin';
+  } else if ($key == 'transformStyle') {
+    $cssProp = 'transform-style';
   } else if ($key == 'gap') {
     $cssProp = 'gap';
   } else if ($key == 'rowGap') {
@@ -1830,6 +1834,8 @@ function pgb_post_query_prams($query_args, $prams)
 function post_grid_upload_file($data)
 {
 
+
+
   $upload_dir       = wp_upload_dir();
 
 
@@ -1845,13 +1851,15 @@ function post_grid_upload_file($data)
     require_once(ABSPATH . 'wp-includes/pluggable.php');
   }
 
+  if (empty($data['tmp_name'])) return;
+
   // @new
   $file             = array();
-  $file['error']    = $data['error'];
-  $file['tmp_name'] = $data['tmp_name'];
-  $file['name']     = $data['name'];
-  $file['type']     = $data['type'];
-  $file['size']     = filesize($data['tmp_name']);
+  $file['error']    = isset($data['error']) ? $data['error'] : '';
+  $file['tmp_name'] = isset($data['tmp_name']) ? $data['tmp_name'] : "";
+  $file['name']     = isset($data['name']) ? $data['name'] : '';
+  $file['type']     = isset($data['type']) ? $data['type'] : '';
+  $file['size']     = isset($data['tmp_name']) ? filesize($data['tmp_name']) : 0;
 
   // upload file to server
   // @new use $file instead of $image_upload
@@ -4565,4 +4573,584 @@ function generateShortcode($params, $default)
   $shortcode .= ']';
 
   return $shortcode;
+}
+
+
+
+function post_grid_breadcrumb_dynamic_links()
+{
+  $home_url = get_bloginfo('url');
+  $breadcrumb_home_text = "Home";
+  $breadcrumb_display_home = "yes";
+  $active_plugins = get_option('active_plugins');
+
+  $array_list = [];
+
+  if (is_front_page() && is_home()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : $home_url,
+        'label' => ($breadcrumb_home_text),
+
+      );
+  } elseif (is_front_page()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : $home_url,
+        'label' => ($breadcrumb_home_text),
+      );
+  } elseif (is_home()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => ($breadcrumb_home_text),
+      );
+
+    $array_list[] = array(
+      'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : $home_url,
+      'label' => __('Blog', 'breadcrumb'),
+    );
+  } else if (is_attachment()) {
+
+    $current_attachment_id = get_query_var('attachment_id');
+    $current_attachment_link = get_attachment_link($current_attachment_id);
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => ($breadcrumb_home_text),
+      );
+
+    $array_list[] = array(
+      'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : $current_attachment_link,
+      'label' => get_the_title(),
+    );
+  } else if (in_array('woocommerce/woocommerce.php', (array) $active_plugins) && is_woocommerce() && is_shop()) {
+    $shop_page_id = wc_get_page_id('shop');
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $array_list[] = array(
+      'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_permalink($shop_page_id),
+      'label' => get_the_title($shop_page_id),
+    );
+  } else if (is_page()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+
+    global $post;
+    $home = get_post(get_option('page_on_front'));
+
+    $j = 2;
+
+    for ($i = count($post->ancestors) - 1; $i >= 0; $i--) {
+      if (($home->ID) != ($post->ancestors[$i])) {
+
+        $array_list[] = array(
+          'link' => get_permalink($post->ancestors[$i]),
+          'label' => get_the_title($post->ancestors[$i]),
+        );
+      }
+
+      $j++;
+    }
+
+
+    $array_list[] = array(
+      'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash :  get_permalink($post->ID),
+      'label' => get_the_title($post->ID),
+    );
+  } else if (is_singular()) {
+
+    if (is_preview()) {
+
+      $array_list[] = array(
+        'link' => '#',
+        'label' => __('Post preview', 'breadcrumb'),
+      );
+
+
+      return $array_list;
+    }
+
+
+    $permalink_structure = get_option('permalink_structure', true);
+    //        $permalink_structure = str_replace('%postname%','',$permalink_structure);
+    //        $permalink_structure = str_replace('%post_id%','',$permalink_structure);
+
+    $permalink_items = array_filter(explode('/', $permalink_structure));
+
+    global $post;
+    $author_id = $post->post_author;
+    $author_posts_url = get_author_posts_url($author_id);
+    $author_name = get_the_author_meta('display_name', $author_id);
+
+    $post_date_year = get_the_time('Y');
+    $post_date_month = get_the_time('m');
+    $post_date_day = get_the_time('d');
+
+    $get_month_link = get_month_link($post_date_year, $post_date_month);
+    $get_year_link = get_year_link($post_date_year);
+    $get_day_link = get_day_link($post_date_year, $post_date_month, $post_date_day);
+
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+
+
+    if (!empty($permalink_structure) && get_post_type() == 'post') {
+
+      $item_count = 2;
+      foreach ($permalink_items as $item) :
+
+
+        if ($item == '%year%') {
+
+          $array_list[] = array(
+            'link' => $get_year_link,
+            'label' => $post_date_year,
+          );
+        } elseif ($item == '%monthnum%') {
+
+          $array_list[] = array(
+            'link' => $get_month_link,
+            'label' => $post_date_month,
+          );
+        } elseif ($item == '%day%') {
+
+          $array_list[] = array(
+            'link' => $get_day_link,
+            'label' => $post_date_day,
+          );
+        } elseif ($item == '%author%') {
+
+          $array_list[] = array(
+            'link' => $author_posts_url,
+            'label' => $author_name,
+          );
+        } elseif ($item == '%post_id%') {
+
+          $array_list[] = array(
+            'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_permalink($post->ID),
+            'label' => $post->ID,
+          );
+        } elseif ($item == '%postname%') {
+
+          $array_list[] = array(
+            'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_permalink($post->ID),
+            'label' => get_the_title($post->ID),
+          );
+        } elseif ($item == 'archives') {
+
+          $array_list[] = array(
+            'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_permalink($post->ID),
+            'label' => __('Archives', 'breadcrumb'),
+          );
+        } elseif ($item == '%category%') {
+
+          $category_string = get_query_var('category_name');
+          $category_arr = array();
+          $taxonomy = 'category';
+
+
+          if (strpos($category_string, '/')) {
+
+            $category_arr = explode('/', $category_string);
+            $category_count = count($category_arr);
+            $last_cat = $category_arr[($category_count - 1)];
+
+            $term_data = get_term_by('slug', $last_cat, $taxonomy);
+
+            $term_id = $term_data->term_id;
+            $term_name = $term_data->name;
+            $term_link = get_term_link($term_id, $taxonomy);
+
+
+
+            $parents_id  = get_ancestors($term_id, $taxonomy);
+
+            $parents_id = array_reverse($parents_id);
+
+            $i = $item_count + 1;
+            foreach ($parents_id as $id) {
+
+              $parent_term_link = get_term_link($id, $taxonomy);
+              $paren_term_name = get_term_by('id', $id, $taxonomy);
+
+              $array_list[] = array(
+                'link' => $parent_term_link,
+                'label' => $paren_term_name->name,
+              );
+
+
+              $i++;
+            }
+
+            $array_list[] = array(
+              'link' => $term_link,
+              'label' => $term_name,
+            );
+          } else {
+
+            $term_data = get_term_by('slug', $category_string, $taxonomy);
+
+            $term_id = isset($term_data->term_id) ? $term_data->term_id : '';
+            $term_name = isset($term_data->name) ? $term_data->name : '';
+
+            if (!empty($term_id)) :
+              $term_link = get_term_link($term_id, $taxonomy);
+
+              $array_list[] = array(
+                'link' => $term_link,
+                'label' => $term_name,
+              );
+            endif;
+          }
+        }
+
+
+
+
+
+
+        $item_count++;
+
+      endforeach;
+    } elseif (get_post_type() == 'product') {
+
+      $shop_page_id = wc_get_page_id('shop');
+      $woocommerce_permalinks = get_option('woocommerce_permalinks', '');
+      $product_base = $woocommerce_permalinks['product_base'];
+      $permalink_items = array_filter(explode('/', $product_base));
+
+      if (in_array('shop', $permalink_items)) {
+
+        $array_list[] = array(
+          'link' => get_permalink($shop_page_id),
+          'label' => get_the_title($shop_page_id),
+        );
+      }
+
+      if (in_array('%product_cat%', $permalink_items)) {
+
+        $category_string = get_query_var('product_cat');
+
+        //$category_string = get_query_var('category_name');
+        $category_arr = array();
+        $taxonomy = 'product_cat';
+        if (strpos($category_string, '/')) {
+
+          $category_arr = explode('/', $category_string);
+          $category_count = count($category_arr);
+          $last_cat = $category_arr[($category_count - 1)];
+
+          $term_data = get_term_by('slug', $last_cat, $taxonomy);
+
+          $term_id = $term_data->term_id;
+          $term_name = $term_data->name;
+          $term_link = get_term_link($term_id, $taxonomy);
+
+
+          $parents_id  = get_ancestors($term_id, $taxonomy);
+
+          $parents_id = array_reverse($parents_id);
+
+          $i = 3;
+          foreach ($parents_id as $id) {
+
+            $parent_term_link = get_term_link($id, $taxonomy);
+            $paren_term_name = get_term_by('id', $id, $taxonomy);
+
+            $array_list[] = array(
+              'link' => $parent_term_link,
+              'label' => $paren_term_name->name,
+            );
+
+
+            $i++;
+          }
+
+          $array_list[] = array(
+            'link' => $term_link,
+            'label' => $term_name,
+          );
+        } else {
+
+          $term_data = get_term_by('slug', $category_string, $taxonomy);
+
+          $term_id = isset($term_data->term_id) ? $term_data->term_id : '';
+          $term_name = isset($term_data->name) ? $term_data->name : '';
+
+          if (!empty($term_id)) :
+            $term_link = get_term_link($term_id, $taxonomy);
+
+            $array_list[] = array(
+              'link' => $term_link,
+              'label' => $term_name,
+            );
+
+            $array_list[] = array(
+              'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_permalink($post->ID),
+              'label' => get_the_title($post->ID),
+            );
+          endif;
+        }
+      }
+
+      $array_list_count = count($array_list);
+      $array_list[] = array(
+        'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_permalink($post->ID),
+        'label' => get_the_title($post->ID),
+      );
+
+
+
+      //            $array_list[3] = array(
+      //                'link'=>get_permalink($post->ID),
+      //                'label' => get_the_title($post->ID),
+      //            );
+
+
+    } else {
+
+      $postType = get_post_type();
+      $pt = get_post_type_object($postType);
+      $posTypeName = isset($pt->labels->singular_name) ? $pt->labels->singular_name : $postType;
+
+      $array_list[] = array(
+        'link' => '#',
+        'label' => $posTypeName,
+      );
+
+      $array_list[] = array(
+        'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_permalink($post->ID),
+        'label' => get_the_title($post->ID),
+      );
+    }
+  } else if (is_tax()) {
+
+    $queried_object = get_queried_object();
+    $term_name = $queried_object->name;
+    $term_id = $queried_object->term_id;
+
+    $taxonomy = $queried_object->taxonomy;
+    $term_link = get_term_link($term_id, $taxonomy);
+    $parents_id  = get_ancestors($term_id, $taxonomy);
+
+    $parents_id = array_reverse($parents_id);
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $i = 2;
+    foreach ($parents_id as $id) {
+
+      $parent_term_link = get_term_link($id, $taxonomy);
+      $paren_term_name = get_term_by('id', $id, $taxonomy);
+
+      $array_list[] = array(
+        'link' => $parent_term_link,
+        'label' => $paren_term_name->name,
+      );
+
+
+      $i++;
+    }
+
+    $array_list[] = array(
+      'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : $term_link,
+      'label' => $term_name,
+    );
+  } else if (is_category()) {
+
+    $current_cat_id = get_query_var('cat');
+    $queried_object = get_queried_object();
+
+    $taxonomy = $queried_object->taxonomy;
+    $term_id = $queried_object->term_id;
+    $term_name = $queried_object->name;
+    $term_link = get_term_link($term_id, $taxonomy);
+
+    $parents_id  = get_ancestors($term_id, $taxonomy);
+    $parents_id = array_reverse($parents_id);
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $array_list[] = array(
+      'link' => '#',
+      'label' => $taxonomy,
+    );
+
+
+    $i = 3;
+    foreach ($parents_id as $id) {
+
+      $parent_term_link = get_term_link($id, $taxonomy);
+      $paren_term_name = get_term_by('id', $id, $taxonomy);
+
+      $array_list[] = array(
+        'link' => $parent_term_link,
+        'label' => $paren_term_name->name,
+      );
+
+
+      $i++;
+    }
+
+    $array_list[] = array(
+      'link' => !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : $term_link,
+      'label' => $term_name,
+    );
+  } else if (is_tag()) {
+
+    $current_tag_id = get_query_var('tag_id');
+    $current_tag = get_tag($current_tag_id);
+    $current_tag_name = $current_tag->name;
+
+    $current_tag_link = get_tag_link($current_tag_id);;
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $array_list[] = array(
+      'link' => '#',
+      'label' => __('Tag', 'breadcrumb'),
+    );
+
+
+    $array_list[] = array(
+      'link' =>  !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : $current_tag_link,
+      'label' => $current_tag_name,
+    );
+  } else if (is_author()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+
+    $array_list[] = array(
+      'link' => '#',
+      'label' => __('Author', 'breadcrumb'),
+    );
+
+    $array_list[] = array(
+      'link' =>  !empty($breadcrumb_url_hash) ? $breadcrumb_url_hash : get_author_posts_url(get_the_author_meta("ID")),
+      'label' => get_the_author(),
+    );
+  } else if (is_search()) {
+
+    $current_query = sanitize_text_field(get_query_var('s'));
+
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $array_list[] = array(
+      'link' =>  '#',
+      'label' => __('Search', 'breadcrumb'),
+    );
+
+
+    $array_list[] = array(
+      'link' =>  '#',
+      'label' => $current_query,
+    );
+  } else if (is_year()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $array_list[] = array(
+      'link' => '#',
+      'label' => __('Year', 'breadcrumb'),
+    );
+
+    $array_list[] = array(
+      'link' =>  '#',
+      'label' => get_the_date('Y'),
+    );
+  } else if (is_month()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+    $array_list[] = array(
+      'link' => '#',
+      'label' => __('Month', 'breadcrumb'),
+    );
+
+
+    $array_list[] = array(
+      'link' =>  '#',
+      'label' => get_the_date('F'),
+    );
+  } else if (is_date()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $array_list[] = array(
+      'link' => '#',
+      'label' => __('Date', 'breadcrumb'),
+    );
+
+    $array_list[] = array(
+      'link' =>  '#',
+      'label' => get_the_date(),
+    );
+  } elseif (is_404()) {
+
+    if ($breadcrumb_display_home == 'yes')
+      $array_list[] = array(
+        'link' => $home_url,
+        'label' => $breadcrumb_home_text,
+      );
+
+    $array_list[] = array(
+      'link' =>  '#',
+      'label' => __('404', 'breadcrumb'),
+    );
+  }
+
+  return $array_list;
 }

@@ -154,6 +154,10 @@ class PGBlockAccordionNested
 
     // //* Visible condition
 
+    $accordionData = [
+      "id" => $blockId,
+      "activeIndex" => 999,
+    ];
 
     ob_start();
 
@@ -163,9 +167,11 @@ class PGBlockAccordionNested
 ?>
 
 
-    <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-accordion="<?php echo esc_attr(json_encode($accOptions)) ?>">
+    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-pgaccordion="<?php echo esc_attr(json_encode($accordionData)) ?>">
       <?php echo $content; ?>
     </div>
+
+
 
     <?php
     if ($schemaEnable) :

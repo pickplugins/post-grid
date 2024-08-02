@@ -99,6 +99,20 @@
         }
       }
     },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": true,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-check-circle",
+          "position": "beforeText",
+          "class": "text-icon"
+        },
+        "styles": {}
+      }
+    },
     "errorWrap": {
       "type": "object",
       "default": {

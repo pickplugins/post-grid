@@ -1,0 +1,134 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/form-steps",
+  "title": "Form Steps",
+  "textdomain": "post-grid",
+  "category": "post-grid-tools",
+  "parent": [
+    "post-grid/form-wrap"
+  ],
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "tag": "div",
+          "class": "pg-form-steps"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "backgroundColor": {
+            "Desktop": "#F1F7F9"
+          }
+        }
+      }
+    },
+    "navsWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "tag": "div",
+          "class": "pg-form-steps"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "backgroundColor": {
+            "Desktop": "#F1F7F9"
+          }
+        }
+      }
+    },
+    "navItem": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "tag": "div",
+          "class": "pg-form-steps"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "backgroundColor": {
+            "Desktop": "#F1F7F9"
+          }
+        }
+      }
+    },
+    "next": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "tag": "div",
+          "class": "pg-form-steps"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "backgroundColor": {
+            "Desktop": "#F1F7F9"
+          }
+        }
+      }
+    },
+    "prev": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "",
+          "tag": "div",
+          "class": "pg-form-steps"
+        },
+        "styles": {
+          "display": {
+            "Desktop": "block"
+          },
+          "backgroundColor": {
+            "Desktop": "#F1F7F9"
+          }
+        }
+      }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "form-steps"
+  ],
+  "description": "The layer block is an HTML element that can be styled and positioned on a webpage to structure and organize content."
+}

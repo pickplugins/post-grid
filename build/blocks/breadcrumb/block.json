@@ -146,6 +146,7 @@
           "showLabel": true,
           "showSeparator": true,
           "showIcon": false,
+          "elementSource": "",
           "iconPosition": "beforeLabel"
         },
         "styles": {

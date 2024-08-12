@@ -31,12 +31,8 @@ class PGBlockTermsList
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
 
   function addUTMTracking($link, $utmTracking)
@@ -284,7 +280,7 @@ class PGBlockTermsList
 ?>
 
 
-    <<?php echo tag_escape($wrapperTag); ?> class="
+    <<?php echo pg_tag_escape($wrapperTag); ?> class="
                                         <?php echo $blockId; ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
@@ -452,7 +448,7 @@ class PGBlockTermsList
       <?php endif; ?>
 
 
-    </<?php echo tag_escape($wrapperTag); ?>>
+    </<?php echo pg_tag_escape($wrapperTag); ?>>
 
 
 

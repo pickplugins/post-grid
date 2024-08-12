@@ -31,12 +31,8 @@ class PGBlockAfterExpiredWrap
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -96,19 +92,19 @@ class PGBlockAfterExpiredWrap
 
 
     if ($wrapperTag == 'a') { ?>
-<a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
-  href="" target="">
-  <?php echo $content ?>
-</a>
-<?php
+      <a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+        href="" target="">
+        <?php echo $content ?>
+      </a>
+    <?php
 
     } else { ?>
-<<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="
                     <?php echo esc_attr($wrapperClass); ?>
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($blockAlign); ?>">
-  <?php echo $content ?>
-</<?php echo tag_escape($wrapperTag); ?>>
+        <?php echo $content ?>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }
 

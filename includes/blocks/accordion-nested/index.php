@@ -48,12 +48,8 @@ class PGBlockAccordionNested
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -133,7 +129,7 @@ class PGBlockAccordionNested
 
       $json['mainEntity'][$i]['@type'] = "Question";
       $json['mainEntity'][$i]['@id'] = isset($block['attrs']['blockId']) ? "#" . $block['attrs']['blockId'] : '';
-      $json['mainEntity'][$i]['name'] = isset($block['attrs']['headerLabel']['options']['text']) ? $block['attrs']['headerLabel']['options']['text'] : '';
+      $json['mainEntity'][$i]['name'] = isset($block['attrs']['headerLabel']['options']['text']) ? _wp_specialchars($block['attrs']['headerLabel']['options']['text'], ENT_QUOTES)  : '';
       $json['mainEntity'][$i]['acceptedAnswer']['@type'] = "Answer";
       $json['mainEntity'][$i]['acceptedAnswer']['text'] = _wp_specialchars(render_block($block), ENT_QUOTES);
 

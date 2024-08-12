@@ -40,9 +40,7 @@ class PGBlockTermsQueryItem
     //         wp_enqueue_script('pg-text');
     //     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -256,7 +254,7 @@ class PGBlockTermsQueryItem
 
     <?php if (!empty($wrapperTag)) : ?>
 
-      <<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($wrapperClass); ?>">
         <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
@@ -314,7 +312,7 @@ class PGBlockTermsQueryItem
 
 
 
-      </<?php echo tag_escape($wrapperTag); ?>>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
 
     <?php elseif (empty($wrapperTag)) : ?>
 

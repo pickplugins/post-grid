@@ -28,12 +28,8 @@ class PGBlockAccordionNestedItem
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
-	function front_style($attributes)
-	{
-	}
+	function front_script($attributes) {}
+	function front_style($attributes) {}
 
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)
@@ -213,7 +209,7 @@ class PGBlockAccordionNestedItem
 
 
 ?>
-		<<?php echo tag_escape($headerTag); ?> id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>">
+		<<?php echo pg_tag_escape($headerTag); ?> id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>">
 			<?php if ($iconPosition == 'left') : ?>
 				<span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
 					<?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
@@ -228,11 +224,11 @@ class PGBlockAccordionNestedItem
 			<?php if ($labelIconPosition == 'beforeLabel') : ?>
 				<?php echo wp_kses_post($labelIconHtml); ?>
 			<?php endif; ?>
-			<<?php echo tag_escape($headerLabelTag); ?> index="" <?php if ($headerLabelTag == 'a') :
-																															$link = strtolower($headerLabelText);
-																															$link = str_replace(" ", "-", $link);
+			<<?php echo pg_tag_escape($headerLabelTag); ?> index="" <?php if ($headerLabelTag == 'a') :
+																																$link = strtolower($headerLabelText);
+																																$link = str_replace(" ", "-", $link);
 
-																														?> href="#<?php echo esc_attr($link); ?>" <?php endif; ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+																															?> href="#<?php echo esc_attr($link); ?>" <?php endif; ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
 
 
 				<?php if ($labelCounterPosition == 'beforeLabelText') : ?>
@@ -256,7 +252,7 @@ class PGBlockAccordionNestedItem
 				<?php endif; ?>
 
 
-			</<?php echo tag_escape($headerLabelTag); ?>>
+			</<?php echo pg_tag_escape($headerLabelTag); ?>>
 			<?php if ($labelIconPosition == 'afterLabel') : ?>
 				<?php echo wp_kses_post($labelIconHtml); ?>
 			<?php endif; ?>
@@ -266,11 +262,11 @@ class PGBlockAccordionNestedItem
 					<?php echo wp_kses_post($iconToggleHtml); ?>
 				</span>
 			<?php endif; ?>
-		</<?php echo tag_escape($headerTag); ?>>
+		</<?php echo pg_tag_escape($headerTag); ?>>
 
-		<<?php echo tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>">
+		<<?php echo pg_tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>">
 			<?php echo $content; ?>
-		</<?php echo tag_escape($contentWrapperTag); ?>>
+		</<?php echo pg_tag_escape($contentWrapperTag); ?>>
 <?php return ob_get_clean();
 	}
 }

@@ -29,12 +29,8 @@ class PGBlockUserFields
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -203,7 +199,7 @@ class PGBlockUserFields
 ?>
 
 
-    <<?php echo tag_escape($wrapperTag); ?> class="
+    <<?php echo pg_tag_escape($wrapperTag); ?> class="
           <?php echo $blockId; ?>
           <?php echo esc_attr($wrapperClass); ?>">
 
@@ -308,7 +304,7 @@ class PGBlockUserFields
           <?php echo wp_kses_post($postfixText); ?>
         </span>
       <?php endif; ?>
-    </<?php echo tag_escape($wrapperTag); ?>>
+    </<?php echo pg_tag_escape($wrapperTag); ?>>
 
 
 

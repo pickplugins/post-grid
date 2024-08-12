@@ -31,9 +31,7 @@ class PGBlockWooPrice
     );
   }
 
-  function front_script($attributes)
-  {
-  }
+  function front_script($attributes) {}
   function front_style($attributes)
   {
 
@@ -172,7 +170,7 @@ class PGBlockWooPrice
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="
               <?php echo esc_attr($blockId); ?>
               <?php echo esc_attr($wrapperClass); ?>">
 
@@ -268,7 +266,7 @@ class PGBlockWooPrice
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
 
-      </<?php echo tag_escape($wrapperTag); ?>>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php endif; ?>
 
 

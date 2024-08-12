@@ -40,9 +40,7 @@ class PGBlockTermsQuery
       //wp_enqueue_style('pgpostquery_front_style');
     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
 
 
@@ -249,7 +247,7 @@ class PGBlockTermsQuery
 
 
       ?>
-          <<?php echo tag_escape($itemWrapTag); ?> class="
+          <<?php echo pg_tag_escape($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php ?>
             <?php if ($itemWrapCounterClass) {
@@ -260,7 +258,7 @@ class PGBlockTermsQuery
             } ?> ">
             <?php echo wp_kses_post($html);
             ?>
-          </<?php echo tag_escape($itemWrapTag); ?>>
+          </<?php echo pg_tag_escape($itemWrapTag); ?>>
       <?php
           $counter++;
         }

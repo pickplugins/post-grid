@@ -50,7 +50,7 @@
           "field": "name",
           "prefix": "",
           "isLink": "",
-          "thumbSize": "low",
+          "thumbSize": "high",
           "dateFormat": "Y-M-d",
           "linkToPlug": "false",
           "linkText": "",

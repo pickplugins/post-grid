@@ -2286,18 +2286,21 @@ class BlockPostGridRest
 			while ($post_grid_wp_query->have_posts()) :
 				$post_grid_wp_query->the_post();
 
-				global $post;
+				//global $post;
+				$post_id = get_the_id();
 
-				$post_id = $post->ID;
-				$post->post_id = $post->ID;
-				$post->post_title = $post->post_title;
-				$post->post_excerpt = wp_kses_post($post->post_excerpt);
-				$post->post_content = $post->post_content;
+				$post = get_post($post_id);
+				$postData = new stdClass();
+
+				$postData->post_id = $post->ID;
+				$postData->post_title = $post->post_title;
+				//$post->post_excerpt = wp_kses_post($post->post_excerpt);
+				//$post->post_content = $post->post_content;
 				$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id));
 				$thumb_url = isset($thumb[0]) ? $thumb[0] : '';
-				$post->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/images/placeholder.png';
+				$postData->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/images/placeholder.png';
 
-				$post->is_pro = ($post_id % 2 == 0) ? true : false;
+				//$post->is_pro = ($post_id % 2 == 0) ? true : false;
 
 
 				$blocks = parse_blocks($rawData);
@@ -2309,9 +2312,9 @@ class BlockPostGridRest
 					$html .= render_block($block);
 				}
 
-				$post->html = $html;
+				//$postData->html = $html;
 
-				$posts[] = $post;
+				$posts[] = $postData;
 
 
 

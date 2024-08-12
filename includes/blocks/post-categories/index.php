@@ -31,12 +31,8 @@ class PGBlockPostCategories
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -190,7 +186,7 @@ class PGBlockPostCategories
 ?>
 
 
-    <<?php echo tag_escape($wrapperTag); ?> class=" <?php echo $blockId; ?>     <?php echo esc_attr($wrapperClass); ?>">
+    <<?php echo pg_tag_escape($wrapperTag); ?> class=" <?php echo $blockId; ?>     <?php echo esc_attr($wrapperClass); ?>">
 
       <?php if ($iconPosition == 'beforeFronttext') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
@@ -361,7 +357,7 @@ class PGBlockPostCategories
       <?php endif; ?>
 
 
-    </<?php echo tag_escape($wrapperTag); ?>>
+    </<?php echo pg_tag_escape($wrapperTag); ?>>
 
 
 

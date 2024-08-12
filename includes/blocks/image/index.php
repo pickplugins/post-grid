@@ -35,16 +35,12 @@ class PGBlockImage
     wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/image/lazy-load.js', [], '', true);
   }
 
-  function front_scripts($attributes)
-  {
-  }
+  function front_scripts($attributes) {}
 
 
 
 
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
 
 
@@ -418,7 +414,7 @@ class PGBlockImage
     if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>">
         <?php if (!empty($featuredImageLinkTo)) : ?>
@@ -439,7 +435,7 @@ class PGBlockImage
           <?php endif; ?>
 
         <?php endif; ?>
-      </<?php echo tag_escape($wrapperTag); ?>>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php
 
     endif;
@@ -478,17 +474,17 @@ class PGBlockImage
 
       <?php if (!empty($featuredImageLinkTo)) : ?>
         <a href=" <?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-          <<?php echo tag_escape($wrapperTag); ?> class="
+          <<?php echo pg_tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>">
 
-          </<?php echo tag_escape($wrapperTag); ?>>
+          </<?php echo pg_tag_escape($wrapperTag); ?>>
         </a>
       <?php else : ?>
 
-        <<?php echo tag_escape($wrapperTag); ?> class="
+        <<?php echo pg_tag_escape($wrapperTag); ?> class="
                           <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-        </<?php echo tag_escape($wrapperTag); ?>>
+        </<?php echo pg_tag_escape($wrapperTag); ?>>
       <?php endif; ?>
 
     <?php

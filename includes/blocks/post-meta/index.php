@@ -31,12 +31,8 @@ class BlockPostMeta
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
-	function front_style($attributes)
-	{
-	}
+	function front_script($attributes) {}
+	function front_style($attributes) {}
 
 
 	function nestedToSingle($array, $slug = '')
@@ -104,8 +100,8 @@ class BlockPostMeta
 		$templateFront = isset($attributes['templateFront']) ? $attributes['templateFront'] : '';
 
 		$blockCssY = isset($attributes["blockCssY"])
-		? $attributes["blockCssY"]
-		: [];
+			? $attributes["blockCssY"]
+			: [];
 		$postGridCssY[] = isset($blockCssY["items"]) ? $blockCssY["items"] : [];
 
 
@@ -186,11 +182,11 @@ class BlockPostMeta
 
 		if (!empty($wrapperTag)) :
 ?>
-<<?php echo tag_escape($wrapperTag); ?> class="
+			<<?php echo pg_tag_escape($wrapperTag); ?> class="
                 <?php echo esc_attr($blockId); ?>
                 <?php echo esc_attr($wrapperClass); ?>">
 
-  <?php
+				<?php
 
 
 				// if (gettype($metaValue) == 'array' || gettype($metaValue) == 'object') {
@@ -259,7 +255,7 @@ class BlockPostMeta
 				?>
 
 
-</<?php echo tag_escape($wrapperTag); ?>>
+			</<?php echo pg_tag_escape($wrapperTag); ?>>
 
 <?php
 

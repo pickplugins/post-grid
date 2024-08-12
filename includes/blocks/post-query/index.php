@@ -40,9 +40,7 @@ class PGBlockPostQuery
       //wp_enqueue_style('pgpostquery_front_style');
     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
 
 
@@ -233,7 +231,7 @@ class PGBlockPostQuery
           <?php if ($itemWrapExcluded) : ?>
 
           <?php else : ?>
-            <<?php echo tag_escape($itemWrapTag); ?> class="
+            <<?php echo pg_tag_escape($itemWrapTag); ?> class="
             <?php echo esc_attr($itemWrapClass); ?>
             <?php if ($itemWrapTermsClass) {
               echo esc_attr($slug);
@@ -256,7 +254,7 @@ class PGBlockPostQuery
             <?php if ($itemWrapExcluded) : ?>
 
             <?php else : ?>
-            </<?php echo tag_escape($itemWrapTag); ?>>
+            </<?php echo pg_tag_escape($itemWrapTag); ?>>
           <?php endif; ?>
 
 

@@ -31,9 +31,7 @@ class PGBlockWooCategories
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
+	function front_script($attributes) {}
 	function front_style($attributes)
 	{
 
@@ -94,13 +92,13 @@ class PGBlockWooCategories
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
+			<<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
 
 				<?php
 				echo do_shortcode(generateShortcode($shortcodeParam, "product_categories"));
 				?>
 
-			</<?php echo tag_escape($wrapperTag); ?>>
+			</<?php echo pg_tag_escape($wrapperTag); ?>>
 		<?php
 
 		endif;

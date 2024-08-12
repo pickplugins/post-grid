@@ -31,12 +31,8 @@ class PGBlockFeaturedImage
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -280,7 +276,7 @@ class PGBlockFeaturedImage
     if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="
                                                           <?php echo esc_attr($blockId); ?>
                                                           <?php echo esc_attr($wrapperClass); ?>">
         <?php if (!empty($featuredImageLinkTo)) : ?>
@@ -293,7 +289,7 @@ class PGBlockFeaturedImage
           <img <?php echo esc_attr($linkAttrStr); ?> srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
         <?php endif; ?>
-      </<?php echo tag_escape($wrapperTag); ?>>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php
 
     endif;
@@ -316,16 +312,16 @@ class PGBlockFeaturedImage
     ?>
       <?php if (!empty($featuredImageLinkTo)) : ?>
         <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>">
-          <<?php echo tag_escape($wrapperTag); ?> class="
+          <<?php echo pg_tag_escape($wrapperTag); ?> class="
                                                                                 <?php echo esc_attr($blockId); ?>" style="background-image: url(<?php echo esc_url_raw($attachment_url) ?>)">
-          </<?php echo tag_escape($wrapperTag); ?>>
+          </<?php echo pg_tag_escape($wrapperTag); ?>>
         </a>
       <?php else : ?>
 
-        <<?php echo tag_escape($wrapperTag); ?> class="
+        <<?php echo pg_tag_escape($wrapperTag); ?> class="
                                                                             <?php echo esc_attr($blockId); ?>" style="background-image: url(<?php echo esc_url_raw($attachment_url) ?>)">
 
-        </<?php echo tag_escape($wrapperTag); ?>>
+        </<?php echo pg_tag_escape($wrapperTag); ?>>
       <?php endif; ?>
 
     <?php

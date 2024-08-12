@@ -30,9 +30,7 @@ class PGBlocArchiveDescription
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
+	function front_script($attributes) {}
 	function front_style($attributes)
 	{
 
@@ -260,7 +258,7 @@ class PGBlocArchiveDescription
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo tag_escape($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
+			<<?php echo pg_tag_escape($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
 				<?php if ($iconPosition == 'beforePrefix') : ?>
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
@@ -321,7 +319,7 @@ class PGBlocArchiveDescription
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
 
-			</<?php echo tag_escape($wrapperTag); ?>>
+			</<?php echo pg_tag_escape($wrapperTag); ?>>
 		<?php
 
 		endif;
@@ -375,7 +373,7 @@ class PGBlocArchiveDescription
 			<?php else : ?>
 
 
-				<<?php echo tag_escape($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> <?php echo esc_attr($archiveTitleClass); ?>'>
+				<<?php echo pg_tag_escape($archiveTitleTag); ?> class='<?php echo esc_attr($blockId); ?> <?php echo esc_attr($archiveTitleClass); ?>'>
 					<?php if ($iconPosition == 'beforePrefix') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?> <?php endif; ?>
 					<?php if ($prefixText) : ?> <span class="<?php echo esc_attr($prefixClass); ?>">
@@ -409,7 +407,7 @@ class PGBlocArchiveDescription
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
 
-				</<?php echo tag_escape($archiveTitleTag); ?>>
+				</<?php echo pg_tag_escape($archiveTitleTag); ?>>
 
 			<?php endif; ?>
 

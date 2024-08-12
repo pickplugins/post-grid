@@ -42,9 +42,7 @@ class PGBlockWooProductTabs
     }
   }
 
-  function front_script($attributes)
-  {
-  }
+  function front_script($attributes) {}
   function front_style($attributes)
   {
 
@@ -136,7 +134,7 @@ class PGBlockWooProductTabs
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockAlign); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
 
         <?php
 
@@ -149,7 +147,7 @@ class PGBlockWooProductTabs
         ?>
 
 
-      </<?php echo tag_escape($wrapperTag); ?>>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php
 
     endif;

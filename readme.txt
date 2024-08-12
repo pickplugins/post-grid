@@ -4,7 +4,7 @@ Donate link: https://comboblocks.com/
 Tags: Gutenberg Blocks, form maker, woocommerce blocks, popup maker, Page Builder
 Requires at least: 5.0.0
 Tested up to: 6.6
-Stable tag: 2.2.87
+Stable tag: 2.2.88
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -256,6 +256,10 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 == Changelog ==
 
+= 2.2.88 =
+- 2024-08-012 - update - Blocks translation support added
+- 2024-08-012 - update - List block updated
+- 2024-08-012 - update - Security issue fixed.
 
 = 2.2.87 =
 - 2024-08-02 - fix - Security issue fixed.

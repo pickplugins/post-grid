@@ -29,12 +29,8 @@ class PGBlockGalleryImagesField
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -254,7 +250,7 @@ class PGBlockGalleryImagesField
 ?>
 
 
-    <<?php echo tag_escape($wrapperTag); ?> class="
+    <<?php echo pg_tag_escape($wrapperTag); ?> class="
           <?php echo $blockId; ?>
           <?php echo esc_attr($wrapperClass); ?>">
 
@@ -368,7 +364,7 @@ class PGBlockGalleryImagesField
           <?php echo wp_kses_post($postfixText); ?>
         </span>
       <?php endif; ?>
-    </<?php echo tag_escape($wrapperTag); ?>>
+    </<?php echo pg_tag_escape($wrapperTag); ?>>
 
 
 

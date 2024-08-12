@@ -48,9 +48,7 @@ class PGBlockPostText
       // }
     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -161,11 +159,11 @@ class PGBlockPostText
 
 
 
-      <<?php echo tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
 
-                                                                                                                                                                  if ($otherCopyObj) :
-                                                                                                                                                                  ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" copyContent="<?php echo esc_attr($otherCopyContent); ?>" <?php endif; ?>><?php echo $content; ?>
-      </<?php echo tag_escape($wrapperTag); ?>>
+                                                                                                                                                                      if ($otherCopyObj) :
+                                                                                                                                                                      ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" copyContent="<?php echo esc_attr($otherCopyContent); ?>" <?php endif; ?>><?php echo $content; ?>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php
 
     endif;

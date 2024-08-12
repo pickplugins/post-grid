@@ -31,12 +31,8 @@ class PGBlockWordpressOrgItem
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
-	function front_style($attributes)
-	{
-	}
+	function front_script($attributes) {}
+	function front_style($attributes) {}
 
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)
@@ -144,7 +140,7 @@ class PGBlockWordpressOrgItem
 ?>
 
 
-		<<?php echo tag_escape($wrapperTag); ?> class="	<?php echo esc_attr($blockId); ?>	<?php echo esc_attr($wrapperClass); ?>">
+		<<?php echo pg_tag_escape($wrapperTag); ?> class="	<?php echo esc_attr($blockId); ?>	<?php echo esc_attr($wrapperClass); ?>">
 			<?php if ($iconPosition == 'beforePrefix') : ?>
 				<?php echo wp_kses_post($fontIconHtml); ?>
 			<?php endif; ?>
@@ -177,7 +173,7 @@ class PGBlockWordpressOrgItem
 					} ?>
 					<?php if ($wrapperField == 'preview_url') {
 						if ($wrapperIsLink) { ?>
-							<a href="<?php echo isset($objectData['preview_url']) ? esc_url_raw($objectData['preview_url'] . '?' . $wrapper['options']['urlPrefix']) : ''; ?>">
+							<a href="<?php echo isset($objectData['preview_url']) ? esc_url_raw($objectData['preview_url'] . '?' . $wrapperUrlPrefix) : ''; ?>">
 								<?php echo esc_html($wrapperLinkText); ?>
 							</a>
 					<?php } else {
@@ -249,7 +245,7 @@ class PGBlockWordpressOrgItem
 						} ?>
 			<?php if ($wrapperField == 'download_link') {
 						if ($wrapperIsLink) { ?>
-					<a href="<?php echo esc_url_raw($objectData['download_link'] . '?' . $wrapper['options']['urlPrefix']); ?>">
+					<a href="<?php echo esc_url_raw($objectData['download_link'] . '?' . $wrapperUrlPrefix); ?>">
 						<?php echo esc_html($wrapperLinkText) ?>
 					</a> <?php } else {
 								echo esc_html($objectData['download_link']);
@@ -352,7 +348,7 @@ class PGBlockWordpressOrgItem
 					} ?>
 		<?php if ($wrapperField == 'homepage') {
 				if ($wrapperIsLink) { ?>
-				<a href="<?php echo isset($objectData['homepage']) ? esc_url_raw($objectData['homepage'] . '?' . $wrapper['options']['urlPrefix']) : ''; ?>">
+				<a href="<?php echo isset($objectData['homepage']) ? esc_url_raw($objectData['homepage'] . '?' . $wrapperUrlPrefix) : ''; ?>">
 					<?php //echo esc_html($wrapperLinkText);
 
 					?>
@@ -363,7 +359,7 @@ class PGBlockWordpressOrgItem
 					} ?>
 		<?php if ($wrapperField == 'download_link') {
 				if ($wrapperIsLink) { ?>
-				<a href="<?php echo esc_url_raw($objectData['download_link'] . '?' . $wrapper['options']['urlPrefix']); ?>">
+				<a href="<?php echo esc_url_raw($objectData['download_link'] . '?' . $wrapperUrlPrefix); ?>">
 					<?php echo esc_html($wrapperLinkText) ?>
 				</a> <?php } else {
 							echo isset($objectData['download_link']) ? esc_html($objectData['download_link']) : '';
@@ -397,7 +393,7 @@ class PGBlockWordpressOrgItem
 
 
 
-		</<?php echo tag_escape($wrapperTag); ?>>
+		</<?php echo pg_tag_escape($wrapperTag); ?>>
 
 
 

@@ -84,7 +84,7 @@ class PGBlockNumberCounter
 		$end = isset($numberCountOptions['end']) ? $numberCountOptions['end'] : 500;
 		$duration = isset($numberCountOptions['duration']) ? (int) $numberCountOptions['duration'] : 1000;
 		$source = isset($numberCountOptions['source']) ? $numberCountOptions['source'] : "";
-		
+
 		$onScroll = isset($numberCountOptions['onScroll']) ? $numberCountOptions['onScroll'] : false;
 
 
@@ -180,32 +180,32 @@ class PGBlockNumberCounter
 		if (!empty($wrapperTag)) :
 
 ?>
-<<?php echo tag_escape($wrapperTag); ?> class=" PGBlockNumberCount 
+			<<?php echo pg_tag_escape($wrapperTag); ?> class=" PGBlockNumberCount 
                             <?php echo esc_attr($wrapperClass); ?>
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($blockAlign); ?>"
-  data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+				data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
-  <?php if ($iconPosition == 'beforePrefix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+				<?php if ($iconPosition == 'beforePrefix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
 
-  <?php if ($prefixText) : ?>
-  <span class="<?php echo esc_attr($prefixClass); ?>">
-    <?php echo wp_kses_post($prefixText); ?>
-  </span>
-  <?php endif; ?>
+				<?php if ($prefixText) : ?>
+					<span class="<?php echo esc_attr($prefixClass); ?>">
+						<?php echo wp_kses_post($prefixText); ?>
+					</span>
+				<?php endif; ?>
 
-  <?php if ($iconPosition == 'afterPrefix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+				<?php if ($iconPosition == 'afterPrefix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
 
 
 
-  <span class='number-count'>
+				<span class='number-count'>
 
-    <?php
+					<?php
 
 					// if ($source == 'total_sale') {
 					// 	echo wp_kses_post($productSaleCount);
@@ -215,24 +215,24 @@ class PGBlockNumberCounter
 					// }
 					?>
 
-  </span>
+				</span>
 
 
-  <?php if ($iconPosition == 'beforePostfix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
-  <?php if ($postfixText) : ?>
-  <span class="<?php echo $postfixClass; ?>">
-    <?php echo $postfixText; ?>
-  </span>
-  <?php endif; ?>
+				<?php if ($iconPosition == 'beforePostfix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
+				<?php if ($postfixText) : ?>
+					<span class="<?php echo $postfixClass; ?>">
+						<?php echo $postfixText; ?>
+					</span>
+				<?php endif; ?>
 
-  <?php if ($iconPosition == 'afterPostfix') : ?>
-  <?php echo wp_kses_post($fontIconHtml); ?>
-  <?php endif; ?>
+				<?php if ($iconPosition == 'afterPostfix') : ?>
+					<?php echo wp_kses_post($fontIconHtml); ?>
+				<?php endif; ?>
 
-</<?php echo tag_escape($wrapperTag); ?>>
-<?php
+			</<?php echo pg_tag_escape($wrapperTag); ?>>
+		<?php
 
 		endif;
 

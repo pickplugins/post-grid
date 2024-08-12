@@ -36,9 +36,7 @@ class PGBlockList
   // function front_script($attributes)
   // {
   // }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -139,7 +137,7 @@ class PGBlockList
     if (!empty($wrapperTag)) :
 ?>
 
-      <<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>
                     <?php echo esc_attr($blockAlign); ?>" <?php if ($itemReversed) { ?> reversed <?php } ?> <?php if ($itemStart) { ?> start=<?php echo '"' . $itemStart . '"';
@@ -152,7 +150,7 @@ class PGBlockList
           foreach ($items as $index => $item) {
 
         ?>
-          <<?php echo tag_escape($itemTag); ?> class=" <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
+          <<?php echo pg_tag_escape($itemTag); ?> class=" <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
 
 
             <?php if ($iconPosition == 'left') : ?>
@@ -178,7 +176,7 @@ class PGBlockList
             <?php endif; ?>
 
 
-          </<?php echo tag_escape($itemTag); ?>>
+          </<?php echo pg_tag_escape($itemTag); ?>>
 
 
 
@@ -188,7 +186,7 @@ class PGBlockList
           }
 
         ?>
-      </<?php echo tag_escape($wrapperTag); ?>>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php
 
     endif;

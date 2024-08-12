@@ -31,9 +31,7 @@ class PGBlockWooTotalSales
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
+	function front_script($attributes) {}
 	function front_style($attributes)
 	{
 
@@ -208,7 +206,7 @@ class PGBlockWooTotalSales
 		if (!empty($wrapperTag)) :
 
 ?>
-			<<?php echo tag_escape($wrapperTag); ?> class="
+			<<?php echo pg_tag_escape($wrapperTag); ?> class="
                                         <?php echo esc_attr($blockId); ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
@@ -231,7 +229,7 @@ class PGBlockWooTotalSales
 
 					/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 				?>
-					<<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+					<<?php echo pg_tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
 						<?php if ($iconPosition == 'beforeSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
@@ -239,13 +237,13 @@ class PGBlockWooTotalSales
 						<?php if ($iconPosition == 'afterSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
-					</<?php echo tag_escape($skuTag); ?>>
+					</<?php echo pg_tag_escape($skuTag); ?>>
 
 				<?php else :
 					/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 				?>
 
-					<<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>>
+					<<?php echo pg_tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?>>
 						<?php if ($iconPosition == 'beforeSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
@@ -253,7 +251,7 @@ class PGBlockWooTotalSales
 						<?php if ($iconPosition == 'afterSaleCount') : ?>
 							<?php echo wp_kses_post($fontIconHtml); ?>
 						<?php endif; ?>
-					</<?php echo tag_escape($skuTag); ?>>
+					</<?php echo pg_tag_escape($skuTag); ?>>
 
 
 				<?php endif; ?>
@@ -276,7 +274,7 @@ class PGBlockWooTotalSales
 					<?php echo wp_kses_post($fontIconHtml); ?>
 				<?php endif; ?>
 
-			</<?php echo tag_escape($wrapperTag); ?>>
+			</<?php echo pg_tag_escape($wrapperTag); ?>>
 		<?php
 
 		endif;
@@ -301,7 +299,7 @@ class PGBlockWooTotalSales
 				/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
 			?>
 
-				<<?php echo tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+				<<?php echo pg_tag_escape($skuTag); ?> class='saleCount' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
 					<?php if ($iconPosition == 'beforeSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
@@ -309,9 +307,9 @@ class PGBlockWooTotalSales
 					<?php if ($iconPosition == 'afterSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
-				</<?php echo tag_escape($skuTag); ?>>
+				</<?php echo pg_tag_escape($skuTag); ?>>
 			<?php else : ?>
-				<<?php echo tag_escape($skuTag); ?> class='saleCount'>
+				<<?php echo pg_tag_escape($skuTag); ?> class='saleCount'>
 					<?php if ($iconPosition == 'beforeSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
@@ -321,7 +319,7 @@ class PGBlockWooTotalSales
 					<?php if ($iconPosition == 'afterSaleCount') : ?>
 						<?php echo wp_kses_post($fontIconHtml); ?>
 					<?php endif; ?>
-				</<?php echo tag_escape($skuTag); ?>>
+				</<?php echo pg_tag_escape($skuTag); ?>>
 			<?php endif; ?>
 
 

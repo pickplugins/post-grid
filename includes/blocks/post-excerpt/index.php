@@ -31,12 +31,8 @@ class PGBlockPostExcerpt
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -319,7 +315,7 @@ class PGBlockPostExcerpt
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo tag_escape($wrapperTag); ?> class="
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="
         <?php echo esc_attr($blockId); ?>
         <?php echo esc_attr($wrapperClass); ?>">
         <?php if ($postExcerptLinkTo) : ?>
@@ -350,7 +346,7 @@ class PGBlockPostExcerpt
 
 
           <?php if (!empty($postExcerptTag)) : ?>
-            <<?php echo tag_escape($postExcerptTag); ?> class="
+            <<?php echo pg_tag_escape($postExcerptTag); ?> class="
               <?php echo esc_attr($postExcerptclass); ?>
               ">
               <?php if ($postfixText) : ?>
@@ -367,7 +363,7 @@ class PGBlockPostExcerpt
                 </span>
               <?php endif; ?>
 
-            </<?php echo tag_escape($postExcerptTag); ?>>
+            </<?php echo pg_tag_escape($postExcerptTag); ?>>
 
           <?php else : ?>
             <?php if ($postfixText) : ?>
@@ -410,7 +406,7 @@ class PGBlockPostExcerpt
         <?php endif; ?>
 
 
-      </<?php echo tag_escape($wrapperTag); ?>>
+      </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php
 
     endif;
@@ -442,7 +438,7 @@ class PGBlockPostExcerpt
         <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($postExcerptclass); ?>">
 
           <?php if (!empty($postExcerptTag)) : ?>
-            <<?php echo tag_escape($postExcerptTag); ?> class="excerpt-text">
+            <<?php echo pg_tag_escape($postExcerptTag); ?> class="excerpt-text">
               <?php if ($postfixText) : ?>
                 <span class="<?php echo esc_attr($prefixClass); ?>">
                   <?php echo wp_kses_post($prefixText); ?>
@@ -457,7 +453,7 @@ class PGBlockPostExcerpt
                 </span>
               <?php endif; ?>
 
-            </<?php echo tag_escape($postExcerptTag); ?>>
+            </<?php echo pg_tag_escape($postExcerptTag); ?>>
 
           <?php else : ?>
             <?php if ($postfixText) : ?>

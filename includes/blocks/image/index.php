@@ -188,12 +188,11 @@ class PGBlockImage
     $image_srcset = wp_get_attachment_image_srcset($thumb_id);
     $attachment_metadata = wp_get_attachment_metadata($thumb_id);
 
-    // echo "<pre>" . var_export($attachment_metadata, true) . "</pre>";
 
     $sizes = isset($attachment_metadata['sizes']) ? $attachment_metadata['sizes'] : [];
 
 
-    //var_dump($attachment_metadata);
+    var_dump($attachment_metadata);
 
     $mt_width = isset($attachment_metadata['width']) ? $attachment_metadata['width'] : '';
     $mt_height = isset($attachment_metadata['height']) ? $attachment_metadata['height'] : '';

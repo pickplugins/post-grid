@@ -139,11 +139,11 @@ class PGBlockTermsQueryItem
     // $fieldValue = get_term($term_ID);
     $term = get_term($term_ID, $taxonomy);
 
-    //var_dump($term);
+    var_dump($term);
 
     if (is_wp_error($term)) return;
-    // var_dump($termFieldMetaKeyType);
-    // var_dump($termFieldMetaKey);
+    var_dump($termFieldMetaKeyType);
+    var_dump($termFieldMetaKey);
 
     $fieldValue = "";
 
@@ -172,7 +172,7 @@ class PGBlockTermsQueryItem
 
           $thumb_id = get_term_meta($term_ID, "thumbnail_id", true);
           // $term_vals = get_term_meta(17);
-          //var_dump($term_ID);
+          var_dump($term_ID);
 
           $fieldValue = wp_get_attachment_image_url($thumb_id, 'full');
 
@@ -191,7 +191,7 @@ class PGBlockTermsQueryItem
 
           $thumb_id = get_term_meta($term_ID, $termFieldMetaKey, true);
           // $term_vals = get_term_meta(17);
-          //var_dump($term_ID);
+          var_dump($term_ID);
 
           $fieldValue = wp_get_attachment_image_url($thumb_id, 'full');
 

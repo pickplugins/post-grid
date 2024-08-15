@@ -64,7 +64,6 @@ class class_post_grid_post_types
 
 		foreach ($post_types as $post_type) {
 
-			//echo "<pre>" . var_export($post_type_args, true) . "</pre>";
 
 
 

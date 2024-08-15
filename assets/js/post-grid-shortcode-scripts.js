@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
             type: 'POST',
             context: this,
             url: post_grid_ajax.post_grid_ajaxurl,
-            data: { "action": "post_grid_ajax_search_free", "grid_id": grid_id, "is_reset": is_reset, "formData": formData, },
+            data: { "action": "post_grid_ajax_search_free", "_wpnonce": post_grid_ajax._wpnonce, "grid_id": grid_id, "is_reset": is_reset, "formData": formData, },
             success: function (response) {
 
                 var datas = JSON.parse(response);
@@ -83,60 +83,6 @@ jQuery(document).ready(function ($) {
 
 
 
-    // $(document).on('keyup', '.post-grid .post-grid-search.ajax .search', function (e) {
-
-    //     e.preventDefault();
-    //     clearTimeout(debounce);
-
-
-    //     var keyword = $(this).val();
-    //     var grid_id = $(this).attr('grid_id');
-    //     var key = e.which;
-
-    //     //console.log(key);
-
-
-    //     formData = $(this).serialize();
-
-    //     var is_reset = 'no';
-
-
-    //     debounce = setTimeout(() => {
-
-    //         $('#post-grid-' + grid_id + ' .search-loading').addClass('active');
-    //         //$('.pagination').fadeOut();
-
-    //         $.ajax({
-    //             type: 'POST',
-    //             context: this,
-    //             url: post_grid_ajax.post_grid_ajaxurl,
-    //             data: { "action": "post_grid_ajax_search_free", "grid_id": grid_id, "is_reset": is_reset, "formData": formData, },
-    //             success: function (response) {
-
-    //                 var datas = JSON.parse(response);
-    //                 pagination = datas['pagination'];
-    //                 html = datas['html'];
-
-    //                 //console.log(pagination);
-
-
-    //                 $('#post-grid-' + grid_id + ' .grid-items').html(html);
-    //                 //$('#post-grid-'+grid_id+' .search-icon').html('<i class="fas fa-search"></i>');
-    //                 $('#post-grid-' + grid_id + ' .pagination').html(pagination);
-    //                 $('#post-grid-' + grid_id + ' .search-loading').removeClass('active');
-
-
-    //             }
-    //         });
-
-
-    //     }, 1000);
-
-
-
-
-    // })
-
 
 
     $(document).on('click', '.post-grid .paginate-ajax a.page-numbers', function (event) {
@@ -154,6 +100,7 @@ jQuery(document).ready(function ($) {
         var grid_id = parseInt($(this).parent().attr('grid-id'));
 
 
+        console.log(post_grid_ajax._wpnonce);
 
 
         post_grid_masonry_enable = 'no';
@@ -162,7 +109,7 @@ jQuery(document).ready(function ($) {
                 type: 'POST',
                 context: this,
                 url: post_grid_ajax.post_grid_ajaxurl,
-                data: { "action": "post_grid_paginate_ajax_free", "grid_id": grid_id, "current_page": current_page, "formData": formData, },
+                data: { "action": "post_grid_paginate_ajax_free", "_wpnonce": post_grid_ajax._wpnonce, "grid_id": grid_id, "current_page": current_page, "formData": formData, },
                 success: function (data) {
 
                     var response = JSON.parse(data)

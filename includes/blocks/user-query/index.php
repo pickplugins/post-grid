@@ -60,7 +60,7 @@ class PGBlockUserQuery
 
     $block_instance = $block->parsed_block;
 
-    ////var_dump($block_instance);
+    var_dump($block_instance);
 
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -126,7 +126,7 @@ class PGBlockUserQuery
 
     // $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
 
-    //var_dump($query_args);
+    var_dump($query_args);
 
 
     $posts = [];
@@ -135,9 +135,8 @@ class PGBlockUserQuery
 
     $PGUserQuery = new WP_Query($query_args);
 
-    //echo "<pre>" . var_export($query_args, true) . "</pre>";
 
-    // //var_dump($innerBlocks);
+    var_dump($innerBlocks);
 
     $blockArgs = [
       'blockId' => $blockId,
@@ -179,7 +178,6 @@ class PGBlockUserQuery
 
       $get_users = get_users($query_args);
 
-      //echo "<pre>" . var_export($get_users, true) . "</pre>";
 
 
       foreach ($get_users as $index => $term) {
@@ -204,7 +202,7 @@ class PGBlockUserQuery
           return $context;
         };
 
-        ////var_dump($filter_block_context);
+        var_dump($filter_block_context);
         add_filter('render_block_context', $filter_block_context, 1);
 
 

@@ -71,7 +71,7 @@ class PGBlockWooLoginForm
 
 
 
-		// var_dump(generateShortcode($shortcodeParam, "product_categories"));
+		var_dump(generateShortcode($shortcodeParam, "product_categories"));
 
 
 		ob_start();

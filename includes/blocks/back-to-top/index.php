@@ -80,9 +80,11 @@ class PGBlockBackToTop
     $text = isset($attributes['text']) ? $attributes['text'] : [];
     $textOptions = isset($text['options']) ? $text['options'] : [];
 
+    $textClass = isset($textOptions['class']) ? $textOptions['class'] : 'back-to-top-text';
     $textText = isset($textOptions['text']) ? $textOptions['text'] : 'Custom Text';
 
     $textEnable = isset($textOptions['enable']) ? $textOptions['enable'] : true;
+
 
     $textLinkTo = isset($textOptions['linkTo']) ? $textOptions['linkTo'] : '';
     $textLinkTarget = isset($textOptions['linkTarget']) ? $textOptions['linkTarget'] : '_blank';
@@ -230,13 +232,14 @@ class PGBlockBackToTop
     ob_start();
 
 
-
     if (!empty($wrapperTag)) :
 
 ?>
       <<?php echo pg_tag_escape($wrapperTag); ?> class="pg-back-to-top  
                                   <?php echo esc_attr($blockId); ?>
-                                  <?php echo esc_attr($wrapperClass); ?>" data-settings='<?php echo esc_attr($dataSettings); ?>' <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
+                                  <?php echo esc_attr($wrapperClass); ?>"
+        data-settings='<?php echo esc_attr($dataSettings); ?>'
+        <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
 
 
 
@@ -254,7 +257,7 @@ class PGBlockBackToTop
         <?php endif; ?>
 
         <?php if ($textEnable) : ?>
-          <span class="<?php echo esc_attr($wrapperClass); ?>">
+          <span class="<?php echo esc_attr($textClass); ?>">
             <?php echo wp_kses_post($textText); ?>
           </span>
         <?php endif; ?>
@@ -287,7 +290,7 @@ class PGBlockBackToTop
 
 
         <?php if ($textEnable) : ?>
-          <span class="text">
+          <span class="<?php echo esc_attr($textClass); ?>">
             <?php echo wp_kses_post($textText); ?>
           </span>
         <?php endif; ?>

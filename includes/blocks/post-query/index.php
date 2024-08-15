@@ -146,7 +146,6 @@ class PGBlockPostQuery
 
     $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
 
-    // echo "<pre>" . var_export($query_args, true) . "</pre>";
 
 
 

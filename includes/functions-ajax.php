@@ -9,8 +9,8 @@ if (!function_exists('post_grid_pagination_ajax_pagination_22032023')) {
     function post_grid_pagination_ajax_pagination_22032023($args, $post_grid_wp_query)
     {
 
-        wp_enqueue_script('post-grid-shortcode-scripts');
-        wp_localize_script('post-grid-shortcode-scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
+        // wp_enqueue_script('post-grid-shortcode-scripts');
+        // wp_localize_script('post-grid-shortcode-scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
 
         $grid_id = $args['grid_id'];
 
@@ -230,14 +230,13 @@ if (!function_exists('post_grid_paginate_ajax_free')) {
         // $query_args = apply_filters('post_grid_query_args', $query_args, $args);
 
 
-        //echo '<pre>'.var_export($query_args, true).'</pre>';
 
         $post_grid_wp_query = new WP_Query($query_args);
 
         //$wp_query = $post_grid_wp_query;
 
         $args['options'] = $post_grid_options;
-        //echo '<pre>'.var_export($post_grid_wp_query, true).'</pre>';
+
 
 
         $pagination_prev_text = !empty($post_grid_options['pagination']['prev_text']) ? $post_grid_options['pagination']['prev_text'] : __('« Previous', 'post-grid');

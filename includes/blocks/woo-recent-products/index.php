@@ -71,7 +71,7 @@ class PGBlockWooRecentProducts
 
 
 
-		// var_dump(generateShortcode($shortcodeParam, "recent_products"));
+		var_dump(generateShortcode($shortcodeParam, "recent_products"));
 
 
 		// //* Visible condition

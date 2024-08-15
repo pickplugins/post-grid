@@ -186,7 +186,7 @@ class PGBlockTermsList
     }
 
     // $query_args['post_parent'] = $parent_id;
-    // var_dump($query_args);
+    var_dump($query_args);
     $terms = get_terms($query_args);
     $termsX = [];
 

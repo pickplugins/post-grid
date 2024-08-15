@@ -126,7 +126,7 @@
       "default": {
         "options": {
           "type": "",
-          "rating_count": 123,
+          "rating_count": 0,
           "avg_rating": 4.25,
           "typeCustom": "",
           "linkTo": "reviews",

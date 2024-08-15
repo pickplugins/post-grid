@@ -44,7 +44,7 @@ class PGBlockUserFields
 
     $userId = isset($block->context['userId']) ? $block->context['userId'] : '';
 
-    //var_dump($block->context);
+    var_dump($block->context);
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
@@ -280,7 +280,7 @@ class PGBlockUserFields
         <?php
           }
 
-        //var_dump($metaKey);
+          var_dump($metaKey);
 
 
 

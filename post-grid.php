@@ -3,7 +3,7 @@
 Plugin Name: Combo Blocks
 Plugin URI: https://comboblocks.com/
 Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.88
+Version: 2.2.89
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.88');
+      define('post_grid_version', '2.2.89');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -348,11 +348,11 @@ if (!class_exists('PostGrid')) {
 
 
 
-      if (!in_array('post-grid/gallery-images', $disabled)) {
-        require_once(post_grid_plugin_dir . 'includes/blocks/gallery-images/index.php');
+      if (!in_array('post-grid/images', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/images/index.php');
       }
-      if (!in_array('post-grid/gallery-images-field', $disabled)) {
-        require_once(post_grid_plugin_dir . 'includes/blocks/gallery-images-field/index.php');
+      if (!in_array('post-grid/images-field', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/images-field/index.php');
       }
 
 

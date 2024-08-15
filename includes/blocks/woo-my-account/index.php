@@ -76,7 +76,7 @@ class PGBlockWooMyAccount
     $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
     $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
 
-    // var_dump($wrapperClass);
+    var_dump($wrapperClass);
 
     $icon = isset($attributes['icon']) ? $attributes['icon'] : [];
     $iconOptions = isset($icon['options']) ? $icon['options'] : [];
@@ -115,7 +115,7 @@ class PGBlockWooMyAccount
 
 
 
-    //var_dump($blockAlign);
+    var_dump($blockAlign);
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];

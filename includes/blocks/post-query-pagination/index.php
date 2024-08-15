@@ -40,9 +40,7 @@ class PGBlockPostQueryPagination
       //wp_enqueue_style('pgpostquerypagination_front_style');
     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
 
 
@@ -180,7 +178,7 @@ class PGBlockPostQueryPagination
 
 
 
-    ////var_dump($maxPageNum);
+    var_dump($maxPageNum);
 
     $layout = isset($attributes['layout']) ? $attributes['layout'] : [];
 

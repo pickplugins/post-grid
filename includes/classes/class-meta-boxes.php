@@ -107,9 +107,9 @@ class post_grid_meta_boxs
 
 
 
-<div class="settings-tabs vertical">
-  <ul class="tab-navs">
-    <?php
+    <div class="settings-tabs vertical">
+      <ul class="tab-navs">
+        <?php
         foreach ($post_grid_settings_tab as $tab) {
           $id = $tab['id'];
           $title = $tab['title'];
@@ -117,32 +117,32 @@ class post_grid_meta_boxs
           $data_visible = isset($tab['data_visible']) ? $tab['data_visible'] : '';
           $hidden = isset($tab['hidden']) ? $tab['hidden'] : false;
         ?>
-    <li <?php if (!empty($data_visible)) :  ?> data_visible="<?php echo esc_attr($data_visible); ?>" <?php endif; ?>
-      class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>"
-      data-id="<?php echo esc_attr($id); ?>"><?php echo ($title); ?></li>
-    <?php
+          <li <?php if (!empty($data_visible)) :  ?> data_visible="<?php echo esc_attr($data_visible); ?>" <?php endif; ?>
+            class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>"
+            data-id="<?php echo esc_attr($id); ?>"><?php echo ($title); ?></li>
+        <?php
         }
         ?>
-  </ul>
-  <?php
+      </ul>
+      <?php
       foreach ($post_grid_settings_tab as $tab) {
         $id = $tab['id'];
         $title = $tab['title'];
         $active = $tab['active'];
       ?>
 
-  <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
-    <?php
+        <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
+          <?php
           do_action('post_grid_layout_metabox_content_' . $id, $post_id);
           ?>
-  </div>
-  <?php
+        </div>
+      <?php
       }
       ?>
-</div>
-<div class="clear clearfix"></div>
+    </div>
+    <div class="clear clearfix"></div>
 
-<?php
+  <?php
 
   }
 
@@ -337,7 +337,7 @@ class post_grid_meta_boxs
 
     $settings_tabs = apply_filters('post_grid_metabox_tabs', $settings_tabs);
 
-    ////var_dump($settings_tabs);
+    var_dump($settings_tabs);
 
 
     $tabs_sorted = array();
@@ -348,104 +348,104 @@ class post_grid_meta_boxs
 
   ?>
 
-<div id="post-grid-editor">
-  <?php
+    <div id="post-grid-editor">
+      <?php
 
       do_action('postgrid_editor', $post_id)
       ?>
-</div>
+    </div>
 
 
-<div class="post-grid-meta-box">
+    <div class="post-grid-meta-box">
 
-  <script>
-  jQuery(document).ready(function($) {
+      <script>
+        jQuery(document).ready(function($) {
 
-    var griType = '<?php echo esc_attr($grid_type); ?>'
-
-
-    if (griType == 'filterable' || griType == 'glossary') {
-      $('[for="pagination_type-none"]').fadeOut();
-      $('[for="pagination_type-normal"]').fadeOut();
-      $('[for="pagination_type-ajax_pagination"]').fadeOut();
-      $('[for="pagination_type-next_previous"]').fadeOut();
-      $('[for="pagination_type-loadmore"]').fadeOut();
-      $('[for="pagination_type-jquery"]').fadeIn();
+          var griType = '<?php echo esc_attr($grid_type); ?>'
 
 
-    } else {
+          if (griType == 'filterable' || griType == 'glossary') {
+            $('[for="pagination_type-none"]').fadeOut();
+            $('[for="pagination_type-normal"]').fadeOut();
+            $('[for="pagination_type-ajax_pagination"]').fadeOut();
+            $('[for="pagination_type-next_previous"]').fadeOut();
+            $('[for="pagination_type-loadmore"]').fadeOut();
+            $('[for="pagination_type-jquery"]').fadeIn();
 
 
-      $('[for="pagination_type-none"]').fadeIn();
-      $('[for="pagination_type-normal"]').fadeIn();
-      $('[for="pagination_type-ajax_pagination"]').fadeIn();
-      $('[for="pagination_type-next_previous"]').fadeIn();
-      $('[for="pagination_type-loadmore"]').fadeIn();
-      $('[for="pagination_type-jquery"]').fadeOut();
-
-    }
+          } else {
 
 
+            $('[for="pagination_type-none"]').fadeIn();
+            $('[for="pagination_type-normal"]').fadeIn();
+            $('[for="pagination_type-ajax_pagination"]').fadeIn();
+            $('[for="pagination_type-next_previous"]').fadeIn();
+            $('[for="pagination_type-loadmore"]').fadeIn();
+            $('[for="pagination_type-jquery"]').fadeOut();
 
-    $(document).on('click', '#post-grid-view-types .radio-img label', function() {
-      var val = $(this).attr('data-value');
-
-
-      if (val == 'filterable' || val == 'glossary') {
-        $('[for="pagination_type-none"]').fadeOut();
-        $('[for="pagination_type-normal"]').fadeOut();
-        $('[for="pagination_type-ajax_pagination"]').fadeOut();
-        $('[for="pagination_type-next_previous"]').fadeOut();
-        $('[for="pagination_type-loadmore"]').fadeOut();
-        $('[for="pagination_type-jquery"]').fadeIn();
-
-
-      } else {
-
-
-        $('[for="pagination_type-none"]').fadeIn();
-        $('[for="pagination_type-normal"]').fadeIn();
-        $('[for="pagination_type-ajax_pagination"]').fadeIn();
-        $('[for="pagination_type-next_previous"]').fadeIn();
-        $('[for="pagination_type-loadmore"]').fadeIn();
-        $('[for="pagination_type-jquery"]').fadeOut();
-
-      }
+          }
 
 
 
-      if (!$(this).hasClass('disabled')) {
-        $('.settings-tabs .tab-navs li').each(function(index) {
-          data_visible = $(this).attr('data_visible');
-          if (typeof data_visible != 'undefined') {
-            n = data_visible.indexOf(val);
-            if (n < 0) {
-              $(this).hide();
+          $(document).on('click', '#post-grid-view-types .radio-img label', function() {
+            var val = $(this).attr('data-value');
+
+
+            if (val == 'filterable' || val == 'glossary') {
+              $('[for="pagination_type-none"]').fadeOut();
+              $('[for="pagination_type-normal"]').fadeOut();
+              $('[for="pagination_type-ajax_pagination"]').fadeOut();
+              $('[for="pagination_type-next_previous"]').fadeOut();
+              $('[for="pagination_type-loadmore"]').fadeOut();
+              $('[for="pagination_type-jquery"]').fadeIn();
+
+
             } else {
-              $(this).show();
+
+
+              $('[for="pagination_type-none"]').fadeIn();
+              $('[for="pagination_type-normal"]').fadeIn();
+              $('[for="pagination_type-ajax_pagination"]').fadeIn();
+              $('[for="pagination_type-next_previous"]').fadeIn();
+              $('[for="pagination_type-loadmore"]').fadeIn();
+              $('[for="pagination_type-jquery"]').fadeOut();
+
             }
-          } else {}
-        });
-      }
-
-
-    })
 
 
 
+            if (!$(this).hasClass('disabled')) {
+              $('.settings-tabs .tab-navs li').each(function(index) {
+                data_visible = $(this).attr('data_visible');
+                if (typeof data_visible != 'undefined') {
+                  n = data_visible.indexOf(val);
+                  if (n < 0) {
+                    $(this).hide();
+                  } else {
+                    $(this).show();
+                  }
+                } else {}
+              });
+            }
+
+
+          })
 
 
 
 
 
-  })
-  </script>
 
-  <div class="settings-tabs vertical">
-    <input class="current_tab" type="hidden" name="post_grid_meta_options[current_tab]"
-      value="<?php echo esc_attr($current_tab); ?>">
 
-    <?php
+
+        })
+      </script>
+
+      <div class="settings-tabs vertical">
+        <input class="current_tab" type="hidden" name="post_grid_meta_options[current_tab]"
+          value="<?php echo esc_attr($current_tab); ?>">
+
+        <?php
 
 
         $view_types_args['grid'] = array('name' => 'Grid',  'thumb' => post_grid_plugin_url . 'assets/images/grid.png',);
@@ -463,9 +463,9 @@ class post_grid_meta_boxs
 
 
         ?>
-    <div id="post-grid-view-types">
+        <div id="post-grid-view-types">
 
-      <?php
+          <?php
 
           $args = array(
             'id'        => 'grid_type',
@@ -485,9 +485,9 @@ class post_grid_meta_boxs
 
           ?>
 
-    </div>
+        </div>
 
-    <?php
+        <?php
 
 
 
@@ -503,8 +503,8 @@ class post_grid_meta_boxs
         ?>
 
 
-    <ul class="tab-navs">
-      <?php
+        <ul class="tab-navs">
+          <?php
           foreach ($settings_tabs as $tab) {
             $id = isset($tab['id']) ? $tab['id'] : '';
             $title = isset($tab['title']) ? $tab['title'] : '';
@@ -512,14 +512,14 @@ class post_grid_meta_boxs
             $data_visible = isset($tab['data_visible']) ? $tab['data_visible'] : '';
             $hidden = isset($tab['hidden']) ? $tab['hidden'] : false;
           ?>
-      <li <?php if (!empty($data_visible)) :  ?> data_visible="<?php echo esc_attr($data_visible); ?>" <?php endif; ?>
-        class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>"
-        data-id="<?php echo esc_attr($id); ?>"><?php echo $title; ?></li>
-      <?php
+            <li <?php if (!empty($data_visible)) :  ?> data_visible="<?php echo esc_attr($data_visible); ?>" <?php endif; ?>
+              class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>"
+              data-id="<?php echo esc_attr($id); ?>"><?php echo $title; ?></li>
+          <?php
           }
           ?>
-    </ul>
-    <?php
+        </ul>
+        <?php
         foreach ($settings_tabs as $tab) {
 
           $id = isset($tab['id']) ? $tab['id'] : '';
@@ -529,20 +529,18 @@ class post_grid_meta_boxs
 
         ?>
 
-    <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
-      <?php
+          <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
+            <?php
             do_action('post_grid_metabox_tabs_content_' . $id, $tab, $post_id);
             ?>
-    </div>
-    <?php
+          </div>
+        <?php
         }
         ?>
-  </div>
-  <div class="clear clearfix"></div>
+      </div>
+      <div class="clear clearfix"></div>
 
-</div>
-
-
+    </div>
 
 
 
@@ -551,7 +549,9 @@ class post_grid_meta_boxs
 
 
 
-<?php
+
+
+  <?php
 
 
 
@@ -601,26 +601,26 @@ class post_grid_meta_boxs
 
 
 
-<div class="post-grid-meta-box">
+    <div class="post-grid-meta-box">
 
 
-  <ul>
-    <li>Post Grid Version: <?php echo esc_html(post_grid_version); ?></li>
+      <ul>
+        <li>Post Grid Version: <?php echo esc_html(post_grid_version); ?></li>
 
-  </ul>
+      </ul>
 
-  <?php
+      <?php
 
       if (!is_plugin_active('post-grid-pro/post-grid-pro.php')) {
 
       ?>
-  <h3>Try Pro</h3>
+        <h3>Try Pro</h3>
 
-  <a class="button" href="https://comboblocks.com/" target="_blank">Buy Pro</a>
-  <p class="description">If you are looking some extra feature you may try our premium version.</p>
-  <br>
+        <a class="button" href="https://comboblocks.com/" target="_blank">Buy Pro</a>
+        <p class="description">If you are looking some extra feature you may try our premium version.</p>
+        <br>
 
-  <?php
+      <?php
 
       }
 
@@ -628,38 +628,38 @@ class post_grid_meta_boxs
 
 
 
-  <h3>Documentation</h3>
+      <h3>Documentation</h3>
 
-  <a class="button" href="https://comboblocks.com/documentations/" target="_blank">Documentation</a>
-  <p class="description">Before asking, submitting reviews please take a look on our documentation, may help your issue
-    fast.</p>
-  <br>
-  <h3>Video Tutorials</h3>
+      <a class="button" href="https://comboblocks.com/documentations/" target="_blank">Documentation</a>
+      <p class="description">Before asking, submitting reviews please take a look on our documentation, may help your issue
+        fast.</p>
+      <br>
+      <h3>Video Tutorials</h3>
 
-  <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6" target="_blank">Go
-    to YouTube</a>
+      <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6" target="_blank">Go
+        to YouTube</a>
 
-  <br>
-  <h3>Looking for support?</h3>
+      <br>
+      <h3>Looking for support?</h3>
 
-  <a class="button" href="https://pickplugins.com/create-support-ticket/" target="_blank">Create Support Ticket</a>
-  <p class="description">Its free and you can ask any question about our plugins and get support fast.</p>
-  <br>
-  <h3>Provide your feedback</h3>
+      <a class="button" href="https://pickplugins.com/create-support-ticket/" target="_blank">Create Support Ticket</a>
+      <p class="description">Its free and you can ask any question about our plugins and get support fast.</p>
+      <br>
+      <h3>Provide your feedback</h3>
 
-  <a class="button" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" target="_blank">Submit
-    Reviews</a> <a class="button" href="https://wordpress.org/support/plugin/post-grid/#new-topic-0" target="_blank">Ask
-    wordpress.org</a>
-  <p>We spent thousand+ hours to development on this plugin, please submit your reviews wisely.</p>
-  <p>If you have any issue with this plugin please submit our forums or contact our support first.</p>
-  <p class="description">Your feedback and reviews are most important things to keep our development on track. If you
-    have time please submit us five star <a href="https://wordpress.org/support/plugin/post-grid/reviews/"><span
-        style="color: orange"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-          class="fas fa-star"></i><i class="fas fa-star"></i></span></a> reviews.</p>
+      <a class="button" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" target="_blank">Submit
+        Reviews</a> <a class="button" href="https://wordpress.org/support/plugin/post-grid/#new-topic-0" target="_blank">Ask
+        wordpress.org</a>
+      <p>We spent thousand+ hours to development on this plugin, please submit your reviews wisely.</p>
+      <p>If you have any issue with this plugin please submit our forums or contact our support first.</p>
+      <p class="description">Your feedback and reviews are most important things to keep our development on track. If you
+        have time please submit us five star <a href="https://wordpress.org/support/plugin/post-grid/reviews/"><span
+            style="color: orange"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+              class="fas fa-star"></i><i class="fas fa-star"></i></span></a> reviews.</p>
 
 
-</div>
-<?php
+    </div>
+  <?php
 
   }
 
@@ -699,12 +699,12 @@ class post_grid_meta_boxs
 
   ?>
 
-<div class="settings-tabs vertical">
-  <input class="current_tab" type="hidden" name="post_grid_post_settings[current_tab]"
-    value="<?php echo esc_attr($current_tab); ?>">
+    <div class="settings-tabs vertical">
+      <input class="current_tab" type="hidden" name="post_grid_post_settings[current_tab]"
+        value="<?php echo esc_attr($current_tab); ?>">
 
-  <ul class="tab-navs">
-    <?php
+      <ul class="tab-navs">
+        <?php
         foreach ($post_grid_settings_tabs as $tab) {
           $id = $tab['id'];
           $title = $tab['title'];
@@ -712,14 +712,14 @@ class post_grid_meta_boxs
           $data_visible = isset($tab['data_visible']) ? $tab['data_visible'] : '';
           $hidden = isset($tab['hidden']) ? $tab['hidden'] : false;
         ?>
-    <li <?php if (!empty($data_visible)) :  ?> data_visible="<?php echo esc_attr($data_visible); ?>" <?php endif; ?>
-      class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>"
-      data-id="<?php echo esc_attr($id); ?>"><?php echo ($title); ?></li>
-    <?php
+          <li <?php if (!empty($data_visible)) :  ?> data_visible="<?php echo esc_attr($data_visible); ?>" <?php endif; ?>
+            class="tab-nav <?php if ($hidden) echo 'hidden'; ?> <?php if ($active) echo 'active'; ?>"
+            data-id="<?php echo esc_attr($id); ?>"><?php echo ($title); ?></li>
+        <?php
         }
         ?>
-  </ul>
-  <?php
+      </ul>
+      <?php
       foreach ($post_grid_settings_tabs as $tab) {
         $id = $tab['id'];
         $title = $tab['title'];
@@ -728,16 +728,16 @@ class post_grid_meta_boxs
 
       ?>
 
-  <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
-    <?php
+        <div class="tab-content <?php if ($active) echo 'active'; ?>" id="<?php echo esc_attr($id); ?>">
+          <?php
           do_action('post_grid_post_options_content_' . $id, $tab, $post_id);
           ?>
-  </div>
-  <?php
+        </div>
+      <?php
       }
       ?>
-</div>
-<div class="clear clearfix"></div>
+    </div>
+    <div class="clear clearfix"></div>
 
 
 <?php

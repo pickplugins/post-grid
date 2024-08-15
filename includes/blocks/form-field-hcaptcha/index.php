@@ -40,12 +40,8 @@ class PGBlockFormFieldHcaptcha
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -58,7 +54,7 @@ class PGBlockFormFieldHcaptcha
     $apiKeys = isset($post_grid_block_editor['apiKeys']) ? $post_grid_block_editor['apiKeys'] : [];
     $hCAPTCHA = isset($apiKeys['hCAPTCHA']['args']) ? $apiKeys['hCAPTCHA']['args'] : [];
     $site_key = isset($hCAPTCHA['site_key']) ? $hCAPTCHA['site_key'] : "";
-    // var_dump($site_key);
+    var_dump($site_key);
     // $secret_key = isset($hCAPTCHA['secret_key']) ? $hCAPTCHA['secret_key'] : "";
     // $version = isset($hCAPTCHA['version']) ? $hCAPTCHA['version'] : "v2Checkbox";
 
@@ -140,38 +136,38 @@ class PGBlockFormFieldHcaptcha
 
 ?>
 
-<div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>"
-  id="<?php echo esc_attr($blockId); ?>">
+    <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>"
+      id="<?php echo esc_attr($blockId); ?>">
 
 
-  <div class='label-wrap'>
+      <div class='label-wrap'>
 
-    <?php if ($labelEnable) : ?>
-    <label for="" class="font-medium text-slate-900 "><?php echo wp_kses_post($labelText); ?></label>
-    <?php endif; ?>
-
-
-    <?php if ($errorWrapPosition == 'afterlabel') : ?>
-    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-    <?php endif; ?>
+        <?php if ($labelEnable) : ?>
+          <label for="" class="font-medium text-slate-900 "><?php echo wp_kses_post($labelText); ?></label>
+        <?php endif; ?>
 
 
-  </div>
-  <div class='input-wrap'>
+        <?php if ($errorWrapPosition == 'afterlabel') : ?>
+          <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+        <?php endif; ?>
 
 
-
-    <div class="h-captcha" data-sitekey="<?php echo wp_kses_post($site_key); ?>"></div>
-
-
-  </div>
+      </div>
+      <div class='input-wrap'>
 
 
 
+        <div class="h-captcha" data-sitekey="<?php echo wp_kses_post($site_key); ?>"></div>
+
+
+      </div>
 
 
 
-</div>
+
+
+
+    </div>
 
 <?php
 

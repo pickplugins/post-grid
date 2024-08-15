@@ -253,7 +253,7 @@ class PGBlockWooProductInfoItem
               $finalValue = get_post_meta($POST_ID, $fieldCustomMeta, true);
               // $finalValue = get_field($fieldCustomMeta, $POST_ID);
 
-              // var_dump($finalValue);
+              var_dump($finalValue);
               echo wp_kses_post($finalValue);
             }
           }

@@ -31,12 +31,8 @@ class PGBlockFormFieldInput
         );
     }
 
-    function front_script($attributes)
-    {
-    }
-    function front_style($attributes)
-    {
-    }
+    function front_script($attributes) {}
+    function front_style($attributes) {}
 
     // front-end output from the gutenberg editor 
     function theHTML($attributes, $content, $block)
@@ -48,7 +44,7 @@ class PGBlockFormFieldInput
         global $PGFormProps;
         global $post;
 
-        //var_dump($post);
+        var_dump($post);
 
         $formId = isset($block->context['post-grid/formId']) ? $block->context['post-grid/formId'] : '';
 
@@ -59,7 +55,7 @@ class PGBlockFormFieldInput
         $currentUser = wp_get_current_user();
 
 
-        //var_dump($global_post);
+        var_dump($global_post);
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';

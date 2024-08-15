@@ -71,7 +71,7 @@ class PGBlockWooCategories
 
 
 
-		// var_dump(generateShortcode($shortcodeParam, "product_categories"));
+		var_dump(generateShortcode($shortcodeParam, "product_categories"));
 
 		// //* Visible condition
 		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];

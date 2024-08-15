@@ -178,7 +178,7 @@ class PGBlockPostQueryPagination
 
 
 
-    var_dump($maxPageNum);
+
 
     $layout = isset($attributes['layout']) ? $attributes['layout'] : [];
 

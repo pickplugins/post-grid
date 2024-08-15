@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 	var lazyImages = document.querySelectorAll("img[data-src]");
-  // console.log(lazyImages)
+
 
 	function lazyLoad() {
 		lazyImages.forEach(function (img) {
@@ -11,12 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				// If the image is within the viewport
 				if (img.getAttribute("data-loaded") !== "true") {
 
-          
-					
+
+
 					var newImg = new Image();
 					newImg.src = img.getAttribute("data-src");
 					newImg.onload = function () {
-						
+
 						img.src = img.getAttribute("data-src");
 						// img.removeAttribute("data-src");
 						img.setAttribute("data-loaded", "true");
@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 
-	
+
 	lazyLoad();
 
-	
+
 	// window.addEventListener("scroll", lazyLoad);
 	window.addEventListener("load", lazyLoad);
 });

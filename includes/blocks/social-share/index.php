@@ -159,9 +159,9 @@ class PGBlockSocialShare
 							$url = isset($item['profileLink']) ? $item['profileLink'] : '';
 						}
 
-						var_dump($wrapperType);
-						var_dump($url);
-						var_dump($profileLink);
+
+
+
 
 
 				?>

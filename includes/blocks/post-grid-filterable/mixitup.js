@@ -143,7 +143,7 @@
 
     if (typeof Object.create !== "function") {
       Object.create = (function (undefined) {
-        var Temp = function () {};
+        var Temp = function () { };
 
         return function (prototype, propertiesObject) {
           if (prototype !== Object(prototype) && prototype !== null) {
@@ -239,7 +239,7 @@
 
         self = this;
 
-        FNOP = function () {};
+        FNOP = function () { };
 
         fBound = function () {
           return self.apply(
@@ -264,7 +264,7 @@
       window.Element.prototype.dispatchEvent = function (event) {
         try {
           return this.fireEvent("on" + event.type, event);
-        } catch (err) {}
+        } catch (err) { }
       };
     }
   })();
@@ -1075,13 +1075,13 @@
       intersectionX = Math.max(
         0,
         Math.min(box1.left + box1.width, box2.left + box2.width) -
-          Math.max(box1.left, box2.left)
+        Math.max(box1.left, box2.left)
       );
 
       intersectionY = Math.max(
         0,
         Math.min(box1.top + box1.height, box2.top + box2.height) -
-          Math.max(box1.top, box2.top)
+        Math.max(box1.top, box2.top)
       );
 
       intersectionArea = intersectionY * intersectionX;
@@ -1509,7 +1509,7 @@
    * @since       3.0.0
    */
 
-  mixitup.Base = function () {};
+  mixitup.Base = function () { };
 
   mixitup.Base.prototype = {
     constructor: mixitup.Base,
@@ -2419,7 +2419,7 @@
      * var mixer = mixitup(containerEl, {
      *     callbacks: {
      *         onMixStart: function(state, futureState) {
-     *              console.log('Starting operation...');
+     *              
      *         }
      *     }
      * });
@@ -2442,7 +2442,7 @@
      * var mixer = mixitup(containerEl, {
      *     callbacks: {
      *         onMixBusy: function(state) {
-     *              console.log('Mixer busy');
+     *              
      *         }
      *     }
      * });
@@ -2464,7 +2464,7 @@
      * var mixer = mixitup(containerEl, {
      *     callbacks: {
      *         onMixEnd: function(state) {
-     *              console.log('Operation complete');
+     *              
      *         }
      *     }
      * });
@@ -2486,7 +2486,7 @@
      * var mixer = mixitup(containerEl, {
      *     callbacks: {
      *         onMixFail: function(state) {
-     *              console.log('No items could be found matching the requested filter');
+     *              
      *         }
      *     }
      * });
@@ -2515,7 +2515,7 @@
      * var mixer = mixitup(containerEl, {
      *     callbacks: {
      *         onMixClick: function(state, originalEvent) {
-     *              console.log('The control "' + this.innerText + '" was clicked');
+     *              
      *         }
      *     }
      * });
@@ -3237,7 +3237,7 @@
      *
      * // Private properties and methods will now be visible on the mixer instance:
      *
-     * console.log(mixer);
+     * 
      *
      * @name        enable
      * @memberof    mixitup.Config.debug
@@ -5230,7 +5230,7 @@
           operation.startDataset =
             operation.newDataset =
             state.activeDataset =
-              self.config.load.dataset.slice();
+            self.config.load.dataset.slice();
           operation.startContainerClassName = operation.newContainerClassName =
             state.activeContainerClassName;
           operation.show = self.targets.slice();
@@ -5341,10 +5341,10 @@
         self.dom.targets = self.config.layout.allowNestedTargets
           ? self.dom.container.querySelectorAll(self.config.selectors.target)
           : h.children(
-              self.dom.container,
-              self.config.selectors.target,
-              self.dom.document
-            );
+            self.dom.container,
+            self.config.selectors.target,
+            self.dom.document
+          );
 
         self.dom.targets = h.arrayFromList(self.dom.targets);
 
@@ -6417,10 +6417,10 @@
 
             transform.push(
               effectName +
-                "(" +
-                effects[effectName].value +
-                effects[effectName].unit +
-                ")"
+              "(" +
+              effects[effectName].value +
+              effects[effectName].unit +
+              ")"
             );
         }
 
@@ -6610,7 +6610,7 @@
           self.config.animation.animateResizeContainer &&
           operation.startHeight !== operation.newHeight &&
           operation.viewportDeltaY !==
-            operation.startHeight - operation.newHeight
+          operation.startHeight - operation.newHeight
         ) {
           self.dom.parent.style.height = operation.startHeight + "px";
         }
@@ -6688,18 +6688,18 @@
         operation.startHeight = self.incPadding
           ? parentRect.height
           : parentRect.height -
-            parseFloat(parentStyle.paddingTop) -
-            parseFloat(parentStyle.paddingBottom) -
-            parseFloat(parentStyle.borderTop) -
-            parseFloat(parentStyle.borderBottom);
+          parseFloat(parentStyle.paddingTop) -
+          parseFloat(parentStyle.paddingBottom) -
+          parseFloat(parentStyle.borderTop) -
+          parseFloat(parentStyle.borderBottom);
 
         operation.startWidth = self.incPadding
           ? parentRect.width
           : parentRect.width -
-            parseFloat(parentStyle.paddingLeft) -
-            parseFloat(parentStyle.paddingRight) -
-            parseFloat(parentStyle.borderLeft) -
-            parseFloat(parentStyle.borderRight);
+          parseFloat(parentStyle.paddingLeft) -
+          parseFloat(parentStyle.paddingRight) -
+          parseFloat(parentStyle.borderLeft) -
+          parseFloat(parentStyle.borderRight);
 
         self.callActions("afterGetStartMixData", arguments);
       },
@@ -6827,7 +6827,7 @@
           self.dom.parent.style.height =
             self.dom.parent.style.width =
             self.dom.parent.style.overflow =
-              "";
+            "";
         }
 
         if (!self.incPadding) {
@@ -6842,18 +6842,18 @@
         operation.newHeight = self.incPadding
           ? parentRect.height
           : parentRect.height -
-            parseFloat(parentStyle.paddingTop) -
-            parseFloat(parentStyle.paddingBottom) -
-            parseFloat(parentStyle.borderTop) -
-            parseFloat(parentStyle.borderBottom);
+          parseFloat(parentStyle.paddingTop) -
+          parseFloat(parentStyle.paddingBottom) -
+          parseFloat(parentStyle.borderTop) -
+          parseFloat(parentStyle.borderBottom);
 
         operation.newWidth = self.incPadding
           ? parentRect.width
           : parentRect.width -
-            parseFloat(parentStyle.paddingLeft) -
-            parseFloat(parentStyle.paddingRight) -
-            parseFloat(parentStyle.borderLeft) -
-            parseFloat(parentStyle.borderRight);
+          parseFloat(parentStyle.paddingLeft) -
+          parseFloat(parentStyle.paddingRight) -
+          parseFloat(parentStyle.borderLeft) -
+          parseFloat(parentStyle.borderRight);
 
         operation.viewportDeltaX =
           operation.docState.viewportWidth -
@@ -7005,7 +7005,7 @@
             posData.posIn[effectName].unit =
               posData.posOut[effectName].unit =
               posData.tweenData[effectName].unit =
-                effect.unit;
+              effect.unit;
           }
         }
 
@@ -7072,7 +7072,7 @@
             posData.posIn[effectName].unit =
               posData.posOut[effectName].unit =
               posData.tweenData[effectName].unit =
-                effect.unit;
+              effect.unit;
           }
         }
 
@@ -7169,7 +7169,7 @@
             if (
               operation.startHeight !== operation.newHeight &&
               operation.viewportDeltaY !==
-                operation.startHeight - operation.newHeight
+              operation.startHeight - operation.newHeight
             ) {
               self.dom.parent.style.height = operation.newHeight + "px";
             }
@@ -7177,7 +7177,7 @@
             if (
               operation.startWidth !== operation.newWidth &&
               operation.viewportDeltaX !==
-                operation.startWidth - operation.newWidth
+              operation.startWidth - operation.newWidth
             ) {
               self.dom.parent.style.width = operation.newWidth + "px";
             }
@@ -7326,7 +7326,7 @@
           self.targetsImmovable =
           self.targetsBound =
           self.targetsDone =
-            0;
+          0;
 
         for (i = 0; (target = operation.show[i]); i++) {
           target.cleanUp();
@@ -7352,7 +7352,7 @@
           self.dom.parent.style.overflow =
           self.dom.parent.style[mixitup.features.perspectiveProp] =
           self.dom.parent.style[mixitup.features.perspectiveOriginProp] =
-            "";
+          "";
 
         if (operation.willChangeLayout) {
           h.removeClass(self.dom.container, operation.startContainerClassName);
@@ -7769,8 +7769,8 @@
 
             !instruction.command.collection.length
               ? (instruction.command.collection = h.arrayFromList(
-                  arg.childNodes
-                ))
+                arg.childNodes
+              ))
               : (instruction.command.sibling = arg.childNodes[0]);
           } else if (typeof arg === "object") {
             // Insert command
@@ -9638,7 +9638,7 @@
        *
        * var state = mixer.getState();
        *
-       * console.log(state.totalShow + 'targets are currently shown');
+       * 
        *
        * @public
        * @instance
@@ -10183,10 +10183,10 @@
 
           currentTransformValues.push(
             propertyName +
-              "(" +
-              currentValues[propertyName].value +
-              tweenData.unit +
-              ")"
+            "(" +
+            currentValues[propertyName].value +
+            tweenData.unit +
+            ")"
           );
         } else {
           if (!tweenData) continue;

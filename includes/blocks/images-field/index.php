@@ -337,7 +337,7 @@ class PGBlockGalleryImagesField
         <?php
           }
 
-          var_dump($metaKey);
+
 
 
 

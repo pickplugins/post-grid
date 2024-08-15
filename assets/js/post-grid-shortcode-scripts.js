@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
 
         var view_type = postgridAttsObj.view_type;
 
-        // console.log(grid_id);
+
 
 
         var is_reset = 'no';
@@ -100,7 +100,7 @@ jQuery(document).ready(function ($) {
         var grid_id = parseInt($(this).parent().attr('grid-id'));
 
 
-        console.log(post_grid_ajax._wpnonce);
+
 
 
         post_grid_masonry_enable = 'no';

@@ -212,7 +212,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
       keyword = $(this).val();
 
       url = window.location.href
-      //console.log();
+
       var url = new URL(url);
 
 

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var header = hashWrap.parentElement;
 			var index = header.getAttribute("index")
 
-			console.log(index);
+
 
 
 			window.pgAccordion.switch(index)

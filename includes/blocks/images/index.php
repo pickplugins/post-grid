@@ -58,7 +58,7 @@ class PGBlockGalleryImages
 
     $block_instance = $block->parsed_block;
 
-    var_dump($block_instance);
+
 
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -214,7 +214,7 @@ class PGBlockGalleryImages
             return $context;
           };
 
-          var_dump($filter_block_context);
+
           add_filter('render_block_context', $filter_block_context, 1);
 
 

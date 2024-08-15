@@ -136,8 +136,6 @@ class BlockPostMeta
 				if (function_exists("pods_field")) {
 					$post_type = get_post_type($post_ID);
 					$metaValue = pods_field($post_type, $post_ID, $metaKey, true);
-
-					var_dump($metaValue);
 				}
 			}
 		} else {

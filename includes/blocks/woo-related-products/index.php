@@ -71,7 +71,7 @@ class PGBlockWooRelatedProducts
 
 
 
-		var_dump(generateShortcode($shortcodeParam, "related_products"));
+
 		// //* Visible condition
 		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
 		if (!empty($visible['rules'])) {

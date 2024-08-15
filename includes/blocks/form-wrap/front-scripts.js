@@ -80,15 +80,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var action = args[1];
 						var actionId = action.id;
 
-						console.log(actionId);
+
 
 
 						if (actionId == "simpleMath") {
 
 							var simpleMathInput = document.querySelector('input[name="simple_math"]');
 
-							console.log(simpleMathInput.value);
-							console.log(window.pgSimpleMath);
+
+
 
 							if (window.pgSimpleMath.result != simpleMathInput.value) {
 								onsubmitProceed = false;
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 
 
-					console.log(onsubmitProceed);
+
 
 
 					if (onsubmitProceed) {
@@ -337,8 +337,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						var successArgs = data.success == undefined ? {} : data.success;
 						var errorsArgs = data.errors == undefined ? {} : data.errors;
 
-						console.log(successArgs);
-						console.log(errorsArgs);
+
+
 
 
 						if (aftersubmitargsObj == null) return;
@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 							var action = aftersubmitargsObj[i];
 
-							console.log(action);
+
 
 
 							var actionId = action.id;

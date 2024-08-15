@@ -337,7 +337,7 @@ class post_grid_meta_boxs
 
     $settings_tabs = apply_filters('post_grid_metabox_tabs', $settings_tabs);
 
-    var_dump($settings_tabs);
+
 
 
     $tabs_sorted = array();

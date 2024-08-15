@@ -113,7 +113,7 @@ class PGBlockWooProductTabs
 
 
 
-    var_dump($blockAlign);
+
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];

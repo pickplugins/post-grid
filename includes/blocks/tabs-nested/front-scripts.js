@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						event.currentTarget.classList.remove("nav-item");
 						event.currentTarget.classList.add("nav-item-active");
 						var tabId = event.currentTarget.getAttribute("data-tab-id");
-						console.log("tabId " + tabId);
+
 
 						var navActiveIndex = window.pgTabs.navActiveIndex;
 

@@ -44,7 +44,7 @@ class PGBlockFormFieldInput
         global $PGFormProps;
         global $post;
 
-        var_dump($post);
+
 
         $formId = isset($block->context['post-grid/formId']) ? $block->context['post-grid/formId'] : '';
 
@@ -55,7 +55,7 @@ class PGBlockFormFieldInput
         $currentUser = wp_get_current_user();
 
 
-        var_dump($global_post);
+
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';

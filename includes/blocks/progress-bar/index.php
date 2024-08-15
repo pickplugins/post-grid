@@ -79,7 +79,7 @@ class PGBlockProgressBar
 
 
 
-    var_dump($progressData);
+
 
     $type = isset($progressData['type']) ? $progressData['type'] : "horizontal";
     $max = isset($progressData['max']) ? (int) $progressData['max'] : 0;

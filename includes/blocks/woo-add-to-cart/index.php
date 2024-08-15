@@ -146,7 +146,7 @@ class PGBlockWooAddToCart
     }
 
 
-    var_dump($productType);
+
 
 
 

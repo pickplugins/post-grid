@@ -54,7 +54,7 @@ class PGBlockFormFieldHcaptcha
     $apiKeys = isset($post_grid_block_editor['apiKeys']) ? $post_grid_block_editor['apiKeys'] : [];
     $hCAPTCHA = isset($apiKeys['hCAPTCHA']['args']) ? $apiKeys['hCAPTCHA']['args'] : [];
     $site_key = isset($hCAPTCHA['site_key']) ? $hCAPTCHA['site_key'] : "";
-    var_dump($site_key);
+
     // $secret_key = isset($hCAPTCHA['secret_key']) ? $hCAPTCHA['secret_key'] : "";
     // $version = isset($hCAPTCHA['version']) ? $hCAPTCHA['version'] : "v2Checkbox";
 

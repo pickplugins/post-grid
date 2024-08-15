@@ -192,7 +192,7 @@ class PGBlockImage
     $sizes = isset($attachment_metadata['sizes']) ? $attachment_metadata['sizes'] : [];
 
 
-    var_dump($attachment_metadata);
+
 
     $mt_width = isset($attachment_metadata['width']) ? $attachment_metadata['width'] : '';
     $mt_height = isset($attachment_metadata['height']) ? $attachment_metadata['height'] : '';

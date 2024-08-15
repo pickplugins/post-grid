@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				// elemX.forEach((item) => {
 				imagesLoaded(item, function () {
 					var msnry = new Masonry(item, masonryOptions);
-					// console.log(msnry);
+
 				});
 				// });
 			}

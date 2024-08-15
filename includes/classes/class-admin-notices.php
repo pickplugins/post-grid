@@ -72,7 +72,7 @@ class class_post_grid_notices
 
     $screen = get_current_screen();
 
-    var_dump($post_grid_notices);
+
 
     ob_start();
 
@@ -128,7 +128,7 @@ class class_post_grid_notices
     $post_grid_info = get_option('post_grid_info');
     $import_layouts = isset($post_grid_info['import_layouts']) ? $post_grid_info['import_layouts'] : '';
 
-    var_dump($screen);
+
 
 
     //delete_option('post_grid_info');

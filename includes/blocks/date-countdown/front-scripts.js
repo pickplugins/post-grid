@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		document.addEventListener("pgDateCountdownExpired", (event) => {
 
-			console.log("Hello pgDateCountdownExpired");
+
 
 		});
 
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				everDurationX = everDuration;
 			}
 
-			// console.log("everDuration : ", everDuration);
+
 			//cookie
 
 			// const totalTime =
@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 				if (dateCountdownType == "everGreen") {
 					// document.cookie = "pgDateCountdownEverGreenTime=" + everDuration;
-					// console.log("pgDateCountdownEverGreenTime");
+
 
 					var countdownWrap = document.querySelector(".countdown-wrapper");
 					countdownWrap.style.display = "none";

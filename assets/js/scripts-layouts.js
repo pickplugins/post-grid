@@ -62,8 +62,8 @@ jQuery(document).ready(function ($) {
         imgHeight = $(this).children('img').height();
         wrapHeight = $(this).height();
 
-        //console.log(wrapHeight);
-        //console.log(imgHeight);
+
+
 
         if (imgHeight > wrapHeight) {
 

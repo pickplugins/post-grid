@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					var rawData = post_grid_vars[blockId].layout.rawData;
 					var nonce = post_grid_vars[blockId]._wpnonce;
 
-					console.log(nonce);
+
 
 
 					var pagination = blockargsObj.pagination;
@@ -395,7 +395,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 										html += '<div className="item">' + x.html + "</div>";
 									});
 
-									console.log(html);
+
 
 
 									itemsLoopWrap.insertAdjacentHTML("beforeend", html);

@@ -48,7 +48,10 @@ class PGBlockWooStarRate
 
 
     global $postGridCssY;
+    global $product;
 
+
+    if ($product == NULL) return;
 
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -123,7 +126,8 @@ class PGBlockWooStarRate
 
 
 
-    global $product;
+
+
 
     $productSKu = ($product == null) ? '' : $product->get_sku();
     $productRatingCount = ($product == null) ? '' : $product->get_rating_count();

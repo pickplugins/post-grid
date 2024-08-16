@@ -60,6 +60,8 @@ class PGBlockWooProductTabs
 
     global $postGridCssY;
     global $postGridScriptData;
+    global $product;
+    if ($product == NULL) return;
 
 
 

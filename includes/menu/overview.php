@@ -100,7 +100,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
       <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
         Product Info</div>
     </a>
-    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/woo-product-ratings?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/woo-star-rate?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
       <span class=" w-12 mx-auto ">
         <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-product-rating-150x138.png" alt="Product Rate">
       </span>

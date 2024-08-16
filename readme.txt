@@ -130,13 +130,6 @@ We have added all google fonts with our style component font family picker, so i
 Still using custom plugin or coding to creating custom post types? we have added visual post type maker in our dashboard, just you need to give your post type name and fill condition, post type will generate immediately.
 
 
-
-
-
-
-
-
-
 ## 3rd-party Integrations
 
 To extend the functinality of our post grid plugin we have added many popular plugins features integration and support, here are the top plugins we have added

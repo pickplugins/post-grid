@@ -109,10 +109,6 @@ class PGBlockWooSku
     global $product;
 
     $productSku = ($product == null) ? '' : $product->get_sku();
-    // $productaverage_rating = $product->get_average_rating();
-    // $productget_rating_counts = $product->get_rating_counts();
-    // $productget_review_count = $product->get_review_count();
-    //$productget_stock_quantity = $product->get_stock_quantity();
 
 
 

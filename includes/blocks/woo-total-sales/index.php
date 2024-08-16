@@ -110,11 +110,6 @@ class PGBlockWooTotalSales
 		global $product;
 
 		$productSaleCount = ($product == null) ? '' : $product->get_total_sales();
-		// $productaverage_rating = $product->get_average_rating();
-		// $productget_rating_counts = $product->get_rating_counts();
-		// $productget_review_count = $product->get_review_count();
-		//$productget_stock_quantity = $product->get_stock_quantity();
-
 
 
 		if ($iconLibrary == 'fontAwesome') {

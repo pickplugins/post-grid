@@ -47,6 +47,8 @@ class PGBlockWooStarRate
 
 
 
+
+
     global $postGridCssY;
     global $product;
 
@@ -323,7 +325,9 @@ class PGBlockWooStarRate
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

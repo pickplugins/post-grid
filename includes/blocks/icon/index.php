@@ -54,6 +54,8 @@ class PGBlockIcon
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -445,7 +447,9 @@ class PGBlockIcon
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

@@ -53,6 +53,8 @@ class PGBlockDateCountdown
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -580,7 +582,9 @@ class PGBlockDateCountdown
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

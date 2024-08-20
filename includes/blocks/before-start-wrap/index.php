@@ -40,6 +40,8 @@ class PGBlockBeforeStartWrap
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -107,6 +109,8 @@ class PGBlockBeforeStartWrap
       </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }
+
+
 
     return ob_get_clean();
   }

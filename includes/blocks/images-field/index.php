@@ -41,6 +41,8 @@ class PGBlockGalleryImagesField
 
 
 
+
+
     global $postGridCssY;
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 
@@ -373,7 +375,9 @@ class PGBlockGalleryImagesField
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

@@ -47,6 +47,8 @@ class PGBlockWooLoginForm
 
 
 
+
+
 		global $postGridCssY;
 
 
@@ -107,7 +109,9 @@ class PGBlockWooLoginForm
 
 
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

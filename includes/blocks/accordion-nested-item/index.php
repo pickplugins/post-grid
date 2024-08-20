@@ -37,6 +37,8 @@ class PGBlockAccordionNestedItem
 
 
 
+
+
 		global $postGridCssY;
 
 		$parentIcon = isset($block->context['post-grid/accordionNestedIcon']) ? $block->context['post-grid/accordionNestedIcon'] : '';
@@ -209,7 +211,7 @@ class PGBlockAccordionNestedItem
 
 
 ?>
-		<<?php echo pg_tag_escape($headerTag); ?> id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>">
+		<<?php echo pg_tag_escape($headerTag); ?> id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="<?php echo esc_attr($blockId); ?>" aria-selected="false" aria-expanded="false" tabindex="-1">
 			<?php if ($iconPosition == 'left') : ?>
 				<span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
 					<?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
@@ -264,10 +266,12 @@ class PGBlockAccordionNestedItem
 			<?php endif; ?>
 		</<?php echo pg_tag_escape($headerTag); ?>>
 
-		<<?php echo pg_tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>">
+		<<?php echo pg_tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>" aria-labelledby="<?php echo esc_attr($blockId); ?>" role="tabpanel" aria-hidden="false">
 			<?php echo $content; ?>
 		</<?php echo pg_tag_escape($contentWrapperTag); ?>>
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

@@ -47,6 +47,8 @@ class PGBlockWooBreadcrumb
 
 
 
+
+
         global $postGridCssY;
 
 
@@ -120,7 +122,9 @@ class PGBlockWooBreadcrumb
 
 
 
-<?php return ob_get_clean();
+<?php
+
+        return ob_get_clean();
     }
 }
 

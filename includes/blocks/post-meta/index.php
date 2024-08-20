@@ -59,6 +59,8 @@ class BlockPostMeta
 	function theHTML($attributes, $content, $block)
 	{
 
+
+
 		global $postGridCssY;
 
 
@@ -258,6 +260,8 @@ class BlockPostMeta
 <?php
 
 		endif;
+
+
 
 
 

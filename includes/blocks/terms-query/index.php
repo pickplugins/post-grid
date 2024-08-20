@@ -48,6 +48,8 @@ class PGBlockTermsQuery
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
     wp_enqueue_style('font-awesome-5');
 
 
@@ -272,7 +274,9 @@ class PGBlockTermsQuery
       </div>
     <?php
       endif; ?>
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

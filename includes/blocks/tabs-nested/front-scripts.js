@@ -59,17 +59,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			var currentTarget = document.querySelector(`#${navActiveId}`);
 
+			if (currentTarget != null) {
+				//currentTarget.classList.remove("nav-item");
+				currentTarget.classList.add("nav-item-active");
+			}
 
-			//currentTarget.classList.remove("nav-item");
-			currentTarget.classList.add("nav-item-active");
+
 
 
 			var tabByattr = document.querySelector(
 				`.pg-tabs-panel[data-tab-id="${navActiveId}"]`
 			);
 
-			tabByattr.classList.add("pg-tabs-panel-active");
-			tabByattr.setAttribute('hidden', false)
+			if (tabByattr != null) {
+				tabByattr.classList.add("pg-tabs-panel-active");
+				tabByattr.setAttribute('hidden', false)
+			}
+
+
 
 
 
@@ -237,33 +244,45 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var tabsPrevWrap = document.querySelector("#" + window.pgTabs.id + " .prev ");
 			var tabsPageNumbers = document.querySelectorAll("#" + window.pgTabs.id + " .page-numbers ");
 
-			tabsNextWrap.addEventListener("click", function (event) {
-				window.pgTabs.switchNext()
-			})
-			tabsPrevWrap.addEventListener("click", function (event) {
-				window.pgTabs.switchPrev()
-
-			})
-
-			tabsPageNumbers.forEach((PageNumbers) => {
-				PageNumbers.addEventListener("click", function (event) {
-
-					var target = event.target;
-					var itemClass = [];
-					target.classList.forEach((item) => {
-						itemClass.push(item)
-					})
-
-					if (itemClass.includes("prev")) {
-					}
-					else if (itemClass.includes("next")) {
-					}
-					else {
-						var index = parseInt(target.getAttribute("index"));
-						window.pgTabs.switchNavs(index)
-					}
+			if (tabsNextWrap != null) {
+				tabsNextWrap.addEventListener("click", function (event) {
+					window.pgTabs.switchNext()
 				})
-			})
+			}
+			if (tabsPrevWrap != null) {
+				tabsPrevWrap.addEventListener("click", function (event) {
+					window.pgTabs.switchPrev()
+
+				})
+			}
+			if (tabsPageNumbers != null) {
+				tabsPageNumbers.forEach((PageNumbers) => {
+					PageNumbers.addEventListener("click", function (event) {
+
+						var target = event.target;
+						var itemClass = [];
+						target.classList.forEach((item) => {
+							itemClass.push(item)
+						})
+
+						if (itemClass.includes("prev")) {
+						}
+						else if (itemClass.includes("next")) {
+						}
+						else {
+							var index = parseInt(target.getAttribute("index"));
+							window.pgTabs.switchNavs(index)
+						}
+					})
+				})
+			}
+
+
+
+
+
+
+
 
 
 

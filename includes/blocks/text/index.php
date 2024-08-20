@@ -54,6 +54,8 @@ class PGBlockPostText
   function theHTML($attributes, $content, $block)
   {
 
+
+
     // global $wp_query;
     // $taxterm = get_queried_object();
 
@@ -179,7 +181,9 @@ class PGBlockPostText
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

@@ -58,6 +58,8 @@ class PGBlockWooProductTabs
 
 
 
+
+
     global $postGridCssY;
     global $postGridScriptData;
     global $product;
@@ -164,7 +166,9 @@ class PGBlockWooProductTabs
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

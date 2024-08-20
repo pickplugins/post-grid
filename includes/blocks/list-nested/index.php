@@ -42,6 +42,8 @@ class PGBlockListNested
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -158,7 +160,9 @@ class PGBlockListNested
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

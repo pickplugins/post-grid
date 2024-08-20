@@ -31,16 +31,14 @@ class PGBlockImageGalleryItem
         );
     }
 
-    function front_script($attributes)
-    {
-    }
-    function front_style($attributes)
-    {
-    }
+    function front_script($attributes) {}
+    function front_style($attributes) {}
 
     // front-end output from the gutenberg editor 
     function theHTML($attributes, $content, $block)
     {
+
+
 
 
 
@@ -95,6 +93,8 @@ class PGBlockImageGalleryItem
             <?php echo $content ?>
         </div>
 <?php
+
+
         return ob_get_clean();
     }
 }

@@ -42,9 +42,7 @@ class PGBlockPostGrid
       wp_enqueue_style('pgpostgrid_front_style');
     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
 
 
@@ -52,6 +50,8 @@ class PGBlockPostGrid
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
     wp_enqueue_style('font-awesome-5');
 
 
@@ -311,6 +311,8 @@ class PGBlockPostGrid
       <?php echo $content ?>
     </div>
 <?php
+
+
 
     return ob_get_clean();
   }

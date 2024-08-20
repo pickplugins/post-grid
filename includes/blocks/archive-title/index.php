@@ -46,6 +46,8 @@ class PGBlocArchiveTitle
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -420,7 +422,9 @@ class PGBlocArchiveTitle
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

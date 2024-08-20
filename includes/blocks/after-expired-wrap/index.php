@@ -40,6 +40,8 @@ class PGBlockAfterExpiredWrap
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -107,6 +109,8 @@ class PGBlockAfterExpiredWrap
       </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }
+
+
 
     return ob_get_clean();
   }

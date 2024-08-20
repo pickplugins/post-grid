@@ -27,16 +27,14 @@ class PGBlockJustifiedWrapItem
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
 
 
 
@@ -65,13 +63,15 @@ class PGBlockJustifiedWrapItem
 
     ob_start();
 
-    ?>
-        <div
-          class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-          <?php echo $content ?>
-        </div>
-        <?php
-        return ob_get_clean();
+?>
+    <div
+      class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+      <?php echo $content ?>
+    </div>
+<?php
+
+
+    return ob_get_clean();
   }
 }
 

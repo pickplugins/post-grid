@@ -47,6 +47,8 @@ class PGBlockWooStockQuantity
 
 
 
+
+
         global $postGridCssY;
 
 
@@ -342,7 +344,9 @@ class PGBlockWooStockQuantity
 
 
 
-<?php return ob_get_clean();
+<?php
+
+        return ob_get_clean();
     }
 }
 

@@ -49,6 +49,8 @@ class PGBlockJustifiedImage
   {
 
 
+
+
     wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/justified-image/fslightbox.js', [], '', true);
     wp_register_script('pgimage_front_script', post_grid_plugin_url . 'includes/blocks/post-grid/front-scripts.js', [], '', true);
 
@@ -382,7 +384,9 @@ class PGBlockJustifiedImage
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

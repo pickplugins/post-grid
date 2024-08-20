@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 	function lazyLoad() {
+
 		lazyImages.forEach(function (img) {
 			if (
 				img.getBoundingClientRect().top <= window.innerHeight &&
@@ -30,6 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	lazyLoad();
 
 
-	// window.addEventListener("scroll", lazyLoad);
+	window.addEventListener("scroll", lazyLoad);
 	window.addEventListener("load", lazyLoad);
 });

@@ -47,7 +47,7 @@
           "imgSrcImgId": "",
           "srcUrl": "",
           "srcsetEnable": true,
-          "lazy": false,
+          "lazy": true,
           "lazySrc": "",
           "lazySrcId": "",
           "lazySrcType": "media",

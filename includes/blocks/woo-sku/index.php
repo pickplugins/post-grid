@@ -47,6 +47,8 @@ class PGBlockWooSku
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -289,7 +291,9 @@ class PGBlockWooSku
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

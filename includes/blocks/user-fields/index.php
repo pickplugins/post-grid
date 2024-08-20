@@ -39,6 +39,8 @@ class PGBlockUserFields
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -316,7 +318,9 @@ class PGBlockUserFields
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

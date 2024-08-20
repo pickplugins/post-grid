@@ -40,6 +40,8 @@ class PGBlockLayer
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -106,6 +108,8 @@ class PGBlockLayer
       </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }
+
+
 
     return ob_get_clean();
   }

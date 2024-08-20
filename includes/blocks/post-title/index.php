@@ -33,6 +33,8 @@ class PGBlockPostTitle
   {
 
 
+
+
     global $postGridCssY;
 
     $post_ID = isset($block->context["postId"])
@@ -339,7 +341,9 @@ class PGBlockPostTitle
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

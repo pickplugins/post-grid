@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Combo Blocks
+Plugin Name: Post Grid and Gutenberg Blocks
 Plugin URI: https://comboblocks.com/
-Description: Combo Blocks is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.89
+Description: Post Grid is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
+Version: 2.2.90
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.89');
+      define('post_grid_version', '2.2.90');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -254,12 +254,7 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/date-countdown', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/date-countdown/index.php');
       }
-      // if (!in_array('post-grid/before-start-wrap', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/before-start-wrap/index.php');
-      // }
-      // if (!in_array('post-grid/after-expired-wrap', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/after-expired-wrap/index.php');
-      // }
+
       if (!in_array('post-grid/popup', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/popup/index.php');
       }
@@ -459,7 +454,9 @@ if (!class_exists('PostGrid')) {
         require_once(post_grid_plugin_dir . 'includes/blocks/table-tr/index.php');
       }
 
-
+      if (!in_array('post-grid/business-hours', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
+      }
 
 
       // if (!in_array('post-grid/woo-related-products', $disabled)) {
@@ -496,104 +493,10 @@ if (!class_exists('PostGrid')) {
       // if (!in_array('post-grid/woo-login-form', $disabled)) {
       //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-login-form/index.php');
       // }
-      if (!in_array('post-grid/business-hours', $disabled)) {
-        require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
-      }
 
 
 
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-grid/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-query/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-query-pagination/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/wordpress-org-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-title/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-excerpt/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/read-more/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-featured-image/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-categories/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-tags/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-author/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-taxonomies/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-author-fields/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-date/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/terms-list/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/layers/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/layer/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/image/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/list-nested/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/list-nested-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/number-counter/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/date-countdown/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/popup/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/progress-bar/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/list/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/image-gallery-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/content-slider/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/content-slider-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-meta/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-grid-filterable-nav/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/shortcode/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/social-share/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/breadcrumb/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/archive-title/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/archive-description/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/post-comment-count/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/star-rate/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/accordion-nested-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/flex-wrap-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/masonry-wrap-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/grid-wrap-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/back-to-top/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-wrap/functions.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-input/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file-multi/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-file/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-submit/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/terms-query/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/terms-query-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-checkbox/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-radio/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-select/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/form-field-textarea/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-sku/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-total-sales/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock-quantity/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info-item/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-price/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-add-to-cart/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-related-products/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale-products/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-best-selling-products/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-top-rated-products/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-products/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-recent-products/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-categories/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/woo-login-form/index.php');
-      //require_once(post_grid_plugin_dir . 'includes/blocks/post-comments/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/info-box/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/table/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/table-td/index.php');
-      // require_once(post_grid_plugin_dir . 'includes/blocks/table-tr/index.php');
+
     }
 
 

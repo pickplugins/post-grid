@@ -40,6 +40,8 @@ class PGBlockFlipBoxBack
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -153,6 +155,8 @@ class PGBlockFlipBoxBack
         <?php echo $content ?> </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }
+
+
 
     return ob_get_clean();
   }

@@ -31,16 +31,14 @@ class PGBlockTabsNestedItem
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
-	function front_style($attributes)
-	{
-	}
+	function front_script($attributes) {}
+	function front_style($attributes) {}
 
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)
 	{
+
+
 
 
 
@@ -130,7 +128,7 @@ class PGBlockTabsNestedItem
 
 
 ?>
-		<div class="pg-tabs-panel  <?php echo ($uid == $activeTab) ? '' : '' ?>" data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true">
+		<div class="pg-tabs-panel  <?php echo ($uid == $activeTab) ? '' : '' ?>" data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true" aria-hidden="true" role="tabpanel" aria-labelledby="<?php echo esc_attr($uid); ?>">
 
 			<?php echo $content; ?>
 
@@ -141,7 +139,9 @@ class PGBlockTabsNestedItem
 
 
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

@@ -47,6 +47,8 @@ class PGBlockReadmore
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -355,7 +357,9 @@ class PGBlockReadmore
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

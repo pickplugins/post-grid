@@ -1,10 +1,10 @@
-=== Gutenberg Blocks, Page Builder - ComboBlocks ===
+=== Post Grid and Gutenberg Blocks ===
 Contributors: PickPlugins, NafisMahmudAyon
 Donate link: https://comboblocks.com/
-Tags: Gutenberg Blocks, form maker, woocommerce blocks, popup maker, Page Builder
+Tags: popup Blocks, form block, post meta block
 Requires at least: 5.0.0
 Tested up to: 6.6
-Stable tag: 2.2.89
+Stable tag: 2.2.90
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -249,7 +249,15 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 == Changelog ==
 
-
+= 2.2.90 =
+- 2024-08-20 - security - XSS in the list block issue fixed
+- 2024-08-20 - update - More translation support added.
+- 2024-08-17 - update - Date Countdown Block update.
+- 2024-08-15 - added - Block variation picker added on Flip Box block.
+- 2024-08-15 - added - Block variation picker added on Back to Top block.
+- 2024-08-15 - added - Block variation picker added on Star Rate block.
+- 2024-08-15 - added - Block variation picker added on Social Share or Links block.
+- 2024-08-15 - added - Block variation picker added on Social Wordpress-org block.
 
 = 2.2.89 =
 - 2024-08-13 - update - More translation support added.

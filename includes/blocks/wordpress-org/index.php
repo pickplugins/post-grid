@@ -40,6 +40,8 @@ class PGBlockWordpressOrg
 
 
 
+
+
 		global $postGridCssY;
 
 
@@ -154,7 +156,9 @@ class PGBlockWordpressOrg
 
 
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

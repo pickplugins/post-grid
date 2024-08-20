@@ -47,6 +47,8 @@ class PGBlockWooTotalSales
 
 
 
+
+
 		global $postGridCssY;
 
 
@@ -344,7 +346,9 @@ class PGBlockWooTotalSales
 
 
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

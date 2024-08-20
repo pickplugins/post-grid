@@ -31,12 +31,8 @@ class BlockPostShortcode
 		);
 	}
 
-	function front_script($attributes)
-	{
-	}
-	function front_style($attributes)
-	{
-	}
+	function front_script($attributes) {}
+	function front_style($attributes) {}
 
 
 
@@ -44,6 +40,8 @@ class BlockPostShortcode
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)
 	{
+
+
 
 
 
@@ -148,6 +146,8 @@ class BlockPostShortcode
 
 
 		endif;
+
+
 
 
 

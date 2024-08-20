@@ -63,6 +63,8 @@ class PGBlockBusinessHours
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -280,6 +282,8 @@ class PGBlockBusinessHours
 
     </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
+
+
 
 
     return ob_get_clean();

@@ -64,6 +64,8 @@ class PGBlockWooAddToCart
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -273,7 +275,9 @@ class PGBlockWooAddToCart
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

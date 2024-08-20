@@ -41,6 +41,8 @@ class PGBlockPostTaxonomies
 
 
 
+
+
     global $postGridCssY;
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -367,7 +369,9 @@ class PGBlockPostTaxonomies
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

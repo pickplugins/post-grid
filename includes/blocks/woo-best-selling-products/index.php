@@ -47,6 +47,8 @@ class PGBlockWooBestSellingProducts
 
 
 
+
+
 		global $postGridCssY;
 
 
@@ -134,7 +136,9 @@ class PGBlockWooBestSellingProducts
 
 
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

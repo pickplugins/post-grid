@@ -5,6 +5,12 @@
   "title": "Images",
   "textdomain": "post-grid",
   "category": "post-grid-archive",
+  "parent": [
+    "post-grid/content-slider",
+    "post-grid/image-gallery",
+    "post-grid/masonry-wrap",
+    "post-grid/grid-wrap"
+  ],
   "usesContext": [
     "post-grid/galleryId",
     "post-grid/lightbox",

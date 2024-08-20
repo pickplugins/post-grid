@@ -40,16 +40,14 @@ class PGBlockTabs
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
 
 
 
@@ -201,7 +199,7 @@ class PGBlockTabs
           $tablink = str_replace(" ", "-", $tablink);
 
         ?>
-          <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>" class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="<?php echo esc_attr($index); ?>">
+          <div id="<?php echo esc_attr($uid); ?>" data-tab-id="<?php echo esc_attr($uid); ?>" class="<?php echo ($uid == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="<?php echo ($uid == $activeTab) ? '0' : '-1' ?>" aria-controls="tabs-<?php echo esc_attr($index); ?>" aria-selected="false" aria-expanded="false" index="<?php echo esc_attr($index); ?>">
 
 
             <?php if ($iconPosition == 'before') : ?>
@@ -266,7 +264,9 @@ class PGBlockTabs
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

@@ -41,6 +41,8 @@ class PGBlockFeaturedImage
 
 
 
+
+
     global $postGridCssY;
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -339,7 +341,9 @@ class PGBlockFeaturedImage
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

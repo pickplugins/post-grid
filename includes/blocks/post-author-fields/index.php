@@ -39,6 +39,8 @@ class PGBlockPostAuthorields
 
 
 
+
+
     global $postGridCssY;
 
     $pgAuthorField = isset($block->context['post-grid/postElement']) ? $block->context['post-grid/postElement'] : 'display_name';
@@ -291,7 +293,9 @@ class PGBlockPostAuthorields
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

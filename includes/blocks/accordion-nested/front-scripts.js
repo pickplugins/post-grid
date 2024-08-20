@@ -40,35 +40,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 				}
 			});
-
-
-			// var accordionHeader = "";
-			// accordionHeader.classList.toggle("accordion-header-active");
-
-			// content.style.height = "auto";
-
-			// if (accordionHeader.classList.contains("accordion-header-active")) {
-			// 	if (iconToggle != null) {
-			// 		iconToggle.style.display = "inline-block";
-			// 	}
-			// 	if (iconIdle != null) {
-			// 		iconIdle.style.display = "none";
-			// 	}
-			// 	content.style.display = "block";
-			// 	content.style.height = "auto";
-			// } else {
-			// 	if (iconIdle != null) {
-			// 		iconIdle.style.display = "inline-block";
-			// 	}
-			// 	if (iconToggle != null) {
-			// 		iconToggle.style.display = "none";
-			// 	}
-
-			// 	content.style.display = "none";
-			// 	content.style.height = 0;
-			// }
-
-
 		},
 
 		switchNext: () => {
@@ -187,39 +158,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-			var nextWrap = document.querySelector("#" + window.pgAccordion.id + " .next ");
-			var prevWrap = document.querySelector("#" + window.pgAccordion.id + " .prev ");
-			var pageNumbers = document.querySelectorAll("#" + window.pgAccordion.id + " .page-numbers ");
+			// var nextWrap = document.querySelector("#" + window.pgAccordion.id + " .next ");
+			// var prevWrap = document.querySelector("#" + window.pgAccordion.id + " .prev ");
+			// var pageNumbers = document.querySelectorAll("#" + window.pgAccordion.id + " .page-numbers ");
 
 
-			nextWrap.addEventListener("click", function (event) {
-				window.pgAccordion.switchNext()
-			})
-			prevWrap.addEventListener("click", function (event) {
-				window.pgAccordion.switchPrev()
+			// nextWrap.addEventListener("click", function (event) {
+			// 	window.pgAccordion.switchNext()
+			// })
+			// prevWrap.addEventListener("click", function (event) {
+			// 	window.pgAccordion.switchPrev()
 
-			})
+			// })
 
 
-			pageNumbers.forEach((PageNumber) => {
-				PageNumber.addEventListener("click", function (event) {
+			// pageNumbers.forEach((PageNumber) => {
+			// 	PageNumber.addEventListener("click", function (event) {
 
-					var target = event.target;
-					var itemClass = [];
-					target.classList.forEach((item) => {
-						itemClass.push(item)
-					})
+			// 		var target = event.target;
+			// 		var itemClass = [];
+			// 		target.classList.forEach((item) => {
+			// 			itemClass.push(item)
+			// 		})
 
-					if (itemClass.includes("prev")) {
-					}
-					else if (itemClass.includes("next")) {
-					}
-					else {
-						var index = parseInt(target.getAttribute("index"));
-						window.pgAccordion.switch(index)
-					}
-				})
-			})
+			// 		if (itemClass.includes("prev")) {
+			// 		}
+			// 		else if (itemClass.includes("next")) {
+			// 		}
+			// 		else {
+			// 			var index = parseInt(target.getAttribute("index"));
+			// 			window.pgAccordion.switch(index)
+			// 		}
+			// 	})
+			// })
 
 
 

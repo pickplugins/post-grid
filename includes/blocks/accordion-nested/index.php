@@ -57,6 +57,8 @@ class PGBlockAccordionNested
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -163,7 +165,7 @@ class PGBlockAccordionNested
 ?>
 
 
-    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-pgaccordion="<?php echo esc_attr(json_encode($accordionData)) ?>">
+    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-pgaccordion="<?php echo esc_attr(json_encode($accordionData)) ?>" role="tablist">
       <?php echo $content; ?>
     </div>
 
@@ -183,7 +185,9 @@ class PGBlockAccordionNested
 
 
 
-<?php return ob_get_clean();
+<?php 
+
+    return ob_get_clean();
   }
 }
 

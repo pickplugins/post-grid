@@ -58,6 +58,8 @@ class PGBlockWooMyAccount
 
 
 
+
+
     global $postGridCssY;
     global $postGridScriptData;
 
@@ -160,7 +162,9 @@ class PGBlockWooMyAccount
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

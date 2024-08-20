@@ -80,6 +80,8 @@ class PGBlockPostTableOfContents
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -143,7 +145,9 @@ class PGBlockPostTableOfContents
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

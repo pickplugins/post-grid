@@ -40,6 +40,8 @@ class PGBlockBreadcrumb
 
 
 
+
+
 		global $postGridCssY;
 
 		$post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -903,7 +905,9 @@ class PGBlockBreadcrumb
 
 		?>
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

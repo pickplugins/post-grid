@@ -40,6 +40,8 @@ class PGBlockTable
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -142,6 +144,8 @@ class PGBlockTable
 
     </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
+
+
     return ob_get_clean();
   }
 }

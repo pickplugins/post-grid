@@ -47,6 +47,8 @@ class PGBlockWooCategories
 
 
 
+
+
 		global $postGridCssY;
 
 
@@ -113,7 +115,9 @@ class PGBlockWooCategories
 
 
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

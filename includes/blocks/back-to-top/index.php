@@ -54,6 +54,8 @@ class PGBlockBackToTop
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -321,7 +323,9 @@ class PGBlockBackToTop
 
 
 
-  <?php return ob_get_clean();
+  <?php
+
+    return ob_get_clean();
   }
 }
 

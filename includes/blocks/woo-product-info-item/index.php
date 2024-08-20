@@ -41,6 +41,8 @@ class PGBlockWooProductInfoItem
 
 
 
+
+
     global $postGridCssY;
 
     $post_ID = get_the_ID();
@@ -301,7 +303,9 @@ class PGBlockWooProductInfoItem
 
 
 
-  <?php return ob_get_clean();
+  <?php
+
+    return ob_get_clean();
   }
 }
 

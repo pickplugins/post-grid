@@ -41,6 +41,8 @@ class PGBlockPostCategories
 
 
 
+
+
     global $postGridCssY;
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
@@ -369,7 +371,9 @@ class PGBlockPostCategories
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

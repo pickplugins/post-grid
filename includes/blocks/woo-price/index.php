@@ -47,6 +47,8 @@ class PGBlockWooPrice
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -270,7 +272,9 @@ class PGBlockWooPrice
     <?php endif; ?>
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

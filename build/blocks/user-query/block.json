@@ -5,6 +5,11 @@
   "title": "User Query",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
+  "parent": [
+    "post-grid/content-slider",
+    "post-grid/masonry-wrap",
+    "post-grid/grid-wrap"
+  ],
   "providesContext": {
     "post-grid/blockId": "blockId",
     "post-grid/queryId": "queryId",

@@ -48,6 +48,8 @@ class PGBlockTermsQueryItem
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -383,7 +385,9 @@ class PGBlockTermsQueryItem
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

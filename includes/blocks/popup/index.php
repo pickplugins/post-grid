@@ -19,11 +19,11 @@ class PGBlockPopup
     wp_register_style('pgpopup_animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
 
 
-    // if (has_block('post-grid/popup')) {
+    if (has_block('post-grid/popup')) {
 
-    wp_enqueue_style('pgpopup_animate');
-    wp_enqueue_script('pgpopup_front_script');
-    // }
+      wp_enqueue_style('pgpopup_animate');
+      wp_enqueue_script('pgpopup_front_script');
+    }
   }
   // loading src files in the gutenberg editor screen
   function register_scripts()
@@ -46,16 +46,14 @@ class PGBlockPopup
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
 
 
 
@@ -179,6 +177,8 @@ class PGBlockPopup
     </div>
 
 <?php
+
+
 
     return ob_get_clean();
   }

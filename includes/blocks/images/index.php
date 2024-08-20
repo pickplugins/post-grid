@@ -49,6 +49,8 @@ class PGBlockGalleryImages
   function theHTML($attributes, $content, $block)
   {
 
+
+
     wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', true);
 
     global $postGridCssY;
@@ -259,7 +261,9 @@ class PGBlockGalleryImages
       </div>
     <?php
       endif; ?>
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

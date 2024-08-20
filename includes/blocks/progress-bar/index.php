@@ -58,6 +58,8 @@ class PGBlockProgressBar
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -407,7 +409,9 @@ class PGBlockProgressBar
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

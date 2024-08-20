@@ -45,6 +45,8 @@ class PGBlockGridWrap
 
 
 
+
+
 		global $postGridCssY;
 
 
@@ -96,6 +98,8 @@ class PGBlockGridWrap
 			<?php echo $content ?>
 		</div>
 <?php
+
+
 
 		return ob_get_clean();
 	}

@@ -5,6 +5,13 @@
   "title": "Post Query",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
+  "parent": [
+    "post-grid/post-grid",
+    "post-grid/post-grid-filterable",
+    "post-grid/content-slider",
+    "post-grid/masonry-wrap",
+    "post-grid/grid-wrap"
+  ],
   "usesContext": [
     "post-grid/queryArgs",
     "post-grid/layout",

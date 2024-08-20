@@ -40,9 +40,7 @@ class PGBlockUserQueryPagination
       //wp_enqueue_style('pgpostquerypagination_front_style');
     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
 
 
@@ -50,6 +48,8 @@ class PGBlockUserQueryPagination
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
     wp_enqueue_style('font-awesome-5');
 
 
@@ -391,7 +391,9 @@ class PGBlockUserQueryPagination
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

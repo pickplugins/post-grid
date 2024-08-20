@@ -40,6 +40,8 @@ class PGBlockFormFieldSimpleMath
 
 
 
+
+
         global $postGridCssY;
         global $PGFormProps;
         global $post;
@@ -239,6 +241,8 @@ class PGBlockFormFieldSimpleMath
         </div>
 
 <?php
+
+
 
         return ob_get_clean();
     }

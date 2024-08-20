@@ -48,6 +48,8 @@ class PGBlockFormFieldHcaptcha
   {
 
 
+
+
     global $postGridCssY;
 
     $post_grid_block_editor = get_option('post_grid_block_editor');
@@ -170,6 +172,8 @@ class PGBlockFormFieldHcaptcha
     </div>
 
 <?php
+
+
 
     return ob_get_clean();
   }

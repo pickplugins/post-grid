@@ -31,16 +31,14 @@ class PGBlockFormFieldFileMulti
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
 
 
 
@@ -124,7 +122,7 @@ class PGBlockFormFieldFileMulti
     ob_start();
 
 
-    ?>
+?>
 
     <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?> ">
       <div class='label-wrap'>
@@ -164,15 +162,15 @@ class PGBlockFormFieldFileMulti
 
         for ($i = 0; $i < $inputMaxCount; $i++) {
 
-          ?>
+        ?>
           <div class="item">
             <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
               value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>"
-              <?php if ($inputRequired): ?> required <?php endif; ?>       <?php if ($inputDisabled): ?> disabled <?php endif; ?>
+              <?php if ($inputRequired): ?> required <?php endif; ?> <?php if ($inputDisabled): ?> disabled <?php endif; ?>
               <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
           </div>
 
-          <?php
+        <?php
         }
 
         ?>
@@ -201,7 +199,9 @@ class PGBlockFormFieldFileMulti
 
     </div>
 
-    <?php
+<?php
+
+
     return ob_get_clean();
   }
 }

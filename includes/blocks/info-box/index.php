@@ -40,6 +40,8 @@ class PGBlockInfoBox
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -145,6 +147,8 @@ class PGBlockInfoBox
         <?php echo $content ?> </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }
+
+
 
     return ob_get_clean();
   }

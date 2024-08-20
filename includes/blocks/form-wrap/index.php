@@ -46,16 +46,14 @@ class PGBlockFormWrap
     );
   }
 
-  function front_script($attributes)
-  {
-  }
-  function front_style($attributes)
-  {
-  }
+  function front_script($attributes) {}
+  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
 
 
 
@@ -164,6 +162,8 @@ class PGBlockFormWrap
     </div>
 
 <?php
+
+
 
     return ob_get_clean();
   }

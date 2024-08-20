@@ -44,6 +44,8 @@ class PGBlockList
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -133,15 +135,14 @@ class PGBlockList
 
 
 
-
     if (!empty($wrapperTag)) :
 ?>
 
       <<?php echo pg_tag_escape($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>
-                    <?php echo esc_attr($blockAlign); ?>" <?php if ($itemReversed) { ?> reversed <?php } ?> <?php if ($itemStart) { ?> start=<?php echo '"' . $itemStart . '"';
-                                                                                                                                            } ?>>
+                    <?php echo esc_attr($blockAlign); ?>" <?php if ($itemReversed) { ?> reversed <?php } ?> <?php if ($itemStart) { ?> start="<?php echo $itemStart; ?>"
+        <?php   } ?>>
 
 
 
@@ -150,7 +151,7 @@ class PGBlockList
           foreach ($items as $index => $item) {
 
         ?>
-          <<?php echo pg_tag_escape($itemTag); ?> class=" <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
+          <<?php echo pg_tag_escape($itemTag); ?> class="<?php echo esc_attr($itemOptions['class']); ?>" index="<?php echo esc_attr($index); ?>">
 
 
             <?php if ($iconPosition == 'left') : ?>
@@ -202,7 +203,9 @@ class PGBlockList
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

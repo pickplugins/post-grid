@@ -58,6 +58,8 @@ class PGBlockNumberCounter
 
 
 
+
+
 		global $postGridCssY;
 
 
@@ -248,7 +250,9 @@ class PGBlockNumberCounter
 
 
 
-<?php return ob_get_clean();
+<?php
+
+		return ob_get_clean();
 	}
 }
 

@@ -47,6 +47,8 @@ class PGBlocPostDate
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -348,7 +350,9 @@ class PGBlocPostDate
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

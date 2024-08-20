@@ -51,6 +51,8 @@ class PGBlockImage
   {
 
 
+
+
     wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', true);
     wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/image/lazy-load.js', [], '', true);
 
@@ -501,7 +503,9 @@ class PGBlockImage
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

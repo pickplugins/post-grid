@@ -44,6 +44,8 @@ class PGBlockStarRate
 
 
 
+
+
     global $postGridCssY;
 
 
@@ -415,7 +417,9 @@ class PGBlockStarRate
 
 
 
-<?php return ob_get_clean();
+<?php
+
+    return ob_get_clean();
   }
 }
 

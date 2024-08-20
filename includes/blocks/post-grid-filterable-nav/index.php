@@ -43,9 +43,7 @@ class PGBlockPostGridFilterableNav
       wp_enqueue_style('pgpostgrid_filterable_nav_front_style');
     }
   }
-  function front_style($attributes)
-  {
-  }
+  function front_style($attributes) {}
 
 
 
@@ -53,6 +51,8 @@ class PGBlockPostGridFilterableNav
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+
+
     wp_enqueue_style('font-awesome-5');
 
 
@@ -372,6 +372,8 @@ class PGBlockPostGridFilterableNav
 
 
 <?php
+
+
 
     return ob_get_clean();
   }

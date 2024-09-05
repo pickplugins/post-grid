@@ -36,7 +36,7 @@ class PGBlockNumberCounter
 	function front_scripts($attributes)
 	{
 
-		wp_register_script('pg-number-counter', post_grid_plugin_url . 'includes/blocks/number-counter/front-scripts.js', [], '', true);
+		wp_register_script('pg-number-counter', post_grid_plugin_url . 'includes/blocks/number-counter/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
 		if (has_block('post-grid/number-counter')) {
 
@@ -160,9 +160,9 @@ class PGBlockNumberCounter
 
 
 
-		$wrapperClass = parse_css_class($wrapperClass, $obj);
-		$prefixText = parse_css_class($prefixText, $obj);
-		$postfixText = parse_css_class($postfixText, $obj);
+		$wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+		$prefixText = post_grid_parse_css_class($prefixText, $obj);
+		$postfixText = post_grid_parse_css_class($postfixText, $obj);
 
 		// //* Visible condition
 		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];

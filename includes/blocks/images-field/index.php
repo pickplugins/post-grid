@@ -51,6 +51,7 @@ class PGBlockGalleryImagesField
     $imageId = isset($block->context['imageId']) ? $block->context['imageId'] : '';
     $galleryId = isset($block->context['galleryId']) ? $block->context['galleryId'] : '';
     $lightboxEnable = isset($block->context['lightbox']) ? $block->context['lightbox'] : false;
+    $categories = isset($block->context['categories']) ? $block->context['categories'] : [];
 
 
 
@@ -224,9 +225,9 @@ class PGBlockGalleryImagesField
     $obj['id'] = $imageId;
     $obj['type'] = 'attachment';
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
-    $prefixText = parse_css_class($prefixText, $obj);
-    $postfixText = parse_css_class($postfixText, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+    $prefixText = post_grid_parse_css_class($prefixText, $obj);
+    $postfixText = post_grid_parse_css_class($postfixText, $obj);
 
 
     // //* Visible condition

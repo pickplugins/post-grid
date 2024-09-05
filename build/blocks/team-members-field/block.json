@@ -1,0 +1,132 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "post-grid/team-members-field",
+  "title": "Team Members Field",
+  "textdomain": "post-grid",
+  "category": "post-grid-tools",
+  "parent": [
+    "post-grid/team-members",
+    "post-grid/flex-wrap-item",
+    "post-grid/flip-box-back",
+    "post-grid/flip-box-front",
+    "post-grid/layers",
+    "post-grid/layer"
+  ],
+  "usesContext": [
+    "blockId",
+    "teamMemberData",
+    "socialLinks",
+    "loopIndex",
+    "lightbox",
+    "categories",
+    "post-grid/elements",
+    "post-grid/galleryId",
+    "post-grid/lightbox"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "team-members-field",
+          "tag": "div"
+        },
+        "styles": {}
+      }
+    },
+    "field": {
+      "type": "object",
+      "default": {
+        "options": {
+          "linkTo": "",
+          "customField": "",
+          "linkToMeta": "",
+          "linkTarget": "",
+          "avatarSize": "",
+          "dateFormat": "",
+          "customUrl": "",
+          "separator": "",
+          "prefix": "",
+          "postfix": "",
+          "linkAttr": []
+        },
+        "styles": {}
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforePostDate",
+          "class": "icon"
+        },
+        "styles": {}
+      }
+    },
+    "metaKey": {
+      "type": "string",
+      "default": "image"
+    },
+    "frontText": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "inline-block"
+        },
+        "styles": {}
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "prefix",
+          "position": ""
+        },
+        "styles": {}
+      }
+    },
+    "postfix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "postfix",
+          "position": ""
+        },
+        "styles": {}
+      }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "team-members-field"
+  ],
+  "description": ""
+}

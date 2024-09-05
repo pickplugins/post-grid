@@ -105,7 +105,7 @@ class PGBlockFormFieldFile
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
     $inputName = form_wrap_input_name($inputOptions, ["blockId" => $blockId]);
 
 

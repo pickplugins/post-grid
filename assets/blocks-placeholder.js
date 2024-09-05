@@ -50,7 +50,7 @@ registerBlockType('post-grid/post-date', { title: 'Post Date', description: 'The
 registerBlockType('post-grid/post-excerpt', { title: 'Post Excerpt', description: 'This block displays the excerpt or summary of a blog post\'s content.' });
 registerBlockType('post-grid/post-featured-image', { title: 'Featured Image', description: 'The featured image block is a container for displaying the featured image within a webpage.' });
 registerBlockType('post-grid/post-grid', { title: 'Post Grid', description: 'The post grid block arranges blog posts in a grid format, making it easy for users to browse and access content efficiently.' });
-registerBlockType('post-grid/post-grid-filterable', { title: 'Post Grid - Filterable', description: 'The post grid filterable block is a dynamic element that organizes and displays blog posts in a grid format, allowing users to filter and sort posts by categories.' });
+registerBlockType('post-grid/post-grid-filterable', { title: 'Filterable Grid', description: 'The post grid filterable block is a dynamic element that organizes and displays blog posts in a grid format, allowing users to filter and sort posts by categories.' });
 registerBlockType('post-grid/post-meta', { title: 'Post Meta', description: 'The post meta block provides supplementary information about a blog post, including details like the author, date, and category.' });
 registerBlockType('post-grid/post-tags', { title: 'Post Tags', description: 'The post tag block displays tags or keywords associated with a blog post' });
 registerBlockType('post-grid/post-taxonomies', { title: 'Post Terms', description: 'A post terms block is used to categorize and organize blog posts by displaying associated tags, categories, or other classification elements.' });

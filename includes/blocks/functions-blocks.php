@@ -21,7 +21,7 @@ register_meta('post', 'pgc_meta', [
 
 
 
-function parse_css_class($classStr, $obj)
+function post_grid_parse_css_class($classStr, $obj)
 {
 
   $matches = array();
@@ -313,7 +313,7 @@ function parse_css_class($classStr, $obj)
 
 
 
-function parse_css_classX($classStr, $obj)
+function post_grid_parse_css_classX($classStr, $obj)
 {
   $objType = $obj['type'];
   $objId = $obj['id'];

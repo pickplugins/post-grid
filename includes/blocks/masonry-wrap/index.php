@@ -15,11 +15,11 @@ class PGBlockMasonryWrap
 
 	function front_scripts($attributes)
 	{
-		wp_register_script('pgmasonry-wrap_image_loaded', post_grid_plugin_url . 'includes/blocks/masonry-wrap/imagesloaded.pkgd.min.js', [], '', true);
+		wp_register_script('pgmasonry-wrap_image_loaded', post_grid_plugin_url . 'includes/blocks/masonry-wrap/imagesloaded.pkgd.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
-		wp_register_script('pgmasonry-wrap_masonry_core', post_grid_plugin_url . 'includes/blocks/masonry-wrap/masonry.pkgd.js', [], '', true);
-		wp_register_script('pgmasonry-wrap_masonry_min', post_grid_plugin_url . 'includes/blocks/masonry-wrap/masonry.pkgd.min.js', [], '', true);
-		wp_register_script('pgmasonry-wrap_front_script', post_grid_plugin_url . 'includes/blocks/masonry-wrap/front-scripts.js', [], '', true);
+		wp_register_script('pgmasonry-wrap_masonry_core', post_grid_plugin_url . 'includes/blocks/masonry-wrap/masonry.pkgd.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+		wp_register_script('pgmasonry-wrap_masonry_min', post_grid_plugin_url . 'includes/blocks/masonry-wrap/masonry.pkgd.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+		wp_register_script('pgmasonry-wrap_front_script', post_grid_plugin_url . 'includes/blocks/masonry-wrap/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
 
 		if (has_block('post-grid/masonry-wrap')) {
@@ -149,7 +149,7 @@ class PGBlockMasonryWrap
 
 
 
-		$wrapperClass = parse_css_class($wrapperClass, $obj);
+		$wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
 
 		// //* Visible condition

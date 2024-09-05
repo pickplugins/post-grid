@@ -15,10 +15,9 @@ class PGBlockJustifiedWrap
 
 	function front_scripts($attributes)
 	{
-		wp_register_script('pgjustified-wrap_front_script', post_grid_plugin_url . 'includes/blocks/justified-wrap/front-scripts.js', [], '', true);
+		wp_register_script('pgjustified-wrap_front_script', post_grid_plugin_url . 'includes/blocks/justified-wrap/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
-		wp_register_script('pgjustified-wrap_justified_core', post_grid_plugin_url . 'includes/blocks/justified-wrap/lightgallery.min.js', [], '', true);
-		// wp_register_script('pgjustified-wrap_justified_min', post_grid_plugin_url . 'includes/blocks/justified-wrap/justified.pkgd.min.js', [], '', true);
+		wp_register_script('pgjustified-wrap_justified_core', post_grid_plugin_url . 'includes/blocks/justified-wrap/lightgallery.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
 
 		if (has_block('post-grid/justified-wrap')) {
@@ -147,7 +146,7 @@ class PGBlockJustifiedWrap
 
 
 
-		$wrapperClass = parse_css_class($wrapperClass, $obj);
+		$wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
 
 		ob_start();

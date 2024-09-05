@@ -51,8 +51,8 @@ class PGBlockJustifiedImage
 
 
 
-    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/justified-image/fslightbox.js', [], '', true);
-    wp_register_script('pgimage_front_script', post_grid_plugin_url . 'includes/blocks/post-grid/front-scripts.js', [], '', true);
+    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/justified-image/fslightbox.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+    wp_register_script('pgimage_front_script', post_grid_plugin_url . 'includes/blocks/post-grid/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
     $galleryLightbox = isset($block->context['post-grid/lightbox']) ? $block->context['post-grid/lightbox'] : null;
     $lightbox = ($galleryLightbox == null) ? $attributes['lightbox'] : $galleryLightbox;
@@ -275,7 +275,7 @@ class PGBlockJustifiedImage
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];

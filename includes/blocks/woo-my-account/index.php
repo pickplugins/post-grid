@@ -38,7 +38,8 @@ class PGBlockWooMyAccount
 
     if (has_block('post-grid/woo-my-account')) {
 
-      wp_enqueue_script('pg-woo-my-account-scripts');
+      // wp_enqueue_script('pg-woo-my-account-scripts');
+      wp_enqueue_script('pg_block_scripts');
     }
   }
 

@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
 	window.pgTabs = {
@@ -18,15 +19,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		paginationNext: "next ",
 		listenUrlHash: () => {
 			var hash = window.location.hash;
-			var hashWrap = document.querySelector('[href="' + hash + '"]');
-			if (hashWrap == null) return;
 
+			if (hash.length == 0) return;
+
+			var hashWrap = document.querySelector('[href="' + hash + '"]');
 			var index = hashWrap.getAttribute("index")
 			window.pgTabs.switchNavs(index)
 
 
 		},
 		switchNavs: (index) => {
+
+			// console.log(index);
 
 
 			var pgTabId = window.pgTabs.id;
@@ -128,15 +132,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					var pgTabId = tabDataObject.id;
 					var navsIndex = tabDataObject.navsIndex;
 
+					// console.log(pgTabId);
+					// console.log(activeTab);
+
+
 
 					window.pgTabs.id = pgTabId;
 					window.pgTabs.navsIndex = navsIndex;
 					window.pgTabs.navActiveId = activeTab;
-
+					//window.pgTabs.switchNavs(0)
 					// Assign navs active class
 					pgTabs.forEach((pgTab) => {
 						if (activeTab == pgTabId) {
 							pgTab.classList.add("nav-item-active");
+
 						}
 					});
 				});
@@ -194,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 						});
 
-						event.currentTarget.classList.remove("nav-item");
+						//event.currentTarget.classList.remove("nav-item");
 						event.currentTarget.classList.add("nav-item-active");
 						var tabId = event.currentTarget.getAttribute("data-tab-id");
 
@@ -311,6 +320,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 });
+
+
+
 
 
 

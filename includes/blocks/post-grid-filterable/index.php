@@ -16,8 +16,6 @@ class PGBlockPostGridFilterable
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'includes/blocks/post-grid/index.css');
-    //wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'includes/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
 
 
 
@@ -25,7 +23,7 @@ class PGBlockPostGridFilterable
     register_block_type(
       post_grid_plugin_dir . 'build/blocks/post-grid-filterable/block.json',
       array(
-        'title' => "Post Grid -  Filterable",
+        'title' => "Filterable Grid",
         'render_callback' => array($this, 'theHTML'),
 
 
@@ -36,11 +34,16 @@ class PGBlockPostGridFilterable
   function front_scripts($attributes)
   {
     wp_register_script('pgpostgrid_filterable_front_script', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/front-scripts.js', []);
-    wp_register_style('pgpostgrid_filterable_front_style', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/index.css');
+    wp_register_script('pgpostgrid_mixitup', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/mixitup.min.js', []);
+    wp_register_script('pgpostgrid_mixitup_multifilter', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/mixitup-multifilter.js', []);
+    wp_register_script('pgpostgrid_mixitup_pagination', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/mixitup-pagination.js', []);
+
+
     if (has_block('post-grid/post-grid-filterable')) {
 
-      // wp_enqueue_script('pgpostgrid_filterable_front_script');
-      // wp_enqueue_style('pgpostgrid_filterable_front_style');
+      wp_enqueue_script('pgpostgrid_mixitup');
+      wp_enqueue_script('pgpostgrid_mixitup_multifilter');
+      wp_enqueue_script('pgpostgrid_mixitup_pagination');
     }
   }
   function front_style($attributes) {}
@@ -268,7 +271,7 @@ class PGBlockPostGridFilterable
 
 
 
-    $containerClass = parse_css_class($containerClass, $obj);
+    $containerClass = post_grid_parse_css_class($containerClass, $obj);
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];

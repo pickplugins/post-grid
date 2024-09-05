@@ -31,7 +31,7 @@ class PGBlockDateCountdown
   function front_scripts($attributes)
   {
 
-    wp_register_script('pg-date-countdown', post_grid_plugin_url . 'includes/blocks/date-countdown/front-scripts.js', [], '', true);
+    wp_register_script('pg-date-countdown', post_grid_plugin_url . 'includes/blocks/date-countdown/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
     if (has_block('post-grid/date-countdown')) {
 
@@ -262,7 +262,7 @@ class PGBlockDateCountdown
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
     // //* Visible condition
     if (!empty($visible['rules'])) {

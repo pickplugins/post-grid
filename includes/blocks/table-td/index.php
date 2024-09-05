@@ -134,7 +134,7 @@ class PGBlockTableCell
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
 
     // //* Visible condition

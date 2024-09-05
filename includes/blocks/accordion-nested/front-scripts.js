@@ -1,4 +1,4 @@
-// * not working
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
 	window.pgAccordion = {
@@ -211,3 +211,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 });
+
+

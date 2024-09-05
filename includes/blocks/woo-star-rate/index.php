@@ -170,9 +170,9 @@ class PGBlockWooStarRate
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
-    $prefixText = parse_css_class($prefixText, $obj);
-    $postfixText = parse_css_class($postfixText, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+    $prefixText = post_grid_parse_css_class($prefixText, $obj);
+    $postfixText = post_grid_parse_css_class($postfixText, $obj);
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
     if (!empty($visible['rules'])) {

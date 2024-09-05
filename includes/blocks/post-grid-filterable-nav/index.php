@@ -16,8 +16,6 @@ class PGBlockPostGridFilterableNav
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'includes/blocks/post-grid/index.css');
-    //wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'includes/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
 
 
 
@@ -25,7 +23,7 @@ class PGBlockPostGridFilterableNav
     register_block_type(
       post_grid_plugin_dir . 'build/blocks/post-grid-filterable-nav/block.json',
       array(
-        'title' => "Post Grid - Filterable Nav",
+        'title' => "Filterable Grid - Nav",
         'render_callback' => array($this, 'theHTML'),
 
 
@@ -36,11 +34,10 @@ class PGBlockPostGridFilterableNav
   function front_scripts($attributes)
   {
     wp_register_script('pgpostgrid_filterable_nav_front_script', post_grid_plugin_url . 'includes/blocks/post-grid-filterable-nav/front-scripts.js', []);
-    wp_register_style('pgpostgrid_filterable_nav_front_style', post_grid_plugin_url . 'includes/blocks/post-grid-filterable-nav/index.css');
     if (has_block('post-grid/post-grid-filterable-nav')) {
 
       wp_enqueue_script('pgpostgrid_filterable_nav_front_script');
-      wp_enqueue_style('pgpostgrid_filterable_nav_front_style');
+      wp_enqueue_style('pg_block_styles');
     }
   }
   function front_style($attributes) {}
@@ -107,6 +104,7 @@ class PGBlockPostGridFilterableNav
     $filterableFilters = isset($filterableOptions['filters']) ? $filterableOptions['filters'] : [];
     $filterableShowSort = isset($filterableOptions['showSort']) ? $filterableOptions['showSort'] : 'no';
     $filterToggle = isset($filterableOptions['filterToggle']) ? $filterableOptions['filterToggle'] : 'no';
+
 
 
     $filterableShowRandom = isset($filterableOptions['showRandom']) ? $filterableOptions['showRandom'] : 'no';
@@ -316,8 +314,9 @@ class PGBlockPostGridFilterableNav
                 if (!empty($groupitems))
                   foreach ($groupitems as $item) {
                     $itemId = isset($item['id']) ? $item['id'] : '';
-                    $itemSlug = isset($item['slug']) ? $item['slug'] : '';
                     $itemTitle = isset($item['title']) ? $item['title'] : '';
+                    $itemTitleToSlug = str_replace(' ', '-', strtolower($itemTitle));
+                    $itemSlug = !empty($item['slug']) ? $item['slug'] : $itemTitleToSlug;
                     $itemCount = isset($item['count']) ? $item['count'] : '';
                 ?>
                   <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" <?php if ($filterToggle == 'yes') : ?> data-toggle="<?php echo '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>

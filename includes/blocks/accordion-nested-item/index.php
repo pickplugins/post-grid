@@ -205,13 +205,14 @@ class PGBlockAccordionNestedItem
 		}
 
 
+
 		// //* Visible condition
 
 		ob_start();
 
 
 ?>
-		<<?php echo pg_tag_escape($headerTag); ?> id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="<?php echo esc_attr($blockId); ?>" aria-selected="false" aria-expanded="false" tabindex="-1">
+		<<?php echo pg_tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1">
 			<?php if ($iconPosition == 'left') : ?>
 				<span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
 					<?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
@@ -226,11 +227,12 @@ class PGBlockAccordionNestedItem
 			<?php if ($labelIconPosition == 'beforeLabel') : ?>
 				<?php echo wp_kses_post($labelIconHtml); ?>
 			<?php endif; ?>
-			<<?php echo pg_tag_escape($headerLabelTag); ?> index="" <?php if ($headerLabelTag == 'a') :
-																																$link = strtolower($headerLabelText);
-																																$link = str_replace(" ", "-", $link);
+			<<?php echo pg_tag_escape($headerLabelTag); ?> index=""
+				<?php if ($headerLabelTag == 'a') :
+					$link = strtolower($headerLabelText);
+					$link = str_replace(" ", "-", $link);
 
-																															?> href="#<?php echo esc_attr($link); ?>" <?php endif; ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+				?> href="#<?php echo esc_attr($link); ?>" <?php endif; ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
 
 
 				<?php if ($labelCounterPosition == 'beforeLabelText') : ?>
@@ -249,7 +251,8 @@ class PGBlockAccordionNestedItem
 
 				<?php if ($labelCounterPosition == 'afterLabelText') : ?>
 					<span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
-						<?php echo wp_kses_post($count); ?>
+						<?php echo wp_kses_post($count);
+						?>
 					</span>
 				<?php endif; ?>
 
@@ -266,7 +269,7 @@ class PGBlockAccordionNestedItem
 			<?php endif; ?>
 		</<?php echo pg_tag_escape($headerTag); ?>>
 
-		<<?php echo pg_tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>" aria-labelledby="<?php echo esc_attr($blockId); ?>" role="tabpanel" aria-hidden="false">
+		<<?php echo pg_tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false">
 			<?php echo $content; ?>
 		</<?php echo pg_tag_escape($contentWrapperTag); ?>>
 <?php

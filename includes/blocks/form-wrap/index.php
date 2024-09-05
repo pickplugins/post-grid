@@ -15,8 +15,7 @@ class PGBlockFormWrap
 
   function front_scripts($attributes)
   {
-    wp_register_script('pgform-wrap_front_script', post_grid_plugin_url . 'includes/blocks/form-wrap/front-scripts.js', [], '', true);
-    wp_register_style('pgform-wrap_front_style', post_grid_plugin_url . 'includes/blocks/form-wrap/index.css');
+    wp_register_script('pgform-wrap_front_script', post_grid_plugin_url . 'includes/blocks/form-wrap/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
     if (has_block('post-grid/form-wrap')) {
 
@@ -28,14 +27,12 @@ class PGBlockFormWrap
       wp_enqueue_script('jquery-effects-core');
 
       wp_enqueue_script('pgform-wrap_front_script');
-      wp_enqueue_style('pgform-wrap_front_style');
+      wp_enqueue_style('pg_block_styles');
     }
   }
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/layers/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(
@@ -126,7 +123,7 @@ class PGBlockFormWrap
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
     // //* Visible condition
     if (!empty($visible['rules'])) {

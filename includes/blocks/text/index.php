@@ -33,7 +33,7 @@ class PGBlockPostText
 
   function front_scripts($attributes)
   {
-    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', true);
+    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
     if (has_block('post-grid/text')) {
 
@@ -63,7 +63,8 @@ class PGBlockPostText
     global $postGridCssY;
 
 
-    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', true);
+    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+    wp_register_style('pgpopup_animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
 
     if (has_block('post-grid/text')) {
 
@@ -74,7 +75,10 @@ class PGBlockPostText
 
 
       if ($otherCopyObj) {
-        wp_enqueue_script('pg-text');
+        // wp_enqueue_script('pg-text');
+        wp_enqueue_style('pg_block_styles');
+
+        wp_enqueue_style('pgpopup_animate');
       }
     }
 
@@ -99,11 +103,14 @@ class PGBlockPostText
     $otherCopyContent = isset($otherOptions['copyContent']) ? $otherOptions['copyContent'] : "";
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
     $rules = isset($visible['rules']) ? $visible['rules'] : [];
+    $animateOn = isset($attributes['animateOn']) ? $attributes['animateOn'] : [];
+    $animateRules = isset($animateOn['rules']) ? $animateOn['rules'] : [];
+
 
     $text = isset($attributes['text']) ? $attributes['text'] : [];
     $textOptions = isset($text['options']) ? $text['options'] : [];
     $textClass = isset($textOptions['class']) ? $textOptions['class'] : '';
-    $textId = isset($textOptions['id']) ? $textOptions['id'] : '';
+    $textId = !empty($textOptions['id']) ? $textOptions['id'] : $blockId;
 
     $wrapperTag = isset($textOptions['tag']) ? $textOptions['tag'] : 'div';
     $content = isset($textOptions['content']) ? $textOptions['content'] : '';
@@ -130,12 +137,12 @@ class PGBlockPostText
     $obj['id'] = $post_ID;
     $obj['type'] = 'post';
 
-    $textClass = parse_css_class($textClass, $obj);
-    $content = parse_css_class($content, $obj);
+    $textClass = post_grid_parse_css_class($textClass, $obj);
+    $content = post_grid_parse_css_class($content, $obj);
 
 
 
-    //$textClass = parse_css_class($textClass, $obj);
+    //$textClass = post_grid_parse_css_class($textClass, $obj);
 
     // //* Visible condition
     if (!empty($visible['rules'])) {
@@ -157,31 +164,19 @@ class PGBlockPostText
 
     if (!empty($wrapperTag)) :
 ?>
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>"
+        <?php if (!empty($animateRules)): ?>
+        animateOn="<?php echo esc_attr(json_encode($animateRules)) ?>"
+        <?php endif;
 
-
-
-      <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>" <?php
-
-                                                                                                                                                                      if ($otherCopyObj) :
-                                                                                                                                                                      ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" copyContent="<?php echo esc_attr($otherCopyContent); ?>" <?php endif; ?>><?php echo $content; ?>
+        if ($otherCopyObj) : ?>
+        clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" copyContent="<?php echo esc_attr($otherCopyContent); ?>"
+        <?php endif; ?>>
+        <?php echo $content; ?>
       </<?php echo pg_tag_escape($wrapperTag); ?>>
-    <?php
+<?php
 
     endif;
-
-
-
-    ?>
-
-
-
-
-
-
-
-
-
-<?php
 
     return ob_get_clean();
   }

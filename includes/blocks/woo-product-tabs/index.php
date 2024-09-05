@@ -38,7 +38,8 @@ class PGBlockWooProductTabs
 
     if (has_block('post-grid/woo-product-tabs')) {
 
-      wp_enqueue_script('pg-woo-product-tabs-scripts');
+      //wp_enqueue_script('pg-woo-product-tabs-scripts');
+      wp_enqueue_script('pg_block_scripts');
     }
   }
 

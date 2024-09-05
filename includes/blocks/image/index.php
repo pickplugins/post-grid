@@ -9,7 +9,6 @@ class PGBlockImage
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -30,18 +29,6 @@ class PGBlockImage
     );
   }
 
-  function front_script($attributes)
-  {
-    wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/image/lazy-load.js', [], '', true);
-  }
-
-  function front_scripts($attributes) {}
-
-
-
-
-  function front_style($attributes) {}
-
 
 
 
@@ -53,8 +40,8 @@ class PGBlockImage
 
 
 
-    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', true);
-    wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/image/lazy-load.js', [], '', true);
+    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+    wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/image/lazy-load.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
 
 
@@ -233,14 +220,14 @@ class PGBlockImage
       }
     } elseif ($featuredImageSrcType == 'customUrl') {
 
-      //$imagesize = getimagesize($featuredImagesrcUrl);
+      $imagesize = getimagesize($featuredImagesrcUrl);
 
 
-      // $width = isset($imagesize[0]) ? $imagesize[0] : '';
-      // $height = isset($imagesize[1]) ? $imagesize[1] : '';
+      $width = isset($imagesize[0]) ? $imagesize[0] : '';
+      $height = isset($imagesize[1]) ? $imagesize[1] : '';
 
-      $width =  '';
-      $height =  '';
+      // $width =  '';
+      // $height =  '';
 
 
       $attachment_url = $featuredImagesrcUrl;
@@ -394,7 +381,7 @@ class PGBlockImage
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];

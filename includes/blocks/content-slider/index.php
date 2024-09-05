@@ -15,8 +15,8 @@ class PGBlockContentSlider
 
 	function front_scripts($attributes)
 	{
-		wp_register_script('pgcontent-slider_front_script', post_grid_plugin_url . 'includes/blocks/content-slider/front-scripts.js', [], '', true);
-		wp_register_script('pgcontent_slider_splide', post_grid_plugin_url . 'includes/blocks/content-slider/splide.min.js', [], '', true);
+		wp_register_script('pgcontent-slider_front_script', post_grid_plugin_url . 'includes/blocks/content-slider/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+		wp_register_script('pgcontent_slider_splide', post_grid_plugin_url . 'includes/blocks/content-slider/splide.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
 		wp_register_style('pgcontent_slider_splide', post_grid_plugin_url . 'includes/blocks/content-slider/splide.min.css', []);
 		wp_register_style('pgcontent_slider_splide_core', post_grid_plugin_url . 'includes/blocks/content-slider/splide-core.min.css', []);
@@ -198,7 +198,7 @@ class PGBlockContentSlider
 
 
 
-		$wrapperClass = parse_css_class($wrapperClass, $obj);
+		$wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
 
 

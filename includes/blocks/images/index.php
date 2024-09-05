@@ -42,7 +42,21 @@ class PGBlockGalleryImages
   }
   function front_style($attributes) {}
 
+  function categories_slugs($categories)
+  {
 
+    //$slug = [];
+
+    if (!empty($categories)) {
+
+      $user_meta = array_map(function ($a) {
+        $slug = str_replace(" ", "-", strtolower($a));
+        return $slug;
+      }, $categories);
+
+      return implode(" ", $user_meta);
+    }
+  }
 
 
   // front-end output from the gutenberg editor 
@@ -51,7 +65,7 @@ class PGBlockGalleryImages
 
 
 
-    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', true);
+    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
     global $postGridCssY;
     global $postGridScriptData;
@@ -193,8 +207,9 @@ class PGBlockGalleryImages
         foreach ($galleryItems as $index => $galleryItem) {
 
           $imageId = isset($galleryItem['id']) ? $galleryItem['id'] : "";
+          $categories = isset($galleryItem['categories']) ? $galleryItem['categories'] : [];
 
-
+          $categories_slug = $this->categories_slugs($categories);
 
           //if (empty($imageId)) continue;
 
@@ -207,12 +222,13 @@ class PGBlockGalleryImages
           }
           $html = '';
 
-          $filter_block_context = static function ($context) use ($imageId, $galleryItem, $index, $lightboxEnable, $blockId) {
+          $filter_block_context = static function ($context) use ($imageId, $galleryItem, $categories, $index, $lightboxEnable, $blockId) {
             $context['imageId']   = $imageId;
             //$context['imageData']   = $galleryItem;
             $context['loopIndex']   = $index;
             $context['galleryId']   = $blockId;
             $context['lightbox']   = $lightboxEnable;
+            $context['categories']   = $categories;
             return $context;
           };
 
@@ -244,7 +260,12 @@ class PGBlockGalleryImages
             } ?>
             <?php if ($itemWrapOddEvenClass) {
               echo esc_attr($odd_even_class);
-            } ?> ">
+            } ?> 
+            <?php if ($itemWrapTermsClass) {
+              echo esc_attr($categories_slug);
+            } ?> 
+
+">
           <?php echo wp_kses_post($html);
           ?>
         </<?php echo pg_tag_escape($itemWrapTag); ?>>

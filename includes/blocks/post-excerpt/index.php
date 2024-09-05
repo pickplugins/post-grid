@@ -218,11 +218,11 @@ class PGBlockPostExcerpt
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
-    $postExcerptclass = parse_css_class($postExcerptclass, $obj);
-    $readMoreClass = parse_css_class($readMoreClass, $obj);
-    $prefixText = parse_css_class($prefixText, $obj);
-    $postfixText = parse_css_class($postfixText, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+    $postExcerptclass = post_grid_parse_css_class($postExcerptclass, $obj);
+    $readMoreClass = post_grid_parse_css_class($readMoreClass, $obj);
+    $prefixText = post_grid_parse_css_class($prefixText, $obj);
+    $postfixText = post_grid_parse_css_class($postfixText, $obj);
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];

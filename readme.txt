@@ -4,7 +4,7 @@ Donate link: https://comboblocks.com/
 Tags: popup Blocks, form block, post meta block
 Requires at least: 5.0.0
 Tested up to: 6.6
-Stable tag: 2.2.90
+Stable tag: 2.2.91
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -249,6 +249,18 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 == Changelog ==
 
+
+= 2.2.91 =
+- 2024-09-01 - fix - Form block user meta field security issue fixed.
+- 2024-09-01 - update - Dashboard Block Settings added.
+- 2024-08-22 - added - New block Team Showcase added
+- 2024-08-21 - added - New block Team Members Field added
+- 2024-08-21 - added - New block Team Members added
+- 2024-09-04 - added - New block Testimonial Showcase added
+- 2024-08-21 - added - New block Testimonials Item added
+- 2024-08-21 - added - New block Testimonials added
+
+
 = 2.2.90 =
 - 2024-08-20 - security - XSS in the list block issue fixed
 - 2024-08-20 - update - More translation support added.
@@ -275,7 +287,7 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 = 2.2.87 =
 - 2024-08-02 - fix - Security issue fixed.
-- 2024-08-02 - add -New block Gallery images added
+- 2024-08-02 - add - New block Gallery images added
 - 2024-08-02 - fix - New block Gallery images field
 - 2024-08-02 - fix - New block Info box item
 - 2024-08-02 - fix - New block Flip box front

@@ -2922,6 +2922,14 @@ function form_wrap_process_userProfileUpdate($formFields, $onprocessargs, $reque
   $pass2 = $request->get_param('pass2');
 
 
+  $post_grid_block_editor = get_option("post_grid_block_editor");
+
+  $blockSettings = isset($post_grid_block_editor['blockSettings']) ? $post_grid_block_editor['blockSettings'] : [];
+  $formWrap = isset($blockSettings['formWrap']) ? $blockSettings['formWrap'] : [];
+  $allowedUserMetaKeys = isset($formWrap['allowedUserMetaKeys']) ? $formWrap['allowedUserMetaKeys'] : [];
+
+
+  error_log(serialize($allowedUserMetaKeys));
 
 
 
@@ -3011,15 +3019,11 @@ function form_wrap_process_userProfileUpdate($formFields, $onprocessargs, $reque
       // }
 
 
-      if (isset($response['errors'])) {
-
-        return $response;
-      }
 
 
 
 
-      $user_update = wp_update_user($user_new_data);
+
 
 
 
@@ -3029,32 +3033,43 @@ function form_wrap_process_userProfileUpdate($formFields, $onprocessargs, $reque
 
       if (!empty($user_meta)) {
         foreach ($user_meta as $metaKey => $metavalue) {
-          update_user_meta($currentUserId, $metaKey, $metavalue);
-        }
-      }
 
-      $user_meta_files = $request->get_file_params()['user_meta'];
-
-
-
-      $files = [];
-      if (!empty($user_meta_files)) {
-        $i = 0;
-        foreach ($user_meta_files as $index => $data) {
-
-          foreach ($data as $metaKey => $fileInfo) {
-            $files[$metaKey][$index] = $fileInfo;
+          if (in_array($metaKey, $allowedUserMetaKeys)) {
+            update_user_meta($currentUserId, $metaKey, $metavalue);
+          } else {
+            $response['errors']['profileUpdateFailed'] = __("You dont\'t have access to update this field({$metaKey})", 'post-grid');
           }
         }
       }
 
-      if (!empty($files)) {
-        foreach ($files as $metaKey => $metavalue) {
+      if (isset($request->get_file_params()['user_meta'])) {
+        $user_meta_files = $request->get_file_params()['user_meta'];
 
-          $file_response = post_grid_upload_file($metavalue);
 
-          if ($file_response['id']) {
-            update_user_meta($currentUserId, $metaKey, $file_response['id']);
+
+        $files = [];
+        if (!empty($user_meta_files)) {
+          $i = 0;
+          foreach ($user_meta_files as $index => $data) {
+
+            foreach ($data as $metaKey => $fileInfo) {
+              $files[$metaKey][$index] = $fileInfo;
+            }
+          }
+        }
+
+        if (!empty($files)) {
+          foreach ($files as $metaKey => $metavalue) {
+
+            $file_response = post_grid_upload_file($metavalue);
+
+            if ($file_response['id']) {
+              if (in_array($metaKey, $allowedUserMetaKeys)) {
+                update_user_meta($currentUserId, $metaKey, $file_response['id']);
+              } else {
+                $response['errors']['profileUpdateFailed'] = __("You dont\'t have access to update this field({$metaKey})", 'post-grid');
+              }
+            }
           }
         }
       }
@@ -3065,13 +3080,22 @@ function form_wrap_process_userProfileUpdate($formFields, $onprocessargs, $reque
 
 
 
+
+
+
+      if (isset($response['errors'])) {
+
+        return $response;
+      }
+
+      $user_update = wp_update_user($user_new_data);
 
 
 
       if (!is_wp_error($user_update)) {
         $response['success']['profileUpdateSuccess'] = __('User profile update success', 'post-grid');
       } else {
-        $response['errors']['profileUpdateSuccess'] = __('User profile update failed', 'post-grid');
+        $response['errors']['profileUpdateFailed'] = __('User profile update failed', 'post-grid');
       }
     }
 

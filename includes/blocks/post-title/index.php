@@ -221,10 +221,10 @@ class PGBlockPostTitle
     $obj["id"] = $post_ID;
     $obj["type"] = "post";
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
-    $postTitleClass = parse_css_class($postTitleClass, $obj);
-    $prefixText = parse_css_class($prefixText, $obj);
-    $postfixText = parse_css_class($postfixText, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+    $postTitleClass = post_grid_parse_css_class($postTitleClass, $obj);
+    $prefixText = post_grid_parse_css_class($prefixText, $obj);
+    $postfixText = post_grid_parse_css_class($postfixText, $obj);
 
 
     // //* Visible condition

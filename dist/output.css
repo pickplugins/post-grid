@@ -478,6 +478,10 @@
   height: 1rem !important;
 }
 
+.\!h-full {
+  height: 100% !important;
+}
+
 .h-0 {
   height: 0px;
 }
@@ -553,6 +557,10 @@
 
 .\!w-4 {
   width: 1rem !important;
+}
+
+.\!w-6 {
+  width: 1.5rem !important;
 }
 
 .w-1\/2 {
@@ -856,6 +864,10 @@
   align-items: flex-start;
 }
 
+.\!items-center {
+  align-items: center !important;
+}
+
 .items-center {
   align-items: center;
 }
@@ -866,6 +878,10 @@
 
 .justify-start {
   justify-content: flex-start;
+}
+
+.\!justify-center {
+  justify-content: center !important;
 }
 
 .justify-center {
@@ -1046,6 +1062,10 @@
   border-width: 2px;
 }
 
+.border-\[2px\] {
+  border-width: 2px;
+}
+
 .\!border-b {
   border-bottom-width: 1px !important;
 }
@@ -1091,6 +1111,11 @@
 .border-\[\#e0e0e0\] {
   --tw-border-opacity: 1;
   border-color: rgb(224 224 224 / var(--tw-border-opacity));
+}
+
+.border-\[rgb\(199_210_254\)\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(199 210 254 / var(--tw-border-opacity));
 }
 
 .border-\[rgba\(6\2c 44\2c 241\2c 0\.46\)\] {
@@ -1249,6 +1274,11 @@
   background-color: #ffffff6b;
 }
 
+.bg-\[rgb\(244_231_255\)\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 231 255 / var(--tw-bg-opacity));
+}
+
 .bg-\[rgba\(7\2c 73\2c 149\2c 0\.121\)\] {
   background-color: rgba(7,73,149,0.121);
 }
@@ -1281,6 +1311,11 @@
 .bg-blue-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .bg-blue-600 {
@@ -1593,6 +1628,11 @@
   padding-right: 2rem;
 }
 
+.px-\[10px\] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1780,6 +1820,10 @@
   font-size: 13px !important;
 }
 
+.\!text-\[20px\] {
+  font-size: 20px !important;
+}
+
 .\!text-lg {
   font-size: 1.125rem !important;
   line-height: 1.75rem !important;
@@ -1904,8 +1948,16 @@
   line-height: 50px !important;
 }
 
+.\!leading-none {
+  line-height: 1 !important;
+}
+
 .leading-\[32px\] {
   line-height: 32px;
+}
+
+.leading-none {
+  line-height: 1;
 }
 
 .leading-normal {
@@ -1982,11 +2034,6 @@
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-gray-800 {

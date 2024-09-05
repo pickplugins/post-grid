@@ -9,7 +9,7 @@ class PGBlockTermsQueryItem
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+    //add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -31,15 +31,7 @@ class PGBlockTermsQueryItem
     );
   }
 
-  function front_scripts($attributes)
-  {
-    // wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', true);
-
-    //     if (has_block('post-grid/text')) {
-
-    //         wp_enqueue_script('pg-text');
-    //     }
-  }
+  function front_scripts($attributes) {}
   function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
@@ -230,10 +222,10 @@ class PGBlockTermsQueryItem
     $obj["id"] = $term_ID;
     $obj["type"] = "post";
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
-    $fieldValue = parse_css_class($fieldValue, $obj);
-    $prefixText = parse_css_class($prefixText, $obj);
-    $postfixText = parse_css_class($postfixText, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+    $fieldValue = post_grid_parse_css_class($fieldValue, $obj);
+    $prefixText = post_grid_parse_css_class($prefixText, $obj);
+    $postfixText = post_grid_parse_css_class($postfixText, $obj);
 
 
     // //* Visible condition

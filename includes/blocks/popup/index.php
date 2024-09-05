@@ -15,7 +15,7 @@ class PGBlockPopup
 
   function front_scripts($attributes)
   {
-    wp_register_script('pgpopup_front_script', post_grid_plugin_url . 'includes/blocks/popup/front-scripts.js', [], '', true);
+    wp_register_script('pgpopup_front_script', post_grid_plugin_url . 'includes/blocks/popup/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
     wp_register_style('pgpopup_animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
 
 
@@ -147,7 +147,7 @@ class PGBlockPopup
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
     // //* Visible condition
     if (!empty($visible['rules'])) {

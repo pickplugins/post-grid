@@ -15,20 +15,17 @@ class PGBlockMenuWrap
 
   function front_scripts($attributes)
   {
-    wp_register_style('pgmenu_wrap_style', post_grid_plugin_url . 'includes/blocks/menu-wrap/index.css');
-    wp_register_script('pgmenu_wrap_front_script', post_grid_plugin_url . 'includes/blocks/menu-wrap/front-scripts.js', [], '', true);
+    wp_register_script('pgmenu_wrap_front_script', post_grid_plugin_url . 'includes/blocks/menu-wrap/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
 
     if (has_block('post-grid/menu-wrap')) {
-      wp_enqueue_style('pgmenu_wrap_style');
+      wp_enqueue_style('pg_block_styles');
       wp_enqueue_script('pgmenu_wrap_front_script');
     }
   }
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    wp_register_style('pgmenu_wrap_editor_style', post_grid_plugin_url . 'includes/blocks/menu-wrap/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/menu-wrap/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(
@@ -143,7 +140,7 @@ class PGBlockMenuWrap
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
 
 
 
@@ -176,7 +173,7 @@ class PGBlockMenuWrap
       </nav>
 
 
-      <div class="mobile-menu-wrap">
+      <div class="mobile-menu-wrap hidden">
         <div class="mobile-menu-close">
           <?php echo wp_kses_post($mobileMenuCloseIconHtml); ?>
         </div>

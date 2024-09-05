@@ -17,7 +17,7 @@ class PGBlockIcon
   {
 
     if (has_block('post-grid/icon')) {
-      wp_register_script('pgicon_front_script', post_grid_plugin_url . 'includes/blocks/icon/front-scripts.js', [], '', true);
+      wp_register_script('pgicon_front_script', post_grid_plugin_url . 'includes/blocks/icon/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
       wp_enqueue_script('pgicon_front_script');
     }
@@ -244,10 +244,10 @@ class PGBlockIcon
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
-    $textText = parse_css_class($textText, $obj);
-    $prefixText = parse_css_class($prefixText, $obj);
-    $postfixText = parse_css_class($postfixText, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+    $textText = post_grid_parse_css_class($textText, $obj);
+    $prefixText = post_grid_parse_css_class($prefixText, $obj);
+    $postfixText = post_grid_parse_css_class($postfixText, $obj);
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
@@ -260,7 +260,7 @@ class PGBlockIcon
 
     // //* Visible condition
 
-    $dataAtts = [
+    $dataTrigger = [
       "triggerName" => $triggerName,
       "triggerType" => $triggerType,
       "blockId" => $blockId,
@@ -274,27 +274,25 @@ class PGBlockIcon
     if (!empty($wrapperTag)) :
 
 ?>
-      <<?php echo pg_tag_escape($wrapperTag); ?> class="
-                                  <?php echo esc_attr($blockId); ?>
-                                  <?php echo esc_attr($wrapperClass); ?>" data-trigger="<?php echo esc_attr(json_encode($dataAtts)) ?>" <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
-
-
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>"
+        <?php if (!empty($triggerName)): ?>
+        data-trigger="<?php echo esc_attr(json_encode($dataTrigger)) ?>"
+        <?php endif; ?>
+        <?php if (!empty($wrapperAttrText)): ?>
+        <?php echo esc_attr($wrapperAttrText); ?>
+        <?php endif; ?>>
         <?php if ($iconPosition == 'beforePrefix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-
         <?php if ($prefixText) : ?>
           <span class="<?php echo esc_attr($prefixClass); ?>">
             <?php echo wp_kses_post($prefixText); ?>
           </span>
         <?php endif; ?>
-
         <?php if ($iconPosition == 'afterPrefix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-        <?php if (!empty($textLinkTo)) :
-          /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-        ?>
+        <?php if (!empty($textLinkTo)) : ?>
           <?php if ($iconPosition == 'beforeLink') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
@@ -302,14 +300,11 @@ class PGBlockIcon
             <?php if ($iconPosition == 'beforeText') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
-
             <?php if ($textEnable) : ?>
               <span>
                 <?php echo wp_kses_post($textText); ?>
               </span>
             <?php endif; ?>
-
-
             <?php if ($iconPosition == 'afterText') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
@@ -317,28 +312,19 @@ class PGBlockIcon
           <?php if ($iconPosition == 'afterLink') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
-
         <?php else : ?>
           <?php if ($iconPosition == 'beforeText') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
-
-
           <?php if ($textEnable) : ?>
             <span class="text">
               <?php echo wp_kses_post($textText); ?>
             </span>
           <?php endif; ?>
-
-
           <?php if ($iconPosition == 'afterText') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
         <?php endif; ?>
-
-
-
-
         <?php if ($iconPosition == 'beforePostfix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
@@ -347,54 +333,39 @@ class PGBlockIcon
             <?php echo wp_kses_post($postfixText); ?>
           </span>
         <?php endif; ?>
-
         <?php if ($iconPosition == 'afterPostfix') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-
       </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php
 
     endif;
 
     if (empty($wrapperTag)) :
-
     ?>
-
-
       <?php if (empty($textLinkTo)) : ?>
         <?php if ($prefixText) : ?>
           <span class="<?php echo esc_attr($prefixClass); ?>">
             <?php echo wp_kses_post($prefixText); ?>
           </span>
         <?php endif; ?>
-
-
         <?php if ($iconPosition == 'beforeText') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-
-
         <?php if ($textEnable) : ?>
           <span class="text">
             <?php echo wp_kses_post($textText); ?>
           </span>
         <?php endif; ?>
-
-
         <?php if ($iconPosition == 'afterText') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-
-
         <?php if ($postfixText) : ?>
           <span class="<?php echo esc_attr($postfixClass); ?>">
             <?php echo wp_kses_post($postfixText); ?>
           </span>
         <?php endif; ?>
-      <?php else :
-        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-      ?>
+      <?php else : ?>
         <?php if ($prefixText) : ?>
           <span class="<?php echo esc_attr($prefixClass); ?>">
             <?php echo wp_kses_post($prefixText); ?>
@@ -404,23 +375,17 @@ class PGBlockIcon
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
         <a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
-
           <?php if ($iconPosition == 'beforeText') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
-
-
           <?php if ($textEnable) : ?>
             <span class='text'>
               <?php echo wp_kses_post($textText); ?>
             </span>
           <?php endif; ?>
-
-
           <?php if ($iconPosition == 'afterText') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
-
         </a>
         <?php if ($iconPosition == 'afterLink') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
@@ -431,22 +396,7 @@ class PGBlockIcon
           </span>
         <?php endif; ?>
       <?php endif; ?>
-
-
-    <?php
-
-    endif;
-
-    ?>
-
-
-
-
-
-
-
-
-
+    <?php endif; ?>
 <?php
 
     return ob_get_clean();

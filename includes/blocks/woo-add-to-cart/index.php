@@ -15,7 +15,7 @@ class PGBlockWooAddToCart
 
   function front_scripts($attributes)
   {
-    wp_register_script('pgwoo-add-to-cart_front_script', post_grid_plugin_url . 'includes/blocks/woo-add-to-cart/front-scripts.js', [], '', true);
+    wp_register_script('pgwoo-add-to-cart_front_script', post_grid_plugin_url . 'includes/blocks/woo-add-to-cart/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
     //wp_register_style('pgwoo-add-to-cart_front_style', post_grid_plugin_url . 'includes/blocks/woo-add-to-cart/index.css');
 
     if (has_block('post-grid/woo-add-to-cart')) {
@@ -171,9 +171,9 @@ class PGBlockWooAddToCart
 
 
 
-    $wrapperClass = parse_css_class($wrapperClass, $obj);
-    $prefixText = parse_css_class($prefixText, $obj);
-    $postfixText = parse_css_class($postfixText, $obj);
+    $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+    $prefixText = post_grid_parse_css_class($prefixText, $obj);
+    $postfixText = post_grid_parse_css_class($postfixText, $obj);
 
     // //* Visible condition
     $visible = isset($attributes['visible']) ? $attributes['visible'] : [];

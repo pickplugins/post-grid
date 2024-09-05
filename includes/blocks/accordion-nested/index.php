@@ -15,8 +15,8 @@ class PGBlockAccordionNested
 
   function front_scripts($attributes)
   {
-    wp_register_script('pgaccordionnested_front_script', post_grid_plugin_url . 'includes/blocks/accordion-nested/front-scripts.js', [], '', true);
-    //wp_register_script('pgaccordionnested_accorion', post_grid_plugin_url . 'includes/blocks/accordion-nested/accordion.js', [], '', true);
+    wp_register_script('pgaccordionnested_front_script', post_grid_plugin_url . 'includes/blocks/accordion-nested/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+    //wp_register_script('pgaccordionnested_accorion', post_grid_plugin_url . 'includes/blocks/accordion-nested/accordion.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
     if (has_block('post-grid/accordion-nested')) {
 
@@ -27,7 +27,8 @@ class PGBlockAccordionNested
       wp_enqueue_script('jquery-ui-accordion');
       wp_enqueue_script('jquery-effects-core');
 
-      wp_enqueue_script('pgaccordionnested_front_script');
+      wp_enqueue_script('pg_block_scripts');
+      // wp_enqueue_script('pgaccordionnested_front_script');
       //wp_enqueue_script('pgaccordionnested_accorion');
 
     }
@@ -185,7 +186,7 @@ class PGBlockAccordionNested
 
 
 
-<?php 
+<?php
 
     return ob_get_clean();
   }

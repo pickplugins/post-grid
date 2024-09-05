@@ -16,8 +16,6 @@ class PGBlockPostGrid
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'includes/blocks/post-grid/index.css');
-    //wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'includes/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
 
 
 
@@ -35,11 +33,10 @@ class PGBlockPostGrid
   function front_scripts($attributes)
   {
     wp_register_script('pgpostgrid_front_script', post_grid_plugin_url . 'includes/blocks/post-grid/front-scripts.js', []);
-    wp_register_style('pgpostgrid_front_style', post_grid_plugin_url . 'includes/blocks/post-grid/index.css');
     if (has_block('post-grid/post-grid')) {
 
       wp_enqueue_script('pgpostgrid_front_script');
-      wp_enqueue_style('pgpostgrid_front_style');
+      wp_enqueue_style('pg_block_styles');
     }
   }
   function front_style($attributes) {}
@@ -283,7 +280,7 @@ class PGBlockPostGrid
 
 
 
-    $containerClass = parse_css_class($containerClass, $obj);
+    $containerClass = post_grid_parse_css_class($containerClass, $obj);
 
 
     // //* Visible condition

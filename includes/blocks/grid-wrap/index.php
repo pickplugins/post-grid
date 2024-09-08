@@ -9,16 +9,10 @@ class PGBlockGridWrap
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
-		//add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
 	}
 
 
-	function front_scripts($attributes)
-	{
 
-		if (has_block('post-grid/grid-wrap')) {
-		}
-	}
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{

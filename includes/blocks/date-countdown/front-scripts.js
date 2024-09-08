@@ -1,3 +1,5 @@
+export function setupDateCountdown() {
+
 document.addEventListener("DOMContentLoaded", function (event) {
 	// To assign event
 	const pgDateCountdownExpired = new Event("pgDateCountdownExpired");
@@ -486,3 +488,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 });
 
+}

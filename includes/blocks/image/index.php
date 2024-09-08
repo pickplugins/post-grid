@@ -40,8 +40,7 @@ class PGBlockImage
 
 
 
-    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-    wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/image/lazy-load.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+
 
 
 
@@ -50,6 +49,7 @@ class PGBlockImage
     $lightboxOptions = isset($lightbox['options']) ? $lightbox['options'] : [];
 
     $lightboxEnable = isset($lightboxOptions['enable']) ? $lightboxOptions['enable'] : false;
+    $lightboxThumbSize = isset($lightboxOptions['thumbSize']) ? $lightboxOptions['thumbSize'] : 'full';
 
     $featuredImage = isset($attributes['image']) ? $attributes['image'] : [];
     $featuredImageOptions = isset($featuredImage['options']) ? $featuredImage['options'] : [];
@@ -351,7 +351,7 @@ class PGBlockImage
 
 
     if (strlen($lazyLoadSrc) === 0) {
-      $lazyLoadSrc = post_grid_plugin_url . "/assets/images/loading.gif";
+      $lazyLoadSrc = post_grid_plugin_url . "assets/images/loading.gif";
     }
 
 

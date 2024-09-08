@@ -9,30 +9,15 @@ class PGBlockWooAddToCart
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgwoo-add-to-cart_front_script', post_grid_plugin_url . 'includes/blocks/woo-add-to-cart/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-    //wp_register_style('pgwoo-add-to-cart_front_style', post_grid_plugin_url . 'includes/blocks/woo-add-to-cart/index.css');
-
-    if (has_block('post-grid/woo-add-to-cart')) {
-
-
-      wp_enqueue_script('pgwoo-add-to-cart_front_script');
-      wp_enqueue_style('pgwoo-add-to-cart_front_style');
-    }
-  }
 
 
 
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/woo-add-to-cart/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/woo-add-to-cart/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(
@@ -48,21 +33,16 @@ class PGBlockWooAddToCart
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes)
-  {
 
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
 
-
+    if (has_block('post-grid/woo-add-to-cart')) {
+      wp_enqueue_script('pg_block_scripts');
+    }
 
 
 
@@ -219,11 +199,16 @@ class PGBlockWooAddToCart
           <?php if ($quantityWrapEnable) : ?>
             <div class='quantity-wrap' data-blockid="<?php echo esc_attr($blockId); ?>">
               <span class='quantity-decrease'>-</span>
-              <input class='quantity-input' size="3" type="text" inputmode="numeric" value="<?php echo esc_attr($quantityInputQuantity); ?>" />
+              <input class='quantity-input' size="3" type="text" inputmode="numeric"
+                value="<?php echo esc_attr($quantityInputQuantity); ?>" />
               <span class='quantity-increase'>+</span>
             </div>
           <?php endif; ?>
-          <a class='<?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn' data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>" data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
+          <a class='<?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn'
+            data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>"
+            data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>"
+            aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>"
+            href="<?php echo esc_attr($cartUrl); ?>">
             <?php if ($iconPosition == 'beforeCartText') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
@@ -233,7 +218,9 @@ class PGBlockWooAddToCart
             <?php endif; ?>
           </a>
         <?php else : ?>
-          <a class='cartBtn' aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
+          <a class='cartBtn' aria-label="<?php echo esc_attr($cartBtnRel); ?>"
+            aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>"
+            href="<?php echo esc_attr($cartUrl); ?>">
             <?php if ($iconPosition == 'beforeCartText') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>

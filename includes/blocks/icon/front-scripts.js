@@ -1,3 +1,4 @@
+export function setupIcon() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	var PGBlockIcon = document.querySelectorAll(".pg-icon");
 
@@ -69,3 +70,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		if (e !== BreakException) throw e;
 	}
 });
+}

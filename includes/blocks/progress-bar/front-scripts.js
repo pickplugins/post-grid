@@ -1,3 +1,4 @@
+export function setupProgressBar() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	function isInViewport(el) {
 		const rect = el.getBoundingClientRect();
@@ -76,3 +77,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
+}

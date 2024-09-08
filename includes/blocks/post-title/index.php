@@ -13,8 +13,7 @@ class PGBlockPostTitle
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/post-title/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/post-title/index.js', array('wp-blocks', 'wp-element'));
+
 
     register_block_type(
       post_grid_plugin_dir . "build/blocks/post-title/block.json",
@@ -25,8 +24,8 @@ class PGBlockPostTitle
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
+
+
 
   // front-end output from the gutenberg editor
   function theHTML($attributes, $content, $block)

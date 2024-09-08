@@ -9,7 +9,6 @@ class PGBlockProgressBar
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -32,31 +31,16 @@ class PGBlockProgressBar
     );
   }
 
-  function front_scripts($attributes)
-  {
 
-    wp_register_script('pg-progress-bar', post_grid_plugin_url . 'includes/blocks/progress-bar/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-
-    if (has_block('post-grid/progress-bar')) {
-
-      // wp_enqueue_script('pg-progress-bar');
-      wp_enqueue_script('pg_block_scripts');
-    }
-  }
-  function front_style($attributes)
-  {
-
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
 
-
+    if (has_block('post-grid/progress-bar')) {
+      wp_enqueue_script('pg_block_scripts');
+    }
 
 
 

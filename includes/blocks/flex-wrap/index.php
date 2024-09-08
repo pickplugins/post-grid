@@ -9,16 +9,11 @@ class PGBlockFlexWrap
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
-		//add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+		//
 	}
 
 
-	function front_scripts($attributes)
-	{
 
-		if (has_block('post-grid/flex-wrap')) {
-		}
-	}
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
@@ -36,8 +31,8 @@ class PGBlockFlexWrap
 		);
 	}
 
-	function front_script($attributes) {}
-	function front_style($attributes) {}
+
+
 
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)

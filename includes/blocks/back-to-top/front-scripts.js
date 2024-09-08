@@ -1,3 +1,4 @@
+export function setupBackToTop() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	(() => {
 		"use strict";
@@ -29,3 +30,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	})();
 });
+}

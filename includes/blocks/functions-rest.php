@@ -2041,6 +2041,7 @@ class BlockPostGridRest
 
 
 
+		$returnObj = isset($post_data['returnObj']) ? $post_data['returnObj'] : 'postObject'; // postObject, html
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
 		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
 		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
@@ -2312,9 +2313,15 @@ class BlockPostGridRest
 					$html .= render_block($block);
 				}
 
-				//$postData->html = $html;
+
+				if ($returnObj == 'html') {
+					$postData->html = $html;
+				}
 
 				$posts[] = $postData;
+
+
+
 
 
 

@@ -15,8 +15,7 @@ class PGBlockTeamMembersField
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/team-members-field/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/team-members-field/index.js', array('wp-blocks', 'wp-element'));
+
 
 
     register_block_type(
@@ -29,8 +28,8 @@ class PGBlockTeamMembersField
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
+
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -236,91 +235,91 @@ class PGBlockTeamMembersField
 ?>
 
 
-    <<?php echo pg_tag_escape($wrapperTag); ?> class="
+<<?php echo pg_tag_escape($wrapperTag); ?> class="
           <?php echo $blockId; ?>
           <?php echo esc_attr($wrapperClass); ?>">
 
-      <?php if (!empty($prefixText) && $prefixPosition == 'beforeFrontText') : ?>
-        <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo wp_kses_post($prefixText); ?>
-        </span>
-      <?php endif; ?>
+  <?php if (!empty($prefixText) && $prefixPosition == 'beforeFrontText') : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-      <?php if ($iconPosition == 'beforeFronttext') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-
-
-      <?php if (!empty($frontTextText)) : ?>
-        <span class='frontText'>
-          <?php echo wp_kses_post($frontTextText); ?>
-        </span>
-      <?php endif; ?>
-
-      <?php if ($iconPosition == 'afterFronttext') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
+  <?php if ($iconPosition == 'beforeFronttext') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
 
+  <?php if (!empty($frontTextText)) : ?>
+  <span class='frontText'>
+    <?php echo wp_kses_post($frontTextText); ?>
+  </span>
+  <?php endif; ?>
 
-      <?php if (!empty($prefixText) && $prefixPosition == 'afterFrontText') : ?>
-        <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo wp_kses_post($prefixText); ?>
-        </span>
-      <?php endif; ?>
+  <?php if ($iconPosition == 'afterFronttext') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
 
-      <?php if ($iconPosition == 'beforeField') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
 
-      <?php if (!empty($fieldLink)) : ?>
-        <a <?php if ($fieldLinkTo == 'authorMail') : ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>"
-          <?php else : ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?>
-          target="<?php echo esc_attr($fieldLinkTarget); ?>" <?php echo $linkAttrStr; ?>>
 
-        <?php endif; ?>
-        <?php if (!empty($prefixText) && $prefixPosition == 'beforeField') : ?>
-          <span class="<?php echo esc_attr($prefixClass); ?>">
-            <?php echo wp_kses_post($prefixText); ?>
-          </span>
-        <?php endif; ?>
-        <?php
+  <?php if (!empty($prefixText) && $prefixPosition == 'afterFrontText') : ?>
+  <span class="<?php echo esc_attr($prefixClass); ?>">
+    <?php echo wp_kses_post($prefixText); ?>
+  </span>
+  <?php endif; ?>
 
-        if ($metaKey == 'title' || $metaKey == 'description' || $metaKey == 'website' || $metaKey == 'phone') :
+  <?php if ($iconPosition == 'beforeField') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+
+  <?php if (!empty($fieldLink)) : ?>
+  <a <?php if ($fieldLinkTo == 'authorMail') : ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>"
+    <?php else : ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?>
+    target="<?php echo esc_attr($fieldLinkTarget); ?>" <?php echo $linkAttrStr; ?>>
+
+    <?php endif; ?>
+    <?php if (!empty($prefixText) && $prefixPosition == 'beforeField') : ?>
+    <span class="<?php echo esc_attr($prefixClass); ?>">
+      <?php echo wp_kses_post($prefixText); ?>
+    </span>
+    <?php endif; ?>
+    <?php
+
+        if ($metaKey == 'title' || $metaKey == 'description' || $metaKey == 'website' || $metaKey =='phone' || $metaKey == 'role') :
         ?>
-          <span class="fieldVal">
-            <?php echo wp_kses_post($teamMemberData[$metaKey]) ?>
-          </span>
+    <span class="fieldVal">
+      <?php echo wp_kses_post($teamMemberData[$metaKey]) ?>
+    </span>
 
 
 
-        <?php
+    <?php
         endif;
         if ($metaKey == 'categories') :
         ?>
-          <span class="fieldVal categories">
-            <?php
+    <span class="fieldVal categories">
+      <?php
             foreach ($categories as $index => $item) :
             ?>
-              <span class="category-<?php echo esc_attr($index); ?>">
-                <?php echo esc_html($item); ?>
-              </span>
-            <?php
+      <span class="category-<?php echo esc_attr($index); ?>">
+        <?php echo esc_html($item); ?>
+      </span>
+      <?php
               // If this isn't the last item, add the separator
               if (count($categories) > $index + 1) :
                 echo wp_kses_post($fieldSeparator);
               endif;
             endforeach;
             ?>
-          </span>
-        <?php
+    </span>
+    <?php
 
 
         endif;
         if ($metaKey == 'socialLinks') :
         ?>
-          <span class="fieldVal social-links">
-            <?php
+    <span class="fieldVal social-links">
+      <?php
             foreach ($teamSocialLinks as $index => $item) :
               $socialLinkConfig = null;
               foreach ($socialLinks as $link) {
@@ -335,20 +334,20 @@ class PGBlockTeamMembersField
               $socialIconHtml = '<span class="' . $iconSrc . '"></span>';
               // }
             ?>
-              <a href="<?php echo esc_url($item['value']); ?>" class="item item-<?php echo esc_attr($index); ?>">
-                <span class="icon">
-                  <?php echo wp_kses_post($socialIconHtml); ?>
-                </span>
-                <span><?php echo wp_kses_post($socialLinkConfig["label"]) ?></span>
-              </a>
+      <a href="<?php echo esc_url($item['value']); ?>" class="item item-<?php echo esc_attr($index); ?>">
+        <span class="icon">
+          <?php echo wp_kses_post($socialIconHtml); ?>
+        </span>
+        <span><?php echo wp_kses_post($socialLinkConfig["label"]) ?></span>
+      </a>
 
-          <?php
+      <?php
             endforeach;
           endif;
           ?>
-          </span>
+    </span>
 
-          <?php
+    <?php
 
 
 
@@ -359,14 +358,14 @@ class PGBlockTeamMembersField
 
           ?>
 
-            <img class="fieldVal" src="<?php echo esc_url_raw($teamMemberData['url']) ?>"
-              alt=" <?php echo esc_attr($teamMemberData['title']) ?> " />
+    <img class="fieldVal" src="<?php echo esc_url_raw($teamMemberData['url']) ?>"
+      alt=" <?php echo esc_attr($teamMemberData['title']) ?> " />
 
 
-          <?php endif; ?>
+    <?php endif; ?>
 
 
-          <?php
+    <?php
 
 
 
@@ -376,23 +375,23 @@ class PGBlockTeamMembersField
 
 
           ?>
-          <?php if (!empty($postfixText) && $postfixPosition == 'afterField') : ?>
-            <span class="<?php echo esc_attr($postfixClass); ?>">
-              <?php echo wp_kses_post($postfixText); ?>
-            </span>
-          <?php endif; ?>
-          <?php if (!empty($fieldLink)) : ?>
-        </a>
-      <?php endif; ?>
-      <?php if ($iconPosition == 'afterField') : ?>
-        <?php echo wp_kses_post($fontIconHtml); ?>
-      <?php endif; ?>
-      <?php if (!empty($postfixText) && $postfixPosition == 'atTheEnd') : ?>
-        <span class="<?php echo esc_attr($postfixClass); ?>">
-          <?php echo wp_kses_post($postfixText); ?>
-        </span>
-      <?php endif; ?>
-    </<?php echo pg_tag_escape($wrapperTag); ?>>
+    <?php if (!empty($postfixText) && $postfixPosition == 'afterField') : ?>
+    <span class="<?php echo esc_attr($postfixClass); ?>">
+      <?php echo wp_kses_post($postfixText); ?>
+    </span>
+    <?php endif; ?>
+    <?php if (!empty($fieldLink)) : ?>
+  </a>
+  <?php endif; ?>
+  <?php if ($iconPosition == 'afterField') : ?>
+  <?php echo wp_kses_post($fontIconHtml); ?>
+  <?php endif; ?>
+  <?php if (!empty($postfixText) && $postfixPosition == 'atTheEnd') : ?>
+  <span class="<?php echo esc_attr($postfixClass); ?>">
+    <?php echo wp_kses_post($postfixText); ?>
+  </span>
+  <?php endif; ?>
+</<?php echo pg_tag_escape($wrapperTag); ?>>
 
 
 

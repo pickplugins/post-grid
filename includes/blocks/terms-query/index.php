@@ -9,7 +9,6 @@ class PGBlockTermsQuery
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -30,17 +29,8 @@ class PGBlockTermsQuery
     );
   }
 
-  function front_scripts($attributes)
-  {
-    // wp_register_script('pgpostquery_front_script', post_grid_plugin_url . 'includes/blocks/post-query/front-scripts.js', []);
-    // wp_register_style('pgpostquery_front_style', post_grid_plugin_url . 'includes/blocks/post-query/index.css');
-    if (has_block('post-grid/post-query')) {
 
-      //wp_enqueue_script('pgpostquery_front_script');
-      //wp_enqueue_style('pgpostquery_front_style');
-    }
-  }
-  function front_style($attributes) {}
+
 
 
 

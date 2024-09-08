@@ -9,20 +9,9 @@ class PGBlockMenuWrap
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgmenu_wrap_front_script', post_grid_plugin_url . 'includes/blocks/menu-wrap/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-
-
-    if (has_block('post-grid/menu-wrap')) {
-      wp_enqueue_style('pg_block_styles');
-      wp_enqueue_script('pgmenu_wrap_front_script');
-    }
-  }
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
@@ -40,15 +29,18 @@ class PGBlockMenuWrap
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
+
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
 
-
+    if (has_block('post-grid/menu-wrap')) {
+      wp_enqueue_style('pg_block_styles');
+      wp_enqueue_script('pg_block_scripts');
+    }
 
 
     global $postGridCssY;

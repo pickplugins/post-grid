@@ -9,15 +9,12 @@ class PGBlockWooMyAccount
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/woo-price/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/woo-price/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(
@@ -32,25 +29,9 @@ class PGBlockWooMyAccount
     );
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pg-woo-my-account-scripts', post_grid_plugin_url . 'includes/blocks/woo-my-account/front-scripts.js', []);
 
-    if (has_block('post-grid/woo-my-account')) {
 
-      // wp_enqueue_script('pg-woo-my-account-scripts');
-      wp_enqueue_script('pg_block_scripts');
-    }
-  }
 
-  function front_script($attributes) {}
-  function front_style($attributes)
-  {
-
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -59,7 +40,10 @@ class PGBlockWooMyAccount
 
 
 
+    if (has_block('post-grid/woo-my-account')) {
 
+      wp_enqueue_script('pg_block_scripts');
+    }
 
     global $postGridCssY;
     global $postGridScriptData;

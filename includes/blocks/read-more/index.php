@@ -15,8 +15,7 @@ class PGBlockReadmore
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/read-more/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/read-more/index.js', array('wp-blocks', 'wp-element'));
+
 
 
     register_block_type(
@@ -31,14 +30,8 @@ class PGBlockReadmore
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes)
-  {
 
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)

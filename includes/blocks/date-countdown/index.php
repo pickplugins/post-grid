@@ -9,15 +9,12 @@ class PGBlockDateCountdown
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/date-countdown/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/date-countdown/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(
@@ -28,23 +25,7 @@ class PGBlockDateCountdown
     );
   }
 
-  function front_scripts($attributes)
-  {
 
-    wp_register_script('pg-date-countdown', post_grid_plugin_url . 'includes/blocks/date-countdown/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-
-    if (has_block('post-grid/date-countdown')) {
-
-      wp_enqueue_script('pg-date-countdown');
-    }
-  }
-  function front_style($attributes)
-  {
-
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -52,7 +33,9 @@ class PGBlockDateCountdown
 
 
 
-
+    if (has_block('post-grid/date-countdown')) {
+      wp_enqueue_script('pg_block_scripts');
+    }
 
 
     global $postGridCssY;
@@ -282,7 +265,9 @@ class PGBlockDateCountdown
 ?>
       <<?php echo pg_tag_escape($wrapperTag); ?> class="PGBlockDateCountdown
 											<?php echo esc_attr($blockId); ?>						 			<?php echo esc_attr($wrapperClass); ?>
-											<?php echo esc_attr($blockAlign); ?>" date-countdown-id="<?php echo esc_attr($blockId); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>" countdown-expired-arg="<?php echo esc_attr(json_encode($expiredArg)) ?>">
+											<?php echo esc_attr($blockAlign); ?>" date-countdown-id="<?php echo esc_attr($blockId); ?>"
+        data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>"
+        countdown-expired-arg="<?php echo esc_attr(json_encode($expiredArg)) ?>">
 
         <?php //if ($timeDifference > 0) {
         ?>

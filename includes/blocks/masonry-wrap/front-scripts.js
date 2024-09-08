@@ -1,3 +1,4 @@
+export function setupMasonry() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	var PGBlockMasonryWrap = document.querySelectorAll(".PGBlockMasonryWrap");
 
@@ -29,4 +30,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
-
+}

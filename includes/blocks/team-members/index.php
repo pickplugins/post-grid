@@ -9,7 +9,6 @@ class PGBlockTeamMembers
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
-		add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
 	}
 
 
@@ -30,17 +29,8 @@ class PGBlockTeamMembers
 		);
 	}
 
-	function front_scripts($attributes)
-	{
-		// wp_register_script('pgpostquery_front_script', post_grid_plugin_url . 'includes/blocks/team-members/front-scripts.js', []);
-		// wp_register_style('pgpostquery_front_style', post_grid_plugin_url . 'includes/blocks/team-members/index.css');
-		if (has_block('post-grid/team-members')) {
 
-			//wp_enqueue_script('pgpostquery_front_script');
-			//wp_enqueue_style('pgpostquery_front_style');
-		}
-	}
-	function front_style($attributes) {}
+
 
 	function categories_slugs($categories)
 	{
@@ -65,7 +55,7 @@ class PGBlockTeamMembers
 
 
 
-		wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+
 
 		global $postGridCssY;
 		global $postGridScriptData;
@@ -147,7 +137,7 @@ class PGBlockTeamMembers
 
 
 		$block_type = WP_Block_Type_Registry::get_instance()->get_registered($block->clientId);
-		
+
 		$blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
 
 
@@ -192,16 +182,16 @@ class PGBlockTeamMembers
 ?>
 
 
-<?php
+		<?php
 		if (!$itemsWrapExcluded) :
 		?>
-<div class="loop-loading"></div>
-<div class="<?php echo esc_attr($blockId); ?> pg-team-members items-loop"
-  id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-  <?php
+			<div class="loop-loading"></div>
+			<div class="<?php echo esc_attr($blockId); ?> pg-team-members items-loop"
+				id="items-loop-<?php echo esc_attr($blockId); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+			<?php
 		endif;
 			?>
-  <?php
+			<?php
 
 
 			$counter = 1;
@@ -258,7 +248,7 @@ class PGBlockTeamMembers
 
 
 			?>
-  <<?php echo pg_tag_escape($itemWrapTag); ?> class=" 
+				<<?php echo pg_tag_escape($itemWrapTag); ?> class=" 
             <?php echo esc_attr($itemWrapClass); ?>
             <?php ?>
             <?php if ($itemWrapCounterClass) {
@@ -271,10 +261,10 @@ class PGBlockTeamMembers
 							echo esc_attr($categories_slug);
 						} ?> 
  ">
-    <?php echo wp_kses_post($html);
+					<?php echo wp_kses_post($html);
 					?>
-  </<?php echo pg_tag_escape($itemWrapTag); ?>>
-  <?php
+				</<?php echo pg_tag_escape($itemWrapTag); ?>>
+			<?php
 					$counter++;
 				}
 
@@ -282,10 +272,10 @@ class PGBlockTeamMembers
 
 			?>
 
-  <?php
+			<?php
 			if (!$itemsWrapExcluded) : ?>
-</div>
-<?php
+			</div>
+		<?php
 			endif; ?>
 <?php
 

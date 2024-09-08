@@ -1,5 +1,5 @@
 //import mixitup from 'mixitup';
-
+export function setupPostGridFilterable() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	var PGBlockPostGrid = document.querySelectorAll(".PGBlockPostGrid");
 
@@ -417,4 +417,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	/*##############################*/
 });
-
+}

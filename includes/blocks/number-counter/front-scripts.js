@@ -1,3 +1,4 @@
+export function setupNumberCounter() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	const counterAnim = (qSelector, start = 0, end, duration = 1000) => {
 		const target = document.querySelector(qSelector);
@@ -80,4 +81,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
-
+}

@@ -9,28 +9,14 @@ class PGBlockMenuWrapItem
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    //add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
-
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgmenu-wrap-item_style', post_grid_plugin_url . 'includes/blocks/menu-wrap-item/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
-    if (has_block('post-grid/menu-wrap-item')) {
-
-
-
-      wp_enqueue_script('pgflex-wrap_front_script');
-    }
-  }
 
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/menu-wrap-item/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/menu-wrap-item/index.js', array('wp-blocks', 'wp-element'));
-    wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/css/fontawesome-old/css/font-awesome-5.css', []);
+
 
 
     register_block_type(
@@ -45,8 +31,6 @@ class PGBlockMenuWrapItem
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)

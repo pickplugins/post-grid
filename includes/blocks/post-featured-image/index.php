@@ -15,8 +15,7 @@ class PGBlockFeaturedImage
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/post-featured-image/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/post-featured-image/index.js', array('wp-blocks', 'wp-element'));
+
 
 
     register_block_type(
@@ -31,15 +30,15 @@ class PGBlockFeaturedImage
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
+
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
 
-    wp_register_script('lazyLoad', post_grid_plugin_url . 'includes/blocks/post-featured-image/lazy-load.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+
 
 
 

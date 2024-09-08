@@ -1,3 +1,4 @@
+export function setupForm() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	// To assign event
 	const pgFormSubmitted = new Event("pgFormSubmitted");
@@ -513,4 +514,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 });
-
+}

@@ -9,29 +9,13 @@ class PGBlockPopup
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgpopup_front_script', post_grid_plugin_url . 'includes/blocks/popup/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-    wp_register_style('pgpopup_animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
-
-
-    if (has_block('post-grid/popup')) {
-
-      wp_enqueue_style('pgpopup_animate');
-      wp_enqueue_script('pgpopup_front_script');
-    }
-  }
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/popup/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/popup/index.js', array('wp-blocks', 'wp-element'));
 
-    wp_register_style('pgpopup-animate', post_grid_plugin_url . 'includes/blocks/popup/animate.min.css');
 
 
     register_block_type(
@@ -46,15 +30,16 @@ class PGBlockPopup
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
 
-
+    if (has_block('post-grid/popup')) {
+      wp_enqueue_style('pgpopup_animate');
+      wp_enqueue_script('pg_block_scripts');
+    }
 
 
     global $postGridCssY;

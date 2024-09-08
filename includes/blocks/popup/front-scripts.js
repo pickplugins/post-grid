@@ -1,5 +1,6 @@
 "use strict";
 
+export function setupPopup() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	var popupActions = {
 		clickCount: 0,
@@ -1224,3 +1225,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		});
 	}
 });
+}

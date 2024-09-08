@@ -9,14 +9,13 @@ class PGBlockPostQueryPagination
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/css/fontawesome-old/css/font-awesome-5.css', []);
+
 
 
 
@@ -31,16 +30,7 @@ class PGBlockPostQueryPagination
     );
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_style('pgpostquerypagination_front_style', post_grid_plugin_url . 'includes/blocks/post-query-pagination/index.css');
-    if (has_block('post-grid/post-query-pagination')) {
-      wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/css/fontawesome-old/css/font-awesome-5.css', []);
-      wp_enqueue_style('font-awesome-5');
-      //wp_enqueue_style('pgpostquerypagination_front_style');
-    }
-  }
-  function front_style($attributes) {}
+
 
 
 
@@ -50,9 +40,11 @@ class PGBlockPostQueryPagination
   {
 
 
-    wp_enqueue_style('font-awesome-5');
 
 
+    if (has_block('post-grid/post-query-pagination')) {
+      wp_enqueue_style('font-awesome-5');
+    }
 
 
     global $postGridCssY;

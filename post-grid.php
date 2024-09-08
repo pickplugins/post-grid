@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Gutenberg Blocks
 Plugin URI: https://comboblocks.com/
 Description: Post Grid is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.91
+Version: 2.2.92
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.91');
+      define('post_grid_version', '2.2.92');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -622,11 +622,28 @@ if (!class_exists('PostGrid')) {
       wp_register_style('bootstrap-icons', post_grid_plugin_url . 'assets/css/bootstrap-icons/bootstrap-icons.css');
       wp_register_style('fontawesome-icons', post_grid_plugin_url . 'assets/css/fontawesome/css/all.min.css');
       wp_register_style('icofont-icons', post_grid_plugin_url . 'assets/css/icofont/icofont.min.css');
+      wp_register_style('pgpopup_animate', post_grid_plugin_url . 'assets/css/animate.min.css');
+      wp_register_style('pgcontent_slider_splide_core', post_grid_plugin_url . 'assets/css/splide-core.min.css');
+
+
+      wp_register_script('imagesloaded', post_grid_plugin_url . 'assets/js/imagesloaded.pkgd.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+
+      wp_register_script('masonry', post_grid_plugin_url . 'assets/js/masonry.pkgd.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+      wp_register_script('masonry.min', post_grid_plugin_url . 'assets/js/masonry.pkgd.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+      wp_register_script('fslightbox', post_grid_plugin_url . 'assets/js/fslightbox.js', [], '', true);
+      wp_register_script('lazyLoad', post_grid_plugin_url . 'assets/js/lazy-load.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+      wp_register_script('splide.min', post_grid_plugin_url . 'assets/js/splide.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+
+      wp_register_script('pgpostgrid_mixitup', post_grid_plugin_url . 'assets/js/mixitup.min.js', []);
+      wp_register_script('pgpostgrid_mixitup_multifilter', post_grid_plugin_url . 'assets/js/mixitup-multifilter.js', []);
+      wp_register_script('pgpostgrid_mixitup_pagination', post_grid_plugin_url . 'assets/js/mixitup-pagination.js', []);
 
       wp_register_script('scrollto', post_grid_plugin_url . 'assets/js/jquery-scrollto.js', array('jquery'));
 
       wp_register_style('pg_block_styles', post_grid_plugin_url . 'assets/block-css/block-styles.min.css');
-      wp_register_script('pg_block_scripts', post_grid_plugin_url . 'assets/block-js/block-scripts.js', []);
+      wp_register_script('pg_block_scripts', post_grid_plugin_url . 'assets/block-js/block-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+
+      wp_register_script('hcaptcha-script', 'https://hcaptcha.com/1/api.js');
     }
 
     public function enqueue_scripts()

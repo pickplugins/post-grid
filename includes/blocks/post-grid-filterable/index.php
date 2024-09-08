@@ -9,7 +9,6 @@ class PGBlockPostGridFilterable
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -31,22 +30,7 @@ class PGBlockPostGridFilterable
     );
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgpostgrid_filterable_front_script', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/front-scripts.js', []);
-    wp_register_script('pgpostgrid_mixitup', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/mixitup.min.js', []);
-    wp_register_script('pgpostgrid_mixitup_multifilter', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/mixitup-multifilter.js', []);
-    wp_register_script('pgpostgrid_mixitup_pagination', post_grid_plugin_url . 'includes/blocks/post-grid-filterable/mixitup-pagination.js', []);
 
-
-    if (has_block('post-grid/post-grid-filterable')) {
-
-      wp_enqueue_script('pgpostgrid_mixitup');
-      wp_enqueue_script('pgpostgrid_mixitup_multifilter');
-      wp_enqueue_script('pgpostgrid_mixitup_pagination');
-    }
-  }
-  function front_style($attributes) {}
 
 
 
@@ -56,9 +40,16 @@ class PGBlockPostGridFilterable
   {
 
 
-    wp_enqueue_style('font-awesome-5');
 
 
+    if (has_block('post-grid/post-grid-filterable')) {
+      wp_enqueue_script('pg_block_scripts');
+
+      wp_enqueue_style('font-awesome-5');
+      wp_enqueue_script('pgpostgrid_mixitup');
+      wp_enqueue_script('pgpostgrid_mixitup_multifilter');
+      wp_enqueue_script('pgpostgrid_mixitup_pagination');
+    }
 
 
     global $postGridCssY;

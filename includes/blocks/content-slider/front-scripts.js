@@ -1,3 +1,5 @@
+export function setupContentSlider() {
+
 document.addEventListener('DOMContentLoaded', function () {
 
     var dataSplideWraps = document.querySelectorAll('[data-splide]');
@@ -24,3 +26,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+}

@@ -1,3 +1,4 @@
+export function setupWooProductTabs() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	var blockWrapper = document.querySelectorAll(".pg-woo-product-tabs");
 
@@ -100,3 +101,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 });
+}

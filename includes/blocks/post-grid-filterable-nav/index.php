@@ -9,7 +9,6 @@ class PGBlockPostGridFilterableNav
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -31,16 +30,7 @@ class PGBlockPostGridFilterableNav
     );
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgpostgrid_filterable_nav_front_script', post_grid_plugin_url . 'includes/blocks/post-grid-filterable-nav/front-scripts.js', []);
-    if (has_block('post-grid/post-grid-filterable-nav')) {
 
-      wp_enqueue_script('pgpostgrid_filterable_nav_front_script');
-      wp_enqueue_style('pg_block_styles');
-    }
-  }
-  function front_style($attributes) {}
 
 
 
@@ -50,9 +40,14 @@ class PGBlockPostGridFilterableNav
   {
 
 
-    wp_enqueue_style('font-awesome-5');
 
 
+    if (has_block('post-grid/post-grid-filterable-nav')) {
+      wp_enqueue_script('pg_block_scripts');
+
+      wp_enqueue_style('font-awesome-5');
+      wp_enqueue_style('pg_block_styles');
+    }
 
 
     global $postGridCssY;
@@ -261,7 +256,9 @@ class PGBlockPostGridFilterableNav
 
 
 
-    <div class="<?php echo esc_attr($blockId); ?> PGBlockPostGridFilterableNav PGBlockPostGridFilterableNav-<?php echo esc_attr($postGridId); ?>" postgridargs=<?php echo wp_json_encode($postGridArgs); ?>>
+    <div
+      class="<?php echo esc_attr($blockId); ?> PGBlockPostGridFilterableNav PGBlockPostGridFilterableNav-<?php echo esc_attr($postGridId); ?>"
+      postgridargs=<?php echo wp_json_encode($postGridArgs); ?>>
       <form class="filterable-group-wrap">
         <?php
 
@@ -319,7 +316,9 @@ class PGBlockPostGridFilterableNav
                     $itemSlug = !empty($item['slug']) ? $item['slug'] : $itemTitleToSlug;
                     $itemCount = isset($item['count']) ? $item['count'] : '';
                 ?>
-                  <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" <?php if ($filterToggle == 'yes') : ?> data-toggle="<?php echo '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
+                  <span class="pg-filter pg-filter-<?php echo esc_attr($postGridId); ?>" <?php if ($filterToggle == 'yes') : ?>
+                    data-toggle="<?php echo '.' . esc_attr($itemSlug); ?>" <?php else : ?>
+                    data-filter="<?php echo '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
                     <?php echo esc_html($itemTitle) ?>
                     <?php echo ($groupshowPostCount == 'yes') ? '(' . esc_html($itemCount) . ')' : '' ?>
                   </span>

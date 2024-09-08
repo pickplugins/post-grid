@@ -9,19 +9,9 @@ class PGBlockBackToTop
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
-  function front_scripts($attributes)
-  {
-
-    if (has_block('post-grid/back-to-top')) {
-      wp_register_script('pgicon_front_script', post_grid_plugin_url . 'includes/blocks/back-to-top/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-
-      wp_enqueue_script('pgicon_front_script');
-    }
-  }
 
   // loading src files in the gutenberg editor screen
   function register_scripts()
@@ -38,21 +28,18 @@ class PGBlockBackToTop
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes)
-  {
 
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
 
+    if (has_block('post-grid/back-to-top')) {
 
+      wp_enqueue_script('pg_block_scripts');
+    }
 
 
 

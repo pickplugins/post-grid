@@ -1,3 +1,4 @@
+export function setupWooMyAccount() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	var blockWrapper = document.querySelectorAll(".pg-woo-my-account");
 
@@ -98,3 +99,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 });
+}

@@ -9,7 +9,7 @@ class PGBlockPostText
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    // add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+    // 
   }
 
 
@@ -31,30 +31,16 @@ class PGBlockPostText
     );
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
-    if (has_block('post-grid/text')) {
-
-      // $other = isset($attributes['other']) ? $attributes['other'] : [];
-      // $otherOptions = isset($other['options']) ? $other['options'] : [];
-      // $otherCopyObj = isset($otherOptions['copyObj']) ? $otherOptions['copyObj'] : false;
-      // $otherCopyContent = isset($otherOptions['copyContent']) ? $otherOptions['copyContent'] : "";
-
-
-      // if ($otherCopyObj) {
-      wp_enqueue_script('pg-text');
-      // }
-    }
-  }
-  function front_style($attributes) {}
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
 
+    if (has_block('post-grid/text')) {
+      wp_enqueue_script('pg_block_scripts');
+    }
 
     // global $wp_query;
     // $taxterm = get_queried_object();
@@ -63,8 +49,6 @@ class PGBlockPostText
     global $postGridCssY;
 
 
-    wp_register_script('pg-text', post_grid_plugin_url . 'includes/blocks/text/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-    wp_register_style('pgpopup_animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
 
     if (has_block('post-grid/text')) {
 
@@ -75,9 +59,7 @@ class PGBlockPostText
 
 
       if ($otherCopyObj) {
-        // wp_enqueue_script('pg-text');
         wp_enqueue_style('pg_block_styles');
-
         wp_enqueue_style('pgpopup_animate');
       }
     }
@@ -164,14 +146,12 @@ class PGBlockPostText
 
     if (!empty($wrapperTag)) :
 ?>
-      <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>"
-        <?php if (!empty($animateRules)): ?>
-        animateOn="<?php echo esc_attr(json_encode($animateRules)) ?>"
-        <?php endif;
+      <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($textClass); ?>"
+        id="<?php echo esc_attr($textId); ?>" <?php if (!empty($animateRules)): ?>
+        animateOn="<?php echo esc_attr(json_encode($animateRules)) ?>" <?php endif;
 
-        if ($otherCopyObj) : ?>
-        clickToCopy="<?php echo esc_attr($otherCopyObj); ?>" copyContent="<?php echo esc_attr($otherCopyContent); ?>"
-        <?php endif; ?>>
+                                                                      if ($otherCopyObj) : ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>"
+        copyContent="<?php echo esc_attr($otherCopyContent); ?>" <?php endif; ?>>
         <?php echo $content; ?>
       </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php

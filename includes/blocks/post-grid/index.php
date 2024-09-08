@@ -9,7 +9,6 @@ class PGBlockPostGrid
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -30,16 +29,7 @@ class PGBlockPostGrid
     );
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgpostgrid_front_script', post_grid_plugin_url . 'includes/blocks/post-grid/front-scripts.js', []);
-    if (has_block('post-grid/post-grid')) {
 
-      wp_enqueue_script('pgpostgrid_front_script');
-      wp_enqueue_style('pg_block_styles');
-    }
-  }
-  function front_style($attributes) {}
 
 
 
@@ -47,10 +37,15 @@ class PGBlockPostGrid
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
+    //wp_register_script('pg_block_scripts_post_grid', post_grid_plugin_url . 'includes/blocks/post-grid/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
 
-    wp_enqueue_style('font-awesome-5');
 
+    if (has_block('post-grid/post-grid')) {
+      wp_enqueue_style('pg_block_styles');
+      //wp_enqueue_script('pg_block_scripts_post_grid');
+      wp_enqueue_style('font-awesome-5');
+    }
 
 
 

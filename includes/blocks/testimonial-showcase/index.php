@@ -9,16 +9,11 @@ class PGBlockTestimonialShowcase
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
-		//add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+		//
 	}
 
 
-	function front_scripts($attributes)
-	{
 
-		if (has_block('post-grid/testimonial-showcase')) {
-		}
-	}
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
@@ -92,10 +87,10 @@ class PGBlockTestimonialShowcase
 
 
 ?>
-<div
-  class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-  <?php echo $content ?>
-</div>
+		<div
+			class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+			<?php echo $content ?>
+		</div>
 <?php
 
 		return ob_get_clean();

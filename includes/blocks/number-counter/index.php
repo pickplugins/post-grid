@@ -9,15 +9,12 @@ class PGBlockNumberCounter
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
-		add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
 	}
 
 
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
-		//wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/number-counter/index.css');
-		//wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/number-counter/index.js', array('wp-blocks', 'wp-element'));
 
 
 		register_block_type(
@@ -33,16 +30,6 @@ class PGBlockNumberCounter
 		);
 	}
 
-	function front_scripts($attributes)
-	{
-
-		wp_register_script('pg-number-counter', post_grid_plugin_url . 'includes/blocks/number-counter/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-
-		if (has_block('post-grid/number-counter')) {
-
-			wp_enqueue_script('pg-number-counter');
-		}
-	}
 	function front_style($attributes)
 	{
 
@@ -56,7 +43,9 @@ class PGBlockNumberCounter
 	{
 
 
-
+		if (has_block('post-grid/number-counter')) {
+			wp_enqueue_script('pg_block_scripts');
+		}
 
 
 

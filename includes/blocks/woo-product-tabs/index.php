@@ -9,15 +9,12 @@ class PGBlockWooProductTabs
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/woo-price/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/woo-price/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(
@@ -32,25 +29,9 @@ class PGBlockWooProductTabs
     );
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pg-woo-product-tabs-scripts', post_grid_plugin_url . 'includes/blocks/woo-product-tabs/front-scripts.js', []);
 
-    if (has_block('post-grid/woo-product-tabs')) {
 
-      //wp_enqueue_script('pg-woo-product-tabs-scripts');
-      wp_enqueue_script('pg_block_scripts');
-    }
-  }
 
-  function front_script($attributes) {}
-  function front_style($attributes)
-  {
-
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -58,7 +39,10 @@ class PGBlockWooProductTabs
 
 
 
+    if (has_block('post-grid/woo-product-tabs')) {
 
+      wp_enqueue_script('pg_block_scripts');
+    }
 
 
     global $postGridCssY;

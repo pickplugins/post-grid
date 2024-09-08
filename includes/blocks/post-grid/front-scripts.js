@@ -1,3 +1,4 @@
+//export function setupPostGrid() {
 document.addEventListener("DOMContentLoaded", function (event) {
 	var PGBlockPostGrid = document.querySelectorAll(".PGBlockPostGrid");
 	if (PGBlockPostGrid != null) {
@@ -120,6 +121,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			let data = {
 				queryArgs: queryArgsX,
 				rawData: rawData,
+				returnObj: 'html',
+
 			};
 
 			fetch(post_grid_vars["siteUrl"] + "/wp-json/post-grid/v2/get_posts", {
@@ -188,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	function ajaxPageClick() {
 		var paginationAjaxLink = document.querySelectorAll(".pagination.ajax a");
 
+
 		if (paginationAjaxLink != null) {
 			paginationAjaxLink.forEach((el) =>
 				el.addEventListener("click", (event) => {
@@ -207,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					var blockargsObj = blockargs != null ? JSON.parse(blockargs) : {};
 					var blockId =
 						blockargsObj.blockId != undefined ? blockargsObj.blockId : null;
+
 
 					if (blockId == null) return;
 
@@ -235,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 					let data = {
 						queryArgs: queryArgsX,
+						returnObj: 'html',
 						prevText: prevText,
 						nextText: nextText,
 						maxPageNum: maxPageNum,
@@ -269,6 +275,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 									var html = "";
 									var paginationHtml = "";
+
 
 									posts.map((x) => {
 										html += '<div className="item">' + x.html + "</div>";
@@ -366,6 +373,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 				let data = {
 					queryArgs: queryArgsX,
+					returnObj: 'html',
 					rawData: rawData,
 					_wpnonce: nonce,
 
@@ -427,3 +435,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}, 500);
 		});
 });
+//}

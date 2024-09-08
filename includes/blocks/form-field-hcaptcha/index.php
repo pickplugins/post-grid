@@ -9,23 +9,13 @@ class PGBlockFormFieldHcaptcha
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('hcaptcha-script', 'https://hcaptcha.com/1/api.js');
-
-    if (has_block('post-grid/form-field-hcaptcha')) {
-
-      wp_enqueue_script('hcaptcha-script');
-    }
-  }
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    // wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/text/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/text/index.js', array('wp-blocks', 'wp-element'));
+
+
 
 
     register_block_type(
@@ -40,14 +30,17 @@ class PGBlockFormFieldHcaptcha
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
+
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
 
+    if (has_block('post-grid/form-field-hcaptcha')) {
 
+      wp_enqueue_script('hcaptcha-script');
+    }
 
 
     global $postGridCssY;

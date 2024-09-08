@@ -9,7 +9,7 @@ class PGBlockTermsQueryItem
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    //add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
+    //
   }
 
 
@@ -31,8 +31,7 @@ class PGBlockTermsQueryItem
     );
   }
 
-  function front_scripts($attributes) {}
-  function front_style($attributes) {}
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)

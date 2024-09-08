@@ -87,6 +87,7 @@
       "type": "object",
       "default": {
         "options": {
+          "thumbSize": "full",
           "enable": false
         }
       }

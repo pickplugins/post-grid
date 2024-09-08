@@ -15,8 +15,7 @@ class PGBlockSocialShare
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
-		//wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/social-share-x/index.css');
-		// wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/social-share-x/index.js', array('wp-blocks', 'wp-element'));
+
 
 
 		register_block_type(
@@ -31,8 +30,8 @@ class PGBlockSocialShare
 		);
 	}
 
-	function front_script($attributes) {}
-	function front_style($attributes) {}
+
+
 
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)

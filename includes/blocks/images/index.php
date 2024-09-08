@@ -9,7 +9,6 @@ class PGBlockGalleryImages
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
@@ -30,17 +29,8 @@ class PGBlockGalleryImages
     );
   }
 
-  function front_scripts($attributes)
-  {
-    // wp_register_script('pgpostquery_front_script', post_grid_plugin_url . 'includes/blocks/images/front-scripts.js', []);
-    // wp_register_style('pgpostquery_front_style', post_grid_plugin_url . 'includes/blocks/images/index.css');
-    if (has_block('post-grid/images')) {
 
-      //wp_enqueue_script('pgpostquery_front_script');
-      //wp_enqueue_style('pgpostquery_front_style');
-    }
-  }
-  function front_style($attributes) {}
+
 
   function categories_slugs($categories)
   {
@@ -65,7 +55,7 @@ class PGBlockGalleryImages
 
 
 
-    wp_register_script('fslightbox', post_grid_plugin_url . 'includes/blocks/image/fslightbox.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+
 
     global $postGridCssY;
     global $postGridScriptData;

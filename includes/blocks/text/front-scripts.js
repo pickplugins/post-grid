@@ -1,3 +1,4 @@
+export function setupText() {
 document.addEventListener("DOMContentLoaded", function () {
 	const contentElement = document.querySelector('[clicktocopy="1"]');
 
@@ -147,4 +148,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-
+}

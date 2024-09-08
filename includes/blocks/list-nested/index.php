@@ -15,9 +15,6 @@ class PGBlockListNested
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('pglist_editor_style', post_grid_plugin_url . 'includes/blocks/list-nested/index.css');
-    //wp_register_script('pglist_editor_script', post_grid_plugin_url . 'includes/blocks/list-nested/index.js', array('wp-blocks', 'wp-element'));
-    //wp_register_style('pglist_front_style', post_grid_plugin_url . 'includes/blocks/list-nested/index.css');
 
 
 
@@ -31,10 +28,7 @@ class PGBlockListNested
     );
   }
 
-  // function front_script($attributes)
-  // {
-  // }
-  function front_style($attributes) {}
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)

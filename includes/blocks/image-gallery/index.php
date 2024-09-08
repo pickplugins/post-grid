@@ -9,31 +9,15 @@ class PGBlockImageGallery
   function __construct()
   {
     add_action('init', array($this, 'register_scripts'));
-    add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
   }
 
 
-  function front_scripts($attributes)
-  {
-    wp_register_script('pgimage-gallery_front_script', post_grid_plugin_url . 'includes/blocks/image-gallery/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
-    if (has_block('post-grid/image-gallery')) {
-
-      wp_enqueue_style('jquery-ui');
-
-      wp_enqueue_script('jquery');
-      wp_enqueue_script('jquery-ui-core');
-      wp_enqueue_script('jquery-ui-accordion');
-      wp_enqueue_script('jquery-effects-core');
-
-      wp_enqueue_script('pgimage-gallery_front_script');
-    }
-  }
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/layers/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
+
+
 
 
     register_block_type(
@@ -45,8 +29,8 @@ class PGBlockImageGallery
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes) {}
+
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)

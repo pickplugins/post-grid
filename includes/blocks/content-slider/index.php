@@ -9,54 +9,19 @@ class PGBlockContentSlider
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
-		add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
 	}
 
 
-	function front_scripts($attributes)
-	{
-		wp_register_script('pgcontent-slider_front_script', post_grid_plugin_url . 'includes/blocks/content-slider/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-		wp_register_script('pgcontent_slider_splide', post_grid_plugin_url . 'includes/blocks/content-slider/splide.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-
-		wp_register_style('pgcontent_slider_splide', post_grid_plugin_url . 'includes/blocks/content-slider/splide.min.css', []);
-		wp_register_style('pgcontent_slider_splide_core', post_grid_plugin_url . 'includes/blocks/content-slider/splide-core.min.css', []);
-
-
-
-
-		if (has_block('post-grid/content-slider')) {
-
-			wp_enqueue_style('jquery-ui');
-
-			// wp_enqueue_style('pgcontent_slider_splide');
-			wp_enqueue_style('pgcontent_slider_splide_core');
-
-			wp_enqueue_script('pgcontent_slider_splide');
-
-
-
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-ui-core');
-			wp_enqueue_script('jquery-ui-accordion');
-			wp_enqueue_script('jquery-effects-core');
-
-			wp_enqueue_script('pgcontent-slider_front_script');
-		}
-	}
 
 	function editor_style()
 	{
-		wp_register_style('splide-core.min', post_grid_plugin_url . 'includes/blocks/content-slider/splide-core.min.css');
-		wp_enqueue_style('splide-core.min');
+		wp_enqueue_style('pgcontent_slider_splide_core');
 	}
 
 
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
-		//wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
-		wp_register_style('pgcontent-slider-splide-core', post_grid_plugin_url . 'includes/blocks/content-slider/splide-core.min.css');
-
 
 		register_block_type(
 			post_grid_plugin_dir . 'build/blocks/content-slider/block.json',
@@ -71,15 +36,20 @@ class PGBlockContentSlider
 		);
 	}
 
-	function front_script($attributes) {}
-	function front_style($attributes) {}
+
+
 
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)
 	{
 
 
+		if (has_block('post-grid/content-slider')) {
 
+			wp_enqueue_style('pgcontent_slider_splide_core');
+			wp_enqueue_script('splide.min');
+			wp_enqueue_script('pg_block_scripts');
+		}
 
 
 		global $postGridCssY;
@@ -221,9 +191,11 @@ class PGBlockContentSlider
 ?>
 
 
-		<div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+		<div
+			class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
-			<div class="splide" id="splide-<?php echo esc_attr($blockId); ?>" data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
+			<div class="splide" id="splide-<?php echo esc_attr($blockId); ?>"
+				data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 
 
 				<div class="splide__arrows">

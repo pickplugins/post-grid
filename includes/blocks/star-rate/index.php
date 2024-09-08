@@ -28,14 +28,8 @@ class PGBlockStarRate
     );
   }
 
-  function front_script($attributes) {}
-  function front_style($attributes)
-  {
 
-    $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
-    $iconOptions = isset($icon['options']) ? $icon['options'] : [];
-    $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-  }
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)

@@ -88,6 +88,11 @@ class PGBlockTabs
     $activeNavItemOptions = isset($activeNavItem['options']) ? $activeNavItem['options'] : [];
 
 
+    $labelCounter = isset($attributes['labelCounter']) ? $attributes['labelCounter'] : [];
+    $labelCounterOptions = isset($labelCounter['options']) ? $labelCounter['options'] : [];
+    $labelCounterEnable = isset($labelCounterOptions['enable']) ? $labelCounterOptions['enable'] : false;
+
+
     $navLabel = isset($attributes['navLabel']) ? $attributes['navLabel'] : [];
     $navLabelOptions = isset($navLabel['options']) ? $navLabel['options'] : [];
 
@@ -209,7 +214,11 @@ class PGBlockTabs
 
 
             <a href="#<?php echo  esc_attr($tablink) ?>" class="nav-label" index="<?php echo esc_attr($index); ?>">
-              <!-- <span class="label-counter"><?php echo esc_html($index + 1); ?></span> -->
+
+              <?php if ($labelCounterEnable): ?>
+                <span class="label-counter"><?php echo esc_html($index + 1); ?></span>
+              <?php endif; ?>
+
               <?php echo isset($tab['title']) ? wp_kses_post($tab['title']) : ""; ?>
             </a>
             <?php if ($iconPosition == 'after') : ?>

@@ -104,6 +104,15 @@
         }
       }
     },
+    "labelCounter": {
+      "type": "object",
+      "default": {
+        "options": {
+          "enable": false
+        },
+        "styles": {}
+      }
+    },
     "icon": {
       "type": "object",
       "default": {

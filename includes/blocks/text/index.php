@@ -140,7 +140,7 @@ class PGBlockPostText
     ob_start();
 
     if (empty($wrapperTag)) :
-      echo $content;
+      echo wp_kses_post($content);
     endif;
 
 
@@ -152,7 +152,7 @@ class PGBlockPostText
 
                                                                       if ($otherCopyObj) : ?> clickToCopy="<?php echo esc_attr($otherCopyObj); ?>"
         copyContent="<?php echo esc_attr($otherCopyContent); ?>" <?php endif; ?>>
-        <?php echo $content; ?>
+        <?php echo wp_kses_post($content); ?>
       </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
 

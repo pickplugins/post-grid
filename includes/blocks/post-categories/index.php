@@ -30,7 +30,7 @@ class PGBlockPostCategories
   }
 
 
-  
+
 
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
@@ -186,7 +186,7 @@ class PGBlockPostCategories
 ?>
 
 
-    <<?php echo pg_tag_escape($wrapperTag); ?> class=" <?php echo $blockId; ?>     <?php echo esc_attr($wrapperClass); ?>">
+    <<?php echo pg_tag_escape($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?>     <?php echo esc_attr($wrapperClass); ?>">
 
       <?php if ($iconPosition == 'beforeFronttext') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>
@@ -194,7 +194,7 @@ class PGBlockPostCategories
 
       <?php if (!empty($frontTexttext)) : ?>
         <span class='frontText '>
-          <?php echo $frontTexttext; ?>
+          <?php echo esc_attr($frontTexttext); ?>
         </span>
       <?php endif; ?>
 
@@ -268,7 +268,8 @@ class PGBlockPostCategories
 
         <?php if (!empty($itemsLinkTo)) : ?>
 
-          <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+          <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php //echo ($linkAttrStr); 
+                                                          ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
 
             <?php if ($iconPosition == 'beforeItem') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
@@ -303,7 +304,8 @@ class PGBlockPostCategories
           </a>
         <?php else : ?>
 
-          <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
+          <span <?php //echo ($linkAttrStr); 
+                ?> class="<?php echo esc_attr($itemsClass); ?>">
 
             <?php if ($iconPosition == 'beforeItem') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>

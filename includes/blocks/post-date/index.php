@@ -221,7 +221,8 @@ class PGBlocPostDate
 
           /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
         ?>
-          <a class='postdate-text' <?php echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>"
+          <a class='postdate-text' <?php //echo ($linkAttrStrpostDate); 
+                                    ?> target="<?php echo esc_attr($postDateLinkTarget); ?>"
             rel="<?php echo esc_attr($postDateRel); ?>"
             href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
             <?php if ($iconPosition == 'beforePostDate') : ?>
@@ -237,7 +238,8 @@ class PGBlocPostDate
           /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
         ?>
 
-          <<?php echo pg_tag_escape($postDateTag); ?> class='postdate-text' <?php echo ($linkAttrStrpostDate); ?>>
+          <<?php echo pg_tag_escape($postDateTag); ?> class='postdate-text' <?php //echo ($linkAttrStrpostDate); 
+                                                                            ?>>
             <?php if ($iconPosition == 'beforePostDate') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
@@ -259,8 +261,8 @@ class PGBlocPostDate
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
         <?php if ($postfixText) : ?>
-          <span class="<?php echo $postfixClass; ?>">
-            <?php echo $postfixText; ?>
+          <span class="<?php echo esc_attr($postfixClass); ?>">
+            <?php echo esc_attr($postfixText); ?>
           </span>
         <?php endif; ?>
 
@@ -281,7 +283,7 @@ class PGBlocPostDate
       <?php endif; ?>
       <?php if ($prefixText) : ?>
         <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo $prefixText; ?>
+          <?php echo esc_attr($prefixText); ?>
         </span>
       <?php endif; ?>
 
@@ -293,7 +295,8 @@ class PGBlocPostDate
         /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
       ?>
 
-        <a class='postdate-text' <?php echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>"
+        <a class='postdate-text' <?php //echo ($linkAttrStrpostDate); 
+                                  ?> target="<?php echo esc_attr($postDateLinkTarget); ?>"
           rel="<?php echo esc_attr($postDateRel); ?>"
           href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
           <?php if ($iconPosition == 'beforePostDate') : ?>
@@ -322,8 +325,8 @@ class PGBlocPostDate
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
       <?php if ($postfixText) : ?>
-        <span class="<?php echo $postfixClass; ?>">
-          <?php echo $postfixText; ?>
+        <span class="<?php echo esc_attr($postfixClass); ?>">
+          <?php echo esc_attr($postfixText); ?>
         </span>
       <?php endif; ?>
       <?php if ($iconPosition == 'afterPostfix') : ?>

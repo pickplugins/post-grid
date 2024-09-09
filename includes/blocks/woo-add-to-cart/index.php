@@ -238,8 +238,8 @@ class PGBlockWooAddToCart
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
         <?php if ($postfixText) : ?>
-          <span class="<?php echo $postfixClass; ?>">
-            <?php echo $postfixText; ?>
+          <span class="<?php echo esc_attr($postfixClass); ?>">
+            <?php echo esc_attr($postfixText); ?>
           </span>
         <?php endif; ?>
 

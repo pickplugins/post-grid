@@ -542,7 +542,7 @@ class PGBlockDateCountdown
 
         <?php if ($innerEnable) : ?>
           <div class="inner" id="inner">
-            <?php echo $content ?>
+            <?php echo wp_kses_post($content) ?>
           </div>
         <?php endif; ?>
 

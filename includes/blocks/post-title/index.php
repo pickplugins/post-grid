@@ -163,18 +163,18 @@ class PGBlockPostTitle
       $post_url = get_post_meta($post_ID, $postTitleLinkToAuthorMeta, true);
     }
 
+    //$linkAttrStr = post_grid_parse_attributes_arr($linkAttr);
+
     $linkAttrStr = "";
-    $attrArr = [];
 
     if (!empty($linkAttr)) {
       foreach ($linkAttr as $attr) {
         if (!empty($attr["val"])) {
           $linkAttrStr .=
-            esc_attr($attr["id"]) .
+            esc_html($attr["id"]) .
             '="' .
             esc_attr($attr["val"]) .
             '" ';
-          $attrArr[$attr["id"]] = $attr["val"];
         }
       };
     }
@@ -262,7 +262,8 @@ class PGBlockPostTitle
       <?php if ($postTitleIsLink) : ?>
 
         <a class="<?php echo esc_attr($postTitleClass); ?>" href="<?php echo esc_url_raw($post_url); ?>"
-          rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
+          rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php //echo $linkAttrStr; 
+                                                                                            ?>>
 
           <?php  // * prefix isLink true beforebegin 
           ?>

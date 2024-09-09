@@ -92,7 +92,7 @@ class PGBlockFlexWrap
 
 ?>
 		<div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?>	<?php echo esc_attr($blockAlign); ?>">
-			<?php echo $content ?>
+			<?php echo wp_kses_post($content) ?>
 		</div>
 <?php
 

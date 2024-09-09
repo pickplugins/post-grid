@@ -43,7 +43,7 @@ class PGBlockPostGrid
 
     if (has_block('post-grid/post-grid')) {
       wp_enqueue_style('pg_block_styles');
-      //wp_enqueue_script('pg_block_scripts_post_grid');
+      wp_enqueue_script('pg_block_scripts');
       wp_enqueue_style('font-awesome-5');
     }
 
@@ -300,7 +300,7 @@ class PGBlockPostGrid
 
 
     <div class="pg-post-grid <?php echo esc_attr($containerClass); ?> <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($blockAlign); ?>">
-      <?php echo $content ?>
+      <?php echo wp_kses_post($content) ?>
     </div>
 <?php
 

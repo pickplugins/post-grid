@@ -285,7 +285,7 @@ class PGBlockPostGridFilterable
 
 
     <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> ">
-      <?php echo $content ?>
+      <?php echo wp_kses_post($content) ?>
     </div>
 <?php
 

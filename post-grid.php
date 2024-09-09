@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Gutenberg Blocks
 Plugin URI: https://comboblocks.com/
 Description: Post Grid is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.92
+Version: 2.2.93
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.92');
+      define('post_grid_version', '2.2.93');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -191,9 +191,9 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/post-author', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/post-author/index.php');
       }
-      // if (!in_array('post-grid/post-taxonomies', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/post-taxonomies/index.php');
-      // }
+      if (!in_array('post-grid/post-taxonomies', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/post-taxonomies/index.php');
+      }
       if (!in_array('post-grid/post-author-fields', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/post-author-fields/index.php');
       }
@@ -207,9 +207,9 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/tabs-nested-item', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/tabs-nested-item/index.php');
       }
-      // if (!in_array('post-grid/terms-list', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/terms-list/index.php');
-      // }
+      if (!in_array('post-grid/terms-list', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/terms-list/index.php');
+      }
       if (!in_array('post-grid/flip-box', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/flip-box/index.php');
       }
@@ -219,16 +219,16 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/flip-box-front', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/flip-box-front/index.php');
       }
-      // if (!in_array('post-grid/user-query', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/user-query/index.php');
-      // }
-      // if (!in_array('post-grid/user-query-pagination', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/user-query-pagination/index.php');
-      // }
+      if (!in_array('post-grid/user-query', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/user-query/index.php');
+      }
+      if (!in_array('post-grid/user-query-pagination', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/user-query-pagination/index.php');
+      }
 
-      // if (!in_array('post-grid/user-fields', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/user-fields/index.php');
-      // }
+      if (!in_array('post-grid/user-fields', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/user-fields/index.php');
+      }
 
 
 
@@ -417,52 +417,52 @@ if (!class_exists('PostGrid')) {
         require_once(post_grid_plugin_dir . 'includes/blocks/form-field-textarea/index.php');
       }
 
-      // if (!in_array('post-grid/terms-query', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/terms-query/index.php');
-      // }
-      // if (!in_array('post-grid/terms-query-item', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/terms-query-item/index.php');
-      // }
+      if (!in_array('post-grid/terms-query', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/terms-query/index.php');
+      }
+      if (!in_array('post-grid/terms-query-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/terms-query-item/index.php');
+      }
 
-      // if (!in_array('post-grid/woo-sku', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-sku/index.php');
-      // }
-      // if (!in_array('post-grid/woo-total-sales', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-total-sales/index.php');
-      // }
-      // if (!in_array('post-grid/woo-stock-quantity', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock-quantity/index.php');
-      // }
-      // if (!in_array('post-grid/woo-product-info', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info/index.php');
-      // }
-      // if (!in_array('post-grid/woo-product-info-item', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info-item/index.php');
-      // }
-      // if (!in_array('post-grid/woo-price', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-price/index.php');
-      // }
-      // if (!in_array('post-grid/woo-add-to-cart', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-add-to-cart/index.php');
-      // }
-      // if (!in_array('post-grid/woo-star-rate', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
-      // }
-      // if (!in_array('post-grid/woo-sale', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
-      // }
-      // if (!in_array('post-grid/woo-stock', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
-      // }
-      // if (!in_array('post-grid/woo-my-account', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
-      // }
-      // if (!in_array('post-grid/woo-product-tabs', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
-      // }
-      // if (!in_array('post-grid/woo-breadcrumb', $disabled)) {
-      //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
-      // }
+      if (!in_array('post-grid/woo-sku', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-sku/index.php');
+      }
+      if (!in_array('post-grid/woo-total-sales', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-total-sales/index.php');
+      }
+      if (!in_array('post-grid/woo-stock-quantity', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock-quantity/index.php');
+      }
+      if (!in_array('post-grid/woo-product-info', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info/index.php');
+      }
+      if (!in_array('post-grid/woo-product-info-item', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-info-item/index.php');
+      }
+      if (!in_array('post-grid/woo-price', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-price/index.php');
+      }
+      if (!in_array('post-grid/woo-add-to-cart', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-add-to-cart/index.php');
+      }
+      if (!in_array('post-grid/woo-star-rate', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-star-rate/index.php');
+      }
+      if (!in_array('post-grid/woo-sale', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-sale/index.php');
+      }
+      if (!in_array('post-grid/woo-stock', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-stock/index.php');
+      }
+      if (!in_array('post-grid/woo-my-account', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-my-account/index.php');
+      }
+      if (!in_array('post-grid/woo-product-tabs', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-product-tabs/index.php');
+      }
+      if (!in_array('post-grid/woo-breadcrumb', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/woo-breadcrumb/index.php');
+      }
       if (!in_array('post-grid/post-comments', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/post-comments/index.php');
       }

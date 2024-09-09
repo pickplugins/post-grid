@@ -222,22 +222,22 @@ class PGBlockWooProductInfoItem
 
               $finalValue = ($product == null) ? 0 : $product->get_weight();
 
-              echo $finalValue . ' kg';
+              echo esc_attr($finalValue) . ' kg';
             }
             if ($fieldValue == 'length') {
 
               $finalValue = ($product == null) ? 0 : $product->get_length();
-              echo $finalValue . ' cm';
+              echo esc_attr($finalValue) . ' cm';
             }
             if ($fieldValue == 'width') {
 
               $finalValue = ($product == null) ? 0 : $product->get_width();
-              echo $finalValue . ' cm';
+              echo esc_attr($finalValue) . ' cm';
             }
             if ($fieldValue == 'height') {
 
               $finalValue = ($product == null) ? 0 : $product->get_height();
-              echo $finalValue . ' cm';
+              echo esc_attr($finalValue) . ' cm';
             }
             if ($fieldValue == 'dimensions') {
 

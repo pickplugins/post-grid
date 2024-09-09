@@ -309,16 +309,19 @@ class PGBlockFeaturedImage
                                                           <?php echo esc_attr($blockId); ?>
                                                           <?php echo esc_attr($wrapperClass); ?>">
         <?php if (!empty($featuredImageLinkTo)) : ?>
-          <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo $linkAttrStr; ?>>
+          <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php //echo $linkAttrStr; 
+                                                                                                                                                                                          ?>>
 
-            <img <?php echo esc_attr($linkAttrStr); ?> srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>"
-              <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?>
+            <img <?php //echo ($linkAttrStr); 
+                  ?> srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>"
+              <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?>
               width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
           </a>
         <?php else : ?>
-          <img <?php echo esc_attr($linkAttrStr); ?> srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>"
-            <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?>
+          <img <?php //echo ($linkAttrStr); 
+                ?> srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>"
+            <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?>
             width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
         <?php endif; ?>
@@ -331,14 +334,16 @@ class PGBlockFeaturedImage
     ?>
       <?php if (!empty($featuredImageLinkTo)) : ?>
         <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>">
-          <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
-            <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?>
+          <img <?php //echo ($linkAttrStr); 
+                ?> src="<?php echo esc_url_raw($attachment_url); ?>"
+            <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?>
 
             alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
         </a>
       <?php else : ?>
-        <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>"
-          <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo $lazy ?>" <?php endif; ?>
+        <img <?php //echo ($linkAttrStr); 
+              ?> src="<?php echo esc_url_raw($attachment_url); ?>"
+          <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url_raw($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?>
           alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
       <?php endif; ?>
     <?php

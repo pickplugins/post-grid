@@ -157,7 +157,7 @@ class PGBlockMenuWrap
     <div class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
       <nav>
         <ul class="<?php echo esc_attr($menuWrapClass); ?>">
-          <?php echo $content ?>
+          <?php echo wp_kses_post($content) ?>
         </ul>
         <div class="mobile-menu-toggle">
           <?php echo wp_kses_post($mobileMenuToggleHtml); ?>
@@ -171,7 +171,7 @@ class PGBlockMenuWrap
         </div>
         <ul class="<?php echo esc_attr($menuWrapClass);
                     ?>">
-          <?php echo $content ?>
+          <?php echo wp_kses_post($content) ?>
         </ul>
       </div>
     </div>

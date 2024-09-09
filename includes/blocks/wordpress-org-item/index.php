@@ -203,7 +203,7 @@ class PGBlockWordpressOrgItem
 						<ul><?php
 								if (isset($objectData['ratings'])) {
 									foreach ($objectData['ratings'] as $x => $value) { ?>
-									<li><?php echo $x; ?>: <?php echo $value; ?></li>
+									<li><?php echo esc_attr($x); ?>: <?php echo esc_attr($value); ?></li>
 								<?php } ?>
 						</ul><?php }
 							} ?>
@@ -221,7 +221,7 @@ class PGBlockWordpressOrgItem
 				?>
 				<?php if ($wrapperField == 'creation_time') {
 						//echo isset($objectData['creation_time']) ? esc_html($objectData['creation_time']) : '';
-						echo $formattedCreationDate;
+						echo esc_attr($formattedCreationDate);
 					} ?>
 				<?php if ($wrapperField == 'homepage') {
 						if ($wrapperIsLink) { ?>

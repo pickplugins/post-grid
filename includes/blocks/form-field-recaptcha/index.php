@@ -200,13 +200,13 @@ class PGBlockFormFieldRecaptcha
         if ($version == 'v2Checkbox') :
 
         ?>
-          <div class="g-recaptcha" data-sitekey="<?php echo $site_key; ?>"></div>
+          <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($site_key); ?>"></div>
         <?php
 
         endif;
         if ($version == 'v2Invisible') :
         ?>
-          <div class="g-recaptcha" data-sitekey="<?php echo $site_key; ?>" data-size="invisible"></div>
+          <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($site_key); ?>" data-size="invisible"></div>
         <?php
         endif;
 

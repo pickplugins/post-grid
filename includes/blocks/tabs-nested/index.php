@@ -228,7 +228,7 @@ class PGBlockTabs
 
       </div>
       <div class='panels-wrap'>
-        <?php echo $content; ?>
+        <?php echo wp_kses_post($content); ?>
       </div>
 
       <div class="progress">

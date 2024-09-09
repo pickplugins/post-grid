@@ -129,7 +129,7 @@ class PGBlockTabsNestedItem
 ?>
 		<div class="pg-tabs-panel  <?php echo ($uid == $activeTab) ? '' : '' ?>" data-tab-id="<?php echo esc_attr($uid); ?>" hidden="true" aria-hidden="true" role="tabpanel" aria-labelledby="<?php echo esc_attr($uid); ?>">
 
-			<?php echo $content; ?>
+			<?php echo wp_kses_post($content); ?>
 
 		</div>
 

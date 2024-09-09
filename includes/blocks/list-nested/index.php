@@ -136,7 +136,7 @@ class PGBlockListNested
 
 
 
-      <?php echo $content ?>
+      <?php echo wp_kses_post($content) ?>
 
     </<?php echo pg_tag_escape($wrapperTag); ?>>
     <?php

@@ -201,9 +201,9 @@ class PGBlockPostAuthor
 
     <<?php echo pg_tag_escape($wrapperTag); ?> class="
           <?php echo esc_attr($wrapperClass); ?>
-          <?php echo $blockId; ?>">
+          <?php echo esc_attr($blockId); ?>">
       <?php
-      echo $content ?>
+      echo wp_kses_post($content) ?>
     </<?php echo pg_tag_escape($wrapperTag); ?>>
 
 

@@ -143,14 +143,14 @@ class PGBlockImageAccordion
         class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
         target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>"
         href="<?php echo esc_url_raw($linkUrl); ?>">
-        <?php echo $content ?>
+        <?php echo wp_kses_post($content) ?>
       </a>
     <?php
 
     } else { ?>
       <<?php echo pg_tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>"
         class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-        <?php echo $content ?> </<?php echo pg_tag_escape($wrapperTag); ?>>
+        <?php echo wp_kses_post($content) ?> </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }
 

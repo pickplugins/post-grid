@@ -88,7 +88,7 @@ class PGBlockWooSaleProducts
 				<?php
 				// echo do_shortcode(generateShortcode($shortcodeParam, "sale_products"));
 				?>
-				<?php echo $content ?>
+				<?php echo wp_kses_post($content) ?>
 
 
 			</<?php echo pg_tag_escape($wrapperTag); ?>>

@@ -282,7 +282,7 @@ class PGBlockTermsList
 
 
     <<?php echo pg_tag_escape($wrapperTag); ?> class="
-                                        <?php echo $blockId; ?>
+                                        <?php echo esc_attr($blockId); ?>
                                         <?php echo esc_attr($wrapperClass); ?>">
 
       <?php if ($iconPosition == 'beforeFronttext') : ?>
@@ -291,7 +291,7 @@ class PGBlockTermsList
 
       <?php if (!empty($frontTexttext)) : ?>
         <span class='frontText '>
-          <?php echo $frontTexttext; ?>
+          <?php echo esc_attr($frontTexttext); ?>
         </span>
       <?php endif; ?>
 
@@ -392,7 +392,8 @@ class PGBlockTermsList
           </a>
         <?php else : ?>
 
-          <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
+          <span <?php //echo ($linkAttrStr); 
+                ?> class="<?php echo esc_attr($itemsClass); ?>">
 
             <?php if ($iconPosition == 'beforeLabel') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>

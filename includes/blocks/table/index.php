@@ -139,7 +139,7 @@ class PGBlockTable
     <<?php echo pg_tag_escape($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" <?php //echo esc_attr($wrapperAttrText); 
                                                                                                                                 ?>>
       <table id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-        <?php echo $content ?> </table>
+        <?php echo wp_kses_post($content) ?> </table>
 
     </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php

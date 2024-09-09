@@ -254,9 +254,8 @@ class PGBlockStarRate
 
 
         <?php if ($textIsLink) : ?>
-          <a class='text-icon' <?php
-                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>"
+          <a class='text-icon' <?php //echo ($linkAttrStrText);  
+                                ?> target="<?php echo esc_attr($textLinkTarget); ?>"
             rel="<?php echo esc_attr($textRel); ?>"
             href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
             <!-- <div class="text-icon"> -->
@@ -372,9 +371,8 @@ class PGBlockStarRate
             <?php echo wp_kses_post($prefixText); ?>
           </span>
         <?php endif; ?>
-        <a class='text' <?php
-                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                        echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>"
+        <a class='text' <?php //echo ($linkAttrStrText);   
+                        ?> target="<?php echo esc_attr($textLinkTarget); ?>"
           rel="<?php echo esc_attr($textRel); ?>"
           href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 

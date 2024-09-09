@@ -242,9 +242,9 @@ class PGBlockBusinessHours
               <span class="<?php echo esc_attr($startTimeClass) ?>">
                 <?php
                 if ($itemStart) {
-                  echo $this->TimeDisplay($itemStart);
+                  echo wp_kses_post($this->TimeDisplay($itemStart));
                 } else {
-                  echo $this->TimeDisplay($startTimeStart);
+                  echo wp_kses_post($this->TimeDisplay($startTimeStart));
                 }
                 ?>
               </span>
@@ -254,9 +254,9 @@ class PGBlockBusinessHours
               <span class="<?php echo esc_attr($endTimeClass) ?>">
                 <?php
                 if ($itemEnd) {
-                  echo $this->TimeDisplay($itemEnd);
+                  echo wp_kses_post($this->TimeDisplay($itemEnd));
                 } else {
-                  echo $this->TimeDisplay($endTimeEnd);
+                  echo wp_kses_post($this->TimeDisplay($endTimeEnd));
                 }
                 ?>
               </span>

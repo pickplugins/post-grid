@@ -126,7 +126,7 @@ class PGBlockWooProductInfo
     <<?php echo pg_tag_escape($wrapperTag); ?> class="  <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($wrapperClass); ?>">
 
       <?php
-      echo $content ?>
+      echo wp_kses_post($content) ?>
     </<?php echo pg_tag_escape($wrapperTag); ?>>
 
 

@@ -155,9 +155,9 @@ class PGBlockPopup
     <div class="<?php echo esc_attr($wrapperClass); ?>   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" entrance-animation="<?php echo esc_attr($entranceWrapAnimation); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-trigger="<?php echo esc_attr(json_encode($triggerRules)) ?>" pgpopup-close-trigger="<?php echo esc_attr(json_encode($closeTriggerRules)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
       <div class='inner'>
         <span class='close' popup-id="<?php echo esc_attr($blockId); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
-          <?php echo $closeIconHtml; ?>
+          <?php echo wp_kses_post($closeIconHtml); ?>
         </span>
-        <?php echo $content ?>
+        <?php echo wp_kses_post($content) ?>
       </div>
     </div>
 

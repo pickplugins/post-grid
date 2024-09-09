@@ -114,7 +114,7 @@ class PGBlockListNestedItem
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
 
-      <?php echo $content; ?>
+      <?php echo wp_kses_post($content); ?>
 
       <?php if ($iconPosition == 'after') : ?>
         <?php echo wp_kses_post($fontIconHtml); ?>

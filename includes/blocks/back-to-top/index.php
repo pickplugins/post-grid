@@ -228,7 +228,8 @@ class PGBlockBackToTop
                                   <?php echo esc_attr($blockId); ?>
                                   <?php echo esc_attr($wrapperClass); ?>"
         data-settings='<?php echo esc_attr($dataSettings); ?>'
-        <?php echo esc_attr($wrapperAttrText); ?><?php /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/ echo $linkAttrStr; ?>>
+        <?php echo esc_attr($wrapperAttrText); ?><?php  //echo $linkAttrStr; 
+                                                  ?>>
 
 
 

@@ -159,7 +159,7 @@ class PGBlockMasonryWrap
 			data-masonry="<?php echo esc_attr(json_encode($masonryOptions)) ?>"
 			data-block-id="<?php echo esc_attr(json_encode($dataBlockId)) ?>">
 
-			<?php echo $content ?>
+			<?php echo wp_kses_post($content) ?>
 		</div>
 		<style>
 			.pg-masonry-wrap-item {

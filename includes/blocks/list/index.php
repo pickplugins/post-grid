@@ -138,7 +138,7 @@ class PGBlockList
       <<?php echo pg_tag_escape($wrapperTag); ?> class="
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($wrapperClass); ?>
-                    <?php echo esc_attr($blockAlign); ?>" <?php if ($itemReversed) { ?> reversed <?php } ?> <?php if ($itemStart) { ?> start="<?php echo $itemStart; ?>"
+                    <?php echo esc_attr($blockAlign); ?>" <?php if ($itemReversed) { ?> reversed <?php } ?> <?php if ($itemStart) { ?> start="<?php echo esc_attr($itemStart); ?>"
         <?php   } ?>>
 
 

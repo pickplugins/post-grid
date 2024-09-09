@@ -19,6 +19,28 @@ register_meta('post', 'pgc_meta', [
 ]);
 
 
+function post_grid_parse_attributes_arr($attrArr)
+{
+
+  $linkAttrStr = "";
+
+  if (!empty($attrArr)) {
+    foreach ($attrArr as $attr) {
+
+      $attrId = isset($attr["id"]) ? $attr["id"] : '';
+      $attrVal = isset($attr["val"]) ? $attr["val"] : '';
+
+      if (!empty($attr["val"])) {
+        $linkAttrStr .= esc_attr($attrId) . '="' . esc_attr($attrVal) . '" ';
+      }
+    };
+  }
+
+
+
+  return $linkAttrStr;
+}
+
 
 
 function post_grid_parse_css_class($classStr, $obj)
@@ -1149,8 +1171,7 @@ function post_grid_page_styles()
 
 
   <style>
-    <?php echo ($reponsiveCss);
-    ?>
+    <?php echo strip_tags($reponsiveCss); ?>
   </style>
 
 <?php
@@ -1332,8 +1353,7 @@ function post_grid_global_styles()
 
 
   <style>
-    <?php echo ($reponsiveCss);
-    ?>
+    <?php echo strip_tags($reponsiveCss); ?>
   </style>
 
   <?php
@@ -1344,7 +1364,7 @@ function post_grid_global_styles()
 add_action('wp_footer', 'post_grid_page_styles', 80);
 
 
-function post_grid_global_cssY()
+function post_grid_blocks_styles()
 {
 
   global $postGridCssY;
@@ -1504,7 +1524,7 @@ function post_grid_global_cssY()
   //$fonts = str_replace(",", "|", $fonts);
   $fonts = str_replace(" ", "+", $fontsArrStr);
 
-  //echo '###############';
+
 
 
   if (!empty($fonts)) {
@@ -1517,15 +1537,14 @@ function post_grid_global_cssY()
   ?>
 
   <style>
-    <?php echo ($reponsiveCss);
-    ?>
+    <?php echo strip_tags($reponsiveCss); ?>
   </style>
 
 <?php
 
 }
-add_action('wp_footer', 'post_grid_global_cssY', 99);
-add_action('elementor/editor/init', 'post_grid_global_cssY');
+add_action('wp_footer', 'post_grid_blocks_styles', 99);
+add_action('elementor/editor/init', 'post_grid_blocks_styles');
 
 
 function post_grid_font_family()
@@ -2639,7 +2658,7 @@ function post_grid_visible_parse($visible)
       $id = isset($arg['id']) ? $arg['id'] : '';
 
 
-      //echo "<p>" . $id . "</p>";
+
 
       $isAccess = false;
 

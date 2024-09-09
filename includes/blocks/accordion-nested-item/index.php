@@ -268,7 +268,7 @@ class PGBlockAccordionNestedItem
 		</<?php echo pg_tag_escape($headerTag); ?>>
 
 		<<?php echo pg_tag_escape($contentWrapperTag); ?> class="<?php echo esc_attr($contentWrapperClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false">
-			<?php echo $content; ?>
+			<?php echo wp_kses_post($content); ?>
 		</<?php echo pg_tag_escape($contentWrapperTag); ?>>
 <?php
 

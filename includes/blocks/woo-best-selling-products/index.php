@@ -108,7 +108,7 @@ class PGBlockWooBestSellingProducts
 
 				// echo do_shortcode(generateShortcode($shortcodeParam, "best_selling_products"));
 				?>
-				<?php echo $content ?>
+				<?php echo wp_kses_post($content) ?>
 
 
 

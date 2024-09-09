@@ -201,7 +201,7 @@ class PGBlockUserFields
 
 
     <<?php echo pg_tag_escape($wrapperTag); ?> class="
-          <?php echo $blockId; ?>
+          <?php echo esc_attr($blockId); ?>
           <?php echo esc_attr($wrapperClass); ?>">
 
       <?php if (!empty($prefixText) && $prefixPosition == 'beforeFrontText') : ?>
@@ -238,7 +238,8 @@ class PGBlockUserFields
       <?php endif; ?>
 
       <?php if (!empty($fieldLink)) : ?>
-        <a <?php if ($fieldLinkTo == 'authorMail') : ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>" <?php else : ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?> target="<?php echo esc_attr($fieldLinkTarget); ?>" <?php echo $linkAttrStr; ?>>
+        <a <?php if ($fieldLinkTo == 'authorMail') : ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>" <?php else : ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?> target="<?php echo esc_attr($fieldLinkTarget); ?>" <?php //echo $linkAttrStr; 
+                                                                                                                                                                                                                                                    ?>>
 
         <?php endif; ?>
         <?php if (!empty($prefixText) && $prefixPosition == 'beforeField') : ?>

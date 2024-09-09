@@ -145,7 +145,7 @@ class PGBlockFormWrap
         <?php if (!empty($afterSubmit)) : ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>'
         <?php endif; ?> <?php if (!empty($visible)) : ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>'
         <?php endif; ?>>
-        <?php echo $content ?>
+        <?php echo wp_kses_post($content) ?>
         <?php wp_nonce_field('wp_rest', '_wpnonce'); ?>
       </form>
       <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>

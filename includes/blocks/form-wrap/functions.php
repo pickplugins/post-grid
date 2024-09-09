@@ -888,7 +888,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
         $curl_response = curl_exec($ch);
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['brevoAddContactErrorCurl'] = !empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -910,10 +910,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->id)) {
             $response['success']['brevoAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -955,7 +951,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -981,10 +977,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->Data)) {
             $response['success']['brevoAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1044,7 +1036,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['brevoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1074,10 +1066,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->id)) {
             $response['success']['brevoAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1163,10 +1151,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->success)) {
             $response['success']['brevoAddContactSuccess'] = empty($errorMessage) ? $curl_response->message : $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1240,7 +1224,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['dripAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1265,10 +1249,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->subscribers)) {
             $response['success']['dripAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1366,7 +1346,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
         $curl_response = curl_exec($ch);
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['klaviyoAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1392,10 +1372,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (($curl_response[0]->email == $email)) {
             $response['success']['klaviyoAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1486,7 +1462,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1508,10 +1484,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->data->email) && $curl_response->data->email == $email) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1605,7 +1577,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1629,10 +1601,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->data->email) && $curl_response->data->email == $email) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1727,7 +1695,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1752,10 +1720,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->id) && $curl_response->email_address == $email) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1812,7 +1776,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1835,10 +1799,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->success) && $curl_response->data->email == $email) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1892,7 +1852,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1915,10 +1875,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->Code) && $curl_response->Code == null) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -1974,7 +1930,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -1997,10 +1953,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->Code) && $curl_response->Code == null) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -2071,7 +2023,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
 
 
         if ($curl_response === false) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['mailerliteAddContactError'] = empty($errorMessage) ? $errorMessage : curl_error($ch);
         } else {
 
@@ -2094,10 +2046,6 @@ function form_wrap_process_optInForm($formFields, $onprocessargs, $request)
           if (isset($curl_response->Code) && $curl_response->Code == null) {
             $response['success']['mailerliteAddContactSuccess'] = $successMessage;
           }
-
-
-
-          //echo $curl_response;
         }
 
         curl_close($ch);
@@ -3893,7 +3841,7 @@ function form_wrap_process_customForm($formFields, $onprocessargs, $request)
 
 
         if (isset($file_response['errors'])) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['dropboxUpload'] = empty($errorMessage) ? $failedMessage : curl_error($ch);
         } else {
           $response['success']['dropboxUpload'] = $successMessage;
@@ -3977,7 +3925,7 @@ function form_wrap_process_customForm($formFields, $onprocessargs, $request)
 
 
         if (isset($file_response['errors'])) {
-          //echo 'Error: ' . curl_error($ch);
+
           $response['errors']['dropboxUpload'] = empty($errorMessage) ? $failedMessage : curl_error($ch);
         } else {
           $response['success']['dropboxUpload'] = $successMessage;

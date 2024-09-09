@@ -116,7 +116,7 @@ class PGBlockWordpressOrg
 
 
 				<?php
-				echo $content ?>
+				echo wp_kses_post($content) ?>
 
 
 			</<?php echo pg_tag_escape($wrapperTag); ?>>

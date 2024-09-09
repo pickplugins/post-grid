@@ -209,7 +209,7 @@ class PGBlockContentSlider
 
 						<?php if (!empty($prevText)) : ?>
 							<span>
-								<?php echo $prevText; ?>
+								<?php echo esc_attr($prevText); ?>
 							</span>
 						<?php endif; ?>
 
@@ -233,7 +233,7 @@ class PGBlockContentSlider
 						<?php endif; ?>
 						<?php if (!empty($nextText)) : ?>
 							<span>
-								<?php echo $nextText; ?>
+								<?php echo esc_attr($nextText); ?>
 							</span>
 						<?php endif; ?>
 
@@ -249,7 +249,7 @@ class PGBlockContentSlider
 
 				<div class="splide__track">
 					<ul class="splide__list">
-						<?php echo $content ?>
+						<?php echo wp_kses_post($content) ?>
 					</ul>
 				</div>
 

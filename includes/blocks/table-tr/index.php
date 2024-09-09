@@ -137,7 +137,7 @@ class PGBlockTableRow
 
 ?>
     <tr id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-      <?php echo $content ?> </tr>
+      <?php echo wp_kses_post($content) ?> </tr>
 <?php
 
 

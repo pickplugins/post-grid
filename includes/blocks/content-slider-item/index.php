@@ -88,7 +88,7 @@ class PGBlockContentSliderItem
 
 ?>
     <div class="<?php echo esc_attr($wrapperClass); ?> splide__slide <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-      <?php echo $content ?>
+      <?php echo wp_kses_post($content) ?>
     </div>
 <?php
 

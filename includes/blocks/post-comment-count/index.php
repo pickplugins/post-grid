@@ -218,7 +218,8 @@ class PGBlocpostCommentCount
         <?php endif; ?>
 
         <?php if (!empty($commentCountLinkTo)) : ?>
-          <a class='commentCount' <?php echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+          <a class='commentCount' <?php //echo ($linkAttrStrcommentCount); 
+                                  ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
             <?php if ($iconPosition == 'beforeCommentCount') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
@@ -233,7 +234,8 @@ class PGBlocpostCommentCount
           <?php if ($iconPosition == 'beforeCommentCount') :  ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif;  ?>
-          <span class='commentCount' <?php echo ($linkAttrStrcommentCount); ?>>
+          <span class='commentCount' <?php //echo ($linkAttrStrcommentCount); 
+                                      ?>>
             <?php echo wp_kses_post($formatedcommentCount); ?>
             <?php if ($iconPosition == 'afterCommentCount') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
@@ -252,8 +254,8 @@ class PGBlocpostCommentCount
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
         <?php if ($postfixText) : ?>
-          <span class="<?php echo $postfixClass; ?>">
-            <?php echo $postfixText; ?>
+          <span class="<?php echo esc_attr($postfixClass); ?>">
+            <?php echo esc_attr($postfixText); ?>
           </span>
         <?php endif; ?>
 
@@ -274,7 +276,7 @@ class PGBlocpostCommentCount
       <?php endif; ?>
       <?php if ($prefixText) : ?>
         <span class="<?php echo esc_attr($prefixClass); ?>">
-          <?php echo $prefixText; ?>
+          <?php echo esc_attr($prefixText); ?>
         </span>
       <?php endif; ?>
 
@@ -311,8 +313,8 @@ class PGBlocpostCommentCount
         <?php echo wp_kses_post($fontIconHtml); ?>
       <?php endif; ?>
       <?php if ($postfixText) : ?>
-        <span class="<?php echo $postfixClass; ?>">
-          <?php echo $postfixText; ?>
+        <span class="<?php echo esc_attr($postfixClass); ?>">
+          <?php echo esc_attr($postfixText); ?>
         </span>
       <?php endif; ?>
       <?php if ($iconPosition == 'afterPostfix') : ?>

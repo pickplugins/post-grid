@@ -72,6 +72,17 @@
         }
       }
     },
+    "lazyLoad": {
+      "type": "object",
+      "default": {
+        "options": {
+          "lazy": true,
+          "lazySrc": "",
+          "lazySrcId": "",
+          "lazySrcType": "media"
+        }
+      }
+    },
     "blockCssY": {
       "type": "object",
       "default": {

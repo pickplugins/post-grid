@@ -284,7 +284,8 @@ class PGBlockIcon
           <?php if ($iconPosition == 'beforeLink') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>
-          <a class='text' <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+          <a class='text' <?php //echo ($linkAttrStrText); 
+                          ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
             <?php if ($iconPosition == 'beforeText') : ?>
               <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
@@ -362,7 +363,8 @@ class PGBlockIcon
         <?php if ($iconPosition == 'beforeLink') : ?>
           <?php echo wp_kses_post($fontIconHtml); ?>
         <?php endif; ?>
-        <a class="<?php echo esc_attr($blockId); ?>" <?php echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
+        <a class="<?php echo esc_attr($blockId); ?>" <?php //echo ($linkAttrStrText); 
+                                                      ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
           <?php if ($iconPosition == 'beforeText') : ?>
             <?php echo wp_kses_post($fontIconHtml); ?>
           <?php endif; ?>

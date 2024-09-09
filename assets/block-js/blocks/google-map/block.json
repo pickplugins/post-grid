@@ -1,13 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "post-grid/before-start-wrap",
-  "title": "Before Start Wrap",
+  "name": "post-grid/google-map",
+  "title": "Google Map",
   "textdomain": "post-grid",
   "category": "post-grid-tools",
-  "parent": [
-    "post-grid/date-countdown"
-  ],
   "usesContext": [
     "postId",
     "loopIndex",
@@ -25,18 +22,39 @@
       "type": "object",
       "default": {
         "options": {
-          "content": "",
           "tag": "div",
-          "class": "pg-before-start-wrap"
+          "class": "pg-google-map",
+          "id": "",
+          "linkTo": "postUrl",
+          "linkToAuthorMeta": "",
+          "linkToCustomMeta": "",
+          "linkTarget": "_blank",
+          "customUrl": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
+      }
+    },
+    "addresses": {
+      "type": "array",
+      "default": []
+    },
+    "objMap": {
+      "type": "object",
+      "default": {
+        "zoom": "",
+        "zoomControl": "",
+        "minZoom": "",
+        "maxZoom": "",
+        "lat": "",
+        "lng": "",
+        "tilt": "",
+        "heading": "",
+        "name": "",
+        "titleSize": "",
+        "alt": "",
+        "mapTypeId": "",
+        "streetViewControl": "",
+        "colorScheme": ""
       }
     },
     "visible": {

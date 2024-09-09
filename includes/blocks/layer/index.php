@@ -95,7 +95,7 @@ class PGBlockLayer
 
     if ($wrapperTag == 'a') { ?>
       <a class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" href="" target="">
-        <?php echo $content ?>
+        <?php echo wp_kses_post($content) ?>
       </a>
     <?php
 
@@ -104,7 +104,7 @@ class PGBlockLayer
                     <?php echo esc_attr($wrapperClass); ?>
                     <?php echo esc_attr($blockId); ?>
                     <?php echo esc_attr($blockAlign); ?>">
-        <?php echo $content ?>
+        <?php echo wp_kses_post($content) ?>
       </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }

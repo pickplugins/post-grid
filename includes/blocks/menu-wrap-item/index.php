@@ -150,7 +150,7 @@ class PGBlockMenuWrapItem
 
       <?php if (!empty($content)) : ?>
         <ul class="<?php echo esc_attr($subMenuWrapClass); ?> ">
-          <?php echo $content ?>
+          <?php echo wp_kses_post($content) ?>
         </ul>
       <?php endif; ?>
 

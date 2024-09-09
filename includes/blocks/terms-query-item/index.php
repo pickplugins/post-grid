@@ -318,7 +318,8 @@ class PGBlockTermsQueryItem
         </span>
       <?php endif; ?>
       <?php if ($termFieldIsLink) : ?>
-        <a class="<?php echo esc_attr($termFieldClass); ?>" href="<?php echo esc_url_raw($term_url); ?>" target="<?php echo esc_attr($termFieldLinkTarget); ?>" <?php echo $termFieldLinkAttr; ?>>
+        <a class="<?php echo esc_attr($termFieldClass); ?>" href="<?php echo esc_url_raw($term_url); ?>" target="<?php echo esc_attr($termFieldLinkTarget); ?>" <?php //echo $termFieldLinkAttr; 
+                                                                                                                                                                ?>>
           <?php if (!empty($prefixText)  && ($prefixPosition == "afterbegin")) : ?>
             <span class="<?php echo esc_attr($prefixClass); ?>">
               <?php echo wp_kses_post($prefixText); ?>

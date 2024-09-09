@@ -91,7 +91,7 @@ class PGBlockWooProducts
 				// echo do_shortcode(generateShortcode($shortcodeParam, "products"));
 				?>
 
-				<?php echo $content ?>
+				<?php echo wp_kses_post($content) ?>
 
 
 

@@ -104,6 +104,15 @@
         "content": ""
       }
     },
+    "lazyload": {
+      "type": "object",
+      "default": {
+        "enable": true,
+        "lazySrc": "",
+        "lazySrcId": "",
+        "lazySrcType": "media"
+      }
+    },
     "visible": {
       "type": "object",
       "default": {}

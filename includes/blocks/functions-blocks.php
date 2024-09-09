@@ -1169,17 +1169,42 @@ function post_grid_page_styles()
 
 ?>
 
+  <?php if (!empty($reponsiveCss)): ?>
+    <style>
+      <?php echo strip_tags($reponsiveCss); ?>
+    </style>
+  <?php endif; ?>
 
-  <style>
-    <?php echo strip_tags($reponsiveCss); ?>
-  </style>
 
-<?php
+  <?php
 
 
 
 }
 add_action('wp_footer', 'post_grid_global_styles', 80);
+
+function post_grid_global_json_ld()
+{
+
+  global $postGridLdJson;
+
+
+  if (!empty($postGridLdJson)) {
+
+    foreach ($postGridLdJson as $json) {
+
+      if (!empty($json)):
+  ?>
+        <script type="application/ld+json">
+          <?php echo wp_unslash(json_encode($json)); ?>
+        </script>
+  <?php
+      endif;
+    }
+  }
+}
+
+add_action('wp_footer', 'post_grid_global_json_ld', 80);
 
 
 function post_grid_global_styles()
@@ -1349,12 +1374,13 @@ function post_grid_global_styles()
 
 
 
-?>
+  ?>
 
-
-  <style>
-    <?php echo strip_tags($reponsiveCss); ?>
-  </style>
+  <?php if (!empty($reponsiveCss)): ?>
+    <style>
+      <?php echo strip_tags($reponsiveCss); ?>
+    </style>
+  <?php endif; ?>
 
   <?php
 
@@ -1536,9 +1562,11 @@ function post_grid_blocks_styles()
 
   ?>
 
-  <style>
-    <?php echo strip_tags($reponsiveCss); ?>
-  </style>
+  <?php if (!empty($reponsiveCss)): ?>
+    <style>
+      <?php echo strip_tags($reponsiveCss); ?>
+    </style>
+  <?php endif; ?>
 
 <?php
 

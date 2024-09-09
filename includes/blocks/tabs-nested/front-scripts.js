@@ -31,7 +31,8 @@ export function setupTabs() {
 			},
 			switchNavs: (index) => {
 
-				// console.log(index);
+				if (window.pgTabs.id.length == 0) return;
+				console.log(window.pgTabs.id);
 
 
 				var pgTabId = window.pgTabs.id;
@@ -121,8 +122,8 @@ export function setupTabs() {
 			initTabs: ({ selector = "[data-pgTabs]" }) => {
 
 
-				console.log(window.pgTabs.id);
-				if (window.pgTabs.id.length == 0) return;
+				console.log(selector);
+				//if (window.pgTabs.id.length == 0) return;
 
 
 				// Tabs Wrapper Selectors

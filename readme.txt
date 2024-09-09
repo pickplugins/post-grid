@@ -255,6 +255,7 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 = 2.2.93 =
 - 2024-09-09 - fix - escaping issue fixed for blocks.
 - 2024-09-09 - fix - outputing custom attributs commented out for blocks.
+- 2024-09-09 - fix - Tabs blocks js error issue fixed.
 
 = 2.2.92 =
 - 2024-09-08 - fix - Js error issue fixed for blocks.

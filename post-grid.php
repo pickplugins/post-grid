@@ -41,6 +41,7 @@ if (!class_exists('PostGrid')) {
       $postGridFonts = [];
 
 
+      global $postGridLdJson;
       global $postGridCss;
       global $postGridCustomCss;
       global $postGridCssY;

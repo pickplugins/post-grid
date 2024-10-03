@@ -27,14 +27,7 @@
           "tag": "div",
           "class": "pg-image"
         },
-        "styles": {
-          "width": {
-            "Desktop": "100%"
-          },
-          "overflow": {
-            "Desktop": "hidden"
-          }
-        }
+        "styles": {}
       }
     },
     "image": {
@@ -47,7 +40,7 @@
           "imgSrcImgId": "",
           "srcUrl": "",
           "srcsetEnable": true,
-          "lazy": true,
+          "lazy": false,
           "lazySrc": "",
           "lazySrcId": "",
           "lazySrcType": "media",
@@ -70,17 +63,7 @@
             "Mobile": "full"
           }
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "maxWidth": {
-            "Desktop": "100%"
-          },
-          "height": {
-            "Desktop": "auto"
-          }
-        }
+        "styles": {}
       }
     },
     "lightbox": {
@@ -104,10 +87,10 @@
         "content": ""
       }
     },
-    "lazyload": {
+    "lazyLoad": {
       "type": "object",
       "default": {
-        "enable": true,
+        "enable": false,
         "lazySrc": "",
         "lazySrcId": "",
         "lazySrcType": "media"

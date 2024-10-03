@@ -29,14 +29,7 @@
           "tag": "div",
           "class": "pg-form-steps"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "navsWrap": {
@@ -47,14 +40,7 @@
           "tag": "div",
           "class": "pg-form-steps"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "navItem": {
@@ -65,14 +51,7 @@
           "tag": "div",
           "class": "pg-form-steps"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "next": {
@@ -83,14 +62,7 @@
           "tag": "div",
           "class": "pg-form-steps"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "prev": {
@@ -101,14 +73,7 @@
           "tag": "div",
           "class": "pg-form-steps"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

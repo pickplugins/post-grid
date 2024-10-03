@@ -29,11 +29,7 @@
         "options": {
           "class": "pg-user-query"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "taxonomies": {

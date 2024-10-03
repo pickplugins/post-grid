@@ -1,15 +1,11 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
 class class_post_grid_post_types
 {
-
-
 	public function __construct()
 	{
 		add_action('init', array($this, '_posttype_post_grid'), 0);
 		add_action('init', array($this, '_posttype_setting'), 0);
-
 		add_action('init', array($this, '_posttype_post_grid_layout'), 80);
 		add_action('init', array($this, '_posttype_saved_template'));
 		add_action('admin_init', array($this, 'add_capability'));
@@ -17,9 +13,6 @@ class class_post_grid_post_types
 	public function add_capability()
 	{
 		$role = get_role('administrator');
-
-
-
 		$role->add_cap('publish_post_grids');
 		$role->add_cap('edit_post_grids');
 		$role->add_cap('edit_others_post_grids');
@@ -27,7 +20,6 @@ class class_post_grid_post_types
 		$role->add_cap('edit_post_grid');
 		$role->add_cap('read_post_grid');
 		$role->add_cap('delete_post_grid', false);
-
 		$role->add_cap('publish_post_grid_templates');
 		$role->add_cap('edit_post_grid_templates');
 		$role->add_cap('edit_others_post_grid_templates');
@@ -35,7 +27,6 @@ class class_post_grid_post_types
 		$role->add_cap('edit_post_grid_template');
 		$role->add_cap('read_post_grid_template');
 		$role->add_cap('delete_post_grid_template', false);
-
 		$role->add_cap('publish_post_grid_layouts');
 		$role->add_cap('edit_post_grid_layouts');
 		$role->add_cap('edit_others_post_grid_layouts');
@@ -44,44 +35,18 @@ class class_post_grid_post_types
 		$role->add_cap('read_post_grid_layout');
 		$role->add_cap('delete_post_grid_layout', false);
 	}
-
-
-
-
-
-
-
 	public function _posttype_setting()
 	{
-
 		$post_grid_block_editor = get_option('post_grid_block_editor');
 		$post_types = isset($post_grid_block_editor['postTypes']) ? $post_grid_block_editor['postTypes'] : [];
-
-
-
 		if (empty($post_types)) return;
-
-
 		foreach ($post_types as $post_type) {
-
-
-
-
 			$slug = isset($post_type['slug']) ? $post_type['slug'] : '';
-
-
-
 			if (empty($slug)) continue;
 			if (post_type_exists($slug)) continue;
-
-
-
 			$plural = isset($post_type['labels']['name']) ? $post_type['labels']['name'] : '';
 			$singular_name = isset($post_type['labels']['singular_name']) ? $post_type['labels']['singular_name'] : $plural;
 			$menu_name = isset($post_type['labels']['menu_name']) ? $post_type['labels']['menu_name'] : $plural;
-
-
-
 			$add_new = isset($post_type['labels']['add_new']) ? $post_type['labels']['add_new'] : "Add New";
 			$all_items = isset($post_type['labels']['all_items']) ? $post_type['labels']['all_items'] : "All %s";
 			$add_new_item = isset($post_type['labels']['add_new_item']) ? $post_type['labels']['add_new_item'] : "Add %s";
@@ -94,13 +59,11 @@ class class_post_grid_post_types
 			$not_found = isset($post_type['labels']['not_found']) ? $post_type['labels']['not_found'] : "No %s found";
 			$not_found_in_trash = isset($post_type['labels']['not_found_in_trash']) ? $post_type['labels']['not_found_in_trash'] : "No %s found in trash";
 			$parent = isset($post_type['labels']['parent']) ? $post_type['labels']['parent'] : "Parent %s";
-
 			$description = isset($post_type['description']) ? $post_type['description'] : "This is where you can create and manage %s.";
 			$public = isset($post_type['public']) ? $post_type['public'] : true;
 			$show_ui = isset($post_type['show_ui']) ? $post_type['show_ui'] : true;
 			$show_in_rest = isset($post_type['show_in_rest']) ? $post_type['show_in_rest'] : false;
 			$capability_type = isset($post_type['capability_type']) ? $post_type['capability_type'] : "post";
-
 			// $publish_posts = isset($post_type['capabilities']['publish_posts']) ? $post_type['labels']['publish_posts'] : "publish_" . $slug . "s";
 			// $edit_posts = isset($post_type['capabilities']['edit_posts']) ? $post_type['labels']['edit_posts'] : "edit_" . $slug . "s";
 			// $edit_others_posts = isset($post_type['capabilities']['edit_others_posts']) ? $post_type['labels']['edit_others_posts'] : "edit_others_" . $slug . "s";
@@ -108,7 +71,6 @@ class class_post_grid_post_types
 			// $edit_post = isset($post_type['capabilities']['edit_post']) ? $post_type['labels']['edit_post'] : "edit_" . $slug;
 			// $delete_post = isset($post_type['capabilities']['delete_post']) ? $post_type['labels']['delete_post'] : "delete_" . $slug;
 			// $read_post = isset($post_type['capabilities']['read_post']) ? $post_type['labels']['read_post'] : "read_" . $slug;
-
 			$map_meta_cap = isset($post_type['map_meta_cap']) ? $post_type['map_meta_cap'] : true;
 			$publicly_queryable = isset($post_type['publicly_queryable']) ? $post_type['publicly_queryable'] : true;
 			$rewrite = isset($post_type['rewrite']) ? $post_type['rewrite'] : true;
@@ -119,8 +81,6 @@ class class_post_grid_post_types
 			$menu_icon = isset($post_type['menu_icon']) ? $post_type['menu_icon'] : 'dashicons-grid-view';
 			$show_in_menu = isset($post_type['show_in_menu']) ? $post_type['show_in_menu'] : $slug;
 			$supports = isset($post_type['supports']) ? $post_type['supports'] : array("title");
-
-
 			// $map_meta_cap =  true;
 			// $publicly_queryable =  true;
 			// $exclude_from_search =  false;
@@ -129,13 +89,8 @@ class class_post_grid_post_types
 			// $show_in_nav_menus = true;
 			// $rewrite = true;
 			// $menu_icon =  'dashicons-grid-view';
-
 			// $supports =  array('title', 'author', 'comments', 'custom-fields');
-
-
 			$post_type_args = [];
-
-
 			$post_type_args['labels']['name'] = $plural;
 			$post_type_args['labels']['singular_name'] = $singular_name;
 			$post_type_args['labels']['menu_name'] = $menu_name;
@@ -151,15 +106,9 @@ class class_post_grid_post_types
 			$post_type_args['labels']['not_found'] = $not_found;
 			$post_type_args['labels']['not_found_in_trash'] = $not_found_in_trash;
 			$post_type_args['labels']['parent'] = $parent;
-
-
-
 			//$post_type_args['capabilities']['publish_posts'] = $publish_posts;
 			$post_type_args['capability_type'] = $capability_type;
-
 			//($public);
-
-
 			$post_type_args['description'] = $description;
 			$post_type_args['public'] = (bool) $public;
 			$post_type_args['show_ui'] = (bool) $show_ui;
@@ -173,34 +122,23 @@ class class_post_grid_post_types
 			$post_type_args['show_in_nav_menus'] = (bool)$show_in_nav_menus;
 			$post_type_args['menu_icon'] = $menu_icon;
 			$post_type_args['rewrite'] = $rewrite;
-
 			if (!empty($show_in_menu)) {
 				//$post_type_args['show_in_menu'] = $show_in_menu;
 			}
-
-
-
-
-
 			register_post_type(
 				$slug,
 				apply_filters("post_grid_posttype_{$slug}", $post_type_args)
 			);
 		}
 	}
-
 	public function _posttype_post_grid()
 	{
-
 		if (post_type_exists("post_grid"))
 			return;
-
 		$singular  = __('Post Grid', 'post-grid');
 		$plural    = __('Post Grid', 'post-grid');
 		$post_grid_settings = get_option('post_grid_settings');
 		$post_grid_preview = isset($post_grid_settings['post_grid_preview']) ? $post_grid_settings['post_grid_preview'] : 'yes';
-
-
 		register_post_type(
 			"post_grid",
 			apply_filters("post_grid_posttype_post_grid", array(
@@ -243,24 +181,15 @@ class class_post_grid_post_types
 				'show_in_nav_menus'     => true,
 				'menu_icon' => 'dashicons-grid-view',
 				'show_in_menu'     => 'post-grid',
-
-
 			))
 		);
 	}
-
-
-
 	public function _posttype_post_grid_layout()
 	{
-
 		if (post_type_exists("post_grid_layout"))
 			return;
-
 		$singular  = __('Saved Layout', 'post-grid');
 		$plural    = __('Saved Layouts', 'post-grid');
-
-
 		register_post_type(
 			"post_grid_layout",
 			apply_filters("post_grid_posttype_post_grid_layout", array(
@@ -304,17 +233,10 @@ class class_post_grid_post_types
 				'show_in_menu'     => 'post-grid',
 				'menu_icon' => 'dashicons-businessman',
 				'show_in_rest' => true,
-
 			))
 		);
-
-
-
-
-
 		$singular  = __('Category', 'post-grid');
 		$plural    = __('Categories', 'post-grid');
-
 		register_taxonomy(
 			"layout_cat",
 			apply_filters('register_taxonomy_layout_cat_object_type', array('post_grid_layout')),
@@ -340,7 +262,6 @@ class class_post_grid_post_types
 				'public'                  => true,
 				'show_in_rest' => true,
 				'show_in_menu'     => 'post-grid',
-
 				'rewrite' => array(
 					'slug' => 'layout_cat', // This controls the base slug that will display before each term
 					'with_front' => false, // Don't display the category base before "/locations/"
@@ -349,22 +270,12 @@ class class_post_grid_post_types
 			))
 		);
 	}
-
-
-
-
-
-
 	public function _posttype_saved_template()
 	{
-
 		if (post_type_exists("post_grid_template"))
 			return;
-
 		$singular  = __('Saved Template', 'post-grid');
 		$plural    = __('Saved Templates', 'post-grid');
-
-
 		register_post_type(
 			"post_grid_template",
 			apply_filters("post_grid_posttype_template", array(
@@ -408,17 +319,10 @@ class class_post_grid_post_types
 				'show_in_menu'     => 'post-grid',
 				'menu_icon' => 'dashicons-businessman',
 				'show_in_rest' => true,
-
 			))
 		);
-
-
-
-
-
 		$singular  = __('Category', 'post-grid');
 		$plural    = __('Categories', 'post-grid');
-
 		register_taxonomy(
 			"template_cat",
 			apply_filters('register_taxonomy_template_cat_object_type', array('post_grid_template')),
@@ -444,7 +348,6 @@ class class_post_grid_post_types
 				'public'                  => true,
 				'show_in_rest' => true,
 				'show_in_menu'     => 'post-grid',
-
 				'rewrite' => array(
 					'slug' => 'template_cat', // This controls the base slug that will display before each term
 					'with_front' => false, // Don't display the category base before "/locations/"
@@ -454,11 +357,7 @@ class class_post_grid_post_types
 		);
 	}
 }
-
-
 new class_post_grid_post_types();
-
-
 // function book_setup_post_type()
 // {
 // 	$args = array(

@@ -77,24 +77,7 @@
           "activeFilter": "",
           "perPage": 6
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "wordBreak": {},
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {
-            "Desktop": "inline-block"
-          },
-          "cursor": {
-            "Desktop": "pointer"
-          }
-        }
+        "styles": {}
       }
     },
     "activeFilter": {
@@ -103,66 +86,21 @@
         "options": {
           "slug": "all"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "wordBreak": {},
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "filterGroupWrap": {
       "type": "object",
       "default": {
         "options": {},
-        "styles": {
-          "color": {
-            "Desktop": "#18978F"
-          },
-          "backgroundColor": {
-            "Desktop": "#9DD6DF"
-          },
-          "wordBreak": {},
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {
-            "Desktop": "inline-block"
-          }
-        }
+        "styles": {}
       }
     },
     "filterGroup": {
       "type": "object",
       "default": {
         "options": {},
-        "styles": {
-          "color": {
-            "Desktop": "#18978F"
-          },
-          "backgroundColor": {
-            "Desktop": "#9DD6DF"
-          },
-          "wordBreak": {},
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {
-            "Desktop": "inline-block"
-          }
-        }
+        "styles": {}
       }
     },
     "container": {
@@ -180,17 +118,7 @@
         "options": {
           "class": "items-loop"
         },
-        "styles": {
-          "display": {
-            "Desktop": "grid"
-          },
-          "gridTemplateColumns": {
-            "Desktop": "1fr 1fr 1fr"
-          },
-          "gap": {
-            "Desktop": "2em"
-          }
-        }
+        "styles": {}
       }
     },
     "itemWrap": {
@@ -226,21 +154,7 @@
         "options": {
           "itemCss": {}
         },
-        "styles": {
-          "gridTemplateColumns": {},
-          "gridTemplateRows": {},
-          "colGap": {},
-          "rowGap": {},
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "pagination": {
@@ -261,23 +175,7 @@
             "iconSrc": ""
           }
         },
-        "styles": {
-          "margin": {
-            "Desktop": "20px 0px 20px 0px"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "justifyContent": {
-            "Desktop": "center"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "gap": {
-            "Desktop": "1em"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationItem": {
@@ -286,23 +184,7 @@
         "options": {
           "class": "page-numbers inline-block"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#ffffff"
-          },
-          "fontSize": {
-            "Desktop": "16px"
-          },
-          "padding": {
-            "Desktop": "5px 15px 5px 15px"
-          },
-          "backgroundColor": {
-            "Desktop": "#2445ffab"
-          },
-          "borderRadius": {
-            "Desktop": "5px 5px 5px 5px"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationItemActive": {
@@ -311,11 +193,7 @@
         "options": {
           "class": "page-numbers inline-block"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#3223cb"
-          }
-        }
+        "styles": {}
       }
     },
     "layout": {

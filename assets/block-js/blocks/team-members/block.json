@@ -58,6 +58,14 @@
         "styles": {}
       }
     },
+    "nthItemStyle": {
+      "type": "array",
+      "default": [
+        {
+          "styles": {}
+        }
+      ]
+    },
     "teamMembers": {
       "type": "array",
       "default": []

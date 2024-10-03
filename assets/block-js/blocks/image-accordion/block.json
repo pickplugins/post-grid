@@ -25,6 +25,7 @@
           "tag": "div",
           "class": "pg-image-accordion",
           "id": "",
+          "accordionDirection": "row",
           "linkTo": "postUrl",
           "linkToAuthorMeta": "",
           "linkToCustomMeta": "",
@@ -40,14 +41,7 @@
         "options": {
           "class": "pg-image-accordion-item"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

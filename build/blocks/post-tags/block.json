@@ -25,11 +25,7 @@
           "class": "pg-post-tags",
           "tag": "div"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "items": {
@@ -48,23 +44,7 @@
           "linkTarget": "",
           "linkAttr": []
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -77,17 +57,7 @@
           "position": "beforeFronttext",
           "class": "icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 10px"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          }
-        }
+        "styles": {}
       }
     },
     "separator": {
@@ -97,26 +67,7 @@
           "class": "",
           "text": ", "
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "termTitle": {
@@ -126,23 +77,7 @@
           "class": "",
           "text": ", "
         },
-        "styles": {
-          "color": {
-            "Desktop": "#0000ff"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "frontText": {
@@ -152,23 +87,7 @@
           "text": "Tags: ",
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "postCount": {
@@ -178,26 +97,7 @@
           "class": "",
           "text": ", "
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "utmTracking": {

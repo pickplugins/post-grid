@@ -25,11 +25,7 @@
           "tag": "div",
           "class": "pg-post-excerpt"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "postExcerpt": {
@@ -51,31 +47,12 @@
           "linkTarget": "_blank",
           "customUrl": "",
           "linkAttr": [],
-          "linkTo": "postUrl",
+          "linkTo": "",
           "linkToAuthorMeta": "",
           "linkToCustomMeta": "",
           "class": "excerpt-text"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "display": {
-            "Desktop": "inline"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "readMore": {
@@ -93,29 +70,7 @@
           "linkToCustomMeta": "",
           "class": "readmore"
         },
-        "styles": {
-          "display": {
-            "Desktop": "inline-block"
-          },
-          "color": {
-            "Desktop": "#1F2E45"
-          },
-          "margin": {
-            "Desktop": "0px 0px 0px 6px"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "600"
-          }
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -125,26 +80,7 @@
           "text": "",
           "class": "prefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -154,26 +90,7 @@
           "text": "",
           "class": "postfix"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 0px 0px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

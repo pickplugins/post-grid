@@ -26,17 +26,7 @@
           "class": "pg-business-hours",
           "id": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          },
-          "padding": {
-            "Desktop": "20px 20px 20px 20px"
-          },
-          "boxShadow": {
-            "Desktop": "0px 10px 10px 0px #0000001a"
-          }
-        }
+        "styles": {}
       }
     },
     "items": {
@@ -46,35 +36,7 @@
           "tag": "div",
           "class": "pg-business-hours"
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          },
-          "borderBottom": {
-            "Desktop": "1px solid #fafafa"
-          },
-          "padding": {
-            "Desktop": "11px 0px 10px 0px"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "justifyContent": {
-            "Desktop": "space-between"
-          },
-          "color": {
-            "Desktop": "#3b3b3b"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontSize": {
-            "Desktop": "20px"
-          },
-          "fontWeight": {
-            "Desktop": "500"
-          }
-        }
+        "styles": {}
       }
     },
     "label": {
@@ -85,11 +47,7 @@
           "class": "label",
           "id": ""
         },
-        "styles": {
-          "marginRight": {
-            "Desktop": "auto"
-          }
-        }
+        "styles": {}
       }
     },
     "timesWrap": {
@@ -100,20 +58,7 @@
           "class": "times-wrap",
           "id": ""
         },
-        "styles": {
-          "marginLeft": {
-            "Desktop": "auto"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "justifyContent": {
-            "Desktop": "flex-end"
-          },
-          "gap": {
-            "Desktop": "10px"
-          }
-        }
+        "styles": {}
       }
     },
     "startTime": {
@@ -125,14 +70,7 @@
           "id": "",
           "start": "10:00"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "endTime": {
@@ -144,14 +82,7 @@
           "id": "",
           "end": "17:00"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "separator": {
@@ -162,14 +93,7 @@
           "class": "separator",
           "id": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "closed": {
@@ -181,11 +105,7 @@
           "id": "",
           "closeText": "Closed"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#fa2d2d"
-          }
-        }
+        "styles": {}
       }
     },
     "elements": {
@@ -195,35 +115,7 @@
           "tag": "div",
           "class": "item"
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          },
-          "borderBottom": {
-            "Desktop": "1px solid #fafafa"
-          },
-          "padding": {
-            "Desktop": "11px 0px 10px 0px"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "justifyContent": {
-            "Desktop": "space-between"
-          },
-          "color": {
-            "Desktop": "#3b3b3b"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontSize": {
-            "Desktop": "20px"
-          },
-          "fontWeight": {
-            "Desktop": "500"
-          }
-        },
+        "styles": {},
         "items": [
           {
             "id": "saturday",
@@ -233,11 +125,7 @@
             "start": "",
             "end": "",
             "closeText": "avc",
-            "styles": {
-              "color": {
-                "Desktop": "#fa2d2d"
-              }
-            }
+            "styles": {}
           },
           {
             "id": "sunday",
@@ -247,11 +135,7 @@
             "start": "",
             "end": "",
             "closeText": "",
-            "styles": {
-              "color": {
-                "Desktop": "#fa2d2d"
-              }
-            }
+            "styles": {}
           },
           {
             "id": "monday",

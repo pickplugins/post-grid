@@ -1,17 +1,12 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
 if (!current_user_can('manage_options')) return;
-
 $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
 $paged = isset($_GET['paged']) ? sanitize_text_field($_GET['paged']) : '';
 $tabs = isset($_GET['tabs']) ? sanitize_text_field($_GET['tabs']) : 'latest';
-
 $post_grid_settings = get_option('post_grid_license');
 $license_key = isset($post_grid_settings['license_key']) ? $post_grid_settings['license_key'] : '';
-
 $max_num_pages = 0;
-
 wp_enqueue_script('post_grid_layouts');
 wp_localize_script(
   'post_grid_layouts',
@@ -22,16 +17,10 @@ wp_localize_script(
   )
 );
 wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], false, 'all');
-
-
-
 ?>
 <div class="wrap">
   <h2><?php _e('Post Grid - Layouts library', 'post-grid'); ?></h2>
-
-
   <div class="wpblockhub-search">
-
     <div class="wp-filter">
       <ul class="filter-links">
         <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=latest" class="<?php if ($tabs == 'latest') echo 'current'; ?>" aria-current="page"><?php _e('Latest', 'post-grid'); ?></a> </li>
@@ -43,27 +32,20 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
         <input id="block-keyword" type="search" placeholder="<?php _e('Start typing...', 'wp-block-hub'); ?>" value="<?php echo esc_attr($keyword); ?>">
       </form>
     </div>
-
     <?php
-
     $api_params = array(
       'post_grid_remote_action' => 'layoutSearch',
       'keyword' => $keyword,
       'paged' => $paged,
       'tabs' => $tabs,
     );
-
     // Send query to the license manager server
     $response = wp_remote_get(add_query_arg($api_params, post_grid_server_url), array('timeout' => 20, 'sslverify' => false));
-
-
-
     /*
          * Check is there any server error occurred
          *
          * */
     if (is_wp_error($response)) {
-
     ?>
       <div class="return-empty">
         <ul>
@@ -72,60 +54,36 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
         </ul>
       </div>
     <?php
-
-
     } else {
-
       $response_data = json_decode(wp_remote_retrieve_body($response));
       $post_data = isset($response_data->posts) ? $response_data->posts : array();
       $post_found = isset($response_data->post_found) ? sanitize_text_field($response_data->post_found) : array();
       $max_num_pages = isset($response_data->max_num_pages) ? sanitize_text_field($response_data->max_num_pages) : 0;
     }
-
     ?>
-
     <div class="block-list-items">
       <?php
-
-
-
       if (!empty($post_data)) :
-
         foreach ($post_data as $item_index => $item) :
-
-
-
           $post_id      = isset($item->post_id) ? $item->post_id : '';
           $block_title        = isset($item->title) ? $item->title : __('No title', 'post-grid');
           $post_url           = isset($item->post_url) ? $item->post_url : '';
           $download_count           = isset($item->download_count) ? $item->download_count : 0;
-
           $layout_options           = isset($item->layout_options) ? unserialize($item->layout_options) : '';
           $is_pro           = isset($item->is_pro) ? $item->is_pro : '';
-
           $layout_preview_img           = isset($layout_options['layout_preview_img']) ? $layout_options['layout_preview_img'] : '';
-
-
-
-
       ?>
-
           <div class="item">
             <div class="item-top-area">
-
               <?php if (!empty($layout_preview_img)) : ?>
                 <div class="block-thumb">
                   <img src="<?php echo esc_url($layout_preview_img); ?>">
                 </div>
               <?php endif; ?>
-
-
               <div class="block-content">
                 <div class="block-name"><?php echo esc_html($block_title); ?></div>
-
               </div>
               <div class="actions">
-
                 <?php
                 if ($is_pro == 'yes' && empty($license_key)) {
                 } else {
@@ -133,45 +91,27 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
                   <span class="button  import-layout" post_id="<?php echo esc_attr($post_id); ?>"><i class="fas fa-download"></i> Import (<?php echo esc_html($download_count); ?>)</span>
                 <?php
                 }
-
                 ?>
-
-
                 <?php if ($is_pro == 'yes') : ?>
                   <span title="Enter license key to import" class="is_pro button"><i class="fas fa-crown"></i> Pro</span>
                 <?php else : ?>
                   <span class="is_free button"><i class="far fa-lightbulb"></i> Free</span>
                 <?php endif; ?>
-
-
-
               </div>
             </div>
             <div class="clear"></div>
           </div>
       <?php
         endforeach;
-
       else :
-
         echo 'Server return empty. please try again later.';
       endif;
-
       ?>
-
-
-
     </div>
-
     <div class="paginate">
       <?php
-
-
       $big = 999999999; // need an unlikely integer
       //$max_num_pages = 4;
-
-
-
       echo paginate_links(
         array(
           'base' => preg_replace('/\?.*/', '', get_pagenum_link()) . '%_%',
@@ -181,23 +121,14 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
           'total' => $max_num_pages,
           'prev_text'          => '« Previous',
           'next_text'          => 'Next »',
-
-
-
         )
       );
       ?>
     </div>
-
-
-
   </div>
-
 </div>
-
 <script>
   jQuery(document).ready(function($) {
-
     var delay = (function() {
       var timer = 0;
       return function(callback, ms) {
@@ -205,31 +136,20 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
         timer = setTimeout(callback, ms);
       };
     })();
-
-
     $(document).on('keyup', '#block-keyword', function() {
       _this = this;
       keyword = $(this).val();
-
       url = window.location.href
-
       var url = new URL(url);
-
-
       delay(function() {
         $(_this).parent().children('.loading').addClass('button updating-message');
-
         url.searchParams.append('keyword', keyword);
         url.searchParams.delete('paged');
         window.location.href = url.href;
-
       }, 1000);
-
-
     })
   })
 </script>
-
 <style type="text/css">
   .block-search-form {
     float: right;
@@ -256,32 +176,22 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
   }
 
   @media (max-width: 1199.98px) {
-
     .block-list-items .item {
       width: 46%;
-
     }
   }
 
   @media (max-width: 767.98px) {
-
     .block-list-items .item {
       width: 46%;
-
     }
-
   }
 
   @media (max-width: 575.98px) {
     .block-list-items .item {
       width: 95%;
-
     }
   }
-
-
-
-
 
   .block-list-items .item-top-area {}
 
@@ -346,7 +256,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     text-decoration: none;
   }
 
-
   .plugin-required .installed {
     color: #00a04f;
   }
@@ -354,8 +263,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
   .plugin-required .not-installed {
     color: #e02102;
   }
-
-
 
   .block-list-items .item-bottom-area {
     padding: 10px;
@@ -389,8 +296,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     margin-bottom: 10px;
   }
 
-
-
   .paginate {
     text-align: center;
     margin: 40px;
@@ -407,18 +312,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     background: #e4e4e4;
   }
 
-
-
-
-
-
-
-
-
-
-
   /*wpblockhub-import-container*/
-
   .wpblockhub-import-container {
     position: relative;
   }
@@ -449,10 +343,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     display: none;
   }
 
-
-
-
-
   .item-list-wrap .item {
     position: relative;
     transition: ease all 1s;
@@ -474,13 +364,10 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
   /*    display: none;*/
   /*    transform: scale(.5);*/
   /*}*/
-
   /*.item-list-wrap .item:hover img:before {*/
-
   /*    display: block;*/
   /*    transform: scale(1);*/
   /*}*/
-
   .item-list-wrap .item .item-import {
     position: absolute;
     top: 50%;
@@ -491,7 +378,6 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
   }
 
   .item-list-wrap .item:hover .item-import {
-
     display: block;
   }
 
@@ -519,13 +405,10 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     width: 100%;
   }
 
-
-
   .item-list-wrap .load-more {
     width: 100%;
     text-align: center;
   }
-
 
   .item-list-wrap .plugins-required {}
 
@@ -533,10 +416,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     text-decoration: none;
   }
 
-
-
   /*Sidebar .wpblockhub-import-wrap*/
-
   .wpblockhub-import-wrap {}
 
   .wpblockhub-import-header-wrap {

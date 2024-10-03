@@ -25,20 +25,7 @@
           "tag": "div",
           "class": "pg-woo-sku"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "sku": {
@@ -49,20 +36,7 @@
           "tag": "span",
           "class": "sku"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -75,29 +49,7 @@
           "position": "",
           "class": "icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {},
-          "fontSize": {
-            "Desktop": ""
-          },
-          "lineHeight": {},
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textDecoration": {}
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -107,14 +59,7 @@
           "text": "",
           "class": "prefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -124,14 +69,7 @@
           "text": "",
           "class": "postfix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

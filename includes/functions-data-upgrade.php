@@ -1,18 +1,16 @@
 <?php
-if ( ! defined('ABSPATH')) exit;  // if direct access
-
-function post_grid_layout_css($layout){
-
-    $css = array();
-    $css['flat'] = '.__ID__ a{text-decoration:none}
+if (! defined('ABSPATH')) exit;  // if direct access
+function post_grid_layout_css($layout)
+{
+  $css = array();
+  $css['flat'] = '.__ID__ a{text-decoration:none}
 .__ID__ {
   vertical-align: top;
 }
 .__ID__ .layer-media{}
 .__ID__ .layer-content {
 }';
-
-    $css['flip-x'] = '.__ID__ a{text-decoration:none}
+  $css['flip-x'] = '.__ID__ a{text-decoration:none}
 .__ID__ {
   overflow: hidden;
   padding: 0;
@@ -73,8 +71,7 @@ function post_grid_layout_css($layout){
   padding:10px;
 }
 ';
-
-    $css['flip-y'] = '.__ID__ {
+  $css['flip-y'] = '.__ID__ {
   background: rgb(255, 255, 255) none repeat scroll 0 0;
   overflow: hidden;
   padding: 0;
@@ -132,7 +129,7 @@ function post_grid_layout_css($layout){
   width: inherit;
   z-index: 800;
 }';
-    $css['zoomin'] = '
+  $css['zoomin'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -168,8 +165,7 @@ function post_grid_layout_css($layout){
 .__ID__ .layer-hover {
   display: none;
 }';
-
-    $css['zoomout'] = '.__ID__ {
+  $css['zoomout'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -202,7 +198,7 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['thumbzoomcontentin'] = '
+  $css['thumbzoomcontentin'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -226,7 +222,6 @@ function post_grid_layout_css($layout){
   filter: url(\'data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.3" /><feFuncG type="linear" slope="0.3" /><feFuncB type="linear" slope="0.3" /></feComponentTransfer></filter></svg>#filter\');
   -webkit-filter: brightness(0.3);
   filter: brightness(0.3);
-
 }
 .__ID__:hover .layer-content{
   opacity: 1;
@@ -242,7 +237,7 @@ function post_grid_layout_css($layout){
   transition: all 0.3s ease 0s;
   width: 100%;
 }';
-    $css['spinrightzoom'] = '.__ID__ {
+  $css['spinrightzoom'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -275,7 +270,7 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['spinleft'] = '
+  $css['spinleft'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -309,7 +304,7 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['spinleftzoom'] = '
+  $css['spinleftzoom'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -343,13 +338,12 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['spinrightfast'] = '
+  $css['spinrightfast'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
 }
-
 .__ID__:hover .layer-media {
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
@@ -378,7 +372,7 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['spinleftfast'] = '
+  $css['spinleftfast'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -412,7 +406,7 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['thumbgoright'] = '
+  $css['thumbgoright'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -443,7 +437,7 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['thumbgotop'] = '
+  $css['thumbgotop'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -476,7 +470,7 @@ function post_grid_layout_css($layout){
   transition: all 1s ease 0s;
 }
 ';
-    $css['thumbgobottom'] = '.__ID__ {
+  $css['thumbgobottom'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -508,7 +502,7 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-    $css['thumbmiddle'] = '
+  $css['thumbmiddle'] = '
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -548,7 +542,7 @@ function post_grid_layout_css($layout){
   transition: all 1s ease 0s;
   width: 100%;
 }';
-    $css['thumbskew'] = '.__ID__ {
+  $css['thumbskew'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -588,12 +582,11 @@ function post_grid_layout_css($layout){
   width: 100%;
 }
 ';
-    $css['contentbottom'] = '.__ID__ {
+  $css['contentbottom'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
 }
-
 .__ID__:hover .layer-media {
   z-index:9;
 }
@@ -617,7 +610,7 @@ function post_grid_layout_css($layout){
   width: 100%;
 }
 ';
-    $css['contentmiddle'] = '.__ID__ {
+  $css['contentmiddle'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -645,7 +638,7 @@ function post_grid_layout_css($layout){
   transform: translate(0px, 50%);
   width: 100%;
 }';
-    $css['contentinbottom'] = '.__ID__ {
+  $css['contentinbottom'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -673,7 +666,7 @@ function post_grid_layout_css($layout){
   transition: all 0.5s ease 0s;
   width: 100%;
 }';
-    $css['contentinleft'] = '.__ID__ {
+  $css['contentinleft'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -706,7 +699,7 @@ function post_grid_layout_css($layout){
   display: none;
 }
 ';
-    $css['contentinright'] = '.__ID__ {
+  $css['contentinright'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -735,13 +728,12 @@ function post_grid_layout_css($layout){
   transition: all 0.5s ease 0s;
   width: 100%;
 }';
-    $css['contentinrightfixtitle'] = '.__ID__ {
+  $css['contentinrightfixtitle'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
 }
 .__ID__:hover .layer-media {
-
   z-index:9;
 }
 .__ID__ .layer-media {
@@ -778,7 +770,7 @@ function post_grid_layout_css($layout){
 .__ID__:hover .layer-media .title {
   transform: scale(0);
 }';
-    $css['thumbgoleftconetntinright'] = '.__ID__ {
+  $css['thumbgoleftconetntinright'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -808,7 +800,7 @@ function post_grid_layout_css($layout){
   transition: all 0.5s ease 0s;
   width: 100%;
 }';
-    $css['thumbgobottomconetntinright'] = '.__ID__ {
+  $css['thumbgobottomconetntinright'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -838,7 +830,7 @@ function post_grid_layout_css($layout){
   transition: all 0.5s ease 0s;
   width: 100%;
 }';
-    $css['thumbgotopconetntinright'] = '.__ID__ {
+  $css['thumbgotopconetntinright'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -868,7 +860,7 @@ function post_grid_layout_css($layout){
   transition: all 0.5s ease 0s;
   width: 100%;
 }';
-    $css['thumbgorightconetntinright'] = '.__ID__ {
+  $css['thumbgorightconetntinright'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -898,7 +890,7 @@ function post_grid_layout_css($layout){
   transition: all 0.5s ease 0s;
   width: 100%;
 }';
-    $css['halfthumbleft'] = '.__ID__{
+  $css['halfthumbleft'] = '.__ID__{
   overflow: hidden;
   vertical-align: top;
 }
@@ -913,8 +905,7 @@ function post_grid_layout_css($layout){
   float: right;
   width: 50%;
 }';
-
-    $css['halfthumbright'] = '.__ID__ {
+  $css['halfthumbright'] = '.__ID__ {
   overflow: hidden;
   vertical-align: top;
 }
@@ -928,7 +919,7 @@ function post_grid_layout_css($layout){
   display: inline-block;
   width: 49%;
 }';
-    $css['contentborder'] = '.__ID__ {
+  $css['contentborder'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -1021,7 +1012,7 @@ function post_grid_layout_css($layout){
 .__ID__ .layer-content .excerpt {
   margin-top: 40px;
 }';
-    $css['contentborderrounded'] = '.__ID__ {
+  $css['contentborderrounded'] = '.__ID__ {
   overflow: hidden;
   position: relative;
   vertical-align: top;
@@ -1118,8 +1109,7 @@ function post_grid_layout_css($layout){
 .__ID__ .layer-content .excerpt {
   margin-top: 40px;
 }';
-
-    $css['thumbgoleft'] = '.__ID__ a{text-decoration:none}
+  $css['thumbgoleft'] = '.__ID__ a{text-decoration:none}
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -1153,7 +1143,7 @@ function post_grid_layout_css($layout){
 .__ID__ .layer-hover {
   display: none;
 }';
-    $css['thumbrounded'] = '.__ID__ a{text-decoration:none}
+  $css['thumbrounded'] = '.__ID__ a{text-decoration:none}
 .__ID__ .layer-media {
   background: rgb(255, 255, 255) none repeat scroll 0 0;
   border-radius: 50%;
@@ -1161,7 +1151,7 @@ function post_grid_layout_css($layout){
 }
 .__ID__ .layer-media .thumb {
 }';
-    $css['contentbottom'] = '.__ID__ a{text-decoration:none}
+  $css['contentbottom'] = '.__ID__ a{text-decoration:none}
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -1191,7 +1181,7 @@ function post_grid_layout_css($layout){
 	padding: 10px;
 }
 ';
-    $css['spinright'] = '.__ID__ a{text-decoration:none}
+  $css['spinright'] = '.__ID__ a{text-decoration:none}
 .__ID__ {
   overflow: hidden;
   position: relative;
@@ -1225,9 +1215,5 @@ function post_grid_layout_css($layout){
   -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }';
-
-
-    return isset($css[$layout]) ? $css[$layout] : '';
-
-
+  return isset($css[$layout]) ? $css[$layout] : '';
 }

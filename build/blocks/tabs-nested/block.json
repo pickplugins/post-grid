@@ -42,11 +42,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "navItem": {
@@ -55,17 +51,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "color": {
-            "Desktop": ""
-          },
-          "display": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "activeNavItem": {
@@ -75,17 +61,7 @@
           "class": "",
           "id": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "color": {
-            "Desktop": ""
-          },
-          "display": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "navLabel": {
@@ -94,14 +70,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "color": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "labelCounter": {
@@ -123,23 +92,7 @@
           "position": "before",
           "class": "nav-icon nav-icon-idle"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "iconToggle": {
@@ -152,23 +105,7 @@
           "position": "before",
           "class": "nav-icon-toggle nav-icon"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "panelWrap": {
@@ -178,14 +115,7 @@
           "position": "left",
           "class": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "color": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "progressWrap": {
@@ -271,14 +201,7 @@
           "tag": "div",
           "class": "pg-tabs"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "display": {},
-          "position": {},
-          "overflow": {}
-        }
+        "styles": {}
       }
     },
     "visible": {

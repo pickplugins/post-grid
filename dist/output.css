@@ -98,8 +98,8 @@
   left: 0.5rem;
 }
 
-.left-\[-40px\] {
-  left: -40px;
+.left-\[-100px\] {
+  left: -100px;
 }
 
 .right-0 {
@@ -537,6 +537,10 @@
 
 .min-h-\[40px\] {
   min-height: 40px;
+}
+
+.min-h-\[50px\] {
+  min-height: 50px;
 }
 
 .min-h-\[75px\] {
@@ -1128,11 +1132,6 @@
   border-color: rgb(17 24 39 / 0.5);
 }
 
-.border-indigo-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(199 210 254 / var(--tw-border-opacity));
-}
-
 .border-indigo-300 {
   --tw-border-opacity: 1;
   border-color: rgb(165 180 252 / var(--tw-border-opacity));
@@ -1165,19 +1164,9 @@
   background-color: rgb(156 163 175 / var(--tw-bg-opacity)) !important;
 }
 
-.\!bg-indigo-300 {
+.\!bg-gray-700 {
   --tw-bg-opacity: 1 !important;
-  background-color: rgb(165 180 252 / var(--tw-bg-opacity)) !important;
-}
-
-.\!bg-indigo-400 {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(129 140 248 / var(--tw-bg-opacity)) !important;
-}
-
-.\!bg-indigo-500 {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(99 102 241 / var(--tw-bg-opacity)) !important;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
 }
 
 .\!bg-red-400 {
@@ -1328,6 +1317,11 @@
   background-color: rgb(107 114 128 / 0.6);
 }
 
+.bg-gray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+}
+
 .bg-gray-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
@@ -1351,26 +1345,6 @@
 .bg-green-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
-}
-
-.bg-indigo-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(199 210 254 / var(--tw-bg-opacity));
-}
-
-.bg-indigo-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(165 180 252 / var(--tw-bg-opacity));
-}
-
-.bg-indigo-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(129 140 248 / var(--tw-bg-opacity));
-}
-
-.bg-indigo-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
 }
 
 .bg-lime-500 {
@@ -1712,10 +1686,6 @@
   padding-right: 320px;
 }
 
-.pt-1 {
-  padding-top: 0.25rem;
-}
-
 .pt-2 {
   padding-top: 0.5rem;
 }
@@ -1814,6 +1784,10 @@
 
 .text-\[20px\] {
   font-size: 20px;
+}
+
+.text-\[24px\] {
+  font-size: 24px;
 }
 
 .text-\[32px\] {
@@ -2345,8 +2319,8 @@
   padding: 4px;
   font-weight: 500;
   font-size: 13px;
-  background-color: rgb(224 231 255);
-  border: 2px solid rgb(199 210 254);
+  background-color: #6b728061;
+  border: 2px solid #4b5563;
 }
 
 .pg-setting-input-text .components-textarea-control__input {
@@ -2356,8 +2330,8 @@
   padding: 4px;
   font-weight: 500;
   font-size: 13px;
-  background-color: rgb(224 231 255);
-  border: 2px solid rgb(199 210 254);
+  background-color: #6b728061;
+  border: 2px solid #4b5563;
 }
 
 .pg-setting-input-text .panel-body-padding.is-opened {
@@ -2383,15 +2357,15 @@
   padding: 1px;
   font-weight: 500;
   font-size: 14px !important;
-  background-color: rgb(224 231 255) !important;
-  border: 2px solid rgb(199 210 254) !important;
+  background-color: #6b728061 !important;
+  border: 2px solid #4b5563 !important;
 }
 
 .pg-setting-input-text .components-select-control__input {
   font-weight: 500;
   font-size: 13px;
-  background-color: rgb(224 231 255) !important;
-  border: 2px solid rgb(199 210 254) !important;
+  background-color: #6b728061 !important;
+  border: 2px solid #4b5563 !important;
 }
 
 .pg-setting-input-text {
@@ -2454,13 +2428,13 @@
 }
 
 .pg-setting-input-text .components-form-toggle.is-checked .components-form-toggle__track {
-  background-color: rgb(129 140 248);
-  border: 2px solid rgb(199 210 254);
+  background-color: #1f2937;
+  border: 2px solid #4b5563;
 }
 
 .pg-setting-input-text .components-form-toggle .components-form-toggle__track {
-  background-color: rgb(224 231 255);
-  border: 2px solid rgb(199 210 254);
+  background-color: #6b728061;
+  border: 2px solid #4b5563;
 }
 
 .pg-setting-input-text .components-form-toggle.is-checked .components-form-toggle__thumb {
@@ -2515,7 +2489,6 @@
 /* gradient picker edit  */
 
 /* .pg-setting-css-components .components-button {
-	
 	display: flex;
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
@@ -2533,7 +2506,6 @@
 	background-color: #1f2937;
 	cursor: pointer;
 }
-
 .pg-setting-css-components .components-button:hover {
 	color: #ffffff;
 	background-color: #374151;
@@ -2687,7 +2659,6 @@
 
 /*
   That's it for the basic pgTooltip.
-
   If you want some adjustability
   here are some orientation settings you can use:
 */
@@ -2883,11 +2854,6 @@
   background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
 }
 
-.hover\:\!bg-indigo-500:hover {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(99 102 241 / var(--tw-bg-opacity)) !important;
-}
-
 .hover\:\!bg-red-600:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity)) !important;
@@ -2937,19 +2903,19 @@
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-green-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(34 197 94 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-indigo-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(129 140 248 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-indigo-500:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-red-400:hover {
@@ -3016,14 +2982,14 @@
   border-bottom-width: 1px;
 }
 
+.focus\:bg-gray-600:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+}
+
 .focus\:bg-gray-700:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-}
-
-.focus\:bg-indigo-500:focus {
-  --tw-bg-opacity: 1;
-  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
 }
 
 .focus\:outline-none:focus {
@@ -3064,6 +3030,10 @@
 
 .group:hover .group-hover\:left-0 {
   left: 0px;
+}
+
+.group:hover .group-hover\:fill-gray-700 {
+  fill: #374151;
 }
 
 .group:hover .group-hover\:text-\[\#fe8e52\] {

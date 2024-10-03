@@ -33,11 +33,7 @@
           "class": "accordion-content",
           "overrideChild": true
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "header": {
@@ -48,14 +44,7 @@
           "class": "accordion-header",
           "overrideChild": true
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "display": {
-            "Desktop": "flex"
-          }
-        }
+        "styles": {}
       }
     },
     "headerLabel": {
@@ -69,11 +58,7 @@
           "class": "accordion-header-label",
           "overrideChild": true
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "labelCounter": {

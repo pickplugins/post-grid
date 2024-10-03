@@ -31,34 +31,49 @@
           "linkTarget": "_blank",
           "customUrl": ""
         },
-        "styles": {
-          "height": {
-            "Desktop": "400px"
-          }
-        }
+        "styles": {}
       }
     },
     "addresses": {
       "type": "array",
       "default": []
     },
-    "objMap": {
+    "mapSettings": {
       "type": "object",
       "default": {
-        "zoom": "10",
-        "zoomControl": "true",
-        "minZoom": "1",
-        "maxZoom": "16",
-        "lat": "-33.860664",
-        "lng": "151.208138",
-        "tilt": "",
+        "mapId": "",
+        "zoom": 6,
+        "zoomControl": true,
+        "minZoom": 1,
+        "maxZoom": 16,
+        "lat": "53.54992",
+        "lng": "10.00678",
+        "tilt": 45,
         "heading": "",
         "name": "",
         "titleSize": "",
         "alt": "",
         "mapTypeId": "roadmap",
-        "streetViewControl": "true",
-        "colorScheme": "DARK"
+        "streetViewControl": true,
+        "colorScheme": "DARK",
+        "infoWindow": {
+          "titleTag": "h2",
+          "descriptionTag": "p"
+        },
+        "markerType": "default",
+        "marker": {
+          "image": {
+            "id": "",
+            "src": "",
+            "width": "",
+            "height": ""
+          },
+          "pin": {
+            "background": "",
+            "borderColor": "",
+            "glyphColor": ""
+          }
+        }
       }
     },
     "visible": {

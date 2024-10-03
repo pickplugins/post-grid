@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Gutenberg Blocks
 Plugin URI: https://comboblocks.com/
 Description: Post Grid is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.93
+Version: 2.2.94
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
       define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
       define('post_grid_plugin_basename', plugin_basename(__FILE__));
       define('post_grid_plugin_name', 'Combo Blocks');
-      define('post_grid_version', '2.2.93');
+      define('post_grid_version', '2.2.94');
       define('post_grid_server_url', 'https://pickplugins.com/demo/post-grid/');
 
 
@@ -156,6 +156,8 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/post-query', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/post-query/index.php');
       }
+
+
       if (!in_array('post-grid/post-query-pagination', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/post-query-pagination/index.php');
       }
@@ -171,6 +173,11 @@ if (!class_exists('PostGrid')) {
       if (!in_array('post-grid/menu-wrap-item', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/menu-wrap-item/index.php');
       }
+      if (!in_array('post-grid/google-map', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/google-map/index.php');
+      }
+
+
       if (!in_array('post-grid/post-title', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/post-title/index.php');;
       }
@@ -487,6 +494,10 @@ if (!class_exists('PostGrid')) {
         require_once(post_grid_plugin_dir . 'includes/blocks/business-hours/index.php');
       }
 
+      // if (!in_array('post-grid/videos', $disabled)) {
+      //   require_once(post_grid_plugin_dir . 'includes/blocks/videos/index.php');
+      // }
+
 
       // if (!in_array('post-grid/woo-related-products', $disabled)) {
       //   require_once(post_grid_plugin_dir . 'includes/blocks/woo-related-products/index.php');
@@ -643,8 +654,28 @@ if (!class_exists('PostGrid')) {
 
       wp_register_style('pg_block_styles', post_grid_plugin_url . 'assets/block-css/block-styles.min.css');
       wp_register_script('pg_block_scripts', post_grid_plugin_url . 'assets/block-js/block-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+      wp_register_script('tippy-bundle.min', post_grid_plugin_url . 'assets/js/tippy-bundle.umd.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+      wp_register_script('popper.min', post_grid_plugin_url . 'assets/js/popper.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+      wp_register_script('vanilla-tilt.min', post_grid_plugin_url . 'assets/js/vanilla-tilt.min.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
+      wp_register_script('typed.umd', post_grid_plugin_url . 'assets/js/typed.umd.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
 
       wp_register_script('hcaptcha-script', 'https://hcaptcha.com/1/api.js');
+
+
+
+
+
+      if (is_singular()) {
+        $upload_dir = wp_upload_dir();
+
+
+        $post_id = get_the_ID();
+        $combo_blocks_css_file_id = get_post_meta($post_id, 'combo_blocks_css_file_id', true);
+
+        if (!empty($combo_blocks_css_file_id)) {
+          //wp_enqueue_style('block-styles-' . $post_id, $upload_dir['baseurl'] . '/combo-blocks/block-styles-' . $post_id . '.css');
+        }
+      }
     }
 
     public function enqueue_scripts()
@@ -711,6 +742,7 @@ if (!class_exists('PostGrid')) {
 
 
 
+
         wp_enqueue_style('select2');
         wp_enqueue_script('select2');
 
@@ -760,6 +792,15 @@ if (!class_exists('PostGrid')) {
     {
 
       wp_enqueue_style(
+        'pgcontent_slider_splide_core',
+        post_grid_plugin_url . 'assets/css/splide-core.min.css',
+        [],
+        time(),
+        'all'
+      );
+
+
+      wp_enqueue_style(
         'post-grid-editor',
         post_grid_plugin_url . '/dist/output.css',
         [],
@@ -804,7 +845,6 @@ if (!class_exists('PostGrid')) {
       );
 
       wp_localize_script('post-grid-blocks', 'post_grid_editor_js', array('post_grid_ajaxurl' => admin_url('admin-ajax.php'), '_wpnonce' => wp_create_nonce('wp_rest')));
-
 
 
 

@@ -1,24 +1,16 @@
 <?php
-
-
-
 if (!defined('ABSPATH')) exit;  // if direct access
-
-
-
 function post_grid_duplicate_post_as_draft()
 {
     global $wpdb;
     if (!(isset($_GET['post']) || isset($_POST['post'])  || (isset($_REQUEST['action']) && 'post_grid_duplicate_post_as_draft' == $_REQUEST['action']))) {
         wp_die('No post to duplicate has been supplied!');
     }
-
     /*
 	 * Nonce verification
 	 */
     if (!isset($_GET['duplicate_nonce']) || !wp_verify_nonce($_GET['duplicate_nonce'], basename(__FILE__)))
         return;
-
     /*
 	 * get the original post id
 	 */
@@ -27,19 +19,16 @@ function post_grid_duplicate_post_as_draft()
 	 * and all the original post data then
 	 */
     $post = get_post($post_id);
-
     /*
 	 * if you don't want current user to be the new post author,
 	 * then change next couple of lines to this: $new_post_author = $post->post_author;
 	 */
     $current_user = wp_get_current_user();
     $new_post_author = $current_user->ID;
-
     /*
 	 * if post data exists, create the post duplicate
 	 */
     if (isset($post) && $post != null) {
-
         /*
 		 * new post data array
 		 */
@@ -58,12 +47,10 @@ function post_grid_duplicate_post_as_draft()
             'to_ping'        => $post->to_ping,
             'menu_order'     => $post->menu_order
         );
-
         /*
 		 * insert the post by wp_insert_post() function
 		 */
         $new_post_id = wp_insert_post($args);
-
         /*
 		 * get all current post terms ad set them to the new post draft
 		 */
@@ -72,7 +59,6 @@ function post_grid_duplicate_post_as_draft()
             $post_terms = wp_get_object_terms($post_id, $taxonomy, array('fields' => 'slugs'));
             wp_set_object_terms($new_post_id, $post_terms, $taxonomy, false);
         }
-
         /*
 		 * duplicate all post meta just in two SQL queries
 		 */
@@ -83,8 +69,6 @@ function post_grid_duplicate_post_as_draft()
                 add_post_meta($new_post_id, $key, maybe_unserialize($value)); // it is important to unserialize data to avoid conflicts.
             }
         }
-
-
         /*
 		 * finally, redirect to the edit post screen for the new draft
 		 */
@@ -95,18 +79,14 @@ function post_grid_duplicate_post_as_draft()
     }
 }
 add_action('admin_action_post_grid_duplicate_post_as_draft', 'post_grid_duplicate_post_as_draft');
-
 /*
  * Add the duplicate link to action list for post_row_actions
  */
 function post_grid_duplicate_post_link($actions, $post)
 {
-
-
     if (current_user_can('edit_posts') && ($post->post_type == 'post_grid' || $post->post_type == 'post_grid_template' || $post->post_type == 'post_grid_layout')) {
         $actions['duplicate'] = '<a href="' . wp_nonce_url('admin.php?action=post_grid_duplicate_post_as_draft&post=' . $post->ID, basename(__FILE__), 'duplicate_nonce') . '" title="Duplicate this item" rel="permalink">Duplicate</a>';
     }
     return $actions;
 }
-
 add_filter('post_row_actions', 'post_grid_duplicate_post_link', 10, 2);

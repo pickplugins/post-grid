@@ -25,17 +25,7 @@
           "tag": "div",
           "class": "pg-grid-wrap"
         },
-        "styles": {
-          "display": {
-            "Desktop": "grid"
-          },
-          "gap": {
-            "Desktop": "1em"
-          },
-          "gridTemplateColumns": {
-            "Desktop": "1fr"
-          }
-        }
+        "styles": {}
       }
     },
     "item": {

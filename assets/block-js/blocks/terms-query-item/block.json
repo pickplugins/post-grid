@@ -34,11 +34,7 @@
           "tag": "div",
           "class": "pg-terms-query-item"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "thumb": {
@@ -48,11 +44,7 @@
           "tag": "img",
           "class": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "termField": {

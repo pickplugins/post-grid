@@ -26,20 +26,7 @@
           "tag": "div",
           "class": "pg-social-share"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -49,20 +36,7 @@
           "class": "icon",
           "position": "beforeLabel"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "label": {
@@ -71,20 +45,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "count": {
@@ -93,20 +54,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "elements": {
@@ -119,14 +67,7 @@
           "showIcon": true,
           "iconPosition": "beforeLabel"
         },
-        "styles": {
-          "margin": {
-            "Desktop": "10px 10px 10px 10px"
-          },
-          "fontSize": {
-            "Desktop": "30px"
-          }
-        },
+        "styles": {},
         "items": [
           {
             "id": "facebook",
@@ -139,19 +80,7 @@
               "srcType": "class",
               "iconSrc": "fab fa-facebook-square"
             },
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {},
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              },
-              "display": {}
-            }
+            "styles": {}
           },
           {
             "id": "twitter",
@@ -164,19 +93,7 @@
               "srcType": "class",
               "iconSrc": "fab fa-twitter-square"
             },
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {},
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              },
-              "display": {}
-            }
+            "styles": {}
           },
           {
             "id": "linkedin",
@@ -189,19 +106,7 @@
               "srcType": "class",
               "iconSrc": "fab fa-linkedin"
             },
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {},
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              },
-              "display": {}
-            }
+            "styles": {}
           }
         ]
       }

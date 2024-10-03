@@ -25,11 +25,7 @@
           "tag": "div",
           "class": "pg-post-title"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "abTest": {

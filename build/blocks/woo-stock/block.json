@@ -25,20 +25,7 @@
           "tag": "div",
           "class": "pg-woo-stock"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "stock": {
@@ -55,20 +42,7 @@
           "position": "",
           "class": "stock"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "outOfStock": {
@@ -83,20 +57,7 @@
           "position": "",
           "class": "out-of-stock"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "backOrder": {
@@ -111,20 +72,7 @@
           "position": "",
           "class": "backorder"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -137,29 +85,7 @@
           "position": "",
           "class": "icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {},
-          "fontSize": {
-            "Desktop": ""
-          },
-          "lineHeight": {},
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textDecoration": {}
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -169,14 +95,7 @@
           "text": "",
           "class": "prefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -186,14 +105,7 @@
           "text": "",
           "class": "postfix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

@@ -7,9 +7,9 @@ function elementor_combo_blocks_saved_template($widgets_manager)
 
 	$post_grid_block_editor = get_option('post_grid_block_editor');
 	$addons = isset($post_grid_block_editor['addons']) ? $post_grid_block_editor['addons'] : [];
-	$disabled = isset($addons['disabled']) ? $addons['disabled'] : [];
+	$enabled = isset($addons['enabled']) ? $addons['enabled'] : [];
 
-	if (in_array('elementor', $disabled)) {
+	if (in_array('elementor', $enabled)) {
 		return;
 	}
 

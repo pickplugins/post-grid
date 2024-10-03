@@ -31,11 +31,7 @@
         "options": {
           "class": "pg-images"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "itemsWrap": {
@@ -61,6 +57,10 @@
       }
     },
     "galleryItems": {
+      "type": "array",
+      "default": []
+    },
+    "categories": {
       "type": "array",
       "default": []
     },

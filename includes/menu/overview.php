@@ -1,23 +1,13 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
 wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
 wp_enqueue_style('font-awesome-5');
 $admin_email = get_option('admin_email');
-
-
 $post_grid_license = get_option('post_grid_license');
 $license_status = isset($post_grid_license['license_status']) ? $post_grid_license['license_status'] : '';
-
-
-
 ?>
 <div class="wrap pg-overview font-lato text-color bg-[linear-gradient(101deg,_rgba(238,_255,_251,_0.83)_0%,_rgba(235,_235,_235,_0.44)_50%,_rgb(255,_253,_238)_100%)] w-full
    ">
-
-
-
-
   <div class="text-center w-full">
     <h2 class=" text-color font-lato lg:!text-5xl md:!text-4xl !text-3xl !font-bold tracking-[2.5px] text-center w-full max-w-[900px] !mx-auto !py-6 md:!py-10 lg:!py-12  ">
       50+ Blocks Available to Create Next Level Landing Pages</h2>
@@ -108,17 +98,10 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
         Product Rate</div>
     </a>
   </div>
-
-
-
-
   <div class="pt-7 md:pt-14 lg:pt-20 pb-10 w-full text-center">
     <a class=" !text-white text-2xl font-lato font-bold tracking-[1.2px] px-8 py-[10px] rounded-md inline-block bg-[linear-gradient(90deg,_rgb(252,_127,_100)_0%,_rgb(255,_157,_66)_100%)] no-underline " href="https://comboblocks.com/blocks/?utm_source=overview&utm_medium=SeeAllBlocks&utm_id=comboBlocksUser"><span class="!text-white">See All Blocks</span></a>
   </div>
-
-
   <div class="bg-[#eef8ffd4] py-8 md:py-14 lg:py-20">
-
     <div class="w-full text-center">
       <h2 class="text-color my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Ready
         Design Library</h2>
@@ -126,12 +109,8 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
         increase
         productivity up to 200% and deliver quick result.</p>
     </div>
-
     <div class="mt-8 md:mt-14 lg:mt-20">
-
       <div class="flex flex-col gap-12 ">
-
-
         <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden ">
           <div class="flex-1 pl-5 flex flex-col gap-5 pb-7 ">
             <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px] ">Post Layouts
@@ -147,9 +126,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <img src="https://comboblocks.com/wp-content/uploads/2023/11/post-layouts.png" alt="Post Layouts Library" srcset="">
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
           <div class="w-full md:w-[60%] p-5 bg-white ">
             <img src="https://comboblocks.com/wp-content/uploads/2023/12/css-library.png" alt="CSS Library" srcset="">
@@ -164,9 +140,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
                 Layouts</span></a>
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
           <div class="flex-1 pl-5 flex flex-col gap-5 pb-7 ">
             <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]  ">Page Sections
@@ -183,9 +156,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <img src="https://comboblocks.com/wp-content/uploads/2023/11/page-sections.png" alt="Page Sections Library" srcset="">
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
           <div class="w-full md:w-[60%] p-5 bg-white ">
             <img src="https://comboblocks.com/wp-content/uploads/2023/12/full-page-library.png" alt="Full page Library" srcset="">
@@ -201,9 +171,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <a href="https://comboblocks.com/server/full-page-templates/?utm_source=overview&utm_medium=library&utm_id=comboBlocksUser" class="text-white text-lg font-lato font-bold px-5 py-3 bg-[linear-gradient(90deg,_rgb(118,_137,_248)_0%,_rgb(22,_12,_133)_100%)] inline-block tracking-[1.2px] rounded-md  "><i class="fas fa-external-link-alt text-white"></i> <span class="ml-2 text-white">See Full Pages</span></a>
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden ">
           <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
             <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Block Variations
@@ -219,13 +186,9 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           </div>
         </div>
       </div>
-
     </div>
   </div>
-
-
   <div class="pt-6 md:pt-10 lg:pt-16">
-
     <div class="w-full text-center">
       <h2 class="text-color !my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Style
         Component</h2>
@@ -234,77 +197,53 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
         responsive support, advanced pseudo selectors, and almost all the CSS
         properties supported by a browser.</p>
     </div>
-
     <div class="grid md:grid-cols-2 max-w-[1200px] mx-auto gap-4 md:gap-6 lg:gap-12  mt-12">
-
-
       <div class="bg-[#51557E] rounded-lg overflow-hidden">
         <div class=" flex gap-2 h-8 px-3 items-center  ">
           <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
-
         <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-pseudo-selector.png" alt="Pseudo Selectors" srcset="">
-
         <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Pseudo Selectors</h5>
         <p class="text-white text-base text-center p-3 pb-4 ">Pseudo CSS selectors are special keywords to target
           specific states of elements beyond their basic HTML tag or class.</p>
       </div>
-
-
       <div class="bg-[#51557E] rounded-lg overflow-hidden">
         <div class=" flex gap-2 h-8 px-3 items-center  ">
           <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
         <!-- <a href="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-css-properties-150x150.png"> -->
         <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-css-properties.png" alt="CSS Properties" srcset="">
-
         <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">CSS Properties</h5>
         <p class="text-white text-base text-center p-3 pb-4 ">No code experience. Search, click, and fine-tune any
           property to achieve your unique style.</p>
       </div>
-
-
       <div class="bg-[#51557E] rounded-lg overflow-hidden">
         <div class=" flex gap-2 h-8 px-3 items-center  ">
           <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
-
         <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-responsive-picker.png" alt="Responsiveness" srcset="">
-
         <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Responsiveness</h5>
         <p class="text-white text-base text-center p-3 pb-4 ">Apply device specific styles with ease, achieving
           pixel-perfect responsiveness that adapt to any screen size.</p>
       </div>
-
-
       <div class="bg-[#51557E] rounded-lg overflow-hidden">
         <div class=" flex gap-2 h-8 px-3 items-center  ">
           <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
-
         <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-copy-paste.png" alt="Copy Paste" srcset="">
-
         <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Copy Paste</h5>
         <p class="text-white text-base text-center p-3 pb-4 ">Save time by copying and pasting styles, or inject your
           own raw CSS code directly into our powerful style component.</p>
       </div>
-
-
-
     </div>
-
   </div>
-
-
   <div class=" pt-8 md:pt-14 lg:pt-20">
-
     <div class="w-full text-center">
       <h2 class="text-color my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Fonts
       </h2>
       <!-- <p class="text-color font-lato text-xl max-w-[600px] mx-auto">The most powerful feature for styling with responsive support, advanced pseudo selectors, and almost all the CSS
       properties supported by a browser.</p> -->
     </div>
-
     <div class="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-12 mx-auto max-w-[1100px] mt-12">
       <div class="rounded-3xl overflow-hidden bg-[#ffebd8]">
         <div class="p-5 bg-white lg:h-[400px] overflow-hidden "><img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-google-fonts.png" alt="" srcset="">
@@ -329,17 +268,11 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             option. You can host
             your custom
             font and use the URL under Font Family CSS.</p>
-
         </div>
       </div>
     </div>
-
   </div>
-
-
-
   <div class=" py-8 md:py-14 lg:py-20">
-
     <div class="w-full text-center">
       <h2 class="text-color !my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">Custom
         CSS</h2>
@@ -348,68 +281,40 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
         Blocks”! Global styles for consistency, page styles for unique touches, and
         block styles for ultimate control. All without writing a single line of CSS code.</p>
     </div>
-
     <div class="grid md:grid-cols-3 max-w-[1200px] mx-auto gap-4 md:gap-5  mt-12">
-
-
       <div class="bg-[#51557E] rounded-lg overflow-hidden">
         <div class=" flex gap-2 h-8 px-3 items-center  ">
           <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
-
         <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-global-styles.png" alt="Global Styles" srcset="">
-
         <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Global Styles</h5>
         <p class="text-white text-base text-center p-3 pb-4 ">For example you might want to set a universal look for
           all links with our intuitive global style option.</p>
       </div>
-
-
       <div class="bg-[#51557E] rounded-lg overflow-hidden">
         <div class=" flex gap-2 h-8 px-3 items-center  ">
           <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
         <!-- <a href="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-css-properties-150x150.png"> -->
         <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-page-styles.png" alt="Page Styles" srcset="">
-
         <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Page Styles</h5>
         <p class="text-white text-base text-center p-3 pb-4 ">Beyond global styles? Page Styles offers unique design
           control for each page, all without code.</p>
       </div>
-
-
       <div class="bg-[#51557E] rounded-lg overflow-hidden">
         <div class=" flex gap-2 h-8 px-3 items-center  ">
           <span class="w-[12px] h-[12px] bg-[#e13d3d] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#f2840e] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span><span class="w-[12px] h-[12px] bg-[#43c426] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] "></span>
         </div>
-
         <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-block-styles.png" alt="Block Styles" srcset="">
-
         <h5 class="!my-0 pt-3 text-xl text-center mt-4 font-bold text-white ">Block Styles</h5>
         <p class="text-white text-base text-center p-3 pb-4 ">Block Style unlocks unique CSS for each Gutenberg block,
           fine-tuning every detail for pixel-perfect content.</p>
       </div>
-
-
-
-
-
-
     </div>
-
   </div>
-
-
-
-
-
   <div class="bg-[#eef8ffd4] pb-20">
-
     <div class="">
-
-
       <div class="flex flex-col gap-12 ">
-
         <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden ">
           <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
             <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px] ">Custom Colors</h4>
@@ -423,9 +328,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-custom-colors.png" alt="Custom Colors" srcset="">
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden  ">
           <div class="w-full md:w-[60%] p-5 bg-white ">
             <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Dynamic Class" srcset="">
@@ -438,9 +340,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
               ensuring dynamic design elements.</p>
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
           <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
             <h4 class=" !my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Terms Query Builder
@@ -456,9 +355,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <img src="https://comboblocks.com/wp-content/uploads/2024/04/terms-query-args.png" alt="Terms Query Builder" srcset="">
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
           <div class="w-full md:w-[60%] p-5 bg-white">
             <img src="https://comboblocks.com/wp-content/uploads/2024/04/post-query-block-query-args.png" alt="Post Query Builder" srcset="">
@@ -473,9 +369,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
               categories, tags, or custom taxonomies.</p>
           </div>
         </div>
-
-
-
         <div class="flex items-center flex-col-reverse md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
           <div class="flex-1 pl-5 flex flex-col gap-5 pb-7">
             <h4 class="!my-0 text-2xl md:text-3xl lg:text-4xl font-lato font-bold tracking-[2.5px]">Third Party
@@ -494,9 +387,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="Third Party Integration" srcset="">
           </div>
         </div>
-
-
-
         <!-- <div class="flex items-center flex-col md:flex-row bg-[#f5ffd9f0]  max-w-[1100px] mx-auto gap-5 rounded-3xl overflow-hidden">
           <div class="w-full md:w-[60%] p-5 bg-white">
             <img src="https://comboblocks.com/wp-content/uploads/2024/02/all-featurs-dynamic-calss.png" alt="CSS Animations" srcset="">
@@ -512,15 +402,10 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
           </div>
         </div> -->
       </div>
-
-
     </div>
   </div>
-
-
   <div class="flex items-center justify-center  w-full bg-[#c4dcc2] text-white">
     <div class="px-5 py-24">
-
       <div class="w-full text-center mb-8">
         <h2 class="text-color !my-[10px] text-3xl md:text-4xl lg:text-5xl font-lato font-black tracking-[2.5px] ">3rd
           Party Plugins Support</h2>
@@ -560,7 +445,6 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
     </div>
   </div>
   <div class="flex items-center justify-center p-6 w-full bg-[#4c5eea] text-white">
-
     <div class="px-5 py-24 bg-[url(https://comboblocks.com/wp-content/uploads/2023/12/get-started-bg.png)] max-w-[800px] bg-cover rounded-none  ">
       <div class=" text-center w-full  flex flex-col justify-center items-center gap-8 py-6 ">
         <h2 class="!my-0 text-2xl md:text-3xl lg:text-[40px] !leading-[50px] font-lato font-bold !text-white tracking-[2.5px]">
@@ -574,7 +458,5 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
         <a class="pg-bg-color px-10 py-3 text-lg md:text-xl inline-block rounded-md font-lato no-underline" target="_blank" href="https://comboblocks.com/pricing/?utm_source=overview&utm_medium=buttonGetIt&utm_id=comboBlocksUser">Get It Now</a>
       </div>
     </div>
-
   </div>
-
 </div>

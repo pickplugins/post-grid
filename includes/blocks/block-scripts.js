@@ -9,7 +9,7 @@ import { setupMenu } from "./menu-wrap/front-scripts";
 import { setupNumberCounter } from "./number-counter/front-scripts";
 import { setupPopup } from "./popup/front-scripts";
 import { setupPostGrid } from "./post-grid/front-scripts";
-import { setupPostGridFilterable } from "./post-grid-filterable/front-scripts";
+// import { setupPostGridFilterable } from "./post-grid-filterable/front-scripts";
 import { setupPostGridFilterableNav } from "./post-grid-filterable-nav/front-scripts";
 import { setupProgressBar } from "./progress-bar/front-scripts";
 import { setupTabs } from "./tabs-nested/front-scripts";
@@ -17,7 +17,6 @@ import { setupText } from "./text/front-scripts";
 import { setupWooAddToCart } from "./woo-add-to-cart/front-scripts";
 import { setupWooMyAccount } from "./woo-my-account/front-scripts";
 import { setupWooProductTabs } from "./woo-product-tabs/front-scripts";
-
 setupAccordion();
 setupBackToTop();
 setupContentSlider();
@@ -29,11 +28,13 @@ setupMenu();
 setupNumberCounter();
 setupPopup();
 setupPostGrid();
-setupPostGridFilterable();
-setupPostGridFilterableNav();
 setupProgressBar();
 setupTabs();
 setupText();
 setupWooAddToCart();
 setupWooMyAccount();
 setupWooProductTabs();
+setupPostGridFilterableNav();
+
+// setupPostGridFilterable();
+

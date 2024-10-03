@@ -31,14 +31,7 @@
           "linkTarget": "_blank",
           "customUrl": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "item": {
@@ -47,14 +40,7 @@
         "options": {
           "class": "pg-info-box-item"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

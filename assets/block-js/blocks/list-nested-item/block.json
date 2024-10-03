@@ -28,17 +28,7 @@
           "tag": "li",
           "class": "pg-list-nested-item"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "position": {},
-          "zIndex": {},
-          "top": {},
-          "right": {},
-          "bottom": {},
-          "left": {}
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -51,17 +41,7 @@
           "class": "icon",
           "position": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

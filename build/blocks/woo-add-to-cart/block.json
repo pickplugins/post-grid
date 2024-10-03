@@ -25,22 +25,7 @@
           "tag": "div",
           "class": "pg-woo-sku"
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex",
-            "Tablet": "flex",
-            "Mobile": "flex"
-          },
-          "gap": {
-            "Desktop": "10px"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "viewCart": {
@@ -49,20 +34,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "cartBtn": {
@@ -76,22 +48,7 @@
           "text": "Add to cart",
           "class": ""
         },
-        "styles": {
-          "display": {},
-          "width": {},
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "textDecoration": {
-            "Desktop": "none"
-          }
-        }
+        "styles": {}
       }
     },
     "quantityWrap": {
@@ -101,21 +58,7 @@
           "enable": false,
           "class": ""
         },
-        "styles": {
-          "width": {},
-          "color": {
-            "Desktop": ""
-          },
-          "gap": {
-            "Desktop": "10px"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "display": {
-            "Desktop": "flex"
-          }
-        }
+        "styles": {}
       }
     },
     "quantityInput": {
@@ -125,22 +68,7 @@
           "class": "",
           "quantity": 1
         },
-        "styles": {
-          "display": {},
-          "width": {},
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "quantityIncrease": {
@@ -149,22 +77,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "display": {},
-          "width": {},
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "cursor": {
-            "Desktop": "pointer"
-          }
-        }
+        "styles": {}
       }
     },
     "quantityDecrease": {
@@ -173,22 +86,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "display": {},
-          "width": {},
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "cursor": {
-            "Desktop": "pointer"
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -201,29 +99,7 @@
           "position": "beforeSku",
           "class": "sku-icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {},
-          "fontSize": {
-            "Desktop": ""
-          },
-          "lineHeight": {},
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textDecoration": {}
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -233,14 +109,7 @@
           "text": " ",
           "class": "prefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -250,14 +119,7 @@
           "text": "",
           "class": "postfix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

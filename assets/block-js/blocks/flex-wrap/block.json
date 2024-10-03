@@ -25,14 +25,7 @@
           "tag": "div",
           "class": "pg-flex-wrap"
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          },
-          "gap": {
-            "Desktop": "1em"
-          }
-        }
+        "styles": {}
       }
     },
     "item": {

@@ -27,14 +27,7 @@
         "options": {
           "class": "pg-content-slider"
         },
-        "styles": {
-          "padding": {
-            "Desktop": "60px 0px 50px 0px"
-          },
-          "backgroundColor": {
-            "Desktop": "#f1f7f9"
-          }
-        }
+        "styles": {}
       }
     },
     "itemsWrap": {
@@ -63,29 +56,7 @@
         "options": {
           "class": "nav-wrap"
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          },
-          "width": {
-            "Desktop": "100%"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "position": {
-            "Desktop": "absolute !important"
-          },
-          "top": {
-            "Desktop": "10px"
-          },
-          "left": {
-            "Desktop": "20px"
-          },
-          "gap": {
-            "Desktop": "20px"
-          }
-        }
+        "styles": {}
       }
     },
     "prev": {
@@ -95,35 +66,7 @@
           "text": "Prev",
           "class": ""
         },
-        "styles": {
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "textAlign": {
-            "Desktop": "left"
-          },
-          "color": {
-            "Desktop": "#ffffff"
-          },
-          "backgroundColor": {
-            "Desktop": "#1F2E45"
-          },
-          "borderRadius": {
-            "Desktop": "50px"
-          },
-          "padding": {
-            "Desktop": "5px 20px 5px 20px"
-          }
-        }
+        "styles": {}
       }
     },
     "prevIcon": {
@@ -136,14 +79,7 @@
           "srcType": "class",
           "iconSrc": "fas fa-chevron-left"
         },
-        "styles": {
-          "padding": {
-            "Desktop": "0px 10px 0px 0px"
-          },
-          "fontSize": {
-            "Desktop": "16px"
-          }
-        }
+        "styles": {}
       }
     },
     "next": {
@@ -153,35 +89,7 @@
           "text": "Next",
           "class": ""
         },
-        "styles": {
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "textAlign": {
-            "Desktop": "right"
-          },
-          "color": {
-            "Desktop": "#ffffff"
-          },
-          "backgroundColor": {
-            "Desktop": "#1F2E45"
-          },
-          "borderRadius": {
-            "Desktop": "50px"
-          },
-          "padding": {
-            "Desktop": "5px 20px 5px 20px"
-          }
-        }
+        "styles": {}
       }
     },
     "nextIcon": {
@@ -194,14 +102,7 @@
           "srcType": "class",
           "iconSrc": "fas fa-chevron-right"
         },
-        "styles": {
-          "padding": {
-            "Desktop": "0px 0px 0px 10px"
-          },
-          "fontSize": {
-            "Desktop": "16px"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationWrap": {
@@ -211,20 +112,7 @@
           "tag": "ul",
           "class": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          },
-          "justifyContent": {
-            "Desktop": "center"
-          },
-          "padding": {
-            "Desktop": "30px 0px 0px 0px"
-          },
-          "gap": {
-            "Desktop": "1em"
-          }
-        }
+        "styles": {}
       }
     },
     "pagination": {
@@ -234,23 +122,7 @@
           "tag": "span",
           "class": ""
         },
-        "styles": {
-          "border": {
-            "Desktop": "1px solid #1f2e45"
-          },
-          "backgroundColor": {
-            "Desktop": "#f1f7f9"
-          },
-          "height": {
-            "Desktop": "15px"
-          },
-          "width": {
-            "Desktop": "15px"
-          },
-          "borderRadius": {
-            "Desktop": "50%"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationActive": {
@@ -259,11 +131,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#1f2e45"
-          }
-        }
+        "styles": {}
       }
     },
     "sliderOptions": {

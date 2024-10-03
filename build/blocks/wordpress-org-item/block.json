@@ -73,17 +73,7 @@
           "position": "",
           "class": "icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 10px"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          }
-        }
+        "styles": {}
       }
     },
     "item": {
@@ -93,14 +83,7 @@
           "class": "item",
           "tag": "li"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "itemsWrap": {
@@ -110,14 +93,7 @@
           "class": "item",
           "tag": "ul"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "itemWrap": {
@@ -127,14 +103,7 @@
           "class": "item",
           "tag": "li"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "thumb": {
@@ -143,14 +112,7 @@
         "options": {
           "class": "thumb"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "object": {

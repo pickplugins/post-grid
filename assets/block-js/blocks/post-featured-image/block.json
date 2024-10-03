@@ -75,6 +75,24 @@
         }
       }
     },
+    "lightbox": {
+      "type": "object",
+      "default": {
+        "options": {
+          "thumbSize": "full",
+          "enable": false
+        }
+      }
+    },
+    "lazyLoad": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "lazySrc": "",
+        "lazySrcId": "",
+        "lazySrcType": "media"
+      }
+    },
     "utmTracking": {
       "type": "object",
       "default": {

@@ -25,20 +25,7 @@
           "tag": "div",
           "class": "pg-woo-stockQuantity"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "stockQuantity": {
@@ -55,31 +42,7 @@
           "customUrl": "",
           "class": ""
         },
-        "styles": {
-          "display": {},
-          "width": {},
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "fontSize": {
-            "Desktop": ""
-          },
-          "lineHeight": {},
-          "letterSpacing": {},
-          "fontFamily": {},
-          "fontWeight": {},
-          "textDecoration": {},
-          "textTransform": {}
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -92,29 +55,7 @@
           "position": "",
           "class": "stockQuantity-icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {},
-          "fontSize": {
-            "Desktop": ""
-          },
-          "lineHeight": {},
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textDecoration": {}
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -124,14 +65,7 @@
           "text": "In Stock: ",
           "class": "prefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -141,14 +75,7 @@
           "text": "",
           "class": "postfix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

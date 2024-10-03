@@ -1,0 +1,172 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "post-grid/videos-field",
+  "title": "Videos Field",
+  "textdomain": "post-grid",
+  "category": "post-grid-tools",
+  "parent": [
+    "post-grid/images",
+    "post-grid/flex-wrap-item",
+    "post-grid/flip-box-back",
+    "post-grid/flip-box-front",
+    "post-grid/layers",
+    "post-grid/layer"
+  ],
+  "usesContext": [
+    "blockId",
+    "imageData",
+    "loopIndex",
+    "imageId",
+    "lightbox",
+    "categories",
+    "post-grid/galleryId",
+    "post-grid/lightbox"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "images-field",
+          "tag": "div"
+        },
+        "styles": {}
+      }
+    },
+    "field": {
+      "type": "object",
+      "default": {
+        "options": {
+          "linkTo": "userLink",
+          "customField": "",
+          "linkToMeta": "",
+          "linkTarget": "",
+          "avatarSize": "",
+          "dateFormat": "",
+          "customUrl": "",
+          "prefix": "",
+          "postfix": "",
+          "linkAttr": []
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000 !important"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforePostDate",
+          "class": "icon"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          }
+        }
+      }
+    },
+    "metaKey": {
+      "type": "string",
+      "default": "image"
+    },
+    "frontText": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "inline-block"
+        },
+        "styles": {}
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "prefix",
+          "position": ""
+        },
+        "styles": {}
+      }
+    },
+    "postfix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "postfix",
+          "position": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#000000 !important"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          },
+          "margin": {
+            "Desktop": "0px 0px 0px 10px"
+          }
+        }
+      }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "script": "front_script",
+  "keywords": [
+    "images-field"
+  ],
+  "description": ""
+}

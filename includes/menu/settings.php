@@ -1,52 +1,31 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
-
 $current_tab = isset($_REQUEST['tab']) ? sanitize_text_field($_REQUEST['tab']) : 'general';
-
 $post_grid_settings_tab = array();
-
 $post_grid_settings_tab[] = array(
   'id' => 'general',
   'title' => sprintf(__('%s General', 'post-grid'), '<i class="fas fa-list-ul"></i>'),
   'priority' => 1,
   'active' => ($current_tab == 'general') ? true : false,
 );
-
-
 // $post_grid_settings_tab[] = array(
 //   'id' => 'disable_blocks',
 //   'title' => sprintf(__('%s Disable Blocks', 'post-grid'), '<i class="fas fa-list-ul"></i>'),
 //   'priority' => 10,
 //   'active' => ($current_tab == 'disable_blocks') ? true : false,
 // );
-
 $post_grid_settings_tab = apply_filters('post_grid_settings_tabs', $post_grid_settings_tab);
-
-
-
-
 $tabs_sorted = array();
-
 if (!empty($post_grid_settings_tab))
   foreach ($post_grid_settings_tab as $page_key => $tab) $tabs_sorted[$page_key] = isset($tab['priority']) ? $tab['priority'] : 0;
 array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tab);
-
-
-
 $post_grid_settings = get_option('post_grid_settings');
-
 ?>
 <div class="wrap">
-
-
-
   <div class="p-5 bg-white">
     <div class="grid grid-cols-12 gap-3">
       <div class="col-span-6 ">
-
         <div class="text-[40px] font-black flex text-indigo-600 items-center ">
-
           <div class="mr-5">
             <svg width="50" height="50" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M267.846 117.688C267.846 114.926 270.085 112.688 272.846 112.688H450C452.761 112.688 455 114.926 455 117.688V144.205C455 146.967 452.761 149.205 450 149.205H272.846C270.085 149.205 267.846 146.967 267.846 144.205V117.688Z" fill="#4f46e5" />
@@ -58,33 +37,19 @@ $post_grid_settings = get_option('post_grid_settings');
               <path d="M233.154 460.042C233.154 462.804 230.915 465.042 228.154 465.042L51 465.042C48.2386 465.042 46 462.804 46 460.042L46 433.525C46 430.763 48.2386 428.525 51 428.525L228.154 428.525C230.915 428.525 233.154 430.763 233.154 433.525L233.154 460.042Z" fill="#4f46e5" />
               <rect x="435" y="445.042" width="149.893" height="149.893" transform="rotate(-180 435 445.042)" stroke="#4f46e5" stroke-width="40" />
             </svg>
-
           </div>
-
           <div>
             Combo Blcoks - <?php echo post_grid_version; ?>
           </div>
         </div>
-
-
-
       </div>
       <div class="col-span-6 text-right">
-
         <a href="https://pickplugins.com/create-support-ticket/" target="_blank" class="inline-block px-4 py-2 rounded-sm bg-blue-600 text-white text-lg mx-2 hover:text-white ">Create
           Support</a>
-
-
         <a href="https://comboblocks.com/documentations/" target="_blank" class="inline-block px-4 py-2 rounded-sm bg-blue-600 text-white text-lg mx-2 hover:text-white ">Documentation</a>
-
-
-
       </div>
-
     </div>
-
   </div>
-
   <form method="post" action="<?php echo esc_url(str_replace('%7E', '~', esc_url($_SERVER['REQUEST_URI']))); ?>">
     <input type="hidden" name="post_grid_hidden" value="Y">
     <input type="hidden" name="tab" value="<?php echo esc_attr($current_tab); ?>">
@@ -123,7 +88,6 @@ $post_grid_settings = get_option('post_grid_settings');
         <?php
         if (!empty($post_grid_settings_tab))
           foreach ($post_grid_settings_tab as $tab) {
-
             $id = isset($tab['id']) ? $tab['id'] : '';
             $title = isset($tab['title']) ? $tab['title'] : '';
             $active = isset($tab['active']) ? $tab['active'] : '';

@@ -39,21 +39,7 @@
           "rowCount": 0,
           "id": ""
         },
-        "styles": {
-          "width": {
-            "Desktop": "100%"
-          },
-          "border": {
-            "Desktop": "0px solid gray",
-            "Mobile": "0px solid gray"
-          },
-          "borderCollapse": {
-            "Desktop": "collapse"
-          },
-          "tableLayout": {
-            "Desktop": "fixed"
-          }
-        }
+        "styles": {}
       }
     },
     "tdStyle": {
@@ -63,43 +49,7 @@
           "text": "",
           "class": ""
         },
-        "styles": {
-          "textAlign": {
-            "Desktop": "center",
-            "Mobile": "right"
-          },
-          "padding": {
-            "Desktop": "10px 10px 10px 10px"
-          },
-          "border": {
-            "Desktop": "1px solid gray"
-          },
-          "display": {
-            "Mobile": "block"
-          },
-          "fontSize": {
-            "Mobile": ".8em"
-          }
-        },
-        "before": {
-          "content": {
-            "Mobile": "attr(data-label)"
-          },
-          "float": {
-            "Mobile": "left"
-          },
-          "fontWeight": {
-            "Mobile": "700"
-          },
-          "textTransform": {
-            "Mobile": "uppercase"
-          }
-        },
-        "last-child": {
-          "borderBottom": {
-            "Mobile": "0px solid gray"
-          }
-        }
+        "styles": {}
       }
     },
     "thStyle": {
@@ -109,20 +59,7 @@
           "text": "",
           "class": ""
         },
-        "styles": {
-          "textAlign": {
-            "Desktop": "center"
-          },
-          "padding": {
-            "Desktop": "0.6% 0.6% 0.6% 0.6%"
-          },
-          "fontSize": {
-            "Desktop": ".85em"
-          },
-          "textTransform": {
-            "Desktop": "uppercase"
-          }
-        }
+        "styles": {}
       }
     },
     "trStyle": {
@@ -132,23 +69,7 @@
           "text": "",
           "class": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#f8f8f8"
-          },
-          "padding": {
-            "Desktop": "0.35em 0.35em 0.35em 0.35em"
-          },
-          "borderBottom": {
-            "Mobile": "2px solid #dddddd"
-          },
-          "display": {
-            "Mobile": "block"
-          },
-          "marginBottom": {
-            "Mobile": ".625em"
-          }
-        }
+        "styles": {}
       }
     },
     "caption": {
@@ -158,26 +79,7 @@
           "content": "",
           "class": ""
         },
-        "styles": {
-          "border": {
-            "Desktop": "1px solid gray"
-          },
-          "backgroundColor": {
-            "Desktop": "#f8f8f8"
-          },
-          "padding": {
-            "Desktop": "0.35em 0.35em 0.35em 0.35em"
-          },
-          "borderBottom": {
-            "Mobile": "2px solid #dddddd"
-          },
-          "display": {
-            "Mobile": "block"
-          },
-          "marginBottom": {
-            "Mobile": ".625em"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

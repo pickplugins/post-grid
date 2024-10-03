@@ -1,20 +1,11 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
 class class_post_grid_support
 {
-
-    public function __construct()
-    {
-    }
-
-
+    public function __construct() {}
     public function video_tutorials()
     {
-
-
         $tutorials = array(
-
             array(
                 'title' => __('How to create post grid', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=QaoMrdgkyKw&list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6&index=9&ab_channel=PickPlugins',
@@ -34,7 +25,6 @@ class class_post_grid_support
                 'url' => 'https://www.youtube.com/watch?v=gZ6E3UiKQqk',
                 'keywords' => '',
             ),
-
             array(
                 'title' => __('Custom media height', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=TupF2TpHHFA',
@@ -95,7 +85,6 @@ class class_post_grid_support
                 'url' => 'https://www.youtube.com/watch?v=5Dueav6Yoyc',
                 'keywords' => '',
             ),
-
             array(
                 'title' => __('[ Pro ] Filterable custom all text', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=JvVkAyoXC3g',
@@ -106,49 +95,36 @@ class class_post_grid_support
                 'url' => 'https://www.youtube.com/watch?v=h2rbyZNhMhU',
                 'keywords' => '',
             ),
-
             array(
                 'title' => __('[ Pro ] Filterable custom filter', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=e8phxNKIRsU',
                 'keywords' => '',
             ),
-
             array(
                 'title' => __('[ Pro ] Filterable dropdown single filter', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=ZHY8qf-z3H0',
                 'keywords' => '',
             ),
-
             array(
                 'title' => __('[ Pro ] Filterable display sort filter', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=21TYNsp2OPI',
                 'keywords' => '',
             ),
-
             array(
                 'title' => __('[ Pro ] Filterable multi filter', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=uRcfd_R9YCM',
                 'keywords' => '',
             ),
-
-
-
             array(
                 'title' => __('[ Pro ] Post grid on archive tags', 'post-grid'),
                 'url' => 'https://youtu.be/lNyAjva_UXo',
                 'keywords' => '',
             ),
-
-
-
-
             array(
                 'title' => __('[ Pro ] Query post by meta field', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=0AIDNJvZGR0',
                 'keywords' => '',
             ),
-
-
             array(
                 'title' => __('[ Pro ] Multi skin', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=YzUs_P3cFCo',
@@ -179,7 +155,6 @@ class class_post_grid_support
                 'url' => 'https://www.youtube.com/watch?v=A0bZ_luBtQQ',
                 'keywords' => '',
             ),
-
             array(
                 'title' => __('[ Pro ] Grid layout type', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=58piQVkDZN4',
@@ -198,31 +173,20 @@ class class_post_grid_support
                 'title' => __('How to upgrade to premium?', 'post-grid'),
                 'url' => 'https://www.pickplugins.com/documentation/post-grid/upgrade-to-premium/',
             ),
-
             array(
                 'title' => __('Post grid on archive page?', 'post-grid'),
                 'url' => 'https://www.pickplugins.com/documentation/post-grid/faq/post-grid-for-archive-page/',
             ),
-
-
             array(
                 'title' => __('How to display HTML/Shortcode via layout editor?', 'post-grid'),
                 'url' => 'https://www.pickplugins.com/documentation/post-grid/faq/layout-editor-how-at-add-htmlshortcode/',
             ),
-
         );
-
-
         return apply_filters('post_grid_video_tutorials', $tutorials);
     }
-
-
-
     public function faq()
     {
         $faq = array();
-
-
         return apply_filters('post_grid_faq', $faq);
     }
 }

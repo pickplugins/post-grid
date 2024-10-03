@@ -25,11 +25,7 @@
           "tag": "div",
           "class": "pg-menu-wrap"
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          }
-        }
+        "styles": {}
       }
     },
     "mobileMenuWrap": {
@@ -49,11 +45,7 @@
           "tag": "ul",
           "class": "pg-menu"
         },
-        "styles": {
-          "display": {
-            "Desktop": "flex"
-          }
-        }
+        "styles": {}
       }
     },
     "subMenuWrap": {
@@ -63,11 +55,7 @@
           "class": "pg-sub-menu",
           "type": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "link": {
@@ -76,11 +64,7 @@
         "options": {
           "class": "pg-menu-link"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -89,14 +73,7 @@
         "options": {
           "class": "pg-menu-icon"
         },
-        "styles": {
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "mobileMenuToggle": {
@@ -109,14 +86,7 @@
           "iconSrc": "fas fa-chevron-right",
           "position": ""
         },
-        "styles": {
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "mobileMenuClose": {
@@ -129,14 +99,7 @@
           "iconSrc": "fas fa-chevron-right",
           "position": ""
         },
-        "styles": {
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

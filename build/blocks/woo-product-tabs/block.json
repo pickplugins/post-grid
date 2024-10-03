@@ -25,20 +25,7 @@
           "tag": "div",
           "class": "pg-woo-product-tabs"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "woocommerce": {
@@ -165,17 +152,7 @@
           "class": "icon",
           "position": "beforeLabel"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "panelWrap": {

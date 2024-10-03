@@ -31,11 +31,7 @@
         "options": {
           "class": "pg-terms-query"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "taxonomies": {

@@ -4,7 +4,7 @@ Donate link: https://comboblocks.com/
 Tags: popup Blocks, form block, post meta block
 Requires at least: 5.0.0
 Tested up to: 6.6
-Stable tag: 2.2.93
+Stable tag: 2.2.94
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -251,6 +251,27 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 
 
 
+= 2.2.94 =
+- 2024-09-12 - fix - escaping issue fixed for blocks.
+- 2024-10-01 - update - Dashboard page update.
+- 2024-10-01 - update - Number Counter block update
+- 2024-09-30 - update - Image Gallery block update
+- 2024-09-29 - update - Filterable Grid - Nav block update
+- 2024-09-29 - update - Form Maker block update
+- 2024-09-28 - update - Post Date block update
+- 2024-09-28 - update - Image Accordion block update
+- 2024-09-28 - update - Read More block update
+- 2024-09-26 - update - More translation support added.
+- 2024-09-21 - added - New component AnimatiOn added
+- 2024-09-21 - added - New component Typing Text added
+- 2024-09-21 - added - New component Tilt added
+- 2024-09-21 - added - New component Tooltip added
+- 2024-09-21 - update - Team Members block update
+- 2024-09-21 - update - Text block update
+- 2024-09-21 - update - Layers block update
+- 2024-09-21 - update - Testimonial block update
+- 2024-09-18 - update - Image block update
+- 2024-09-18 - update - Featured Image block update
 
 = 2.2.93 =
 - 2024-09-09 - fix - escaping issue fixed for blocks.

@@ -9,6 +9,8 @@
     "postId",
     "loopIndex",
     "postType",
+    "iconLink",
+    "iconText",
     "queryId"
   ],
   "supports": {

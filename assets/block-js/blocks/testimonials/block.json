@@ -33,11 +33,7 @@
           "class": "pg-testimonial",
           "type": "link"
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          }
-        }
+        "styles": {}
       }
     },
     "itemsWrap": {

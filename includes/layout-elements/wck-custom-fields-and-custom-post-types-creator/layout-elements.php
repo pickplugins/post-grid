@@ -1,11 +1,8 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
 add_filter('post_grid_layout_elements', 'post_grid_pro_wck_layout_elements', 5);
-
 function post_grid_pro_wck_layout_elements($elements_group)
 {
-
     $elements_group['wck'] = array(
         'group_title' => 'WCK - Custom Fields Creator',
         'items' => array(
@@ -16,77 +13,54 @@ function post_grid_pro_wck_layout_elements($elements_group)
             //            'wck_email'=>array('name' =>__('Email','post-grid')),
             //            'wck_url'=>array('name' =>__('URL','post-grid')),
             //            'wck_password'=>array('name' =>__('Password','post-grid')),
-
-
             //            'wck_link'=>array('name' =>__('Link','post-grid')),
             //            'wck_post_object'=>array('name' =>__('Post object','post-grid')),
             //            'wck_page_link'=>array('name' =>__('Page link','post-grid')),
             //            'wck_taxonomy'=>array('name' =>__('Taxonomy','post-grid')),
             //            'wck_user'=>array('name' =>__('User','post-grid')),
             //            'wck_relationship'=>array('name' =>__('Relationship','post-grid')),
-
             'wck_upload' => array('name' => __('Upload', 'post-grid')),
             //            'wck_file'=>array('name' =>__('File','post-grid')),
             'wck_wysiwyg' => array('name' => __('Wysiwyg', 'post-grid')),
             //            'wck_oembed'=>array('name' =>__('oEmbed','post-grid')),
-
             'wck_select' => array('name' => __('Select', 'post-grid')),
             'wck_checkbox' => array('name' => __('Checkbox', 'post-grid')),
             'wck_radio' => array('name' => __('Radio', 'post-grid')),
             //            'wck_buttongroup'=>array('name' =>__('Button group','post-grid')),
             //            'wck_true_false'=>array('name' =>__('True / False','post-grid')),
-
             //            'wck_date_picker'=>array('name' =>__('Date picker','post-grid')),
             'wck_time_picker' => array('name' => __('Time picker', 'post-grid')),
             //            'wck_datetime_picker'=>array('name' =>__('Datetime picker','post-grid')),
             //            'wck_google_map'=>array('name' =>__('Google Map','post-grid')),
             //'wck_colorpicker'=>array('name' =>__('Color picker','post-grid')),
-
-
         ),
     );
-
     return $elements_group;
 }
-
-
-
-
 add_action('post_grid_layout_element_option_wck_text', 'post_grid_layout_element_option_wck_text');
 function post_grid_layout_element_option_wck_text($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -98,9 +72,7 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_text',
@@ -111,9 +83,7 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -125,10 +95,7 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -140,10 +107,7 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -155,10 +119,7 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -170,10 +131,7 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -185,9 +143,7 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -199,61 +155,37 @@ function post_grid_layout_element_option_wck_text($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_text', 'post_grid_layout_element_wck_text');
 function post_grid_layout_element_wck_text($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_text ">
             <?php echo esc_html($wck_value); ?>
@@ -261,32 +193,23 @@ function post_grid_layout_element_wck_text($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_text', 'post_grid_layout_element_css_wck_text', 10);
 function post_grid_layout_element_css_wck_text($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -310,7 +233,6 @@ function post_grid_layout_element_css_wck_text($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -321,46 +243,30 @@ function post_grid_layout_element_css_wck_text($args)
     </style>
 <?php
 }
-
-
-
-
-
 add_action('post_grid_layout_element_option_wck_textarea', 'post_grid_layout_element_option_wck_textarea');
 function post_grid_layout_element_option_wck_textarea($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Textarea', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -372,9 +278,7 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_textarea',
@@ -385,9 +289,7 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -399,10 +301,7 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -414,10 +313,7 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -429,10 +325,7 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -444,10 +337,7 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -459,9 +349,7 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -473,61 +361,37 @@ function post_grid_layout_element_option_wck_textarea($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_textarea', 'post_grid_layout_element_wck_textarea');
 function post_grid_layout_element_wck_textarea($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_textarea ">
             <?php echo esc_html($wck_value); ?>
@@ -535,32 +399,23 @@ function post_grid_layout_element_wck_textarea($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_textarea', 'post_grid_layout_element_css_wck_textarea', 10);
 function post_grid_layout_element_css_wck_textarea($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -584,7 +439,6 @@ function post_grid_layout_element_css_wck_textarea($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -595,46 +449,30 @@ function post_grid_layout_element_css_wck_textarea($args)
     </style>
 <?php
 }
-
-
-
-
-
 add_action('post_grid_layout_element_option_wck_number', 'post_grid_layout_element_option_wck_number');
 function post_grid_layout_element_option_wck_number($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Number', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -646,9 +484,7 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_number',
@@ -659,9 +495,7 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -673,10 +507,7 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -688,10 +519,7 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -703,10 +531,7 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -718,10 +543,7 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -733,9 +555,7 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -747,61 +567,37 @@ function post_grid_layout_element_option_wck_number($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_number', 'post_grid_layout_element_wck_number');
 function post_grid_layout_element_wck_number($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_number ">
             <?php echo esc_html($wck_value); ?>
@@ -809,32 +605,23 @@ function post_grid_layout_element_wck_number($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_number', 'post_grid_layout_element_css_wck_number', 10);
 function post_grid_layout_element_css_wck_number($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -858,7 +645,6 @@ function post_grid_layout_element_css_wck_number($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -869,45 +655,31 @@ function post_grid_layout_element_css_wck_number($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_email', 'post_grid_layout_element_option_wck_email');
 function post_grid_layout_element_option_wck_email($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Email', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -919,10 +691,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -934,9 +703,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => '',
                 'placeholder'        => 'Email: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_email',
@@ -947,9 +714,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -961,10 +726,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -976,10 +738,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -991,10 +750,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -1006,10 +762,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -1021,9 +774,7 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -1035,63 +786,39 @@ function post_grid_layout_element_option_wck_email($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_email', 'post_grid_layout_element_wck_email');
 function post_grid_layout_element_wck_email($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_email ">
             <?php echo esc_html($wck_value); ?>
@@ -1099,32 +826,23 @@ function post_grid_layout_element_wck_email($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_email', 'post_grid_layout_element_css_wck_email', 10);
 function post_grid_layout_element_css_wck_email($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -1148,7 +866,6 @@ function post_grid_layout_element_css_wck_email($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -1159,44 +876,31 @@ function post_grid_layout_element_css_wck_email($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_url', 'post_grid_layout_element_option_wck_url');
 function post_grid_layout_element_option_wck_url($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK URL', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -1208,9 +912,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -1222,10 +924,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => '',
                 'placeholder'        => 'Link: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_url',
@@ -1236,9 +935,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -1250,10 +947,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -1265,10 +959,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -1280,10 +971,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -1295,10 +983,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -1310,9 +995,7 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -1324,62 +1007,37 @@ function post_grid_layout_element_option_wck_url($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_url', 'post_grid_layout_element_wck_url');
 function post_grid_layout_element_wck_url($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
     ?>
@@ -1389,32 +1047,23 @@ function post_grid_layout_element_wck_url($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_url', 'post_grid_layout_element_css_wck_url', 10);
 function post_grid_layout_element_css_wck_url($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -1438,7 +1087,6 @@ function post_grid_layout_element_css_wck_url($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -1449,44 +1097,31 @@ function post_grid_layout_element_css_wck_url($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_range', 'post_grid_layout_element_option_wck_range');
 function post_grid_layout_element_option_wck_range($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Range', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -1498,9 +1133,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -1512,10 +1145,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_range',
@@ -1526,9 +1156,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -1540,10 +1168,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -1555,10 +1180,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -1570,10 +1192,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -1585,10 +1204,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -1600,9 +1216,7 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -1614,64 +1228,39 @@ function post_grid_layout_element_option_wck_range($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_range', 'post_grid_layout_element_wck_range');
 function post_grid_layout_element_wck_range($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
         $wck_value = sprintf($wrapper_html, $wck_value);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_range ">
             <?php echo esc_html($wck_value); ?>
@@ -1679,32 +1268,23 @@ function post_grid_layout_element_wck_range($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_range', 'post_grid_layout_element_css_wck_range', 10);
 function post_grid_layout_element_css_wck_range($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -1728,7 +1308,6 @@ function post_grid_layout_element_css_wck_range($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -1739,44 +1318,30 @@ function post_grid_layout_element_css_wck_range($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_wysiwyg', 'post_grid_layout_element_option_wck_wysiwyg');
 function post_grid_layout_element_option_wck_wysiwyg($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Wysiwyg', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -1788,9 +1353,7 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_wysiwyg',
@@ -1801,9 +1364,7 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -1815,10 +1376,7 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -1830,10 +1388,7 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -1845,10 +1400,7 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -1860,10 +1412,7 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -1875,9 +1424,7 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -1889,63 +1436,37 @@ function post_grid_layout_element_option_wck_wysiwyg($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_wysiwyg', 'post_grid_layout_element_wck_wysiwyg');
 function post_grid_layout_element_wck_wysiwyg($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_wysiwyg ">
             <?php echo esc_html($wck_value); ?>
@@ -1953,32 +1474,23 @@ function post_grid_layout_element_wck_wysiwyg($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_wysiwyg', 'post_grid_layout_element_css_wck_wysiwyg', 10);
 function post_grid_layout_element_css_wck_wysiwyg($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -2002,7 +1514,6 @@ function post_grid_layout_element_css_wck_wysiwyg($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -2013,44 +1524,31 @@ function post_grid_layout_element_css_wck_wysiwyg($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_upload', 'post_grid_layout_element_option_wck_upload');
 function post_grid_layout_element_option_wck_upload($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Image', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -2062,9 +1560,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -2076,9 +1572,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => '',
                 'placeholder'        => 'Image: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_upload',
@@ -2089,9 +1583,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -2103,10 +1595,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -2118,10 +1607,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -2133,10 +1619,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -2148,10 +1631,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -2163,9 +1643,7 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -2177,80 +1655,45 @@ function post_grid_layout_element_option_wck_upload($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_upload', 'post_grid_layout_element_wck_upload');
 function post_grid_layout_element_wck_upload($args)
 {
-
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $attachment_id = get_post_meta($post_id, $wck_key, true);
-
-
-
-
     if (!empty($attachment_id)) :
-
         $wck_value = wp_get_attachment_metadata($attachment_id);
-
-
         if (is_array($wck_value)) {
-
-
             $sizes = isset($wck_value['sizes']) ? $wck_value['sizes'] : array();
             $sizes_arr = array();
             foreach ($sizes as $sizeIndex => $size) {
                 $sizes_arr['{sizes_' . $sizeIndex . '}'] = $size;
             }
-
-
-
             $vars = array(
                 '{ID}' => $attachment_id,
                 '{id}' => $attachment_id,
@@ -2270,16 +1713,11 @@ function post_grid_layout_element_wck_upload($args)
                 '{width}' => isset($wck_value['width']) ? $wck_value['width'] : '',
                 '{height}' => isset($wck_value['height']) ? $wck_value['height'] : '',
             );
-
             $vars = array_merge($vars, $sizes_arr);
-
-
             $wck_value = strtr($wrapper_html, $vars);
         } else {
             $wck_value = sprintf($wrapper_html, $wck_value);
         }
-
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_file ">
             <?php echo esc_html($wck_value); ?>
@@ -2287,32 +1725,23 @@ function post_grid_layout_element_wck_upload($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_upload', 'post_grid_layout_element_css_wck_upload', 10);
 function post_grid_layout_element_css_wck_upload($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -2336,7 +1765,6 @@ function post_grid_layout_element_css_wck_upload($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -2347,44 +1775,31 @@ function post_grid_layout_element_css_wck_upload($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_file', 'post_grid_layout_element_option_wck_file');
 function post_grid_layout_element_option_wck_file($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK File', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -2396,9 +1811,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -2410,10 +1823,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_file',
@@ -2424,9 +1834,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -2438,10 +1846,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -2453,10 +1858,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -2468,10 +1870,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -2483,10 +1882,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -2498,9 +1894,7 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -2512,72 +1906,44 @@ function post_grid_layout_element_option_wck_file($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_file', 'post_grid_layout_element_wck_file');
 function post_grid_layout_element_wck_file($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
     if (!empty($wck_value)) :
-
         if (is_array($wck_value)) {
-
-
             $sizes = isset($wck_value['sizes']) ? $wck_value['sizes'] : array();
             $sizes_arr = array();
             foreach ($sizes as $sizeIndex => $size) {
                 $sizes_arr['{sizes_' . $sizeIndex . '}'] = $size;
             }
-
             $vars = array(
                 '{ID}' => isset($wck_value['ID']) ? $wck_value['ID'] : '',
                 '{id}' => isset($wck_value['id']) ? $wck_value['id'] : '',
@@ -2596,19 +1962,12 @@ function post_grid_layout_element_wck_file($args)
                 '{icon}' => isset($wck_value['icon']) ? $wck_value['icon'] : '',
                 '{width}' => isset($wck_value['width']) ? $wck_value['width'] : '',
                 '{height}' => isset($wck_value['height']) ? $wck_value['height'] : '',
-
             );
-
             $vars = array_merge($vars, $sizes_arr);
-
-
-
             $wck_value = strtr($wrapper_html, $vars);
         } else {
             $wck_value = sprintf($wrapper_html, $wck_value);
         }
-
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_file ">
             <?php echo esc_html($wck_value); ?>
@@ -2616,32 +1975,23 @@ function post_grid_layout_element_wck_file($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_file', 'post_grid_layout_element_css_wck_file', 10);
 function post_grid_layout_element_css_wck_file($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -2665,7 +2015,6 @@ function post_grid_layout_element_css_wck_file($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -2676,45 +2025,32 @@ function post_grid_layout_element_css_wck_file($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_select', 'post_grid_layout_element_option_wck_select');
 function post_grid_layout_element_option_wck_select($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $item_wrapper_html = !empty($element_data['item_wrapper_html']) ? $element_data['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Select', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -2726,9 +2062,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'item_wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -2740,10 +2074,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -2755,10 +2086,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_select',
@@ -2769,9 +2097,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -2783,10 +2109,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -2798,10 +2121,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -2813,10 +2133,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -2828,10 +2145,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -2843,9 +2157,7 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -2857,67 +2169,40 @@ function post_grid_layout_element_option_wck_select($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_select', 'post_grid_layout_element_wck_select');
 function post_grid_layout_element_wck_select($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $item_wrapper_html = !empty($element['item_wrapper_html']) ? $element['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     $html = '';
-
     if (!empty($wck_value)) :
-
         if (is_array($wck_value)) {
             foreach ($wck_value as $_items) {
                 $html .= sprintf($item_wrapper_html, $_items);
@@ -2925,10 +2210,7 @@ function post_grid_layout_element_wck_select($args)
         } else {
             $html = sprintf($item_wrapper_html, $wck_value);
         }
-
-
         $html = sprintf($wrapper_html, $html);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_select ">
             <?php echo esc_html($html); ?>
@@ -2936,32 +2218,23 @@ function post_grid_layout_element_wck_select($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_select', 'post_grid_layout_element_css_wck_select', 10);
 function post_grid_layout_element_css_wck_select($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -2985,7 +2258,6 @@ function post_grid_layout_element_css_wck_select($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -2996,45 +2268,32 @@ function post_grid_layout_element_css_wck_select($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_checkbox', 'post_grid_layout_element_option_wck_checkbox');
 function post_grid_layout_element_option_wck_checkbox($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $item_wrapper_html = !empty($element_data['item_wrapper_html']) ? $element_data['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Checkbox', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -3046,9 +2305,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'item_wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -3060,10 +2317,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -3075,10 +2329,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_checkbox',
@@ -3089,9 +2340,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -3103,10 +2352,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -3118,10 +2364,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -3133,10 +2376,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -3148,10 +2388,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -3163,9 +2400,7 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -3177,66 +2412,40 @@ function post_grid_layout_element_option_wck_checkbox($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_checkbox', 'post_grid_layout_element_wck_checkbox');
 function post_grid_layout_element_wck_checkbox($args)
 {
-
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $item_wrapper_html = !empty($element['item_wrapper_html']) ? $element['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     $html = '';
-
     if (!empty($wck_value)) :
-
         if (is_array($wck_value)) {
             foreach ($wck_value as $_items) {
                 $html .= sprintf($item_wrapper_html, $_items);
@@ -3244,10 +2453,7 @@ function post_grid_layout_element_wck_checkbox($args)
         } else {
             $html = sprintf($item_wrapper_html, $wck_value);
         }
-
-
         $html = sprintf($wrapper_html, $html);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_checkbox ">
             <?php echo esc_html($html); ?>
@@ -3255,32 +2461,23 @@ function post_grid_layout_element_wck_checkbox($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_checkbox', 'post_grid_layout_element_css_wck_checkbox', 10);
 function post_grid_layout_element_css_wck_checkbox($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -3304,7 +2501,6 @@ function post_grid_layout_element_css_wck_checkbox($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -3315,46 +2511,32 @@ function post_grid_layout_element_css_wck_checkbox($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_radio', 'post_grid_layout_element_option_wck_radio');
 function post_grid_layout_element_option_wck_radio($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $item_wrapper_html = !empty($element_data['item_wrapper_html']) ? $element_data['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Radio', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -3366,9 +2548,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'item_wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -3380,10 +2560,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -3395,10 +2572,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_radio',
@@ -3409,9 +2583,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -3423,10 +2595,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -3438,10 +2607,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -3453,10 +2619,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -3468,10 +2631,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -3483,9 +2643,7 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -3497,75 +2655,44 @@ function post_grid_layout_element_option_wck_radio($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_radio', 'post_grid_layout_element_wck_radio');
 function post_grid_layout_element_wck_radio($args)
 {
-
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $item_wrapper_html = !empty($element['item_wrapper_html']) ? $element['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     $html = '';
-
     if (!empty($wck_value)) :
-
         if (is_array($wck_value)) {
-
-
             if (is_array($wck_value)) {
                 $value = $wck_value['value'];
                 $label = $wck_value['label'];
-
                 //$html .= $label.$value;
                 $html .= sprintf($item_wrapper_html, $label, $value);
             } else {
@@ -3574,10 +2701,7 @@ function post_grid_layout_element_wck_radio($args)
         } else {
             $html = sprintf($item_wrapper_html, $wck_value);
         }
-
-
         $html = sprintf($wrapper_html, $html);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_radio ">
             <?php echo esc_html($html); ?>
@@ -3585,32 +2709,23 @@ function post_grid_layout_element_wck_radio($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_radio', 'post_grid_layout_element_css_wck_radio', 10);
 function post_grid_layout_element_css_wck_radio($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -3634,7 +2749,6 @@ function post_grid_layout_element_css_wck_radio($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -3645,46 +2759,32 @@ function post_grid_layout_element_css_wck_radio($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_buttongroup', 'post_grid_layout_element_option_wck_buttongroup');
 function post_grid_layout_element_option_wck_buttongroup($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $item_wrapper_html = !empty($element_data['item_wrapper_html']) ? $element_data['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Button group', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -3696,9 +2796,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'item_wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -3710,10 +2808,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -3725,10 +2820,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_buttongroup',
@@ -3739,9 +2831,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -3753,10 +2843,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -3768,10 +2855,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -3783,10 +2867,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -3798,10 +2879,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -3813,9 +2891,7 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -3827,75 +2903,44 @@ function post_grid_layout_element_option_wck_buttongroup($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_buttongroup', 'post_grid_layout_element_wck_buttongroup');
 function post_grid_layout_element_wck_buttongroup($args)
 {
-
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $item_wrapper_html = !empty($element['item_wrapper_html']) ? $element['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     $html = '';
-
     if (!empty($wck_value)) :
-
         if (is_array($wck_value)) {
-
-
             if (is_array($wck_value)) {
                 $value = $wck_value['value'];
                 $label = $wck_value['label'];
-
                 //$html .= $label.$value;
                 $html .= sprintf($item_wrapper_html, $label, $value);
             } else {
@@ -3904,10 +2949,7 @@ function post_grid_layout_element_wck_buttongroup($args)
         } else {
             $html = sprintf($item_wrapper_html, $wck_value);
         }
-
-
         $html = sprintf($wrapper_html, $html);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_buttongroup ">
             <?php echo esc_html($html); ?>
@@ -3915,32 +2957,23 @@ function post_grid_layout_element_wck_buttongroup($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_buttongroup', 'post_grid_layout_element_css_wck_buttongroup', 10);
 function post_grid_layout_element_css_wck_buttongroup($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -3964,7 +2997,6 @@ function post_grid_layout_element_css_wck_buttongroup($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -3975,45 +3007,32 @@ function post_grid_layout_element_css_wck_buttongroup($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_page_link', 'post_grid_layout_element_option_wck_page_link');
 function post_grid_layout_element_option_wck_page_link($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $link_wrapper_html = !empty($element_data['link_wrapper_html']) ? $element_data['link_wrapper_html'] : '%s';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Page link', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -4025,9 +3044,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'link_wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -4039,10 +3056,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'Link: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -4054,10 +3068,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'Link: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_page_link',
@@ -4068,9 +3079,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -4082,10 +3091,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -4097,10 +3103,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -4112,10 +3115,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -4127,10 +3127,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -4142,9 +3139,7 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -4156,79 +3151,47 @@ function post_grid_layout_element_option_wck_page_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_page_link', 'post_grid_layout_element_wck_page_link');
 function post_grid_layout_element_wck_page_link($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $link_wrapper_html = !empty($element['link_wrapper_html']) ? $element['link_wrapper_html'] : '%s';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     if (!empty($wck_value)) :
         $html = '';
-
         if (is_array($wck_value)) :
             foreach ($wck_value as $link) :
-
                 $html .= sprintf($link_wrapper_html, $link);
-
             endforeach;
         else :
             $html = $wck_value;
-
         endif;
-
-
-
         $html = sprintf($wrapper_html, $html);
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_page_link ">
@@ -4237,32 +3200,23 @@ function post_grid_layout_element_wck_page_link($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_page_link', 'post_grid_layout_element_css_wck_page_link', 10);
 function post_grid_layout_element_css_wck_page_link($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -4286,7 +3240,6 @@ function post_grid_layout_element_css_wck_page_link($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -4297,46 +3250,32 @@ function post_grid_layout_element_css_wck_page_link($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_taxonomy', 'post_grid_layout_element_option_wck_taxonomy');
 function post_grid_layout_element_option_wck_taxonomy($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $item_wrapper_html = !empty($element_data['item_wrapper_html']) ? $element_data['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Taxonomy', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -4348,9 +3287,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'item_wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -4362,10 +3299,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -4377,11 +3311,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => 'Link: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_taxonomy',
@@ -4392,9 +3322,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -4406,10 +3334,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -4421,10 +3346,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -4436,10 +3358,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -4451,10 +3370,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -4466,9 +3382,7 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -4480,69 +3394,42 @@ function post_grid_layout_element_option_wck_taxonomy($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_taxonomy', 'post_grid_layout_element_wck_taxonomy');
 function post_grid_layout_element_wck_taxonomy($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $item_wrapper_html = !empty($element['item_wrapper_html']) ? $element['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     if (!empty($wck_value)) :
-
         $term_html = '';
         foreach ($wck_value as $term) {
-
             //echo esc_html($item_wrapper_html);
-
             if (is_object($term)) {
                 $vars = array(
                     '{term_id}' => isset($term->term_id) ? $term->term_id : '',
@@ -4554,18 +3441,12 @@ function post_grid_layout_element_wck_taxonomy($args)
                     '{description}' => isset($term->description) ? $term->description : '',
                     '{count}' => isset($term->count) ? $term->count : '',
                 );
-
                 $term_html .= strtr($item_wrapper_html, $vars);
             } else {
                 $term_html .= sprintf($item_wrapper_html, $term);
             }
         }
-
-
-
         $html = sprintf($wrapper_html, $term_html);
-
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_taxonomy ">
             <?php echo esc_html($html); ?>
@@ -4573,32 +3454,23 @@ function post_grid_layout_element_wck_taxonomy($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_taxonomy', 'post_grid_layout_element_css_wck_taxonomy', 10);
 function post_grid_layout_element_css_wck_taxonomy($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -4622,7 +3494,6 @@ function post_grid_layout_element_css_wck_taxonomy($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -4633,45 +3504,31 @@ function post_grid_layout_element_css_wck_taxonomy($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_user', 'post_grid_layout_element_option_wck_user');
 function post_grid_layout_element_option_wck_user($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK User', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -4683,9 +3540,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -4697,10 +3552,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_user',
@@ -4711,9 +3563,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -4725,10 +3575,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -4740,10 +3587,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -4755,10 +3599,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -4770,10 +3611,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -4785,9 +3623,7 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -4799,67 +3635,39 @@ function post_grid_layout_element_option_wck_user($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_user', 'post_grid_layout_element_wck_user');
 function post_grid_layout_element_wck_user($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
-
     if (!empty($wck_value)) :
-
         if (is_object($wck_value)) {
-
             $vars = array(
                 '{ID}' => isset($wck_value->ID) ? $wck_value->ID : '',
                 '{user_login}' => isset($wck_value->user_login) ? $wck_value->user_login : '',
@@ -4869,16 +3677,12 @@ function post_grid_layout_element_wck_user($args)
                 '{display_name}' => isset($wck_value->display_name) ? $wck_value->display_name : '',
                 '{user_posts_url}' => get_author_posts_url($wck_value->ID),
                 '{user_avtar}' => get_avatar($wck_value->ID),
-
-
             );
-
             $html = strtr($wrapper_html, $vars);
         } elseif (is_array($wck_value)) {
         } else {
             $html = sprintf($wrapper_html, $wck_value);
         }
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_user ">
             <?php echo esc_html($html); ?>
@@ -4886,32 +3690,23 @@ function post_grid_layout_element_wck_user($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_user', 'post_grid_layout_element_css_wck_user', 10);
 function post_grid_layout_element_css_wck_user($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -4935,7 +3730,6 @@ function post_grid_layout_element_css_wck_user($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -4946,46 +3740,31 @@ function post_grid_layout_element_css_wck_user($args)
     </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_wck_date_picker', 'post_grid_layout_element_option_wck_date_picker');
 function post_grid_layout_element_option_wck_date_picker($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Date picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -4997,9 +3776,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -5011,9 +3788,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_date_picker',
@@ -5024,9 +3799,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -5038,10 +3811,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -5053,10 +3823,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -5068,10 +3835,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -5083,10 +3847,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -5098,9 +3859,7 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -5112,60 +3871,37 @@ function post_grid_layout_element_option_wck_date_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_date_picker', 'post_grid_layout_element_wck_date_picker');
 function post_grid_layout_element_wck_date_picker($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
     ?>
@@ -5175,32 +3911,23 @@ function post_grid_layout_element_wck_date_picker($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_date_picker', 'post_grid_layout_element_css_wck_date_picker', 10);
 function post_grid_layout_element_css_wck_date_picker($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -5224,7 +3951,6 @@ function post_grid_layout_element_css_wck_date_picker($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -5235,47 +3961,31 @@ function post_grid_layout_element_css_wck_date_picker($args)
     </style>
 <?php
 }
-
-
-
-
-
 add_action('post_grid_layout_element_option_wck_time_picker', 'post_grid_layout_element_option_wck_time_picker');
 function post_grid_layout_element_option_wck_time_picker($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Time picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -5287,9 +3997,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -5301,10 +4009,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_time_picker',
@@ -5315,9 +4020,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -5329,10 +4032,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -5344,10 +4044,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -5359,10 +4056,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -5374,10 +4068,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -5389,9 +4080,7 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -5403,63 +4092,39 @@ function post_grid_layout_element_option_wck_time_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_time_picker', 'post_grid_layout_element_wck_time_picker');
 function post_grid_layout_element_wck_time_picker($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_time_picker ">
             <?php echo esc_html($wck_value); ?>
@@ -5467,32 +4132,23 @@ function post_grid_layout_element_wck_time_picker($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_time_picker', 'post_grid_layout_element_css_wck_time_picker', 10);
 function post_grid_layout_element_css_wck_time_picker($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -5516,7 +4172,6 @@ function post_grid_layout_element_css_wck_time_picker($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -5527,47 +4182,32 @@ function post_grid_layout_element_css_wck_time_picker($args)
     </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_wck_datetime_picker', 'post_grid_layout_element_option_wck_datetime_picker');
 function post_grid_layout_element_option_wck_datetime_picker($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Datetime picker', 'post-grid'); ?> -
                 <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -5579,9 +4219,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -5593,10 +4231,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_datetime_picker',
@@ -5607,9 +4242,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -5621,10 +4254,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -5636,10 +4266,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -5651,10 +4278,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -5666,10 +4290,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -5681,9 +4302,7 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -5695,63 +4314,39 @@ function post_grid_layout_element_option_wck_datetime_picker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_datetime_picker', 'post_grid_layout_element_wck_datetime_picker');
 function post_grid_layout_element_wck_datetime_picker($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_datetime_picker ">
             <?php echo esc_html($wck_value); ?>
@@ -5759,32 +4354,23 @@ function post_grid_layout_element_wck_datetime_picker($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_datetime_picker', 'post_grid_layout_element_css_wck_datetime_picker', 10);
 function post_grid_layout_element_css_wck_datetime_picker($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -5808,7 +4394,6 @@ function post_grid_layout_element_css_wck_datetime_picker($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -5819,43 +4404,30 @@ function post_grid_layout_element_css_wck_datetime_picker($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_google_map', 'post_grid_layout_element_option_wck_google_map');
 function post_grid_layout_element_option_wck_google_map($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Google map', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -5867,9 +4439,7 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_google_map',
@@ -5880,9 +4450,7 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -5894,10 +4462,7 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -5909,10 +4474,7 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -5924,10 +4486,7 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -5939,10 +4498,7 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -5954,9 +4510,7 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -5968,61 +4522,37 @@ function post_grid_layout_element_option_wck_google_map($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_google_map', 'post_grid_layout_element_wck_google_map');
 function post_grid_layout_element_wck_google_map($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_google_map ">
             <?php echo esc_html($wck_value); ?>
@@ -6030,32 +4560,23 @@ function post_grid_layout_element_wck_google_map($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_google_map', 'post_grid_layout_element_css_wck_google_map', 10);
 function post_grid_layout_element_css_wck_google_map($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -6079,7 +4600,6 @@ function post_grid_layout_element_css_wck_google_map($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -6090,45 +4610,30 @@ function post_grid_layout_element_css_wck_google_map($args)
     </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_wck_colorpicker', 'post_grid_layout_element_option_wck_colorpicker');
 function post_grid_layout_element_option_wck_colorpicker($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Color picker', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -6140,9 +4645,7 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_colorpicker',
@@ -6153,9 +4656,7 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -6167,10 +4668,7 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -6182,10 +4680,7 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -6197,10 +4692,7 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -6212,10 +4704,7 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -6227,9 +4716,7 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -6241,61 +4728,37 @@ function post_grid_layout_element_option_wck_colorpicker($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_colorpicker', 'post_grid_layout_element_wck_colorpicker');
 function post_grid_layout_element_wck_colorpicker($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_colorpicker ">
             <?php echo esc_html($wck_value); ?>
@@ -6303,32 +4766,23 @@ function post_grid_layout_element_wck_colorpicker($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_colorpicker', 'post_grid_layout_element_css_wck_colorpicker', 10);
 function post_grid_layout_element_css_wck_colorpicker($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -6352,7 +4806,6 @@ function post_grid_layout_element_css_wck_colorpicker($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -6363,45 +4816,31 @@ function post_grid_layout_element_css_wck_colorpicker($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_link', 'post_grid_layout_element_option_wck_link');
 function post_grid_layout_element_option_wck_link($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Link', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -6413,9 +4852,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -6427,10 +4864,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'Link: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_link',
@@ -6441,9 +4875,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -6455,10 +4887,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -6470,10 +4899,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -6485,10 +4911,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -6500,10 +4923,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -6515,9 +4935,7 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -6529,74 +4947,45 @@ function post_grid_layout_element_option_wck_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_link', 'post_grid_layout_element_wck_link');
 function post_grid_layout_element_wck_link($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
-
-
     if (!empty($wck_value)) :
-
         if (is_array($wck_value)) :
             $title = isset($wck_value['title']) ? $wck_value['title'] : '';
             $url = isset($wck_value['url']) ? $wck_value['url'] : '';
             $target = isset($wck_value['target']) ? $wck_value['target'] : '';
-
             $wck_value = "<a target='$target' href='$url'>$title</a>";
-
         endif;
-
         $wck_value = sprintf($wrapper_html, $wck_value);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_link ">
             <?php echo esc_html($wck_value); ?>
@@ -6604,32 +4993,23 @@ function post_grid_layout_element_wck_link($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_link', 'post_grid_layout_element_css_wck_link', 10);
 function post_grid_layout_element_css_wck_link($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -6653,7 +5033,6 @@ function post_grid_layout_element_css_wck_link($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -6664,43 +5043,30 @@ function post_grid_layout_element_css_wck_link($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_post_object', 'post_grid_layout_element_option_wck_post_object');
 function post_grid_layout_element_option_wck_post_object($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -6712,9 +5078,7 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_post_object',
@@ -6725,9 +5089,7 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -6739,10 +5101,7 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -6754,10 +5113,7 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -6769,10 +5125,7 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -6784,10 +5137,7 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -6799,9 +5149,7 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -6813,61 +5161,37 @@ function post_grid_layout_element_option_wck_post_object($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_post_object', 'post_grid_layout_element_wck_post_object');
 function post_grid_layout_element_wck_post_object($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_post_object ">
             <?php echo esc_html($wck_value); ?>
@@ -6875,32 +5199,23 @@ function post_grid_layout_element_wck_post_object($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_post_object', 'post_grid_layout_element_css_wck_post_object', 10);
 function post_grid_layout_element_css_wck_post_object($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -6924,7 +5239,6 @@ function post_grid_layout_element_css_wck_post_object($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -6935,43 +5249,30 @@ function post_grid_layout_element_css_wck_post_object($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_oembed', 'post_grid_layout_element_option_wck_oembed');
 function post_grid_layout_element_option_wck_oembed($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -6983,9 +5284,7 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_oembed',
@@ -6996,9 +5295,7 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -7010,10 +5307,7 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -7025,10 +5319,7 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -7040,10 +5331,7 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -7055,10 +5343,7 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -7070,9 +5355,7 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -7084,61 +5367,37 @@ function post_grid_layout_element_option_wck_oembed($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_oembed', 'post_grid_layout_element_wck_oembed');
 function post_grid_layout_element_wck_oembed($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_oembed ">
             <?php echo esc_html($wck_value); ?>
@@ -7146,32 +5405,23 @@ function post_grid_layout_element_wck_oembed($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_oembed', 'post_grid_layout_element_css_wck_oembed', 10);
 function post_grid_layout_element_css_wck_oembed($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -7195,7 +5445,6 @@ function post_grid_layout_element_css_wck_oembed($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -7206,44 +5455,31 @@ function post_grid_layout_element_css_wck_oembed($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_password', 'post_grid_layout_element_option_wck_password');
 function post_grid_layout_element_option_wck_password($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -7255,9 +5491,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -7269,11 +5503,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => '',
                 'placeholder'        => 'Password: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_password',
@@ -7284,9 +5514,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -7298,10 +5526,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -7313,10 +5538,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -7328,10 +5550,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -7343,10 +5562,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -7358,9 +5574,7 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -7372,63 +5586,39 @@ function post_grid_layout_element_option_wck_password($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_password', 'post_grid_layout_element_wck_password');
 function post_grid_layout_element_wck_password($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_password ">
             <?php echo esc_html($wck_value); ?>
@@ -7436,32 +5626,23 @@ function post_grid_layout_element_wck_password($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_password', 'post_grid_layout_element_css_wck_password', 10);
 function post_grid_layout_element_css_wck_password($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -7485,7 +5666,6 @@ function post_grid_layout_element_css_wck_password($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -7496,45 +5676,32 @@ function post_grid_layout_element_css_wck_password($args)
     </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_wck_relationship', 'post_grid_layout_element_option_wck_relationship');
 function post_grid_layout_element_option_wck_relationship($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $item_wrapper_html = !empty($element_data['item_wrapper_html']) ? $element_data['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Relationship', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -7546,9 +5713,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'item_wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -7560,10 +5725,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -7575,9 +5737,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_relationship',
@@ -7588,9 +5748,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -7602,10 +5760,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -7617,10 +5772,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -7632,10 +5784,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -7647,10 +5796,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -7662,9 +5808,7 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -7676,70 +5820,41 @@ function post_grid_layout_element_option_wck_relationship($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_relationship', 'post_grid_layout_element_wck_relationship');
 function post_grid_layout_element_wck_relationship($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $item_wrapper_html = !empty($element['item_wrapper_html']) ? $element['item_wrapper_html'] : '%s';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
-
-
-
-
-
         $post_html = '';
-
         foreach ($wck_value as $post_item) :
-
             $vars = array(
                 '{ID}' => isset($post_item->ID) ? $post_item->ID : '',
                 '{post_author' => isset($post_item->post_author) ? $post_item->post_author : '',
@@ -7756,16 +5871,10 @@ function post_grid_layout_element_wck_relationship($args)
                 '{post_type}' => isset($post_item->post_type) ? $post_item->post_type : '',
                 '{comment_count}' => isset($post_item->comment_count) ? $post_item->comment_count : '',
                 '{permalink}' => get_permalink($post_item->ID),
-
             );
-
             $post_html .= strtr($item_wrapper_html, $vars);
-
-
         endforeach;
-
         $post_html = sprintf($wrapper_html, $post_html);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_relationship ">
             <?php echo esc_html($post_html); ?>
@@ -7773,32 +5882,23 @@ function post_grid_layout_element_wck_relationship($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_relationship', 'post_grid_layout_element_css_wck_relationship', 10);
 function post_grid_layout_element_css_wck_relationship($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -7822,7 +5922,6 @@ function post_grid_layout_element_css_wck_relationship($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>
@@ -7833,45 +5932,31 @@ function post_grid_layout_element_css_wck_relationship($args)
     </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_wck_true_false', 'post_grid_layout_element_option_wck_true_false');
 function post_grid_layout_element_option_wck_true_false($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wck_key = isset($element_data['wck_key']) ? $element_data['wck_key'] : '';
     $wrapper_html = !empty($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '%s';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
     <div class="item">
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
             <span class="expand"><?php echo __('WCK Text', 'post-grid'); ?> - <?php echo esc_html($wck_key); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
-
             $args = array(
                 'id'        => 'wck_key',
                 'css_id'        => $element_index . '_text',
@@ -7883,10 +5968,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -7898,10 +5980,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => '',
                 'placeholder'        => 'Value: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_wck_true_false',
@@ -7912,9 +5991,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -7926,10 +6003,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -7941,10 +6015,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -7956,10 +6027,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -7971,10 +6039,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -7986,9 +6051,7 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -8000,65 +6063,40 @@ function post_grid_layout_element_option_wck_true_false($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
             <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
             <?php
-
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
         </div>
     </div>
     <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_wck_true_false', 'post_grid_layout_element_wck_true_false');
 function post_grid_layout_element_wck_true_false($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $wck_key = isset($element['wck_key']) ? $element['wck_key'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
     $boolean_html = !empty($element['boolean_html']) ? $element['boolean_html'] : '';
-
-
-
-
-
-
     $wck_value = get_post_meta($post_id, $wck_key, true);
-
     if (!empty($wck_value)) :
         $wck_value = sprintf($wrapper_html, $wck_value);
-
     ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> wck_true_false ">
             <?php echo esc_html($wck_value); ?>
@@ -8066,32 +6104,23 @@ function post_grid_layout_element_wck_true_false($args)
     <?php
     endif;
 }
-
-
-
 add_action('post_grid_layout_element_css_wck_true_false', 'post_grid_layout_element_css_wck_true_false', 10);
 function post_grid_layout_element_css_wck_true_false($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
     <style type="text/css">
         .layout-<?php echo esc_attr($layout_id);
                 ?>.element_<?php echo esc_attr($index);
-
                             ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color);
                                                     ?>;
@@ -8115,7 +6144,6 @@ function post_grid_layout_element_css_wck_true_false($args)
 
         <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id);
                                                     ?>.element_<?php echo esc_attr($index);
-
                                                                 ?>:hover {
             <?php echo esc_attr($css_hover);
             ?>

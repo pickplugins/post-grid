@@ -29,11 +29,7 @@
           "class": "pg-menu-wrap-item",
           "isActive": false
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "link": {
@@ -44,11 +40,7 @@
           "text": "Label",
           "url": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "subMenuWrap": {
@@ -58,11 +50,7 @@
           "class": "pg-sub-menu",
           "type": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {

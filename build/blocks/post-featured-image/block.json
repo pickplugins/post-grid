@@ -25,14 +25,7 @@
           "tag": "div",
           "class": "pg-post-featured-image"
         },
-        "styles": {
-          "width": {
-            "Desktop": "100%"
-          },
-          "overflow": {
-            "Desktop": "hidden"
-          }
-        }
+        "styles": {}
       }
     },
     "featuredImage": {
@@ -62,17 +55,25 @@
             "Mobile": "full"
           }
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "maxWidth": {
-            "Desktop": "100%"
-          },
-          "height": {
-            "Desktop": "auto"
-          }
+        "styles": {}
+      }
+    },
+    "lightbox": {
+      "type": "object",
+      "default": {
+        "options": {
+          "thumbSize": "full",
+          "enable": false
         }
+      }
+    },
+    "lazyLoad": {
+      "type": "object",
+      "default": {
+        "enable": false,
+        "lazySrc": "",
+        "lazySrcId": "",
+        "lazySrcType": "media"
       }
     },
     "utmTracking": {

@@ -25,14 +25,7 @@
           "tag": "div",
           "class": "pg-date-countdown"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "dateCountdown": {
@@ -76,39 +69,7 @@
           "tag": "div",
           "class": ""
         },
-        "styles": {
-          "color": {},
-          "backgroundColor": {
-            "Desktop": "#9DD6DF"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "justifyContent": {
-            "Desktop": "center"
-          },
-          "width": {
-            "Desktop": "max-content"
-          },
-          "borderRadius": {
-            "Desktop": "20px 20px 20px 20px"
-          },
-          "padding": {
-            "Desktop": "30px 30px 30px 30px"
-          },
-          "gap": {
-            "Desktop": "20px"
-          },
-          "marginRight": {
-            "Desktop": "auto"
-          },
-          "marginLeft": {
-            "Desktop": "auto"
-          }
-        }
+        "styles": {}
       }
     },
     "inner": {
@@ -119,23 +80,7 @@
           "tag": "div",
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "items": {
@@ -149,14 +94,7 @@
           "hourEnable": true,
           "dayEnable": true
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "count": {
@@ -168,14 +106,7 @@
           "class": "count",
           "position": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "secondWrap": {
@@ -201,47 +132,7 @@
           "label": "",
           "prefix": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#d9eaf2"
-          },
-          "backgroundColor": {
-            "Desktop": "#18978F"
-          },
-          "padding": {
-            "Desktop": "20px 20px 20px 20px"
-          },
-          "margin": [],
-          "backgroundImage": [],
-          "textDecoration": {
-            "Desktop": "none #000000 wavy 1px"
-          },
-          "borderBottom": [],
-          "transition": {
-            "Desktop": "all 0.4s ease 0s"
-          },
-          "fontSize": {
-            "Desktop": "5rem"
-          },
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textShadow": {
-            "Desktop": "5px 5px 0px #4d4d4d"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "flexDirection": {
-            "Desktop": "column"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "borderRadius": {
-            "Desktop": "10px 10px 10px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "minuteWrap": {
@@ -267,47 +158,7 @@
           "label": "",
           "prefix": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#d9eaf2"
-          },
-          "backgroundColor": {
-            "Desktop": "#18978F"
-          },
-          "padding": {
-            "Desktop": "20px 20px 20px 20px"
-          },
-          "margin": [],
-          "backgroundImage": [],
-          "textDecoration": {
-            "Desktop": "none #000000 wavy 1px"
-          },
-          "borderBottom": [],
-          "transition": {
-            "Desktop": "all 0.4s ease 0s"
-          },
-          "fontSize": {
-            "Desktop": "5rem"
-          },
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textShadow": {
-            "Desktop": "5px 5px 0px #4d4d4d"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "flexDirection": {
-            "Desktop": "column"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "borderRadius": {
-            "Desktop": "10px 10px 10px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "hourWrap": {
@@ -333,47 +184,7 @@
           "label": "",
           "prefix": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#d9eaf2"
-          },
-          "backgroundColor": {
-            "Desktop": "#18978F"
-          },
-          "padding": {
-            "Desktop": "20px 20px 20px 20px"
-          },
-          "margin": [],
-          "backgroundImage": [],
-          "textDecoration": {
-            "Desktop": "none #000000 wavy 1px"
-          },
-          "borderBottom": [],
-          "transition": {
-            "Desktop": "all 0.4s ease 0s"
-          },
-          "fontSize": {
-            "Desktop": "5rem"
-          },
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textShadow": {
-            "Desktop": "5px 5px 0px #4d4d4d"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "flexDirection": {
-            "Desktop": "column"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "borderRadius": {
-            "Desktop": "10px 10px 10px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "dayWrap": {
@@ -399,47 +210,7 @@
           "label": "",
           "prefix": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#d9eaf2"
-          },
-          "backgroundColor": {
-            "Desktop": "#18978F"
-          },
-          "padding": {
-            "Desktop": "20px 20px 20px 20px"
-          },
-          "margin": [],
-          "backgroundImage": [],
-          "textDecoration": {
-            "Desktop": "none #000000 wavy 1px"
-          },
-          "borderBottom": [],
-          "transition": {
-            "Desktop": "all 0.4s ease 0s"
-          },
-          "fontSize": {
-            "Desktop": "5rem"
-          },
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textShadow": {
-            "Desktop": "5px 5px 0px #4d4d4d"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "flexDirection": {
-            "Desktop": "column"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "borderRadius": {
-            "Desktop": "10px 10px 10px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -453,23 +224,7 @@
           "position": "",
           "class": "date-countdown-icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "separator": {
@@ -481,26 +236,7 @@
           "class": "separator",
           "position": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#d9eaf2"
-          },
-          "textDecoration": {
-            "Desktop": "none #000000 wavy 1px"
-          },
-          "transition": {
-            "Desktop": "all 0.4s ease 0s"
-          },
-          "fontSize": {
-            "Desktop": "5rem"
-          },
-          "fontWeight": {
-            "Desktop": "700"
-          },
-          "textShadow": {
-            "Desktop": "5px 5px 0px #4d4d4d"
-          }
-        }
+        "styles": {}
       }
     },
     "label": {
@@ -512,23 +248,7 @@
           "class": "label",
           "position": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -539,26 +259,7 @@
           "text": "",
           "class": "prefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -569,26 +270,7 @@
           "text": "",
           "class": "postfix"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 0px 0px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

@@ -1,42 +1,27 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
 add_action('post_grid_layout_element_option_wrapper_link_start', 'post_grid_layout_element_option_wrapper_link_start');
-
-
 function post_grid_layout_element_option_wrapper_link_start($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
     $wrapper_class = isset($element_data['wrapper_class']) ? $element_data['wrapper_class'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
 ?>
-<div class="item wrapper_link_start">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand  "><?php echo __('Wrapper Link start', 'post-grid'); ?></span>
-
-    <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
-
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item wrapper_link_start">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand  "><?php echo __('Wrapper Link start', 'post-grid'); ?></span>
+            <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'wrapper_id',
                 'parent' => $input_name . '[wrapper_link_start]',
@@ -46,10 +31,7 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
                 'value'        => $wrapper_id,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_class',
                 'parent' => $input_name . '[wrapper_link_start]',
@@ -59,11 +41,7 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
                 'value'        => $wrapper_class,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -75,9 +53,7 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -89,9 +65,7 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -103,93 +77,60 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-    <?php
-
+            <textarea readonly type="text"
+                onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
-
 add_action('post_grid_layout_element_wrapper_link_start', 'post_grid_layout_element_wrapper_link_start', 10);
 function post_grid_layout_element_wrapper_link_start($args)
 {
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element_class = !empty($index) ? 'element_' . $index : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     $element = isset($args['element']) ? $args['element'] : array();
     $wrapper_class = isset($element['wrapper_class']) ? $element['wrapper_class'] : '';
     $wrapper_id = isset($element['wrapper_id']) ? $element['wrapper_id'] : '';
-
-
-
 ?>
-<a class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>"
-  id="<?php echo esc_attr($wrapper_id); ?>" href="<?php echo esc_url_raw(get_permalink($post_id)); ?>">
-
-
-  <?php
-
+    <a class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>"
+        id="<?php echo esc_attr($wrapper_id); ?>" href="<?php echo esc_url_raw(get_permalink($post_id)); ?>">
+    <?php
 }
-
-
 add_action('post_grid_layout_element_option_wrapper_link_end', 'post_grid_layout_element_option_wrapper_link_end');
-
-
 function post_grid_layout_element_option_wrapper_link_end($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-
     $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
-
     ?>
-  <div class="item wrapper_link_end">
-    <div class="element-title header ">
-      <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-      <span class="sort"><i class="fas fa-sort"></i></span>
-
-      <span class="header-text expand"><?php echo __('Wrapper Link end', 'post-grid'); ?></span>
-      <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
-    </div>
-    <div class="element-options options">
-
-      <?php
-
+        <div class="item wrapper_link_end">
+            <div class="element-title header ">
+                <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+                <span class="sort"><i class="fas fa-sort"></i></span>
+                <span class="header-text expand"><?php echo __('Wrapper Link end', 'post-grid'); ?></span>
+                <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
+            </div>
+            <div class="element-options options">
+                <?php
                 $args = array(
                     'id'        => 'wrapper_id',
                     'wraper_class'        => 'hidden',
-
                     'parent' => $input_name . '[wrapper_link_end]',
                     'title'        => __('Wrapper id', 'post-grid'),
                     'details'    => __('Write wrapper id, ex: div, p, span.', 'post-grid'),
@@ -197,73 +138,41 @@ function post_grid_layout_element_option_wrapper_link_end($parameters)
                     'value'        => $wrapper_id,
                     'default'        => '',
                 );
-
                 $settings_tabs_field->generate_field($args);
-
-
-
-
-
                 ?>
-
-    </div>
-  </div>
-  <?php
-
+            </div>
+        </div>
+    <?php
 }
-
-
-
 add_action('post_grid_layout_element_wrapper_link_end', 'post_grid_layout_element_wrapper_link_end', 10);
 function post_grid_layout_element_wrapper_link_end($args)
 {
-
-
     ?>
-</a>
+    </a>
 <?php
-
 }
-
-
-
-
 add_action('post_grid_layout_element_option_wrapper_start', 'post_grid_layout_element_option_wrapper_start');
-
-
 function post_grid_layout_element_option_wrapper_start($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
     $wrapper_class = isset($element_data['wrapper_class']) ? $element_data['wrapper_class'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
 ?>
-<div class="item wrapper_start">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Wrapper start', 'post-grid'); ?></span>
-
-    <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
-
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item wrapper_start">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Wrapper start', 'post-grid'); ?></span>
+            <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'wrapper_id',
                 'parent' => $input_name . '[wrapper_start]',
@@ -273,10 +182,7 @@ function post_grid_layout_element_option_wrapper_start($parameters)
                 'value'        => $wrapper_id,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_class',
                 'parent' => $input_name . '[wrapper_start]',
@@ -286,11 +192,7 @@ function post_grid_layout_element_option_wrapper_start($parameters)
                 'value'        => $wrapper_class,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -302,9 +204,7 @@ function post_grid_layout_element_option_wrapper_start($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -316,9 +216,7 @@ function post_grid_layout_element_option_wrapper_start($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -330,152 +228,109 @@ function post_grid_layout_element_option_wrapper_start($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-    <?php
-
+            <textarea readonly type="text"
+                onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
-
 add_action('post_grid_layout_element_wrapper_start', 'post_grid_layout_element_wrapper_start', 10);
 function post_grid_layout_element_wrapper_start($args)
 {
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element_class = !empty($index) ? 'element_' . $index : '';
-
     $element = isset($args['element']) ? $args['element'] : array();
     $wrapper_class = isset($element['wrapper_class']) ? $element['wrapper_class'] : '';
     $wrapper_id = isset($element['wrapper_id']) ? $element['wrapper_id'] : '';
-
-
-
 ?>
-<div class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>"
-  id="<?php echo esc_attr($wrapper_id); ?>">
-  <?php
-
+    <div class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>"
+        id="<?php echo esc_attr($wrapper_id); ?>">
+    <?php
 }
-
-
 add_action('post_grid_layout_element_css_wrapper_start', 'post_grid_layout_element_css_wrapper_start', 10);
 function post_grid_layout_element_css_wrapper_start($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
     ?>
-  <style type="text/css">
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
+        <style type="text/css">
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                    ?>;
+                <?php endif;
+                ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                                ?>;
+                <?php endif;
+                ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                    ?>;
+                <?php endif;
+                ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                        ?>;
+                <?php endif;
+                ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                                ?>;
+                <?php endif;
+                ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                                ?><?php endif;
+                                                    ?>
+            }
 
-  ?> {
-    <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-    ?>;
-    <?php endif;
-    ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-    ?>;
-    <?php endif;
-    ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-    ?>;
-    <?php endif;
-    ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-    ?>;
-    <?php endif;
-    ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-    ?>;
-    <?php endif;
-    ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-    ?><?php endif;
-    ?>
-  }
+            <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                                ?><?php echo esc_attr(' .element_' . $index);
+                                                    ?>:hover {
+                <?php echo wp_strip_all_tags($css_hover);
+                ?>
+            }
 
-  <?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?>:hover {
-    <?php echo wp_strip_all_tags($css_hover);
-    ?>
-  }
-
-  <?php endif;
-  ?>
-  </style>
-  <?php
+            <?php endif;
+            ?>
+        </style>
+    <?php
 }
-
-
-
-
-
 add_action('post_grid_layout_element_option_wrapper_end', 'post_grid_layout_element_option_wrapper_end');
-
-
 function post_grid_layout_element_option_wrapper_end($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-
     $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
-
     ?>
-  <div class="item wrapper_end">
-    <div class="element-title header ">
-      <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-      <span class="sort"><i class="fas fa-sort"></i></span>
-
-      <span class="header-text expand"><?php echo __('Wrapper end', 'post-grid'); ?></span>
-      <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
-    </div>
-    <div class="element-options options">
-
-      <?php
-
+        <div class="item wrapper_end">
+            <div class="element-title header ">
+                <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+                <span class="sort"><i class="fas fa-sort"></i></span>
+                <span class="header-text expand"><?php echo __('Wrapper end', 'post-grid'); ?></span>
+                <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
+            </div>
+            <div class="element-options options">
+                <?php
                 $args = array(
                     'id'        => 'wrapper_id',
                     'wraper_class'        => 'hidden',
-
                     'parent' => $input_name . '[wrapper_end]',
                     'title'        => __('Wrapper id', 'post-grid'),
                     'details'    => __('Write wrapper id, ex: div, p, span.', 'post-grid'),
@@ -483,73 +338,44 @@ function post_grid_layout_element_option_wrapper_end($parameters)
                     'value'        => $wrapper_id,
                     'default'        => '',
                 );
-
                 $settings_tabs_field->generate_field($args);
-
-
-
-
-
                 ?>
-
-    </div>
-  </div>
-  <?php
-
+            </div>
+        </div>
+    <?php
 }
-
-
-
 add_action('post_grid_layout_element_wrapper_end', 'post_grid_layout_element_wrapper_end', 10);
 function post_grid_layout_element_wrapper_end($args)
 {
-
-
     ?>
-</div>
+    </div>
 <?php
-
 }
-
-
-
-
 add_action('post_grid_layout_element_option_custom_text', 'post_grid_layout_element_option_custom_text');
 function post_grid_layout_element_option_custom_text($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $text = isset($element_data['text']) ? $element_data['text'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Custom text', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Custom text', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -561,10 +387,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text',
                 'css_id'        => $element_index . '_text',
@@ -576,9 +399,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_custom_text',
@@ -589,9 +410,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -603,10 +422,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -618,10 +434,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -633,10 +446,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -648,10 +458,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -663,9 +470,7 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -677,135 +482,101 @@ function post_grid_layout_element_option_custom_text($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-    <?php
-
+            <textarea readonly type="text"
+                onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
 add_action('post_grid_layout_element_custom_text', 'post_grid_layout_element_custom_text');
 function post_grid_layout_element_custom_text($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $title = get_the_title($post_id);
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $text = isset($element['text']) ?  $element['text'] : '';
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
-  <?php echo esc_html($text); ?>
-</div>
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
+        <?php echo esc_html($text); ?>
+    </div>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_css_custom_text', 'post_grid_layout_element_css_custom_text', 10);
 function post_grid_layout_element_css_custom_text($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_title', 'post_grid_layout_element_option_title');
 function post_grid_layout_element_option_title($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
@@ -813,26 +584,18 @@ function post_grid_layout_element_option_title($parameters)
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : '';
-
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Post title', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Post title', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -844,10 +607,7 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -865,11 +625,7 @@ function post_grid_layout_element_option_title($parameters)
                     )
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'link_target',
                 'css_id'        => $element_index . '_link_target',
@@ -884,13 +640,9 @@ function post_grid_layout_element_option_title($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'char_limit',
                 'css_id'        => $element_index . '_char_limit',
@@ -902,11 +654,7 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => '',
                 'placeholder'        => '25',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_title_color',
@@ -917,9 +665,7 @@ function post_grid_layout_element_option_title($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -931,10 +677,7 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => '20px',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -946,10 +689,7 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -961,10 +701,7 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => '10px 0',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -976,12 +713,7 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_margin',
@@ -993,9 +725,7 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_margin',
@@ -1007,110 +737,71 @@ function post_grid_layout_element_option_title($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_title', 'post_grid_layout_element_title');
-
 function post_grid_layout_element_title($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
-
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_title_permalink', $post_link, $args);
-
     $post = get_post($post_id);
     $title = isset($post->post_title) ? $post->post_title : '';
-
-
     //$title = get_the_title($post_id);
-
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
     $char_end = isset($element['char_end']) ? $element['char_end'] : '...';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
-
-
     if ($char_limit > 0) {
         $title = wp_trim_words($title, $char_limit, $char_end);
     }
-
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
-  <?php if ($link_to == 'post_link') : ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
-
-  <?php elseif ($link_to == 'custom_link') :
-
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
+        <?php if ($link_to == 'post_link') : ?>
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
+        <?php elseif ($link_to == 'custom_link') :
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
-
-  <?php else : ?>
-  <?php echo wp_kses_post($title); ?>
-  <?php endif; ?>
-
-
-</div>
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
+        <?php else : ?>
+            <?php echo wp_kses_post($title); ?>
+        <?php endif; ?>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_title', 'post_grid_layout_element_css_title', 10);
 function post_grid_layout_element_css_title($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
@@ -1118,114 +809,91 @@ function post_grid_layout_element_css_title($args)
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
+    </style>
 <?php
 }
-
-
-
-
-
 add_action('post_grid_layout_element_option_title_link', 'post_grid_layout_element_option_title_link');
-
-
 function post_grid_layout_element_option_title_link($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Post title with link', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Post title with link', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -1237,9 +905,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -1257,10 +923,7 @@ function post_grid_layout_element_option_title_link($parameters)
                     )
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_target',
                 'css_id'        => $element_index . '_link_target',
@@ -1275,13 +938,9 @@ function post_grid_layout_element_option_title_link($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'char_limit',
                 'css_id'        => $element_index . '_char_limit',
@@ -1293,11 +952,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => '',
                 'placeholder'        => '25',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_color',
@@ -1308,9 +963,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -1322,10 +975,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -1337,10 +987,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -1352,10 +999,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -1367,10 +1011,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_margin',
@@ -1382,9 +1023,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_margin',
@@ -1396,201 +1035,148 @@ function post_grid_layout_element_option_title_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
 <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
 add_action('post_grid_layout_element_title_link', 'post_grid_layout_element_title_link');
-
 function post_grid_layout_element_title_link($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
-
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
-
-
     $title = get_the_title($post_id);
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_title_link_permalink', $post_link, $args);
-
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
     $char_end = isset($element['char_end']) ? $element['char_end'] : '...';
-
-
     if ($char_limit > 0) {
         $title = wp_trim_words($title, $char_limit, $char_end);
     }
-
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
-  <?php if ($link_to == 'post_link') : ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
-  <?php elseif ($link_to == 'custom_link') :
-
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
+        <?php if ($link_to == 'post_link') : ?>
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
+        <?php elseif ($link_to == 'custom_link') :
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
-  <?php else : ?>
-  <?php echo wp_kses_post($title); ?>
-  <?php endif; ?>
-</div>
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
+        <?php else : ?>
+            <?php echo wp_kses_post($title); ?>
+        <?php endif; ?>
+    </div>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_css_title_link', 'post_grid_layout_element_css_title_link', 10);
 function post_grid_layout_element_css_title_link($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
+    </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_content', 'post_grid_layout_element_option_content');
-
-
 function post_grid_layout_element_option_content($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Content', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Content', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -1602,9 +1188,7 @@ function post_grid_layout_element_option_content($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -1616,9 +1200,7 @@ function post_grid_layout_element_option_content($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -1630,10 +1212,7 @@ function post_grid_layout_element_option_content($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -1645,10 +1224,7 @@ function post_grid_layout_element_option_content($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -1660,9 +1236,7 @@ function post_grid_layout_element_option_content($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -1674,119 +1248,77 @@ function post_grid_layout_element_option_content($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
-
 add_action('post_grid_layout_element_content', 'post_grid_layout_element_content');
-
 function post_grid_layout_element_content($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
-
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $post = get_post($post_id);
     $post_content = isset($post->post_content) ? $post->post_content : '';
-
-
     //$post_content = get_the_content($post_id);
-
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
-
     $post_content = wpautop($post_content);
     $post_content = do_shortcode($post_content);
-
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
-  <?php echo $post_content; ?>
-</div>
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
+        <?php echo $post_content; ?>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_excerpt', 'post_grid_layout_element_option_excerpt');
 function post_grid_layout_element_option_excerpt($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $excerpt_source = isset($element_data['excerpt_source']) ? $element_data['excerpt_source'] : '';
     //    $remove_html = isset($element_data['remove_html']) ? $element_data['remove_html'] : '';
     //    $remove_shortcodes = isset($element_data['remove_shortcodes']) ? $element_data['remove_shortcodes'] : '';
-
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
     $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Post excerpt', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Post excerpt', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -1798,9 +1330,7 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'excerpt_source',
                 'css_id'        => $element_index . '_excerpt_source',
@@ -1814,13 +1344,9 @@ function post_grid_layout_element_option_excerpt($parameters)
                     'excerpt_field' => __('Excerpt field', 'post-grid'),
                     'content' => __('Content', 'post-grid'),
                     'excerpt_content' => __('Excerpt first then Content', 'post-grid'),
-
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'char_limit',
                 'css_id'        => $element_index . '_char_limit',
@@ -1832,9 +1358,7 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => '',
                 'placeholder'        => '20',
             );
-
             $settings_tabs_field->generate_field($args);
-
             //
             //            $args = array(
             //                'id'		=> 'remove_html',
@@ -1872,8 +1396,6 @@ function post_grid_layout_element_option_excerpt($parameters)
             //            );
             //
             //            $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'read_more_text',
                 'css_id'        => $element_index . '_read_more_text',
@@ -1885,7 +1407,6 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => '',
                 'placeholder'        => 'Read more',
             );
-
             $settings_tabs_field->generate_field($args);
             $args = array(
                 'id'        => 'link_target',
@@ -1901,17 +1422,9 @@ function post_grid_layout_element_option_excerpt($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -1923,9 +1436,7 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => '10px 0',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_color',
@@ -1936,10 +1447,7 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -1951,10 +1459,7 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -1966,10 +1471,7 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => '15px',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -1981,9 +1483,7 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -1995,239 +1495,174 @@ function post_grid_layout_element_option_excerpt($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_excerpt', 'post_grid_layout_element_excerpt');
-
 function post_grid_layout_element_excerpt($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
-
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
-
-
-
-
     //$post_excerpt = get_the_excerpt($post_id);
-
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_excerpt_permalink', $post_link, $args);
-
     $excerpt_source = !empty($element['excerpt_source']) ? $element['excerpt_source'] : 'excerpt_content';
-
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $char_limit = !empty($element['char_limit']) ? (int) $element['char_limit'] : 50;
     $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
-
-
     if ($excerpt_source == 'excerpt_field') {
-
         $the_post = get_post($post_id);
         $post_excerpt = isset($the_post->post_excerpt) ? $the_post->post_excerpt : '';
         //$post_content = strip_shortcodes( $post_content );
         //$post_excerpt = excerpt_remove_blocks( $post_content );
-
-
-
     } elseif ($excerpt_source == 'content') {
-
         $the_post = get_post($post_id);
         $post_content = isset($the_post->post_content) ? $the_post->post_content : '';
         $post_content = strip_shortcodes($post_content);
-
         if (function_exists('excerpt_remove_blocks')) {
             $post_excerpt = excerpt_remove_blocks($post_content);
         }
     } elseif ($excerpt_source == 'excerpt_content') {
-
         $the_post = get_post($post_id);
         $post_excerpt = isset($the_post->post_excerpt) ? $the_post->post_excerpt : '';
         $post_content = isset($the_post->post_content) ? $the_post->post_content : '';
-
         $post_excerpt = !empty($post_excerpt) ? $post_excerpt : $post_content;
         $post_excerpt = strip_shortcodes($post_excerpt);
         if (function_exists('excerpt_remove_blocks')) {
             $post_excerpt = excerpt_remove_blocks($post_excerpt);
         }
     }
-
-
-
-
     if ($char_limit > 0) {
         $post_excerpt = wp_trim_words($post_excerpt, $char_limit, '');
     }
-
-
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
-  <?php echo wp_kses_post($post_excerpt); ?>
-  <?php
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
+        <?php echo wp_kses_post($post_excerpt); ?>
+        <?php
         if (!empty($read_more_text)) :
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($read_more_text); ?></a>
-  <?php
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($read_more_text); ?></a>
+        <?php
         endif;
         ?>
-</div>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_excerpt', 'post_grid_layout_element_css_excerpt', 10);
 function post_grid_layout_element_css_excerpt($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
+    </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_excerpt_read_more', 'post_grid_layout_element_option_excerpt_read_more');
 function post_grid_layout_element_option_excerpt_read_more($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $excerpt_source = isset($element_data['excerpt_source']) ? $element_data['excerpt_source'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
     $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : __('Read more', 'post-grid');
-
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Excerpt read more', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Excerpt read more', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -2239,10 +1674,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'excerpt_source',
                 'css_id'        => $element_index . '_excerpt_source',
@@ -2256,13 +1688,9 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                     'excerpt_field' => __('Excerpt field', 'post-grid'),
                     'content' => __('Content', 'post-grid'),
                     'excerpt_content' => __('Excerpt first then Content', 'post-grid'),
-
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'char_limit',
                 'css_id'        => $element_index . '_char_limit',
@@ -2274,9 +1702,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '20',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'read_more_text',
                 'css_id'        => $element_index . '_read_more_text',
@@ -2288,7 +1714,6 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => 'Read more',
             );
-
             $settings_tabs_field->generate_field($args);
             $args = array(
                 'id'        => 'link_target',
@@ -2304,17 +1729,9 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_color',
@@ -2325,9 +1742,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -2339,9 +1754,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -2353,9 +1766,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '16px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -2367,9 +1778,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -2381,9 +1790,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -2395,76 +1802,48 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
 add_action('post_grid_layout_element_excerpt_read_more', 'post_grid_layout_element_excerpt_read_more');
-
 function post_grid_layout_element_excerpt_read_more($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
-
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
-
-
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_excerpt_read_more_permalink', $post_link, $args);
-
     $excerpt_source = !empty($element['excerpt_source']) ? $element['excerpt_source'] : 'excerpt_content';
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
     $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-
-
     if ($excerpt_source == 'excerpt_field') {
-
         $the_post = get_post($post_id);
         $post_excerpt = isset($the_post->post_excerpt) ? $the_post->post_excerpt : '';
         //$post_content = strip_shortcodes( $post_content );
         //$post_excerpt = excerpt_remove_blocks( $post_content );
-
-
     } elseif ($excerpt_source == 'content') {
-
         $the_post = get_post($post_id);
         $post_content = isset($the_post->post_content) ? $the_post->post_content : '';
         $post_content = strip_shortcodes($post_content);
@@ -2472,154 +1851,118 @@ function post_grid_layout_element_excerpt_read_more($args)
             $post_excerpt = excerpt_remove_blocks($post_content);
         }
     } elseif ($excerpt_source == 'excerpt_content') {
-
         $the_post = get_post($post_id);
         $post_excerpt = isset($the_post->post_excerpt) ? $the_post->post_excerpt : '';
         $post_content = isset($the_post->post_content) ? $the_post->post_content : '';
-
         $post_excerpt = !empty($post_excerpt) ? $post_excerpt : $post_content;
         $post_excerpt = strip_shortcodes($post_excerpt);
         if (function_exists('excerpt_remove_blocks')) {
             $post_excerpt = excerpt_remove_blocks($post_excerpt);
         }
     }
-
     if ($char_limit > 0) {
         $post_excerpt = wp_trim_words($post_excerpt, $char_limit, '');
     }
-
-
 ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
-  <?php echo $post_excerpt; ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
-
-</div>
+    <div
+        class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
+        <?php echo $post_excerpt; ?>
+        <a target="<?php echo esc_attr($link_target); ?>"
+            href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+    </div>
 <?php
 }
-
-
-
-
-
 add_action('post_grid_layout_element_css_excerpt_read_more', 'post_grid_layout_element_css_excerpt_read_more', 10);
 function post_grid_layout_element_css_excerpt_read_more($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
+    </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_read_more', 'post_grid_layout_element_option_read_more');
 function post_grid_layout_element_option_read_more($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : __('Read more', 'post-grid');
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Read more', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Read more', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -2631,10 +1974,7 @@ function post_grid_layout_element_option_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'read_more_text',
                 'css_id'        => $element_index . '_read_more_text',
@@ -2646,10 +1986,7 @@ function post_grid_layout_element_option_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => 'Read more',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -2667,10 +2004,7 @@ function post_grid_layout_element_option_read_more($parameters)
                     )
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_target',
                 'css_id'        => $element_index . '_link_target',
@@ -2685,13 +2019,9 @@ function post_grid_layout_element_option_read_more($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_color',
@@ -2702,9 +2032,7 @@ function post_grid_layout_element_option_read_more($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -2716,9 +2044,7 @@ function post_grid_layout_element_option_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -2730,9 +2056,7 @@ function post_grid_layout_element_option_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '16px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -2744,9 +2068,7 @@ function post_grid_layout_element_option_read_more($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -2758,9 +2080,7 @@ function post_grid_layout_element_option_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -2772,184 +2092,139 @@ function post_grid_layout_element_option_read_more($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_read_more', 'post_grid_layout_element_read_more');
-
 function post_grid_layout_element_read_more($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_read_more_permalink', $post_link, $args);
-
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
-
     $title = get_the_title($post_id);
 ?>
-<?php if ($link_to == 'post_link') : ?>
-<a class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more "
-  target="<?php echo esc_attr($link_target); ?>"
-  href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
-<?php elseif ($link_to == 'custom_link') :
-
+    <?php if ($link_to == 'post_link') : ?>
+        <a class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more "
+            target="<?php echo esc_attr($link_target); ?>"
+            href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+    <?php elseif ($link_to == 'custom_link') :
         $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
         $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
     ?>
-<a target="<?php echo esc_attr($link_target); ?>"
-  href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
-<?php else : ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
-  <?php echo esc_html($read_more_text); ?>
-</div>
-<?php endif; ?>
-
+        <a target="<?php echo esc_attr($link_target); ?>"
+            href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
+    <?php else : ?>
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
+            <?php echo esc_html($read_more_text); ?>
+        </div>
+    <?php endif; ?>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_css_read_more', 'post_grid_layout_element_css_read_more', 10);
 function post_grid_layout_element_css_read_more($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?> !important;
+            ;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?> !important;
-  ;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?> !important;
-  ;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?> !important;
-  ;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?> !important;
-  ;
-  <?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?> !important;
+            ;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?> !important;
+            ;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?> !important;
+            ;
+            <?php endif;
+            ?>
+        }
+    </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_media', 'post_grid_layout_element_option_media');
-
-
 function post_grid_layout_element_option_media($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $media_source = isset($element_data['media_source']) ? $element_data['media_source'] : array();
     $padding = isset($element_data['padding']) ? $element_data['padding'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
     $media_sources_list = apply_filters(
         'post_grid_media_source_list',
         array(
@@ -2959,19 +2234,15 @@ function post_grid_layout_element_option_media($parameters)
             'siteorigin_first_image' => __('SiteOrigin first image', 'post-grid'),
         )
     );
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-    <span class="header-text expand"><?php echo __('Media', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-    <?php
-
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Media', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -2983,68 +2254,55 @@ function post_grid_layout_element_option_media($parameters)
                 'default'        => '',
                 'placeholder'        => 'media-css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
-
             if (!empty($media_sources_list)) {
                 $media_source_new = array();
-
                 if (!empty($media_source))
                     foreach ($media_source as $elementIndex => $argData) {
                         $enable = isset($argData['enable']) ? $argData['enable'] : '';
-
                         if ($enable == 'yes')
                             $media_source_new[$elementIndex]  = array('enable' => $enable);
                     }
                 $media_sources_new = array_replace($media_source_new, $media_sources_list);
                 $media_sources_new = (!empty($media_sources_new)) ? $media_sources_new : $media_sources_list;
             ?>
-    <div class="expandable sortable">
-      <?php
-
+                <div class="expandable sortable">
+                    <?php
                     if (!empty($media_sources_new))
                         foreach ($media_sources_new as $source_id => $source_name) {
-
                             if (is_array($source_name)) continue;
-
                             $media_source_options = array();
                             $source_data = isset($media_source[$source_id]) ? $media_source[$source_id] : array();
                             $source_enable = isset($media_source[$source_id]['enable']) ? $media_source[$source_id]['enable'] : '';
-
                             $media_source_options['index'] = $element_index;
                             $media_source_options['input_name'] = $input_name;
                             $media_source_options['source_data'] = $source_data;
-
                     ?>
-      <div class="item">
-        <div class="element-title header ">
-          <span class="sort"><i class="fas fa-sort"></i></span>
-          <?php
+                        <div class="item">
+                            <div class="element-title header ">
+                                <span class="sort"><i class="fas fa-sort"></i></span>
+                                <?php
                                 if ($source_enable == 'yes') :
                                 ?><i class="fas fa-check"></i><?php
                                                             else :
                                                                 ?><i class="fas fa-times"></i><?php
                                                                                             endif; ?>
-          <span class="header-text expand"><?php echo esc_html($source_name); ?></span>
-        </div>
-        <div class="element-options options">
-          <?php
+                                <span class="header-text expand"><?php echo esc_html($source_name); ?></span>
+                            </div>
+                            <div class="element-options options">
+                                <?php
                                 do_action('media_source_options_' . $source_id, $media_source_options);
                                 ?>
-        </div>
-      </div>
-      <?php
+                            </div>
+                        </div>
+                    <?php
                         }
                     ?>
-    </div>
-    <?php
+                </div>
+            <?php
             }
-
             $html = ob_get_clean();
-
             $args = array(
                 'id' => 'media_source',
                 'title' => __('Media source', 'post-grid'),
@@ -3052,30 +2310,20 @@ function post_grid_layout_element_option_media($parameters)
                 'type' => 'custom_html',
                 'html' => $html,
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $media_height = isset($element_data['media_height']) ? $element_data['media_height'] : '';
-
             $media_height_large = isset($media_height['large']) ? $media_height['large'] : '';
             $media_height_large_type = isset($media_height['large_type']) ? $media_height['large_type'] : '';
-
             $media_height_medium = isset($media_height['medium']) ? $media_height['medium'] : '';
             $media_height_medium_type = isset($media_height['medium_type']) ? $media_height['medium_type'] : '';
-
             $media_height_small = isset($media_height['small']) ? $media_height['small'] : '';
             $media_height_small_type = isset($media_height['small_type']) ? $media_height['small_type'] : '';
-
-
             $args = array(
                 'id'        => 'media_height',
                 'title'        => __('Media height', 'post-grid'),
                 'details'    => __('Set media height.', 'post-grid'),
                 'type'        => 'option_group',
                 'options'        => array(
-
                     array(
                         'id'        => 'large_type',
                         'css_id'        => $element_index . '_text_align',
@@ -3140,13 +2388,8 @@ function post_grid_layout_element_option_media($parameters)
                         'placeholder'   => '280px',
                     ),
                 ),
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -3158,10 +2401,7 @@ function post_grid_layout_element_option_media($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'padding',
                 'css_id'        => $element_index . '_margin',
@@ -3173,10 +2413,7 @@ function post_grid_layout_element_option_media($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -3188,9 +2425,7 @@ function post_grid_layout_element_option_media($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -3202,84 +2437,55 @@ function post_grid_layout_element_option_media($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_media', 'post_grid_layout_element_media');
-
 function post_grid_layout_element_media($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $media_source = isset($element['media_source']) ? $element['media_source'] : '';
-
     $featured_img_size = !empty($element['featured_img_size']) ? $element['featured_img_size'] : 'full';
     $thumb_linked = !empty($element['thumb_linked']) ? $element['thumb_linked'] : 'yes';
-
     $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
-
-
 ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> element-media ">
-  <?php
-
+    <div
+        class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> element-media ">
+        <?php
         $html_media = '';
-
         $is_image = false;
         if (!empty($media_source))
             foreach ($media_source as $source_id => $source_info) {
-
                 $args['source_id'] = $source_id;
                 $args['source_args'] = $source_info;
                 $args['post_settings'] = $post_grid_post_settings;
-
                 $is_enable = isset($source_info['enable']) ? $source_info['enable'] : '';
-
                 $media = post_grid_media($post_id, $args);
-
                 if ($is_image) continue;
-
                 if ($is_enable == 'yes') {
                     if (!empty($media)) {
-
                         $html_media = post_grid_media($post_id, $args);
                         $is_image = true;
                     } else {
@@ -3287,175 +2493,138 @@ function post_grid_layout_element_media($args)
                     }
                 }
             }
-
         echo ($html_media);
-
         ?>
-
-
-</div>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_media', 'post_grid_layout_element_css_media', 10);
 function post_grid_layout_element_css_media($args)
 {
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $media_height = isset($element['media_height']) ? $element['media_height'] : '';
     $thumb_height_large = isset($media_height['large']) ? $media_height['large'] : '';
     $thumb_height_medium = isset($media_height['medium']) ? $media_height['medium'] : '';
     $thumb_height_small = isset($media_height['small']) ? $media_height['small'] : '';
-
     $height_large_type = isset($media_height['large_type']) ? $media_height['large_type'] : '';
     $height_medium_type = isset($media_height['medium_type']) ? $media_height['medium_type'] : '';
     $height_small_type = isset($media_height['small_type']) ? $media_height['small_type'] : '';
-
     $padding = isset($element['padding']) ? $element['padding'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($padding)): ?>padding: <?php echo esc_attr($padding);
+                                                        ?>;
+            <?php endif;
+            ?>overflow: hidden;
+            <?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                        ?><?php endif;
+                                            ?>
+        }
 
-?> {
-  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($padding)): ?>padding: <?php echo esc_attr($padding);
-  ?>;
-  <?php endif;
-  ?>overflow: hidden;
-  <?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index) . ' img';
+            ?> {
+            max-width: 100%;
+            height: auto;
+        }
 
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index) . ' img';
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-?> {
-  max-width: 100%;
-  height: auto;
-}
+        <?php endif;
+        ?>@media only screen and (min-width: 1024px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if ($height_large_type == 'auto_height'): ?>height: auto;
+                <?php elseif ($height_large_type == 'fixed_height'): ?><?php if (!empty($thumb_height_large)): ?>height: <?php echo esc_attr($thumb_height_large);
+                                                                                                                            ?>;
+                <?php endif;
+                ?><?php elseif ($height_large_type == 'max_height'): ?><?php if (!empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
+                                                                                                                                ?>;
+                <?php endif;
+                ?><?php endif;
+                    ?>
+            }
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+        @media only screen and (min-width: 768px) and (max-width: 1023px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if ($height_medium_type == 'auto_height'): ?>height: auto;
+                <?php elseif ($height_medium_type == 'fixed_height'): ?><?php if (!empty($thumb_height_medium)): ?>height: <?php echo esc_attr($thumb_height_medium);
+                                                                                                                            ?>;
+                <?php endif;
+                ?><?php elseif ($height_medium_type == 'max_height'): ?><?php if (!empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
+                                                                                                                                ?>;
+                <?php endif;
+                ?><?php endif;
+                    ?>
+            }
+        }
 
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-
-?>@media only screen and (min-width: 1024px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ($height_large_type=='auto_height'): ?>height: auto;
-    <?php elseif ($height_large_type=='fixed_height'): ?><?php if ( !empty($thumb_height_large)): ?>height: <?php echo esc_attr($thumb_height_large);
-    ?>;
-    <?php endif;
-    ?><?php elseif ($height_large_type=='max_height'): ?><?php if ( !empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
-    ?>;
-    <?php endif;
-    ?><?php endif;
-    ?>
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ($height_medium_type=='auto_height'): ?>height: auto;
-    <?php elseif ($height_medium_type=='fixed_height'): ?><?php if ( !empty($thumb_height_medium)): ?>height: <?php echo esc_attr($thumb_height_medium);
-    ?>;
-    <?php endif;
-    ?><?php elseif ($height_medium_type=='max_height'): ?><?php if ( !empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
-    ?>;
-    <?php endif;
-    ?><?php endif;
-    ?>
-  }
-}
-
-@media only screen and (min-width: 0px) and (max-width: 767px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ($height_small_type=='auto_height'): ?>height: auto;
-    <?php elseif ($height_small_type=='fixed_height'): ?><?php if ( !empty($thumb_height_small)): ?>height: <?php echo esc_attr($thumb_height_small);
-    ?>;
-    <?php endif;
-    ?><?php elseif ($height_small_type=='max_height'): ?><?php if ( !empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
-    ?>;
-    <?php endif;
-    ?><?php endif;
-    ?>
-  }
-}
-</style>
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if ($height_small_type == 'auto_height'): ?>height: auto;
+                <?php elseif ($height_small_type == 'fixed_height'): ?><?php if (!empty($thumb_height_small)): ?>height: <?php echo esc_attr($thumb_height_small);
+                                                                                                                            ?>;
+                <?php endif;
+                ?><?php elseif ($height_small_type == 'max_height'): ?><?php if (!empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
+                                                                                                                                ?>;
+                <?php endif;
+                ?><?php endif;
+                    ?>
+            }
+        }
+    </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_thumb', 'post_grid_layout_element_option_thumb');
-
-
 function post_grid_layout_element_option_thumb($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $thumb_size = isset($element_data['thumb_size']) ? $element_data['thumb_size'] : '';
     $default_thumb_src = isset($element_data['default_thumb_src']) ? $element_data['default_thumb_src'] : '';
-
     $thumb_height = isset($element_data['thumb_height']) ? $element_data['thumb_height'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
-
     $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
     $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
-
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Thumbnail', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Thumbnail', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -3467,22 +2636,16 @@ function post_grid_layout_element_option_thumb($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $thumbnail_sizes = array();
             $thumbnail_sizes['full'] = __('Full', '');
             $get_intermediate_image_sizes =  get_intermediate_image_sizes();
-
             if (!empty($get_intermediate_image_sizes))
                 foreach ($get_intermediate_image_sizes as $size_key) {
                     $size_name = str_replace('_', ' ', $size_key);
                     $size_name = str_replace('-', ' ', $size_name);
-
                     $thumbnail_sizes[$size_key] = ucfirst($size_name);
                 }
-
             $args = array(
                 'id'        => 'thumb_size',
                 'parent' => $input_name . '[thumb]',
@@ -3493,12 +2656,7 @@ function post_grid_layout_element_option_thumb($parameters)
                 'default'        => 'large',
                 'args'        => $thumbnail_sizes,
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -3516,10 +2674,7 @@ function post_grid_layout_element_option_thumb($parameters)
                     )
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_target',
                 'css_id'        => $element_index . '_link_target',
@@ -3534,14 +2689,9 @@ function post_grid_layout_element_option_thumb($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'thumb_height',
                 'title'        => __('Thumbnail height', 'post-grid'),
@@ -3579,11 +2729,8 @@ function post_grid_layout_element_option_thumb($parameters)
                         'placeholder'   => '280px',
                     ),
                 ),
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'default_thumb_src',
                 'parent' => $input_name . '[thumb]',
@@ -3593,10 +2740,7 @@ function post_grid_layout_element_option_thumb($parameters)
                 'value'        => $default_thumb_src,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -3608,9 +2752,7 @@ function post_grid_layout_element_option_thumb($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -3622,9 +2764,7 @@ function post_grid_layout_element_option_thumb($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -3636,228 +2776,163 @@ function post_grid_layout_element_option_thumb($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_thumb', 'post_grid_layout_element_thumb');
-
 function post_grid_layout_element_thumb($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $default_thumb_src = isset($element['default_thumb_src']) ? $element['default_thumb_src'] : '';
     $thumb_size = isset($element['thumb_size']) ?  $element['thumb_size'] : 'large';
-
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
-
-
     $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), $thumb_size);
     $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb_src;
-
     if (empty($thumb_url)) return;
-
     $alt_text = get_post_meta(get_post_thumbnail_id($post_id), '_wp_attachment_image_alt', true);
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_thumb_permalink', $post_link, $args);
-
-
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
-  <?php
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
+        <?php
         if ($link_to == 'post_link') :
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img alt="php"
-      src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($alt_text); ?>"></a>
-  <?php elseif ($link_to == 'custom_link') :
-
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img alt="php"
+                    src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($alt_text); ?>"></a>
+        <?php elseif ($link_to == 'custom_link') :
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img
-      alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
-
-  <?php
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img
+                    alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
+        <?php
         else :
         ?>
-  <img alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>">
-  <?php
-
+            <img alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>">
+        <?php
         endif;
         ?>
-
-
-</div>
+    </div>
 <?php
 }
-
-
-
-
-
-
 add_action('post_grid_layout_element_css_thumb', 'post_grid_layout_element_css_thumb', 10);
 function post_grid_layout_element_css_thumb($args)
 {
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $thumb_height = isset($element['thumb_height']) ? $element['thumb_height'] : '';
     $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
     $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
-
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            overflow: hidden;
+            <?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?>
+        }
 
-?> {
-  overflow: hidden;
-  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?>
-}
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index) . ' img';
+            ?> {
+            max-width: 100%;
+            height: auto;
+        }
 
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index) . ' img';
+        @media only screen and (min-width: 1024px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if (!empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
+                                                                        ?>;
+                <?php endif;
+                ?>
+            }
+        }
 
-?> {
-  max-width: 100%;
-  height: auto;
-}
+        @media only screen and (min-width: 768px) and (max-width: 1023px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if (!empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
+                                                                        ?>;
+                <?php endif;
+                ?>
+            }
+        }
 
-@media only screen and (min-width: 1024px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ( !empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
-    ?>;
-    <?php endif;
-    ?>
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ( !empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
-    ?>;
-    <?php endif;
-    ?>
-  }
-}
-
-@media only screen and (min-width: 0px) and (max-width: 767px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ( !empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
-    ?>;
-    <?php endif;
-    ?>
-  }
-}
-</style>
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if (!empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
+                                                                        ?>;
+                <?php endif;
+                ?>
+            }
+        }
+    </style>
 <?php
 }
-
-
 add_action('post_grid_layout_element_option_thumb_link', 'post_grid_layout_element_option_thumb_link');
-
-
 function post_grid_layout_element_option_thumb_link($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $thumb_size = isset($element_data['thumb_size']) ? $element_data['thumb_size'] : '';
     $default_thumb_src = isset($element_data['default_thumb_src']) ? $element_data['default_thumb_src'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
-
     $thumb_height = isset($element_data['thumb_height']) ? $element_data['thumb_height'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-
     $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
     $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Thumbnail with link', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Thumbnail with link', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -3869,21 +2944,16 @@ function post_grid_layout_element_option_thumb_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $thumbnail_sizes = array();
             $thumbnail_sizes['full'] = __('Full', '');
             $get_intermediate_image_sizes =  get_intermediate_image_sizes();
-
             if (!empty($get_intermediate_image_sizes))
                 foreach ($get_intermediate_image_sizes as $size_key) {
                     $size_name = str_replace('_', ' ', $size_key);
                     $size_name = str_replace('-', ' ', $size_name);
-
                     $thumbnail_sizes[$size_key] = ucfirst($size_name);
                 }
-
             $args = array(
                 'id'        => 'thumb_size',
                 'parent' => $input_name . '[thumb_link]',
@@ -3894,11 +2964,7 @@ function post_grid_layout_element_option_thumb_link($parameters)
                 'default'        => 'large',
                 'args'        => $thumbnail_sizes,
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -3916,10 +2982,7 @@ function post_grid_layout_element_option_thumb_link($parameters)
                     )
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_target',
                 'css_id'        => $element_index . '_link_target',
@@ -3934,14 +2997,9 @@ function post_grid_layout_element_option_thumb_link($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'thumb_height',
                 'title'        => __('Thumbnail height', 'post-grid'),
@@ -3979,11 +3037,8 @@ function post_grid_layout_element_option_thumb_link($parameters)
                         'placeholder'   => '280px',
                     ),
                 ),
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'default_thumb_src',
                 'parent' => $input_name . '[thumb_link]',
@@ -3993,10 +3048,7 @@ function post_grid_layout_element_option_thumb_link($parameters)
                 'value'        => $default_thumb_src,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -4008,9 +3060,7 @@ function post_grid_layout_element_option_thumb_link($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -4022,9 +3072,7 @@ function post_grid_layout_element_option_thumb_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -4036,232 +3084,162 @@ function post_grid_layout_element_option_thumb_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
 add_action('post_grid_layout_element_thumb_link', 'post_grid_layout_element_thumb_link');
-
 function post_grid_layout_element_thumb_link($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $default_thumb_src = isset($element['default_thumb_src']) ? $element['default_thumb_src'] : '';
     $thumb_size = isset($element['thumb_size']) ?  $element['thumb_size'] : 'large';
-
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
-
-
     $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), $thumb_size);
     $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb_src;
-
     if (empty($thumb_url)) return;
-
     $alt_text = get_post_meta(get_post_thumbnail_id($post_id), '_wp_attachment_image_alt', true);
-
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_thumb_link_permalink', $post_link, $args);
-
-
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
-  <?php
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
+        <?php
         if ($link_to == 'post_link') :
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img
-      alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
-
-  <?php elseif ($link_to == 'custom_link') :
-
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img
+                    alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
+        <?php elseif ($link_to == 'custom_link') :
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img
-      alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
-
-
-  <?php
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img
+                    alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>"></a>
+        <?php
         else :
         ?>
-  <img alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>">
-  <?php
-
+            <img alt="<?php echo esc_attr($alt_text); ?>" src="<?php echo esc_url($thumb_url); ?>">
+        <?php
         endif;
         ?>
-
-
-</div>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_thumb_link', 'post_grid_layout_element_css_thumb_link', 10);
 function post_grid_layout_element_css_thumb_link($args)
 {
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $thumb_height = isset($element['thumb_height']) ? $element['thumb_height'] : '';
     $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
     $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
-
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            overflow: hidden;
+            <?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?>
+        }
 
-?> {
-  overflow: hidden;
-  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?>
-}
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index) . ' img';
+            ?> {
+            max-width: 100%;
+            height: auto;
+        }
 
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index) . ' img';
+        @media only screen and (min-width: 1024px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if (!empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
+                                                                        ?>;
+                <?php endif;
+                ?>
+            }
+        }
 
-?> {
-  max-width: 100%;
-  height: auto;
-}
+        @media only screen and (min-width: 768px) and (max-width: 1023px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if (!empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
+                                                                        ?>;
+                <?php endif;
+                ?>
+            }
+        }
 
-@media only screen and (min-width: 1024px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ( !empty($thumb_height_large)): ?>max-height: <?php echo esc_attr($thumb_height_large);
-    ?>;
-    <?php endif;
-    ?>
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ( !empty($thumb_height_medium)): ?>max-height: <?php echo esc_attr($thumb_height_medium);
-    ?>;
-    <?php endif;
-    ?>
-  }
-}
-
-@media only screen and (min-width: 0px) and (max-width: 767px) {
-  <?php echo esc_attr('.layout-'. $layout_id);
-  ?><?php echo esc_attr(' .element_'. $index);
-
-  ?> {
-    <?php if ( !empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
-    ?>;
-    <?php endif;
-    ?>
-  }
-}
-</style>
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+            <?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index);
+                ?> {
+                <?php if (!empty($thumb_height_small)): ?>max-height: <?php echo esc_attr($thumb_height_small);
+                                                                        ?>;
+                <?php endif;
+                ?>
+            }
+        }
+    </style>
 <?php
 }
-
-
-
-
-
-
-
-
-
-
-
 add_action('post_grid_layout_element_option_post_date', 'post_grid_layout_element_option_post_date');
 function post_grid_layout_element_option_post_date($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $date_format = isset($element_data['date_format']) ? $element_data['date_format'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Post date', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Post date', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -4273,9 +3251,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'date_format',
                 'css_id'        => $element_index . '_background_colorpost_date',
@@ -4286,12 +3262,8 @@ function post_grid_layout_element_option_post_date($parameters)
                 'value'        => $date_format,
                 'default'        => '',
                 'placeholder'        => 'd-m-Y',
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -4303,10 +3275,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => '',
                 'placeholder'        => 'Date: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -4324,9 +3293,7 @@ function post_grid_layout_element_option_post_date($parameters)
                     )
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_custom_text',
@@ -4337,9 +3304,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -4351,10 +3316,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -4366,10 +3328,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -4381,10 +3340,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -4396,9 +3352,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -4410,9 +3364,7 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -4424,104 +3376,72 @@ function post_grid_layout_element_option_post_date($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_post_date', 'post_grid_layout_element_post_date');
-
 function post_grid_layout_element_post_date($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $link_to = isset($element['link_to']) ? $element['link_to'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
     $wrapper_html  = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_post_date_permalink', $post_link, $args);
-
     $post_date = get_the_date($date_format, $post_id);
-
     $post_date = sprintf($wrapper_html, $post_date);
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
-  <?php
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
+        <?php
         if ($link_to == 'post_link') :
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_date); ?></a>
-
-  <?php elseif ($link_to == 'custom_link') :
-
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_date); ?></a>
+        <?php elseif ($link_to == 'custom_link') :
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_date); ?></a>
-
-
-  <?php
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_date); ?></a>
+        <?php
         else :
         ?>
-  <?php echo esc_html($post_date); ?>
-  <?php
+            <?php echo esc_html($post_date); ?>
+        <?php
         endif;
         ?>
-
-</div>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_post_date', 'post_grid_layout_element_css_post_date', 10);
 function post_grid_layout_element_css_post_date($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
@@ -4530,98 +3450,80 @@ function post_grid_layout_element_css_post_date($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
+    </style>
 <?php
 }
-
-
-
-
-
-
 add_action('post_grid_layout_element_option_author', 'post_grid_layout_element_option_author');
 function post_grid_layout_element_option_author($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Author name', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Author name', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -4633,9 +3535,7 @@ function post_grid_layout_element_option_author($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -4645,7 +3545,6 @@ function post_grid_layout_element_option_author($parameters)
                 'type'        => 'select',
                 'value'        => $link_to,
                 'default'        => 'none',
-
                 'args'        => apply_filters(
                     'post_grid_author_link_to_args',
                     array(
@@ -4654,13 +3553,8 @@ function post_grid_layout_element_option_author($parameters)
                         'none' => __('None', 'post-grid'),
                     )
                 ),
-
             );
-
-
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -4672,11 +3566,7 @@ function post_grid_layout_element_option_author($parameters)
                 'default'        => '',
                 'placeholder'        => 'Author: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_color',
@@ -4687,11 +3577,7 @@ function post_grid_layout_element_option_author($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -4703,9 +3589,7 @@ function post_grid_layout_element_option_author($parameters)
                 'default'        => '',
                 'placeholder'        => '16px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_padding',
@@ -4717,9 +3601,7 @@ function post_grid_layout_element_option_author($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 10px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -4731,9 +3613,7 @@ function post_grid_layout_element_option_author($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -4745,9 +3625,7 @@ function post_grid_layout_element_option_author($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -4759,118 +3637,80 @@ function post_grid_layout_element_option_author($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
 add_action('post_grid_layout_element_author', 'post_grid_layout_element_author');
-
 function post_grid_layout_element_author($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $link_to = isset($element['link_to']) ? $element['link_to'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_author_permalink', $post_link, $args);
-
     $post = get_post($post_id);
     $post_author = isset($post->post_author) ? $post->post_author : '';
     $post_author_data = get_user_by('ID', $post_author);
-
     $post_author = isset($post_author_data->display_name) ? $post_author_data->display_name : '';
-
     $post_author = sprintf($wrapper_html, $post_author);
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
-  <?php
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
+        <?php
         if ($link_to == 'post_link') :
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
-
-  <?php elseif ($link_to == 'custom_link') :
-
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
+        <?php elseif ($link_to == 'custom_link') :
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
-
-
-
-
-  <?php
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
+        <?php
         elseif ($link_to == 'author_posts_link') :
             $post_author_link = get_author_posts_url(get_the_author_meta('ID'));
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
-  <?php
-
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
+        <?php
         else :
         ?>
-  <?php echo esc_html($post_author); ?>
-  <?php
+            <?php echo esc_html($post_author); ?>
+        <?php
         endif;
         ?>
-
-</div>
+    </div>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_css_author', 'post_grid_layout_element_css_author', 10);
 function post_grid_layout_element_css_author($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
@@ -4879,98 +3719,81 @@ function post_grid_layout_element_css_author($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
+    </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_author_link', 'post_grid_layout_element_option_author_link');
 function post_grid_layout_element_option_author_link($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Author name with link', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Author name with link', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -4982,9 +3805,7 @@ function post_grid_layout_element_option_author_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'link_to',
                 'css_id'        => $element_index . '_link_to',
@@ -5003,10 +3824,7 @@ function post_grid_layout_element_option_author_link($parameters)
                     )
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -5018,10 +3836,7 @@ function post_grid_layout_element_option_author_link($parameters)
                 'default'        => '',
                 'placeholder'        => 'Author: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_color',
@@ -5032,11 +3847,7 @@ function post_grid_layout_element_option_author_link($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -5048,9 +3859,7 @@ function post_grid_layout_element_option_author_link($parameters)
                 'default'        => '',
                 'placeholder'        => '16px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_padding',
@@ -5062,9 +3871,7 @@ function post_grid_layout_element_option_author_link($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 10px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -5076,9 +3883,7 @@ function post_grid_layout_element_option_author_link($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -5090,9 +3895,7 @@ function post_grid_layout_element_option_author_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -5104,112 +3907,77 @@ function post_grid_layout_element_option_author_link($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
-
 add_action('post_grid_layout_element_author_link', 'post_grid_layout_element_author_link');
-
 function post_grid_layout_element_author_link($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_author_link_permalink', $post_link, $args);
-
     $post_author = get_the_author();
-
     $post_author = sprintf($wrapper_html, $post_author);
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author_link ">
-  <?php
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author_link ">
+        <?php
         if ($link_to == 'post_link') :
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
-
-
-  <?php elseif ($link_to == 'custom_link') :
-
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($post_author); ?></a>
+        <?php elseif ($link_to == 'custom_link') :
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
-
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
-
-
-
-  <?php
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
+        <?php
         elseif ($link_to == 'author_posts_link') :
             $post_author_link = get_author_posts_url(get_the_author_meta('ID'));
-
         ?>
-  <a target="<?php echo esc_attr($link_target); ?>"
-    href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
-  <?php
-
+            <a target="<?php echo esc_attr($link_target); ?>"
+                href="<?php echo esc_url($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
+        <?php
         else :
         ?>
-  <?php echo esc_html($post_author); ?>
-  <?php
+            <?php echo esc_html($post_author); ?>
+        <?php
         endif;
         ?>
-
-</div>
+    </div>
 <?php
 }
-
 add_action('post_grid_layout_element_css_author_link', 'post_grid_layout_element_css_author_link', 10);
 function post_grid_layout_element_css_author_link($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
@@ -5218,104 +3986,84 @@ function post_grid_layout_element_css_author_link($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
-
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-</style>
+        <?php endif;
+        ?><?php echo esc_attr('.layout-' . $layout_id);
+            ?><?php echo esc_attr(' .element_' . $index . ' a');
+                ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
+    </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_categories', 'post_grid_layout_element_option_categories');
 function post_grid_layout_element_option_categories($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $max_count = isset($element_data['max_count']) ? $element_data['max_count'] : 3;
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
-
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $wrapper_margin = isset($element_data['wrapper_margin']) ? $element_data['wrapper_margin'] : '';
     $link_color = isset($element_data['link_color']) ? $element_data['link_color'] : '';
     $text_color = isset($element_data['text_color']) ? $element_data['text_color'] : '';
-
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Post categories', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Post categories', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -5327,10 +4075,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'max_count',
                 'parent' => $input_name . '[categories]',
@@ -5341,9 +4086,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'default'        => 3,
                 'placeholder'        => '3',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'separator',
                 'css_id'        => $element_index . '_position_color',
@@ -5354,11 +4097,8 @@ function post_grid_layout_element_option_categories($parameters)
                 'value'        => $separator,
                 'default'        => '',
                 'placeholder'        => ', ',
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'link_target',
                 'css_id'        => $element_index . '_link_target',
@@ -5373,12 +4113,9 @@ function post_grid_layout_element_option_categories($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -5390,9 +4127,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'default'        => '',
                 'placeholder'        => 'Categories: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_margin',
                 'css_id'        => $element_index . '_margin',
@@ -5404,13 +4139,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -5421,12 +4150,8 @@ function post_grid_layout_element_option_categories($parameters)
                 'value'        => $font_size,
                 'default'        => '',
                 'placeholder'        => '16px',
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'link_color',
                 'css_id'        => $element_index . '_link_color',
@@ -5437,9 +4162,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'value'        => $link_color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'text_color',
                 'css_id'        => $element_index . '_text_color',
@@ -5450,10 +4173,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'value'        => $text_color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -5465,9 +4185,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -5479,9 +4197,7 @@ function post_grid_layout_element_option_categories($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -5493,101 +4209,70 @@ function post_grid_layout_element_option_categories($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
 add_action('post_grid_layout_element_categories', 'post_grid_layout_element_categories');
-
 function post_grid_layout_element_categories($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $max_count = isset($element['max_count']) ? (int) $element['max_count'] : 3;
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
     $separator = isset($element['separator']) ? $element['separator'] : ', ';
-
-
     $term_list = wp_get_post_terms($post_id, 'category', array('fields' => 'all'));
-
     $categories_html = '';
     $term_total_count = count($term_list);
     $max_term_limit = ($term_total_count < $max_count) ? $term_total_count : $max_count;
-
     $i = 0;
-
     if (!empty($term_list))
         foreach ($term_list as $term) {
             if ($i >= $max_count) continue;
-
             $term_id = isset($term->term_id) ? $term->term_id : '';
             $term_name = isset($term->name) ? $term->name : '';
             $term_link = get_term_link($term_id);
-
             $categories_html .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($term_link) . '">' . esc_html($term_name) . '</a>';
             if ($i + 1 < $max_term_limit) {
                 $categories_html .= $separator;
             }
-
             $i++;
         }
-
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
-  <?php echo sprintf($wrapper_html, $categories_html); ?>
-</div>
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
+        <?php echo sprintf($wrapper_html, $categories_html); ?>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_categories', 'post_grid_layout_element_css_categories', 10);
 function post_grid_layout_element_css_categories($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $link_color = isset($element['link_color']) ? $element['link_color'] : '';
     $text_color = isset($element['text_color']) ? $element['text_color'] : '';
-
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
@@ -5595,102 +4280,85 @@ function post_grid_layout_element_css_categories($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($text_color)): ?>color: <?php echo esc_attr($text_color);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($text_color)): ?>color: <?php echo esc_attr($text_color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index . ' a');
+            ?> {
+            <?php if (!empty($link_color)): ?>color: <?php echo esc_attr($link_color);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
 
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-?> {
-  <?php if ( !empty($link_color)): ?>color: <?php echo esc_attr($link_color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
-
-
-
-
-
 add_action('post_grid_layout_element_option_tags', 'post_grid_layout_element_option_tags');
 function post_grid_layout_element_option_tags($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $max_count = isset($element_data['max_count']) ? $element_data['max_count'] : 3;
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $wrapper_margin = isset($element_data['wrapper_margin']) ? $element_data['wrapper_margin'] : '';
     $link_color = isset($element_data['link_color']) ? $element_data['link_color'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Post tag', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Post tag', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -5702,9 +4370,7 @@ function post_grid_layout_element_option_tags($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'max_count',
                 'parent' => $input_name . '[tags]',
@@ -5715,9 +4381,7 @@ function post_grid_layout_element_option_tags($parameters)
                 'default'        => 3,
                 'placeholder'        => '3',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'separator',
                 'css_id'        => $element_index . '_position_color',
@@ -5728,11 +4392,8 @@ function post_grid_layout_element_option_tags($parameters)
                 'value'        => $separator,
                 'default'        => '',
                 'placeholder'        => ', ',
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'link_target',
                 'css_id'        => $element_index . '_link_target',
@@ -5747,13 +4408,9 @@ function post_grid_layout_element_option_tags($parameters)
                     '_parent' => __('_parent', 'post-grid'),
                     '_self' => __('_self', 'post-grid'),
                     '_top' => __('_top', 'post-grid'),
-
                 ),
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -5765,9 +4422,7 @@ function post_grid_layout_element_option_tags($parameters)
                 'default'        => '',
                 'placeholder'        => 'Tags: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'wrapper_margin',
                 'css_id'        => $element_index . '_margin',
@@ -5779,9 +4434,7 @@ function post_grid_layout_element_option_tags($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'link_color',
                 'css_id'        => $element_index . '_link_color',
@@ -5792,10 +4445,7 @@ function post_grid_layout_element_option_tags($parameters)
                 'value'        => $link_color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -5807,9 +4457,7 @@ function post_grid_layout_element_option_tags($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -5821,9 +4469,7 @@ function post_grid_layout_element_option_tags($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -5835,198 +4481,153 @@ function post_grid_layout_element_option_tags($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
 add_action('post_grid_layout_element_tags', 'post_grid_layout_element_tags');
-
 function post_grid_layout_element_tags($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $max_count = isset($element['max_count']) ? (int) $element['max_count'] : 3;
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
     $separator = isset($element['separator']) ? $element['separator'] : ', ';
-
-
     $term_list = wp_get_post_terms($post_id, 'post_tag', array('fields' => 'all'));
-
-
     $categories_html = '';
     $term_total_count = count($term_list);
     $max_term_limit = ($term_total_count < $max_count) ? $term_total_count : $max_count;
-
     $i = 0;
-
     if (!empty($term_list))
         foreach ($term_list as $term) {
             if ($i >= $max_count) continue;
-
             $term_id = isset($term->term_id) ? $term->term_id : '';
             $term_name = isset($term->name) ? $term->name : '';
             $term_link = get_term_link($term_id);
-
             $categories_html .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($term_link) . '">' . esc_html($term_name) . '</a>';
             if ($i + 1 < $max_term_limit) {
                 $categories_html .= $separator;
             }
-
             $i++;
         }
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
-  <?php echo sprintf($wrapper_html, $categories_html); ?>
-</div>
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+        <?php echo sprintf($wrapper_html, $categories_html); ?>
+    </div>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_tags', 'post_grid_layout_element_css_tags', 10);
 function post_grid_layout_element_css_tags($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $link_color = isset($element['link_color']) ? $element['link_color'] : '';
     $text_color = isset($element['text_color']) ? $element['text_color'] : '';
-
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($text_color)): ?>color: <?php echo esc_attr($text_color);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($text_color)): ?>color: <?php echo esc_attr($text_color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index . ' a');
+            ?> {
+            <?php if (!empty($link_color)): ?>color: <?php echo esc_attr($link_color);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?>
+        }
 
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-?> {
-  <?php if ( !empty($link_color)): ?>color: <?php echo esc_attr($link_color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?>
-}
-
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_comments_count', 'post_grid_layout_element_option_comments_count');
 function post_grid_layout_element_option_comments_count($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Comment count', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Comment count', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -6038,10 +4639,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'wrapper_html',
                 'css_id'        => $element_index . '_wrapper_html',
@@ -6053,12 +4651,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => '',
                 'placeholder'        => 'Total comments: %s',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
             $args = array(
                 'id'        => 'color',
                 'css_id'        => $element_index . '_color',
@@ -6069,9 +4662,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -6083,10 +4674,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => '',
                 'placeholder'        => '14px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_family',
                 'css_id'        => $element_index . '_font_family',
@@ -6098,10 +4686,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => '',
                 'placeholder'        => 'Open Sans',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -6113,10 +4698,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 0',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -6128,9 +4710,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -6142,9 +4722,7 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -6156,61 +4734,39 @@ function post_grid_layout_element_option_comments_count($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-    <?php
-
+            <textarea readonly type="text"
+                onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ?>
-
-  </div>
-</div>
-<?php
-
+        </div>
+    </div>
+    <?php
 }
-
-
-
 add_action('post_grid_layout_element_comments_count', 'post_grid_layout_element_comments_count');
-
 function post_grid_layout_element_comments_count($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
-
-
-
     $comments_number = get_comments_number($post_id);
     $comments_count_html = '';
-
     if (comments_open()) {
-
         if ($comments_number == 0) {
             $comments_count_html .= __('No Comments', 'post-grid');
         } elseif ($comments_number > 1) {
@@ -6218,115 +4774,85 @@ function post_grid_layout_element_comments_count($args)
         } else {
             $comments_count_html .= __('1 Comment', 'post-grid');
         }
-
     ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
-  <?php echo sprintf($wrapper_html, $comments_count_html); ?>
-</div>
-<?php
-
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+            <?php echo sprintf($wrapper_html, $comments_count_html); ?>
+        </div>
+    <?php
     }
 }
-
-
 add_action('post_grid_layout_element_css_comments_count', 'post_grid_layout_element_css_comments_count', 10);
 function post_grid_layout_element_css_comments_count($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $color = isset($element['color']) ? $element['color'] : '';
-
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
+                                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_family)): ?>font-family: <?php echo esc_attr($font_family);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
-
-
-
-
-
-
-
-
-
-
 add_action('post_grid_layout_element_option_share_button', 'post_grid_layout_element_option_share_button');
 function post_grid_layout_element_option_share_button($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $icon_color = isset($element_data['icon_color']) ? $element_data['icon_color'] : '';
     $icon_margin = isset($element_data['icon_margin']) ? $element_data['icon_margin'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Share button', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Share button', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -6338,10 +4864,7 @@ function post_grid_layout_element_option_share_button($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -6353,11 +4876,7 @@ function post_grid_layout_element_option_share_button($parameters)
                 'default'        => '',
                 'placeholder'        => '16px',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             $args = array(
                 'id'        => 'icon_margin',
                 'css_id'        => $element_index . '_icon_margin',
@@ -6369,9 +4888,7 @@ function post_grid_layout_element_option_share_button($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 10px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'icon_color',
                 'css_id'        => $element_index . '_color',
@@ -6382,9 +4899,7 @@ function post_grid_layout_element_option_share_button($parameters)
                 'value'        => $icon_color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -6396,9 +4911,7 @@ function post_grid_layout_element_option_share_button($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -6410,63 +4923,43 @@ function post_grid_layout_element_option_share_button($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}
  <?php echo esc_attr(' .element_' . $element_index); ?> a{}</textarea>
-    <?php
-
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
-
-
 add_action('post_grid_layout_element_share_button', 'post_grid_layout_element_share_button');
-
 function post_grid_layout_element_share_button($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_color = isset($element['color']) ? $element['color'] : '';
-
-
     $post_title = get_the_title($post_id);
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_share_button_permalink', $post_link, $args);
-
     $share_button_html = '';
-
     $share_button_html .= '
 		<span class="fb">
 			<a target="' . $link_target . '" href="https://www.facebook.com/sharer/sharer.php?u=' . $post_link . '"><i class="fab fa-facebook-square"></i></a>
@@ -6474,137 +4967,99 @@ function post_grid_layout_element_share_button($args)
 		<span class="twitter">
 			<a target="' . $link_target . '" href="https://twitter.com/intent/tweet?url=' . $post_link . '&text=' . $post_title . '"><i class="fab fa-twitter-square"></i></a>
 		</span>';
-
     $share_button_html = apply_filters('post_grid_share_buttons', $share_button_html, $args);
-
 ?>
-<div
-  class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
-  <?php echo sprintf($wrapper_html, $share_button_html); ?>
-</div>
+    <div
+        class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
+        <?php echo sprintf($wrapper_html, $share_button_html); ?>
+    </div>
 <?php
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 add_action('post_grid_layout_element_css_share_button', 'post_grid_layout_element_css_share_button', 10);
 function post_grid_layout_element_css_share_button($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
-
     $wrapper_margin = isset($element['wrapper_margin']) ? $element['wrapper_margin'] : '';
-
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
     $icon_margin = isset($element['icon_margin']) ? $element['icon_margin'] : '';
     $icon_color = isset($element['icon_color']) ? $element['icon_color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($icon_color)): ?>color: <?php echo esc_attr($icon_color);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($wrapper_margin)): ?>margin: <?php echo esc_attr($wrapper_margin);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($icon_color)): ?>color: <?php echo esc_attr($icon_color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($wrapper_margin)): ?>margin: <?php echo esc_attr($wrapper_margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index . ' a');
+            ?> {
+            <?php if (!empty($icon_color)): ?>color: <?php echo esc_attr($icon_color);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($icon_margin)): ?>margin: <?php echo esc_attr($icon_margin);
+                                                            ?>;
+            <?php endif;
+            ?>
+        }
 
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index . ' a');
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-?> {
-  <?php if ( !empty($icon_color)): ?>color: <?php echo esc_attr($icon_color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($icon_margin)): ?>margin: <?php echo esc_attr($icon_margin);
-  ?>;
-  <?php endif;
-  ?>
-}
-
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
-
-
-
-
 add_action('post_grid_layout_element_option_hr', 'post_grid_layout_element_option_hr');
 function post_grid_layout_element_option_hr($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $height = isset($element_data['height']) ? $element_data['height'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Horizontal line', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Horizontal line', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -6616,9 +5071,7 @@ function post_grid_layout_element_option_hr($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'background_color',
                 'css_id'        => $element_index . '_background_coloradd_to_cart',
@@ -6629,10 +5082,7 @@ function post_grid_layout_element_option_hr($parameters)
                 'value'        => $background_color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'height',
                 'css_id'        => $element_index . '_height',
@@ -6644,9 +5094,7 @@ function post_grid_layout_element_option_hr($parameters)
                 'default'        => '',
                 'placeholder'        => '5px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_padding',
@@ -6658,9 +5106,7 @@ function post_grid_layout_element_option_hr($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 10px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -6672,9 +5118,7 @@ function post_grid_layout_element_option_hr($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -6686,147 +5130,109 @@ function post_grid_layout_element_option_hr($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-    <?php
-
+            <textarea readonly type="text"
+                onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
 add_action('post_grid_layout_element_hr', 'post_grid_layout_element_hr');
-
 function post_grid_layout_element_hr($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
     $height = isset($element['height']) ? $element['height'] : '';
     $background_color = isset($element['background_color']) ? $element['background_color'] : '';
-
-
 ?>
-<hr class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr ">
-</hr>
+    <hr class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr ">
+    </hr>
 <?php
 }
-
-
 add_action('post_grid_layout_element_css_hr', 'post_grid_layout_element_css_hr', 10);
 function post_grid_layout_element_css_hr($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
     $height = isset($element['height']) ? $element['height'] : '1px';
-
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $background_color = isset($element['background_color']) ? $element['background_color'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($background_color)): ?>background-color: <?php echo esc_attr($background_color);
+                                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($height)): ?>padding: <?php echo esc_attr($height);
+                                                        ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($background_color)): ?>background-color: <?php echo esc_attr($background_color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($height)): ?>padding: <?php echo esc_attr($height);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_option_five_star', 'post_grid_layout_element_option_five_star');
 function post_grid_layout_element_option_five_star($parameters)
 {
-
     $settings_tabs_field = new settings_tabs_field();
-
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
     $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
-
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
-
-
 ?>
-<div class="item">
-  <div class="element-title header ">
-    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-    <span class="sort"><i class="fas fa-sort"></i></span>
-
-    <span class="header-text expand"><?php echo __('Five star', 'post-grid'); ?></span>
-  </div>
-  <div class="element-options options">
-
-    <?php
-
+    <div class="item">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+            <span class="header-text expand"><?php echo __('Five star', 'post-grid'); ?></span>
+        </div>
+        <div class="element-options options">
+            <?php
             $args = array(
                 'id'        => 'custom_class',
                 'css_id'        => $element_index . '_custom_class',
@@ -6838,7 +5244,6 @@ function post_grid_layout_element_option_five_star($parameters)
                 'default'        => '',
                 'placeholder'        => 'css-class',
             );
-
             $settings_tabs_field->generate_field($args);
             $args = array(
                 'id'        => 'color',
@@ -6850,10 +5255,7 @@ function post_grid_layout_element_option_five_star($parameters)
                 'value'        => $color,
                 'default'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             $args = array(
                 'id'        => 'font_size',
                 'css_id'        => $element_index . '_font_size',
@@ -6865,9 +5267,7 @@ function post_grid_layout_element_option_five_star($parameters)
                 'default'        => '',
                 'placeholder'        => '16px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'margin',
                 'css_id'        => $element_index . '_margin',
@@ -6879,9 +5279,7 @@ function post_grid_layout_element_option_five_star($parameters)
                 'default'        => '',
                 'placeholder'        => '5px 10px',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'text_align',
                 'css_id'        => $element_index . '_text_align',
@@ -6893,9 +5291,7 @@ function post_grid_layout_element_option_five_star($parameters)
                 'default'        => 'left',
                 'args'        => array('left' => __('Left', 'post-grid'), 'right' => __('Right', 'post-grid'), 'center' => __('Center', 'post-grid')),
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css',
                 'css_id'        => $element_index . '_css',
@@ -6907,9 +5303,7 @@ function post_grid_layout_element_option_five_star($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'        => 'css_hover',
                 'css_id'        => $element_index . '_css_hover',
@@ -6921,65 +5315,44 @@ function post_grid_layout_element_option_five_star($parameters)
                 'default'        => '',
                 'placeholder'        => '',
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-    <textarea readonly type="text"
-      onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
-    <?php
-
+            <textarea readonly type="text"
+                onclick="this.select();"> <?php echo esc_attr(' .element_' . $element_index); ?>{}</textarea>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'use_css',
                 'title'        => __('Use of CSS', 'post-grid'),
                 'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
             ?>
-
-  </div>
-</div>
+        </div>
+    </div>
 <?php
-
 }
-
-
 add_action('post_grid_layout_element_five_star', 'post_grid_layout_element_five_star');
-
 function post_grid_layout_element_five_star($args)
 {
-
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
-
     if (empty($post_id)) return;
-
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $custom_class = do_shortcode($custom_class);
     $star_count = isset($element['star_count']) ? $element['star_count'] : 5;
     $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
     $star_icon = isset($element['star_html']) ? $element['star_html'] : '';
-
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_color = isset($element['color']) ? $element['color'] : '';
-
-
     if (empty($star_count)) return;
-
     $load_fontawesome = !empty($post_grid_meta_options['load_fontawesome']) ? $post_grid_meta_options['load_fontawesome'] : 'no';
     $post_grid_settings = get_option('post_grid_settings');
     $font_aw_version = isset($post_grid_settings['font_aw_version']) ? $post_grid_settings['font_aw_version'] : '';
-
     if (empty($star_icon)) {
         if ($font_aw_version == 'v_5') {
             $star_icon =  '<i class="fas fa-star"></i>';
@@ -6987,76 +5360,59 @@ function post_grid_layout_element_five_star($args)
             $star_icon =  '<i class="fa fa-star"></i>';
         }
     }
-
-
-
     $five_star_html = '';
-
     for ($i = 1; $i <= $star_count; $i++) {
-
         $five_star_html .= $star_icon;
     }
-
 ?>
-<div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
-  <?php echo sprintf($wrapper_html, $five_star_html); ?>
-</div>
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
+        <?php echo sprintf($wrapper_html, $five_star_html); ?>
+    </div>
 <?php
 }
-
-
-
 add_action('post_grid_layout_element_css_five_star', 'post_grid_layout_element_css_five_star', 10);
 function post_grid_layout_element_css_five_star($args)
 {
-
-
     $index = isset($args['index']) ? $args['index'] : '';
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
-
-
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $color = isset($element['color']) ? $element['color'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
-
 ?>
-<style type="text/css">
-<?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
+    <style type="text/css">
+        <?php echo esc_attr('.layout-' . $layout_id);
+        ?><?php echo esc_attr(' .element_' . $index);
+            ?> {
+            <?php if (!empty($color)): ?>color: <?php echo esc_attr($color);
+                                                ?>;
+            <?php endif;
+            ?><?php if (!empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($margin)): ?>margin: <?php echo esc_attr($margin);
+                                                    ?>;
+            <?php endif;
+            ?><?php if (!empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
+                                                            ?>;
+            <?php endif;
+            ?><?php if (!empty($css)): ?><?php echo wp_strip_all_tags($css);
+                                            ?><?php endif;
+                                                ?>
+        }
 
-?> {
-  <?php if ( !empty($color)): ?>color: <?php echo esc_attr($color);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($font_size)): ?>font-size: <?php echo esc_attr($font_size);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($margin)): ?>margin: <?php echo esc_attr($margin);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($text_align)): ?>text-align: <?php echo esc_attr($text_align);
-  ?>;
-  <?php endif;
-  ?><?php if ( !empty($css)): ?><?php echo wp_strip_all_tags($css);
-  ?><?php endif;
-  ?>
-}
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-' . $layout_id);
+                                            ?><?php echo esc_attr(' .element_' . $index);
+                                                ?>:hover {
+            <?php echo wp_strip_all_tags($css_hover);
+            ?>
+        }
 
-<?php if ( !empty($css_hover)) : ?><?php echo esc_attr('.layout-'. $layout_id);
-?><?php echo esc_attr(' .element_'. $index);
-
-?>:hover {
-  <?php echo wp_strip_all_tags($css_hover);
-  ?>
-}
-
-<?php endif;
-?>
-</style>
+        <?php endif;
+        ?>
+    </style>
 <?php
 }

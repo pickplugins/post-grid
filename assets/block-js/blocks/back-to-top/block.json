@@ -28,17 +28,7 @@
           "offsetTop": "0",
           "attr": []
         },
-        "styles": {
-          "position": {
-            "Desktop": "fixed"
-          },
-          "right": {
-            "Desktop": "50px"
-          },
-          "bottom": {
-            "Desktop": "50px"
-          }
-        }
+        "styles": {}
       }
     },
     "image": {
@@ -58,17 +48,7 @@
             "Mobile": "full"
           }
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "maxWidth": {
-            "Desktop": "40px"
-          },
-          "height": {
-            "Desktop": "auto"
-          }
-        }
+        "styles": {}
       }
     },
     "text": {

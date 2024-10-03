@@ -39,11 +39,7 @@
           "tag": "div",
           "class": "pg-masonry-wrap-item"
         },
-        "styles": {
-          "width": {
-            "Desktop": "200px"
-          }
-        }
+        "styles": {}
       }
     },
     "masonryOptions": {

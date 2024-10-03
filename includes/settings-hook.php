@@ -1,37 +1,22 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
-
-
 //remove_filter('post_grid_settings_tabs', 'post_grid_pro_settings_tabs', 90);
 //remove_action('post_grid_settings_content_license', 'post_grid_settings_content_license', 10);
 //remove_action('post_grid_settings_save', 'post_grid_pro_settings_save');
-
-
 add_action('post_grid_settings_content_general', 'post_grid_settings_content_general');
-
 function post_grid_settings_content_general()
 {
     $settings_tabs_field = new settings_tabs_field();
-
     $post_grid_settings = get_option('post_grid_settings');
-
     $font_aw_version = isset($post_grid_settings['font_aw_version']) ? $post_grid_settings['font_aw_version'] : 'none';
     $post_grid_preview = isset($post_grid_settings['post_grid_preview']) ? $post_grid_settings['post_grid_preview'] : 'yes';
     $post_options_post_types = isset($post_grid_settings['post_options_post_types']) ? $post_grid_settings['post_options_post_types'] : array();
-
     $posttypes_array = post_grid_posttypes_array();
-
 ?>
-<div class="section">
-  <div class="section-title"><?php echo __('General', 'post-grid'); ?></div>
-  <p class="description section-description"><?php echo __('Choose some general options.', 'post-grid'); ?></p>
-
-  <?php
-
-
-
-
-
+    <div class="section">
+        <div class="section-title"><?php echo __('General', 'post-grid'); ?></div>
+        <p class="description section-description"><?php echo __('Choose some general options.', 'post-grid'); ?></p>
+        <?php
         $args = array(
             'id'        => 'post_options_post_types',
             'parent'        => 'post_grid_settings',
@@ -43,9 +28,7 @@ function post_grid_settings_content_general()
             'multiple'        => true,
             'args'        => $posttypes_array,
         );
-
         $settings_tabs_field->generate_field($args);
-
         $args = array(
             'id'        => 'font_aw_version',
             'parent'        => 'post_grid_settings',
@@ -56,9 +39,7 @@ function post_grid_settings_content_general()
             'default'        => '',
             'args'        => array('v_5' => __('Version 5+', 'post-grid'), 'v_4' => __('Version 4+', 'post-grid'), 'none' => __('None', 'post-grid')),
         );
-
         $settings_tabs_field->generate_field($args);
-
         $args = array(
             'id'        => 'post_grid_preview',
             'parent'        => 'post_grid_settings',
@@ -69,69 +50,40 @@ function post_grid_settings_content_general()
             'default'        => 'yes',
             'args'        => array('yes' => __('Yes', 'post-grid'), 'no' => __('No', 'post-grid')),
         );
-
         $settings_tabs_field->generate_field($args);
-
-
-
-
-
         ?>
-
-</div>
-
-<?php
-
-
-
-
-
+    </div>
+    <?php
 }
-
-
 add_action('post_grid_settings_content_help_support', 'post_grid_settings_content_help_support');
-
 if (!function_exists('post_grid_settings_content_help_support')) {
     function post_grid_settings_content_help_support($tab)
     {
-
         $settings_tabs_field = new settings_tabs_field();
-
         $layouts_pro_url = '';
         $layouts_pro_url_json = '';
-
         if (is_plugin_active('post-grid-pro/post-grid-pro.php')) {
             $layouts_pro_url = post_grid_pro_plugin_url . 'sample-data/post-grid-layouts.xml';
             $layouts_pro_url_json = post_grid_pro_plugin_url . 'sample-data/post-grid-layouts.json';
         }
-
         $layouts_free_url = post_grid_plugin_url . 'sample-data/post-grid-layouts.xml';
         $layouts_free_url_json = post_grid_plugin_url . 'sample-data/post-grid-layouts.json';
-
-
     ?>
-<div class="section">
-  <div class="section-title"><?php echo __('Get support', 'post-grid'); ?></div>
-  <p class="description section-description">
-    <?php echo __('Use following to get help and support from our expert team.', 'post-grid'); ?></p>
-
-  <?php
-
-
-
+        <div class="section">
+            <div class="section-title"><?php echo __('Get support', 'post-grid'); ?></div>
+            <p class="description section-description">
+                <?php echo __('Use following to get help and support from our expert team.', 'post-grid'); ?></p>
+            <?php
             ob_start();
             ?>
-  <ul>
-    <li>Step - 1: Go to Tools > <a href="<?php echo esc_url(admin_url() . 'export.php'); ?>">Export</a> menu.</li>
-    <li>Step - 2: Choose "Layouts" post types from list.</li>
-    <li>Step - 3: Then click to "Download Export File' button.</li>
-    <li>Step - 4: Save the file on your local machine.</li>
-  </ul>
-
-  <?php
-
+            <ul>
+                <li>Step - 1: Go to Tools > <a href="<?php echo esc_url(admin_url() . 'export.php'); ?>">Export</a> menu.</li>
+                <li>Step - 2: Choose "Layouts" post types from list.</li>
+                <li>Step - 3: Then click to "Download Export File' button.</li>
+                <li>Step - 4: Save the file on your local machine.</li>
+            </ul>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'export_layouts',
                 //'parent'		=> '',
@@ -139,38 +91,22 @@ if (!function_exists('post_grid_settings_content_help_support')) {
                 'details'    => '',
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
-
             ob_start();
             ?>
-
-  <p>
-    <?php echo __('Ask question for free on our forum and get quick reply from our expert team members.', 'post-grid'); ?>
-  </p>
-  <a class="button"
-    href="https://www.pickplugins.com/create-support-ticket/"><?php echo __('Create support ticket', 'post-grid'); ?></a>
-
-  <p><?php echo __('Read our documentation before asking your question.', 'post-grid'); ?></p>
-  <a class="button" href="https://comboblocks.com/documentations/"><?php echo __('Documentation', 'post-grid'); ?></a>
-
-  <p><?php echo __('Watch video tutorials.', 'post-grid'); ?></p>
-  <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94Yut5Y0MSVg1wqmqWz0UYpt"><i
-      class="fab fa-youtube"></i> <?php echo __('All tutorials', 'post-grid'); ?></a>
-
-
-
-
-
-  <?php
-
+            <p>
+                <?php echo __('Ask question for free on our forum and get quick reply from our expert team members.', 'post-grid'); ?>
+            </p>
+            <a class="button"
+                href="https://www.pickplugins.com/create-support-ticket/"><?php echo __('Create support ticket', 'post-grid'); ?></a>
+            <p><?php echo __('Read our documentation before asking your question.', 'post-grid'); ?></p>
+            <a class="button" href="https://comboblocks.com/documentations/"><?php echo __('Documentation', 'post-grid'); ?></a>
+            <p><?php echo __('Watch video tutorials.', 'post-grid'); ?></p>
+            <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94Yut5Y0MSVg1wqmqWz0UYpt"><i
+                    class="fab fa-youtube"></i> <?php echo __('All tutorials', 'post-grid'); ?></a>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'get_support',
                 //'parent'		=> '',
@@ -178,27 +114,17 @@ if (!function_exists('post_grid_settings_content_help_support')) {
                 'details'    => '',
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ob_start();
             ?>
-
-  <p class="">We wish your 2 minutes to write your feedback about the <b>Post Grid</b> plugin. give us <span
-      style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-        class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
-
-  <a target="_blank" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" class="button"><i
-      class="fab fa-wordpress"></i> Write a review</a>
-
-
-  <?php
-
+            <p class="">We wish your 2 minutes to write your feedback about the <b>Post Grid</b> plugin. give us <span
+                    style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
+            <a target="_blank" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" class="button"><i
+                    class="fab fa-wordpress"></i> Write a review</a>
+            <?php
             $html = ob_get_clean();
-
             $args = array(
                 'id'        => 'reviews',
                 //'parent'		=> '',
@@ -206,47 +132,27 @@ if (!function_exists('post_grid_settings_content_help_support')) {
                 'details'    => '',
                 'type'        => 'custom_html',
                 'html'        => $html,
-
             );
-
             $settings_tabs_field->generate_field($args);
-
-
-
             ?>
-
-
-</div>
-<?php
-
-
+        </div>
+    <?php
     }
 }
-
-
-
-
 add_action('post_grid_settings_content_disable_blocks', 'post_grid_settings_content_disable_blocks');
-
 if (!function_exists('post_grid_settings_content_disable_blocks')) {
     function post_grid_settings_content_disable_blocks($tab)
     {
-
         $settings_tabs_field = new settings_tabs_field();
         $post_grid_settings = get_option('post_grid_settings');
-
         $disable_blocks = isset($post_grid_settings['disable_blocks']) ? $post_grid_settings['disable_blocks'] : [];
     ?>
-<div class="section">
-  <div class="section-title"><?php echo __('Disable/Enable Blocks', 'post-grid'); ?></div>
-  <p class="description section-description text-lg">
-    <?php echo __('Choose blocks to enable or disable', 'post-grid'); ?></p>
-
-  <?php
-
+        <div class="section">
+            <div class="section-title"><?php echo __('Disable/Enable Blocks', 'post-grid'); ?></div>
+            <p class="description section-description text-lg">
+                <?php echo __('Choose blocks to enable or disable', 'post-grid'); ?></p>
+            <?php
             $blocks_list = [
-
-
                 'post-grid/accordion' => 'Accordion',
                 'post-grid/accordion-nested' => 'Accordion Nested',
                 'post-grid/accordion-nested-item' => 'Accordion Nested Item',
@@ -324,26 +230,7 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
                 'post-grid/woo-stock-quantity' => 'Woo Stock Quantity',
                 'post-grid/woo-total-sales' => 'Woo Total Sales',
                 'post-grid/wordpress-org' => 'Wordpress.org',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             ];
-
-
-
-
             $args = array(
                 'id'        => 'disable_blocks',
                 'parent'        => 'post_grid_settings',
@@ -356,44 +243,17 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
                 'style'        => ['inline' => false],
                 'args'        => $blocks_list,
             );
-
             $settings_tabs_field->generate_field($args);
-
-
             ?>
-
-
-</div>
+        </div>
 <?php
-
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 add_action('post_grid_settings_save', 'post_grid_settings_save');
-
 function post_grid_settings_save()
 {
-
     $post_grid_settings = isset($_POST['post_grid_settings']) ?  post_grid_recursive_sanitize_arr($_POST['post_grid_settings']) : array();
     update_option('post_grid_settings', $post_grid_settings);
-
-
     $post_grid_license = isset($_POST['post_grid_license']) ?  post_grid_recursive_sanitize_arr($_POST['post_grid_license']) : array();
     update_option('post_grid_license', $post_grid_license);
 }

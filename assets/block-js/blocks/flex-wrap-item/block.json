@@ -34,17 +34,7 @@
           "linkTarget": "_blank",
           "customUrl": ""
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "flexBasis": {
-            "Desktop": "0"
-          },
-          "flexGrow": {
-            "Desktop": "1"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

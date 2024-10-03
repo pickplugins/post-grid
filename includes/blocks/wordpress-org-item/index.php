@@ -1,67 +1,36 @@
 <?php
 if (!defined('ABSPATH'))
 	exit();
-
-
-
 class PGBlockWordpressOrgItem
 {
 	function __construct()
 	{
 		add_action('init', array($this, 'register_scripts'));
 	}
-
-
 	// loading src files in the gutenberg editor screen
 	function register_scripts()
 	{
-
-
 		register_block_type(
 			post_grid_plugin_dir . 'build/blocks/wordpress-org-item/block.json',
 			array(
-
 				'render_callback' => array($this, 'theHTML'),
-
-
-
 			)
 		);
 	}
-
-
 	// front-end output from the gutenberg editor 
 	function theHTML($attributes, $content, $block)
 	{
-
-
-
-
-
 		global $postGridCssY;
-
-
-
 		$post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
-
-
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 		$blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
-
 		$wpObject = isset($block->context['post-grid/WPObject']) ? $block->context['post-grid/WPObject'] : 'category';
-
 		$wpObjectData = isset($wpObject['data']) ? $wpObject['data'] : array();
-
-
-
-
-
 		$object = isset($attributes['object']) ? $attributes['object'] : [];
 		$objectOptions = isset($object['options']) ? $object['options'] : [];
 		$objectType = isset($objectOptions['type']) ? $objectOptions['type'] : 'plugin';
 		$objectSlug = isset($objectOptions['slug']) ? $objectOptions['slug'] : 'post-grid';
 		$objectData = isset($objectOptions['data']) ? $objectOptions['data'] : array();
-
 		$wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
 		$wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 		$wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'ul';
@@ -74,34 +43,19 @@ class PGBlockWordpressOrgItem
 		$wrapperLinkText = isset($wrapperOptions['linkText']) ? $wrapperOptions['linkText'] : '';
 		$wrapperLinkToPlug = isset($wrapperOptions['linkToPlug']) ? $wrapperOptions['linkToPlug'] : '';
 		$wrapperUrlPrefix = isset($wrapperOptions['urlPrefix']) ? $wrapperOptions['urlPrefix'] : '';
-
-
 		$icon = isset($attributes['icon']) ? $attributes['icon'] : '';
 		$iconOptions = isset($icon['options']) ? $icon['options'] : [];
-
 		$iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
 		$iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : '';
 		$iconSrc = isset($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : '';
 		$iconPosition = isset($iconOptions['position']) ? $iconOptions['position'] : '';
 		$iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : '';
-
-
-
-
 		$blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
 		$postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
-
-		$lastUpdate = isset($objectData['last_updated']) ? $objectData['last_updated'] : "2024-01-01";
+		$lastUpdate = isset($objectData['last_updated']) ? $objectData['last_updated'] : "";
 		$formattedLastUpdateDate = date($wrapperDateFormat, strtotime($lastUpdate));
-		$creationDate = isset($objectData['creation_time']) ? $objectData['creation_time'] : "2024-01-01";
-
-
-
-
-
+		$creationDate = isset($objectData['creation_time']) ? $objectData['creation_time'] : "";
 		$formattedCreationDate = date($wrapperDateFormat, strtotime($creationDate));
-
-
 		if ($iconLibrary == 'fontAwesome') {
 			wp_enqueue_style('fontawesome-icons');
 		} else if ($iconLibrary == 'iconFont') {
@@ -109,35 +63,20 @@ class PGBlockWordpressOrgItem
 		} else if ($iconLibrary == 'bootstrap') {
 			wp_enqueue_style('bootstrap-icons');
 		}
-
 		$fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
-
 		$transientData = get_transient($blockId . '_data');
-
 		$obj['id'] = $post_ID;
 		$obj['type'] = 'post';
-
-
-
 		$wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
-
 		// //* Visible condition
 		$visible = isset($attributes['visible']) ? $attributes['visible'] : [];
 		if (!empty($visible['rules'])) {
 			$isVisible = post_grid_visible_parse($visible);
-
-
 			if (!$isVisible) return;
 		}
-
 		// //* Visible condition
-
 		ob_start();
-
-
 ?>
-
-
 		<<?php echo pg_tag_escape($wrapperTag); ?> class="	<?php echo esc_attr($blockId); ?>	<?php echo esc_attr($wrapperClass); ?>">
 			<?php if ($iconPosition == 'beforePrefix') : ?>
 				<?php echo wp_kses_post($fontIconHtml); ?>
@@ -151,8 +90,7 @@ class PGBlockWordpressOrgItem
 					<?php if ($wrapperField == 'name') {
 						if ($wrapperLinkToPlug) {
 					?>
-							<a href="<?php echo esc_url_raw($objectData['theme_url']); ?>">
-
+							<a href="<?php echo esc_url($objectData['theme_url']); ?>">
 								<?php echo isset($objectData['name']) ?
 									esc_html($objectData['name']) : ''; ?></a>
 					<?php
@@ -171,7 +109,7 @@ class PGBlockWordpressOrgItem
 					} ?>
 					<?php if ($wrapperField == 'preview_url') {
 						if ($wrapperIsLink) { ?>
-							<a href="<?php echo isset($objectData['preview_url']) ? esc_url_raw($objectData['preview_url'] . '?' . $wrapperUrlPrefix) : ''; ?>">
+							<a href="<?php echo isset($objectData['preview_url']) ? esc_url($objectData['preview_url'] . '?' . $wrapperUrlPrefix) : ''; ?>">
 								<?php echo esc_html($wrapperLinkText); ?>
 							</a>
 					<?php } else {
@@ -185,12 +123,11 @@ class PGBlockWordpressOrgItem
 					<?php if ($wrapperField == 'screenshot_url') {
 						if ($wrapperLinkToPlug) {
 					?>
-							<a href="<?php echo esc_url_raw($objectData['theme_url']); ?>">
-
-								<img src="<?php echo esc_url_raw($objectData['screenshot_url']); ?>" alt="<?php echo esc_attr($objectData['name']) ?>" /></a>
+							<a href="<?php echo esc_url($objectData['theme_url']); ?>">
+								<img src="<?php echo esc_url($objectData['screenshot_url']); ?>" alt="<?php echo esc_attr($objectData['name']) ?>" /></a>
 						<?php
 						} else { ?>
-							<img src="<?php echo esc_url_raw($objectData['screenshot_url']); ?>" alt="<?php echo esc_attr($objectData['name']) ?>" />
+							<img src="<?php echo esc_url($objectData['screenshot_url']); ?>" alt="<?php echo esc_attr($objectData['name']) ?>" />
 					<?php }
 					} ?>
 					<?php if ($wrapperField == 'rating') {
@@ -209,7 +146,7 @@ class PGBlockWordpressOrgItem
 							} ?>
 				<?php if ($wrapperField == 'reviews_url') {
 						if ($wrapperIsLink) { ?>
-						<a href="<?php echo isset($objectData['reviews_url']) ? esc_url_raw($objectData['reviews_url']) : ''; ?>">
+						<a href="<?php echo isset($objectData['reviews_url']) ? esc_url($objectData['reviews_url']) : ''; ?>">
 							<?php echo esc_html($wrapperLinkText) ?>
 						</a> <?php } else {
 									echo isset($objectData['reviews_url']) ? esc_html($objectData['reviews_url']) : '';
@@ -225,7 +162,7 @@ class PGBlockWordpressOrgItem
 					} ?>
 				<?php if ($wrapperField == 'homepage') {
 						if ($wrapperIsLink) { ?>
-						<a href="<?php echo esc_url_raw($objectData['homepage']); ?>">
+						<a href="<?php echo esc_url($objectData['homepage']); ?>">
 							<?php //echo esc_html($wrapperLinkText) 
 							?>
 							<?php echo $wrapperLinkText ? esc_html($wrapperLinkText) : esc_html($objectData['homepage']); ?>
@@ -243,7 +180,7 @@ class PGBlockWordpressOrgItem
 						} ?>
 			<?php if ($wrapperField == 'download_link') {
 						if ($wrapperIsLink) { ?>
-					<a href="<?php echo esc_url_raw($objectData['download_link'] . '?' . $wrapperUrlPrefix); ?>">
+					<a href="<?php echo esc_url($objectData['download_link'] . '?' . $wrapperUrlPrefix); ?>">
 						<?php echo esc_html($wrapperLinkText) ?>
 					</a> <?php } else {
 								echo esc_html($objectData['download_link']);
@@ -257,7 +194,7 @@ class PGBlockWordpressOrgItem
 					} ?>
 			<?php if ($wrapperField == 'external_support_url') {
 						if ($wrapperIsLink) { ?>
-					<a href="<?php echo esc_url_raw($objectData['external_support_url']); ?>">
+					<a href="<?php echo esc_url($objectData['external_support_url']); ?>">
 						<?php echo esc_html($wrapperLinkText) ?>
 					</a> <?php } else {
 								echo esc_html($objectData['external_support_url']);
@@ -265,7 +202,7 @@ class PGBlockWordpressOrgItem
 						} ?>
 			<?php if ($wrapperField == 'external_repository_url') {
 						if ($wrapperIsLink) { ?>
-					<a href="<?php echo esc_url_raw($objectData['external_repository_url']); ?>">
+					<a href="<?php echo esc_url($objectData['external_repository_url']); ?>">
 						<?php echo esc_html($wrapperLinkText) ?>
 					</a> <?php } else {
 								echo esc_html($objectData['external_repository_url']);
@@ -276,8 +213,7 @@ class PGBlockWordpressOrgItem
 			<?php if ($wrapperField == 'name') {
 				if ($wrapperLinkToPlug) {
 			?>
-					<a href="<?php echo isset($objectData['homepage']) ? esc_url_raw($objectData['homepage']) : ''; ?>">
-
+					<a href="<?php echo isset($objectData['homepage']) ? esc_url($objectData['homepage']) : ''; ?>">
 						<?php echo isset($objectData['name']) ?
 							esc_html($objectData['name']) : ''; ?></a>
 			<?php
@@ -296,7 +232,6 @@ class PGBlockWordpressOrgItem
 			<?php if ($wrapperField == 'contributors') { ?>
 				<ul><?php
 						if (isset($objectData['contributors'])) {
-
 							foreach ($objectData['contributors'] as $x => $value) { ?>
 							<li><?php echo esc_html($value); ?></li>
 					<?php }
@@ -346,9 +281,8 @@ class PGBlockWordpressOrgItem
 					} ?>
 		<?php if ($wrapperField == 'homepage') {
 				if ($wrapperIsLink) { ?>
-				<a href="<?php echo isset($objectData['homepage']) ? esc_url_raw($objectData['homepage'] . '?' . $wrapperUrlPrefix) : ''; ?>">
+				<a href="<?php echo isset($objectData['homepage']) ? esc_url($objectData['homepage'] . '?' . $wrapperUrlPrefix) : ''; ?>">
 					<?php //echo esc_html($wrapperLinkText);
-
 					?>
 					<?php echo $wrapperLinkText ? esc_html($wrapperLinkText) : esc_html($objectData['homepage']); ?>
 				</a> <?php } else {
@@ -357,7 +291,7 @@ class PGBlockWordpressOrgItem
 					} ?>
 		<?php if ($wrapperField == 'download_link') {
 				if ($wrapperIsLink) { ?>
-				<a href="<?php echo esc_url_raw($objectData['download_link'] . '?' . $wrapperUrlPrefix); ?>">
+				<a href="<?php echo esc_url($objectData['download_link'] . '?' . $wrapperUrlPrefix); ?>">
 					<?php echo esc_html($wrapperLinkText) ?>
 				</a> <?php } else {
 							echo isset($objectData['download_link']) ? esc_html($objectData['download_link']) : '';
@@ -366,16 +300,14 @@ class PGBlockWordpressOrgItem
 		<?php if ($wrapperField == 'banners') {
 				if ($wrapperLinkToPlug) {
 		?>
-				<a href="<?php echo esc_url_raw($objectData['homepage']); ?>">
-
-					<img src="<?php echo isset($objectData['banners'][$wrapperThumbSize]) ? esc_url_raw($objectData['banners'][$wrapperThumbSize]) : ''; ?>" alt="<?php echo isset($objectData['name']) ? esc_attr($objectData['name']) : ''; ?>" />
+				<a href="<?php echo esc_url($objectData['homepage']); ?>">
+					<img src="<?php echo isset($objectData['banners'][$wrapperThumbSize]) ? esc_url($objectData['banners'][$wrapperThumbSize]) : ''; ?>" alt="<?php echo isset($objectData['name']) ? esc_attr($objectData['name']) : ''; ?>" />
 				</a>
 			<?php
 				} else { ?>
-				<img src="<?php echo isset($objectData['banners'][$wrapperThumbSize]) ? esc_url_raw($objectData['banners'][$wrapperThumbSize]) : ''; ?>" alt="<?php echo isset($objectData['name']) ? esc_attr($objectData['name']) : ''; ?>" />
+				<img src="<?php echo isset($objectData['banners'][$wrapperThumbSize]) ? esc_url($objectData['banners'][$wrapperThumbSize]) : ''; ?>" alt="<?php echo isset($objectData['name']) ? esc_attr($objectData['name']) : ''; ?>" />
 		<?php }
 			} ?>
-
 		<?php if ($wrapperField == 'tags') { ?>
 			<ul><?php
 					if (isset($objectData['tags'])) {
@@ -384,22 +316,11 @@ class PGBlockWordpressOrgItem
 					<?php } ?>
 			</ul><?php }
 				} ?>
-
 <?php endif; ?>
 			</span>
-
-
-
-
 		</<?php echo pg_tag_escape($wrapperTag); ?>>
-
-
-
-
 <?php
-
 		return ob_get_clean();
 	}
 }
-
 $BlockPostGrid = new PGBlockWordpressOrgItem();

@@ -26,11 +26,7 @@
           "tag": "div",
           "class": "pg-image-gallery-item"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

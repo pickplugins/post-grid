@@ -34,14 +34,7 @@
           "linkTarget": "_blank",
           "customUrl": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

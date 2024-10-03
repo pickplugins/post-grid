@@ -27,16 +27,10 @@
         "options": {
           "content": "",
           "tag": "div",
-          "class": "pg-layers"
+          "class": "pg-layers",
+          "id": ""
         },
-        "styles": {
-          "display": {
-            "Desktop": "block"
-          },
-          "backgroundColor": {
-            "Desktop": "#F1F7F9"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

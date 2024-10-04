@@ -4,7 +4,7 @@ Donate link: https://comboblocks.com/
 Tags: popup Blocks, form block, post meta block
 Requires at least: 5.0.0
 Tested up to: 6.6
-Stable tag: 2.2.94
+Stable tag: 2.2.95
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -250,6 +250,10 @@ https://comboblocks.com manage by PickPlugins Team, we use this domain solely fo
 == Changelog ==
 
 
+= 2.2.95 =
+- 2024-10-04 - fix - Block Theme style broken issue fixed.
+- 2024-10-04 - fix - WooCommerce broken style issue fixed.
+- 2024-10-04 - fix - Image block broken issue fixed.
 
 = 2.2.94 =
 - 2024-09-12 - fix - escaping issue fixed for blocks.

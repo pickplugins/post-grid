@@ -1,8 +1,8 @@
 <?php
 if (!defined('ABSPATH'))
   exit; // if direct access
-remove_action('wp_head', 'feed_links', 2);
-remove_action('wp_head', 'rsd_link');
+//remove_action('wp_head', 'feed_links', 2);
+//remove_action('wp_head', 'rsd_link');
 // remove_action('template_redirect', 'wp_shortlink_header', 11, 0);
 // remove_action('wp_head', 'wp_shortlink_wp_head');
 // remove_action('wp_head', 'wp_generator');
@@ -46,7 +46,9 @@ function post_grid_remove_wp_block_library_css()
   wp_dequeue_style('wc-blocks-packages-style');
   wp_dequeue_style('wc-blocks-style-mini-cart');
 }
-add_action('wp_enqueue_scripts', 'post_grid_remove_wp_block_library_css', 9999);
+//add_action('wp_enqueue_scripts', 'post_grid_remove_wp_block_library_css', 9999);
+
+
 register_meta('post', 'pgc_meta', [
   'type' => 'string',
   'single' => true,
@@ -4312,7 +4314,7 @@ function post_grid_check_sidebars()
         //$sidebar_content = get_sidebar_content(); // Your custom function to get the content
         var_dump($widget_id);
 
-         ob_start();
+        ob_start();
         dynamic_sidebar($widget_id);
         $sidebar_html = ob_get_clean();
 

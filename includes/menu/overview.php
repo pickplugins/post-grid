@@ -13,14 +13,14 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
       50+ Blocks Available to Create Next Level Landing Pages</h2>
   </div>
   <div class=" grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 w-full max-w-[1200px] mx-auto ">
-    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group " href="https://comboblocks.com/blocks/post-grid?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group " href="https://comboblocks.com/blocks/post-grid/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
       <span class=" w-12 mx-auto ">
         <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-post-grid-150x150.png" alt="Post Grid">
       </span>
       <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
         Post Grid</div>
     </a>
-    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/content-slider?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/content-slider/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
       <span class=" w-12 mx-auto ">
         <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-content-slider-1-150x150.png" alt="Content Slider">
       </span>
@@ -90,7 +90,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
       <div class=" text-xl md:text-2xl lg:text-3xl font-bold tracking-[1.2px] inline-block group-hover:text-[#fe8e52] transition-all duration-300 ease ">
         Product Info</div>
     </a>
-    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/woo-star-rate?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
+    <a class="flex flex-col gap-1 p-5 items-center  bg-white shadow-[0px_0px_4px_1px_#8db3ff66] rounded-md no-underline group" href="https://comboblocks.com/blocks/woo-star-rate/?utm_source=overview&utm_medium=heroBlockList&utm_id=comboBlocksUser" target="_blank">
       <span class=" w-12 mx-auto ">
         <img src="https://comboblocks.com/wp-content/uploads/2023/12/block-icon-product-rating-150x138.png" alt="Product Rate">
       </span>

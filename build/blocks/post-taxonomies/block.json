@@ -52,7 +52,11 @@
           "linkTarget": "",
           "linkAttr": []
         },
-        "styles": {}
+        "styles": {
+          "textDecoration": {
+            "Desktop": "none #000000 solid 0px !important"
+          }
+        }
       }
     },
     "icon": {

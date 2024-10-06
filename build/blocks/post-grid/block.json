@@ -70,7 +70,17 @@
         "options": {
           "class": "items-loop"
         },
-        "styles": {}
+        "styles": {
+          "display": {
+            "Desktop": "grid"
+          },
+          "gridTemplateColumns": {
+            "Desktop": "1fr 1fr 1fr"
+          },
+          "gap": {
+            "Desktop": "2em"
+          }
+        }
       }
     },
     "itemWrap": {

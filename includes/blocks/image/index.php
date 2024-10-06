@@ -17,6 +17,28 @@ class PGBlockImage
       )
     );
   }
+
+  function validateImageUrl($url)
+  {
+    // Get HTTP headers
+    $headers = @get_headers($url);
+
+    // Check if the request was successful (200 OK)
+    if ($headers && strpos($headers[0], '200') !== false) {
+      // Check if the URL points to a valid image
+      return @getimagesize($url);
+    } elseif (strpos($headers[0], '404') !== false) {
+      error_log("Image URL is not valid. " . $url);
+      //return false;
+    } elseif (strpos($headers[0], '403') !== false) {
+      error_log("Image URL is not valid. " . $url);
+
+      //return false;
+    }
+
+    //return "An error occurred or the URL is unreachable.";
+  }
+
   // front-end output from the gutenberg editor 
   function theHTML($attributes, $content, $block)
   {
@@ -112,12 +134,14 @@ class PGBlockImage
         $image_srcset = wp_get_attachment_image_srcset($thumb_id);
       } else {
         $attachment_url = get_post_meta($post_ID, $featuredImageSrcMetaKey, true);
-        $imagesize = getimagesize($attachment_url);
+        //$imagesize = getimagesize($attachment_url);
+        $imagesize = $this->validateImageUrl($attachment_url);
         $width = isset($imagesize[0]) ? $imagesize[0] : '';
         $height = isset($imagesize[1]) ? $imagesize[1] : '';
       }
     } elseif ($featuredImageSrcType == 'customUrl') {
-      $imagesize = getimagesize($featuredImagesrcUrl);
+      //$imagesize = getimagesize($featuredImagesrcUrl);
+      $imagesize = $this->validateImageUrl($featuredImagesrcUrl);
       $width = isset($imagesize[0]) ? $imagesize[0] : '';
       $height = isset($imagesize[1]) ? $imagesize[1] : '';
       // $width =  '';

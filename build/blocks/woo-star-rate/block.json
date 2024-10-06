@@ -25,7 +25,17 @@
           "tag": "div",
           "class": "pg-woo-star-rate"
         },
-        "styles": {}
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "alignItems": {
+            "Desktop": "center"
+          },
+          "gap": {
+            "Desktop": "10px"
+          }
+        }
       }
     },
     "iconsWrap": {
@@ -38,7 +48,17 @@
           "position": "beforeSku",
           "class": ""
         },
-        "styles": {}
+        "styles": {
+          "display": {
+            "Desktop": "inline-block"
+          },
+          "fontSize": {
+            "Desktop": "30px"
+          },
+          "fontWeight": {
+            "Desktop": "700"
+          }
+        }
       }
     },
     "iconsIdle": {
@@ -48,7 +68,17 @@
           "tag": "div",
           "class": ""
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#fde68a"
+          },
+          "position": {
+            "Desktop": "relative"
+          },
+          "display": {
+            "Desktop": "flex"
+          }
+        }
       }
     },
     "iconsFilled": {
@@ -58,7 +88,29 @@
           "tag": "div",
           "class": ""
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#f59e0b"
+          },
+          "display": {
+            "Desktop": "flex"
+          },
+          "position": {
+            "Desktop": "absolute"
+          },
+          "overflow": {
+            "Desktop": "hidden"
+          },
+          "top": {
+            "Desktop": "0px"
+          },
+          "left": {
+            "Desktop": "0px"
+          },
+          "width": {
+            "Desktop": "75%"
+          }
+        }
       }
     },
     "summary": {
@@ -70,7 +122,23 @@
           "linkTo": "reviews",
           "class": ""
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontStyle": {
+            "Desktop": "normal"
+          },
+          "fontWeight": {
+            "Desktop": "400"
+          }
+        }
       }
     },
     "prefix": {

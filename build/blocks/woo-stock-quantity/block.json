@@ -25,7 +25,17 @@
           "tag": "div",
           "class": "pg-woo-stockQuantity"
         },
-        "styles": {}
+        "styles": {
+          "display": {
+            "Desktop": "flex"
+          },
+          "alignItems": {
+            "Desktop": "center"
+          },
+          "gap": {
+            "Desktop": "1em"
+          }
+        }
       }
     },
     "stockQuantity": {

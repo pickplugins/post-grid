@@ -48,7 +48,14 @@
           "customUrl": "",
           "class": "post-title"
         },
-        "styles": {}
+        "styles": {
+          "fontSize": {
+            "Desktop": "30px"
+          },
+          "textDecoration": {
+            "Desktop": "none #000000 solid 0px !important"
+          }
+        }
       }
     },
     "prefix": {

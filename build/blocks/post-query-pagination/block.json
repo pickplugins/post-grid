@@ -53,7 +53,42 @@
             "class": "load-more"
           }
         },
-        "styles": {}
+        "styles": {
+          "margin": {
+            "Desktop": "20px 0px 20px 0px"
+          },
+          "display": {
+            "Desktop": "flex"
+          },
+          "justifyContent": {
+            "Desktop": "center"
+          },
+          "alignItems": {
+            "Desktop": "center"
+          },
+          "gap": {
+            "Desktop": "0px"
+          },
+          "backgroundColor": {
+            "Desktop": "#ffffff"
+          },
+          "width": {
+            "Desktop": "max-content",
+            "Tablet": "auto"
+          },
+          "marginRight": {
+            "Desktop": "auto"
+          },
+          "marginLeft": {
+            "Desktop": "auto"
+          },
+          "borderRadius": {
+            "Desktop": "5px 5px 5px 5px"
+          },
+          "flexWrap": {
+            "Tablet": "wrap !important"
+          }
+        }
       }
     },
     "paginationItem": {
@@ -62,7 +97,23 @@
         "options": {
           "class": "page-numbers "
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#7b7b7b"
+          },
+          "fontSize": {
+            "Desktop": "16px"
+          },
+          "padding": {
+            "Desktop": "5px 15px 5px 15px"
+          },
+          "border": {
+            "Desktop": "1px solid #e3e3e3"
+          },
+          "fontWeight": {
+            "Desktop": "700"
+          }
+        }
       }
     },
     "paginationItemActive": {
@@ -71,7 +122,11 @@
         "options": {
           "class": "page-numbers "
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#e34f3f"
+          }
+        }
       }
     },
     "next": {

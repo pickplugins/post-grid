@@ -52,7 +52,11 @@
           "linkToCustomMeta": "",
           "class": "excerpt-text"
         },
-        "styles": {}
+        "styles": {
+          "textDecoration": {
+            "Desktop": "none #000000 solid 0px !important"
+          }
+        }
       }
     },
     "readMore": {
@@ -70,7 +74,11 @@
           "linkToCustomMeta": "",
           "class": "readmore"
         },
-        "styles": {}
+        "styles": {
+          "textDecoration": {
+            "Desktop": "none #000000 solid 0px !important"
+          }
+        }
       }
     },
     "prefix": {

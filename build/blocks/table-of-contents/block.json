@@ -22,14 +22,99 @@
       "type": "object",
       "default": {
         "options": {
-          "tag": "div",
           "class": "pg-table-of-contents",
-          "id": "",
-          "linkTo": "postUrl",
-          "linkToAuthorMeta": "",
-          "linkToCustomMeta": "",
-          "linkTarget": "_blank",
-          "customUrl": ""
+          "targetTags": [
+            "h1",
+            "h2"
+          ],
+          "id": ""
+        },
+        "styles": {}
+      }
+    },
+    "tocHeader": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-header",
+          "label": ""
+        },
+        "styles": {}
+      }
+    },
+    "tocHeaderLabel": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-header-label",
+          "text": ""
+        },
+        "styles": {}
+      }
+    },
+    "tocHeaderLabelIcon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-header-label-icon",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-star",
+          "position": ""
+        },
+        "styles": {}
+      }
+    },
+    "tocHeaderToggleIcon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-header-icon",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-star"
+        },
+        "styles": {}
+      }
+    },
+    "itemToggleIconIdle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-toggle-icon",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-star"
+        },
+        "styles": {}
+      }
+    },
+    "itemToggleIconActive": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-toggle-icon",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-star"
+        },
+        "styles": {}
+      }
+    },
+    "tocContent": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-content"
+        },
+        "styles": {}
+      }
+    },
+    "itemsWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-items"
         },
         "styles": {}
       }
@@ -38,7 +123,41 @@
       "type": "object",
       "default": {
         "options": {
-          "class": ""
+          "class": "toc-item"
+        },
+        "styles": {}
+      }
+    },
+    "itemCurrent": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-item-current"
+        },
+        "styles": {}
+      }
+    },
+    "slideToggle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-slide-toggle",
+          "enable": false,
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-star"
+        },
+        "styles": {}
+      }
+    },
+    "slideToggleIcon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "toc-slide-toggle-icon",
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-star"
         },
         "styles": {}
       }

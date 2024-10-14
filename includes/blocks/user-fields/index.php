@@ -156,9 +156,22 @@ class PGBlockUserFields
           <span class="fieldVal">
             <?php echo wp_kses_post(get_the_author_meta($metaKey, $userId)) ?>
           </span>
-        <?php
+          <?php
+        elseif ($metaKey == 'roles') :
+
+          $metaValue = get_the_author_meta('roles', $userId);
+          if (is_array($metaValue)):
+          ?>
+            <span class="fieldVal">
+              <?php echo wp_kses_post(implode(', ', $metaValue)); ?>
+            </span>
+          <?php
+          endif;
+
+
+
         elseif ($metaKey == 'avatar') :
-        ?>
+          ?>
           <img class="fieldVal" src="<?php echo esc_url(get_avatar_url($userId, ['size' => $fieldAvatarSize])) ?>" alt=" <?php echo esc_attr(get_the_author_meta('display_name', $userId)) ?> " />
           <?php
         elseif ($metaKey == 'custom') :
@@ -170,13 +183,21 @@ class PGBlockUserFields
             $attachment_url = wp_get_attachment_image_url($thumb_id, $customFieldSize);
           ?>
             <img class="fieldVal" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" src="<?php echo esc_url($attachment_url) ?>" alt="<?php echo esc_attr(get_the_author_meta('display_name', $userId)) ?> " />
-          <?php
+            <?php
           } else {
-          ?>
-            <span class="fieldVal">
-              <?php echo wp_kses_post(get_user_meta($userId, $customField, true)) ?>
-            </span>
+
+
+
+            if (!empty($customField)) {
+              $metaValue = get_user_meta($userId, $customField, true);
+
+            ?>
+              <span class="fieldVal">
+                <?php echo wp_kses_post($metaValue)
+                ?>
+              </span>
         <?php
+            }
           }
         endif;
         ?>

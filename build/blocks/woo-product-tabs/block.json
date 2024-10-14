@@ -102,47 +102,7 @@
           "iconPosition": "beforeLabel"
         },
         "styles": {},
-        "items": [
-          {
-            "id": "description",
-            "label": "Description",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          },
-          {
-            "id": "addInformation",
-            "label": "Additional Information",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          },
-          {
-            "id": "reviews",
-            "label": "Reviews (0)",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          }
-        ]
+        "items": []
       }
     },
     "icon": {

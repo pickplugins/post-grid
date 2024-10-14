@@ -68,47 +68,7 @@
           "iconPosition": "beforeLabel"
         },
         "styles": {},
-        "items": [
-          {
-            "id": "facebook",
-            "label": "Facebook",
-            "count": 125,
-            "url": "https://www.facebook.com/sharer.php?u={URL}",
-            "profileLink": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": "fab fa-facebook-square"
-            },
-            "styles": {}
-          },
-          {
-            "id": "twitter",
-            "label": "Twitter",
-            "count": 125,
-            "url": "https://twitter.com/intent/tweet?url={URL}",
-            "profileLink": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": "fab fa-twitter-square"
-            },
-            "styles": {}
-          },
-          {
-            "id": "linkedin",
-            "label": "Linkedin",
-            "count": 125,
-            "url": "https://www.linkedin.com/shareArticle?mini=true&url={URL}&title={TITLE}",
-            "profileLink": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": "fab fa-linkedin"
-            },
-            "styles": {}
-          }
-        ]
+        "items": []
       }
     },
     "blockCssY": {

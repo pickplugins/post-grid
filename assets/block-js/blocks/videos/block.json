@@ -23,7 +23,7 @@
         "options": {
           "class": "pg-videos",
           "mediaSource": "media",
-          "queryPrams": {}
+          "queryPrams": []
         },
         "styles": {}
       }

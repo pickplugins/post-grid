@@ -31,7 +31,9 @@
       "default": {
         "options": {
           "class": "pg-testimonial",
-          "type": "link"
+          "type": "link",
+          "queryPrams": [],
+          "source": ""
         },
         "styles": {}
       }

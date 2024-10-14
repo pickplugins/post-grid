@@ -6,7 +6,7 @@
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "providesContext": {
-    "parentBlock": "123"
+    "parentBlock": ""
   },
   "usesContext": [
     "postId",
@@ -27,14 +27,7 @@
         "options": {
           "class": "pg-content-slider"
         },
-        "styles": {
-          "padding": {
-            "Desktop": "60px 0px 50px 0px"
-          },
-          "backgroundColor": {
-            "Desktop": "#f1f7f9"
-          }
-        }
+        "styles": {}
       }
     },
     "itemsWrap": {

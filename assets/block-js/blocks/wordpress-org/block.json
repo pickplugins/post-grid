@@ -51,14 +51,7 @@
           "class": "item",
           "tag": "li"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "thumb": {
@@ -67,14 +60,7 @@
         "options": {
           "class": "thumb"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "object": {
@@ -107,14 +93,7 @@
           "class": "icon",
           "overrideChild": true
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

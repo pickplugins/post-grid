@@ -82,16 +82,7 @@
     "queryArgs": {
       "type": "object",
       "default": {
-        "items": [
-          {
-            "val": "category",
-            "id": "taxonomy"
-          },
-          {
-            "val": "6",
-            "id": "number"
-          }
-        ]
+        "items": []
       }
     },
     "termTitle": {

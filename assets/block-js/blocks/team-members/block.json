@@ -84,14 +84,7 @@
           "showIcon": true,
           "iconPosition": "beforeLabel"
         },
-        "styles": {
-          "margin": {
-            "Desktop": "10px 10px 10px 10px"
-          },
-          "fontSize": {
-            "Desktop": "30px"
-          }
-        },
+        "styles": {},
         "items": [
           {
             "id": "facebook",

@@ -43,6 +43,12 @@
         "styles": {}
       }
     },
+    "conditions": {
+      "type": "object",
+      "default": {
+        "rules": []
+      }
+    },
     "visible": {
       "type": "object",
       "default": {}

@@ -72,16 +72,30 @@ class PGBlockInfoBox
     }
     // //* Visible condition
     ob_start();
-    if ($wrapperTag == 'a') { ?>
-      <a id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url($linkUrl); ?>">
-        <?php echo wp_kses_post($content) ?>
-      </a>
-    <?php
-    } else { ?>
-      <<?php echo pg_tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-        <?php echo wp_kses_post($content) ?> </<?php echo pg_tag_escape($wrapperTag); ?>>
+
+    if (empty($wrapperTag)):
+      echo wp_kses_post($content);
+    endif;
+
+
+    if (!empty($wrapperTag)):
+
+      if ($wrapperTag == 'a') { ?>
+        <a id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url($linkUrl); ?>">
+          <?php echo wp_kses_post($content); ?>
+        </a>
+      <?php
+      } else { ?>
+        <<?php echo pg_tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+          <?php echo wp_kses_post($content) ?> </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
-    }
+      }
+
+    endif;
+
+
+
+
     return ob_get_clean();
   }
 }

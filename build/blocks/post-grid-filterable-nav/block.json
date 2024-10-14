@@ -77,7 +77,38 @@
           "activeFilter": "",
           "perPage": 6
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#000000"
+          },
+          "padding": {
+            "Desktop": "8px 10px 8px 10px"
+          },
+          "margin": {
+            "Desktop": "10px 10px 10px 10px"
+          },
+          "display": {
+            "Desktop": "inline-block"
+          },
+          "cursor": {
+            "Desktop": "pointer"
+          },
+          "border": {
+            "Desktop": "1px solid #bebebe"
+          },
+          "borderRadius": {
+            "Desktop": "5px 5px 5px 5px"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontWeight": {
+            "Desktop": "500"
+          }
+        }
       }
     },
     "activeFilter": {
@@ -86,7 +117,11 @@
         "options": {
           "slug": "all"
         },
-        "styles": {}
+        "styles": {
+          "backgroundColor": {
+            "Desktop": "#7d7d7d"
+          }
+        }
       }
     },
     "filterGroupWrap": {
@@ -100,7 +135,17 @@
       "type": "object",
       "default": {
         "options": {},
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#18978F"
+          },
+          "margin": {
+            "Desktop": "0px 0px 10px 0px"
+          },
+          "display": {
+            "Desktop": "inline-block"
+          }
+        }
       }
     },
     "container": {

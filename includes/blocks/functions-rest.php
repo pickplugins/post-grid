@@ -1818,9 +1818,7 @@ class BlockPostGridRest
 				$id = isset($item['id']) ? $item['id'] : '';
 				$val = isset($item['val']) ? $item['val'] : '';
 				if ($val) {
-					if ($id == 'taxonomy') {
-						$query_args['taxonomy'] = $val;
-					} elseif ($id == 'orderby') {
+					if ($id == 'orderby') {
 						$query_args['orderby'] = $val;
 					} elseif ($id == 'order') {
 						$query_args['order'] = $val;
@@ -1886,7 +1884,7 @@ class BlockPostGridRest
 				$user_data->ID = $term->ID;
 				$user_data->user_login = $term->user_login;
 				$user_data->user_nicename = $term->user_nicename;
-				$user_data->user_email = $term->user_email;
+				//$user_data->user_email = $term->user_email;
 				$user_data->registered = $term->user_registered;
 				$user_data->user_status = $term->user_status;
 				$user_data->description = $term->description;

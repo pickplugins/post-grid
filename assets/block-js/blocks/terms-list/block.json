@@ -82,16 +82,7 @@
     "queryArgs": {
       "type": "object",
       "default": {
-        "items": [
-          {
-            "val": "category",
-            "id": "taxonomy"
-          },
-          {
-            "val": "6",
-            "id": "number"
-          }
-        ]
+        "items": []
       }
     },
     "termTitle": {
@@ -114,14 +105,7 @@
           "position": "beforeFronttext",
           "class": "icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          }
-        }
+        "styles": {}
       }
     },
     "postCount": {

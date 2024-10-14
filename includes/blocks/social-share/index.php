@@ -63,10 +63,10 @@ class PGBlockSocialShare
 		ob_start();
 		if (!empty($wrapperTag)) :
 ?>
-			<<?php echo pg_tag_escape($wrapperTag); ?> class="
+<<?php echo pg_tag_escape($wrapperTag); ?> class="
                             <?php echo esc_attr($blockId); ?>
                             <?php echo esc_attr($wrapperClass); ?>">
-				<?php
+  <?php
 				if (!empty($elementsItems))
 					foreach ($elementsItems as $index => $item) {
 						$label = isset($item['label']) ? $item['label'] : '';
@@ -91,29 +91,29 @@ class PGBlockSocialShare
 							$url = isset($item['profileLink']) ? $item['profileLink'] : '';
 						}
 				?>
-					<a href="<?php echo esc_url($url); ?>" class="<?php echo esc_attr('media-item item-' . $index); ?>">
-						<?php if ($showIcon && $iconPosition == "beforeLabel") : ?>
-							<?php echo wp_kses_post($fontIconHtml); ?>
-						<?php endif; ?>
-						<?php if ($showLabel) : ?>
-							<span class='media-label'>
-								<?php echo esc_html($label); ?>
-							</span>
-						<?php endif; ?>
-						<?php if ($showIcon && $iconPosition == "afterLabel") : ?>
-							<?php echo wp_kses_post($fontIconHtml); ?>
-						<?php endif; ?>
-						<?php if ($showCount) : ?>
-							<span class="media-count">(
-								<?php echo esc_html($count); ?>)
-							</span>
-						<?php endif; ?>
-					</a>
-				<?php
+  <a href="<?php echo esc_url($url); ?>" class="<?php echo esc_attr('media-item item-' . $index); ?>">
+    <?php if ($showIcon && $iconPosition == "beforeLabel") : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php if ($showLabel) : ?>
+    <span class='media-label'>
+      <?php echo esc_html($label); ?>
+    </span>
+    <?php endif; ?>
+    <?php if ($showIcon && $iconPosition == "afterLabel") : ?>
+    <?php echo wp_kses_post($fontIconHtml); ?>
+    <?php endif; ?>
+    <?php if ($showCount) : ?>
+    <span class="media-count">(
+      <?php echo esc_html($count); ?>)
+    </span>
+    <?php endif; ?>
+  </a>
+  <?php
 					}
 				?>
-			</<?php echo pg_tag_escape($wrapperTag); ?>>
-		<?php
+</<?php echo pg_tag_escape($wrapperTag); ?>>
+<?php
 		endif;
 		?>
 <?php

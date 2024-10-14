@@ -14,6 +14,7 @@ import { setupPostGridFilterableNav } from "./post-grid-filterable-nav/front-scr
 import { setupProgressBar } from "./progress-bar/front-scripts";
 import { setupTabs } from "./tabs-nested/front-scripts";
 import { setupText } from "./text/front-scripts";
+import { setupReactions } from "./reactions/front-scripts";
 import { setupWooAddToCart } from "./woo-add-to-cart/front-scripts";
 import { setupWooMyAccount } from "./woo-my-account/front-scripts";
 import { setupWooProductTabs } from "./woo-product-tabs/front-scripts";
@@ -31,6 +32,7 @@ setupPostGrid();
 setupProgressBar();
 setupTabs();
 setupText();
+setupReactions();
 setupWooAddToCart();
 setupWooMyAccount();
 setupWooProductTabs();

@@ -84,20 +84,34 @@
         },
         "styles": {
           "color": {
-            "Desktop": ""
+            "Desktop": "#000000"
           },
-          "wordBreak": {},
           "padding": {
-            "Desktop": ""
+            "Desktop": "8px 10px 8px 10px"
           },
           "margin": {
-            "Desktop": ""
+            "Desktop": "10px 10px 10px 10px"
           },
           "display": {
             "Desktop": "inline-block"
           },
           "cursor": {
             "Desktop": "pointer"
+          },
+          "border": {
+            "Desktop": "1px solid #bebebe"
+          },
+          "borderRadius": {
+            "Desktop": "5px 5px 5px 5px"
+          },
+          "fontSize": {
+            "Desktop": "18px"
+          },
+          "fontFamily": {
+            "Desktop": "Poppins"
+          },
+          "fontWeight": {
+            "Desktop": "500"
           }
         }
       }
@@ -109,15 +123,8 @@
           "slug": "all"
         },
         "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "wordBreak": {},
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
+          "backgroundColor": {
+            "Desktop": "#7d7d7d"
           }
         }
       }
@@ -126,24 +133,7 @@
       "type": "object",
       "default": {
         "options": {},
-        "styles": {
-          "color": {
-            "Desktop": "#18978F"
-          },
-          "backgroundColor": {
-            "Desktop": "#9DD6DF"
-          },
-          "wordBreak": {},
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "display": {
-            "Desktop": "inline-block"
-          }
-        }
+        "styles": {}
       }
     },
     "filterGroup": {
@@ -154,15 +144,8 @@
           "color": {
             "Desktop": "#18978F"
           },
-          "backgroundColor": {
-            "Desktop": "#9DD6DF"
-          },
-          "wordBreak": {},
-          "padding": {
-            "Desktop": ""
-          },
           "margin": {
-            "Desktop": ""
+            "Desktop": "0px 0px 10px 0px"
           },
           "display": {
             "Desktop": "inline-block"
@@ -231,21 +214,7 @@
         "options": {
           "itemCss": {}
         },
-        "styles": {
-          "gridTemplateColumns": {},
-          "gridTemplateRows": {},
-          "colGap": {},
-          "rowGap": {},
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "nthItemStyle": {
@@ -274,23 +243,7 @@
             "iconSrc": ""
           }
         },
-        "styles": {
-          "margin": {
-            "Desktop": "20px 0px 20px 0px"
-          },
-          "display": {
-            "Desktop": "flex"
-          },
-          "justifyContent": {
-            "Desktop": "center"
-          },
-          "alignItems": {
-            "Desktop": "center"
-          },
-          "gap": {
-            "Desktop": "1em"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationItem": {
@@ -299,23 +252,7 @@
         "options": {
           "class": "page-numbers inline-block"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#ffffff"
-          },
-          "fontSize": {
-            "Desktop": "16px"
-          },
-          "padding": {
-            "Desktop": "5px 15px 5px 15px"
-          },
-          "backgroundColor": {
-            "Desktop": "#2445ffab"
-          },
-          "borderRadius": {
-            "Desktop": "5px 5px 5px 5px"
-          }
-        }
+        "styles": {}
       }
     },
     "paginationItemActive": {
@@ -324,11 +261,7 @@
         "options": {
           "class": "page-numbers inline-block"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#3223cb"
-          }
-        }
+        "styles": {}
       }
     },
     "layout": {

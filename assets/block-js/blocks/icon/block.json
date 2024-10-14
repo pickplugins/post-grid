@@ -58,7 +58,7 @@
           "enable": true,
           "library": "fontAwesome",
           "srcType": "class",
-          "iconSrc": "fas fa-check-circle",
+          "iconSrc": "",
           "position": "beforeText",
           "class": "text-icon"
         },

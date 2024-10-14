@@ -145,7 +145,23 @@
             "iconSrc": ""
           }
         },
-        "styles": {}
+        "styles": {
+          "margin": {
+            "Desktop": "20px 0px 20px 0px"
+          },
+          "display": {
+            "Desktop": "flex"
+          },
+          "justifyContent": {
+            "Desktop": "center"
+          },
+          "alignItems": {
+            "Desktop": "center"
+          },
+          "gap": {
+            "Desktop": "1em"
+          }
+        }
       }
     },
     "paginationItem": {
@@ -154,7 +170,23 @@
         "options": {
           "class": "page-numbers inline-block"
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#ffffff"
+          },
+          "fontSize": {
+            "Desktop": "16px"
+          },
+          "padding": {
+            "Desktop": "5px 15px 5px 15px"
+          },
+          "backgroundColor": {
+            "Desktop": "#2445ffab"
+          },
+          "borderRadius": {
+            "Desktop": "5px 5px 5px 5px"
+          }
+        }
       }
     },
     "paginationItemActive": {

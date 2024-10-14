@@ -43,8 +43,8 @@ class PGBlockUserQuery
     $itemWrapTag = isset($itemWrapOptions['tag']) ? $itemWrapOptions['tag'] : 'div';
     $itemWrapClass = isset($itemWrapOptions['class']) ? $itemWrapOptions['class'] : 'item';
     $itemWrapCounterClass = isset($itemWrapOptions['counterClass']) ? $itemWrapOptions['counterClass'] : false;
-    $itemWrapTermsClass = isset($itemWrapOptions['termsClass']) ? $itemWrapOptions['termsClass'] : false;
     $itemWrapOddEvenClass = isset($itemWrapOptions['oddEvenClass']) ? $itemWrapOptions['oddEvenClass'] : false;
+    $itemWrapRoleClass = isset($itemWrapOptions['roleClass']) ? $itemWrapOptions['roleClass'] : false;
     /*#########$noPostsWrap#########*/
     $noPostsWrap = isset($attributes['noPostsWrap']) ? $attributes['noPostsWrap'] : [];
     $noPostsWrapOptions = isset($noPostsWrap['options']) ? $noPostsWrap['options'] : [];
@@ -91,6 +91,10 @@ class PGBlockUserQuery
       $get_users = get_users($query_args);
       foreach ($get_users as $index => $term) {
         $userId = isset($term->ID) ? $term->ID : "";
+        $userRoles = isset($term->roles) ? $term->roles : [];
+        $user_roles_class = implode(' ', $userRoles);
+
+
         $blocks = $innerBlocks;
         if ($counter % 2 == 0) {
           $odd_even_class = 'even';
@@ -120,7 +124,12 @@ class PGBlockUserQuery
             } ?>
             <?php if ($itemWrapOddEvenClass) {
               echo esc_attr($odd_even_class);
-            } ?> ">
+            } ?>
+            <?php if ($itemWrapRoleClass) {
+              echo esc_attr($user_roles_class);
+            } ?>
+
+ ">
           <?php echo wp_kses_post($html);
           ?>
         </<?php echo pg_tag_escape($itemWrapTag); ?>>

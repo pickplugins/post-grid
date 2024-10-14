@@ -49,23 +49,7 @@
           "postfix": "",
           "linkAttr": []
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -78,14 +62,7 @@
           "position": "beforePostDate",
           "class": "icon"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          }
-        }
+        "styles": {}
       }
     },
     "metaKey": {
@@ -121,26 +98,7 @@
           "class": "postfix",
           "position": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "fontFamily": {
-            "Desktop": "Poppins"
-          },
-          "fontStyle": {
-            "Desktop": "normal"
-          },
-          "fontWeight": {
-            "Desktop": "400"
-          },
-          "margin": {
-            "Desktop": "0px 0px 0px 10px"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

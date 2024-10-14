@@ -116,21 +116,7 @@
         "options": {
           "itemCss": {}
         },
-        "styles": {
-          "gridTemplateColumns": {},
-          "gridTemplateRows": {},
-          "colGap": {},
-          "rowGap": {},
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "nthItemStyle": {
@@ -209,11 +195,7 @@
         "options": {
           "class": "page-numbers inline-block"
         },
-        "styles": {
-          "backgroundColor": {
-            "Desktop": "#3223cb"
-          }
-        }
+        "styles": {}
       }
     },
     "layout": {

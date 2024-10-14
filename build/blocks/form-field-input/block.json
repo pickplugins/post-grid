@@ -135,6 +135,18 @@
         }
       }
     },
+    "conditions": {
+      "type": "object",
+      "default": {
+        "rules": []
+      }
+    },
+    "calculations": {
+      "type": "object",
+      "default": {
+        "rules": ""
+      }
+    },
     "blockId": {
       "type": "string",
       "default": ""

@@ -27,10 +27,10 @@ class PGBlockImage
     if ($headers && strpos($headers[0], '200') !== false) {
       // Check if the URL points to a valid image
       return @getimagesize($url);
-    } elseif (strpos($headers[0], '404') !== false) {
+    } elseif (isset($headers[0]) && strpos($headers[0], '404') !== false) {
       error_log("Image URL is not valid. " . $url);
       //return false;
-    } elseif (strpos($headers[0], '403') !== false) {
+    } elseif (isset($headers[0]) && strpos($headers[0], '403') !== false) {
       error_log("Image URL is not valid. " . $url);
 
       //return false;
@@ -50,16 +50,8 @@ class PGBlockImage
     $lightboxThumbSize = isset($lightboxOptions['thumbSize']) ? $lightboxOptions['thumbSize'] : 'full';
     $featuredImage = isset($attributes['image']) ? $attributes['image'] : [];
     $featuredImageOptions = isset($featuredImage['options']) ? $featuredImage['options'] : [];
-    $lazyLoad = isset($featuredImageOptions['lazy']) ? $featuredImageOptions['lazy'] : false;
-    //var_dump($lazyLoad);
-    if (has_block('post-grid/image')) {
-      if ($lazyLoad == true) {
-        wp_enqueue_script('lazyLoad');
-      }
-      if ($lightboxEnable == true) {
-        wp_enqueue_script('fslightbox');
-      }
-    }
+    //$lazyLoad = isset($featuredImageOptions['lazy']) ? $featuredImageOptions['lazy'] : false;
+
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $post_url = get_the_permalink($post_ID);
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -100,9 +92,28 @@ class PGBlockImage
     $utmTrackingTerm = isset($utmTracking['term']) ? $utmTracking['term'] : '';
     $utmTrackingContent = isset($utmTracking['content']) ? $utmTracking['content'] : '';
     $srcsetEnable = isset($featuredImageOptions['srcsetEnable']) ? $featuredImageOptions['srcsetEnable'] : true;
-    $lazyLoad = isset($featuredImageOptions['lazy']) ? $featuredImageOptions['lazy'] : '';
-    $lazyLoadSrc = isset($featuredImageOptions['lazySrc']) ? $featuredImageOptions['lazySrc'] : '';
-    // $lazyLoad = isset($featuredImageOptions['lazy']) ? $featuredImageOptions['lazy'] : '';
+
+    $lazyLoad = isset($attributes['lazyLoad']) ? $attributes['lazyLoad'] : [];
+    $lazyLoadEnable = isset($lazyLoad['enable']) ? $lazyLoad['enable'] : false;
+    $lazyLoadSrc = isset($lazyLoad['lazySrcId']) ? $lazyLoad['lazySrcId'] : '';
+    $lazyLoadSrcType = isset($lazyLoad['lazySrcType']) ? $lazyLoad['lazySrcType'] : '';
+
+
+
+    if (has_block('post-grid/image')) {
+      if ($lazyLoadEnable == true) {
+        wp_enqueue_script('lazyLoad');
+      }
+      if ($lightboxEnable == true) {
+        wp_enqueue_script('fslightbox');
+      }
+    }
+
+
+
+
+
+
     $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
     $postGridCssY[] = $blockCssY['items'];
     $linkAttrStr = '';
@@ -241,7 +252,7 @@ class PGBlockImage
     if (strlen($lazyLoadSrc) === 0) {
       $lazyLoadSrc = post_grid_plugin_url . "assets/images/loading.gif";
     }
-    if ($lazyLoad == true) {
+    if ($lazyLoadEnable == true) {
       $dataSrc = $attachment_url;
       // $lazy_img_src = $lazyLoadSrc;
       $attachment_url = $lazyLoadSrc;
@@ -272,17 +283,17 @@ class PGBlockImage
           <a <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?> href=" <?php echo (!empty($linkUrl)) ? esc_url($linkUrl) : esc_url($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php //echo ($linkAttrStr); 
                                                                                                                                                                                                                                                                                                 ?>>
             <img <?php //echo ($linkAttrStr); 
-                  ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+                  ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoadEnable == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoadEnable == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
           </a>
         <?php else : ?>
           <?php if ($lightboxEnable == true) : ?>
-            <a href="<?php if ($lazyLoad == true) : ?><?php echo esc_url($dataSrc); ?><?php endif; ?><?php if ($lazyLoad == false) : ?><?php echo esc_url($attachment_url); ?><?php endif; ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
+            <a href="<?php if ($lazyLoadEnable == true) : ?><?php echo esc_url($dataSrc); ?><?php endif; ?><?php if ($lazyLoadEnable == false) : ?><?php echo esc_url($attachment_url); ?><?php endif; ?>" data-fslightbox="<?php echo esc_attr($galleryId); ?>">
               <img <?php //echo ($linkAttrStr); 
-                    ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+                    ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoadEnable == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoadEnable == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
             </a>
           <?php else : ?>
             <img <?php //echo ($linkAttrStr); 
-                  ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+                  ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoadEnable == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoadEnable == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
           <?php endif; ?>
         <?php endif; ?>
       </<?php echo pg_tag_escape($wrapperTag); ?>>
@@ -293,7 +304,7 @@ class PGBlockImage
       <?php if (!empty($featuredImageLinkTo)) : ?>
         <a class=" <?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url($linkUrl) : esc_url($post_url); ?>" rel=" <?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php if ($lightboxEnable == true) : ?> data-fslightbox="<?php echo esc_attr($galleryId); ?>" <?php endif; ?>>
           <img <?php //echo ($linkAttrStr); 
-                ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+                ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoadEnable == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoadEnable == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
         </a>
       <?php else : ?>
         <?php if ($lightboxEnable == true) : ?>
@@ -301,7 +312,7 @@ class PGBlockImage
                                                                                                                                                                                                         ?> src="<?php echo esc_url($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" title=" <?php echo esc_attr($titleText); ?>" /> </a>
         <?php else : ?>
           <img <?php //echo ($linkAttrStr); 
-                ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoad == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoad == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
+                ?> src="<?php echo esc_url($attachment_url); ?>" <?php if ($lazyLoadEnable == true) : ?> data-src="<?php echo esc_url($dataSrc); ?>" loading="<?php echo esc_attr($lazy) ?>" <?php endif; ?> <?php if ($lazyLoadEnable == false) : ?> <?php if ($srcsetEnable == true) : ?> srcset=" <?php echo esc_attr($image_srcset); ?>" <?php endif; ?> <?php endif; ?> alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
         <?php endif; ?>
       <?php endif; ?>
     <?php

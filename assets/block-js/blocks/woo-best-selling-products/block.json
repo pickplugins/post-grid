@@ -25,20 +25,7 @@
           "tag": "div",
           "class": "pg-woo-best-selling"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "itemsWrapper": {

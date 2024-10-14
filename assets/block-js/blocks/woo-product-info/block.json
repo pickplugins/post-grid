@@ -29,20 +29,7 @@
           "tag": "ul",
           "class": "pg-woo-product-info"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "icon": {
@@ -52,20 +39,7 @@
           "class": "icon",
           "position": "beforePrefix"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "prefix": {
@@ -74,20 +48,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "postfix": {
@@ -96,20 +57,7 @@
         "options": {
           "class": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "itemInfo": {
@@ -119,20 +67,7 @@
           "class": "",
           "productData": ""
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "items": {
@@ -145,23 +80,14 @@
           "tag": "li"
         },
         "styles": {
-          "color": {
-            "Desktop": "#18978F"
+          "display": {
+            "Desktop": "flex"
           },
-          "backgroundColor": {
-            "Desktop": ""
+          "alignItems": {
+            "Desktop": "center"
           },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          },
-          "borderRadius": {
-            "Desktop": ""
-          },
-          "fontSize": {
-            "Desktop": ""
+          "gap": {
+            "Desktop": "1em"
           }
         },
         "elements": [
@@ -177,20 +103,7 @@
               "iconSrc": ""
             },
             "options": {},
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           },
           {
             "id": "length",
@@ -204,20 +117,7 @@
               "iconSrc": ""
             },
             "options": {},
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           },
           {
             "id": "width",
@@ -231,20 +131,7 @@
               "iconSrc": ""
             },
             "options": {},
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           },
           {
             "id": "height",
@@ -258,20 +145,7 @@
               "iconSrc": ""
             },
             "options": {},
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           },
           {
             "id": "dimensions",
@@ -285,20 +159,7 @@
               "iconSrc": ""
             },
             "options": {},
-            "styles": {
-              "color": {
-                "Desktop": ""
-              },
-              "backgroundColor": {
-                "Desktop": ""
-              },
-              "padding": {
-                "Desktop": ""
-              },
-              "margin": {
-                "Desktop": ""
-              }
-            }
+            "styles": {}
           }
         ]
       }

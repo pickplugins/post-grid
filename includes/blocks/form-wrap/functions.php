@@ -2051,12 +2051,18 @@ function form_wrap_process_registerForm($formFields, $onprocessargs, $request)
       $credentials['username'] = $username;
       $new_user_id = form_wrap_process_register_user($credentials);
       $user_meta = $request->get_param('user_meta');
+
+      unset($user_meta['wp_capabilities']);
+
+
       if (!empty($user_meta)) {
         foreach ($user_meta as $metaKey => $metavalue) {
           update_user_meta($new_user_id, $metaKey, $metavalue);
         }
       }
       $user_meta_files = $request->get_file_params()['user_meta'];
+
+
       $files = [];
       if (!empty($user_meta_files)) {
         $i = 0;
@@ -2534,6 +2540,10 @@ function form_wrap_process_customForm($formFields, $onprocessargs, $request)
         $failedMessage = isset($arg->failedMessage) ? $arg->failedMessage : '';
         $return = false;
         $filter = apply_filters($filterName, $return, $request);
+
+        // error_log("apply_filters");
+        // error_log($filter);
+
         if ($filter) {
           $response['success']['createEntry'] = $successMessage;
         } else {

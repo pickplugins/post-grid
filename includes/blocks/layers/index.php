@@ -24,6 +24,8 @@ class PGBlockLayers
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $post_url = get_the_permalink($post_ID);
     $the_post = get_post($post_ID);
+    $conditions = isset($attributes['conditions']) ? $attributes['conditions'] : [];
+    $conditionsRules = isset($conditions['rules']) ? $conditions['rules'] : [];
     $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
     $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
     $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
@@ -78,7 +80,10 @@ class PGBlockLayers
       </a>
     <?php
     } else { ?>
-      <<?php echo pg_tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+      <<?php echo pg_tag_escape($wrapperTag); ?> id="<?php echo esc_attr($wrapperID); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+        <?php if (!empty($conditionsRules)): ?>
+        data-conditions="<?php echo esc_attr(json_encode($conditionsRules)); ?>"
+        <?php endif; ?>>
         <?php echo ($content) ?> </<?php echo pg_tag_escape($wrapperTag); ?>>
 <?php
     }

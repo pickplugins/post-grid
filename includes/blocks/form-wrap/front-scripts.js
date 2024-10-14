@@ -2,6 +2,14 @@ export function setupForm() {
 	document.addEventListener("DOMContentLoaded", function (event) {
 		// To assign event
 		const pgFormSubmitted = new Event("pgFormSubmitted");
+		var conditions = document.querySelectorAll(`[data-conditions]`);
+		var calculations = document.querySelectorAll(`[data-calculations]`);
+
+		var conditionsSelector = [];
+		var calculationsSelector = {};
+		var calculationsFields = {};
+
+
 		var pgForms = document.querySelectorAll(".pg-form-wrap form");
 		var pgFormFields = document.querySelectorAll(".pg-form-field");
 		/*Hide all error message on load form*/
@@ -14,6 +22,272 @@ export function setupForm() {
 				}
 			});
 		}
+
+
+
+		if (conditions != null) {
+
+			var j = 0;
+			conditions.forEach((conditionWrap) => {
+
+
+				var conditionArg = conditionWrap.getAttribute("data-conditions");
+
+
+				var conditionObj = JSON.parse(conditionArg);
+				conditionWrap.style.display = "none";
+				conditionObj.map((item) => {
+					var args = item.args
+					args.map((arg) => {
+						var selector = arg.selector
+						conditionsSelector.push(selector);
+					})
+				})
+			});
+		}
+		if (calculations != null) {
+			calculations.forEach((calculationsWrap) => {
+				var rules = calculationsWrap.getAttribute("data-calculations");
+				var wrapId = calculationsWrap.getAttribute("id");
+				//var conditionObj = JSON.parse(conditionArg);
+
+				const matches = rules.match(/\${(.*?)}/g).map(match => match.slice(2, -1));
+
+				calculationsSelector[wrapId] = matches;
+				// conditionObj.map((item) => {
+				// 	var args = item.args
+				// 	args.map((arg) => {
+				// 		var selector = arg.selector
+				// 		calculationsSelector.push(selector);
+				// 	})
+				// })
+			});
+		}
+
+
+
+		Object.entries(calculationsSelector).map((args) => {
+
+			var wrapId = args[0]
+			var fields = args[1]
+
+
+
+			fields.forEach((selectorName) => {
+
+				var selectorHndles = document.querySelectorAll(`[name="${selectorName}"]`);
+
+				selectorHndles.forEach((selectorHndle) => {
+					selectorHndle.addEventListener("input", (event) => {
+
+						var targetVal = event.target.value;
+						calculationsFields[selectorName] = targetVal;
+						updateCalcField(wrapId, { field: selectorName, value: targetVal })
+					})
+				})
+			})
+		})
+
+
+		function updateCalcField(wrapId, obj = {}) {
+			var wrapHndle = document.querySelector(`#${wrapId}`);
+			var wrapHndleInput = document.querySelector(`#${wrapId} input`);
+			var rules = wrapHndle.getAttribute("data-calculations");
+
+			//rules = rules.replace(/<\/[^>]+(>|$)/g, "");
+
+			if (rules == null) return;
+
+			const result = rules.replace(/\$\{(.*?)\}/g, (match, p1) => calculationsFields[p1] != null ? calculationsFields[p1] : 0);
+
+			wrapHndleInput.value = eval(result)
+
+
+
+		}
+
+		conditionsSelector.map((selectorName) => {
+
+			var selectorHndles = document.querySelectorAll(`[name="${selectorName}"]`);
+			if (selectorHndles == null) return;
+
+			selectorHndles.forEach((selectorHndle) => {
+				selectorHndle.addEventListener("input", (event) => {
+
+					var targetVal = event.target.value;
+
+
+					conditions.forEach((conditionWrap) => {
+						var conditionArg = conditionWrap.getAttribute("data-conditions");
+						var conditionObj = JSON.parse(conditionArg);
+						conditionObj.map((item) => {
+							var args = item.args
+							args.map((arg) => {
+
+
+
+								var selector = arg.selector
+								var value = arg.value
+								var values = arg.values
+								var compare = arg.compare
+
+
+
+								if (selectorName == selector) {
+
+
+
+									if (compare == 'empty') {
+										if (targetVal.length == 0) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'notEmpty') {
+										if (targetVal.length > 0) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'lengthEqual') {
+										if (targetVal.length == parseInt(value)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'lengthGtEq') {
+										if (targetVal.length >= parseInt(value)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'lengthGt') {
+										if (targetVal.length > parseInt(value)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'lengthLtEq') {
+										if (targetVal.length <= parseInt(value)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'lengthLt') {
+										if (targetVal.length < parseInt(value)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == '>=') {
+										if (targetVal >= parseInt(value)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == '<=') {
+										if (targetVal <= parseInt(value)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+
+
+
+
+
+
+									if (compare == '=') {
+										if (value == targetVal) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == '!=') {
+										if (value != targetVal) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+
+
+
+
+									if (compare == 'contain') {
+										if (targetVal.includes(values)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'notContain') {
+										if (!targetVal.includes(values)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'between') {
+										if (parseInt(targetVal) > values[0] && parseInt(targetVal) < values[1]) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'exist') {
+										if (targetVal.includes(values)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+									if (compare == 'regexp') {
+
+										var pattern = new RegExp(value);
+										if (targetVal.match(pattern)) {
+											conditionWrap.style.display = "block";
+										} else {
+											conditionWrap.style.display = "none";
+										}
+									}
+
+
+
+
+
+
+
+
+
+								}
+
+							})
+
+						})
+
+					});
+
+
+				})
+			})
+
+
+
+		})
+
+
+
 		/*Check each form on page load*/
 		var BreakException = {};
 		var busy = false;
@@ -187,8 +461,6 @@ export function setupForm() {
 				.then((response) => {
 					if (response.ok && response.status < 400) {
 						response.json().then((data) => {
-
-							console.log(data);
 
 
 							var successArgs = data.success == undefined ? {} : data.success;

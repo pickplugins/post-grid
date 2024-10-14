@@ -134,6 +134,12 @@
         "styles": {}
       }
     },
+    "conditions": {
+      "type": "object",
+      "default": {
+        "rules": []
+      }
+    },
     "blockId": {
       "type": "string",
       "default": ""

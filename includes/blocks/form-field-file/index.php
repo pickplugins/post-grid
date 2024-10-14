@@ -24,6 +24,8 @@ class PGBlockFormFieldFile
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
     $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
+    $conditions = isset($attributes['conditions']) ? $attributes['conditions'] : [];
+    $conditionsRules = isset($conditions['rules']) ? $conditions['rules'] : [];
     $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
     $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
     $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
@@ -58,7 +60,9 @@ class PGBlockFormFieldFile
     $inputName = form_wrap_input_name($inputOptions, ["blockId" => $blockId]);
     ob_start();
 ?>
-    <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>">
+    <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?>" <?php if (!empty($conditionsRules)): ?>
+      data-conditions="<?php echo esc_attr(json_encode($conditionsRules)); ?>"
+      <?php endif; ?>>
       <div class='label-wrap'>
         <?php if ($labelEnable) : ?>
           <label for="" class="font-medium text-slate-900 "><?php echo wp_kses_post($labelText); ?></label>

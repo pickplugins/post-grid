@@ -30,6 +30,15 @@ class PGBlockFormFieldInput
         $currentUser = wp_get_current_user();
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
+
+        $conditions = isset($attributes['conditions']) ? $attributes['conditions'] : [];
+        $conditionsRules = isset($conditions['rules']) ? $conditions['rules'] : [];
+
+        $calculations = isset($attributes['calculations']) ? $attributes['calculations'] : [];
+        $calculationsRules = isset($calculations['rules']) ? $calculations['rules'] : "";
+        $calculationsRules = strip_tags($calculationsRules);
+        // var_dump(strip_tags($calculationsRules));
+
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
         $wrapperClass = isset($wrapperOptions['class']) ? $wrapperOptions['class'] : '';
@@ -68,9 +77,19 @@ class PGBlockFormFieldInput
         $obj['id'] = $post_ID;
         $obj['type'] = 'post';
         $wrapperClass = post_grid_parse_css_class($wrapperClass, $obj);
+
+
+
         ob_start();
 ?>
-        <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?> <?php echo ($inputType == 'hidden') ? 'hidden' : ''; ?>" id="<?php echo esc_attr($blockId); ?>">
+
+        <div class="<?php echo esc_attr($blockId); ?> <?php echo esc_attr($wrapperClass); ?> <?php echo ($inputType == 'hidden') ? 'hidden' : ''; ?>" id="<?php echo esc_attr($blockId); ?>"
+            <?php if (!empty($conditionsRules)): ?>
+            data-conditions="<?php echo esc_attr(json_encode($conditionsRules)); ?>"
+            <?php endif; ?>
+            <?php if (!empty($calculationsRules)): ?>
+            data-calculations="<?php echo esc_attr($calculationsRules); ?>"
+            <?php endif; ?>>
             <div class='label-wrap'>
                 <?php if ($labelEnable) : ?>
                     <label for="" class="font-medium text-slate-900 ">
@@ -86,7 +105,7 @@ class PGBlockFormFieldInput
                 <?php endif; ?>
             </div>
             <div class='input-wrap'>
-                <input type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if (!empty($errorWrapText)) : ?> errortext="<?php echo esc_attr($errorWrapText); ?>" <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> <?php if ($inputRequired) : ?> required <?php endif; ?> />
+                <input autocomplete="off" type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if (!empty($errorWrapText)) : ?> errortext="<?php echo esc_attr($errorWrapText); ?>" <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> <?php if ($inputRequired) : ?> required <?php endif; ?> />
                 <?php if ($errorWrapPosition == 'afterInput') : ?>
                     <?php if (!empty($errorWrapText)) : ?>
                         <div class='error-wrap'>

@@ -24,13 +24,7 @@
         "options": {
           "class": "pg-shortcode"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {},
-          "margin": {}
-        }
+        "styles": {}
       }
     },
     "shortcodeClassic": {
@@ -47,13 +41,7 @@
           "postfix": "",
           "prams": []
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "padding": {},
-          "margin": {}
-        }
+        "styles": {}
       }
     },
     "visible": {

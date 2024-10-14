@@ -55,9 +55,9 @@
         "options": {
           "tag": "div",
           "class": "item",
-          "counterClass": true,
-          "termsClass": true,
-          "oddEvenClass": true
+          "counterClass": false,
+          "roleClass": false,
+          "oddEvenClass": false
         },
         "styles": {}
       }

@@ -44,7 +44,7 @@
         "options": {
           "library": "fontAwesome",
           "srcType": "class",
-          "iconSrc": "fas fa-star",
+          "iconSrc": "",
           "position": "beforeSku",
           "class": ""
         },

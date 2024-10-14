@@ -33,7 +33,7 @@
       "default": {
         "options": {
           "tag": "div",
-          "archiveType": "auto",
+          "archiveType": "",
           "customLabel": "Archive: %s",
           "dateFormat": "",
           "linkTo": "",

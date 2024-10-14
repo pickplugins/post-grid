@@ -25,20 +25,7 @@
           "tag": "div",
           "class": "pg-woo-my-account"
         },
-        "styles": {
-          "color": {
-            "Desktop": ""
-          },
-          "backgroundColor": {
-            "Desktop": ""
-          },
-          "padding": {
-            "Desktop": ""
-          },
-          "margin": {
-            "Desktop": ""
-          }
-        }
+        "styles": {}
       }
     },
     "woocommerce": {
@@ -115,86 +102,7 @@
           "iconPosition": "beforeLabel"
         },
         "styles": {},
-        "items": [
-          {
-            "id": "dashboard",
-            "label": "Dashboard",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          },
-          {
-            "id": "orders",
-            "label": "Orders",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          },
-          {
-            "id": "downloads",
-            "label": "Downloads",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          },
-          {
-            "id": "addresses",
-            "label": "Addresses",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          },
-          {
-            "id": "accountDetails",
-            "label": "Account details",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          },
-          {
-            "id": "logout",
-            "label": "Log out",
-            "customText": "",
-            "url": "",
-            "siteIcon": {
-              "library": "fontAwesome",
-              "srcType": "class",
-              "iconSrc": ""
-            },
-            "options": {},
-            "styles": {}
-          }
-        ]
+        "items": []
       }
     },
     "icon": {
@@ -204,17 +112,7 @@
           "class": "icon",
           "position": "beforeLabel"
         },
-        "styles": {
-          "color": {
-            "Desktop": "#000000 !important"
-          },
-          "fontSize": {
-            "Desktop": "18px"
-          },
-          "margin": {
-            "Desktop": "0px 10px 0px 0px"
-          }
-        }
+        "styles": {}
       }
     },
     "visible": {

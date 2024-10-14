@@ -553,7 +553,13 @@ function post_grid_parse_query_prams($queryArgs)
       } elseif ($id == 'authorName') {
         $query_args['author_name'] = $val;
       } elseif ($id == 'authorIn') {
-        $query_args['author_in'] = !empty($val) ? explode(',', $val) : [];
+
+        $author_ids = explode(',', $val);
+        $author_ids = array_map(function ($a) {
+          return (int) $a;
+        }, $author_ids);
+
+        $query_args['author_in'] = !empty($val) ? $author_ids : [];
       } elseif ($id == 'authorNotIn') {
         $query_args['author__not_in'] = !empty($val) ? explode(',', $val) : [];
       } elseif ($id == 'cat') {
@@ -585,7 +591,9 @@ function post_grid_parse_query_prams($queryArgs)
       } elseif ($id == 'p') {
         $query_args['p'] = $val;
       } elseif ($id == 's') {
-        $query_args['s'] = $val;
+
+        if (!empty($val))
+          $query_args['s'] = $val;
       } elseif ($id == 'name') {
         $query_args['name'] = $val;
       } elseif ($id == 'pageId') {
@@ -613,7 +621,7 @@ function post_grid_parse_query_prams($queryArgs)
       } elseif ($id == 'nopaging') {
         $query_args['nopaging'] = $val;
       } elseif ($id == 'postsPerPage') {
-        $query_args['posts_per_page'] = $val;
+        $query_args['posts_per_page'] = (int) $val;
       } elseif ($id == 'paged') {
         $query_args['paged'] = $val;
       } elseif ($id == 'offset') {
@@ -4394,51 +4402,3 @@ function post_grid_check_sidebars()
 
   endif;
 }
-
-
-//remove_action('wp_head', 'feed_links', 2);
-//remove_action('wp_head', 'rsd_link');
-// remove_action('template_redirect', 'wp_shortlink_header', 11, 0);
-// remove_action('wp_head', 'wp_shortlink_wp_head');
-// remove_action('wp_head', 'wp_generator');
-// remove_action('wp_head', 'feed_links_extra', 3);
-// remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
-// remove_action('wp_head', 'rest_output_link_wp_head');
-// remove_action('template_redirect', 'rest_output_link_header', 11, 0);
-// remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
-// remove_action('wp_footer', 'wc_no_js');
-// remove_action('wp_head', 'print_emoji_detection_script', 7);
-// remove_action('admin_print_scripts', 'print_emoji_detection_script');
-// remove_action('wp_print_styles', 'print_emoji_styles');
-// remove_action('admin_print_styles', 'print_emoji_styles');
-// remove_filter('the_content_feed', 'wp_staticize_emoji');
-// remove_filter('comment_text_rss', 'wp_staticize_emoji');
-// remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-// add_filter('tiny_mce_plugins', 'perfmatters_disable_emojis_tinymce');
-// add_filter('emoji_svg_url', '__return_false');
-// remove_action('template_redirect', 'wp_redirect_admin_locations', 1000);
-// remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
-// remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
-// remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
-// remove_action('in_admin_header', 'wp_global_styles_render_svg_filters');
-//Remove Gutenberg Block Library CSS from loading on the frontend
-function post_grid_remove_wp_block_library_css()
-{
-  wp_dequeue_style('ct-woocommerce-styles');
-  wp_dequeue_style('wp-block-library');
-  // wp_dequeue_style('wp-block-library-theme');
-  wp_dequeue_style('woocommerce-blocktheme');
-  wp_dequeue_style('woocommerce-layout');
-  wp_dequeue_style('woocommerce-smallscreen');
-  wp_dequeue_style('woocommerce-general');
-  wp_deregister_style('wp-block-navigation');
-  //wp_deregister_style('dashicons');
-  // wp_dequeue_style('dashicons');
-  // Remove WooCommerce block CSS
-  wp_deregister_style('wc-blocks-style');
-  wp_dequeue_style('wc-blocks-style');
-  wp_dequeue_style('wc-blocks-style-mini-cart-contents');
-  wp_dequeue_style('wc-blocks-packages-style');
-  wp_dequeue_style('wc-blocks-style-mini-cart');
-}
-//add_action('wp_enqueue_scripts', 'post_grid_remove_wp_block_library_css', 9999);

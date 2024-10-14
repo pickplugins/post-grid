@@ -64,8 +64,12 @@ class PGBlockPostQuery
     if ($overideGET) {
       if (!empty($query_args)) {
         foreach ($query_args as $query_key => $query_arg) {
-          if (isset($_GET[$query_key])) {
-            $query_args[$query_key] = $_GET[$query_key];
+
+          //var_dump($_GET['_' . $query_key]);
+
+
+          if (isset($_GET['_' . $query_key])) {
+            $query_args[$query_key] = $_GET['_' . $query_key];
           } else {
             $query_args[$query_key] = $query_arg;
           }
@@ -91,6 +95,9 @@ class PGBlockPostQuery
     }
     $posts = [];
     $responses = [];
+
+
+
     $PGPostQuery = new WP_Query($query_args);
     $blockArgs = [
       'blockId' => $blockId,
@@ -104,6 +111,9 @@ class PGBlockPostQuery
     <?php
     if (!$itemsWrapExcluded) :
     ?>
+
+
+
       <div class="loop-loading"></div>
       <div class="<?php echo esc_attr($blockId); ?> pg-post-query items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>" data-blockargs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
       <?php

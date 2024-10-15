@@ -169,10 +169,12 @@ class PGBlockTermsList
       $i = 1;
       if (!empty($termsX))
         foreach ($termsX as $term) {
+
+
           $term_id = isset($term->term_id) ? $term->term_id : "";
           $term_post_count = isset($term->count) ? $term->count : "";
           $term_link = isset($term->link) ? $term->link : "";
-          $linkUrl = $term_link;
+          $linkUrl = (is_wp_error($term_link)) ? "" : $term_link;
           // if ($itemsLinkTo == 'postUrl') {
           //   $linkUrl = get_permalink($post_ID);
           // } else if ($itemsLinkTo == 'termUrl') {

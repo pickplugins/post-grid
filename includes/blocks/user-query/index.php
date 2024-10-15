@@ -60,7 +60,7 @@ class PGBlockUserQuery
     $innerBlocks = isset($parsed_block['innerBlocks']) ? $parsed_block['innerBlocks'] : [];
     $postGridScriptData[$postGridId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
     $postGridScriptData[$postGridId]['layout']['rawData'] = serialize_blocks($innerBlocks);
-    $query_args = post_grid_parse_query_terms(isset($queryArgs['items']) ? $queryArgs['items'] : []);
+    $query_args = post_grid_parse_query_users(isset($queryArgs['items']) ? $queryArgs['items'] : []);
     // $query_args = apply_filters("pgb_post_query_prams", $query_args, ["blockId" => $blockId]);
     $posts = [];
     $responses = [];

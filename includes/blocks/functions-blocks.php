@@ -738,6 +738,83 @@ function post_grid_parse_query_terms($queryArgs)
   //   $query_args['paged'] = $paged;
   return $query_args;
 }
+function post_grid_parse_query_users($queryArgs)
+{
+  $query_args = [];
+  foreach ($queryArgs as $item) {
+    $id = isset($item['id']) ? $item['id'] : '';
+    $val = isset($item['val']) ? $item['val'] : '';
+    if ($id == 'taxonomy') {
+      $query_args['taxonomy'] = $val;
+    } elseif ($id == 'orderby') {
+      $query_args['orderby'] = $val;
+    } elseif ($id == 'order') {
+      $query_args['order'] = $val;
+    } elseif ($id == 'hide_empty') {
+      $query_args['hide_empty'] = $val;
+    } elseif ($id == 'include') {
+      $query_args['include'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'exclude') {
+      $query_args['exclude'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'exclude_tree') {
+      $query_args['exclude_tree'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'number') {
+      $query_args['number'] = (int)$val;
+    } elseif ($id == 'count') {
+      $query_args['count'] = $val;
+    } elseif ($id == 'offset') {
+      $query_args['offset'] = $val;
+    } elseif ($id == 'name') {
+      $query_args['name'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'slug') {
+      $query_args['slug'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'hierarchical') {
+      $query_args['hierarchical'] = $val;
+    } elseif ($id == 'search') {
+      $query_args['search'] = $val;
+    } elseif ($id == 'name__like') {
+      $query_args['name__like'] = $val;
+    } elseif ($id == 'description__like') {
+      $query_args['description__like'] = $val;
+    } elseif ($id == 'pad_counts') {
+      $query_args['pad_counts'] = $val;
+    } elseif ($id == 'get') {
+      $query_args['get'] = $val;
+    } elseif ($id == 'parent') {
+      $query_args['parent'] = $val;
+    } elseif ($id == 'childless') {
+      $query_args['childless'] = $val;
+    } elseif ($id == 'child_of') {
+      $query_args['child_of'] = $val;
+    } elseif ($id == 'cache_domain') {
+      $query_args['cache_domain'] = $val;
+    } elseif ($id == 'update_term_meta_cache') {
+      $query_args['update_term_meta_cache'] = $val;
+    } elseif ($id == 'meta_key') {
+      $query_args['meta_key'] = $val;
+    } elseif ($id == 'meta_value') {
+      $query_args['meta_value'] = $val;
+    }
+  }
+  // if (get_query_var('paged')) {
+  //   $paged = get_query_var('paged');
+  // } elseif (get_query_var('page')) {
+  //   $paged = get_query_var('page');
+  // } else {
+  //   $paged = 1;
+  // }
+  // if (!empty($paged))
+  //   $query_args['paged'] = $paged;
+  return $query_args;
+}
+
+
+
 function post_grid_global_vars()
 {
   global $postGridScriptData;

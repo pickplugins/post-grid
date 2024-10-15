@@ -6,6 +6,7 @@
   "textdomain": "post-grid",
   "category": "post-grid-tools",
   "parent": [
+    "post-grid/user-showcase",
     "post-grid/content-slider",
     "post-grid/masonry-wrap",
     "post-grid/grid-wrap"

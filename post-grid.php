@@ -38,6 +38,8 @@ if (!class_exists('PostGrid')) {
       $postGridCss = [];
       $postGridCssY = [];
       $postGridScriptData = [];
+      $postGridScriptData['siteUrl'] = get_bloginfo('url');
+
       $postGridFonts = [];
 
 
@@ -342,6 +344,12 @@ if (!class_exists('PostGrid')) {
       }
       if (!in_array('post-grid/team-showcase', $disabled)) {
         require_once(post_grid_plugin_dir . 'includes/blocks/team-showcase/index.php');
+      }
+      if (!in_array('post-grid/terms-showcase', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/terms-showcase/index.php');
+      }
+      if (!in_array('post-grid/user-showcase', $disabled)) {
+        require_once(post_grid_plugin_dir . 'includes/blocks/user-showcase/index.php');
       }
 
 

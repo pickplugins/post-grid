@@ -670,12 +670,14 @@ function post_grid_parse_query_terms($queryArgs)
   foreach ($queryArgs as $item) {
     $id = isset($item['id']) ? $item['id'] : '';
     $val = isset($item['val']) ? $item['val'] : '';
-    if ($id == 'taxonomy') {
-      $query_args['taxonomy'] = $val;
-    } elseif ($id == 'orderby') {
+    if ($id == 'orderby') {
       $query_args['orderby'] = $val;
     } elseif ($id == 'order') {
       $query_args['order'] = $val;
+    } elseif ($id == 'offset') {
+      $query_args['offset'] = $val;
+    } elseif ($id == 'number') {
+      $query_args['number'] = $val;
     } elseif ($id == 'hide_empty') {
       $query_args['hide_empty'] = $val;
     } elseif ($id == 'include') {
@@ -684,47 +686,71 @@ function post_grid_parse_query_terms($queryArgs)
     } elseif ($id == 'exclude') {
       $query_args['exclude'] =
         !empty($val) ? explode(',', $val) : [];
-    } elseif ($id == 'exclude_tree') {
-      $query_args['exclude_tree'] =
-        !empty($val) ? explode(',', $val) : [];
-    } elseif ($id == 'number') {
-      $query_args['number'] = (int)$val;
-    } elseif ($id == 'count') {
-      $query_args['count'] = $val;
-    } elseif ($id == 'offset') {
-      $query_args['offset'] = $val;
-    } elseif ($id == 'name') {
-      $query_args['name'] =
-        !empty($val) ? explode(',', $val) : [];
-    } elseif ($id == 'slug') {
-      $query_args['slug'] =
-        !empty($val) ? explode(',', $val) : [];
-    } elseif ($id == 'hierarchical') {
-      $query_args['hierarchical'] = $val;
     } elseif ($id == 'search') {
       $query_args['search'] = $val;
-    } elseif ($id == 'name__like') {
-      $query_args['name__like'] = $val;
-    } elseif ($id == 'description__like') {
-      $query_args['description__like'] = $val;
-    } elseif ($id == 'pad_counts') {
-      $query_args['pad_counts'] = $val;
-    } elseif ($id == 'get') {
-      $query_args['get'] = $val;
-    } elseif ($id == 'parent') {
-      $query_args['parent'] = $val;
-    } elseif ($id == 'childless') {
-      $query_args['childless'] = $val;
-    } elseif ($id == 'child_of') {
-      $query_args['child_of'] = $val;
-    } elseif ($id == 'cache_domain') {
-      $query_args['cache_domain'] = $val;
-    } elseif ($id == 'update_term_meta_cache') {
-      $query_args['update_term_meta_cache'] = $val;
+    } elseif ($id == 'search_columns') {
+      $query_args['search_columns'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'paged') {
+      $query_args['paged'] = $val;
+    } elseif ($id == 'count_total') {
+      $query_args['count_total'] = $val;
+    } elseif ($id == 'blog_id') {
+      $query_args['blog_id'] = $val;
+    } elseif ($id == 'who') {
+      $query_args['who'] = $val;
+    } elseif ($id == 'meta_type') {
+      $query_args['meta_type'] = $val;
+    } elseif ($id == 'meta_type_key') {
+      $query_args['meta_type_key'] = $val;
     } elseif ($id == 'meta_key') {
-      $query_args['meta_key'] = $val;
+      $query_args['meta_key'] =
+        !empty($val) ? explode(',', $val) : [];
     } elseif ($id == 'meta_value') {
-      $query_args['meta_value'] = $val;
+      $query_args['meta_value'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'capability') {
+      $query_args['capability'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'capability__in') {
+      $query_args['capability__in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'capability__not_in') {
+      $query_args['capability__not_in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'fields') {
+      $query_args['fields'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'role') {
+      $query_args['role'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'role__in') {
+      $query_args['role__in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'role__not_in') {
+      $query_args['role__not_in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'has_published_posts') {
+      $query_args['has_published_posts'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'nicename') {
+      $query_args['nicename'] = $val;
+    } elseif ($id == 'nicename__in') {
+      $query_args['nicename__in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'nicename__not_in') {
+      $query_args['nicename__not_in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'login') {
+      $query_args['login'] = $val;
+    } elseif ($id == 'login__in') {
+      $query_args['login__in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'login__not_in') {
+      $query_args['login__not_in'] =
+        !empty($val) ? explode(',', $val) : [];
+    } elseif ($id == 'cache_results') {
+      $query_args['cache_results'] = $val;
     }
   }
   // if (get_query_var('paged')) {
@@ -744,8 +770,8 @@ function post_grid_parse_query_users($queryArgs)
   foreach ($queryArgs as $item) {
     $id = isset($item['id']) ? $item['id'] : '';
     $val = isset($item['val']) ? $item['val'] : '';
-    if ($id == 'taxonomy') {
-      $query_args['taxonomy'] = $val;
+    if ($id == 'role') {
+      $query_args['role'] = $val;
     } elseif ($id == 'orderby') {
       $query_args['orderby'] = $val;
     } elseif ($id == 'order') {
@@ -814,20 +840,24 @@ function post_grid_parse_query_users($queryArgs)
 }
 
 
-
 function post_grid_global_vars()
 {
   global $postGridScriptData;
-  $postGridScriptData['siteUrl'] = get_bloginfo('url');
-  wp_register_script('post-grid-global-vars', '', array(), '', true);
-  wp_enqueue_script('post-grid-global-vars');
-  wp_add_inline_script('post-grid-global-vars', 'var post_grid_vars =' . wp_json_encode($postGridScriptData));
+
+  //var_dump($postGridScriptData);
+  //wp_enqueue_script('pg_block_scripts');
+
+  // wp_register_script('post-grid-global-vars', '', array(), '', true);
+  // wp_enqueue_script('post-grid-global-vars');
+  // wp_add_inline_script('post-grid-global-vars', 'var post_grid_vars =' . wp_json_encode($postGridScriptData));
+
+  //wp_localize_script('pg_block_scripts', 'post_grid_vars', $postGridScriptData);
 }
-//add_action('wp_footer', 'post_grid_global_vars', 999);
+//add_action('wp_enqueue_scripts', 'post_grid_global_vars', 999);
 
 
 
-add_action('wp_enqueue_scripts', 'post_grid_global_vars');
+//add_action('wp_enqueue_scripts', 'post_grid_global_vars', 99999);
 function post_grid_preloads()
 {
 
@@ -847,8 +877,10 @@ function post_grid_preloads()
 
 
 ?>
-      <link rel="preload" as="<?php echo esc_attr($as); ?>" href="<?php echo esc_url($href); ?>" <?php if ($crossorigin): ?> crossorigin <?php endif; ?> <?php if ($media): ?> as="<?php echo esc_attr($media); ?>" <?php endif; ?> <?php if ($type): ?> type="<?php echo esc_attr($type); ?>" <?php endif; ?>>
-  <?php
+<link rel="preload" as="<?php echo esc_attr($as); ?>" href="<?php echo esc_url($href); ?>" <?php if ($crossorigin): ?>
+  crossorigin <?php endif; ?> <?php if ($media): ?> as="<?php echo esc_attr($media); ?>" <?php endif; ?>
+  <?php if ($type): ?> type="<?php echo esc_attr($type); ?>" <?php endif; ?>>
+<?php
     }
   }
   ?>
@@ -1016,7 +1048,7 @@ function post_grid_page_styles()
     $reponsiveCss .= '}';
   }
 ?>
-  <?php if (!empty($reponsiveCss)):
+<?php if (!empty($reponsiveCss)):
     wp_enqueue_style(
       'post-grid-page-styles',
       post_grid_plugin_url . 'assets/block-css/page-styles.css'
@@ -1032,10 +1064,10 @@ function post_grid_global_json_ld()
     foreach ($postGridLdJson as $json) {
       if (!empty($json)):
   ?>
-        <script type="application/ld+json">
-          <?php echo wp_unslash(json_encode($json)); ?>
-        </script>
-  <?php
+<script type="application/ld+json">
+<?php echo wp_unslash(json_encode($json)); ?>
+</script>
+<?php
       endif;
     }
   }
@@ -1138,7 +1170,7 @@ function post_grid_global_styles()
     $reponsiveCss .= '}';
   }
   ?>
-  <?php if (!empty($reponsiveCss)):
+<?php if (!empty($reponsiveCss)):
     wp_enqueue_style(
       'post-grid-global-styles',
       post_grid_plugin_url . 'assets/block-css/global-styles.css'
@@ -1332,8 +1364,8 @@ function post_grid_blocks_styles_fonts()
   $fonts = str_replace(" ", "+", $fontsArrStr);
   if (!empty($fonts)) {
   ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
-  <?php
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
+<?php
   }
 }
 add_action('wp_footer', 'post_grid_blocks_styles_fonts', 99);
@@ -1383,7 +1415,7 @@ function post_grid_google_fonts()
   $fonts = str_replace(" ", "+", $fontsArrStr);
   if (!empty($fonts)) {
   ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts); ?>&display=swap" />
 <?php
   }
 }

@@ -61,6 +61,18 @@
         "styles": {}
       }
     },
+    "conditions": {
+      "type": "object",
+      "default": {
+        "rules": []
+      }
+    },
+    "calculations": {
+      "type": "object",
+      "default": {
+        "rules": ""
+      }
+    },
     "other": {
       "type": "object",
       "default": {

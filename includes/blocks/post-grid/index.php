@@ -22,13 +22,13 @@ class PGBlockPostGrid
   function theHTML($attributes, $content, $block)
   {
     //wp_register_script('pg_block_scripts_post_grid', post_grid_plugin_url . 'includes/blocks/post-grid/front-scripts.js', [], '', ['in_footer' => true, 'strategy' => 'defer']);
-    if (has_block('post-grid/post-grid')) {
-      wp_enqueue_style('pg_block_styles');
-      wp_enqueue_script('pg_block_scripts');
-      wp_enqueue_style('font-awesome-5');
-    }
+
     global $postGridCssY;
     global $postGridScriptData;
+    global $postGridPrams;
+
+
+
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
     $post_url = get_the_permalink($post_ID);
     $the_post = get_post($post_ID);
@@ -97,8 +97,15 @@ class PGBlockPostGrid
       }
     }
     $postGridCssY[] = array_merge($blockCssY['items'], $itemCssArr);
-    $postGridScriptData[$blockId]['lazyLoad']['enable'] = $lazyLoadEnable;
-    $postGridScriptData[$blockId]['_wpnonce'] = wp_create_nonce('wp_rest');
+    $postGridScriptData['lazyLoad']['enable'] = $lazyLoadEnable;
+    $postGridScriptData['_wpnonce'] = wp_create_nonce('wp_rest');
+
+    $postGridPrams[$blockId]['lazyLoad']['enable'] = $lazyLoadEnable;
+    $postGridPrams[$blockId]['_wpnonce'] = wp_create_nonce('wp_rest');
+    $postGridPrams[$blockId]['siteUrl'] = get_bloginfo('url');
+
+
+
     $layout_id = isset($layout['id']) ? $layout['id'] : '';
     $layout_id = apply_filters('pgb_post_grid_post_layout_id', $layout_id);
     $rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
@@ -167,6 +174,22 @@ class PGBlockPostGrid
       if (!$isVisible) return;
     }
     // //* Visible condition
+
+
+
+    if (has_block('post-grid/post-grid')) {
+      wp_enqueue_style('pg_block_styles');
+      wp_enqueue_script('pg_block_scripts');
+      //wp_localize_script('pg_block_scripts', 'post_grid_vars_' . $blockId, $postGridScriptData);
+      wp_localize_script('pg_block_scripts', 'post_grid_prams', $postGridPrams);
+
+      wp_enqueue_style('font-awesome-5');
+    }
+
+
+
+
+
     ob_start();
 ?>
     <div class="pg-post-grid <?php echo esc_attr($containerClass); ?> <?php echo esc_attr($blockId); ?>  <?php echo esc_attr($blockAlign); ?>">

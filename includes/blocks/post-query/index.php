@@ -24,6 +24,7 @@ class PGBlockPostQuery
     wp_enqueue_style('font-awesome-5');
     global $postGridCssY;
     global $postGridScriptData;
+    global $postGridPrams;
     global $PGPostQuery;
     global $PGBlockPostQuery;
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -58,8 +59,12 @@ class PGBlockPostQuery
     $overideGET = isset($queryArgs['overideGET']) ? $queryArgs['overideGET'] : false;
     $parsed_block = isset($block->parsed_block) ? $block->parsed_block : [];
     $innerBlocks = isset($parsed_block['innerBlocks']) ? $parsed_block['innerBlocks'] : [];
-    $postGridScriptData[$postGridId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
-    $postGridScriptData[$postGridId]['layout']['rawData'] = serialize_blocks($innerBlocks);
+    $postGridScriptData['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
+    $postGridScriptData['layout']['rawData'] = serialize_blocks($innerBlocks);
+    $postGridPrams[$postGridId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
+    $postGridPrams[$postGridId]['layout']['rawData'] = serialize_blocks($innerBlocks);
+
+
     $query_args = post_grid_parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
     if ($overideGET) {
       if (!empty($query_args)) {
@@ -106,6 +111,9 @@ class PGBlockPostQuery
       ],
       'noPosts' => false
     ];
+
+
+
     ob_start();
 ?>
     <?php

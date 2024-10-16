@@ -29,7 +29,9 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "pg-images"
+          "class": "pg-images",
+          "source": "",
+          "metaValue": ""
         },
         "styles": {}
       }

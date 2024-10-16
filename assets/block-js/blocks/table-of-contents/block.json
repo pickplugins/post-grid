@@ -29,7 +29,11 @@
           ],
           "id": ""
         },
-        "styles": {}
+        "styles": {
+          "backgroundColor": {
+            "Desktop": "#201d1d"
+          }
+        }
       }
     },
     "tocHeader": {
@@ -37,6 +41,7 @@
       "default": {
         "options": {
           "class": "toc-header",
+          "hideContent": true,
           "label": ""
         },
         "styles": {}
@@ -105,7 +110,11 @@
       "type": "object",
       "default": {
         "options": {
-          "class": "toc-content"
+          "class": "toc-content",
+          "targetTags": [
+            "h1",
+            "h2"
+          ]
         },
         "styles": {}
       }
@@ -125,7 +134,20 @@
         "options": {
           "class": "toc-item"
         },
-        "styles": {}
+        "styles": {
+          "color": {
+            "Desktop": "#ffffff"
+          },
+          "padding": {
+            "Desktop": "10px 10px 10px 10px"
+          },
+          "display": {
+            "Desktop": "block"
+          },
+          "textDecoration": {
+            "Desktop": "none #000000 wavy 1px !important"
+          }
+        }
       }
     },
     "itemCurrent": {
@@ -134,7 +156,17 @@
         "options": {
           "class": "toc-item-current"
         },
-        "styles": {}
+        "styles": {
+          "backgroundColor": {
+            "Desktop": "#ffffff"
+          },
+          "color": {
+            "Desktop": "#000000"
+          },
+          "padding": {
+            "Desktop": "10px 10px 10px 10px"
+          }
+        }
       }
     },
     "slideToggle": {

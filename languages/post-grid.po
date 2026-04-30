@@ -1,0 +1,4257 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Post Grid\n"
+"POT-Creation-Date: 2025-03-16 22:36+0600\n"
+"PO-Revision-Date: 2025-03-16 22:37+0600\n"
+"Last-Translator: \n"
+"Language-Team: pickplugins <support@pickplugins.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: includes\n"
+"X-Poedit-SearchPath-1: templates\n"
+
+#: includes/classes/class-admin-notices.php:99
+#, php-format
+msgid ""
+"Post grid require import free layouts, please <a href=\"%s\">click here</a> "
+"to go import page"
+msgstr ""
+
+#: includes/classes/class-functions.php:13
+msgid "- Select -"
+msgstr ""
+
+#: includes/classes/class-functions.php:29
+msgid "ID"
+msgstr ""
+
+#: includes/classes/class-functions.php:30
+#: includes/metabox-post-grid-layout-hook.php:89
+msgid "Author"
+msgstr ""
+
+#: includes/classes/class-functions.php:31
+msgid "Title"
+msgstr ""
+
+#: includes/classes/class-functions.php:32
+msgid "Name"
+msgstr ""
+
+#: includes/classes/class-functions.php:33
+msgid "Type"
+msgstr ""
+
+#: includes/classes/class-functions.php:34
+msgid "Date"
+msgstr ""
+
+#: includes/classes/class-functions.php:35
+msgid "post_date"
+msgstr ""
+
+#: includes/classes/class-functions.php:36
+msgid "modified"
+msgstr ""
+
+#: includes/classes/class-functions.php:37
+msgid "Parent"
+msgstr ""
+
+#: includes/classes/class-functions.php:38
+msgid "Random"
+msgstr ""
+
+#: includes/classes/class-functions.php:39
+#: includes/post-grid-layout-elements.php:4627
+msgid "Comment count"
+msgstr ""
+
+#: includes/classes/class-functions.php:40
+msgid "Menu order"
+msgstr ""
+
+#: includes/classes/class-functions.php:41
+msgid "Meta value"
+msgstr ""
+
+#: includes/classes/class-functions.php:42
+msgid "Meta Value(number)"
+msgstr ""
+
+#: includes/classes/class-functions.php:43
+msgid "post__in"
+msgstr ""
+
+#: includes/classes/class-functions.php:44
+msgid "post_name__in"
+msgstr ""
+
+#: includes/classes/class-functions.php:50
+msgid "Publish"
+msgstr ""
+
+#: includes/classes/class-functions.php:51
+msgid "Pending"
+msgstr ""
+
+#: includes/classes/class-functions.php:52
+msgid "Draft"
+msgstr ""
+
+#: includes/classes/class-functions.php:53
+msgid "Auto draft"
+msgstr ""
+
+#: includes/classes/class-functions.php:54
+msgid "Future"
+msgstr ""
+
+#: includes/classes/class-functions.php:55
+msgid "Private"
+msgstr ""
+
+#: includes/classes/class-functions.php:56
+msgid "Inherit"
+msgstr ""
+
+#: includes/classes/class-functions.php:57
+msgid "Trash"
+msgstr ""
+
+#: includes/classes/class-functions.php:58
+msgid "Any"
+msgstr ""
+
+#: includes/classes/class-functions.php:69
+#: includes/post-grid-layout-elements.php:2231
+msgid "Featured Image"
+msgstr ""
+
+#: includes/classes/class-functions.php:70
+#: includes/post-grid-layout-elements.php:2232
+msgid "First images from content"
+msgstr ""
+
+#: includes/classes/class-functions.php:71
+#: includes/post-grid-layout-elements.php:2233
+msgid "Empty thumbnail"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:19
+msgid "Layout data"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:23
+msgid "Post Grid Options"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:24
+msgid "Post Grid Info"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:30
+msgid "Post Grid - Post Options"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:41
+#, php-format
+msgid "%s Layout editor"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:47
+#, php-format
+msgid "%s Custom scripts"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:149
+#, php-format
+msgid "%s Shortcode"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:155 includes/menu/settings.php:7
+#, php-format
+msgid "%s General"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:161
+#, php-format
+msgid "%s Query Post"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:173
+#, php-format
+msgid "%s Grid settings"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:181
+#, php-format
+msgid "%s Layouts"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:187
+#, php-format
+msgid "%s Item style"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:193
+#, php-format
+msgid "%s Masonry"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:201
+#, php-format
+msgid "%s Justified"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:209
+#, php-format
+msgid "%s Tiles"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:217
+#, php-format
+msgid "%s Pagination"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:225
+#, php-format
+msgid "%s Custom Scripts"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:231
+#, php-format
+msgid "%s Search"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:316
+msgid "View Type"
+msgstr ""
+
+#: includes/classes/class-meta-boxes.php:440
+#, php-format
+msgid "%s Options"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:10
+msgid "How to create post grid"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:24
+msgid "Excerpt word count"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:29
+msgid "Custom media height"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:34
+msgid "Item custom padding margin"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:39
+#: includes/metabox-post-grid-hook.php:971
+msgid "Grid item height"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:44
+msgid "Column Width or column number"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:49
+msgid "Post title linked"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:54
+#: includes/metabox-post-grid-hook.php:847
+msgid "Featured image linked to post"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:59
+msgid "Query post by categories or terms"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:64
+msgid "Query post by tags or terms"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:69
+msgid "Display search input"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:74
+msgid "Work with layout editor"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:79
+msgid "[ Pro ] Create filterable grid"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:84
+msgid "[ Pro ] Filterable custom filter type data logic"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:89
+msgid "[ Pro ] Filterable custom all text"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:94
+msgid "[ Pro ] Filterable default active filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:99
+msgid "[ Pro ] Filterable custom filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:104
+msgid "[ Pro ] Filterable dropdown single filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:109
+msgid "[ Pro ] Filterable display sort filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:114
+msgid "[ Pro ] Filterable multi filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:119
+msgid "[ Pro ] Post grid on archive tags"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:124
+msgid "[ Pro ] Query post by meta field"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:129
+msgid "[ Pro ] Multi skin"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:134
+msgid "[ Pro ] Sticky post query"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:139
+msgid "[ Pro ] Masonry layout"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:144
+msgid "[ Pro ] Post query by author"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:149
+msgid "[ Pro ] Create glossary grid"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:154
+msgid "[ Pro ] Post carousel slider"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:159
+msgid "[ Pro ] Grid layout type"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:164
+msgid "[ Pro ] Thumbnail youtube"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:169
+msgid "How to Create a Post Grid?"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:173
+msgid "How to upgrade to premium?"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:177
+msgid "Post grid on archive page?"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:181
+msgid "How to display HTML/Shortcode via layout editor?"
+msgstr ""
+
+#: includes/classes/class-post-types.php:237
+#: includes/classes/class-post-types.php:238
+msgid "Post Grid"
+msgstr ""
+
+#: includes/classes/class-post-types.php:248
+#: includes/classes/class-post-types.php:299
+#: includes/classes/class-post-types.php:352
+#: includes/classes/class-post-types.php:385
+#: includes/classes/class-post-types.php:438
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:249
+#: includes/classes/class-post-types.php:300
+#: includes/classes/class-post-types.php:386
+msgid "Add New"
+msgstr ""
+
+#: includes/classes/class-post-types.php:250
+#: includes/classes/class-post-types.php:301
+#: includes/classes/class-post-types.php:387
+#, php-format
+msgid "Add %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:251
+#: includes/classes/class-post-types.php:302
+#: includes/classes/class-post-types.php:388
+#: includes/metabox-post-grid-hook.php:588
+msgid "Edit"
+msgstr ""
+
+#: includes/classes/class-post-types.php:252
+#: includes/classes/class-post-types.php:303
+#: includes/classes/class-post-types.php:355
+#: includes/classes/class-post-types.php:389
+#: includes/classes/class-post-types.php:441
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:253
+#: includes/classes/class-post-types.php:304
+#: includes/classes/class-post-types.php:390
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:254
+#: includes/classes/class-post-types.php:255
+#: includes/classes/class-post-types.php:305
+#: includes/classes/class-post-types.php:306
+#: includes/classes/class-post-types.php:391
+#: includes/classes/class-post-types.php:392
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:256
+#: includes/classes/class-post-types.php:307
+#: includes/classes/class-post-types.php:351
+#: includes/classes/class-post-types.php:393
+#: includes/classes/class-post-types.php:437
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:257
+#: includes/classes/class-post-types.php:308
+#: includes/classes/class-post-types.php:394
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: includes/classes/class-post-types.php:258
+#: includes/classes/class-post-types.php:309
+#: includes/classes/class-post-types.php:395
+#, php-format
+msgid "No %s found in trash"
+msgstr ""
+
+#: includes/classes/class-post-types.php:259
+#: includes/classes/class-post-types.php:310
+#: includes/classes/class-post-types.php:353
+#: includes/classes/class-post-types.php:396
+#: includes/classes/class-post-types.php:439
+#, php-format
+msgid "Parent %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:261
+#: includes/classes/class-post-types.php:312
+#: includes/classes/class-post-types.php:398
+#, php-format
+msgid "This is where you can create and manage %s."
+msgstr ""
+
+#: includes/classes/class-post-types.php:290
+msgid "Saved Layout"
+msgstr ""
+
+#: includes/classes/class-post-types.php:291
+msgid "Saved Layouts"
+msgstr ""
+
+#: includes/classes/class-post-types.php:337
+#: includes/classes/class-post-types.php:423
+#: includes/layout-elements/simple-job-board/layout-elements.php:10
+msgid "Category"
+msgstr ""
+
+#: includes/classes/class-post-types.php:338
+#: includes/classes/class-post-types.php:424
+#: includes/layout-elements/simple-job-board/layout-elements.php:320
+#: includes/metabox-post-grid-layout-hook.php:91
+msgid "Categories"
+msgstr ""
+
+#: includes/classes/class-post-types.php:354
+#: includes/classes/class-post-types.php:440
+#, php-format
+msgid "Parent %s:"
+msgstr ""
+
+#: includes/classes/class-post-types.php:356
+#: includes/classes/class-post-types.php:442
+#, php-format
+msgid "Update %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:357
+#: includes/classes/class-post-types.php:443
+#, php-format
+msgid "Add New %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:358
+#: includes/classes/class-post-types.php:444
+#, php-format
+msgid "New %s Name"
+msgstr ""
+
+#: includes/classes/class-post-types.php:376
+msgid "Saved Template"
+msgstr ""
+
+#: includes/classes/class-post-types.php:377
+msgid "Saved Templates"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:312
+msgid "Placeholder.jpg"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:356
+#: includes/classes/class-settings-tabs.php:416
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:22
+msgid "Upload"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:357
+#: includes/classes/class-settings-tabs.php:418
+msgid "Clear"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:492
+#: includes/classes/class-settings-tabs.php:681
+msgid "Add"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:597
+msgid "Reset"
+msgstr ""
+
+#: includes/classes/class-settings.php:29
+msgid "Create New"
+msgstr ""
+
+#: includes/classes/class-settings.php:30
+msgid "Import Layouts"
+msgstr ""
+
+#: includes/classes/class-settings.php:32
+msgid "Settings"
+msgstr ""
+
+#: includes/data-update/class-post-grid-data-update.php:24
+#, php-format
+msgid ""
+"Data update required for  <b>%s &raquo; <a href=\"%sedit.php?"
+"post_type=post_grid&page=data-update\">Update</a></b>"
+msgstr ""
+
+#: includes/functions-ajax.php:19 includes/functions-ajax.php:156
+#: includes/metabox-post-grid-hook.php:1093 templates/post-grid-hook.php:537
+msgid "« Previous"
+msgstr ""
+
+#: includes/functions-ajax.php:20 includes/functions-ajax.php:157
+#: includes/metabox-post-grid-hook.php:1094 templates/post-grid-hook.php:538
+msgid "Next »"
+msgstr ""
+
+#: includes/functions-ajax.php:73 includes/functions-ajax.php:202
+msgid "Sorry! you are not allowed to do that."
+msgstr ""
+
+#: includes/functions-layout-api.php:28
+msgid "There is a server error"
+msgstr ""
+
+#: includes/functions.php:84
+msgid "Shortcode"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:6
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:28
+msgid "kk Star Ratings"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:36
+#: includes/layout-elements/wp-postratings/layout-elements.php:36
+msgid "size"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:37
+#: includes/layout-elements/wp-postratings/layout-elements.php:37
+msgid "Icon size, number only, ex: 20"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:48
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:36
+#: includes/layout-elements/multi-rating/layout-elements.php:60
+#: includes/layout-elements/page-views-count/layout-elements.php:48
+#: includes/layout-elements/page-visit-counter/layout-elements.php:48
+#: includes/layout-elements/post-views-counter/layout-elements.php:48
+#: includes/layout-elements/rate-my-post/layout-elements.php:48
+#: includes/layout-elements/rating-widget/layout-elements.php:35
+#: includes/layout-elements/simple-job-board/layout-elements.php:887
+#: includes/layout-elements/simple-job-board/layout-elements.php:1095
+#: includes/layout-elements/simple-job-board/layout-elements.php:1303
+#: includes/layout-elements/simple-job-board/layout-elements.php:1511
+#: includes/layout-elements/simple-job-board/layout-elements.php:1732
+#: includes/layout-elements/simple-job-board/layout-elements.php:1946
+#: includes/layout-elements/site-reviews/layout-elements.php:61
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:80
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:286
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:492
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:711
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:932
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1153
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1361
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1580
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1831
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2094
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2337
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2580
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2828
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3076
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3319
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3560
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3796
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4017
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4239
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4447
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4653
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4872
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5086
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5292
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5511
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5745
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5988
+#: includes/layout-elements/wp-job-manager/layout-elements.php:59
+#: includes/layout-elements/wp-job-manager/layout-elements.php:267
+#: includes/layout-elements/wp-job-manager/layout-elements.php:475
+#: includes/layout-elements/wp-job-manager/layout-elements.php:683
+#: includes/layout-elements/wp-job-manager/layout-elements.php:891
+#: includes/layout-elements/wp-postratings/layout-elements.php:48
+#: includes/layout-elements/wp-postviews/layout-elements.php:48
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:81
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:273
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:38
+#: includes/post-grid-layout-elements.php:407
+#: includes/post-grid-layout-elements.php:662
+#: includes/post-grid-layout-elements.php:960
+#: includes/post-grid-layout-elements.php:3301
+#: includes/post-grid-layout-elements.php:4659
+msgid "Color"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:49
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:37
+#: includes/layout-elements/multi-rating/layout-elements.php:61
+#: includes/layout-elements/page-views-count/layout-elements.php:49
+#: includes/layout-elements/page-visit-counter/layout-elements.php:49
+#: includes/layout-elements/post-views-counter/layout-elements.php:49
+#: includes/layout-elements/rate-my-post/layout-elements.php:49
+#: includes/layout-elements/rating-widget/layout-elements.php:36
+#: includes/layout-elements/simple-job-board/layout-elements.php:888
+#: includes/layout-elements/simple-job-board/layout-elements.php:1096
+#: includes/layout-elements/simple-job-board/layout-elements.php:1304
+#: includes/layout-elements/simple-job-board/layout-elements.php:1512
+#: includes/layout-elements/simple-job-board/layout-elements.php:1733
+#: includes/layout-elements/simple-job-board/layout-elements.php:1947
+#: includes/layout-elements/site-reviews/layout-elements.php:62
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:81
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:287
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:493
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:712
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:933
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1154
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1362
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1581
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1832
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2095
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2338
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2581
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2829
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3077
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3320
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3561
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3797
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4018
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4240
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4448
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4654
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4873
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5087
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5293
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5512
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5746
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5989
+#: includes/layout-elements/wp-job-manager/layout-elements.php:60
+#: includes/layout-elements/wp-job-manager/layout-elements.php:268
+#: includes/layout-elements/wp-job-manager/layout-elements.php:476
+#: includes/layout-elements/wp-job-manager/layout-elements.php:684
+#: includes/layout-elements/wp-job-manager/layout-elements.php:892
+#: includes/layout-elements/wp-postratings/layout-elements.php:49
+#: includes/layout-elements/wp-postviews/layout-elements.php:49
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:82
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:274
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:39
+#: includes/post-grid-layout-elements.php:408
+#: includes/post-grid-layout-elements.php:663
+#: includes/post-grid-layout-elements.php:961
+#: includes/post-grid-layout-elements.php:3302
+#: includes/post-grid-layout-elements.php:4660
+msgid "Title text color."
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:59
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:47
+#: includes/layout-elements/multi-rating/layout-elements.php:71
+#: includes/layout-elements/page-views-count/layout-elements.php:59
+#: includes/layout-elements/page-visit-counter/layout-elements.php:59
+#: includes/layout-elements/post-views-counter/layout-elements.php:59
+#: includes/layout-elements/rate-my-post/layout-elements.php:59
+#: includes/layout-elements/rating-widget/layout-elements.php:46
+#: includes/layout-elements/simple-job-board/layout-elements.php:110
+#: includes/layout-elements/simple-job-board/layout-elements.php:385
+#: includes/layout-elements/simple-job-board/layout-elements.php:660
+#: includes/layout-elements/simple-job-board/layout-elements.php:898
+#: includes/layout-elements/simple-job-board/layout-elements.php:1106
+#: includes/layout-elements/simple-job-board/layout-elements.php:1314
+#: includes/layout-elements/simple-job-board/layout-elements.php:1522
+#: includes/layout-elements/simple-job-board/layout-elements.php:1743
+#: includes/layout-elements/simple-job-board/layout-elements.php:1957
+#: includes/layout-elements/site-reviews/layout-elements.php:72
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:91
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:297
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:503
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:722
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:943
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1164
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1372
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1591
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1842
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2105
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2348
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2591
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2839
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3087
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3330
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3571
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3807
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4028
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4250
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4458
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4664
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4883
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5097
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5303
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5522
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5756
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5999
+#: includes/layout-elements/wp-job-manager/layout-elements.php:70
+#: includes/layout-elements/wp-job-manager/layout-elements.php:278
+#: includes/layout-elements/wp-job-manager/layout-elements.php:486
+#: includes/layout-elements/wp-job-manager/layout-elements.php:694
+#: includes/layout-elements/wp-job-manager/layout-elements.php:902
+#: includes/layout-elements/wp-postratings/layout-elements.php:59
+#: includes/layout-elements/wp-postviews/layout-elements.php:59
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:92
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:284
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:49
+#: includes/metabox-post-grid-hook.php:1161
+#: includes/post-grid-layout-elements.php:418
+#: includes/post-grid-layout-elements.php:673
+#: includes/post-grid-layout-elements.php:971
+#: includes/post-grid-layout-elements.php:1467
+#: includes/post-grid-layout-elements.php:1762
+#: includes/post-grid-layout-elements.php:2052
+#: includes/post-grid-layout-elements.php:3312
+#: includes/post-grid-layout-elements.php:3585
+#: includes/post-grid-layout-elements.php:3855
+#: includes/post-grid-layout-elements.php:4147
+#: includes/post-grid-layout-elements.php:4670
+#: includes/post-grid-layout-elements.php:4872
+#: includes/post-grid-layout-elements.php:5263
+msgid "Font size"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:60
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:48
+#: includes/layout-elements/multi-rating/layout-elements.php:72
+#: includes/layout-elements/page-views-count/layout-elements.php:60
+#: includes/layout-elements/page-visit-counter/layout-elements.php:60
+#: includes/layout-elements/post-views-counter/layout-elements.php:60
+#: includes/layout-elements/rate-my-post/layout-elements.php:60
+#: includes/layout-elements/rating-widget/layout-elements.php:47
+#: includes/layout-elements/simple-job-board/layout-elements.php:111
+#: includes/layout-elements/simple-job-board/layout-elements.php:386
+#: includes/layout-elements/simple-job-board/layout-elements.php:661
+#: includes/layout-elements/simple-job-board/layout-elements.php:899
+#: includes/layout-elements/simple-job-board/layout-elements.php:1107
+#: includes/layout-elements/simple-job-board/layout-elements.php:1315
+#: includes/layout-elements/simple-job-board/layout-elements.php:1523
+#: includes/layout-elements/simple-job-board/layout-elements.php:1744
+#: includes/layout-elements/simple-job-board/layout-elements.php:1958
+#: includes/layout-elements/site-reviews/layout-elements.php:73
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:92
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:298
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:504
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:723
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:944
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1165
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1373
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1592
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1843
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2106
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2349
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2592
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2840
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3088
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3331
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3572
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3808
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4029
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4251
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4459
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4665
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4884
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5098
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5304
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5523
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5757
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6000
+#: includes/layout-elements/wp-job-manager/layout-elements.php:71
+#: includes/layout-elements/wp-job-manager/layout-elements.php:279
+#: includes/layout-elements/wp-job-manager/layout-elements.php:487
+#: includes/layout-elements/wp-job-manager/layout-elements.php:695
+#: includes/layout-elements/wp-job-manager/layout-elements.php:903
+#: includes/layout-elements/wp-postratings/layout-elements.php:60
+#: includes/layout-elements/wp-postviews/layout-elements.php:60
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:93
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:285
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:50
+#: includes/post-grid-layout-elements.php:419
+#: includes/post-grid-layout-elements.php:674
+#: includes/post-grid-layout-elements.php:972
+#: includes/post-grid-layout-elements.php:1468
+#: includes/post-grid-layout-elements.php:1763
+#: includes/post-grid-layout-elements.php:2053
+#: includes/post-grid-layout-elements.php:3313
+#: includes/post-grid-layout-elements.php:4671
+msgid "Set font size."
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:71
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:59
+#: includes/layout-elements/multi-rating/layout-elements.php:83
+#: includes/layout-elements/page-views-count/layout-elements.php:71
+#: includes/layout-elements/page-visit-counter/layout-elements.php:71
+#: includes/layout-elements/post-views-counter/layout-elements.php:71
+#: includes/layout-elements/rate-my-post/layout-elements.php:71
+#: includes/layout-elements/rating-widget/layout-elements.php:58
+#: includes/layout-elements/simple-job-board/layout-elements.php:134
+#: includes/layout-elements/simple-job-board/layout-elements.php:409
+#: includes/layout-elements/simple-job-board/layout-elements.php:684
+#: includes/layout-elements/simple-job-board/layout-elements.php:922
+#: includes/layout-elements/simple-job-board/layout-elements.php:1130
+#: includes/layout-elements/simple-job-board/layout-elements.php:1338
+#: includes/layout-elements/simple-job-board/layout-elements.php:1546
+#: includes/layout-elements/simple-job-board/layout-elements.php:1767
+#: includes/layout-elements/simple-job-board/layout-elements.php:1981
+#: includes/layout-elements/site-reviews/layout-elements.php:84
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:115
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:321
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:527
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:746
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:967
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1188
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1396
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1615
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1866
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2129
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2372
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2615
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2863
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3111
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3354
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3595
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3831
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4052
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4274
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4482
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4688
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4907
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5121
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5327
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5546
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5780
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6023
+#: includes/layout-elements/wp-job-manager/layout-elements.php:94
+#: includes/layout-elements/wp-job-manager/layout-elements.php:302
+#: includes/layout-elements/wp-job-manager/layout-elements.php:510
+#: includes/layout-elements/wp-job-manager/layout-elements.php:718
+#: includes/layout-elements/wp-job-manager/layout-elements.php:926
+#: includes/layout-elements/wp-postratings/layout-elements.php:71
+#: includes/layout-elements/wp-postviews/layout-elements.php:71
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:104
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:296
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:61
+#: includes/post-grid-layout-elements.php:49
+#: includes/post-grid-layout-elements.php:200
+#: includes/post-grid-layout-elements.php:442
+#: includes/post-grid-layout-elements.php:697
+#: includes/post-grid-layout-elements.php:995
+#: includes/post-grid-layout-elements.php:1220
+#: includes/post-grid-layout-elements.php:1432
+#: includes/post-grid-layout-elements.php:1750
+#: includes/post-grid-layout-elements.php:2040
+#: includes/post-grid-layout-elements.php:2397
+#: includes/post-grid-layout-elements.php:2748
+#: includes/post-grid-layout-elements.php:3056
+#: includes/post-grid-layout-elements.php:3336
+#: includes/post-grid-layout-elements.php:3597
+#: includes/post-grid-layout-elements.php:3867
+#: includes/post-grid-layout-elements.php:4135
+#: includes/post-grid-layout-elements.php:4430
+#: includes/post-grid-layout-elements.php:4694
+#: includes/post-grid-layout-elements.php:5102
+#: includes/post-grid-layout-elements.php:5275
+msgid "Margin"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:72
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:60
+#: includes/layout-elements/multi-rating/layout-elements.php:84
+#: includes/layout-elements/page-views-count/layout-elements.php:72
+#: includes/layout-elements/page-visit-counter/layout-elements.php:72
+#: includes/layout-elements/post-views-counter/layout-elements.php:72
+#: includes/layout-elements/rate-my-post/layout-elements.php:72
+#: includes/layout-elements/rating-widget/layout-elements.php:59
+#: includes/layout-elements/simple-job-board/layout-elements.php:135
+#: includes/layout-elements/simple-job-board/layout-elements.php:410
+#: includes/layout-elements/simple-job-board/layout-elements.php:685
+#: includes/layout-elements/simple-job-board/layout-elements.php:923
+#: includes/layout-elements/simple-job-board/layout-elements.php:1131
+#: includes/layout-elements/simple-job-board/layout-elements.php:1339
+#: includes/layout-elements/simple-job-board/layout-elements.php:1547
+#: includes/layout-elements/simple-job-board/layout-elements.php:1768
+#: includes/layout-elements/simple-job-board/layout-elements.php:1982
+#: includes/layout-elements/site-reviews/layout-elements.php:85
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:116
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:322
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:528
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:747
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:968
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1189
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1397
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1616
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1867
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2130
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2373
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2616
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2864
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3112
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3355
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3596
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3832
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4053
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4275
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4483
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4689
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4908
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5122
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5328
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5547
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5781
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6024
+#: includes/layout-elements/wp-job-manager/layout-elements.php:95
+#: includes/layout-elements/wp-job-manager/layout-elements.php:303
+#: includes/layout-elements/wp-job-manager/layout-elements.php:511
+#: includes/layout-elements/wp-job-manager/layout-elements.php:719
+#: includes/layout-elements/wp-job-manager/layout-elements.php:927
+#: includes/layout-elements/wp-postratings/layout-elements.php:72
+#: includes/layout-elements/wp-postviews/layout-elements.php:72
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:105
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:297
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:62
+#: includes/post-grid-layout-elements.php:50
+#: includes/post-grid-layout-elements.php:201
+#: includes/post-grid-layout-elements.php:443
+#: includes/post-grid-layout-elements.php:698
+#: includes/post-grid-layout-elements.php:996
+#: includes/post-grid-layout-elements.php:1221
+#: includes/post-grid-layout-elements.php:1433
+#: includes/post-grid-layout-elements.php:1751
+#: includes/post-grid-layout-elements.php:2041
+#: includes/post-grid-layout-elements.php:2398
+#: includes/post-grid-layout-elements.php:2749
+#: includes/post-grid-layout-elements.php:3057
+#: includes/post-grid-layout-elements.php:3337
+#: includes/post-grid-layout-elements.php:4136
+#: includes/post-grid-layout-elements.php:4431
+#: includes/post-grid-layout-elements.php:4695
+msgid "Set margin."
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:83
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:71
+#: includes/layout-elements/multi-rating/layout-elements.php:95
+#: includes/layout-elements/page-views-count/layout-elements.php:83
+#: includes/layout-elements/page-visit-counter/layout-elements.php:83
+#: includes/layout-elements/post-views-counter/layout-elements.php:83
+#: includes/layout-elements/rate-my-post/layout-elements.php:83
+#: includes/layout-elements/rating-widget/layout-elements.php:70
+#: includes/layout-elements/simple-job-board/layout-elements.php:146
+#: includes/layout-elements/simple-job-board/layout-elements.php:421
+#: includes/layout-elements/simple-job-board/layout-elements.php:696
+#: includes/layout-elements/simple-job-board/layout-elements.php:934
+#: includes/layout-elements/simple-job-board/layout-elements.php:1142
+#: includes/layout-elements/simple-job-board/layout-elements.php:1350
+#: includes/layout-elements/simple-job-board/layout-elements.php:1558
+#: includes/layout-elements/simple-job-board/layout-elements.php:1779
+#: includes/layout-elements/simple-job-board/layout-elements.php:1993
+#: includes/layout-elements/site-reviews/layout-elements.php:96
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:127
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:333
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:539
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:758
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:979
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1200
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1408
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1627
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1878
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2141
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2384
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2627
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2875
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3123
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3366
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3607
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3843
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4064
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4286
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4494
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4700
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4919
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5133
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5339
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5558
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5792
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6035
+#: includes/layout-elements/wp-job-manager/layout-elements.php:106
+#: includes/layout-elements/wp-job-manager/layout-elements.php:314
+#: includes/layout-elements/wp-job-manager/layout-elements.php:522
+#: includes/layout-elements/wp-job-manager/layout-elements.php:730
+#: includes/layout-elements/wp-job-manager/layout-elements.php:938
+#: includes/layout-elements/wp-postratings/layout-elements.php:83
+#: includes/layout-elements/wp-postviews/layout-elements.php:83
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:116
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:308
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:73
+#: includes/metabox-post-grid-hook.php:186
+#: includes/post-grid-layout-elements.php:454
+#: includes/post-grid-layout-elements.php:709
+#: includes/post-grid-layout-elements.php:1007
+#: includes/post-grid-layout-elements.php:1208
+#: includes/post-grid-layout-elements.php:1455
+#: includes/post-grid-layout-elements.php:1774
+#: includes/post-grid-layout-elements.php:2064
+#: includes/post-grid-layout-elements.php:3348
+#: includes/post-grid-layout-elements.php:3609
+#: includes/post-grid-layout-elements.php:3879
+#: includes/post-grid-layout-elements.php:4181
+#: includes/post-grid-layout-elements.php:4453
+#: includes/post-grid-layout-elements.php:4706
+#: includes/post-grid-layout-elements.php:5287
+msgid "Text align"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:84
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:72
+#: includes/layout-elements/multi-rating/layout-elements.php:96
+#: includes/layout-elements/page-views-count/layout-elements.php:84
+#: includes/layout-elements/page-visit-counter/layout-elements.php:84
+#: includes/layout-elements/post-views-counter/layout-elements.php:84
+#: includes/layout-elements/rate-my-post/layout-elements.php:84
+#: includes/layout-elements/rating-widget/layout-elements.php:71
+#: includes/layout-elements/simple-job-board/layout-elements.php:147
+#: includes/layout-elements/simple-job-board/layout-elements.php:422
+#: includes/layout-elements/simple-job-board/layout-elements.php:697
+#: includes/layout-elements/simple-job-board/layout-elements.php:935
+#: includes/layout-elements/simple-job-board/layout-elements.php:1143
+#: includes/layout-elements/simple-job-board/layout-elements.php:1351
+#: includes/layout-elements/simple-job-board/layout-elements.php:1559
+#: includes/layout-elements/simple-job-board/layout-elements.php:1780
+#: includes/layout-elements/simple-job-board/layout-elements.php:1994
+#: includes/layout-elements/site-reviews/layout-elements.php:97
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:128
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:334
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:540
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:759
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:980
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1201
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1409
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1628
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1879
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2142
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2385
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2628
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2876
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3124
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3367
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3608
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3844
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4065
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4287
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4495
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4701
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4920
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5134
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5340
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5559
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5793
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6036
+#: includes/layout-elements/wp-job-manager/layout-elements.php:107
+#: includes/layout-elements/wp-job-manager/layout-elements.php:315
+#: includes/layout-elements/wp-job-manager/layout-elements.php:523
+#: includes/layout-elements/wp-job-manager/layout-elements.php:731
+#: includes/layout-elements/wp-job-manager/layout-elements.php:939
+#: includes/layout-elements/wp-postratings/layout-elements.php:84
+#: includes/layout-elements/wp-postviews/layout-elements.php:84
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:117
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:309
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:74
+#: includes/post-grid-layout-elements.php:455
+#: includes/post-grid-layout-elements.php:710
+#: includes/post-grid-layout-elements.php:1008
+#: includes/post-grid-layout-elements.php:1209
+#: includes/post-grid-layout-elements.php:1456
+#: includes/post-grid-layout-elements.php:1775
+#: includes/post-grid-layout-elements.php:2065
+#: includes/post-grid-layout-elements.php:3349
+#: includes/post-grid-layout-elements.php:3610
+#: includes/post-grid-layout-elements.php:3880
+#: includes/post-grid-layout-elements.php:4182
+#: includes/post-grid-layout-elements.php:4454
+#: includes/post-grid-layout-elements.php:4707
+#: includes/post-grid-layout-elements.php:5288
+msgid "Choose text align."
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:88
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:76
+#: includes/layout-elements/multi-rating/layout-elements.php:100
+#: includes/layout-elements/page-views-count/layout-elements.php:88
+#: includes/layout-elements/page-visit-counter/layout-elements.php:88
+#: includes/layout-elements/post-views-counter/layout-elements.php:88
+#: includes/layout-elements/rate-my-post/layout-elements.php:88
+#: includes/layout-elements/rating-widget/layout-elements.php:75
+#: includes/layout-elements/simple-job-board/layout-elements.php:151
+#: includes/layout-elements/simple-job-board/layout-elements.php:426
+#: includes/layout-elements/simple-job-board/layout-elements.php:701
+#: includes/layout-elements/simple-job-board/layout-elements.php:939
+#: includes/layout-elements/simple-job-board/layout-elements.php:1147
+#: includes/layout-elements/simple-job-board/layout-elements.php:1355
+#: includes/layout-elements/simple-job-board/layout-elements.php:1563
+#: includes/layout-elements/simple-job-board/layout-elements.php:1784
+#: includes/layout-elements/simple-job-board/layout-elements.php:1998
+#: includes/layout-elements/site-reviews/layout-elements.php:101
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:132
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:338
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:544
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:763
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:984
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1205
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1413
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1632
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1883
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2146
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2389
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2632
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2880
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3128
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3371
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3612
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3848
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4069
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4291
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4499
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4705
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4924
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5138
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5344
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5563
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5797
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6040
+#: includes/layout-elements/wp-job-manager/layout-elements.php:111
+#: includes/layout-elements/wp-job-manager/layout-elements.php:319
+#: includes/layout-elements/wp-job-manager/layout-elements.php:527
+#: includes/layout-elements/wp-job-manager/layout-elements.php:735
+#: includes/layout-elements/wp-job-manager/layout-elements.php:943
+#: includes/layout-elements/wp-postratings/layout-elements.php:88
+#: includes/layout-elements/wp-postviews/layout-elements.php:88
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:121
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:313
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:78
+#: includes/metabox-post-grid-hook.php:192
+#: includes/post-grid-layout-elements.php:459
+#: includes/post-grid-layout-elements.php:714
+#: includes/post-grid-layout-elements.php:1012
+#: includes/post-grid-layout-elements.php:1213
+#: includes/post-grid-layout-elements.php:1460
+#: includes/post-grid-layout-elements.php:1779
+#: includes/post-grid-layout-elements.php:2069
+#: includes/post-grid-layout-elements.php:3353
+#: includes/post-grid-layout-elements.php:3614
+#: includes/post-grid-layout-elements.php:3884
+#: includes/post-grid-layout-elements.php:4186
+#: includes/post-grid-layout-elements.php:4458
+#: includes/post-grid-layout-elements.php:4711
+#: includes/post-grid-layout-elements.php:5292
+msgid "Left"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:88
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:76
+#: includes/layout-elements/multi-rating/layout-elements.php:100
+#: includes/layout-elements/page-views-count/layout-elements.php:88
+#: includes/layout-elements/page-visit-counter/layout-elements.php:88
+#: includes/layout-elements/post-views-counter/layout-elements.php:88
+#: includes/layout-elements/rate-my-post/layout-elements.php:88
+#: includes/layout-elements/rating-widget/layout-elements.php:75
+#: includes/layout-elements/simple-job-board/layout-elements.php:151
+#: includes/layout-elements/simple-job-board/layout-elements.php:426
+#: includes/layout-elements/simple-job-board/layout-elements.php:701
+#: includes/layout-elements/simple-job-board/layout-elements.php:939
+#: includes/layout-elements/simple-job-board/layout-elements.php:1147
+#: includes/layout-elements/simple-job-board/layout-elements.php:1355
+#: includes/layout-elements/simple-job-board/layout-elements.php:1563
+#: includes/layout-elements/simple-job-board/layout-elements.php:1784
+#: includes/layout-elements/simple-job-board/layout-elements.php:1998
+#: includes/layout-elements/site-reviews/layout-elements.php:101
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:132
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:338
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:544
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:763
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:984
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1205
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1413
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1632
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1883
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2146
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2389
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2632
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2880
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3128
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3371
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3612
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3848
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4069
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4291
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4499
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4705
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4924
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5138
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5344
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5563
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5797
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6040
+#: includes/layout-elements/wp-job-manager/layout-elements.php:111
+#: includes/layout-elements/wp-job-manager/layout-elements.php:319
+#: includes/layout-elements/wp-job-manager/layout-elements.php:527
+#: includes/layout-elements/wp-job-manager/layout-elements.php:735
+#: includes/layout-elements/wp-job-manager/layout-elements.php:943
+#: includes/layout-elements/wp-postratings/layout-elements.php:88
+#: includes/layout-elements/wp-postviews/layout-elements.php:88
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:121
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:313
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:78
+#: includes/metabox-post-grid-hook.php:194
+#: includes/post-grid-layout-elements.php:459
+#: includes/post-grid-layout-elements.php:714
+#: includes/post-grid-layout-elements.php:1012
+#: includes/post-grid-layout-elements.php:1213
+#: includes/post-grid-layout-elements.php:1460
+#: includes/post-grid-layout-elements.php:1779
+#: includes/post-grid-layout-elements.php:2069
+#: includes/post-grid-layout-elements.php:3353
+#: includes/post-grid-layout-elements.php:3614
+#: includes/post-grid-layout-elements.php:3884
+#: includes/post-grid-layout-elements.php:4186
+#: includes/post-grid-layout-elements.php:4458
+#: includes/post-grid-layout-elements.php:4711
+#: includes/post-grid-layout-elements.php:5292
+msgid "Right"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:88
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:76
+#: includes/layout-elements/multi-rating/layout-elements.php:100
+#: includes/layout-elements/page-views-count/layout-elements.php:88
+#: includes/layout-elements/page-visit-counter/layout-elements.php:88
+#: includes/layout-elements/post-views-counter/layout-elements.php:88
+#: includes/layout-elements/rate-my-post/layout-elements.php:88
+#: includes/layout-elements/rating-widget/layout-elements.php:75
+#: includes/layout-elements/simple-job-board/layout-elements.php:151
+#: includes/layout-elements/simple-job-board/layout-elements.php:426
+#: includes/layout-elements/simple-job-board/layout-elements.php:701
+#: includes/layout-elements/simple-job-board/layout-elements.php:939
+#: includes/layout-elements/simple-job-board/layout-elements.php:1147
+#: includes/layout-elements/simple-job-board/layout-elements.php:1355
+#: includes/layout-elements/simple-job-board/layout-elements.php:1563
+#: includes/layout-elements/simple-job-board/layout-elements.php:1784
+#: includes/layout-elements/simple-job-board/layout-elements.php:1998
+#: includes/layout-elements/site-reviews/layout-elements.php:101
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:132
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:338
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:544
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:763
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:984
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1205
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1413
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1632
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1883
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2146
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2389
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2632
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2880
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3128
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3371
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3612
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3848
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4069
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4291
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4499
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4705
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4924
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5138
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5344
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5563
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5797
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6040
+#: includes/layout-elements/wp-job-manager/layout-elements.php:111
+#: includes/layout-elements/wp-job-manager/layout-elements.php:319
+#: includes/layout-elements/wp-job-manager/layout-elements.php:527
+#: includes/layout-elements/wp-job-manager/layout-elements.php:735
+#: includes/layout-elements/wp-job-manager/layout-elements.php:943
+#: includes/layout-elements/wp-postratings/layout-elements.php:88
+#: includes/layout-elements/wp-postviews/layout-elements.php:88
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:121
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:313
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:78
+#: includes/metabox-post-grid-hook.php:193
+#: includes/post-grid-layout-elements.php:459
+#: includes/post-grid-layout-elements.php:714
+#: includes/post-grid-layout-elements.php:1012
+#: includes/post-grid-layout-elements.php:1213
+#: includes/post-grid-layout-elements.php:1460
+#: includes/post-grid-layout-elements.php:1779
+#: includes/post-grid-layout-elements.php:2069
+#: includes/post-grid-layout-elements.php:3353
+#: includes/post-grid-layout-elements.php:3614
+#: includes/post-grid-layout-elements.php:3884
+#: includes/post-grid-layout-elements.php:4186
+#: includes/post-grid-layout-elements.php:4458
+#: includes/post-grid-layout-elements.php:4711
+#: includes/post-grid-layout-elements.php:5292
+msgid "Center"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:95
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:83
+#: includes/layout-elements/multi-rating/layout-elements.php:107
+#: includes/layout-elements/page-views-count/layout-elements.php:95
+#: includes/layout-elements/page-visit-counter/layout-elements.php:95
+#: includes/layout-elements/post-views-counter/layout-elements.php:95
+#: includes/layout-elements/rate-my-post/layout-elements.php:95
+#: includes/layout-elements/rating-widget/layout-elements.php:82
+#: includes/layout-elements/simple-job-board/layout-elements.php:158
+#: includes/layout-elements/simple-job-board/layout-elements.php:433
+#: includes/layout-elements/simple-job-board/layout-elements.php:708
+#: includes/layout-elements/simple-job-board/layout-elements.php:946
+#: includes/layout-elements/simple-job-board/layout-elements.php:1154
+#: includes/layout-elements/simple-job-board/layout-elements.php:1362
+#: includes/layout-elements/simple-job-board/layout-elements.php:1570
+#: includes/layout-elements/simple-job-board/layout-elements.php:1791
+#: includes/layout-elements/simple-job-board/layout-elements.php:2005
+#: includes/layout-elements/site-reviews/layout-elements.php:108
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:139
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:345
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:551
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:770
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:991
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1212
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1420
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1639
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1890
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2153
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2396
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2639
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2887
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3135
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3378
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3619
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3855
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4076
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4298
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4506
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4712
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4931
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5145
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5351
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5570
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5804
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6047
+#: includes/layout-elements/wp-job-manager/layout-elements.php:118
+#: includes/layout-elements/wp-job-manager/layout-elements.php:326
+#: includes/layout-elements/wp-job-manager/layout-elements.php:534
+#: includes/layout-elements/wp-job-manager/layout-elements.php:742
+#: includes/layout-elements/wp-job-manager/layout-elements.php:950
+#: includes/layout-elements/wp-postratings/layout-elements.php:95
+#: includes/layout-elements/wp-postviews/layout-elements.php:95
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:128
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:320
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:85
+#: includes/metabox-post-grid-layout-hook.php:22
+#: includes/post-grid-layout-elements.php:61
+#: includes/post-grid-layout-elements.php:212
+#: includes/post-grid-layout-elements.php:466
+#: includes/post-grid-layout-elements.php:1232
+#: includes/post-grid-layout-elements.php:1479
+#: includes/post-grid-layout-elements.php:1786
+#: includes/post-grid-layout-elements.php:2076
+#: includes/post-grid-layout-elements.php:2421
+#: includes/post-grid-layout-elements.php:2760
+#: includes/post-grid-layout-elements.php:3068
+#: includes/post-grid-layout-elements.php:3360
+#: includes/post-grid-layout-elements.php:3621
+#: includes/post-grid-layout-elements.php:3891
+#: includes/post-grid-layout-elements.php:4193
+#: includes/post-grid-layout-elements.php:4465
+#: includes/post-grid-layout-elements.php:4718
+#: includes/post-grid-layout-elements.php:4907
+#: includes/post-grid-layout-elements.php:5114
+#: includes/post-grid-layout-elements.php:5299
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:96
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:84
+#: includes/layout-elements/multi-rating/layout-elements.php:108
+#: includes/layout-elements/page-views-count/layout-elements.php:96
+#: includes/layout-elements/page-visit-counter/layout-elements.php:96
+#: includes/layout-elements/post-views-counter/layout-elements.php:96
+#: includes/layout-elements/rate-my-post/layout-elements.php:96
+#: includes/layout-elements/rating-widget/layout-elements.php:83
+#: includes/layout-elements/simple-job-board/layout-elements.php:159
+#: includes/layout-elements/simple-job-board/layout-elements.php:434
+#: includes/layout-elements/simple-job-board/layout-elements.php:709
+#: includes/layout-elements/simple-job-board/layout-elements.php:947
+#: includes/layout-elements/simple-job-board/layout-elements.php:1155
+#: includes/layout-elements/simple-job-board/layout-elements.php:1363
+#: includes/layout-elements/simple-job-board/layout-elements.php:1571
+#: includes/layout-elements/simple-job-board/layout-elements.php:1792
+#: includes/layout-elements/simple-job-board/layout-elements.php:2006
+#: includes/layout-elements/site-reviews/layout-elements.php:109
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:140
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:346
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:552
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:771
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:992
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1213
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1421
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1640
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1891
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2154
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2397
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2640
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2888
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3136
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3379
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3620
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3856
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4077
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4299
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4507
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4713
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4932
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5146
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5352
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5571
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5805
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6048
+#: includes/layout-elements/wp-job-manager/layout-elements.php:119
+#: includes/layout-elements/wp-job-manager/layout-elements.php:327
+#: includes/layout-elements/wp-job-manager/layout-elements.php:535
+#: includes/layout-elements/wp-job-manager/layout-elements.php:743
+#: includes/layout-elements/wp-job-manager/layout-elements.php:951
+#: includes/layout-elements/wp-postratings/layout-elements.php:96
+#: includes/layout-elements/wp-postviews/layout-elements.php:96
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:129
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:321
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:86
+#: includes/post-grid-layout-elements.php:62
+#: includes/post-grid-layout-elements.php:213
+#: includes/post-grid-layout-elements.php:467
+#: includes/post-grid-layout-elements.php:1233
+#: includes/post-grid-layout-elements.php:1480
+#: includes/post-grid-layout-elements.php:1787
+#: includes/post-grid-layout-elements.php:2077
+#: includes/post-grid-layout-elements.php:2422
+#: includes/post-grid-layout-elements.php:2761
+#: includes/post-grid-layout-elements.php:3069
+#: includes/post-grid-layout-elements.php:3361
+#: includes/post-grid-layout-elements.php:3622
+#: includes/post-grid-layout-elements.php:3892
+#: includes/post-grid-layout-elements.php:4194
+#: includes/post-grid-layout-elements.php:4466
+#: includes/post-grid-layout-elements.php:4719
+#: includes/post-grid-layout-elements.php:4908
+#: includes/post-grid-layout-elements.php:5115
+#: includes/post-grid-layout-elements.php:5300
+msgid "Set csutom CSS."
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:107
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:95
+#: includes/layout-elements/multi-rating/layout-elements.php:119
+#: includes/layout-elements/page-views-count/layout-elements.php:107
+#: includes/layout-elements/page-visit-counter/layout-elements.php:107
+#: includes/layout-elements/post-views-counter/layout-elements.php:107
+#: includes/layout-elements/rate-my-post/layout-elements.php:107
+#: includes/layout-elements/rating-widget/layout-elements.php:94
+#: includes/layout-elements/simple-job-board/layout-elements.php:170
+#: includes/layout-elements/simple-job-board/layout-elements.php:445
+#: includes/layout-elements/simple-job-board/layout-elements.php:720
+#: includes/layout-elements/simple-job-board/layout-elements.php:958
+#: includes/layout-elements/simple-job-board/layout-elements.php:1166
+#: includes/layout-elements/simple-job-board/layout-elements.php:1374
+#: includes/layout-elements/simple-job-board/layout-elements.php:1582
+#: includes/layout-elements/simple-job-board/layout-elements.php:1803
+#: includes/layout-elements/simple-job-board/layout-elements.php:2017
+#: includes/layout-elements/site-reviews/layout-elements.php:120
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:151
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:357
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:563
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:782
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1003
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1224
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1432
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1651
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1902
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2165
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2408
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2651
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2899
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3147
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3390
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3631
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3867
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4088
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4310
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4518
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4724
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4943
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5157
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5363
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5582
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5816
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6059
+#: includes/layout-elements/wp-job-manager/layout-elements.php:130
+#: includes/layout-elements/wp-job-manager/layout-elements.php:338
+#: includes/layout-elements/wp-job-manager/layout-elements.php:546
+#: includes/layout-elements/wp-job-manager/layout-elements.php:754
+#: includes/layout-elements/wp-job-manager/layout-elements.php:962
+#: includes/layout-elements/wp-postratings/layout-elements.php:107
+#: includes/layout-elements/wp-postviews/layout-elements.php:107
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:140
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:332
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:97
+#: includes/post-grid-layout-elements.php:73
+#: includes/post-grid-layout-elements.php:224
+#: includes/post-grid-layout-elements.php:478
+#: includes/post-grid-layout-elements.php:1244
+#: includes/post-grid-layout-elements.php:1491
+#: includes/post-grid-layout-elements.php:1798
+#: includes/post-grid-layout-elements.php:2088
+#: includes/post-grid-layout-elements.php:2433
+#: includes/post-grid-layout-elements.php:2772
+#: includes/post-grid-layout-elements.php:3080
+#: includes/post-grid-layout-elements.php:3372
+#: includes/post-grid-layout-elements.php:3633
+#: includes/post-grid-layout-elements.php:3903
+#: includes/post-grid-layout-elements.php:4205
+#: includes/post-grid-layout-elements.php:4477
+#: includes/post-grid-layout-elements.php:4730
+#: includes/post-grid-layout-elements.php:4919
+#: includes/post-grid-layout-elements.php:5126
+#: includes/post-grid-layout-elements.php:5311
+msgid "Hover CSS"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:108
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:96
+#: includes/layout-elements/multi-rating/layout-elements.php:120
+#: includes/layout-elements/page-views-count/layout-elements.php:108
+#: includes/layout-elements/page-visit-counter/layout-elements.php:108
+#: includes/layout-elements/post-views-counter/layout-elements.php:108
+#: includes/layout-elements/rate-my-post/layout-elements.php:108
+#: includes/layout-elements/rating-widget/layout-elements.php:95
+#: includes/layout-elements/simple-job-board/layout-elements.php:171
+#: includes/layout-elements/simple-job-board/layout-elements.php:446
+#: includes/layout-elements/simple-job-board/layout-elements.php:721
+#: includes/layout-elements/simple-job-board/layout-elements.php:959
+#: includes/layout-elements/simple-job-board/layout-elements.php:1167
+#: includes/layout-elements/simple-job-board/layout-elements.php:1375
+#: includes/layout-elements/simple-job-board/layout-elements.php:1583
+#: includes/layout-elements/simple-job-board/layout-elements.php:1804
+#: includes/layout-elements/simple-job-board/layout-elements.php:2018
+#: includes/layout-elements/site-reviews/layout-elements.php:121
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:152
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:358
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:564
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:783
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1004
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1225
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1433
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1652
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1903
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2166
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2409
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2652
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2900
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3148
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3391
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3632
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3868
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4089
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4311
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4519
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4725
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4944
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5158
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5364
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5583
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5817
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6060
+#: includes/layout-elements/wp-job-manager/layout-elements.php:131
+#: includes/layout-elements/wp-job-manager/layout-elements.php:339
+#: includes/layout-elements/wp-job-manager/layout-elements.php:547
+#: includes/layout-elements/wp-job-manager/layout-elements.php:755
+#: includes/layout-elements/wp-job-manager/layout-elements.php:963
+#: includes/layout-elements/wp-postratings/layout-elements.php:108
+#: includes/layout-elements/wp-postviews/layout-elements.php:108
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:141
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:333
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:98
+#: includes/post-grid-layout-elements.php:74
+#: includes/post-grid-layout-elements.php:225
+#: includes/post-grid-layout-elements.php:479
+#: includes/post-grid-layout-elements.php:1245
+#: includes/post-grid-layout-elements.php:1492
+#: includes/post-grid-layout-elements.php:1799
+#: includes/post-grid-layout-elements.php:2089
+#: includes/post-grid-layout-elements.php:2434
+#: includes/post-grid-layout-elements.php:2773
+#: includes/post-grid-layout-elements.php:3081
+#: includes/post-grid-layout-elements.php:3373
+#: includes/post-grid-layout-elements.php:3634
+#: includes/post-grid-layout-elements.php:3904
+#: includes/post-grid-layout-elements.php:4206
+#: includes/post-grid-layout-elements.php:4478
+#: includes/post-grid-layout-elements.php:4731
+#: includes/post-grid-layout-elements.php:4920
+#: includes/post-grid-layout-elements.php:5127
+#: includes/post-grid-layout-elements.php:5312
+msgid "Set hover custom CSS."
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:123
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:111
+#: includes/layout-elements/multi-rating/layout-elements.php:135
+#: includes/layout-elements/page-views-count/layout-elements.php:123
+#: includes/layout-elements/page-visit-counter/layout-elements.php:123
+#: includes/layout-elements/post-views-counter/layout-elements.php:123
+#: includes/layout-elements/rate-my-post/layout-elements.php:123
+#: includes/layout-elements/rating-widget/layout-elements.php:110
+#: includes/layout-elements/simple-job-board/layout-elements.php:186
+#: includes/layout-elements/simple-job-board/layout-elements.php:461
+#: includes/layout-elements/simple-job-board/layout-elements.php:736
+#: includes/layout-elements/simple-job-board/layout-elements.php:974
+#: includes/layout-elements/simple-job-board/layout-elements.php:1182
+#: includes/layout-elements/simple-job-board/layout-elements.php:1390
+#: includes/layout-elements/simple-job-board/layout-elements.php:1598
+#: includes/layout-elements/simple-job-board/layout-elements.php:1819
+#: includes/layout-elements/simple-job-board/layout-elements.php:2033
+#: includes/layout-elements/site-reviews/layout-elements.php:136
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:166
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:372
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:578
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:797
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1018
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1239
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1447
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1666
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1917
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2180
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2423
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2666
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2914
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3162
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3405
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3646
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3882
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4103
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4325
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4533
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4739
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4958
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5172
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5378
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5597
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5831
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6074
+#: includes/layout-elements/wp-job-manager/layout-elements.php:145
+#: includes/layout-elements/wp-job-manager/layout-elements.php:353
+#: includes/layout-elements/wp-job-manager/layout-elements.php:561
+#: includes/layout-elements/wp-job-manager/layout-elements.php:769
+#: includes/layout-elements/wp-job-manager/layout-elements.php:977
+#: includes/layout-elements/wp-postratings/layout-elements.php:123
+#: includes/layout-elements/wp-postviews/layout-elements.php:123
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:156
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:348
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:113
+#: includes/post-grid-layout-elements.php:89
+#: includes/post-grid-layout-elements.php:240
+#: includes/post-grid-layout-elements.php:494
+#: includes/post-grid-layout-elements.php:749
+#: includes/post-grid-layout-elements.php:1047
+#: includes/post-grid-layout-elements.php:1260
+#: includes/post-grid-layout-elements.php:1507
+#: includes/post-grid-layout-elements.php:1814
+#: includes/post-grid-layout-elements.php:2104
+#: includes/post-grid-layout-elements.php:2449
+#: includes/post-grid-layout-elements.php:2788
+#: includes/post-grid-layout-elements.php:3096
+#: includes/post-grid-layout-elements.php:3388
+#: includes/post-grid-layout-elements.php:3649
+#: includes/post-grid-layout-elements.php:3919
+#: includes/post-grid-layout-elements.php:4221
+#: includes/post-grid-layout-elements.php:4493
+#: includes/post-grid-layout-elements.php:4746
+#: includes/post-grid-layout-elements.php:4935
+#: includes/post-grid-layout-elements.php:5142
+#: includes/post-grid-layout-elements.php:5327
+msgid "Use of CSS"
+msgstr ""
+
+#: includes/layout-elements/kk-star-ratings/layout-elements.php:124
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:112
+#: includes/layout-elements/multi-rating/layout-elements.php:136
+#: includes/layout-elements/page-views-count/layout-elements.php:124
+#: includes/layout-elements/page-visit-counter/layout-elements.php:124
+#: includes/layout-elements/post-views-counter/layout-elements.php:124
+#: includes/layout-elements/rate-my-post/layout-elements.php:124
+#: includes/layout-elements/rating-widget/layout-elements.php:111
+#: includes/layout-elements/simple-job-board/layout-elements.php:187
+#: includes/layout-elements/simple-job-board/layout-elements.php:462
+#: includes/layout-elements/simple-job-board/layout-elements.php:737
+#: includes/layout-elements/simple-job-board/layout-elements.php:975
+#: includes/layout-elements/simple-job-board/layout-elements.php:1183
+#: includes/layout-elements/simple-job-board/layout-elements.php:1391
+#: includes/layout-elements/simple-job-board/layout-elements.php:1599
+#: includes/layout-elements/simple-job-board/layout-elements.php:1820
+#: includes/layout-elements/simple-job-board/layout-elements.php:2034
+#: includes/layout-elements/site-reviews/layout-elements.php:137
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:167
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:373
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:579
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:798
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1019
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1240
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1448
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1667
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1918
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2181
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2424
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2667
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2915
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3163
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3406
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3647
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3883
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4104
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4326
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4534
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4740
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4959
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5173
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5379
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5598
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5832
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6075
+#: includes/layout-elements/wp-job-manager/layout-elements.php:146
+#: includes/layout-elements/wp-job-manager/layout-elements.php:354
+#: includes/layout-elements/wp-job-manager/layout-elements.php:562
+#: includes/layout-elements/wp-job-manager/layout-elements.php:770
+#: includes/layout-elements/wp-job-manager/layout-elements.php:978
+#: includes/layout-elements/wp-postratings/layout-elements.php:124
+#: includes/layout-elements/wp-postviews/layout-elements.php:124
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:157
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:349
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:114
+#: includes/post-grid-layout-elements.php:90
+#: includes/post-grid-layout-elements.php:241
+#: includes/post-grid-layout-elements.php:495
+#: includes/post-grid-layout-elements.php:750
+#: includes/post-grid-layout-elements.php:1048
+#: includes/post-grid-layout-elements.php:1261
+#: includes/post-grid-layout-elements.php:1508
+#: includes/post-grid-layout-elements.php:1815
+#: includes/post-grid-layout-elements.php:2105
+#: includes/post-grid-layout-elements.php:2450
+#: includes/post-grid-layout-elements.php:2789
+#: includes/post-grid-layout-elements.php:3097
+#: includes/post-grid-layout-elements.php:3389
+#: includes/post-grid-layout-elements.php:3650
+#: includes/post-grid-layout-elements.php:3920
+#: includes/post-grid-layout-elements.php:4222
+#: includes/post-grid-layout-elements.php:4494
+#: includes/post-grid-layout-elements.php:4747
+#: includes/post-grid-layout-elements.php:4936
+#: includes/post-grid-layout-elements.php:5143
+#: includes/post-grid-layout-elements.php:5328
+msgid "Use following class selector to add custom CSS for this element."
+msgstr ""
+
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:6
+#: includes/layout-elements/likebtn-like-button/layout-elements.php:28
+msgid "Like Button Rating"
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:6
+#: includes/layout-elements/multi-rating/layout-elements.php:29
+msgid "Multi Rating"
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:37
+msgid "Display item"
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:38
+msgid "Choose display items."
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:42
+#: includes/layout-elements/rate-my-post/layout-elements.php:41
+msgid "Result"
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:42
+msgid "Rating button"
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:42
+#: includes/layout-elements/rate-my-post/layout-elements.php:41
+msgid "Both"
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:49
+msgid "No rating text"
+msgstr ""
+
+#: includes/layout-elements/multi-rating/layout-elements.php:50
+msgid "Custom text."
+msgstr ""
+
+#: includes/layout-elements/page-views-count/layout-elements.php:6
+#: includes/layout-elements/page-views-count/layout-elements.php:28
+msgid "Page Views Count"
+msgstr ""
+
+#: includes/layout-elements/page-views-count/layout-elements.php:36
+#: includes/layout-elements/page-visit-counter/layout-elements.php:36
+#: includes/layout-elements/post-views-counter/layout-elements.php:36
+#: includes/layout-elements/simple-job-board/layout-elements.php:76
+#: includes/layout-elements/simple-job-board/layout-elements.php:351
+#: includes/layout-elements/simple-job-board/layout-elements.php:626
+#: includes/layout-elements/simple-job-board/layout-elements.php:875
+#: includes/layout-elements/simple-job-board/layout-elements.php:1083
+#: includes/layout-elements/simple-job-board/layout-elements.php:1291
+#: includes/layout-elements/simple-job-board/layout-elements.php:1499
+#: includes/layout-elements/simple-job-board/layout-elements.php:1720
+#: includes/layout-elements/simple-job-board/layout-elements.php:1934
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:699
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:920
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1141
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1568
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1819
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2082
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2325
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2568
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2816
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3064
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3307
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3548
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3784
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4005
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4227
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4860
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5499
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5733
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5976
+#: includes/layout-elements/wp-job-manager/layout-elements.php:47
+#: includes/layout-elements/wp-job-manager/layout-elements.php:255
+#: includes/layout-elements/wp-job-manager/layout-elements.php:463
+#: includes/layout-elements/wp-job-manager/layout-elements.php:671
+#: includes/layout-elements/wp-job-manager/layout-elements.php:879
+#: includes/layout-elements/wp-postviews/layout-elements.php:36
+#: includes/post-grid-layout-elements.php:3271
+#: includes/post-grid-layout-elements.php:3562
+#: includes/post-grid-layout-elements.php:3832
+#: includes/post-grid-layout-elements.php:4123
+#: includes/post-grid-layout-elements.php:4418
+#: includes/post-grid-layout-elements.php:4647
+msgid "Wrapper html"
+msgstr ""
+
+#: includes/layout-elements/page-views-count/layout-elements.php:37
+#: includes/layout-elements/page-visit-counter/layout-elements.php:37
+#: includes/layout-elements/post-views-counter/layout-elements.php:37
+#: includes/layout-elements/wp-postviews/layout-elements.php:37
+#: includes/post-grid-layout-elements.php:3563
+msgid "Write wrapper html."
+msgstr ""
+
+#: includes/layout-elements/page-visit-counter/layout-elements.php:6
+#: includes/layout-elements/page-visit-counter/layout-elements.php:28
+msgid "Page Visit Counter"
+msgstr ""
+
+#: includes/layout-elements/post-views-counter/layout-elements.php:6
+#: includes/layout-elements/post-views-counter/layout-elements.php:28
+msgid "Post Views Counter"
+msgstr ""
+
+#: includes/layout-elements/rate-my-post/layout-elements.php:6
+#: includes/layout-elements/rate-my-post/layout-elements.php:28
+msgid "Rate my Post"
+msgstr ""
+
+#: includes/layout-elements/rate-my-post/layout-elements.php:36
+msgid "Display"
+msgstr ""
+
+#: includes/layout-elements/rate-my-post/layout-elements.php:37
+msgid "Choose display."
+msgstr ""
+
+#: includes/layout-elements/rate-my-post/layout-elements.php:41
+msgid "Rating widget"
+msgstr ""
+
+#: includes/layout-elements/rating-widget/layout-elements.php:6
+#: includes/layout-elements/rating-widget/layout-elements.php:27
+msgid "Rating-Widget"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:9
+#: includes/layout-elements/simple-job-board/layout-elements.php:1491
+#: includes/layout-elements/wp-job-manager/layout-elements.php:13
+#: includes/layout-elements/wp-job-manager/layout-elements.php:871
+msgid "Job expire date"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:11
+#: includes/layout-elements/simple-job-board/layout-elements.php:595
+msgid "Job type"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:12
+#: includes/layout-elements/simple-job-board/layout-elements.php:1700
+msgid "Job feature"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:13
+#: includes/layout-elements/simple-job-board/layout-elements.php:45
+#: includes/layout-elements/wp-job-manager/layout-elements.php:9
+#: includes/layout-elements/wp-job-manager/layout-elements.php:39
+msgid "Location"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:14
+#: includes/layout-elements/wp-job-manager/layout-elements.php:10
+msgid "Company name"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:15
+#: includes/layout-elements/simple-job-board/layout-elements.php:1075
+#: includes/layout-elements/wp-job-manager/layout-elements.php:11
+#: includes/layout-elements/wp-job-manager/layout-elements.php:455
+msgid "Company website"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:16
+#: includes/layout-elements/simple-job-board/layout-elements.php:1283
+#: includes/layout-elements/wp-job-manager/layout-elements.php:12
+#: includes/layout-elements/wp-job-manager/layout-elements.php:663
+msgid "Company tagline"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:17
+#: includes/layout-elements/simple-job-board/layout-elements.php:1926
+msgid "Company logo"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:52
+#: includes/layout-elements/simple-job-board/layout-elements.php:327
+#: includes/layout-elements/simple-job-board/layout-elements.php:602
+#: includes/post-grid-layout-elements.php:4082
+#: includes/post-grid-layout-elements.php:4377
+msgid "Max count"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:53
+#: includes/layout-elements/simple-job-board/layout-elements.php:328
+#: includes/layout-elements/simple-job-board/layout-elements.php:603
+#: includes/post-grid-layout-elements.php:4083
+#: includes/post-grid-layout-elements.php:4378
+msgid "Write max count"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:64
+#: includes/layout-elements/simple-job-board/layout-elements.php:339
+#: includes/layout-elements/simple-job-board/layout-elements.php:614
+#: includes/post-grid-layout-elements.php:4094
+#: includes/post-grid-layout-elements.php:4389
+msgid "Link separator"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:65
+#: includes/layout-elements/simple-job-board/layout-elements.php:340
+#: includes/layout-elements/simple-job-board/layout-elements.php:615
+#: includes/post-grid-layout-elements.php:4095
+#: includes/post-grid-layout-elements.php:4390
+msgid "Choose link separator."
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:77
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: "
+"<code>Location: %s</code>"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:88
+#: includes/layout-elements/simple-job-board/layout-elements.php:363
+#: includes/layout-elements/simple-job-board/layout-elements.php:638
+#: includes/post-grid-layout-elements.php:4159
+#: includes/post-grid-layout-elements.php:4442
+msgid "Link color"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:89
+#: includes/layout-elements/simple-job-board/layout-elements.php:364
+#: includes/layout-elements/simple-job-board/layout-elements.php:639
+#: includes/post-grid-layout-elements.php:4160
+#: includes/post-grid-layout-elements.php:4443
+msgid "Choose link color."
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:99
+#: includes/layout-elements/simple-job-board/layout-elements.php:374
+#: includes/layout-elements/simple-job-board/layout-elements.php:649
+#: includes/post-grid-layout-elements.php:1444
+#: includes/post-grid-layout-elements.php:1739
+#: includes/post-grid-layout-elements.php:2029
+msgid "Text Color"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:100
+#: includes/layout-elements/simple-job-board/layout-elements.php:375
+#: includes/layout-elements/simple-job-board/layout-elements.php:650
+#: includes/post-grid-layout-elements.php:1445
+#: includes/post-grid-layout-elements.php:1740
+#: includes/post-grid-layout-elements.php:2030
+#: includes/post-grid-layout-elements.php:3575
+#: includes/post-grid-layout-elements.php:3845
+#: includes/post-grid-layout-elements.php:4171
+#: includes/post-grid-layout-elements.php:5253
+msgid "Choose text color."
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:122
+#: includes/layout-elements/simple-job-board/layout-elements.php:397
+#: includes/layout-elements/simple-job-board/layout-elements.php:672
+#: includes/layout-elements/simple-job-board/layout-elements.php:910
+#: includes/layout-elements/simple-job-board/layout-elements.php:1118
+#: includes/layout-elements/simple-job-board/layout-elements.php:1326
+#: includes/layout-elements/simple-job-board/layout-elements.php:1534
+#: includes/layout-elements/simple-job-board/layout-elements.php:1755
+#: includes/layout-elements/simple-job-board/layout-elements.php:1969
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:103
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:309
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:515
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:734
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:955
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1176
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1384
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1603
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1854
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2117
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2360
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2603
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2851
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3099
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3342
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3583
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3819
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4040
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4262
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4470
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4676
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4895
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5109
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5315
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5534
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5768
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6011
+#: includes/layout-elements/wp-job-manager/layout-elements.php:82
+#: includes/layout-elements/wp-job-manager/layout-elements.php:290
+#: includes/layout-elements/wp-job-manager/layout-elements.php:498
+#: includes/layout-elements/wp-job-manager/layout-elements.php:706
+#: includes/layout-elements/wp-job-manager/layout-elements.php:914
+#: includes/post-grid-layout-elements.php:430
+#: includes/post-grid-layout-elements.php:685
+#: includes/post-grid-layout-elements.php:983
+#: includes/post-grid-layout-elements.php:1196
+#: includes/post-grid-layout-elements.php:3324
+#: includes/post-grid-layout-elements.php:4682
+msgid "Font family"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:123
+#: includes/layout-elements/simple-job-board/layout-elements.php:398
+#: includes/layout-elements/simple-job-board/layout-elements.php:673
+#: includes/layout-elements/simple-job-board/layout-elements.php:911
+#: includes/layout-elements/simple-job-board/layout-elements.php:1119
+#: includes/layout-elements/simple-job-board/layout-elements.php:1327
+#: includes/layout-elements/simple-job-board/layout-elements.php:1535
+#: includes/layout-elements/simple-job-board/layout-elements.php:1756
+#: includes/layout-elements/simple-job-board/layout-elements.php:1970
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:104
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:310
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:516
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:735
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:956
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1177
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1385
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1604
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1855
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2118
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2361
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2604
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2852
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3100
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3343
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3584
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3820
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4041
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4263
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4471
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4677
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4896
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5110
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5316
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5535
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5769
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:6012
+#: includes/layout-elements/wp-job-manager/layout-elements.php:83
+#: includes/layout-elements/wp-job-manager/layout-elements.php:291
+#: includes/layout-elements/wp-job-manager/layout-elements.php:499
+#: includes/layout-elements/wp-job-manager/layout-elements.php:707
+#: includes/layout-elements/wp-job-manager/layout-elements.php:915
+#: includes/post-grid-layout-elements.php:431
+#: includes/post-grid-layout-elements.php:686
+#: includes/post-grid-layout-elements.php:984
+#: includes/post-grid-layout-elements.php:1197
+#: includes/post-grid-layout-elements.php:3325
+#: includes/post-grid-layout-elements.php:4683
+msgid "Set font family."
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:352
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: "
+"<code>Categories: %s</code>"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:627
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Job "
+"type: %s</code>"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:867
+#: includes/layout-elements/wp-job-manager/layout-elements.php:247
+msgid "Company Name"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:876
+#: includes/layout-elements/wp-job-manager/layout-elements.php:256
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Company "
+"name: %s</code>"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:1084
+#: includes/layout-elements/wp-job-manager/layout-elements.php:464
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: "
+"<code>Website: &lt;a href=\"%s\">Go link&lt;/a></code> <code>Website: &lt;a "
+"href=\"%1$s\">%2$s&lt;/a></code>"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:1292
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output, <code>Tagline: "
+"%s</code>"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:1500
+#: includes/layout-elements/wp-job-manager/layout-elements.php:672
+#: includes/layout-elements/wp-job-manager/layout-elements.php:880
+#, php-format
+msgid "Write wrapper html, use <code>%s</code> to replace output."
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:1708
+msgid "Jobfeature name"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:1709
+msgid "Write jobfeature id, ex: <code>jobfeature_id</code>"
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:1721
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%1$s : %2$s</code> to replace output. "
+"<code>Label: %1$s</code> <code>Value: %2$s</code> "
+msgstr ""
+
+#: includes/layout-elements/simple-job-board/layout-elements.php:1935
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output, ex: Image "
+"output<code>&lt;img src=\"%s\" /></code> "
+msgstr ""
+
+#: includes/layout-elements/site-reviews/layout-elements.php:6
+#: includes/layout-elements/site-reviews/layout-elements.php:29
+msgid "Site Reviews - summary"
+msgstr ""
+
+#: includes/layout-elements/site-reviews/layout-elements.php:37
+msgid "Hide"
+msgstr ""
+
+#: includes/layout-elements/site-reviews/layout-elements.php:38
+msgid "Hide elements, ex: rating,stars,summary,bars,if_empty"
+msgstr ""
+
+#: includes/layout-elements/site-reviews/layout-elements.php:49
+msgid "Reviews Class"
+msgstr ""
+
+#: includes/layout-elements/site-reviews/layout-elements.php:50
+msgid "Add custom reviews class"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:9
+msgid "Text"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:10
+msgid "Textarea"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:11
+msgid "Number"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:24
+msgid "Wysiwyg"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:26
+msgid "Select"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:27
+msgid "Checkbox"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:28
+msgid "Radio"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:32
+msgid "Time picker"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:60
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5066
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5272
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5479
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5956
+msgid "WCK Text"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:68
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:274
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:480
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:687
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:908
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1129
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1349
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1556
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1807
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2058
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2301
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2544
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2792
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3040
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3283
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3536
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3772
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3993
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4215
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4435
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4641
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4848
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5074
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5280
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5487
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5709
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5964
+msgid "WCK key"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:69
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:275
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:481
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:688
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:909
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1130
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1350
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1557
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1808
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2059
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2302
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2545
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2793
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3041
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3284
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3537
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3773
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3994
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4216
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4436
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4642
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4849
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5075
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5281
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5488
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5710
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5965
+msgid "Write WCK meta key or field name."
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:266
+msgid "WCK Textarea"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:472
+msgid "WCK Number"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:679
+msgid "WCK Email"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:700
+#: includes/layout-elements/wp-job-manager/layout-elements.php:48
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Email: "
+"&lt;a href=\"mailto:%s\">Send mail&lt;/a></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:900
+msgid "WCK URL"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:921
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Link: "
+"&lt;a href=\"%s\">Visit link&lt;/a></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1121
+msgid "WCK Range"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1142
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>value: "
+"%s</code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1341
+msgid "WCK Wysiwyg"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1548
+msgid "WCK Image"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1569
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1820
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Value: "
+"%s</code>,<br> Return type: File URL<br> <code>File: &lt;a href=\"%s\">Click "
+"to Download&lt;/a> </code> <br> Return type: File ID<br> <code>File id: %s</"
+"code> <br> Return type: File Array<br> <code>Link HTML: &lt;a "
+"href=\"{url}\">{filename}&lt;/a> </code> <br> <code>Image HTML: &lt;img "
+"src=\"{url}\"/> </code> <br>Parameter<br> <code>{ID}, {id}, {title}, "
+"{filename}, {filesize}, {url}, {link}, {alt}, {author}, {description}, "
+"{caption}, {name}, {date}, {mime_type}, {icon},{width}, {height} </code> "
+"<br>Sizes parameter:<br> <code>{sizes_$id} => {sizes_thumbnail}</"
+"code><br><code> {sizes_$id-width} => {sizes_thumbnail-width}</"
+"code><br><code> {sizes_$id-height} => {sizes_thumbnail-height}</code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:1799
+msgid "WCK File"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2050
+msgid "WCK Select"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2070
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2313
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2556
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2804
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3295
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5721
+msgid "Item wrapper html"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2071
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2314
+#, php-format
+msgid ""
+"Write item wrapper html, use <code>%s</code> to replace output. <br>Return "
+"Format: Label or Value<br> ex: <code>Value: %s</code> <br>Return Format: "
+"Both(Array)<br> ex: <code>Label: %s</code> <code>Value: %s</code> list item "
+"ex: <code>&lt;li>%s&lt;/li></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2083
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2326
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2569
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5734
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Value: "
+"%s</code>, <code>Values: %s</code> list item wrapper ex: <code>&lt;ul>%s&lt;/"
+"ul></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2293
+msgid "WCK Checkbox"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2536
+msgid "WCK Radio"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2557
+#, php-format
+msgid ""
+"Write item wrapper html, use <code>%s</code> to replace output. <br>Return "
+"Format: Label or Value<br> ex: <code>Value: %s</code> list item ex: "
+"<code>&lt;li>%s&lt;/li></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2784
+msgid "WCK Button group"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2805
+#, php-format
+msgid ""
+"Write item wrapper html, use <code>%s</code> to replace output. <br>Return "
+"Format: Label or Value<br> ex: <code>Value: %s</code> <br>list item ex: "
+"<code>&lt;li>%1$s : %2$s&lt;/li></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:2817
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Links: "
+"%s</code>, <code>Values: %s</code> list item wrapper ex: <code>&lt;ul>%s&lt;/"
+"ul></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3032
+msgid "WCK Page link"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3052
+msgid "Link wrapper html"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3053
+#, php-format
+msgid ""
+"Write link wrapper html, use <code>%s</code> to replace output. ex: "
+"<code>&lt;a href=\"%s\">Visit link&lt;/a></code> list item ex: <code>&lt;"
+"li>&lt;a href=\"%s\">Visit link&lt;/a>&lt;/li></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3065
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Links: "
+"%s</code>, <code>&lt;a href=\"%s\">Visit link&lt;/a></code> list item "
+"wrapper ex: <code>&lt;ul>%s&lt;/ul></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3275
+msgid "WCK Taxonomy"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3296
+msgid ""
+"Write item wrapper html, <br> <code>Link HTML: &lt;a "
+"href=\"{term_link}\">{name}&lt;/a> </code> <br> <code>List HTML: &lt;li>&lt;"
+"a href=\"{term_link}\">{name}&lt;/a>&lt;/li> </code>  <br>Parameter<br> "
+"<code>{term_id}, {term_link},{name}, {term_group}, {slug},"
+"{term_taxonomy_id}, {taxonomy}, {description}, {count} </code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3308
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Tags: "
+"%s</code>, <br> list item wrapper ex: <code>&lt;ul>%s&lt;/ul></code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3528
+msgid "WCK User"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3549
+msgid ""
+"Write item wrapper html, <br> <code>Link HTML: &lt;a "
+"href=\"{user_posts_url}\">{display_name}&lt;/a> </code> <br>Parameter<br> "
+"<code>{ID}, {user_login},{user_nicename}, {user_email}, {user_url},"
+"{display_name}, {user_posts_url}, {user_avtar} </code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3764
+msgid "WCK Date picker"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3785
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4006
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4228
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Date: "
+"%s</code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:3985
+msgid "WCK Time picker"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4206
+msgid "WCK Datetime picker"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4427
+msgid "WCK Google map"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4633
+msgid "WCK Color picker"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4840
+msgid "WCK Link"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:4861
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Link: "
+"%s</code> or <code>Link: &lt;a href=\"%s\">Visit link&lt/a> </code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5500
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Pass: "
+"%s</code>"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5701
+msgid "WCK Relationship"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5722
+msgid ""
+"Write item wrapper html, list item example <br>Post title <code>&lt;"
+"li>{post_title}&lt;/li></code><br> Title link: <code>&lt;li>&lt;a "
+"href=\"{permalink}\">{post_title}&lt;/a> &lt;/li></code> <br> Post "
+"parameters<br> {ID}, {post_author}, {post_date}, {post_date_gmt}, "
+"{post_content}, {post_title}, {post_excerpt}, {post_status}, "
+"{comment_status}, {ping_status},{post_password}, {post_name}, {post_type}, "
+"{comment_count}, {permalink}"
+msgstr ""
+
+#: includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php:5977
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace output. ex: <code>Values: "
+"%s</code> <code>Is true: Yes</code> "
+msgstr ""
+
+#: includes/layout-elements/wp-postratings/layout-elements.php:6
+#: includes/layout-elements/wp-postratings/layout-elements.php:28
+msgid "WP-PostRatings"
+msgstr ""
+
+#: includes/layout-elements/wp-postviews/layout-elements.php:6
+#: includes/layout-elements/wp-postviews/layout-elements.php:28
+msgid "WP-PostViews"
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:28
+msgid "YASR - visitor votes"
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:29
+msgid "YASR- overall rating"
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:61
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:253
+msgid "YASR - Visitor votes"
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:69
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:261
+msgid "Icon size"
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:70
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:262
+msgid "Choose icon size."
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:74
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:266
+msgid "Small"
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:74
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:266
+msgid "Medium"
+msgstr ""
+
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:74
+#: includes/layout-elements/yet-another-stars-rating/layout-elements.php:266
+msgid "Large"
+msgstr ""
+
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:6
+msgid "YITH - Add to Wishlist"
+msgstr ""
+
+#: includes/layout-elements/yith-woocommerce-wishlist/layout-elements.php:30
+msgid "YITH - Wishlist"
+msgstr ""
+
+#: includes/media-source-options.php:18 includes/media-source-options.php:86
+#: includes/media-source-options.php:143 includes/media-source-options.php:201
+msgid "Enable"
+msgstr ""
+
+#: includes/media-source-options.php:19 includes/media-source-options.php:87
+#: includes/media-source-options.php:144 includes/media-source-options.php:202
+msgid "Enable or disable this media source."
+msgstr ""
+
+#: includes/media-source-options.php:24 includes/media-source-options.php:92
+#: includes/media-source-options.php:149 includes/media-source-options.php:207
+#: includes/metabox-post-grid-hook.php:98
+#: includes/metabox-post-grid-hook.php:136
+#: includes/metabox-post-grid-hook.php:425
+#: includes/metabox-post-grid-hook.php:855
+#: includes/metabox-post-grid-hook.php:1245 includes/settings-hook.php:51
+msgid "No"
+msgstr ""
+
+#: includes/media-source-options.php:25 includes/media-source-options.php:93
+#: includes/media-source-options.php:150 includes/media-source-options.php:208
+#: includes/metabox-post-grid-hook.php:99
+#: includes/metabox-post-grid-hook.php:137
+#: includes/metabox-post-grid-hook.php:426
+#: includes/metabox-post-grid-hook.php:854
+#: includes/metabox-post-grid-hook.php:1244 includes/settings-hook.php:51
+msgid "Yes"
+msgstr ""
+
+#: includes/media-source-options.php:32
+msgid "Image size"
+msgstr ""
+
+#: includes/media-source-options.php:33 includes/metabox-post-grid-hook.php:837
+msgid "Select media image size"
+msgstr ""
+
+#: includes/media-source-options.php:44 includes/media-source-options.php:101
+#: includes/media-source-options.php:158 includes/media-source-options.php:216
+#: includes/post-grid-layout-elements.php:615
+#: includes/post-grid-layout-elements.php:913
+#: includes/post-grid-layout-elements.php:1994
+#: includes/post-grid-layout-elements.php:2664
+#: includes/post-grid-layout-elements.php:2972
+#: includes/post-grid-layout-elements.php:3283
+#: includes/post-grid-layout-elements.php:3543
+#: includes/post-grid-layout-elements.php:3813
+msgid "Link to"
+msgstr ""
+
+#: includes/media-source-options.php:45 includes/media-source-options.php:102
+#: includes/media-source-options.php:159 includes/media-source-options.php:217
+msgid "Choose link to featured image."
+msgstr ""
+
+#: includes/media-source-options.php:50 includes/media-source-options.php:107
+#: includes/media-source-options.php:164 includes/media-source-options.php:222
+#: includes/post-grid-layout-elements.php:623
+#: includes/post-grid-layout-elements.php:921
+#: includes/post-grid-layout-elements.php:2002
+#: includes/post-grid-layout-elements.php:2672
+#: includes/post-grid-layout-elements.php:2980
+#: includes/post-grid-layout-elements.php:3291
+#: includes/post-grid-layout-elements.php:3551
+#: includes/post-grid-layout-elements.php:3821
+msgid "Post link"
+msgstr ""
+
+#: includes/media-source-options.php:51 includes/media-source-options.php:108
+#: includes/media-source-options.php:165 includes/media-source-options.php:223
+#: includes/metabox-post-grid-hook.php:1107
+#: includes/post-grid-layout-elements.php:624
+#: includes/post-grid-layout-elements.php:922
+#: includes/post-grid-layout-elements.php:2003
+#: includes/post-grid-layout-elements.php:2673
+#: includes/post-grid-layout-elements.php:2981
+#: includes/post-grid-layout-elements.php:3292
+#: includes/post-grid-layout-elements.php:3553
+#: includes/post-grid-layout-elements.php:3823 includes/settings-hook.php:40
+msgid "None"
+msgstr ""
+
+#: includes/media-source-options.php:59 includes/media-source-options.php:116
+#: includes/media-source-options.php:173 includes/media-source-options.php:231
+#: includes/post-grid-layout-elements.php:633
+#: includes/post-grid-layout-elements.php:931
+#: includes/post-grid-layout-elements.php:1415
+#: includes/post-grid-layout-elements.php:1722
+#: includes/post-grid-layout-elements.php:2012
+#: includes/post-grid-layout-elements.php:2682
+#: includes/post-grid-layout-elements.php:2990
+#: includes/post-grid-layout-elements.php:4106
+#: includes/post-grid-layout-elements.php:4401
+msgid "Link target"
+msgstr ""
+
+#: includes/media-source-options.php:60 includes/media-source-options.php:117
+#: includes/media-source-options.php:174 includes/media-source-options.php:232
+msgid "Choose link target."
+msgstr ""
+
+#: includes/media-source-options.php:65 includes/media-source-options.php:122
+#: includes/media-source-options.php:179 includes/media-source-options.php:237
+#: includes/post-grid-layout-elements.php:639
+#: includes/post-grid-layout-elements.php:937
+#: includes/post-grid-layout-elements.php:1421
+#: includes/post-grid-layout-elements.php:1728
+#: includes/post-grid-layout-elements.php:2018
+#: includes/post-grid-layout-elements.php:2688
+#: includes/post-grid-layout-elements.php:2996
+#: includes/post-grid-layout-elements.php:4112
+#: includes/post-grid-layout-elements.php:4407
+msgid "_blank"
+msgstr ""
+
+#: includes/media-source-options.php:66 includes/media-source-options.php:123
+#: includes/media-source-options.php:180 includes/media-source-options.php:238
+#: includes/post-grid-layout-elements.php:640
+#: includes/post-grid-layout-elements.php:938
+#: includes/post-grid-layout-elements.php:1422
+#: includes/post-grid-layout-elements.php:1729
+#: includes/post-grid-layout-elements.php:2019
+#: includes/post-grid-layout-elements.php:2689
+#: includes/post-grid-layout-elements.php:2997
+#: includes/post-grid-layout-elements.php:4113
+#: includes/post-grid-layout-elements.php:4408
+msgid "_parent"
+msgstr ""
+
+#: includes/media-source-options.php:67 includes/media-source-options.php:124
+#: includes/media-source-options.php:181 includes/media-source-options.php:239
+#: includes/post-grid-layout-elements.php:641
+#: includes/post-grid-layout-elements.php:939
+#: includes/post-grid-layout-elements.php:1423
+#: includes/post-grid-layout-elements.php:1730
+#: includes/post-grid-layout-elements.php:2020
+#: includes/post-grid-layout-elements.php:2690
+#: includes/post-grid-layout-elements.php:2998
+#: includes/post-grid-layout-elements.php:4114
+#: includes/post-grid-layout-elements.php:4409
+msgid "_self"
+msgstr ""
+
+#: includes/media-source-options.php:68 includes/media-source-options.php:125
+#: includes/media-source-options.php:182 includes/media-source-options.php:240
+#: includes/post-grid-layout-elements.php:642
+#: includes/post-grid-layout-elements.php:940
+#: includes/post-grid-layout-elements.php:1424
+#: includes/post-grid-layout-elements.php:1731
+#: includes/post-grid-layout-elements.php:2021
+#: includes/post-grid-layout-elements.php:2691
+#: includes/post-grid-layout-elements.php:2999
+#: includes/post-grid-layout-elements.php:4115
+#: includes/post-grid-layout-elements.php:4410
+msgid "_top"
+msgstr ""
+
+#: includes/media-source-options.php:247
+#: includes/post-grid-layout-elements.php:2737
+#: includes/post-grid-layout-elements.php:3045
+msgid "Default thumbnail"
+msgstr ""
+
+#: includes/media-source-options.php:248
+#: includes/post-grid-layout-elements.php:2738
+#: includes/post-grid-layout-elements.php:3046
+msgid "Choose default thumbnail."
+msgstr ""
+
+#: includes/menu/data-update.php:10
+#, php-format
+msgid "%s - Data Update"
+msgstr ""
+
+#: includes/menu/import-layouts.php:22
+msgid "Post Grid - Layouts library"
+msgstr ""
+
+#: includes/menu/import-layouts.php:26
+msgid "Latest"
+msgstr ""
+
+#: includes/menu/import-layouts.php:27
+msgid "Free"
+msgstr ""
+
+#: includes/menu/import-layouts.php:28
+msgid "Premium"
+msgstr ""
+
+#: includes/menu/import-layouts.php:32
+msgid "Start typing..."
+msgstr ""
+
+#: includes/menu/import-layouts.php:52
+msgid "Unexpected Error! The query returned with an error."
+msgstr ""
+
+#: includes/menu/import-layouts.php:53
+msgid "Make sure your internet connection is up."
+msgstr ""
+
+#: includes/menu/import-layouts.php:69
+msgid "No title"
+msgstr ""
+
+#: includes/menu/settings-old.php:10
+msgid "<i class=\"fas fa-laptop-code\"></i> General"
+msgstr ""
+
+#: includes/menu/settings-old.php:20
+msgid "Post Grid - Settings"
+msgstr ""
+
+#: includes/menu/settings-old.php:36 includes/menu/settings.php:63
+msgid "Changes Saved."
+msgstr ""
+
+#: includes/menu/settings-old.php:78
+msgid "Update"
+msgstr ""
+
+#: includes/menu/settings.php:129
+msgid "Save Changes"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:60
+msgid "Post Grid Shortcode"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:85
+msgid "Lazy load"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:86
+msgid "Choose lazy load options."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:91
+msgid "Enable lazy load"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:92
+msgid "Choose enable or disable lazy load."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:106
+msgid "Lazy load image source"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:107
+msgid "Set custom lazy load image source."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:118
+msgid "Lazy load image alt text"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:119
+msgid "Set custom lazy load image alt text."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:129
+msgid "Load font awesome"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:130
+msgid "Choose enable or disable font-awesome load."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:144
+msgid "Container settings"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:145
+msgid "Choose container options."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:150
+msgid "Container padding"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:151
+msgid "Set custom padding for grid container, ex: 10px 15px 10px 15px"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:160
+#: includes/metabox-post-grid-hook.php:170
+msgid "Container background color"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:161
+#: includes/metabox-post-grid-hook.php:171
+msgid "Set custom background color for grid container."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:180
+msgid "Items wrapper settings"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:181
+msgid "Choose items wrapper options."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:187
+msgid "Container text align."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:236
+msgid "Post types"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:237
+msgid ""
+"Select your desired post types here you want to display post from, you can "
+"choose multiple post type."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:283
+#: includes/metabox-post-grid-hook.php:1569
+msgid "Categories or Terms"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:284
+#: includes/metabox-post-grid-hook.php:1570
+msgid "Select post terms or categories"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:295
+#: includes/metabox-post-grid-hook.php:1581
+msgid "Terms relation"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:296
+msgid "Choose term relation. some option only available in pro"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:303
+#: includes/metabox-post-grid-hook.php:1589
+msgid "IN"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:304
+#: includes/metabox-post-grid-hook.php:1590
+msgid "NOT IN"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:305
+#: includes/metabox-post-grid-hook.php:337
+#: includes/metabox-post-grid-hook.php:1591
+msgid "AND"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:306
+#: includes/metabox-post-grid-hook.php:1592
+msgid "EXISTS"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:307
+#: includes/metabox-post-grid-hook.php:1593
+msgid "NOT EXISTS"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:317
+#: includes/metabox-post-grid-hook.php:1603
+msgid "Please choose at least one post types. save/update post grid"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:321
+msgid "Select post categories & terms."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:328
+msgid "Taxonomies relation"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:329
+msgid "Choose Taxonomies relation."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:336
+msgid "OR"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:344
+msgid "Post status"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:345
+msgid "Display post from following post status."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:356
+#: includes/metabox-post-grid-hook.php:1282
+msgid "Post query order"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:357
+#: includes/metabox-post-grid-hook.php:1283
+msgid "Query order ascending or descending."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:364
+#: includes/metabox-post-grid-hook.php:1290
+msgid "Ascending"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:365
+#: includes/metabox-post-grid-hook.php:1291
+msgid "Descending"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:372
+#: includes/metabox-post-grid-hook.php:1298
+msgid "Post query orderby"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:373
+#: includes/metabox-post-grid-hook.php:1299
+msgid "Select post query orderby"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:384
+msgid "Query orderby meta key"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:385
+msgid "You can use custom meta field key for orderby meta key"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:395
+msgid "Posts per page"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:396
+msgid ""
+"Number of post each pagination. -1 to display all. default is 10 if you left "
+"empty."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:406
+msgid "Offset"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:407
+msgid ""
+"Display posts from the n'th, if you set Posts per page to -1 will not work "
+"offset."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:417
+msgid "Ignore paged/page query"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:418
+msgid "Ignore paged/page variable from query."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:433
+msgid "Exclude by post ID"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:434
+msgid ""
+"You can exclude any post by ids here, use comma separate post id value, ex: "
+"45,48"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:444
+msgid "Include by post ID"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:445
+msgid ""
+"You can include any post by ids here, use comma separate post id value, ex: "
+"45,48"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:455
+msgid "Search parameter"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:456
+msgid ""
+"Query post by search keyword, please follow the reference https://codex."
+"wordpress.org/Class_Reference/WP_Query#Search_Parameter"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:466
+msgid "No post found text"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:467
+msgid "Custom text for no post found. default: No post found"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:488
+msgid "Layouts"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:489
+msgid "Choose item layouts."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:495
+#: includes/metabox-post-grid-hook.php:509
+msgid "Create layout"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:497
+msgid "Manage layouts"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:502
+msgid "Layouts library"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:510
+msgid "Please follow the links to create layouts or manage."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:538
+msgid "Item layouts"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:539
+msgid ""
+"Choose grid item layout. When \"Empty layout\" is selecetd old layout data "
+"will be loaded."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:683
+msgid "Content Layout"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:817
+#: includes/metabox-post-grid-hook.php:937
+#: includes/metabox-post-grid-hook.php:948
+#: includes/metabox-post-grid-hook.php:959
+#: includes/post-grid-layout-elements.php:2336
+#: includes/post-grid-layout-elements.php:2357
+#: includes/post-grid-layout-elements.php:2378
+msgid "Auto height"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:818
+#: includes/metabox-post-grid-hook.php:938
+#: includes/metabox-post-grid-hook.php:949
+#: includes/metabox-post-grid-hook.php:960
+#: includes/post-grid-layout-elements.php:2336
+#: includes/post-grid-layout-elements.php:2357
+#: includes/post-grid-layout-elements.php:2378
+msgid "Fixed height"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:819
+#: includes/metabox-post-grid-hook.php:939
+#: includes/metabox-post-grid-hook.php:950
+#: includes/metabox-post-grid-hook.php:961
+#: includes/post-grid-layout-elements.php:2336
+#: includes/post-grid-layout-elements.php:2357
+#: includes/post-grid-layout-elements.php:2378
+msgid "Max height"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:827
+#: includes/post-grid-layout-elements.php:2323
+msgid "Media height"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:828
+#, no-php-format
+msgid ""
+"Grid item media height for different device, you can use % or px, em and "
+"etc, example: 80% or 250px"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:836
+msgid "Featured image size"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:848
+msgid "Select if you want to link to post with featured image."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:875
+msgid "Move"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:899
+#: includes/post-grid-layout-elements.php:2308
+msgid "Media source"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:900
+msgid "Choose media source you want to display from."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:972
+#, no-php-format
+msgid ""
+"Grid item height for different device, you can use % or px, em and etc, "
+"example: 80% or 250px"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:980
+msgid "Items background color type"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:981
+msgid "Select items background color type."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:987
+msgid "Fixed"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:994
+msgid "Grid item background color"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:995
+msgid "Set custom color for grid item."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1004
+msgid "Grid item margin"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1005
+msgid ""
+"Grid item wrapper margin, you can use top right bottom left style, ex: 10px "
+"15px 10px 15px"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1014
+msgid "Grid item padding"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1015
+msgid ""
+"Grid item wrapper padding, you can use top right bottom left style, ex: 10px "
+"15px 10px 15px"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1062
+#: includes/metabox-post-grid-hook.php:1402
+msgid "Grid item width or column number"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1063
+#, no-php-format
+msgid ""
+"Grid item width for different device, you can use % or px, em and  etc, "
+"example: 80% or 250px or column number(ex: 3)"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1108
+msgid "Normal Pagination"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1114
+msgid "Pagination type"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1115
+msgid "Select pagination you want to display."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1126
+msgid "Max number of pagination"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1127
+msgid "Display max number of pagination item, default: 0"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1139
+msgid "Previous text"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1140
+msgid "Custom text for previous page"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1150
+msgid "Next text"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1151
+msgid "Custom text for next page"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1162
+msgid "Custom font size for pagination"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1172
+msgid "Text or link color"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1173
+msgid "Set custom text or link color."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1182
+msgid "Default background color"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1183
+#: includes/metabox-post-grid-hook.php:1193
+msgid "Set custom background color."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1192
+msgid "Active or hover background color"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1211
+#: includes/metabox-post-grid-hook.php:1256 templates/post-grid-hook.php:104
+#: templates/post-grid-hook.php:127
+msgid "Start typing"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1224
+msgid "Search action"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1225
+msgid "Select search action type."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1230
+msgid "Ajax - on change keyword"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1231
+msgid "On form submit(GET method)"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1238
+msgid "Display search form"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1239
+msgid "Display or hide search form at top."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1252
+msgid "Placeholder text"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1253
+msgid "Custom text for search input field"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1262
+msgid "Search icon"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1263
+#: includes/metabox-post-grid-hook.php:1273
+msgid ""
+"Custom icon for search input field, you can use <a target=\"_blank\" "
+"href=\"https://fontawesome.com/icons\">fontawesome</a> icons."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1272
+msgid "Loading icon"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1347
+msgid "Masonry Column number"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1348
+#: includes/metabox-post-grid-hook.php:1403
+#: includes/metabox-post-grid-hook.php:1459
+msgid "Number of columns for responsive device"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1356
+msgid "Masonry gutter"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1357
+msgid "Set custom gutter size of masonry. ex: 5"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1411
+msgid "Tiles gutter"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1412
+msgid "Set custom gutter size of tiles. ex: 5"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1458
+msgid "Column number"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1467
+msgid "Justified gutter"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1468
+msgid "Set custom gutter size of justified. ex: 5"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1477
+msgid "Justified max height"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1478
+msgid "Set custom max height"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1503
+msgid "Custom Js."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1504
+msgid ""
+"You can add custom scripts here, do not use <code>&lt;script&gt; &lt;/"
+"script&gt;</code> tag"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1515
+msgid "Custom CSS."
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1516
+msgid ""
+"You can add custom css here, do not use <code>  &lt;style&gt; &lt;/style&gt;"
+"</code> tag"
+msgstr ""
+
+#: includes/metabox-post-grid-hook.php:1582
+msgid "Choose term relation."
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:15
+msgid "Custom scripts"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:17
+msgid "Write custom scripts to override CSS and scripts."
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:23
+msgid ""
+"Write custom CSS to override default style, do not use <code>&lt;style>&lt;/"
+"style></code> tag. use <code>__ID__</code> to replace by layout id "
+"<code>layout-"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:33
+msgid "Custom JS"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:34
+msgid ""
+"Write custom JS to override default style, do not use <code>&lt;script>&lt;/"
+"script></code> tag."
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:44
+msgid "Preview image"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:45
+msgid "Set layout preview image."
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:67
+msgid "Layout Editor"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:68
+msgid "Customize layout settings."
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:74
+#: includes/post-grid-layout-elements.php:171
+msgid "Wrapper start"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:75
+#: includes/post-grid-layout-elements.php:326
+msgid "Wrapper end"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:76
+#: includes/post-grid-layout-elements.php:20
+msgid "Wrapper Link start"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:77
+#: includes/post-grid-layout-elements.php:126
+msgid "Wrapper Link end"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:78
+#: includes/post-grid-layout-elements.php:2242
+msgid "Media"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:79
+#: includes/post-grid-layout-elements.php:375
+#: includes/post-grid-layout-elements.php:395
+msgid "Custom text"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:80
+#: includes/post-grid-layout-elements.php:595
+msgid "Post title"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:81
+msgid "Title with link"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:82
+#: includes/post-grid-layout-elements.php:1648
+#: includes/post-grid-layout-elements.php:1949
+#: includes/post-grid-layout-elements.php:1962
+msgid "Read more"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:83
+#: includes/post-grid-layout-elements.php:2624
+msgid "Thumbnail"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:84
+msgid "Thumbnail with link "
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:85
+#: includes/post-grid-layout-elements.php:1318
+msgid "Post excerpt"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:86
+msgid "Excerpt with read more"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:87
+#: includes/post-grid-layout-elements.php:1176
+#: includes/post-grid-layout-elements.php:1345
+#: includes/post-grid-layout-elements.php:1689
+msgid "Content"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:88
+#: includes/post-grid-layout-elements.php:3239
+msgid "Post date"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:90
+msgid "Author with link"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:92
+msgid "Tags"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:93
+msgid "Comments count"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:94
+#: includes/post-grid-layout-elements.php:4852
+msgid "Share button"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:95
+#: includes/post-grid-layout-elements.php:5059
+msgid "Horizontal line"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:96
+#: includes/post-grid-layout-elements.php:5232
+msgid "Five star"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:175
+#, php-format
+msgid "%s Click to add tags."
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:254
+msgid "Preview post type"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:255
+msgid "Set layout preview post type."
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:319
+msgid "Layout preview"
+msgstr ""
+
+#: includes/metabox-post-grid-layout-hook.php:320
+msgid "Layout preview, some layout require featured image set on post."
+msgstr ""
+
+#: includes/metabox-post-options-hook.php:25
+msgid "Custom thumbnail image source"
+msgstr ""
+
+#: includes/metabox-post-options-hook.php:26
+msgid "You can use custom thumbnail image source."
+msgstr ""
+
+#: includes/metabox-post-options-hook.php:35
+msgid "Custom link to this post"
+msgstr ""
+
+#: includes/metabox-post-options-hook.php:36
+msgid "You can use custom link to this post."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:28
+#: includes/post-grid-layout-elements.php:135
+#: includes/post-grid-layout-elements.php:179
+#: includes/post-grid-layout-elements.php:335
+msgid "Wrapper id"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:29
+#: includes/post-grid-layout-elements.php:180
+msgid "Write wrapper id, ex: my-unique-id."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:38
+#: includes/post-grid-layout-elements.php:189
+msgid "Wrapper class"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:39
+#: includes/post-grid-layout-elements.php:190
+msgid "Write wrapper class, ex: layer-thumbnail"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:136
+#: includes/post-grid-layout-elements.php:336
+msgid "Write wrapper id, ex: div, p, span."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:383
+#: includes/post-grid-layout-elements.php:603
+#: includes/post-grid-layout-elements.php:901
+#: includes/post-grid-layout-elements.php:1184
+#: includes/post-grid-layout-elements.php:1326
+#: includes/post-grid-layout-elements.php:1670
+#: includes/post-grid-layout-elements.php:1970
+#: includes/post-grid-layout-elements.php:2250
+#: includes/post-grid-layout-elements.php:2632
+#: includes/post-grid-layout-elements.php:2940
+#: includes/post-grid-layout-elements.php:3247
+#: includes/post-grid-layout-elements.php:3531
+#: includes/post-grid-layout-elements.php:3801
+#: includes/post-grid-layout-elements.php:4071
+#: includes/post-grid-layout-elements.php:4366
+#: includes/post-grid-layout-elements.php:4635
+#: includes/post-grid-layout-elements.php:4860
+#: includes/post-grid-layout-elements.php:5067
+#: includes/post-grid-layout-elements.php:5240
+msgid "Wrapper custom class"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:384
+#: includes/post-grid-layout-elements.php:604
+#: includes/post-grid-layout-elements.php:902
+#: includes/post-grid-layout-elements.php:1185
+#: includes/post-grid-layout-elements.php:1327
+#: includes/post-grid-layout-elements.php:1671
+#: includes/post-grid-layout-elements.php:1971
+#: includes/post-grid-layout-elements.php:2251
+#: includes/post-grid-layout-elements.php:2633
+#: includes/post-grid-layout-elements.php:2941
+#: includes/post-grid-layout-elements.php:3248
+#: includes/post-grid-layout-elements.php:3532
+#: includes/post-grid-layout-elements.php:3802
+#: includes/post-grid-layout-elements.php:4072
+#: includes/post-grid-layout-elements.php:4367
+#: includes/post-grid-layout-elements.php:4636
+#: includes/post-grid-layout-elements.php:4861
+#: includes/post-grid-layout-elements.php:5068
+#: includes/post-grid-layout-elements.php:5241
+msgid "Set custom class."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:396
+msgid "Write custom text."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:616
+#: includes/post-grid-layout-elements.php:914
+#: includes/post-grid-layout-elements.php:1995
+#: includes/post-grid-layout-elements.php:2665
+#: includes/post-grid-layout-elements.php:2973
+#: includes/post-grid-layout-elements.php:3284
+#: includes/post-grid-layout-elements.php:3544
+#: includes/post-grid-layout-elements.php:3814
+msgid "Choose option to link title."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:634
+#: includes/post-grid-layout-elements.php:932
+#: includes/post-grid-layout-elements.php:1416
+#: includes/post-grid-layout-elements.php:1723
+#: includes/post-grid-layout-elements.php:2013
+#: includes/post-grid-layout-elements.php:2683
+#: includes/post-grid-layout-elements.php:2991
+#: includes/post-grid-layout-elements.php:4107
+#: includes/post-grid-layout-elements.php:4402
+msgid "Choose option link target."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:650
+#: includes/post-grid-layout-elements.php:948
+msgid "Character limit"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:651
+#: includes/post-grid-layout-elements.php:949
+msgid "Set character limit."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:721
+#: includes/post-grid-layout-elements.php:1019
+msgid "CSS"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:722
+#: includes/post-grid-layout-elements.php:1020
+msgid "Set css."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:733
+#: includes/post-grid-layout-elements.php:1031
+msgid "CSS hover"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:734
+#: includes/post-grid-layout-elements.php:1032
+msgid "Set hover css."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:893
+msgid "Post title with link"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1338
+#: includes/post-grid-layout-elements.php:1682
+msgid "Excerpt source"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1339
+#: includes/post-grid-layout-elements.php:1683
+msgid "Choose excerpt source."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1344
+#: includes/post-grid-layout-elements.php:1688
+msgid "Excerpt field"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1346
+#: includes/post-grid-layout-elements.php:1690
+msgid "Excerpt first then Content"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1354
+#: includes/post-grid-layout-elements.php:1698
+msgid "Word limit"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1355
+#: includes/post-grid-layout-elements.php:1699
+msgid "Set word limit."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1403
+#: includes/post-grid-layout-elements.php:1710
+#: includes/post-grid-layout-elements.php:1982
+msgid "Read more text"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1404
+#: includes/post-grid-layout-elements.php:1711
+#: includes/post-grid-layout-elements.php:1983
+msgid "Custom read more text."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:1662
+msgid "Excerpt read more"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2234
+msgid "SiteOrigin first image"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2309
+msgid "Choose media sources."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2324
+msgid "Set media height."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2331
+#: includes/post-grid-layout-elements.php:2704
+#: includes/post-grid-layout-elements.php:3012
+msgid "In desktop"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2332
+#: includes/post-grid-layout-elements.php:2705
+#: includes/post-grid-layout-elements.php:3013
+msgid "min-width: 1200px, ex: 280px"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2341
+#: includes/post-grid-layout-elements.php:2362
+#: includes/post-grid-layout-elements.php:2383
+msgid "Height value"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2352
+#: includes/post-grid-layout-elements.php:2714
+#: includes/post-grid-layout-elements.php:3022
+msgid "In tablet & small desktop"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2353
+#: includes/post-grid-layout-elements.php:2715
+#: includes/post-grid-layout-elements.php:3023
+msgid "min-width: 992px, ex: 280px"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2373
+#: includes/post-grid-layout-elements.php:2724
+#: includes/post-grid-layout-elements.php:3032
+msgid "In mobile"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2374
+#: includes/post-grid-layout-elements.php:2725
+#: includes/post-grid-layout-elements.php:3033
+msgid "max-width: 768px, ex: 280px"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2409
+msgid "Padding"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2410
+msgid "Set padding."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2641
+#: includes/post-grid-layout-elements.php:2949
+msgid "Full"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2652
+#: includes/post-grid-layout-elements.php:2960
+msgid "Thumbnail size"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2653
+#: includes/post-grid-layout-elements.php:2961
+msgid "Choose thumbnail size."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2697
+#: includes/post-grid-layout-elements.php:3005
+msgid "Thumbnail height"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2698
+#: includes/post-grid-layout-elements.php:3006
+msgid "Set thumbnail height."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:2932
+msgid "Thumbnail with link"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3259
+msgid "Date format"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3260
+msgid "Choose date format."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3272
+#, php-format
+msgid "Write wrapper html, use <code>%s</code> to replace date output."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3523
+msgid "Author name"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3552
+#: includes/post-grid-layout-elements.php:3822
+msgid "Author posts link"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3574
+#: includes/post-grid-layout-elements.php:3844
+#: includes/post-grid-layout-elements.php:4170
+#: includes/post-grid-layout-elements.php:5252
+msgid "Text color"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3586
+#: includes/post-grid-layout-elements.php:3856
+#: includes/post-grid-layout-elements.php:4873
+#: includes/post-grid-layout-elements.php:5264
+msgid "Choose text font size."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3598
+#: includes/post-grid-layout-elements.php:3868
+msgid "Choose padding."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3793
+msgid "Author name with link"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:3833
+#, php-format
+msgid "Write wrapper html, use <code>%s</code> to replace on-sale output."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4063
+msgid "Post categories"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4124
+#, php-format
+msgid "Write wrapper html, use <code>%s</code> to replace category output."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4148
+msgid "Choose font size."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4358
+msgid "Post tag"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4419
+#, php-format
+msgid "Write wrapper html, use <code>%s</code> to replace tags output."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4648
+#, php-format
+msgid ""
+"Write wrapper html, use <code>%s</code> to replace comment count output."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4771
+msgid "No Comments"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4773
+#, php-format
+msgid "%s Comments"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4775
+msgid "1 Comment"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4884
+msgid "Icon margin"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4885
+msgid "Set icon margin."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4896
+msgid "Icon color"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:4897
+msgid "Choose icon color."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:5079
+msgid "Background color"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:5080
+msgid "Choose background color."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:5090
+msgid "Height"
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:5091
+msgid "Choose height."
+msgstr ""
+
+#: includes/post-grid-layout-elements.php:5103
+#: includes/post-grid-layout-elements.php:5276
+msgid "Choose margin."
+msgstr ""
+
+#: includes/settings-hook.php:17
+msgid "General"
+msgstr ""
+
+#: includes/settings-hook.php:18
+msgid "Choose some general options."
+msgstr ""
+
+#: includes/settings-hook.php:23
+msgid "Post option by post types"
+msgstr ""
+
+#: includes/settings-hook.php:24
+msgid "Enable post options for selected post types"
+msgstr ""
+
+#: includes/settings-hook.php:35
+msgid "Font-awesome version"
+msgstr ""
+
+#: includes/settings-hook.php:36
+msgid "Choose font awesome version you want to load."
+msgstr ""
+
+#: includes/settings-hook.php:40
+msgid "Version 5+"
+msgstr ""
+
+#: includes/settings-hook.php:40
+msgid "Version 4+"
+msgstr ""
+
+#: includes/settings-hook.php:46
+msgid "Enable post grid preview"
+msgstr ""
+
+#: includes/settings-hook.php:47
+msgid "You can enable preview post grid."
+msgstr ""
+
+#: includes/settings-hook.php:73
+msgid "Get support"
+msgstr ""
+
+#: includes/settings-hook.php:75
+msgid "Use following to get help and support from our expert team."
+msgstr ""
+
+#: includes/settings-hook.php:90
+msgid "Export layouts"
+msgstr ""
+
+#: includes/settings-hook.php:99
+msgid ""
+"Ask question for free on our forum and get quick reply from our expert team "
+"members."
+msgstr ""
+
+#: includes/settings-hook.php:102
+msgid "Create support ticket"
+msgstr ""
+
+#: includes/settings-hook.php:103
+msgid "Read our documentation before asking your question."
+msgstr ""
+
+#: includes/settings-hook.php:104
+msgid "Documentation"
+msgstr ""
+
+#: includes/settings-hook.php:105
+msgid "Watch video tutorials."
+msgstr ""
+
+#: includes/settings-hook.php:107
+msgid "All tutorials"
+msgstr ""
+
+#: includes/settings-hook.php:113
+msgid "Ask question"
+msgstr ""
+
+#: includes/settings-hook.php:131
+msgid "Submit reviews"
+msgstr ""
+
+#: includes/settings-hook.php:151
+msgid "Disable/Enable Blocks"
+msgstr ""
+
+#: includes/settings-hook.php:153
+msgid "Choose blocks to enable or disable"
+msgstr ""
+
+#: includes/settings-hook.php:237
+msgid "Disbale/Enable Blocks"
+msgstr ""
+
+#: includes/settings-hook.php:238
+msgid "Enable or disable blocks from here."
+msgstr ""
+
+#: templates/post-grid-hook.php:110
+msgid "Press enter to reset"
+msgstr ""
+
+#: templates/post-grid-hook.php:133
+msgid "Search"
+msgstr ""
+
+#: templates/post-grid-hook.php:270
+msgid "No post found"
+msgstr ""
